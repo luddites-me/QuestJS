@@ -1,5 +1,8 @@
 "use strict";
 
+import * as settings from '../lib/_settings';
+import { game } from '../lib/_world';
+
 settings.title = "Blood Witch"
 settings.author = "The Pixie"
 settings.version = "1.2"

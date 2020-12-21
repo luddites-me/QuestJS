@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>A Test Page</title>
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    style-src 'unsafe-inline' 'self' https://fonts.googleapis.com https://ajax.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    script-src 'unsafe-inline' 'self' https://ajax.googleapis.com https://html5shiv.googlecode.com;
+    img-src 'self' https://ajax.googleapis.com;"
+  >
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+    const FOLDER = "game-banks";
+    document.writeln('<script src="' + FOLDER + '/settings.js"></scr' + "ipt>"); 
+  </script>
+  <script>
+    settings.writeScript(FOLDER)
+  </script>
+  
+</head>
+
+
+
+<body>
+
+ <div>ALL GAMES</div>
+  <ul>
+    <li><a href="page-alt-map.html">page-alt-map.html</a></li>                                  
+    <li><a href="page-banks.html">page-banks.html</a></li>                                
+    <li><a href="page-cloak.html">page-cloak.html</a></li>                                
+    <li><a href="page-deeper.html">page-deeper.html</a></li>                                 
+    <li><a href="page-desert.html">page-desert.html</a></li>                                 
+    <li><a href="page-dinner.html">page-dinner.html</a></li>                                 
+    <li><a href="page-ee.html">page-ee.html</a></li>                             
+    <li><a href="page-eg.html">page-eg.html</a></li>                             
+    <li><a href="page-empire.html">page-empire.html</a></li>                                 
+    <li><a href="page-house.html">page-house.html</a></li>                                
+    <li><a href="page-map.html">page-map.html</a></li>                              
+    <li><a href="page-rpg.html">page-rpg.html</a></li>                              
+    <li><a href="page-tutorial.html">page-tutorial.html</a></li>
+    <li><a href="page-witch.html">page-witch.html</a></li>                                
+    <li><a href="page.html">page.html</a></li>                          
+  </ul>
+</body>
+</html>
+

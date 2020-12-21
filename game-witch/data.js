@@ -1,5 +1,12 @@
 "use strict";
 
+import { createRoom, game, createItem, createObject , Exit} from '../lib/_world';
+import { TOPIC, NPC } from '../lib/_npc';
+import { Cmd } from './_command'
+import * as io from './_io';
+import { errormsg, failedmsg, msg, askQuestion } from './_io';
+import { lang } from '../lang/lang-en';
+import { settings } from './_settings';
 
 createRoom("_oldcastle", {
   desc:"None",

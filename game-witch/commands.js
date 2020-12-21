@@ -1,9 +1,8 @@
 "use strict";
 
+import * as commands from '../lib/_commands';
 
-
-
-comands.unshift(new Cmd('wait3', {
+commands.unshift(new Cmd('wait3', {
   regex:/^^wait$|^z$$/,
   objects:[
     {ignore:true},
@@ -18,7 +17,7 @@ comands.unshift(new Cmd('wait3', {
           }
  } }))
 
-comands.unshift(new Cmd('wait2', {
+commands.unshift(new Cmd('wait2', {
   regex:/^^wait$|^z$$/,
   objects:[
     {ignore:true},
