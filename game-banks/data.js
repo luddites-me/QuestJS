@@ -28,7 +28,7 @@ createItem("me",
       let room2 = w[ex.name];
       if (typeof room2.vacuum === "string") room2 = w[room2.vacuum];
       if (room1.vacuum === room2.vacuum) return true;
-      msg("The door to " + QuestJs.LANG.getName(room2, {article:DEFINITE}) + " will not open while it is " + (room1.vacuum ? 'pressurised' : 'depressurised') + " and " + QuestJs.LANG.getName(room1, {article:DEFINITE}) + " is not.");
+      msg("The door to " + QuestJs._lang.getName(room2, {article:DEFINITE}) + " will not open while it is " + (room1.vacuum ? 'pressurised' : 'depressurised') + " and " + QuestJs._lang.getName(room1, {article:DEFINITE}) + " is not.");
       return false;
     }
   }
@@ -78,7 +78,7 @@ createRoom("stasis_bay", {
     switch (arr.length) {
       case 0: return "All pods are currently open.";
       case 4: return "Currently only your pod and the spare pod are open.";
-      case 1: return QuestJs.LANG.getName(arr[0], {possessive:true}) + " stasis pod is closed.";
+      case 1: return QuestJs._lang.getName(arr[0], {possessive:true}) + " stasis pod is closed.";
       default: return "The stasis pods of " + formatList(arr) + " are closed.";
     }
   },
@@ -119,7 +119,7 @@ createItem("stasis_locker", CONTAINER(true), {
       msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored{once: (if there is an emergency, you want the spacesuits by the stasis pods)}.");
     }
     else {
-      msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored. Inside you can see " + formatList(this.getContents(world.LOOK), {lastJoiner:QuestJs.LANG.list_and, article:INDEFINITE}) + ".");
+      msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored. Inside you can see " + formatList(this.getContents(world.LOOK), {lastJoiner:QuestJs._lang.list_and, article:INDEFINITE}) + ".");
     }
   },
 });
@@ -576,10 +576,10 @@ createItem("probe_prototype", COUNTABLE([]), {
     if (!number) number = 1
 
     if (number === 1) {
-      msg("'Launch a " + char.probeType + ",' you say to " + QuestJs.LANG.getName(char, {article:DEFINITE}) + ".")
+      msg("'Launch a " + char.probeType + ",' you say to " + QuestJs._lang.getName(char, {article:DEFINITE}) + ".")
     }
     else {
-      msg("'Launch " + number + " " + char.probeType + "s,' you say to " + QuestJs.LANG.getName(char, {article:DEFINITE}) + ".")
+      msg("'Launch " + number + " " + char.probeType + "s,' you say to " + QuestJs._lang.getName(char, {article:DEFINITE}) + ".")
     }
     if (number > char.probesRemaining) {
       return falsemsg("'We only have " + char.probesRemaining + " and we should save some for the other planets on our itinerary.'")
@@ -598,7 +598,7 @@ createItem("probe_prototype", COUNTABLE([]), {
     
     if (char.deployProbeAction === 0 || char.deployProbeAction ===4) {
       msg("'Okay captain.'");
-      char.setAgenda(["walkTo:probes_aft:" + QuestJs.LANG.getName(char, {article:DEFINITE}) + " goes to the probe deployment console.", "text:deployProbe:" + number])
+      char.setAgenda(["walkTo:probes_aft:" + QuestJs._lang.getName(char, {article:DEFINITE}) + " goes to the probe deployment console.", "text:deployProbe:" + number])
       char.deployProbeAction = 0;
       char.deployProbeCount = 0;
     }

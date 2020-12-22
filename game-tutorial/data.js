@@ -115,7 +115,7 @@ createItem("light_switch", SWITCHABLE(false), {
 createItem("crates", {
   loc:"basement", 
   examine:"A bunch of old crates.",
-  pronouns:QuestJs.LANG.pronouns.plural,
+  pronouns:QuestJs._lang.pronouns.plural,
   move:function() {
     if (!this.moved) {
       msg("You move the crates... And find a passage was hidden behind them.")
@@ -254,7 +254,7 @@ createItem("box", READABLE(), CONTAINER(true), LOCKED_WITH([]), {
     const tpParams = {char:game.player, container:this}
     tpParams.list = this.listContents(world.LOOK)
     msg("It is large, wooden box. It does not look very substantial, but it survived the fall nevertheless. There is a label on the {ifNot:box:closed:open }lid.")
-    if (!this.closed) msg(QuestJs.LANG.look_inside, tpParams)
+    if (!this.closed) msg(QuestJs._lang.look_inside, tpParams)
     if (!this.flag2) hint.now('readBox')
   },
   regex:/crate|label|lid/,
@@ -405,7 +405,7 @@ createItem("lab_door", OPENABLE(false), {
   loc:'laboratory',
   open:function(isMultiple, char) {
     if (!this.closed) {
-      msg(prefix(this, isMultiple) + QuestJs.LANG.already, {item:this})
+      msg(prefix(this, isMultiple) + QuestJs._lang.already, {item:this})
       return false;
     }
     if (char.strong) {
@@ -522,7 +522,7 @@ createItem("control_rod", TAKEABLE(), {
   take:function(isMultiple, char) {
     const tpParams = {char:char, item:this}
     if (this.isAtLoc(char.name)) {
-      msg(prefix(this, isMultiple) + QuestJs.LANG.already_have, tpParams);
+      msg(prefix(this, isMultiple) + QuestJs._lang.already_have, tpParams);
       return false;
     }
     if (!char.canManipulate(this, "take")) return false;
@@ -533,7 +533,7 @@ createItem("control_rod", TAKEABLE(), {
       return false 
     }
     let flag = (this.loc === "reactor")
-    msg(prefix(this, isMultiple) + QuestJs.LANG.take_successful, tpParams)
+    msg(prefix(this, isMultiple) + QuestJs._lang.take_successful, tpParams)
     this.moveToFrom(char.name)
     if (flag) {
       msg("The blue light in the reactor winks out and the buzz dies.")
@@ -604,7 +604,7 @@ createItem("office_window", {
   outside:[],
   lookout:function() {
     let s = 'Out of the window you can see the street at the front of the house. Your black SUV is parked at the side on the road.'
-    if (this.outside.length > 0) s += ' On the street below the house you can see ' + formatList(this.outside, {article:DEFINITE, lastJoiner:QuestJs.LANG.list_and}) + '.'
+    if (this.outside.length > 0) s += ' On the street below the house you can see ' + formatList(this.outside, {article:DEFINITE, lastJoiner:QuestJs._lang.list_and}) + '.'
     msg(s)
   },
   smash:function() {

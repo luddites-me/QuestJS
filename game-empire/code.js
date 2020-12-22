@@ -93,7 +93,7 @@ $(function() {
 
 
 
-commands.push(new QuestJs.command.Cmd('Sleep', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Sleep', {
   regex:/^sleep$/,
   script:function() {
     if (game.player.loc === 'royal_bedroom') {

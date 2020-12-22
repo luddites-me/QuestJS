@@ -656,8 +656,8 @@ createItem("Ostap", CREW(false), {
   // Probe deployment
   probeType:'bio-probe',
   probesRemaining:16,
-  probeAction0:function(count) { this.msg("'Okay, " + QuestJs.LANG.toWords(count) + " probe" + (count === 1 ? "" : "s") + " to deploy...' mutters Ostap as he types at the console.") },
-  probeAction3:function(count) { this.msg("'Okay, " + QuestJs.LANG.toWords(count) + " probe" + (count === 1 ? "" : "s") + " launched,' says Ostap as he stands up.") },
+  probeAction0:function(count) { this.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " to deploy...' mutters Ostap as he types at the console.") },
+  probeAction3:function(count) { this.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " launched,' says Ostap as he stands up.") },
   data:[
     [
       // planet 0
@@ -799,18 +799,18 @@ createItem("Aada", CREW(true), {
   probesRemaining:16,
   probeAction0:function(count) {
     if (w.Xsansi.currentPlanet === 0 && this.deployProbeTotal === 0) {
-      this.msg("'Okay, " + QuestJs.LANG.toWords(count) + " probe" + (count === 1 ? "" : "s") + "...' says Aada, looking blankly at the console for a moment. 'How hard can it be?' She starts tapping at the key board.");
+      this.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + "...' says Aada, looking blankly at the console for a moment. 'How hard can it be?' She starts tapping at the key board.");
     }
     else {
-      this.msg("'Another " + QuestJs.LANG.toWords(count) + " probe" + (count === 1 ? "" : "s") + "...' says Aada. 'Easy enough.'");
+      this.msg("'Another " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + "...' says Aada. 'Easy enough.'");
     }
   },
   probeAction3:function(count) { 
     if (w.Xsansi.currentPlanet === 0 && this.deployProbeTotal === count) {
-      this.msg("'There!' says Aada, triumphantly. '" + QuestJs.LANG.toWords(count) + " probe" + (count === 1 ? "" : "s") + " deployed. I knew it couldn't be {i:that} tricky.'");
+      this.msg("'There!' says Aada, triumphantly. '" + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " deployed. I knew it couldn't be {i:that} tricky.'");
     }
     else {
-      this.msg("'That's another " + QuestJs.LANG.toWords(count) + " probe" + (count === 1 ? "" : "s") + " deployed,' says Aada.");
+      this.msg("'That's another " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " deployed,' says Aada.");
     }
   },
   data:[

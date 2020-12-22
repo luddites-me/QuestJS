@@ -19,10 +19,10 @@ const dungeon = {
   exitpercentage:80,
   themescount:10,
   dirs:[
-    QuestJs.LANG.exit_list.find(el => el.name === 'north'),
-    QuestJs.LANG.exit_list.find(el => el.name === 'east'),
-    QuestJs.LANG.exit_list.find(el => el.name === 'south'),
-    QuestJs.LANG.exit_list.find(el => el.name === 'west'),
+    QuestJs._lang.exit_list.find(el => el.name === 'north'),
+    QuestJs._lang.exit_list.find(el => el.name === 'east'),
+    QuestJs._lang.exit_list.find(el => el.name === 'south'),
+    QuestJs._lang.exit_list.find(el => el.name === 'west'),
   ],
   shapes:[
     {
@@ -140,7 +140,7 @@ dungeon.decorateRoom = function(room, level, theme) {
     }
     else {
       room.desc += ' There are exits '
-      room.desc += formatList(exits.map(el => el.name), {lastJoiner:QuestJs.LANG.list_and})
+      room.desc += formatList(exits.map(el => el.name), {lastJoiner:QuestJs._lang.list_and})
       room.desc += '.'
     }
   }
@@ -301,7 +301,7 @@ dungeon.flagAllAdjacent = function(room) {
 
 // Attempts to find the adjacent room in the given direction.
 // Returns false if there is no room or if there is no exit from this room to that room.
-// Expects dir to be a dictionary from QuestJs.LANG.exit_list
+// Expects dir to be a dictionary from QuestJs._lang.exit_list
 dungeon.findAdjacent = function(room, dir) {
   if (!room['exit_' + dir.name]) return (false)
   return w[dungeon.getRoomName(room.x + dir.x, room.y + dir.y, room.level)]
@@ -311,7 +311,7 @@ dungeon.findAdjacent = function(room, dir) {
 
 // Attempts to flag the room in the given direction as accessible.
 // Returns false if there is no room, or if it is already flagged, true otherwise.
-// Expects dir to be a dictionary from QuestJs.LANG.exit_list
+// Expects dir to be a dictionary from QuestJs._lang.exit_list
 dungeon.flagAdjacent = function(room, dir) {
   const adj = dungeon.findAdjacent(room, dir)
   if (!adj || adj.accessible) return false
@@ -395,13 +395,13 @@ dungeon.exitScript = function(char, dirName) {
     return false
   }
 
-  const dir = QuestJs.LANG.exit_list.find(el => el.name === dirName)
+  const dir = QuestJs._lang.exit_list.find(el => el.name === dirName)
   
   // up and down are different!!!
   const dest = w[dungeon.getRoomName(origin.x + dir.x, origin.y + dir.y, origin.level)]
     
-  msg(QuestJs.LANG.stop_posture(char))
-  msg(QuestJs.LANG.go_successful, {char:char, dir:dirName})
+  msg(QuestJs._lang.stop_posture(char))
+  msg(QuestJs._lang.go_successful, {char:char, dir:dirName})
   world.setRoom(char, dest)
   return true
 }
@@ -425,7 +425,7 @@ createRoom('dungeon_cell_prototype', {
 
   getExits:function(options) {
     const exits = []
-    for (let ex of QuestJs.LANG.exit_list) {
+    for (let ex of QuestJs._lang.exit_list) {
       if (ex.type !== 'nocmd' && this.hasExit(ex.name, options)) {
         exits.push(ex)
       }

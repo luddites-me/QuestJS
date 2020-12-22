@@ -3,7 +3,7 @@
 
 
 /*
-commands.push(new QuestJs.command.Cmd('Kick', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Kick', {
   npcCmd:true,
   rules:[QuestJs.cmdRules.isHere],
   regex:/^(kick) (.+)$/,
@@ -12,12 +12,12 @@ commands.push(new QuestJs.command.Cmd('Kick', {
     {scope:parser.isPresent}
   ],
   default:function(item, isMultiple, char) {
-    msg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(char, "kick", true) + " " + item.pronouns.objective + ", but nothing happens.");
+    msg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(char, "kick", true) + " " + item.pronouns.objective + ", but nothing happens.");
     return false;
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('Move', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Move', {
   npcCmd:true,
   rules:[QuestJs.cmdRules.isHere],
   regex:/^(move) (.+)$/,
@@ -26,7 +26,7 @@ commands.push(new QuestJs.command.Cmd('Move', {
     {scope:parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    msg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(item, "'be", true) + " not something you can move.");
+    msg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
     return false;
   },
 }));
@@ -35,7 +35,7 @@ commands.push(new QuestJs.command.Cmd('Move', {
 
 // kyle, in stasis
 
-commands.push(new QuestJs.command.Cmd('Get in pod1', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Get in pod1', {
   regex:/^(.+), (?:get in|go in|in) (?:stasis pod|stasis|pod)$/,
   npcCmd:true,
   attName:"stasis",
@@ -44,7 +44,7 @@ commands.push(new QuestJs.command.Cmd('Get in pod1', {
   ],
   defmsg:"That's not about to get in a stasis!",
 }));
-commands.push(new QuestJs.command.Cmd('Get in pod2', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Get in pod2', {
   regex:/^tell (.+) to (?:get in|go in|in) (?:stasis pod|stasis|pod)$/,
   npcCmd:true,
   attName:"stasis",
@@ -54,7 +54,7 @@ commands.push(new QuestJs.command.Cmd('Get in pod2', {
   defmsg:"That's not about to get in a stasis!",
 }));
 
-commands.push(new QuestJs.command.Cmd('Stop1', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Stop1', {
   regex:/^(.+), (?:stop|halt|forget it)$/,
   npcCmd:true,
   attName:"stopAgenda",
@@ -63,7 +63,7 @@ commands.push(new QuestJs.command.Cmd('Stop1', {
   ],
   defmsg:"That's not doing anything!",
 }));
-commands.push(new QuestJs.command.Cmd('Stop2', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Stop2', {
   regex:/^tell (.+) to (?:stop|halt|forget it)$/,
   npcCmd:true,
   attName:"stopAgenda",
@@ -74,7 +74,7 @@ commands.push(new QuestJs.command.Cmd('Stop2', {
 }));
 
 
-commands.push(new QuestJs.command.Cmd('Launch', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Launch', {
   regex:/^(launch|deploy) (.+)$/,
   npcCmd:true,
   objects:[
@@ -84,7 +84,7 @@ commands.push(new QuestJs.command.Cmd('Launch', {
   defmsg:"You can't launch that!",
 }));
 
-commands.push(new QuestJs.command.Cmd('Revive', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Revive', {
   regex:/^(revive|wake|awaken) (.+)$/,
   npcCmd:true,
   objects:[
@@ -94,7 +94,7 @@ commands.push(new QuestJs.command.Cmd('Revive', {
   defmsg:"You can't revive that!",
 }));
 
-commands.push(new QuestJs.command.Cmd('Pressurise', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Pressurise', {
   regex:/^pressuri[sz]e (.+)$/,
   npcCmd:true,
   objects:[
@@ -104,7 +104,7 @@ commands.push(new QuestJs.command.Cmd('Pressurise', {
     return handlePressurise(game.player, objects, true);
   },
 }));
-commands.push(new QuestJs.command.Cmd('Depressurise', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Depressurise', {
   regex:/^(depressuri[sz]e|evacuate) (.+)$/,
   npcCmd:true,
   objects:[
@@ -116,7 +116,7 @@ commands.push(new QuestJs.command.Cmd('Depressurise', {
   },
 }));
 
-/*commands.push(new QuestJs.command.Cmd('NpcPressurise1', {
+/*QuestJs._commands.push(new QuestJs._command.Cmd('NpcPressurise1', {
   regex:/^(.+), ?pressuri[sz]e (.+)$/,
   objects:[
     {scope:parser.isHere, attName:"npc"},
@@ -133,7 +133,7 @@ commands.push(new QuestJs.command.Cmd('Depressurise', {
     return handlePressurise(npc, objects, true);
   },
 }));
-commands.push(new QuestJs.command.Cmd('NpcPressurise2', {
+QuestJs._commands.push(new QuestJs._command.Cmd('NpcPressurise2', {
   regex:/^tell (.+) to pressuri[sz]e (.+)$/,
   objects:[
     {scope:parser.isHere, attName:"npc"},
@@ -150,7 +150,7 @@ commands.push(new QuestJs.command.Cmd('NpcPressurise2', {
     return handlePressurise(npc, objects, true);
   },
 }));
-commands.push(new QuestJs.command.Cmd('NpcDepressurise1', {
+QuestJs._commands.push(new QuestJs._command.Cmd('NpcDepressurise1', {
   regex:/^(.+), ?(depressuri[sz]e|evacuate) (.+)$/,
   objects:[
     {scope:parser.isHere, attName:"npc"},
@@ -168,7 +168,7 @@ commands.push(new QuestJs.command.Cmd('NpcDepressurise1', {
     return handlePressurise(npc, objects, false);
   },
 }));
-commands.push(new QuestJs.command.Cmd('NpcDepressurise2', {
+QuestJs._commands.push(new QuestJs._command.Cmd('NpcDepressurise2', {
   regex:/^tell (.+) to (depressuri[sz]e|evacuate) (.+)$/,
   objects:[
     {scope:parser.isHere, attName:"npc"},
@@ -209,7 +209,7 @@ function handlePressurise(char, objects, pressurise) {
   }
   const mainRoom = (typeof baseRoom.vacuum === "string" ? w[baseRoom.vacuum] : baseRoom);
   if (mainRoom.vacuum !== pressurise) {
-    msg("'" + sentenceCase(QuestJs.LANG.getName(mainRoom, {article:DEFINITE})) + " is already " + (pressurise ? 'pressurised' : 'depressurised') + ".");
+    msg("'" + sentenceCase(QuestJs._lang.getName(mainRoom, {article:DEFINITE})) + " is already " + (pressurise ? 'pressurised' : 'depressurised') + ".");
     return world.SUCCESS;
   }
   if (!w.Xsansi.pressureOverride && mainRoom.name !== "airlock" && !pressurise) {
@@ -217,23 +217,23 @@ function handlePressurise(char, objects, pressurise) {
     return world.SUCCESS;
   }
   if (!pressurise) {
-    msg("'Evacuating " + QuestJs.LANG.getName(mainRoom, {article:DEFINITE}) + "... Room is now under vacuum.'");
+    msg("'Evacuating " + QuestJs._lang.getName(mainRoom, {article:DEFINITE}) + "... Room is now under vacuum.'");
     mainRoom.vacuum = true;
     return world.SUCCESS;
   }
   if (mainRoom.leaks) {
-    msg("'Pressurising " + QuestJs.LANG.getName(mainRoom, {article:DEFINITE}) + "... Pressurisation failed.'");
+    msg("'Pressurising " + QuestJs._lang.getName(mainRoom, {article:DEFINITE}) + "... Pressurisation failed.'");
     return world.SUCCESS;
   }
 
-  msg("'Pressurising " + QuestJs.LANG.getName(mainRoom, {article:DEFINITE}) + "... Room is now pressurised.'");
+  msg("'Pressurising " + QuestJs._lang.getName(mainRoom, {article:DEFINITE}) + "... Room is now pressurised.'");
   mainRoom.vacuum = false;
   return world.SUCCESS;
 }
 
 
 
-commands.push(new QuestJs.command.Cmd('Approach', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Approach', {
   regex:/^approach (.+)$/,
   objects:[
     {scope:'isShip'},
@@ -261,7 +261,7 @@ commands.push(new QuestJs.command.Cmd('Approach', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('Scan', {
+QuestJs._commands.push(new QuestJs._command.Cmd('Scan', {
   regex:/^scan (.+)$/,
   objects:[
     {scope:'isShip'},
@@ -301,7 +301,7 @@ function isShip(item) {
 
 
 
-commands.push(new QuestJs.command.Cmd('ProbeStatus', {
+QuestJs._commands.push(new QuestJs._command.Cmd('ProbeStatus', {
   regex:/^probes?$/,
   script:function() {
     const arr = getProbes();
@@ -328,7 +328,7 @@ commands.push(new QuestJs.command.Cmd('ProbeStatus', {
 
 
 
-commands.unshift(new QuestJs.command.Cmd('MapUpdate', {
+QuestJs._commands.unshift(new QuestJs._command.Cmd('MapUpdate', {
   regex:/^map?$/,
   script:function() {
     updateMap()
@@ -342,7 +342,7 @@ commands.unshift(new QuestJs.command.Cmd('MapUpdate', {
 
 
 
-QuestJs.command.findCmd('MetaHelp').script = function() {
+QuestJs._command.findCmd('MetaHelp').script = function() {
   metamsg("Help is available on a number of topics...");
   metamsg("{color:red:HELP GENERAL} or {color:red:HELP GEN}: How to play parser games");
   metamsg("{b:Commands to help you play this game:}");
@@ -360,12 +360,12 @@ QuestJs.command.findCmd('MetaHelp').script = function() {
   return world.SUCCESS_NO_TURNSCRIPTS;
 }
 
-commands.push(new QuestJs.command.Cmd('HelpGen', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpGen', {
   regex:/^(?:\?|help) gen.*$/,
-  script:function() { QuestJs.LANG.helpScript(); },
+  script:function() { QuestJs._lang.helpScript(); },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpGame', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpGame', {
   regex:/^(?:\?|help) game$/,
   script:function() {
     metamsg("At each planet, you need to assess how many bio-probes and how many geo-probes to launch. Do {color:red:HELP PROBES} for details on that. You can {color:red:ASK AI ABOUT SHIP} to find how many of each probe is left.");
@@ -376,7 +376,7 @@ commands.push(new QuestJs.command.Cmd('HelpGame', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpNPCs', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpNPCs', {
   regex:/^(?:\?|help) npcs?$/,
   script:function() {
     metamsg("{b:Interacting with NPCs:}");
@@ -387,7 +387,7 @@ commands.push(new QuestJs.command.Cmd('HelpNPCs', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpProbes', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpProbes', {
   regex:/^(?:\?|help) probes?$/,
   script:function() {
   metamsg("{b:Using probes:}");
@@ -400,7 +400,7 @@ commands.push(new QuestJs.command.Cmd('HelpProbes', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpStasis', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpStasis', {
   regex:/^(?:\?|help) stasis$/,
   script:function() {
     metamsg("{b:Stasis:}");
@@ -411,7 +411,7 @@ commands.push(new QuestJs.command.Cmd('HelpStasis', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpVacuum', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpVacuum', {
   regex:/^(?:\?|help) (?:vacuum|d?e?pressur.+)$/,
   script:function() {
     metamsg("{b:Vacuum:}");
@@ -421,7 +421,7 @@ commands.push(new QuestJs.command.Cmd('HelpVacuum', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpDock', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpDock', {
   regex:/^(?:\?|help) (?:dock|docking)$/,
   script:function() {
     metamsg("{b:Docking:}");
@@ -431,7 +431,7 @@ commands.push(new QuestJs.command.Cmd('HelpDock', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpUniverse', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpUniverse', {
   regex:/^(?:\?|help) universe$/,
   script:function() {
     metamsg("{b:The game world:}");
@@ -442,7 +442,7 @@ commands.push(new QuestJs.command.Cmd('HelpUniverse', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpSystem', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpSystem', {
   regex:/^(?:\?|help) system?$/,
   script:function() {
     metamsg("{b:The Game System:}")
@@ -453,7 +453,7 @@ commands.push(new QuestJs.command.Cmd('HelpSystem', {
   },
 }));
 
-commands.push(new QuestJs.command.Cmd('HelpCredits', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HelpCredits', {
   regex:/^(?:\? |help )?(?:credits?|about)$/,
   script:function() {
     metamsg("{b:Credits:}");

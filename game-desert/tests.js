@@ -19,12 +19,12 @@ test.tests = function() {
   test.title("sentenceCase");
   test.assertEqual("Simple text", sentenceCase("simple text"));
   
-  test.title("QuestJs.LANG.getName");
-  test.assertEqual("book", QuestJs.LANG.getName(w.book));
-  test.assertEqual("the book", QuestJs.LANG.getName(w.book, {article:DEFINITE}));
-  test.assertEqual("A book", QuestJs.LANG.getName(w.book, {article:INDEFINITE, capital:true}));
-  test.assertEqual("you", QuestJs.LANG.getName(w.me));
-  test.assertEqual("You", QuestJs.LANG.getName(w.me, {article:INDEFINITE, capital:true}));
+  test.title("QuestJs._lang.getName");
+  test.assertEqual("book", QuestJs._lang.getName(w.book));
+  test.assertEqual("the book", QuestJs._lang.getName(w.book, {article:DEFINITE}));
+  test.assertEqual("A book", QuestJs._lang.getName(w.book, {article:INDEFINITE, capital:true}));
+  test.assertEqual("you", QuestJs._lang.getName(w.me));
+  test.assertEqual("You", QuestJs._lang.getName(w.me, {article:INDEFINITE, capital:true}));
   
   
   test.title("random.fromArray");
@@ -114,16 +114,16 @@ test.tests = function() {
 
 
   test.title("Numbers");
-  test.assertEqual("fourteen", QuestJs.LANG.toWords(14));
-  test.assertEqual("minus four hundred and three", QuestJs.LANG.toWords(-403));
-  test.assertEqual("ninetyseven", QuestJs.LANG.toWords(97));
-  test.assertEqual("fourteenth", QuestJs.LANG.toOrdinal(14));
-  test.assertEqual("four hundred and third", QuestJs.LANG.toOrdinal(403));
-  test.assertEqual("ninetyfirst", QuestJs.LANG.toOrdinal(91));
-  test.assertEqual("get 4 sticks", QuestJs.LANG.convertNumbers("get four sticks"));
-  test.assertEqual("get 14 sticks", QuestJs.LANG.convertNumbers("get fourteen sticks"));
-  test.assertEqual("get no sticks", QuestJs.LANG.convertNumbers("get no sticks"));
-  test.assertEqual("ninetieth", QuestJs.LANG.toOrdinal(90));
+  test.assertEqual("fourteen", QuestJs._lang.toWords(14));
+  test.assertEqual("minus four hundred and three", QuestJs._lang.toWords(-403));
+  test.assertEqual("ninetyseven", QuestJs._lang.toWords(97));
+  test.assertEqual("fourteenth", QuestJs._lang.toOrdinal(14));
+  test.assertEqual("four hundred and third", QuestJs._lang.toOrdinal(403));
+  test.assertEqual("ninetyfirst", QuestJs._lang.toOrdinal(91));
+  test.assertEqual("get 4 sticks", QuestJs._lang.convertNumbers("get four sticks"));
+  test.assertEqual("get 14 sticks", QuestJs._lang.convertNumbers("get fourteen sticks"));
+  test.assertEqual("get no sticks", QuestJs._lang.convertNumbers("get no sticks"));
+  test.assertEqual("ninetieth", QuestJs._lang.toOrdinal(90));
 
   
   test.title("Numbers 2");

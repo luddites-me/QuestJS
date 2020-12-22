@@ -39,7 +39,7 @@ function firstTimeTesting() {
 
 
 
-commands.unshift(new QuestJs.command.Cmd('Test input', {
+QuestJs._commands.unshift(new QuestJs._command.Cmd('Test input', {
   npcCmd:true,
   rules:[QuestJs.cmdRules.isHere],
   regex:/^inp/,
@@ -50,7 +50,7 @@ commands.unshift(new QuestJs.command.Cmd('Test input', {
         msg("You picked " + result + ".");
       }
       else {
-        msg("You picked " + QuestJs.LANG.getName(result, {article:DEFINITE}) + ".");
+        msg("You picked " + QuestJs._lang.getName(result, {article:DEFINITE}) + ".");
       }
     })
 /*    askQuestion("What colour?", function(result) {
@@ -64,7 +64,7 @@ commands.unshift(new QuestJs.command.Cmd('Test input', {
 
 
 
-commands.unshift(  new QuestJs.command.Cmd('TextReveal', {
+QuestJs._commands.unshift(  new QuestJs._command.Cmd('TextReveal', {
   regex:/^reveal$/,
   script:function() {
     msg("Some text")
@@ -81,7 +81,7 @@ commands.unshift(  new QuestJs.command.Cmd('TextReveal', {
   },
 }));
   
-commands.unshift(  new QuestJs.command.Cmd('Image', {
+QuestJs._commands.unshift(  new QuestJs._command.Cmd('Image', {
   regex:/^img$/,
   script:function() {
     msg("Some more text.")
@@ -89,7 +89,7 @@ commands.unshift(  new QuestJs.command.Cmd('Image', {
   },
 }));
   
-commands.unshift(  new QuestJs.command.Cmd('Audio', {
+QuestJs._commands.unshift(  new QuestJs._command.Cmd('Audio', {
   regex:/^beep$/,
   script:function() {
     msg("Can you hear this?")
@@ -100,7 +100,7 @@ commands.unshift(  new QuestJs.command.Cmd('Audio', {
 
 
 
-commands.unshift(  new QuestJs.command.Cmd('Alpha', {
+QuestJs._commands.unshift(  new QuestJs._command.Cmd('Alpha', {
   regex:/^alpha$/,
   script:function() {
     msg("Some text in Greek: {encode:391:3AC:The quick brown fox jumped over the lazy dog}.")
@@ -121,7 +121,7 @@ commands.unshift(  new QuestJs.command.Cmd('Alpha', {
 
 
 
-commands.unshift(new QuestJs.command.Cmd('EgKick', {
+QuestJs._commands.unshift(new QuestJs._command.Cmd('EgKick', {
   npcCmd:true,
   rules:[QuestJs.cmdRules.isHere],
   regex:/^(kick) (.+)$/,
@@ -130,13 +130,13 @@ commands.unshift(new QuestJs.command.Cmd('EgKick', {
     {scope:parser.isPresent}
   ],
   default:function(item, isMultiple, char) {
-    return failedmsg(prefix(this, isMultiple) + QuestJs.LANG.pronounVerb(char, "kick", true) + " " + this.pronouns.objective + ", but nothing happens.");
+    return failedmsg(prefix(this, isMultiple) + QuestJs._lang.pronounVerb(char, "kick", true) + " " + this.pronouns.objective + ", but nothing happens.");
   },
 }));
 
 
 
-commands.unshift(new QuestJs.command.Cmd('EgCharge', {
+QuestJs._commands.unshift(new QuestJs._command.Cmd('EgCharge', {
   npcCmd:true,
   rules:[QuestJs.cmdRules.isHeld],
   regex:/^(charge) (.+)$/,
@@ -145,12 +145,12 @@ commands.unshift(new QuestJs.command.Cmd('EgCharge', {
     {scope:parser.isHeld}
   ],
   default:function(item, isMultiple, char) {
-    return failedmsg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(item, "'be", true) + " not something you can charge.");
+    return failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can charge.");
   },
 }));
 
 
-commands.unshift(new QuestJs.command.Cmd('EgMove', {
+QuestJs._commands.unshift(new QuestJs._command.Cmd('EgMove', {
   npcCmd:true,
   rules:[QuestJs.cmdRules.isHere],
   regex:/^(move) (.+)$/,
@@ -159,12 +159,12 @@ commands.unshift(new QuestJs.command.Cmd('EgMove', {
     {scope:parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    return failedmsg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(item, "'be", true) + " not something you can move.");
+    return failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
   },
 }));
 
 
-commands.unshift(  new QuestJs.command.Cmd('EgHint', {
+QuestJs._commands.unshift(  new QuestJs._command.Cmd('EgHint', {
     regex:/^hint$|^hints$/,
     script:function() {
       if (w[game.player.loc].hint) {
@@ -180,7 +180,7 @@ commands.unshift(  new QuestJs.command.Cmd('EgHint', {
 
 
 
-commands.unshift(new QuestJs.command.Cmd('Test', {
+QuestJs._commands.unshift(new QuestJs._command.Cmd('Test', {
   regex:/^t$/,
   script:function() {
     console.log(w.Emily)

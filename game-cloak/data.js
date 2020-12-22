@@ -8,20 +8,20 @@ const cloakHere = function() {
 }
 
 
-QuestJs.LANG.no_smell = "It smells slightly musty."
+QuestJs._lang.no_smell = "It smells slightly musty."
 
-QuestJs.LANG.no_listen = "It is quiet as the grave..."
+QuestJs._lang.no_listen = "It is quiet as the grave..."
 
 
 tp.addDirective("cloakHere", function(arr, params) {
   return cloakHere() ? arr[0] : arr[1]
 });
 
-QuestJs.command.findCmd('MetaCredits').script = function() {
+QuestJs._command.findCmd('MetaCredits').script = function() {
   metamsg('This game was created by The Pixie, following the Cloak of Darkness specification by Roger Firth.')
 }
 
-QuestJs.command.findCmd('MetaHelp').script = function() {
+QuestJs._command.findCmd('MetaHelp').script = function() {
   metamsg('Just type stuff at the prompt!')
 }
 
@@ -247,7 +247,7 @@ createItem('doors', {
 
 
 
-commands.push(new QuestJs.command.Cmd('HangUp', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HangUp', {
   regex:/^(hang up|hang) (.+)$/,
   objects:[
     {ignore:true},
@@ -273,7 +273,7 @@ commands.push(new QuestJs.command.Cmd('HangUp', {
 
 
 
-commands.push(new QuestJs.command.Cmd('HangUp', {
+QuestJs._commands.push(new QuestJs._command.Cmd('HangUp', {
   regex:/^(hang up|hang) (.+) on (|the )hook$/,
   objects:[
     {ignore:true},
