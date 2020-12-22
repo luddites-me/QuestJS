@@ -1,4 +1,6 @@
 "use strict";
+import { en_data, en_game, en_pronouns, en_regex, en_responses } from '.'
+
 
 export class Lang {
 
