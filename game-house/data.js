@@ -129,7 +129,7 @@ createRoom("nowhere", {
 
 createItem("glass_shards", {
   loc:"nowhere",
-  pronouns:lang.pronouns.plural,
+  pronouns:QuestJs.LANG.pronouns.plural,
   examine:function() {
     Print ("The shards were the remains of the window. Jagged pieces of glass, some as long as her arm, some almost too small to see.")
   },
@@ -147,7 +147,7 @@ createItem("glass_shard", {
 
 createItem("yellow_balloon_remains", {
   loc:"nowhere",
-  pronouns:lang.pronouns.plural,
+  pronouns:QuestJs.LANG.pronouns.plural,
   examine:"A ragged piece of yellow rubber.",
 })
 
@@ -222,18 +222,18 @@ createItem("pen", {
 createItem("shakespeare_book", {
   loc:"school_bag",
   examine:function() {
-          if (this.state === 0 && lang.getName(this, {}) = "\"Antony and Cleopatra\"") {
+          if (this.state === 0 && QuestJs.LANG.getName(this, {}) = "\"Antony and Cleopatra\"") {
             Print ("Mandy glanced at her copy of Antony and Cleopatra. She really should get around to actually reading it some time, what with an exam on it in just a few weeks.")
           }
           else {
             if (this.state === 0) {
               this.state = 1
-              Print ("Mandy glanced at her copy of \"Antony and Cleopatra\". Wait, this was not the same book! This was " + lang.getName(this, {}) + ". What had happened to \"Antony and Cleopatra\"? Ms Coulter would be furious.")
+              Print ("Mandy glanced at her copy of \"Antony and Cleopatra\". Wait, this was not the same book! This was " + QuestJs.LANG.getName(this, {}) + ". What had happened to \"Antony and Cleopatra\"? Ms Coulter would be furious.")
             }
             else {
-              Print ("Mandy looked at the book she now had. " + lang.getName(this, {}) + ". She wondered if it would be any less boring than \"Antony and Cleopatra\". Probably not worth risking finding out.")
+              Print ("Mandy looked at the book she now had. " + QuestJs.LANG.getName(this, {}) + ". She wondered if it would be any less boring than \"Antony and Cleopatra\". Probably not worth risking finding out.")
             }
-            if (w.clockwork_thespian.state > 1 && lang.getName(this, {}) === "\"Hamlet\"") {
+            if (w.clockwork_thespian.state > 1 && QuestJs.LANG.getName(this, {}) === "\"Hamlet\"") {
               Print ("Then she remembered the Clockwork Thespian. The soul of wit. Hamlet, act 2, scene 2. Quickly she thumbed through. Brevity! Brevity is the soul of wit.")
               this.state = 2
               w.clockwork_thespian.state = 101
@@ -401,7 +401,7 @@ createItem("inside_door", {
 createItem("paintings", {
   loc:"front_hall",
   scenery:true,
-  pronouns:lang.pronouns.plural,
+  pronouns:QuestJs.LANG.pronouns.plural,
   examine:"There were five paints on the back wall, all portraits. To the left, an elderly gentleman, a little plump, in military attire. Next to him, a lady in a blue dress. The central portrait was a youngish man in academic attire; a mortar and gown. Next to him, another lady, perhaps in her thirties, and on the far right, a rather dapper young man in a burgundy suit.",
 })
 
@@ -771,10 +771,10 @@ createItem("boots", {
           break
         default:
           if (this.size > 0) {
-            s = ("The " + LCase(lang.getName(this, {})) + " was of gigantic proportions!")
+            s = ("The " + LCase(QuestJs.LANG.getName(this, {})) + " was of gigantic proportions!")
             break
           else {
-            s = ("The " + LCase(lang.getName(this, {})) + " was too tiny to see properly.")
+            s = ("The " + LCase(QuestJs.LANG.getName(this, {})) + " was too tiny to see properly.")
           }
         }
       }
@@ -1802,7 +1802,7 @@ createItem("pickaxe", {
 createItem("coal", {
   loc:"deeper_mine",
   scenery:true,
-  pronouns:lang.pronouns.plural,
+  pronouns:QuestJs.LANG.pronouns.plural,
   examine:"As Mandy looked closely, she could see there was definitely coal in the rockface here.",
 })
 

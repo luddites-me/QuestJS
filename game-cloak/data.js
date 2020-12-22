@@ -1,13 +1,3 @@
-"use strict"
-
-
-
-
-
-
-
-
-
 
 
 const cloakHere = function() {
@@ -18,9 +8,9 @@ const cloakHere = function() {
 }
 
 
-lang.no_smell = "It smells slightly musty."
+QuestJs.LANG.no_smell = "It smells slightly musty."
 
-lang.no_listen = "It is quiet as the grave..."
+QuestJs.LANG.no_listen = "It is quiet as the grave..."
 
 
 tp.addDirective("cloakHere", function(arr, params) {

@@ -1,7 +1,7 @@
 "use strict";
 
 
-lang.exit_list = [
+QuestJs.LANG.exit_list = [
   {name:'northwest', abbrev:'NW'}, 
   {name:'forward', abbrev:'F'}, 
   {name:'northeast', abbrev:'NE'}, 

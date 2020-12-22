@@ -12,7 +12,7 @@ commands.push(new Cmd('Kick', {
     {scope:parser.isPresent}
   ],
   default:function(item, isMultiple, char) {
-    msg(prefix(item, isMultiple) + lang.pronounVerb(char, "kick", true) + " " + item.pronouns.objective + ", but nothing happens.");
+    msg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(char, "kick", true) + " " + item.pronouns.objective + ", but nothing happens.");
     return false;
   },
 }));
@@ -26,7 +26,7 @@ commands.push(new Cmd('Move', {
     {scope:parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    msg(prefix(item, isMultiple) + lang.pronounVerb(item, "'be", true) + " not something you can move.");
+    msg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(item, "'be", true) + " not something you can move.");
     return false;
   },
 }));
@@ -209,7 +209,7 @@ function handlePressurise(char, objects, pressurise) {
   }
   const mainRoom = (typeof baseRoom.vacuum === "string" ? w[baseRoom.vacuum] : baseRoom);
   if (mainRoom.vacuum !== pressurise) {
-    msg("'" + sentenceCase(lang.getName(mainRoom, {article:DEFINITE})) + " is already " + (pressurise ? 'pressurised' : 'depressurised') + ".");
+    msg("'" + sentenceCase(QuestJs.LANG.getName(mainRoom, {article:DEFINITE})) + " is already " + (pressurise ? 'pressurised' : 'depressurised') + ".");
     return world.SUCCESS;
   }
   if (!w.Xsansi.pressureOverride && mainRoom.name !== "airlock" && !pressurise) {
@@ -217,16 +217,16 @@ function handlePressurise(char, objects, pressurise) {
     return world.SUCCESS;
   }
   if (!pressurise) {
-    msg("'Evacuating " + lang.getName(mainRoom, {article:DEFINITE}) + "... Room is now under vacuum.'");
+    msg("'Evacuating " + QuestJs.LANG.getName(mainRoom, {article:DEFINITE}) + "... Room is now under vacuum.'");
     mainRoom.vacuum = true;
     return world.SUCCESS;
   }
   if (mainRoom.leaks) {
-    msg("'Pressurising " + lang.getName(mainRoom, {article:DEFINITE}) + "... Pressurisation failed.'");
+    msg("'Pressurising " + QuestJs.LANG.getName(mainRoom, {article:DEFINITE}) + "... Pressurisation failed.'");
     return world.SUCCESS;
   }
 
-  msg("'Pressurising " + lang.getName(mainRoom, {article:DEFINITE}) + "... Room is now pressurised.'");
+  msg("'Pressurising " + QuestJs.LANG.getName(mainRoom, {article:DEFINITE}) + "... Room is now pressurised.'");
   mainRoom.vacuum = false;
   return world.SUCCESS;
 }
@@ -362,7 +362,7 @@ findCmd('MetaHelp').script = function() {
 
 commands.push(new Cmd('HelpGen', {
   regex:/^(?:\?|help) gen.*$/,
-  script:function() { lang.helpScript(); },
+  script:function() { QuestJs.LANG.helpScript(); },
 }));
 
 commands.push(new Cmd('HelpGame', {

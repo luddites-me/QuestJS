@@ -1,4 +1,4 @@
-"use strict";
+
 
 // About your game
 settings.title = "Cloak of Darkness";

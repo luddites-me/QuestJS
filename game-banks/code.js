@@ -305,7 +305,7 @@ function createTopics(npc) {
     regex:/(your |his |her )?(area|special.*|expert.*|job|role)/,
     test:function(p) { return p.text.match(this.regex); }, 
     script:function(response) {
-      msg("'What is your area of expertise?' you ask " + lang.getName(response.actor, {article:DEFINITE}) + ".");
+      msg("'What is your area of expertise?' you ask " + QuestJs.LANG.getName(response.actor, {article:DEFINITE}) + ".");
       response.actor.areaAskResponse();
     }
   });
@@ -314,7 +314,7 @@ function createTopics(npc) {
     regex:/^((his |her )?(background))|((him|her)self)$/,
     test:function(p) { return p.text.match(this.regex); }, 
     script:function(response) {
-      msg("'Tell me about yourself,' you say to " + lang.getName(response.actor, {article:DEFINITE}) + ".");
+      msg("'Tell me about yourself,' you say to " + QuestJs.LANG.getName(response.actor, {article:DEFINITE}) + ".");
       response.actor.backgroundAskResponse();
       trackRelationship(response.actor, 1, "background");
     }
@@ -326,7 +326,7 @@ function createTopics(npc) {
 }
  
 function howAreYouFeeling(response) {
-  msg("'How are you feeling?' you ask " + lang.getName(response.actor, {article:DEFINITE}) + ".");
+  msg("'How are you feeling?' you ask " + QuestJs.LANG.getName(response.actor, {article:DEFINITE}) + ".");
   msg(PLANETS[w.Xsansi.currentPlanet][response.actor.name + "_how_are_you"]);
 }
 

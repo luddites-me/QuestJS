@@ -205,7 +205,7 @@ const walkthroughs = {
 
 
 findCmd('MetaSave').script = function() {
-  script:lang.saveLoadScript()
+  script:QuestJs.LANG.saveLoadScript()
   if (hint.before('saveGame')) {
     tmsg("So in Quest 6 SAVE just tells you how to save your game. You need to add a file name to actually save. Do that now! You can call it whatever you want; how about \"tutorial\"?")
     hint.now('saveGame')
@@ -237,7 +237,7 @@ commands.unshift(new Cmd('Move', {
     {scope:parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    return failedmsg(prefix(item, isMultiple) + lang.pronounVerb(item, "'be", true) + " not something you can move.");
+    return failedmsg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(item, "'be", true) + " not something you can move.");
   },
 }));
 
@@ -249,7 +249,7 @@ commands.push(new Cmd('Tutorial', {
   ],
   script:function() {
     $('body').toggleClass("hidden")
-    msg(lang.done_msg)
+    msg(QuestJs.LANG.done_msg)
     return world.SUCCESS_NO_TURNSCRIPTS
   },
 }));
@@ -442,7 +442,7 @@ commands.push(new Cmd('RudeCommand', {
     {scope:parser.isHere},
   ],
   script:function(objects) {
-    parsermsg(lang.not_known_msg)
+    parsermsg(QuestJs.LANG.not_known_msg)
     if (!w.me.rudeCmdFlag) {
       tmsg('You had to go there...')
       tmsg('There are games that cater to... well, people like you, but this is NOT one of them.')

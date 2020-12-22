@@ -46,7 +46,7 @@ commands.unshift(new Cmd('Test input', {
         msg("You picked " + result + ".");
       }
       else {
-        msg("You picked " + lang.getName(result, {article:DEFINITE}) + ".");
+        msg("You picked " + QuestJs.LANG.getName(result, {article:DEFINITE}) + ".");
       }
     })
 /*    askQuestion("What colour?", function(result) {
@@ -126,7 +126,7 @@ commands.unshift(new Cmd('EgKick', {
     {scope:parser.isPresent}
   ],
   default:function(item, isMultiple, char) {
-    return failedmsg(prefix(this, isMultiple) + lang.pronounVerb(char, "kick", true) + " " + this.pronouns.objective + ", but nothing happens.");
+    return failedmsg(prefix(this, isMultiple) + QuestJs.LANG.pronounVerb(char, "kick", true) + " " + this.pronouns.objective + ", but nothing happens.");
   },
 }));
 
@@ -141,7 +141,7 @@ commands.unshift(new Cmd('EgCharge', {
     {scope:parser.isHeld}
   ],
   default:function(item, isMultiple, char) {
-    return failedmsg(prefix(item, isMultiple) + lang.pronounVerb(item, "'be", true) + " not something you can charge.");
+    return failedmsg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(item, "'be", true) + " not something you can charge.");
   },
 }));
 
@@ -155,7 +155,7 @@ commands.unshift(new Cmd('EgMove', {
     {scope:parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    return failedmsg(prefix(item, isMultiple) + lang.pronounVerb(item, "'be", true) + " not something you can move.");
+    return failedmsg(prefix(item, isMultiple) + QuestJs.LANG.pronounVerb(item, "'be", true) + " not something you can move.");
   },
 }));
 
@@ -164,7 +164,7 @@ findCmd('MetaHint').script = function() {
     metamsg(w[game.player.loc].hint);
   }
   else {
-    return lang.hintScript()
+    return QuestJs.LANG.hintScript()
   }
 }
   

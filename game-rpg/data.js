@@ -150,7 +150,7 @@ createItem("chestplate", WEARABLE(2, ['chest']), {
 
 createItem("boots", WEARABLE(2, ['feet']), {
   loc:"practice_room",
-  pronouns:lang.pronouns.plural,
+  pronouns:QuestJs.LANG.pronouns.plural,
 });
 
 createItem("shotgun", LIMITED_USE_WEAPON("2d10+4", 1), {
@@ -331,7 +331,7 @@ skills.add(new Spell("Commune with animal", {
     if (target.canTalkFlagIsTemporary) {
       target.canTalkFlag = false
       delete target.canTalkFlagIsTemporary
-      return "The {i:Commune with animal} spell on " + lang.getName(target, {article:DEFINITE}) + " expires."
+      return "The {i:Commune with animal} spell on " + QuestJs.LANG.getName(target, {article:DEFINITE}) + " expires."
     }
     return ''
   },

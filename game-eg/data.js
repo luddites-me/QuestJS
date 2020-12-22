@@ -4,12 +4,12 @@
 npc_utilities.talkto = function() {
   if (!game.player.canTalk(this)) return false
   const topics = this.getTopics(this)
-  if (topics.length === 0) return failedmsg(lang.no_topics, {char:game.player, item:this})
-  topics.push(lang.never_mind)
+  if (topics.length === 0) return failedmsg(QuestJs.LANG.no_topics, {char:game.player, item:this})
+  topics.push(QuestJs.LANG.never_mind)
 
   showSidePaneOptions(this, topics, function(result) {
     $('#sidepane-menu').remove()
-    if (result !== lang.never_mind) {
+    if (result !== QuestJs.LANG.never_mind) {
       result.runscript()
     }
   })
@@ -23,10 +23,10 @@ npc_utilities.talkto = function() {
 function showSidePaneOptions(item, options, fn) {
   const opts = {article:DEFINITE, capital:true}
   io.input('', options, false, fn, function(options) {
-    let s = '<div id="sidepane-menu"><p class="sidepane-menu-title">Talk to ' + lang.getName(item, {article:DEFINITE}) + ':</p>'
+    let s = '<div id="sidepane-menu"><p class="sidepane-menu-title">Talk to ' + QuestJs.LANG.getName(item, {article:DEFINITE}) + ':</p>'
     for (let i = 0; i < options.length; i++) {
       s += '<p value="' + i + '" onclick="io.menuResponse(' + i + ')" class="sidepane-menu-option">';
-      s += (typeof options[i] === 'string' ? options[i] : lang.getName(options[i], opts))
+      s += (typeof options[i] === 'string' ? options[i] : QuestJs.LANG.getName(options[i], opts))
       s += '</p>';
     }
     s += '</div>'
@@ -128,7 +128,7 @@ createItem("book", TAKEABLE(), READABLE(true), {
         msg ("'It is all about carrots. The basic gist is that all carrots should be given to me.' You are not entirely sure you believe her.")
       }
       else {
-        msg (prefix(this, isMultiple) + "It is not in a language " + lang.pronounVerb(char, "understand") + ".");
+        msg (prefix(this, isMultiple) + "It is not in a language " + QuestJs.LANG.pronounVerb(char, "understand") + ".");
       }
       return true;
     }          
@@ -149,7 +149,7 @@ createItem("book_cover", COMPONENT("book"), {
 
 createItem("boots", 
   WEARABLE(),
-  { loc:"lounge", pronouns:lang.pronouns.plural, examine:"Some old boots.", }
+  { loc:"lounge", pronouns:QuestJs.LANG.pronouns.plural, examine:"Some old boots.", }
 );
 
 
@@ -233,7 +233,7 @@ createItem("coin", TAKEABLE(), {
   loc:"lounge",
   examine: "A gold coin.",
   take:function(isMultiple, participant) {
-    msg(prefix(this, isMultiple) + lang.pronounVerb(participant, "try", true) + " to pick up the coin, but it just will not budge.");
+    msg(prefix(this, isMultiple) + QuestJs.LANG.pronounVerb(participant, "try", true) + " to pick up the coin, but it just will not budge.");
     return false;
   },
 })
@@ -274,7 +274,7 @@ createItem("flashlight", TAKEABLE(), SWITCHABLE(false, 'providing light'), {
   },
   power:2,
   chargeResponse:function(participant) {
-    msg(lang.pronounVerb(participant, "push", true) + " the button. There is a brief hum of power, and a flash.");
+    msg(QuestJs.LANG.pronounVerb(participant, "push", true) + " the button. There is a brief hum of power, and a flash.");
     w.flashlight.power = 20;
     return true;
   },
@@ -302,7 +302,7 @@ createItem("chair",
   {
     loc:"dining_room", examine:"A wooden chair.",
     onSit:function(char) {
-      msg("The chair makes a strange noise when " + lang.nounVerb(char, "sit") + " on it.");
+      msg("The chair makes a strange noise when " + QuestJs.LANG.nounVerb(char, "sit") + " on it.");
     },
   }
 );
@@ -387,7 +387,7 @@ createRoom("kitchen", {
     if (char === game.player) {
       msg("You go through the trapdoor, and down the ladder.");
     } else {
-      msg("You watch " + lang.getName(char, {article:DEFINITE}) + " disappear through the trapdoor.");
+      msg("You watch " + QuestJs.LANG.getName(char, {article:DEFINITE}) + " disappear through the trapdoor.");
     }
   }}),
   north:new Exit("garage"),
@@ -532,11 +532,11 @@ createItem("charger_button", COMPONENT("charger"), BUTTON(), {
   push:function(isMultiple, char) {
     const contents = w.charger_compartment.getContents(world.ALL)[0]
     if (!w.charger_compartment.closed || !contents) {
-      msg(lang.pronounVerb(char, "push", true) + " the button, but nothing happens.");
+      msg(QuestJs.LANG.pronounVerb(char, "push", true) + " the button, but nothing happens.");
       return false
     }
     else if (!contents.chargeResponse) {
-      msg(lang.pronounVerb(char, "push", true) + " the button. There is a brief hum of power, but nothing happens.")
+      msg(QuestJs.LANG.pronounVerb(char, "push", true) + " the button. There is a brief hum of power, but nothing happens.")
       return false
     }
     else {
@@ -576,14 +576,14 @@ createItem("underwear",
   WEARABLE(1, ["lower"]),
   { 
     loc:"bedroom",
-    pronouns:lang.pronouns.massnoun,
+    pronouns:QuestJs.LANG.pronouns.massnoun,
     examine:"Clean!",
   }
 );
 
 createItem("jeans", 
   WEARABLE(2, ["lower"]),
-  { loc:"bedroom", pronouns:lang.pronouns.plural, examine:"Clean!", }
+  { loc:"bedroom", pronouns:QuestJs.LANG.pronouns.plural, examine:"Clean!", }
 );
 
 createItem("shirt", 
@@ -608,7 +608,7 @@ createItem("jumpsuit",
 
 createItem("suit_trousers", 
   WEARABLE(2, ["lower"]),
-  { loc:"wardrobe", examine:"The trousers.", pronouns:lang.pronouns.plural}
+  { loc:"wardrobe", examine:"The trousers.", pronouns:QuestJs.LANG.pronouns.plural}
 );
 
 createItem("jacket", 
