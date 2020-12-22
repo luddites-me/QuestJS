@@ -5,19 +5,20 @@ body {
   font-size: 16px;
 }
 
-.default-h2, .default-h4 {
+.default-h2,
+.default-h4 {
   font-family: 'Orbitron', serif;
 }
 
 .pane-div {
-  background-color:#bbb;
-  padding-bottom:5px;
+  background-color: #bbb;
+  padding-bottom: 5px;
   border: #004 solid 2px;
   margin-bottom: 10px;
 }
 
 #dialog {
-  font-size: 16px; 
+  font-size: 16px;
   font-family: 'Ubuntu Condensed', sans-serif;
 }
 

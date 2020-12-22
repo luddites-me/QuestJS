@@ -1,35 +1,112 @@
 /***
 * Reset 
 ***/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 
 /***
 * Global
 ***/
 html {
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 body {
@@ -40,8 +117,9 @@ body {
   margin-bottom: 20px;
 }
 
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
 
 #cursor {
@@ -65,7 +143,7 @@ ol, ul {
 
 .default-h4 {
   padding: 5px;
-} 
+}
 
 /***
 * Font / Text
@@ -75,7 +153,9 @@ ol, ul {
   margin: 5px 0px 5px 0px;
 }
 
-.default-p, .tutorial, .meta {
+.default-p,
+.tutorial,
+.meta {
   text-align: justify;
   text-justify: inter-word;
 }
@@ -92,7 +172,7 @@ ol, ul {
 /* Style page content */
 #inner {
   max-width: 600px;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 #input input {
@@ -102,20 +182,20 @@ ol, ul {
 
 .cmd-link {
   cursor: pointer;
-  color:blue;
+  color: blue;
 }
 
 .dark-body .cmd-link {
-  color:#aaf;
+  color: #aaf;
 }
 
 .dark-body a {
-  color:#aaf;
+  color: #aaf;
 }
 
 .about-footer {
   float: left;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
 }
 
 /***
@@ -139,7 +219,7 @@ ol, ul {
 }
 
 .qbtn i:hover {
-  color: #FF0000;
+  color: #ff0000;
 }
 
 /***
@@ -155,7 +235,7 @@ ol, ul {
 }
 
 .ui-widget {
-  font-family: Verdana,Arial,sans-serif;
+  font-family: Verdana, Arial, sans-serif;
   font-size: 0.95em;
 }
 
@@ -165,23 +245,23 @@ ol, ul {
 
 /* The command bar  */
 #textbox {
-  border:none;
+  border: none;
   outline: none;
-  width:95%;
+  width: 95%;
 }
 
-.dark-body   #textbox {
+.dark-body #textbox {
   background-color: #111;
   color: white;
 }
 
 .input-text {
-  font-style:italic;
-  color:green;
+  font-style: italic;
+  color: green;
 }
 
-.dark-body   .input-text {
-  color:lightgreen;
+.dark-body .input-text {
+  color: lightgreen;
 }
 
 /***
@@ -210,8 +290,8 @@ ol, ul {
   padding: 5px 10px 5px 10px;
 }
 
-.dark-body  .pane-div {
-  background-color:#606;
+.dark-body .pane-div {
+  background-color: #606;
 }
 
 .side-panes-left {
@@ -256,11 +336,11 @@ td.compass-button {
 }
 
 td.compass-button:hover {
-  color:blue;
+  color: blue;
 }
 
 .dark-body .compass-button {
-  background-color:#404;
+  background-color: #404;
 }
 
 span.compass-button {
@@ -270,7 +350,7 @@ span.compass-button {
   margin: auto;
   width: 18px;
   display: block;
-}  
+}
 
 /***
 * Inventory
@@ -305,8 +385,8 @@ span.compass-button {
   margin-top: 10px;
 }
 
-.dark-body  div  .item {
-  background-color:#404;
+.dark-body div .item {
+  background-color: #404;
 }
 
 .sub-item {
@@ -315,8 +395,8 @@ span.compass-button {
   margin-top: 0px;
 }
 
-.dark-body  div  .sub-item {
-  background-color:#305;
+.dark-body div .sub-item {
+  background-color: #305;
 }
 
 .item-action {
@@ -329,12 +409,12 @@ span.compass-button {
   margin-left: 20px;
   margin-top: 0px;
   margin-bottom: 0px;
-  font-style:italic;
-  display:none;
+  font-style: italic;
+  display: none;
 }
 
-.dark-body  div  .item-action {
-  background-color:#602;
+.dark-body div .item-action {
+  background-color: #602;
 }
 
 #status-pane {
@@ -342,7 +422,7 @@ span.compass-button {
 }
 
 #dialog {
-  display:none;
+  display: none;
 }
 
 .toggle {
@@ -358,26 +438,26 @@ span.compass-button {
 }
 
 .menu-option {
-  color:blue;
+  color: blue;
   cursor: pointer;
   font-style: italic;
   margin-left: 20px;
 }
 
-
 /* Various msg options */
 .tutorial {
   color: blue;
-  font-style:italic;
+  font-style: italic;
 }
 
-.dark-body   .tutorial {
+.dark-body .tutorial {
   color: lightblue;
 }
 
-.hidden {}
+.hidden {
+}
 
-.hidden    .tutorial {
+.hidden .tutorial {
   display: none;
 }
 
@@ -434,9 +514,10 @@ span.compass-button {
   background-color: silver;
 }
 
-th, td {
-  padding:4px;
-  text-align:center;
+th,
+td {
+  padding: 4px;
+  text-align: center;
 }
 
 /***
@@ -445,7 +526,7 @@ th, td {
 .typewriter {
   padding: 5px;
   margin: 5px 0 5px 0;
-  color:grey;
+  color: grey;
 }
 .typewriter-active {
   font-weight: bold;
@@ -458,11 +539,11 @@ th, td {
 }
 
 .compass-button i:hover {
-	color: blue;
+  color: blue;
 }
 
 .continue {
-	color: blue;
+  color: blue;
   cursor: pointer;
 }
 
@@ -523,7 +604,7 @@ th, td {
 }
 
 #panel a:hover {
-  color:blue;
+  color: blue;
 }
 
 #panel .sidepane {
@@ -548,7 +629,7 @@ th, td {
 
 #panel .sidepane li::before {
   counter-increment: section;
-  content: counters(section, ".") ". ";
+  content: counters(section, '.') '. ';
   font-weight: bold;
 }
 
@@ -568,12 +649,11 @@ th, td {
 }
 
 .rules div {
-
 }
 
 .rules p::before {
   counter-increment: section;
-  content: counters(section, ".") ". ";
+  content: counters(section, '.') '. ';
   font-weight: bold;
 }
 
@@ -583,15 +663,15 @@ th, td {
 }
 
 .rules .fragment {
-  background-color: #ECD5D8;
-  color: #9C2A4D;
+  background-color: #ecd5d8;
+  color: #9c2a4d;
   margin-left: -2px;
   padding: 5px;
   border-radius: 5px;
 }
 
 .rules .fragment a {
-  color: #9C2A4D;
+  color: #9c2a4d;
 }
 
 /***
@@ -677,21 +757,22 @@ th, td {
 
 #context-menu hr {
   margin: 2px 0px;
-  border-color: #CCC;
+  border-color: #ccc;
 }
-
 
 /***
 * Item links
 ***/
-.droplink{
-	color:blue;
+.droplink {
+  color: blue;
 }
 .droplink:not(.disabled) {
   cursor: pointer;
 }
 
-.droplink:hover:not(.disabled), .droplink:focus:not(.disabled), .exit-link:hover:not(.disabled) {
+.droplink:hover:not(.disabled),
+.droplink:focus:not(.disabled),
+.exit-link:hover:not(.disabled) {
   color: blue;
 }
 
@@ -706,7 +787,7 @@ th, td {
   background-color: #f1f1f1;
   overflow: auto;
   border: 1px solid black;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -718,6 +799,10 @@ th, td {
   cursor: pointer;
 }
 
-.dropdown a:hover {background-color: #ddd}
+.dropdown a:hover {
+  background-color: #ddd;
+}
 
-.show {display:block;}
+.show {
+  display: block;
+}

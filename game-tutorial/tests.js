@@ -1,16 +1,3 @@
-"use strict";
+'use strict';
 
-
-
-QuestJs._test.tests = function() {
-
-};
-
- 
-    
-    
-    
-    
-    
-    
-  
+QuestJs._test.tests = function () {};

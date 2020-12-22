@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Orbitron|Ubuntu+Condensed');
 
-
 @keyframes offset {
   from {
     background-position: 200px 0;
@@ -10,7 +9,6 @@
   }
 }
 
-
 body {
   color: black;
   font-family: 'Ubuntu Condensed', sans-serif;
@@ -18,11 +16,9 @@ body {
   font-size: 16px;
 }
 
-
 .dark-body {
   color: #eee;
 }
-
 
 /* Style page content */
 #main {
@@ -43,41 +39,35 @@ body {
   background-color: #111;
 }
 
-h2, h4 {
+h2,
+h4 {
   font-family: 'Orbitron', serif;
 }
 
 .cmd-link {
   cursor: pointer;
-  color:blue;
+  color: blue;
 }
-  
-
-
 
 /* The command bar  */
 #textbox {
-  border:none;
+  border: none;
   outline: none;
   background-color: #d0d0d0;
-  width:95%;
+  width: 95%;
 }
-.dark-body   #textbox {
+.dark-body #textbox {
   background-color: #111;
   color: white;
 }
 
-
 .input-text {
-  font-style:italic;
-  color:green;
+  font-style: italic;
+  color: green;
 }
-.dark-body   .input-text {
-  color:lightgreen;
+.dark-body .input-text {
+  color: lightgreen;
 }
-
-
-
 
 /* Side panes */
 .side-panes {
@@ -92,8 +82,8 @@ h2, h4 {
   font-size: 12pt;
 }
 .pane-div {
-  background-color:#bbb;
-  padding-bottom:5px;
+  background-color: #bbb;
+  padding-bottom: 5px;
   border: #004 solid 2px;
   margin-bottom: 10px;
 }
@@ -101,8 +91,8 @@ h2, h4 {
   text-align: center;
   margin: 10px;
 }
-.dark-body  .pane-div {
-  background-color:#333;
+.dark-body .pane-div {
+  background-color: #333;
 }
 .side-panes-left {
   left: 0;
@@ -114,15 +104,11 @@ h2, h4 {
   display: None;
 }
 
-
-
 .pane-div-finished {
   display: none;
   font-size: 3em;
   text-align: center;
 }
-
-
 
 #bottom-panel {
   bottom: 0;
@@ -132,7 +118,6 @@ h2, h4 {
   z-index: 1; /* Stay on top */
   padding: 20px 160px 20px 160px;
 }
-
 
 #scanner {
   background-color: black;
@@ -147,20 +132,17 @@ h2, h4 {
   animation-timing-function: linear;
 }
 
-
 #dialog {
-  font-size: 16px; 
+  font-size: 16px;
   //font-family: 'Orbitron';
   font-family: 'Ubuntu Condensed', sans-serif;
 }
 
-.ui-dialog-title{
+.ui-dialog-title {
   font-family: 'Orbitron';
-    font-size: 110% !important;
-    color: black !important;
+  font-size: 110% !important;
+  color: black !important;
 }
-
-
 
 // Used by showMenu
 .menu-title {
@@ -169,15 +151,15 @@ h2, h4 {
   margin-left: 20px;
 }
 .menu-option {
-  color:blue;
+  color: blue;
   cursor: pointer;
   font-style: italic;
   margin-left: 20px;
 }
-.dark-body .menu-option, .dark-body a {
-  color:#aaf;
+.dark-body .menu-option,
+.dark-body a {
+  color: #aaf;
 }
-
 
 /* Various msg options */
 .meta {
@@ -194,9 +176,6 @@ h2, h4 {
   color: red;
 }
 
-
-
-
 .debug {
   font-size: 10pt;
   color: grey;
@@ -204,29 +183,24 @@ h2, h4 {
   /*display: none;*/
 }
 
-
-
-
 /* Compass */
 td.compass-button {
-    border: black solid 1px;
-    padding: 2px;
-    background-color: #d0d0d0;
-    width: 20px;
-    height: 20px;
-}  
+  border: black solid 1px;
+  padding: 2px;
+  background-color: #d0d0d0;
+  width: 20px;
+  height: 20px;
+}
 span.compass-button {
-    cursor: pointer;
-    text-align: center;
-    margin: auto;
-    width: 18px;
-    display: block;
+  cursor: pointer;
+  text-align: center;
+  margin: auto;
+  width: 18px;
+  display: block;
 }
 .dark-body .compass-button {
-  background-color:#444;
+  background-color: #444;
 }
-
-
 
 #status-pane {
   padding-left: 3pt;
@@ -236,10 +210,8 @@ span.compass-button {
   padding-left: 5pt;
 }
 #dialog {
-  display:none;
+  display: none;
 }
-
-
 
 /* For dialog panels */
 .no-close .ui-dialog-titlebar-close {
@@ -256,32 +228,24 @@ span.compass-button {
   background-color: silver;
 }
 
-
-
-th, td {
-  padding:4px;
+th,
+td {
+  padding: 4px;
 }
-
-
 
 .typewriter {
   font-weight: bold;
   font-size: larger;
 }
 
-
-
 /* The container must be positioned relative: */
 .custom-select {
   font-family: 'Ubuntu Condensed', sans-serif;
-  border-image:none;
+  border-image: none;
 }
-
-
 
 .continue {
   text-decoration: underline;
-  color:blue;
+  color: blue;
   cursor: pointer;
 }
-  

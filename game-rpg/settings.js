@@ -1,124 +1,129 @@
-"use strict";
+'use strict';
 
-QuestJs._settings.title = "A First RPG...";
-QuestJs._settings.author = "The Pixie"
-QuestJs._settings.version = "1.1";
-QuestJs._settings.thanks = ["Kyle", "Lara"];
+QuestJs._settings.title = 'A First RPG...';
+QuestJs._settings.author = 'The Pixie';
+QuestJs._settings.version = '1.1';
+QuestJs._settings.thanks = ['Kyle', 'Lara'];
 
-QuestJs._settings.libraries.push('rpg')
+QuestJs._settings.libraries.push('rpg');
 
 QuestJs._settings.statusPane = false;
-QuestJs._settings.tests = true
-QuestJs._settings.playMode = 'dev'
-QuestJs._settings.attackOutputLevel = 10
-QuestJs._settings.armourScaling = 10
-QuestJs._settings.noTalkTo = false
-QuestJs._settings.output = function(report) {
+QuestJs._settings.tests = true;
+QuestJs._settings.playMode = 'dev';
+QuestJs._settings.attackOutputLevel = 10;
+QuestJs._settings.armourScaling = 10;
+QuestJs._settings.noTalkTo = false;
+QuestJs._settings.output = function (report) {
   for (let el of report) {
     if (el.level <= QuestJs._settings.attackOutputLevel) {
       if (el.level === 1) {
-        QuestJs._io.msg(el.t)
-      }
-      else {
-        QuestJs._io.metamsg(el.t)
+        QuestJs._io.msg(el.t);
+      } else {
+        QuestJs._io.metamsg(el.t);
       }
     }
   }
-}
-
-
-
+};
 
 QuestJs._settings.dateTime = {
-  startTime:1000000000,
-  data:[
-    { name:'second', number:60 },
-    { name:'minute', number:60 },
-    { name:'hour', number:24 },
-    { name:'day', number:365 },
-    { name:'year', number:999999 },
+  startTime: 1000000000,
+  data: [
+    { name: 'second', number: 60 },
+    { name: 'minute', number: 60 },
+    { name: 'hour', number: 24 },
+    { name: 'day', number: 365 },
+    { name: 'year', number: 999999 },
   ],
-  months:[
-    { name:'January', n:31},
-    { name:'February', n:28},
-    { name:'March', n:31},
-    { name:'April', n:30},
-    { name:'May', n:31},
-    { name:'June', n:30},
-    { name:'July', n:31},
-    { name:'August', n:31},
-    { name:'September', n:30},
-    { name:'October', n:31},
-    { name:'November', n:30},
-    { name:'December', n:31},
+  months: [
+    { name: 'January', n: 31 },
+    { name: 'February', n: 28 },
+    { name: 'March', n: 31 },
+    { name: 'April', n: 30 },
+    { name: 'May', n: 31 },
+    { name: 'June', n: 30 },
+    { name: 'July', n: 31 },
+    { name: 'August', n: 31 },
+    { name: 'September', n: 30 },
+    { name: 'October', n: 31 },
+    { name: 'November', n: 30 },
+    { name: 'December', n: 31 },
   ],
-  days:['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-  formats:{
-    def:'%dayOfWeek% %dayOfYear%, %year%, %hour%:%minute% %ampm%',
-    time:'%hour%:%minute% %ampm%',
+  days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+  formats: {
+    def: '%dayOfWeek% %dayOfYear%, %year%, %hour%:%minute% %ampm%',
+    time: '%hour%:%minute% %ampm%',
   },
-  functions:{
-    dayOfWeek:function(dict) { 
-      return QuestJs._settings.dateTime.days[(dict.day + 365 * dict.year) % QuestJs._settings.dateTime.days.length] 
+  functions: {
+    dayOfWeek: function (dict) {
+      return QuestJs._settings.dateTime.days[
+        (dict.day + 365 * dict.year) % QuestJs._settings.dateTime.days.length
+      ];
     },
-    dayOfYear:function(dict) {
-      let day = dict.day
+    dayOfYear: function (dict) {
+      let day = dict.day;
       for (let el of QuestJs._settings.dateTime.months) {
-        if (el.n > day) return (day + 1) + ' ' + el.name
-        day -= el.n
+        if (el.n > day) return day + 1 + ' ' + el.name;
+        day -= el.n;
       }
-      return 'failed'
+      return 'failed';
     },
-    year:function(dict) { return 'AD ' + (dict.year + 1000) },
-    hour:function(dict) { return dict.hour < 13 ? dict.hour : (dict.hour - 12) },
-    minute:function(dict) { return dict.minute < 10 ? '0' + dict.minute : dict.minute },
-    ampm:function(dict) {
-      if (dict.minute === 0 && dict.hour === 0) return 'midnight'
-      if (dict.minute === 0 && dict.hour === 12) return 'noon'
-      return dict.hour < 12 ? 'am' : 'pm'
+    year: function (dict) {
+      return 'AD ' + (dict.year + 1000);
+    },
+    hour: function (dict) {
+      return dict.hour < 13 ? dict.hour : dict.hour - 12;
+    },
+    minute: function (dict) {
+      return dict.minute < 10 ? '0' + dict.minute : dict.minute;
+    },
+    ampm: function (dict) {
+      if (dict.minute === 0 && dict.hour === 0) return 'midnight';
+      if (dict.minute === 0 && dict.hour === 12) return 'noon';
+      return dict.hour < 12 ? 'am' : 'pm';
     },
   },
-}
-
-
+};
 
 // This function will be called at the start of the game, so can be used
 // to introduce your QuestJs._game.
-QuestJs._settings.setup = function() {
+QuestJs._settings.setup = function () {
   QuestJs._game.player.hitpoints = 20;
-  QuestJs._game.player.status = "You are feeling fine";
-  QuestJs._game.player.skillsLearnt = ["Double attack", "Fireball"]
+  QuestJs._game.player.status = 'You are feeling fine';
+  QuestJs._game.player.skillsLearnt = ['Double attack', 'Fireball'];
 
-  QuestJs._settings.updateCustomUI()
-  
-  QuestJs._log.info(skills.findName("Flaming weapon"))
-  QuestJs._log.info(skills.findName("Fireball"))
-  QuestJs._w.rabbit.setLeader(QuestJs._game.player)
-  
-}
+  QuestJs._settings.updateCustomUI();
 
+  QuestJs._log.info(skills.findName('Flaming weapon'));
+  QuestJs._log.info(skills.findName('Fireball'));
+  QuestJs._w.rabbit.setLeader(QuestJs._game.player);
+};
 
-
-
-
-
-
-QuestJs._settings.customUI = function() {
+QuestJs._settings.customUI = function () {
   document.writeln('<div id="rightpanel" class="side-panes side-panes-right">');
   document.writeln('<div id="rightstatus">');
   document.writeln('<table align="center">');
   document.writeln('<tr><td width="120"><b>Current weapon</b></td></tr>');
-  document.writeln('<tr><td id="weapon-td"><img id="weaponImage" onclick="skillUI.chooseWeapon();"/></td></tr>');
+  document.writeln(
+    '<tr><td id="weapon-td"><img id="weaponImage" onclick="skillUI.chooseWeapon();"/></td></tr>',
+  );
   document.writeln('<tr><td><b>Health</b></td></tr>');
-  document.writeln('<tr><td style="border: thin solid black;background:white;text-align:left;\" title="Your current hits" id="hits-td"><span id="hits-indicator" style="background-color:green;padding-right:100px;"></span></td></tr>');
+  document.writeln(
+    '<tr><td style="border: thin solid black;background:white;text-align:left;" title="Your current hits" id="hits-td"><span id="hits-indicator" style="background-color:green;padding-right:100px;"></span></td></tr>',
+  );
   document.writeln('<tr><td><b>Spell points</b></td></tr>');
-  document.writeln('<tr><td style="border: thin solid black;background:white;text-align:left;\" title="Your current PP" id="pp-td"><span id="pp-indicator" style="background-color:blue;padding-right:100px;"></span></td></tr>');
+  document.writeln(
+    '<tr><td style="border: thin solid black;background:white;text-align:left;" title="Your current PP" id="pp-td"><span id="pp-indicator" style="background-color:blue;padding-right:100px;"></span></td></tr>',
+  );
   document.writeln('<tr><td><b>Armour</b></td></tr>');
-  document.writeln('<tr><td style="border: thin solid black;background:white;text-align:left;\" title="Your current armour" id="armour-td"><span id="armour-indicator" style="background-color:red;padding-right:100px;"></span></td></tr>');
+  document.writeln(
+    '<tr><td style="border: thin solid black;background:white;text-align:left;" title="Your current armour" id="armour-td"><span id="armour-indicator" style="background-color:red;padding-right:100px;"></span></td></tr>',
+  );
   document.writeln('</table>');
   document.writeln('</div>');
 
-  document.writeln('<div style="text-align:center"><input type="button" id="castButton" text="Cast" value="Cast" onclick="skillUI.castButtonClick()" style="width: 80px" disabled="yes"/></div>');
+  document.writeln(
+    '<div style="text-align:center"><input type="button" id="castButton" text="Cast" value="Cast" onclick="skillUI.castButtonClick()" style="width: 80px" disabled="yes"/></div>',
+  );
 
   document.writeln('<table align="center">');
   for (let row = 0; row < 8; row++) {
@@ -130,43 +135,67 @@ QuestJs._settings.customUI = function() {
   }
   document.writeln('</table>');
   document.writeln('</div>');
-  
+
   document.writeln('<div id="choose-weapon-div" title="Select a weapon">');
   document.writeln('<select id="weapon-select"></select>');
   document.writeln('</div>');
-  $(function() {
-    $( "#choose-weapon-div" ).dialog({
-      autoOpen: false,  
+  $(function () {
+    $('#choose-weapon-div').dialog({
+      autoOpen: false,
       buttons: {
-        OK: function() { skillUI.chosenWeapon() }
+        OK: function () {
+          skillUI.chosenWeapon();
+        },
       },
     });
   });
-};  
+};
 
+QuestJs._settings.updateCustomUI = function () {
+  $('#weaponImage').attr(
+    'src',
+    QuestJs._settings.imagesFolder +
+      'icon-' +
+      QuestJs._game.player.getEquippedWeapon().image +
+      '.png',
+  );
+  $('#weapon-td').prop('title', 'Weapon: ' + QuestJs._game.player.getEquippedWeapon().alias);
 
-QuestJs._settings.updateCustomUI = function() {
-  $('#weaponImage').attr('src', QuestJs._settings.imagesFolder + 'icon-' + QuestJs._game.player.getEquippedWeapon().image + '.png');
-  $('#weapon-td').prop('title', "Weapon: " + QuestJs._game.player.getEquippedWeapon().alias);
-  
-  $('#hits-indicator').css('padding-right', 120 * QuestJs._game.player.health / QuestJs._game.player.maxHealth);
-  $('#hits-td').prop('title', "Hits: " + QuestJs._game.player.health + "/" + QuestJs._game.player.maxHealth);
+  $('#hits-indicator').css(
+    'padding-right',
+    (120 * QuestJs._game.player.health) / QuestJs._game.player.maxHealth,
+  );
+  $('#hits-td').prop(
+    'title',
+    'Hits: ' + QuestJs._game.player.health + '/' + QuestJs._game.player.maxHealth,
+  );
 
-  $('#pp-indicator').css('padding-right', 120 * QuestJs._game.player.pp / QuestJs._game.player.maxPP);
-  $('#pp-td').prop('title', "Power points: " + QuestJs._game.player.pp + "/" + QuestJs._game.player.maxPP);
+  $('#pp-indicator').css(
+    'padding-right',
+    (120 * QuestJs._game.player.pp) / QuestJs._game.player.maxPP,
+  );
+  $('#pp-td').prop(
+    'title',
+    'Power points: ' + QuestJs._game.player.pp + '/' + QuestJs._game.player.maxPP,
+  );
 
-  $('#armour-indicator').css('padding-right', 120 * QuestJs._game.player.armour / QuestJs._game.player.maxArmour);
-  $('#armour-td').prop('title', "Armour: " + QuestJs._game.player.armour + "/" + QuestJs._game.player.maxArmour);
+  $('#armour-indicator').css(
+    'padding-right',
+    (120 * QuestJs._game.player.armour) / QuestJs._game.player.maxArmour,
+  );
+  $('#armour-td').prop(
+    'title',
+    'Armour: ' + QuestJs._game.player.armour + '/' + QuestJs._game.player.maxArmour,
+  );
 
   //QuestJs._log.info($('#hits-td').prop('title'));
 
-
   //QuestJs._log.info(QuestJs._game.player.skillsLearnt)
-  skillUI.removeAllButtons()
+  skillUI.removeAllButtons();
   for (let skill of skills.list) {
     //QuestJs._log.info(skill.name)
     if (QuestJs._game.player.skillsLearnt.includes(skill.name)) {
-      skillUI.setButton(skill)
+      skillUI.setButton(skill);
     }
   }
   for (let key in QuestJs._w) {
@@ -176,166 +205,164 @@ QuestJs._settings.updateCustomUI = function() {
   }
 };
 
-
-
-
-
-
 const skillUI = {
-  skills:[],
-  selected:false,
-  
-  setButton:function(skill) {
-    if (!skill.icon) skill.icon = skill.name.toLowerCase()
-    const cell = $('#cell' + skillUI.skills.length)
-    let s = '<div class="skill-container" title="' + skill.tooltip + '" >'
-    s += '<img class="skill-image" src="' + QuestJs._settings.imagesFolder + 'icon-' + skill.icon + '.png"/>'
-    if (skill.spell) s += '<img class="skill-image" src="' + QuestJs._settings.imagesFolder + 'flag-spell.png"/>'
-    s += '</div>'
-    cell.html(s)
-    cell.click(skillUI.buttonClickHandler)
-    cell.css("background-color", "black")
-    cell.css("padding", "2px")
-    cell.attr("name", skill.name)
-    skillUI.skills.push(skill)
+  skills: [],
+  selected: false,
+
+  setButton: function (skill) {
+    if (!skill.icon) skill.icon = skill.name.toLowerCase();
+    const cell = $('#cell' + skillUI.skills.length);
+    let s = '<div class="skill-container" title="' + skill.tooltip + '" >';
+    s +=
+      '<img class="skill-image" src="' +
+      QuestJs._settings.imagesFolder +
+      'icon-' +
+      skill.icon +
+      '.png"/>';
+    if (skill.spell)
+      s += '<img class="skill-image" src="' + QuestJs._settings.imagesFolder + 'flag-spell.png"/>';
+    s += '</div>';
+    cell.html(s);
+    cell.click(skillUI.buttonClickHandler);
+    cell.css('background-color', 'black');
+    cell.css('padding', '2px');
+    cell.attr('name', skill.name);
+    skillUI.skills.push(skill);
   },
 
-  resetButtons:function() {
+  resetButtons: function () {
     //QuestJs._log.info('reset')
     for (let i = 0; i < skillUI.skills.length; i++) {
-      $('#cell' + i).css("background-color", "black");
+      $('#cell' + i).css('background-color', 'black');
     }
-    $('#castButton').prop('disabled', true)
-    skillUI.selected = false
+    $('#castButton').prop('disabled', true);
+    skillUI.selected = false;
   },
 
-
-  removeAllButtons:function() {
+  removeAllButtons: function () {
     for (let i = 0; i < skillUI.skills.length; i++) {
-      $('#cell' + i).html("")
+      $('#cell' + i).html('');
     }
-    skillUI.skills = []
-    $('#castButton').prop('disabled', true)
-    skillUI.selected = false
+    skillUI.skills = [];
+    $('#castButton').prop('disabled', true);
+    skillUI.selected = false;
   },
 
-  buttonClickHandler:function(event) {
-    QuestJs._log.info(event)
-    skillUI.resetButtons()
-    
-    const n = parseInt(event.currentTarget.id.replace('cell', ''))
-    QuestJs._log.info(n)
-    skillUI.selected = n
-    const cell = $("#cell" + n)
-    cell.css("background-color", "yellow")
-    const skill = skillUI.skills[n]
-    if (skill.noTarget) $('#castButton').prop('disabled', false)
+  buttonClickHandler: function (event) {
+    QuestJs._log.info(event);
+    skillUI.resetButtons();
+
+    const n = parseInt(event.currentTarget.id.replace('cell', ''));
+    QuestJs._log.info(n);
+    skillUI.selected = n;
+    const cell = $('#cell' + n);
+    cell.css('background-color', 'yellow');
+    const skill = skillUI.skills[n];
+    if (skill.noTarget) $('#castButton').prop('disabled', false);
   },
 
-  getSkillFromButtons:function() {
-    return skillUI.selected ? skillUI.skills[skillUI.selected] : null
-  },
-  
-  castButtonClick:function() {
-    QuestJs._log.info("CKLOICK!!!")
-    QuestJs._log.info("CKLOICK!!! " + skillUI.selected)
-    QuestJs._log.info("CKLOICK!!! " + skillUI.skills)
-    QuestJs._log.info("CKLOICK!!! " + skillUI.skills[skillUI.selected].name)
+  getSkillFromButtons: function () {
+    return skillUI.selected ? skillUI.skills[skillUI.selected] : null;
   },
 
+  castButtonClick: function () {
+    QuestJs._log.info('CKLOICK!!!');
+    QuestJs._log.info('CKLOICK!!! ' + skillUI.selected);
+    QuestJs._log.info('CKLOICK!!! ' + skillUI.skills);
+    QuestJs._log.info('CKLOICK!!! ' + skillUI.skills[skillUI.selected].name);
+  },
 
-  chooseWeapon:function() {
-    QuestJs._log.info("in chooseWeapon");
+  chooseWeapon: function () {
+    QuestJs._log.info('in chooseWeapon');
     const weapons = [];
     for (let o in QuestJs._w) {
-      if (QuestJs._w[o].isAtLoc(QuestJs._game.player, QuestJs._world.SCOPING) && QuestJs._w[o].weapon) {
+      if (
+        QuestJs._w[o].isAtLoc(QuestJs._game.player, QuestJs._world.SCOPING) &&
+        QuestJs._w[o].weapon
+      ) {
         QuestJs._log.info(o);
-        weapons.push('<option value="'+ o +'">' + QuestJs._w[o].listalias + '</option>');
+        weapons.push('<option value="' + o + '">' + QuestJs._w[o].listalias + '</option>');
       }
     }
     const s = weapons.join('');
     QuestJs._log.info(s);
 
-    $('#weapon-select').html(s);  
-    
-    $("#choose-weapon-div").dialog("open");
+    $('#weapon-select').html(s);
+
+    $('#choose-weapon-div').dialog('open');
   },
 
-  chosenWeapon:function() {
-    $("#choose-weapon-div").dialog("close");
-    const selected = $("#weapon-select").val();
-    QuestJs._log.info("in chosenWeapon: " + selected);
+  chosenWeapon: function () {
+    $('#choose-weapon-div').dialog('close');
+    const selected = $('#weapon-select').val();
+    QuestJs._log.info('in chosenWeapon: ' + selected);
     QuestJs._w[selected].equip(false, QuestJs._game.player);
     QuestJs._world.endTurn(QuestJs._world.SUCCESS);
   },
-
-}
-
-
-
-
-
-
-
+};
 
 QuestJs._settings.startingDialogDisabled = true;
 
 QuestJs._settings.professions = [
-  {name:"Farm hand", bonus:"strength"},
-  {name:"Scribe", bonus:"intelligence"},
-  {name:"Exotic dancer", bonus:"agility"},
-  {name:"Merchant", bonus:"charisma"},
+  { name: 'Farm hand', bonus: 'strength' },
+  { name: 'Scribe', bonus: 'intelligence' },
+  { name: 'Exotic dancer', bonus: 'agility' },
+  { name: 'Merchant', bonus: 'charisma' },
 ];
 
-$(function() {
+$(function () {
   if (QuestJs._settings.startingDialogDisabled) {
     const p = QuestJs._w.me;
     p.job = QuestJs._settings.professions[0];
     p.isFemale = true;
-    p.fullname = "Shaala"
-    QuestJs._settings.gui = true
-    return; 
+    p.fullname = 'Shaala';
+    QuestJs._settings.gui = true;
+    return;
   }
-  const diag = $("#dialog");
-  diag.prop("title", "Who are you?");
+  const diag = $('#dialog');
+  diag.prop('title', 'Who are you?');
   let s;
   s = '<p>Name: <input id="namefield" type="text" value="Zoxx" /></p>';
   s += '<p>Male: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
   s += 'Female<input type="radio" id="female" name="sex" value="female" checked></p>';
-  s += '<p>Job:<select id="job">'
+  s += '<p>Job:<select id="job">';
   for (let profession of QuestJs._settings.professions) {
     s += '<option value="' + profession.name + '">' + profession.name + '</option>';
   }
-  s += '</select></p>'
-  
-  s += '<p>Classic interface: <input type="radio" id="classic" name="interface" value="classic" checked>&nbsp;&nbsp;&nbsp;&nbsp;'
-  s += 'GUI<input type="radio" id="gui" name="interface" value="gui"></p>'
-  
+  s += '</select></p>';
+
+  s +=
+    '<p>Classic interface: <input type="radio" id="classic" name="interface" value="classic" checked>&nbsp;&nbsp;&nbsp;&nbsp;';
+  s += 'GUI<input type="radio" id="gui" name="interface" value="gui"></p>';
+
   diag.html(s);
   diag.dialog({
-    modal:true,
-    dialogClass: "no-close",
+    modal: true,
+    dialogClass: 'no-close',
     width: 400,
     height: 340,
     buttons: [
       {
-        text: "OK",
-        click: function() {
-          $(this).dialog("close");
+        text: 'OK',
+        click: function () {
+          $(this).dialog('close');
           const p = QuestJs._game.player;
-          const job = $("#job").val();
-          p.job = QuestJs._settings.professions.find(function(el) { return el.name === job; });
-          p.isFemale = $("#female").is(':checked');
-          QuestJs._settings.gui = $("#gui").is(':checked');
-          p.fullname = $("#namefield").val();
-          if (QuestJs._settings.textInput) { $('#textbox').focus(); }
-          QuestJs._log.info(p)
-        }
-      }
-    ]
+          const job = $('#job').val();
+          p.job = QuestJs._settings.professions.find(function (el) {
+            return el.name === job;
+          });
+          p.isFemale = $('#female').is(':checked');
+          QuestJs._settings.gui = $('#gui').is(':checked');
+          p.fullname = $('#namefield').val();
+          if (QuestJs._settings.textInput) {
+            $('#textbox').focus();
+          }
+          QuestJs._log.info(p);
+        },
+      },
+    ],
   });
 });
-
 
 /*
 

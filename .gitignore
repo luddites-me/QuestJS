@@ -1,9 +1,4 @@
 tmp.*
-*.xml
-*.aslx
-*.yml
-*.rb
-*.txt
 *.zip
 game-x*/
 game-banks-demo/
@@ -14,6 +9,12 @@ images/Joseph Banks.svg
 misc/
 sounds/
 images/medieval_houses_isometric_map_elements_by_darthasparagus_d6hhk05-fullview.png
-QuestJS-0-2.zip
-QuestJS-0-2.zip
-QuestJS-0-2.zip
+*.zip
+node_modules/
+
+.yarn/*
+#!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions

@@ -2,10 +2,8 @@
 
 body {
   color: black;
-  font-family: 'Montserrat', sans-serif;;
+  font-family: 'Montserrat', sans-serif;
 }
-
-
 
 /* Style page content */
 #main {
@@ -15,30 +13,22 @@ body {
   font-family: 'ZCOOL XiaoWei', serif;
 }
 
-
 .cmd-link {
   cursor: pointer;
-  color:blue;
+  color: blue;
 }
-  
-
-
 
 /* The command bar  */
 #textbox {
-  border:none;
+  border: none;
   outline: none;
-  width:95%;
+  width: 95%;
 }
-
 
 .input-text {
-  font-style:italic;
-  color:green;
+  font-style: italic;
+  color: green;
 }
-
-
-
 
 /* Side panes */
 .side-panes {
@@ -48,11 +38,11 @@ body {
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   background-color: #fdf;
-  background-image:url("../images/back.png");
+  background-image: url('../images/back.png');
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 5px;
   font-size: 9pt;
-  font-family: 'Montserrat', sans-serif;;
+  font-family: 'Montserrat', sans-serif;
 }
 .side-panes-left {
   left: 0;
@@ -74,8 +64,6 @@ body {
 }
 */
 
-
-
 // Used by showMenu
 .menu-title {
   color: grey;
@@ -83,12 +71,11 @@ body {
   margin-left: 20px;
 }
 .menu-option {
-  color:blue;
+  color: blue;
   cursor: pointer;
   font-style: italic;
   margin-left: 20px;
 }
-
 
 /* Various msg options */
 .meta {
@@ -105,32 +92,29 @@ body {
   color: red;
 }
 .error21::before {
-  content: "QUEST CODE ERROR: ";
+  content: 'QUEST CODE ERROR: ';
   font-style: italic;
 }
 .error22::before {
-  content: "GAME CODE ERROR: ";
+  content: 'GAME CODE ERROR: ';
   font-style: italic;
 }
 .error23::before {
-  content: "PARSER ERROR: ";
+  content: 'PARSER ERROR: ';
   font-style: italic;
 }
 .error25::before {
-  content: "TEXT PROCESSOR ERROR: ";
+  content: 'TEXT PROCESSOR ERROR: ';
   font-style: italic;
 }
 .error26::before {
-  content: "SAVE/LOAD ERROR: ";
+  content: 'SAVE/LOAD ERROR: ';
   font-style: italic;
 }
 .error27::before {
-  content: "DEBUG COMMAND: ";
+  content: 'DEBUG COMMAND: ';
   font-style: italic;
 }
-
-
-
 
 .debug {
   font-size: 10pt;
@@ -139,25 +123,21 @@ body {
   /*display: none;*/
 }
 
-
-
-
 /* Compass */
 td.compass-button {
-    border: black solid 1px;
-    padding: 2px;
-    background-color: #c0c0ff;
-    width: 20px;
-    height: 15px;
-}  
+  border: black solid 1px;
+  padding: 2px;
+  background-color: #c0c0ff;
+  width: 20px;
+  height: 15px;
+}
 span.compass-button {
-    cursor: pointer;
-    text-align: center;
-    margin: auto;
-    width: 18px;
-    display: block;
-}  
-
+  cursor: pointer;
+  text-align: center;
+  margin: auto;
+  width: 18px;
+  display: block;
+}
 
 /* Items in inventories */
 .side-pane-heading {
@@ -166,31 +146,31 @@ span.compass-button {
   margin-bottom: 4px;
 }
 .item {
-    cursor: pointer;
-    border: black solid 1px;
-    padding: 2px;
-    padding-bottom: 0px;
-    background-color: #c0c0ff;
-    width: 135px;
-    margin-left: 10px;
-    margin-bottom: 0px;
+  cursor: pointer;
+  border: black solid 1px;
+  padding: 2px;
+  padding-bottom: 0px;
+  background-color: #c0c0ff;
+  width: 135px;
+  margin-left: 10px;
+  margin-bottom: 0px;
 }
 .sub-item {
-    background-color: #a0a0ff;
-    width: 140px;
-    margin-top: 0px;
+  background-color: #a0a0ff;
+  width: 140px;
+  margin-top: 0px;
 }
 .item-action {
-    cursor: pointer;
-    border: black solid 1px;
-    border-top: none;
-    padding: 2px;
-    background-color: #e0e0ff;
-    width: 100px;
-    margin-left: 20px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-style:italic;
+  cursor: pointer;
+  border: black solid 1px;
+  border-top: none;
+  padding: 2px;
+  background-color: #e0e0ff;
+  width: 100px;
+  margin-left: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-style: italic;
 }
 #status-pane {
   padding-left: 5pt;
@@ -199,10 +179,8 @@ span.compass-button {
   padding-left: 5pt;
 }
 #dialog {
-  display:none;
+  display: none;
 }
-
-
 
 /* For dialog panels */
 .no-close .ui-dialog-titlebar-close {
@@ -219,14 +197,12 @@ span.compass-button {
   background-color: silver;
 }
 
-
-th, td {
+th,
+td {
   border-bottom: 1px solid #ddd;
-  padding:4px;
-  text-align:center;
+  padding: 4px;
+  text-align: center;
 }
-
-
 
 .typewriter {
   font-weight: bold;

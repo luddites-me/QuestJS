@@ -1,7 +1,5 @@
-"use strict"
+'use strict';
 
 const walkthroughs = {
-  a:[
-    "s", "u", "QuestJs._w", "in", 
-  ]
-}
+  a: ['s', 'u', 'QuestJs._w', 'in'],
+};

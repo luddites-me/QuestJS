@@ -1,20 +1,8 @@
-"use strict";
+'use strict';
 
-
-
-
-
-
-
-
-const takeATurn = function() {
-  QuestJs._io.msg("Time passes...")
-}
-
-
-
-
-
+const takeATurn = function () {
+  QuestJs._io.msg('Time passes...');
+};
 
 /*
 const word = {}
@@ -30,79 +18,74 @@ word.word = function() {
 for (let i = 0; i < 20; i++) QuestJs._log.info(word.word())
 */
 
-
-
-
-
-
 QuestJs._settings.startingDialogDisabled = true;
 
 QuestJs._settings.professions = [
-  "Alchemist",
-  "Baronet",
-  "Farm hand",
-  "Glass blower",
-  "Merchant",
-  "Priest",
-  "Prostitute",
+  'Alchemist',
+  'Baronet',
+  'Farm hand',
+  'Glass blower',
+  'Merchant',
+  'Priest',
+  'Prostitute',
 ];
 
-$(function() {
+$(function () {
   if (QuestJs._settings.startingDialogDisabled) {
     const p = QuestJs._game.player;
-    p.job = "Merchant";
+    p.job = 'Merchant';
     p.isFemale = true;
-    p.alias = "Shaala";
-    return; 
+    p.alias = 'Shaala';
+    return;
   }
-  const diag = $("#dialog");
-  diag.prop("title", "Who are you?");
+  const diag = $('#dialog');
+  diag.prop('title', 'Who are you?');
   let s;
   s = '<p>Name: <input id="namefield" type="text" value="Zoxx" /></p>';
   s += '<p>King: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
   s += 'Queen<input type="radio" id="female" name="sex" value="female" checked></p>';
-  s += '<p>Background:<select id="job">'
+  s += '<p>Background:<select id="job">';
   for (let profession of QuestJs._settings.professions) {
     s += '<option value="' + profession + '">' + profession + '</option>';
   }
   s += '</select></p>';
-  
+
   diag.html(s);
   diag.dialog({
-    modal:true,
-    dialogClass: "no-close",
+    modal: true,
+    dialogClass: 'no-close',
     width: 400,
     height: 300,
     buttons: [
       {
-        text: "OK",
-        click: function() {
-          $(this).dialog("close");
+        text: 'OK',
+        click: function () {
+          $(this).dialog('close');
           const p = QuestJs._game.player;
-          p.job = $("#job").val();
-          p.isFemale = $("#female").is(':checked');
-          p.alias = $("#namefield").val();
-          if (QuestJs._settings.textInput) { $('#textbox').focus(); }
-          QuestJs._log.info(p)
-        }
-      }
-    ]
+          p.job = $('#job').val();
+          p.isFemale = $('#female').is(':checked');
+          p.alias = $('#namefield').val();
+          if (QuestJs._settings.textInput) {
+            $('#textbox').focus();
+          }
+          QuestJs._log.info(p);
+        },
+      },
+    ],
   });
 });
 
-
-
-
-QuestJs._commands.push(new QuestJs._command.Cmd('Sleep', {
-  regex:/^sleep$/,
-  script:function() {
-    if (QuestJs._game.player.loc === 'royal_bedroom') {
-      takeATurn()
-      return QuestJs._world.SUCCESS
-    }
-    else {
-      QuestJs._io.metamsg("You can only sleep in the bedroom");
-      return QuestJs._world.FAILED
-    }
-  },
-}));
+QuestJs._commands.push(
+  new QuestJs._command.Cmd('Sleep', {
+    regex: /^sleep$/,
+    script: function () {
+      if (QuestJs._game.player.loc === 'royal_bedroom') {
+        takeATurn();
+        return QuestJs._world.SUCCESS;
+      } else {
+        QuestJs._io.metamsg('You can only sleep in the bedroom');
+        return QuestJs._world.FAILED;
+      }
+    },
+  }),
+);
