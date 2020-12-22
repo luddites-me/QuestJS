@@ -558,7 +558,7 @@ createRoom("bedroom", {
   hint:"The bedroom has a variety of garments that can be put on - in the right order.",
 })
 
-createItem("wardrobe", DEFAULT_ROOM, {
+createItem("wardrobe", QuestJs._defaults.DEFAULT_ROOM, {
   out:new Exit("bedroom"),
   loc:"bedroom",
   examine:"It is so big you could probably get inside it.",
