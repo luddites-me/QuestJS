@@ -18,11 +18,11 @@ tp.addDirective("cloakHere", function(arr, params) {
 });
 
 QuestJs._command.findCmd('MetaCredits').script = function() {
-  metamsg('This game was created by The Pixie, following the Cloak of Darkness specification by Roger Firth.')
+  QuestJs._io.metamsg('This game was created by The Pixie, following the Cloak of Darkness specification by Roger Firth.')
 }
 
 QuestJs._command.findCmd('MetaHelp').script = function() {
-  metamsg('Just type stuff at the prompt!')
+  QuestJs._io.metamsg('Just type stuff at the prompt!')
 }
 
 
@@ -50,12 +50,12 @@ createItem('cloak', WEARABLE(), {
 createRoom("lobby", {
   desc:"There is something oppressive about the {cloakHere:dark:dingy} {once:room}{notOnce:foyer}; a presence in the air that almost suffocates you. It's former glory has all but faded; the walls still sport old posters from productions that ended over twenty years ago. Paint is peeling, dust is everywhere and it smells decidedly musty. You can see doors to the north, west and south.",
   beforeFirstEnter:function() {
-    msg ("You hurry through the night, keen to get out of the rain. Ahead, you can see the old opera house, a brightly-lit beacon of safety.")
-    msg ("Moments later you are pushing though the doors into the foyer. Now that you are here it does not seem so bright. The doors close behind you with an ominous finality...")
-    msg ("")
+    QuestJs._io.msg ("You hurry through the night, keen to get out of the rain. Ahead, you can see the old opera house, a brightly-lit beacon of safety.")
+    QuestJs._io.msg ("Moments later you are pushing though the doors into the foyer. Now that you are here it does not seem so bright. The doors close behind you with an ominous finality...")
+    QuestJs._io.msg ("")
   },
   north:new Exit('lobby', { use:function() {
-    msg('You try the doors out of the opera house, but they are locked. {once:{i:How did that happen?} you wonder.}')
+    QuestJs._io.msg('You try the doors out of the opera house, but they are locked. {once:{i:How did that happen?} you wonder.}')
     return false
   }}),
   west:new Exit('cloakroom'),
@@ -101,10 +101,10 @@ createItem('hook', SURFACE(), {
   scenery:true,
   examine:function() {
     if (w.cloak.isAtLoc('hook')) {
-      msg("An ornate brass hook, with a cloak hanging from it.")
+      QuestJs._io.msg("An ornate brass hook, with a cloak hanging from it.")
     }
     else {
-      msg("An ornate brass hook, ideal for hanging cloaks on.")
+      QuestJs._io.msg("An ornate brass hook, ideal for hanging cloaks on.")
     }
   },
   loc:'cloakroom'
@@ -145,13 +145,13 @@ createItem('message', {
   loc:'bar',
   examine:function() {
     if (cloakHere()) {
-      msg ("You cannot see any message, it is too dark.")
+      QuestJs._io.msg ("You cannot see any message, it is too dark.")
     }
     if (this.disturbed < 3) {
-      msg ("The message in the dust says 'You have won!'")
+      QuestJs._io.msg ("The message in the dust says 'You have won!'")
     }
     else {
-      msg ("The message in the dust says 'You have lost!'")
+      QuestJs._io.msg ("The message in the dust says 'You have lost!'")
     }
     io.finish()
   },
@@ -162,11 +162,11 @@ createItem('message', {
     this.count++
     if (this.count > 1) {
       if (this.disturbed === 0) {
-        msg ("You think it might be a bad idea to disturb things in the dark.")
+        QuestJs._io.msg ("You think it might be a bad idea to disturb things in the dark.")
       }
       else {
         if (!game.player.suppress_background_sounds) {
-          msg ("You can hear {random:scratching:something moving in the dark:rasping breathing}.")
+          QuestJs._io.msg ("You can hear {random:scratching:something moving in the dark:rasping breathing}.")
         }
       }
       this.disturbed++
@@ -185,10 +185,10 @@ createItem('message', {
 createItem('walls', {
   examine:function() {
     if (cloakHere() && game.player.isAtLoc('bar')) {
-      msg("It is too dark to see the walls.")
+      QuestJs._io.msg("It is too dark to see the walls.")
     }
     else {
-      msg("The walls are covered in a faded red and gold wallpaper, that is showing signs of damp.")
+      QuestJs._io.msg("The walls are covered in a faded red and gold wallpaper, that is showing signs of damp.")
     }    
   },
   isAtLoc:function(loc, situation) {
@@ -200,10 +200,10 @@ createItem('walls', {
 createItem('ceiling', {
   examine:function() {
     if (cloakHere() && game.player.isAtLoc('bar')) {
-      msg("It is too dark to see the ceiling.")
+      QuestJs._io.msg("It is too dark to see the ceiling.")
     }
     else {
-      msg("The ceiling is - or was - white. Now it is a dirty grey.")
+      QuestJs._io.msg("The ceiling is - or was - white. Now it is a dirty grey.")
     }    
   },
   isAtLoc:function(loc, situation) {
@@ -216,10 +216,10 @@ createItem('floor', {
   regex:/^carpet$/,
   examine:function() {
     if (cloakHere() && game.player.isAtLoc('bar')) {
-      msg("It is too dark to see the floor.")
+      QuestJs._io.msg("It is too dark to see the floor.")
     }
     else {
-      msg("A red carpet covers the floor, worn almost though in places.")
+      QuestJs._io.msg("A red carpet covers the floor, worn almost though in places.")
     }    
   },
   isAtLoc:function(loc, situation) {
@@ -232,10 +232,10 @@ createItem('doors', {
   regex:/^carpet$/,
   examine:function() {
     if (cloakHere() && game.player.isAtLoc('bar')) {
-      msg("It is too dark to see the door properly.")
+      QuestJs._io.msg("It is too dark to see the door properly.")
     }
     else {
-      msg("All the doors are wooden, and painted white.")
+      QuestJs._io.msg("All the doors are wooden, and painted white.")
     }    
   },
   isAtLoc:function(loc, situation) {
@@ -265,7 +265,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('HangUp', {
     }
     else {
       objects[0][0].moveToFrom('hook')
-      msg ("You hang {nm:obj:the} on the hook.", {obj:objects[0][0]})
+      QuestJs._io.msg ("You hang {nm:obj:the} on the hook.", {obj:objects[0][0]})
       return world.SUCCESS
     }
   }  
@@ -292,7 +292,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('HangUp', {
     }
     else {
       objects[0][0].moveToFrom('hook')
-      msg ("You hang {nm:obj:the} on the hook.", {obj:objects[0][0]})
+      QuestJs._io.msg ("You hang {nm:obj:the} on the hook.", {obj:objects[0][0]})
       return world.SUCCESS
     }
   }  

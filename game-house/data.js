@@ -20,7 +20,7 @@ createItem("h_find_animate_corpse", {
 createItem("h_animate_corpse1", {
   loc:"hints",
   examine:function() {
-    msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is..?")
+    QuestJs._io.msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is..?")
     this.passed = true
   },
 })
@@ -29,7 +29,7 @@ createItem("h_animate_corpse1", {
 createItem("h_animate_corpse2", {
   loc:"hints",
   examine:function() {
-    msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning.")
+    QuestJs._io.msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning.")
     this.passed = true
   },
 })
@@ -38,7 +38,7 @@ createItem("h_animate_corpse2", {
 createItem("h_animate_corpse3", {
   loc:"hints",
   examine:function() {
-    msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning. There is a reel of wire, just apply lightning to the other end.")
+    QuestJs._io.msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning. There is a reel of wire, just apply lightning to the other end.")
     this.passed = true
   },
 })
@@ -59,7 +59,7 @@ createItem("h_animate_corpse5", {
 createItem("h_animate_corpse6", {
   loc:"hints",
   examine:function() {
-    msg ("Patch wants to follow you, but won't. Why not?")
+    QuestJs._io.msg ("Patch wants to follow you, but won't. Why not?")
     this.passed = true
   },
 })
@@ -183,7 +183,7 @@ createRoom("highfield_lane", {
   desc:function() {
     Print ("Mandy was standing, feeling a little anxious, on the pavement outside The House, which stood in a neatly kept garden to the east. The road continued north, through the countryside, towards her home, and then onwards to Hedlington, while southward, Highfield Lane made its way back into town.")
     if ((w.letter.parent === this) && letter.scenery) {
-      msg (" ")
+      QuestJs._io.msg (" ")
       Print ("She could see a letter lying on the ground.")
     }
   },
@@ -372,7 +372,7 @@ createRoom("front_hall", {
     Print ("The hall was bigger than Mandy had expected, quite an impressive room really. There were doors to the north and south, while the east wall displayed a number of painting. The walls and ceiling were panelled with dark wood, the foor was tiled in a geometric design that was vaguely unnerving.")
   },
   afterFirstEnter:function() {
-    msg (" ")
+    QuestJs._io.msg (" ")
     Print ("The door slammed shut, making Mandy jump.")
     w.h_gettheletter.passed = true
   },
@@ -411,7 +411,7 @@ createRoom("brass_dining_room", {
   scenery:true,
   desc:function() {
     let s = "This room was dominated by an elegant, dark wood table, well polished, with brass legs shaped like a lion's, and laid out with eight dinner settings. Eight chairs, in matching style, surrounded it.  At the table, "
-    msg (" ")
+    QuestJs._io.msg (" ")
     if (this.mannequin_count < 9) {
       s += toWords(this.mannequin_count) + " mannequins were sat, dressed up in clothes and wig."
     }
@@ -512,7 +512,7 @@ createRoom("theatre_stage", {
   },
   beforeFirstEnter:function() {
     Print ("Mandy pushed the curtain aside and looked beyond. She was startled for a moment to see a figure there, but it was quite inanimate.")
-    msg (" ")
+    QuestJs._io.msg (" ")
   },
   east:new Exit("theatre"),
 })
@@ -537,7 +537,7 @@ createRoom("gallery", {
   desc:"Mandy was stood at the end of a long gallery running south. There were doors west, east and north. A small table had a chessboard on it, and there were painting down the two long walls.",
   afterFirstEnter:function() {
     if (!w.front_hall.notedasweird) {
-      msg (" ")
+      QuestJs._io.msg (" ")
       Print ("That's weird, thought Mandy, surely the door to the west would go back into the garden? And this room was so long, surely the house was not this wide...")
       w.front_hall.notedasweird = true
     }
@@ -920,14 +920,14 @@ createItem("winfield_malovich", {
 createItem("wm_hello", TOPIC(true), {
   loc:"winfield_malovich",
   runscript:function() {
-    msg("");
-    msg("'Who are you?' Mandy asked the man at te desk.");
-    msg("");
-    msg("'Me? I'm Winfield Malovich. This is my house. Who are you?'");
-    msg("");
-    msg("'I was just passing the house.. and I kind of got trapped here.'");
-    msg("");
-    msg("'<i>Story of my life</i>! This was my house once,' he said. 'I built the analytical machine you see before you. Now, well, I think it belongs to itself now. You can talk to it, you know. Only thing that keeps me sane, oh the <i>midnight memories</i> we've shared.' Mandy felt unconvinced it had kept him sane.");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Who are you?' Mandy asked the man at te desk.");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Me? I'm Winfield Malovich. This is my house. Who are you?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I was just passing the house.. and I kind of got trapped here.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'<i>Story of my life</i>! This was my house once,' he said. 'I built the analytical machine you see before you. Now, well, I think it belongs to itself now. You can talk to it, you know. Only thing that keeps me sane, oh the <i>midnight memories</i> we've shared.' Mandy felt unconvinced it had kept him sane.");
 
             this.songlist = Split("Story of my life|Midnight memories", "|")
           
@@ -938,18 +938,18 @@ createItem("wm_hello", TOPIC(true), {
 createItem("wm_what_happened", TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
-    msg("");
-    msg("'What... happened?'");
-    msg("");
-    msg("'It came alive. My fault really. I suppose there really are things that man should not mess with.'");
-    msg("");
-    msg("'Bullshit. What about iPods and Facebook and XBox; where would they be if mankind took that attitude?'");
-    msg("");
-    msg("'I... have no idea what you are talking about.'");
-    msg("");
-    msg("'No, you don't, which is kind the point really. So just tell me what happened.'");
-    msg("");
-    msg("'It got sick. The silvers, I don't know where they came from, but they infected it like a virus. They wanted to infect other houses, <i>more than this</i> one.");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'What... happened?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'It came alive. My fault really. I suppose there really are things that man should not mess with.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Bullshit. What about iPods and Facebook and XBox; where would they be if mankind took that attitude?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I... have no idea what you are talking about.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'No, you don't, which is kind the point really. So just tell me what happened.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'It got sick. The silvers, I don't know where they came from, but they infected it like a virus. They wanted to infect other houses, <i>more than this</i> one.");
 
             list add (this.songlist, "More than this")
             if (analytical_engine.state = 1) {
@@ -963,10 +963,10 @@ createItem("wm_what_happened", TOPIC(false), {
 createItem("wm_no_way_out", TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
-    msg("");
-    msg("'Is there no way out?'");
-    msg("");
-    msg("'None. The walls might as well be made of <i>steel, my girl</i>.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Is there no way out?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'None. The walls might as well be made of <i>steel, my girl</i>.'");
 
             list add (this.songlist, "Steal my girl")
           
@@ -977,10 +977,10 @@ createItem("wm_no_way_out", TOPIC(false), {
 createItem("wm_same_question", TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
-    msg("");
-    msg("'It keeps asking the same question. What direction?'");
-    msg("");
-    msg("'I'm sorry, I can't help you. I rather think it's <i>gotta be you</i>, you see. You have to solve this <i>one thing</i>.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'It keeps asking the same question. What direction?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I'm sorry, I can't help you. I rather think it's <i>gotta be you</i>, you see. You have to solve this <i>one thing</i>.'");
 
             list add (this.songlist, "Gotta be you")
             list add (this.songlist, "One thing")
@@ -992,10 +992,10 @@ createItem("wm_same_question", TOPIC(false), {
 createItem("wm_i_dont_know", TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
-    msg("");
-    msg("'I don't know what to do!'");
-    msg("");
-    msg("'Well, you have to do it, <i>one way or another</i>. Otherwise <i>you and I</i> are here for a very long time.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I don't know what to do!'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Well, you have to do it, <i>one way or another</i>. Otherwise <i>you and I</i> are here for a very long time.'");
 
             list add (this.songlist, "One way or another")
             list add (this.songlist, "You and I")
@@ -1007,10 +1007,10 @@ createItem("wm_i_dont_know", TOPIC(false), {
 createItem("wm_i_will_think", TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
-    msg("");
-    msg("'I'll have a good think.'");
-    msg("");
-    msg("'Don't take too long. The <i>night changes</i> things around. And not for the better. Some nights the silvers try to <i>drag me down</i> to their lair; oh, you need your wits about you once it gets dark.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I'll have a good think.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Don't take too long. The <i>night changes</i> things around. And not for the better. Some nights the silvers try to <i>drag me down</i> to their lair; oh, you need your wits about you once it gets dark.'");
 
             list add (this.songlist, "Night changes")
             list add (this.songlist, "Drag me down")
@@ -1022,14 +1022,14 @@ createItem("wm_i_will_think", TOPIC(false), {
 createItem("wm_how_long", TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
-    msg("");
-    msg("'How long have you been here?'");
-    msg("");
-    msg("'A long time. It feels like several years, but I suspect considerably longer has passed on the outside.Your mode of dress looks quite alien to me, for <i>one thing</i<>; the colours are garnish, the thread I cannot guess at. <i>More than this</i>, your hemline is, well, it would be considered scandalous in 1911. And yet I suppose they are common in your time?'");
-    msg("");
-    msg("Mandy glaned down at her uniform, now inexplicably red and hot pink. 'I was wearing grey and navy when I entered the house. But yeah, its 2016.'");
-    msg("");
-    msg("'Over a hundred years...'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'How long have you been here?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'A long time. It feels like several years, but I suspect considerably longer has passed on the outside.Your mode of dress looks quite alien to me, for <i>one thing</i<>; the colours are garnish, the thread I cannot guess at. <i>More than this</i>, your hemline is, well, it would be considered scandalous in 1911. And yet I suppose they are common in your time?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("Mandy glaned down at her uniform, now inexplicably red and hot pink. 'I was wearing grey and navy when I entered the house. But yeah, its 2016.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Over a hundred years...'");
 
             list add (this.songlist, "One thing")
             list add (this.songlist, "More than this")
@@ -1041,18 +1041,18 @@ createItem("wm_how_long", TOPIC(false), {
 createItem("wm_1911", TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
-    msg("");
-    msg("'You have been here since 1911?'");
-    msg("");
-    msg("'The King was due to have his Delhi Durbar in a few weeks.'");
-    msg("");
-    msg("'Er, which king was that?'");
-    msg("");
-    msg("'George V. I suppose he is just <history</i> to you. Who's king now?'");
-    msg("");
-    msg("'Queen. Queen Elizabeth II.'");
-    msg("");
-    msg("'A queen? Jolly good. England became great under Queen Victoria.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'You have been here since 1911?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'The King was due to have his Delhi Durbar in a few weeks.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Er, which king was that?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'George V. I suppose he is just <history</i> to you. Who's king now?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Queen. Queen Elizabeth II.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'A queen? Jolly good. England became great under Queen Victoria.'");
   },
 })
 
@@ -1586,10 +1586,10 @@ createItem("tiny_man", NPC(false), {
 createItem("tinyman_hello", TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
-    msg("");
-    msg("'Er, hi,' Mandy said to the little man.");
-    msg("");
-    msg("He looked up from his work. 'Hello, miss,' he said in a high-pitched voice.");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Er, hi,' Mandy said to the little man.");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("He looked up from his work. 'Hello, miss,' he said in a high-pitched voice.");
   },
 })
 
@@ -1597,12 +1597,12 @@ createItem("tinyman_hello", TOPIC(false), {
 createItem("tinyman_live_here", TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
-    msg("");
-    msg("'Do you live here?'");
-    msg("");
-    msg("'No, no. I'm just 'ere quick-like to use the tools. Er, this this your 'ouse? You looks a bit big for it.'");
-    msg("");
-    msg("'No. I live about half a mile that way.' She pointed northwards. 'I think. Things seem a bit twisted around here.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Do you live here?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'No, no. I'm just 'ere quick-like to use the tools. Er, this this your 'ouse? You looks a bit big for it.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'No. I live about half a mile that way.' She pointed northwards. 'I think. Things seem a bit twisted around here.'");
   },
 })
 
@@ -1610,10 +1610,10 @@ createItem("tinyman_live_here", TOPIC(false), {
 createItem("tinyman_what_doing", TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
-    msg("");
-    msg("'What are you doing?'");
-    msg("");
-    msg("'I'm making meself some shoes. So 'ard to find any me size, so I 'aves to make me own, see. I've gotten quite good over the years, if I say so meself.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'What are you doing?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I'm making meself some shoes. So 'ard to find any me size, so I 'aves to make me own, see. I've gotten quite good over the years, if I say so meself.'");
 
               if (boots.parent = player) {
                 if (boots.size = 0) {
@@ -1631,10 +1631,10 @@ createItem("tinyman_what_doing", TOPIC(false), {
 createItem("tinyman_mend_boots_normal", TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
-    msg("");
-    msg("'Could you mend some boots?' Mandy showed him the boots.");
-    msg("");
-    msg("'Are you kidding me? They're enormous! 'ow could I get a needle through leather that thick?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Could you mend some boots?' Mandy showed him the boots.");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Are you kidding me? They're enormous! 'ow could I get a needle through leather that thick?'");
 
             
   },
@@ -1644,10 +1644,10 @@ createItem("tinyman_mend_boots_normal", TOPIC(false), {
 createItem("tinyman_mend_boots_small", TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
-    msg("");
-    msg("'Could you mend some boots?' Mandy showed him the boots.");
-    msg("");
-    msg("'I should think so. Toss 'em over here, and I'll 'ave a go.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Could you mend some boots?' Mandy showed him the boots.");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I should think so. Toss 'em over here, and I'll 'ave a go.'");
 
               tiny_man.state = 1
             
@@ -1658,14 +1658,14 @@ createItem("tinyman_mend_boots_small", TOPIC(false), {
 createItem("tinyman_where_live", TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
-    msg("");
-    msg("'So where <i>do </i>you live?'");
-    msg("");
-    msg("'14 Clarence Street. Least, that's where I lived before I come in 'ere.'");
-    msg("");
-    msg("'Clarence Street? I know that road, Charlene Porter lives there.' It was a terrace house, built in the later ninettenth century, near the centre of town.");
-    msg("");
-    msg("'I don't know no Charlene. French is she?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'So where <i>do </i>you live?'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'14 Clarence Street. Least, that's where I lived before I come in 'ere.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Clarence Street? I know that road, Charlene Porter lives there.' It was a terrace house, built in the later ninettenth century, near the centre of town.");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I don't know no Charlene. French is she?'");
   },
 })
 
@@ -1673,14 +1673,14 @@ createItem("tinyman_where_live", TOPIC(false), {
 createItem("tinyman_very_small", TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
-    msg("");
-    msg("'I can't help noticing...,' said Mandy wondering how she say this, 'that you quite... well, small.'");
-    msg("");
-    msg("'Or maybe you're freakishly tall.'");
-    msg("");
-    msg("'Well, maybe. But this room looks to me like a nursery for people my  size, and you're in a toy house.'");
-    msg("");
-    msg("'Ah, you got me. Yeah, it's me. I'm small. Never used to be; used to tower over me old mum, I did. Then I got trapped in this 'ouse, see. Went exploring, trying to find a way out, like, walked in room, big as normal, came out like this! '");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'I can't help noticing...,' said Mandy wondering how she say this, 'that you quite... well, small.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Or maybe you're freakishly tall.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Well, maybe. But this room looks to me like a nursery for people my  size, and you're in a toy house.'");
+    QuestJs._io.msg("");
+    QuestJs._io.msg("'Ah, you got me. Yeah, it's me. I'm small. Never used to be; used to tower over me old mum, I did. Then I got trapped in this 'ouse, see. Went exploring, trying to find a way out, like, walked in room, big as normal, came out like this! '");
   },
 })
 

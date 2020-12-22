@@ -1,7 +1,7 @@
 "use strict";
 
 function tmsg(s, params) {
-  _msg(s, params || {}, {cssClass:"tutorial", tag:'p'});
+  QuestJs._io._msg(s, params || {}, {cssClass:"tutorial", tag:'p'});
 }
 
 const hint = {}
@@ -45,16 +45,16 @@ hint.data = [
   { name:'', hint:'Tell the robot to put the rod in the reactor (ROBOT,PUT ROD IN REACTOR).', tutorial:""},
   { name:'useLift', hint:function() {
       if (w.me.loc === 'reactor_room') {
-        metamsg("Head SOUTH, then WEST, then once in the lift, PRESS 3.")
+        QuestJs._io.metamsg("Head SOUTH, then WEST, then once in the lift, PRESS 3.")
       }
       else if (w.me.loc === 'laboratory' || w.me.loc === 'lounge') {
-        metamsg("Head WEST, then once in the lift, PRESS 3.")
+        QuestJs._io.metamsg("Head WEST, then once in the lift, PRESS 3.")
       }
       else if (w.me.loc === 'lift') {
-        metamsg("PRESS 3.")
+        QuestJs._io.metamsg("PRESS 3.")
       }
       else {
-        metamsg("Head to either the lounge or the laboratory, then go WEST, then once in the lift, PRESS 3.")
+        QuestJs._io.metamsg("Head to either the lounge or the laboratory, then go WEST, then once in the lift, PRESS 3.")
       }
   }, tutorial:"Now we are getting somewhere. At last the lift that we saw in the lounge right at the start is working, and we can use it to get to the top of the house."},
   { name:'eastOffice', hint:'GO EAST.', tutorial:"Hopefully when we exit the lift we will be somewhere new..."},
@@ -92,7 +92,7 @@ hint.before = function(name) {
 
 QuestJs._command.findCmd('MetaHint').script = function() {
   if (typeof hint.data[game.player.hintCounter].hint === 'string') {
-    metamsg(hint.data[game.player.hintCounter].hint)
+    QuestJs._io.metamsg(hint.data[game.player.hintCounter].hint)
   }
   else if (typeof hint.data[game.player.hintCounter].hint === 'function') {
     hint.data[game.player.hintCounter].hint()
@@ -222,7 +222,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Crowbar', {
     {scope:parser.isHere},
   ],
   default:function(item) {
-    msg("That's not something you can crowbar open.")
+    QuestJs._io.msg("That's not something you can crowbar open.")
     return world.FAILED
   },
 }));
@@ -237,7 +237,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Move', {
     {scope:parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    return failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
+    return QuestJs._io.failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
   },
 }));
 
@@ -249,28 +249,28 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Tutorial', {
   ],
   script:function() {
     $('body').toggleClass("hidden")
-    msg(QuestJs._lang.done_msg)
+    QuestJs._io.msg(QuestJs._lang.done_msg)
     return world.SUCCESS_NO_TURNSCRIPTS
   },
 }));
 
 
 const wrapScript = function(obj1, obj2) {
-  if (obj2 !== w.old_newspaper) return failedmsg("You cannot wrap that round anything.")
-  if (obj1 !== w.fist) return failedmsg("You don't think that will achieve anything.")
-  if (obj2.fist_wrapped) return failedmsg("It already is.")
+  if (obj2 !== w.old_newspaper) return QuestJs._io.failedmsg("You cannot wrap that round anything.")
+  if (obj1 !== w.fist) return QuestJs._io.failedmsg("You don't think that will achieve anything.")
+  if (obj2.fist_wrapped) return QuestJs._io.failedmsg("It already is.")
   obj2.fist_wrapped = true
-  msg("You carefully wrap the old newspaper around your fist.")
+  QuestJs._io.msg("You carefully wrap the old newspaper around your fist.")
   hint.now('smashWindow2')
   return world.SUCCESS
 }
 
 const unwrapScript = function(obj1, obj2) {
-  if (obj2 !== w.old_newspaper) return failedmsg("They are not wrapped together.")
-  if (obj1 !== w.fist) return failedmsg("They are not wrapped together.")
-  if (!obj2.fist_wrapped) return failedmsg("They are not wrapped together.")
+  if (obj2 !== w.old_newspaper) return QuestJs._io.failedmsg("They are not wrapped together.")
+  if (obj1 !== w.fist) return QuestJs._io.failedmsg("They are not wrapped together.")
+  if (!obj2.fist_wrapped) return QuestJs._io.failedmsg("They are not wrapped together.")
   obj2.fist_wrapped = false
-  msg("You carefully unwrap the old newspaper from around your fist.")
+  QuestJs._io.msg("You carefully unwrap the old newspaper from around your fist.")
   return world.SUCCESS
 }
 
@@ -327,9 +327,9 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('ThrowThrough', {
   script:function(objects) { 
     const item = objects[0][0]
     const dest = objects[1][0]
-    if (!dest.isThrowThroughable) return failedmsg("You can't chuck stuff through {nm:dest:the}.", {dest:dest})
+    if (!dest.isThrowThroughable) return QuestJs._io.failedmsg("You can't chuck stuff through {nm:dest:the}.", {dest:dest})
     if (!dest.isThrowThroughable(item)) return world.FAILED
-    if (!item.isAtLoc("me")) return failedmsg("You are not holding {nm:item:the}.", {item:item})
+    if (!item.isAtLoc("me")) return QuestJs._io.failedmsg("You are not holding {nm:item:the}.", {item:item})
     dest.throwThrough(item)
     return world.SUCCESS
   },
@@ -337,19 +337,19 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('ThrowThrough', {
 
 
 const smashWithScript = function(item, dest) {
-  if (dest !== w.office_window) return failedmsg("That's not something you can smash.")
-  if (!item.isAtLoc("me")) return failedmsg("You are not holding {nm:item:the}.", {item:item})
-  if (w.office_window.smashed) return falsemsg("The window is already smashed.")
+  if (dest !== w.office_window) return QuestJs._io.failedmsg("That's not something you can smash.")
+  if (!item.isAtLoc("me")) return QuestJs._io.failedmsg("You are not holding {nm:item:the}.", {item:item})
+  if (w.office_window.smashed) return QuestJs._io.falsemsg("The window is already smashed.")
 
   if (item === w.crowbar) {
-    msg("You strike the window with the crowbar, breaking the glass. You take a moment to knock away the remaining jagged shards in the frame.")
-    if (w.Professor_Kleinscope.isHere()) msg("Strangely, Professor Kleinscope does not seem to notice.")
+    QuestJs._io.msg("You strike the window with the crowbar, breaking the glass. You take a moment to knock away the remaining jagged shards in the frame.")
+    if (w.Professor_Kleinscope.isHere()) QuestJs._io.msg("Strangely, Professor Kleinscope does not seem to notice.")
     w.office_window.smashed = true
     hint.now('out')
     return world.SUCCESS
   }
   else {
-    msg("You can't smash the window using {nm:item:the}.", {item:item})
+    QuestJs._io.msg("You can't smash the window using {nm:item:the}.", {item:item})
     return world.FAILED
   }
 }
@@ -390,14 +390,14 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Attack', {
   ],
   script:function(objects) {
     if (objects[0][0].npc) {
-      msg("You just need to get the data, not beat anyone up!")
+      QuestJs._io.msg("You just need to get the data, not beat anyone up!")
       if (!w.me.killFlag) {
         tmsg('You will find most games will not let you attack the characters, and those that do will probably have combat as a large part of the game. That said, it is a good idea to try these things, you never know quite what will happen.')
         w.me.killFlag = true
       }
     }
     else {
-      msg("That's not going to achieve anything.")
+      QuestJs._io.msg("That's not going to achieve anything.")
     }
     return world.FAILED
   },
@@ -415,17 +415,17 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('TieUp', {
   script:function(objects) {
     const tpParams = {item:objects[0][0]}
     if (!w.rope.isAtLoc(game.player)) {
-      return failedmsg("What were you thinking you could tie {ob:item} up with it exactly?", tpParams)
+      return QuestJs._io.failedmsg("What were you thinking you could tie {ob:item} up with it exactly?", tpParams)
     }
     
     if (objects[0][0] === w.robot) {
-      msg("'I am not into the kinky stuff,' says the robot. Despite its metallic face, you still feel it is looking at you with disapproval.")
+      QuestJs._io.msg("'I am not into the kinky stuff,' says the robot. Despite its metallic face, you still feel it is looking at you with disapproval.")
     }
     else if (objects[0][0] === w.Professor_Kleinscope) {
-      msg("'I don;t have time for that sort of thing now,' says the Professor irritably. He looks at yoi thoughtfully. 'Though maybe later...'")
+      QuestJs._io.msg("'I don;t have time for that sort of thing now,' says the Professor irritably. He looks at yoi thoughtfully. 'Though maybe later...'")
     }
     else {
-      msg("That's not going to achieve anything.")
+      QuestJs._io.msg("That's not going to achieve anything.")
     }
     return world.FAILED
   },
@@ -442,7 +442,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('RudeCommand', {
     {scope:parser.isHere},
   ],
   script:function(objects) {
-    parsermsg(QuestJs._lang.not_known_msg)
+    QuestJs._io.parsermsg(QuestJs._lang.not_known_msg)
     if (!w.me.rudeCmdFlag) {
       tmsg('You had to go there...')
       tmsg('There are games that cater to... well, people like you, but this is NOT one of them.')

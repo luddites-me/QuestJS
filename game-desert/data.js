@@ -10,7 +10,7 @@ createItem("me", PLAYER(), {
   positionX:-1,
   positionY:-2,
   examine:function(isMultiple) {
-    msg(prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
+    QuestJs._io.msg(prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
   },
 });
 
@@ -21,10 +21,10 @@ createItem("knife",
   { loc:"me", sharp:false,
     examine:function(isMultiple) {
       if (this.sharp) {
-        msg(prefix(this, isMultiple) + "A really sharp knife.");
+        QuestJs._io.msg(prefix(this, isMultiple) + "A really sharp knife.");
       }
       else {
-        msg(prefix(this, isMultiple) + "A blunt knife.");
+        QuestJs._io.msg(prefix(this, isMultiple) + "A blunt knife.");
       }
     },
   }
@@ -36,7 +36,7 @@ createItem("knife",
 
 createRoom("bus_seat", {
   desc:'You are sat on a bus somewhere in Nevada. Out of the window you can see desert, and not a lot else.{once: You have not arrived at Salt Lake City, that is for sure! Has the bus stopped for gas or something? You wonder if you have time to buy a snack.}',
-  up:new Exit("bus", {alsoDir:['out'], msg:'You get up, out of your seat.'}),
+  up:new Exit("bus", {alsoDir:['out'], QuestJs._io.msg:'You get up, out of your seat.'}),
   alias:"Sat on the Bus",
   backgroundNames:['seat', 'window', 'bus'],
 });
@@ -79,7 +79,7 @@ createItem("passengers", {
       count++
       s += ' An older guy in a "Ramones" tee-shirt.'
     }
-    msg('You can see ' + count + ' passenger' + (count === 1 ? '' : 's') + ' here.' + s)
+    QuestJs._io.msg('You can see ' + count + ' passenger' + (count === 1 ? '' : 's') + ' here.' + s)
   },
 });
 
@@ -181,11 +181,11 @@ createRoom("kitchen", {
 
 createRoom("desert", ZONE(), {
   exits:[
-    {x:-1, y:-2, dir:'in', dest:'bus_front', msg:'You climb up into the bus.'},
-    {x:0, y:-1, dir:'north', dest:'gas_station_interior', msg:'You walk inside the gas station office.'},
-    {x:0, y:-1, dir:'in', dest:'gas_station_interior', msg:'You walk inside the gas station office.'},
-    {x:1, y:1, dir:'in', dest:'kitchen', msg:'You walk inside the back of the gas station.'},
-    {x:1, y:1, dir:'south', dest:'kitchen', msg:'You walk inside the back of the gas station.'},
+    {x:-1, y:-2, dir:'in', dest:'bus_front', QuestJs._io.msg:'You climb up into the bus.'},
+    {x:0, y:-1, dir:'north', dest:'gas_station_interior', QuestJs._io.msg:'You walk inside the gas station office.'},
+    {x:0, y:-1, dir:'in', dest:'gas_station_interior', QuestJs._io.msg:'You walk inside the gas station office.'},
+    {x:1, y:1, dir:'in', dest:'kitchen', QuestJs._io.msg:'You walk inside the back of the gas station.'},
+    {x:1, y:1, dir:'south', dest:'kitchen', QuestJs._io.msg:'You walk inside the back of the gas station.'},
   ],
   size:10,
   mapCells:[

@@ -7,7 +7,7 @@ createItem("me",
     loc:"lounge",
     regex:/^(me|myself|player)$/,
     examine:function(isMultiple) {
-      msg(prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
+      QuestJs._io.msg(prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
     },
   }
 );
@@ -20,14 +20,14 @@ createItem("knife",
     sharp:false,
     examine:function(isMultiple) {
       if (this.sharp) {
-        msg(prefix(this, isMultiple) + "A really sharp knife.");
+        QuestJs._io.msg(prefix(this, isMultiple) + "A really sharp knife.");
       }
       else {
-        msg(prefix(this, isMultiple) + "A blunt knife.");
+        QuestJs._io.msg(prefix(this, isMultiple) + "A blunt knife.");
       }
     },
     chargeResponse:function(participant) {
-      msg("There is a loud bang, and the knife is destroyed.");
+      QuestJs._io.msg("There is a loud bang, and the knife is destroyed.");
       delete this.loc;
       return false;
     },

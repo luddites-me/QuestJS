@@ -49,17 +49,17 @@ const CREW = function(isFemale) {
   res.revive = function(isMultiple, char) {
     const tpParams = {actor:this, char:char}
     if (char === game.player) {
-      msg("You wonder how to revive {nm:actor} - probably best to leave that to Xsansi.", tpParams);
+      QuestJs._io.msg("You wonder how to revive {nm:actor} - probably best to leave that to Xsansi.", tpParams);
       return false;
     }
     if (char !== w.Xsansi) {
-      msg("'{nm:char}, can you revive {nm:actor}?' you ask.", tpParams);
-      msg("'Probably best to leave that to Xsansi.'");
+      QuestJs._io.msg("'{nm:char}, can you revive {nm:actor}?' you ask.", tpParams);
+      QuestJs._io.msg("'Probably best to leave that to Xsansi.'");
       return false;
     }
     if (!this.inPod) {
-      msg("'Xsansi, please revive {nm:actor},' you say.", tpParams);
-      msg("'Crew member {nm:actor} is not currently in stasis.'", tpParams);
+      QuestJs._io.msg("'Xsansi, please revive {nm:actor},' you say.", tpParams);
+      QuestJs._io.msg("'Crew member {nm:actor} is not currently in stasis.'", tpParams);
       return false;
     }
     // check number revived TODO!!!
@@ -80,16 +80,16 @@ const CREW = function(isFemale) {
     else if (this.posture) {
       s += " {pv:actor:be:true} " + this.posture + ".";
     }
-    msg(prefix(this, isMultiple) + this.desc + s, tpParams);
+    QuestJs._io.msg(prefix(this, isMultiple) + this.desc + s, tpParams);
   }
   res.stasis = function() {
     const tpParams = {actor:this}
-    msg("'{nm:actor}, you're work here is done; you can go get in your stasis pod.'", tpParams);
+    QuestJs._io.msg("'{nm:actor}, you're work here is done; you can go get in your stasis pod.'", tpParams);
     if (this.deployProbeTotal === 0) {
-      msg("'You don't think I should deploy a probe first?'", tpParams);
-      msg("'I'm the captain,' you remind {ob:actor}.", tpParams);
+      QuestJs._io.msg("'You don't think I should deploy a probe first?'", tpParams);
+      QuestJs._io.msg("'I'm the captain,' you remind {ob:actor}.", tpParams);
     }
-    msg(this.okay);
+    QuestJs._io.msg(this.okay);
     this.agenda.push("walkTo:stasis_bay");
     this.agenda.push("text:stasisPod");
     this.stasisPodCount = 0;
@@ -97,16 +97,16 @@ const CREW = function(isFemale) {
   res.stasisPod = function() {
     const tpParams = {actor:this}
     if (this.clothing === 2) {
-      this.msg("{nv:actor:pull:true} off {pa:actor} jumpsuit, and puts it in the drawer under {pa:actor} stasis pod.", tpParams);
+      this.QuestJs._io.msg("{nv:actor:pull:true} off {pa:actor} jumpsuit, and puts it in the drawer under {pa:actor} stasis pod.", tpParams);
       this.clothing = 1;
       return false;
     }
     if (this.posture !== "reclining") {
-      this.msg("Just in {pa:actor} underwear, {nv:actor:climb} into {pa:actor} stasis pod.", tpParams);
+      this.QuestJs._io.msg("Just in {pa:actor} underwear, {nv:actor:climb} into {pa:actor} stasis pod.", tpParams);
       this.posture = "reclining";
       return false;
     }
-    this.msg("'Close the pod, Xsansi,' {nv:actor:say}. The stasis pod lid smoothly lowers, and Xsansi operates the stasis field.", tpParams);
+    this.QuestJs._io.msg("'Close the pod, Xsansi,' {nv:actor:say}. The stasis pod lid smoothly lowers, and Xsansi operates the stasis field.", tpParams);
     this.status = "stasis";
     this.loc = "nowhere";
     return true;
@@ -134,11 +134,11 @@ const CREW = function(isFemale) {
         this.deployProbeAction++
         break
       case 1:
-        this.msg("{nv:actor:prepare:true} the {ordinal:count} {param:actor:probeType}.", tpParams)
+        this.QuestJs._io.msg("{nv:actor:prepare:true} the {ordinal:count} {param:actor:probeType}.", tpParams)
         this.deployProbeAction++
         break
       case 2:
-        this.msg("{nv:actor:launch:true} the {ordinal:count} {param:actor:probeType}.", tpParams)
+        this.QuestJs._io.msg("{nv:actor:launch:true} the {ordinal:count} {param:actor:probeType}.", tpParams)
         this.actuallyDeployProbe(count)
         break
       case 3:
@@ -288,8 +288,8 @@ function createTopics(npc) {
     test:function(p) { return p.text.match(this.regex) }, 
     script:function(response) {
       const tpParams = {actor:response.actor}
-      msg("'What's your report on {planet}?' you ask {nm:actor:the}.", tpParams)
-      msg(planetAnalysis(response), tpParams)
+      QuestJs._io.msg("'What's your report on {planet}?' you ask {nm:actor:the}.", tpParams)
+      QuestJs._io.msg(planetAnalysis(response), tpParams)
     },
   });
   npc.askOptions.push({
@@ -305,7 +305,7 @@ function createTopics(npc) {
     regex:/(your |his |her )?(area|special.*|expert.*|job|role)/,
     test:function(p) { return p.text.match(this.regex); }, 
     script:function(response) {
-      msg("'What is your area of expertise?' you ask " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
+      QuestJs._io.msg("'What is your area of expertise?' you ask " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
       response.actor.areaAskResponse();
     }
   });
@@ -314,28 +314,28 @@ function createTopics(npc) {
     regex:/^((his |her )?(background))|((him|her)self)$/,
     test:function(p) { return p.text.match(this.regex); }, 
     script:function(response) {
-      msg("'Tell me about yourself,' you say to " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
+      QuestJs._io.msg("'Tell me about yourself,' you say to " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
       response.actor.backgroundAskResponse();
       trackRelationship(response.actor, 1, "background");
     }
   });
   npc.askOptions.push({
-    msg:"{nv:actor:have:true} no interest in that.",
+    QuestJs._io.msg:"{nv:actor:have:true} no interest in that.",
     failed:true,
   })
 }
  
 function howAreYouFeeling(response) {
-  msg("'How are you feeling?' you ask " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
-  msg(PLANETS[w.Xsansi.currentPlanet][response.actor.name + "_how_are_you"]);
+  QuestJs._io.msg("'How are you feeling?' you ask " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
+  QuestJs._io.msg(PLANETS[w.Xsansi.currentPlanet][response.actor.name + "_how_are_you"]);
 }
 
 function planetAnalysis(response) {
   const arr = response.actor.data[w.Xsansi.currentPlanet]
-  if (Object.keys(arr).length === 0) return falsemsg("You should talk to Aada or Ostap about that stuff.")
+  if (Object.keys(arr).length === 0) return QuestJs._io.falsemsg("You should talk to Aada or Ostap about that stuff.")
 
   let rank = response.actor["rank" + w.Xsansi.currentPlanet]
-  if (rank === undefined) return falsemsg("You should talk to Aada or Ostap about that stuff.")
+  if (rank === undefined) return QuestJs._io.falsemsg("You should talk to Aada or Ostap about that stuff.")
   rank >>= 1
   if (rank >= arr.length) rank = arr.length - 1
   return arr[rank]
@@ -426,7 +426,7 @@ function getProbes() {
 
 function shipAlert(s) {
   if (isOnShip()) {
-    msg("'" + s + "' announces Xsansi.");
+    QuestJs._io.msg("'" + s + "' announces Xsansi.");
   }
 }
 
@@ -462,7 +462,7 @@ function updateMap() {
   $('#layer4').hide()
   const currentDeck = w[game.player.loc].deckName
   $('#map').attr('title', 'The Joseph Banks, ' + settings.deckNames[currentDeck]);
-  if (!currentDeck) return errormsg("No deckName for " + game.player.loc)
+  if (!currentDeck) return QuestJs._io.errormsg("No deckName for " + game.player.loc)
   $('#' + currentDeck).show()
   for (let key in w) {
     if (w[key].svgId) $('#' + w[key].svgId).css('fill', isRoomPressured(w[key]) ? '#777' : '#222')

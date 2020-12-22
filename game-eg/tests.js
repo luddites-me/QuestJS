@@ -478,10 +478,10 @@ test.tests = function() {
 
   test.title("Restricting");
   test.assertEqual(["Look at", "Talk to"], w.Kyle.getVerbs())
-  game.player.canTalk = function() { msg("You are gagged."); return false; }
+  game.player.canTalk = function() { QuestJs._io.msg("You are gagged."); return false; }
   test.assertCmd("talk to kyle", "You are gagged.");
   game.player.canTalk = function() { return true; }
-  game.player.canManipulate = function() { msg("You are handcuffed."); return false; }
+  game.player.canManipulate = function() { QuestJs._io.msg("You are handcuffed."); return false; }
   test.assertCmd("drop bricks", "You are handcuffed.");
   game.player.canManipulate = function() { return true; }
   test.assertCmd("drop bricks", "You drop seven bricks.");  
@@ -580,7 +580,7 @@ test.tests = function() {
   
   test.assertCmd("l", ["The dining room", "An old-fashioned room.", "You can see a brick, a chair, a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll) and Lara (sitting on the chair) here.", "You can go east, up or west.",]);  
   
-  w.Lara.canPosture = function() { msg("She is turned to stone."); return false; }
+  w.Lara.canPosture = function() { QuestJs._io.msg("She is turned to stone."); return false; }
   test.assertCmd("lara, get off chair", "She is turned to stone.");
   w.Lara.canPosture = function() { return true; }
   test.assertCmd("lara, get off chair", "Lara gets off the chair.");
@@ -797,13 +797,13 @@ test.tests = function() {
   test.assertCmd("push 1", ["You press the button; the door closes and the lift heads to the first floor. The door opens again."]);
   test.assertCmd("e", ["You head east.", "The bedroom", "A large room, with a big bed and a wardrobe.", "You can see a coat, some jeans, a jumpsuit, a shirt, underwear and a wardrobe here.", "You can go down, in or west."]);
   test.assertCmd("w", ["You head west.", "The lift", "A curious lift.", "You can go east."]);
-  w.lift.onTransitMove = function(toLoc, fromLoc) { msg("MOVING to " + toLoc + " from " + fromLoc); };
+  w.lift.onTransitMove = function(toLoc, fromLoc) { QuestJs._io.msg("MOVING to " + toLoc + " from " + fromLoc); };
   test.assertCmd("push 1", ["You press the button; nothing happens."]);
   test.assertCmd("push 2", ["That does nothing, the button does not work."]);
   test.assertCmd("push g", ["The old man presses the button....", "MOVING to dining_room from bedroom"]);
   test.assertCmd("e", ["You head east.", "The dining room", "An old-fashioned room.", /^You can see/, "You can go east, up or west."]);  
   w.lift.transitCheck = function() {
-    msg("The lift is out of order");
+    QuestJs._io.msg("The lift is out of order");
     return false;
   };
   w.lift.transitAutoMove = true;
@@ -816,7 +816,7 @@ test.tests = function() {
   test.assertCmd("s", ["You head south.", "The conservatory", "A light airy room.", "You can see a broken chair, a crate and a rope here.", "You can go north or west."]);
   test.assertCmd("push crate", "That's not going to do anything useful.");
   test.assertCmd("push chair s", "It's not something you can move around like that.");
-  w.broken_chair.shift = function() { msg("You try to push chair, but it just breaks even more."); return false; }
+  w.broken_chair.shift = function() { QuestJs._io.msg("You try to push chair, but it just breaks even more."); return false; }
   w.broken_chair.shiftable = true;
   test.assertCmd("push chair w", "You try to push chair, but it just breaks even more.");
   test.assertCmd("push crate s", "You can't go south.");

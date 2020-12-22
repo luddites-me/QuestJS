@@ -22,8 +22,8 @@ createItem("soup_can", TAKEABLE(), {
   examine: "A large can of tomato soup.{if:soup_can:opened: It has been opened.}",
   verbFunction:function(l) { if (!this.opened) l.push("Open") },
   open:function() {
-    if (this.state) return falsemsg("It has already been opened.")
-    msg("You grab the tin opener, and use it to open the can of soup.")
+    if (this.state) return QuestJs._io.falsemsg("It has already been opened.")
+    QuestJs._io.msg("You grab the tin opener, and use it to open the can of soup.")
     this.opened = true
   },
 })
@@ -42,14 +42,14 @@ createItem("bowls", TAKEABLE(), {
     if (!this.state) l.push("Fill")
   },
   fill:function() {
-    if (this.state === 10) return falsemsg("The bowls really need a wash before using them again.")
-    if (this.state) return falsemsg("The bowls already have soup in them.")
-    msg("You pour soup into the bowls.")
+    if (this.state === 10) return QuestJs._io.falsemsg("The bowls really need a wash before using them again.")
+    if (this.state) return QuestJs._io.falsemsg("The bowls already have soup in them.")
+    QuestJs._io.msg("You pour soup into the bowls.")
     this.state = 1
   },
   empty:function() {
-    if (this.state === 0 || this.state === 10) return falsemsg("The bowls are already empty.")
-    msg("You empty the bowls into the sink.")
+    if (this.state === 0 || this.state === 10) return QuestJs._io.falsemsg("The bowls are already empty.")
+    QuestJs._io.msg("You empty the bowls into the sink.")
     this.state = 0
   },
 })

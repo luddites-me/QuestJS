@@ -390,7 +390,7 @@ QuestJs._lang = {
       const exit = w[npc.loc].findExit(dest);
       if (exit) s += ", heading " + exit.dir;
       s += ".";
-      msg(s);
+      QuestJs._io.msg(s);
     }
   },
 
@@ -408,7 +408,7 @@ QuestJs._lang = {
       const exit = w[npc.loc].findExit(origin);
       if (exit) s += " from " + util.niceDirection(exit.dir);
       s += ".";
-      msg(s);
+      QuestJs._io.msg(s);
     }
   },
 
@@ -448,88 +448,88 @@ QuestJs._lang = {
 
   helpScript:function() {
     if (settings.textInput) {
-      metamsg("Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.");      
-      metamsg("{b:Movement:} To move, use the eight compass directions (or just N, NE, etc.). Up/down and in/out may be options too. When \"Num Lock\" is on, you can use the number pad for all eight compass directions, - and + for UP and DOWN, / and * for IN and OUT.");
-      metamsg("{b:Other commands:} You can also LOOK (or just L or 5 on the number pad), HELP (or ?) or WAIT (or Z or the dot on the number pad). Other commands are generally of the form GET HAT or PUT THE BLUE TEAPOT IN THE ANCIENT CHEST. Experiment and see what you can do!");
-      metamsg("{b:Using items: }You can use ALL and ALL BUT with some commands, for example TAKE ALL, and PUT ALL BUT SWORD IN SACK. You can also use pronouns, so LOOK AT MARY, then TALK TO HER. The pronoun will refer to the last subject in the last successful command, so after PUT HAT AND FUNNY STICK IN THE DRAWER, 'IT' will refer to the funny stick (the hat and the stick are subjects of the sentence, the drawer was the object).");
-      metamsg("{b:Characters: }If you come across another character, you can ask him or her to do something. Try things like MARY,PUT THE HAT IN THE BOX, or TELL MARY TO GET ALL BUT THE KNIFE. Depending on the game you may be able to TALK TO a character, to ASK or TELL a character ABOUT a topic, or just SAY something and they will respond..");
-      metamsg("{b:Meta-commands:} Type ABOUT to find out about the author, SCRIPT to learn about transcripts or SAVE to learn about saving games. Use WARNINGS to see any applicable sex, violence or trigger warnings.")
+      QuestJs._io.metamsg("Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.");      
+      QuestJs._io.metamsg("{b:Movement:} To move, use the eight compass directions (or just N, NE, etc.). Up/down and in/out may be options too. When \"Num Lock\" is on, you can use the number pad for all eight compass directions, - and + for UP and DOWN, / and * for IN and OUT.");
+      QuestJs._io.metamsg("{b:Other commands:} You can also LOOK (or just L or 5 on the number pad), HELP (or ?) or WAIT (or Z or the dot on the number pad). Other commands are generally of the form GET HAT or PUT THE BLUE TEAPOT IN THE ANCIENT CHEST. Experiment and see what you can do!");
+      QuestJs._io.metamsg("{b:Using items: }You can use ALL and ALL BUT with some commands, for example TAKE ALL, and PUT ALL BUT SWORD IN SACK. You can also use pronouns, so LOOK AT MARY, then TALK TO HER. The pronoun will refer to the last subject in the last successful command, so after PUT HAT AND FUNNY STICK IN THE DRAWER, 'IT' will refer to the funny stick (the hat and the stick are subjects of the sentence, the drawer was the object).");
+      QuestJs._io.metamsg("{b:Characters: }If you come across another character, you can ask him or her to do something. Try things like MARY,PUT THE HAT IN THE BOX, or TELL MARY TO GET ALL BUT THE KNIFE. Depending on the game you may be able to TALK TO a character, to ASK or TELL a character ABOUT a topic, or just SAY something and they will respond..");
+      QuestJs._io.metamsg("{b:Meta-commands:} Type ABOUT to find out about the author, SCRIPT to learn about transcripts or SAVE to learn about saving games. Use WARNINGS to see any applicable sex, violence or trigger warnings.")
       let s = "You can also use BRIEF/TERSE/VERBOSE to control room descriptions. Type DARK to toggle dark mode or SILENT to toggle sounds and music (if implemented)."
       if (typeof map !== "undefined") s += " Use MAP to toggle/show the map."
       if (typeof imagePane !== "undefined") s += " Use IMAGES to toggle/show the iage pane."
-      metamsg(s)
-      metamsg("{b:Shortcuts:}You can often just type the first few characters of an item's name and Quest will guess what you mean.  If fact, if you are in a room with Brian, who is holding a ball, and a box, Quest should be able to work out that B,PUT B IN B mean you want Brian to put the ball in the box.")
-      metamsg("You can use the up and down arrows to scroll back though your previous typed commands - especially useful if you realise you spelled something wrong. If you do not have arrow keys, use OOPS to retrieve the last typed command so you can edit it. Use AGAIN or just G to repeat the last typed command.")
+      QuestJs._io.metamsg(s)
+      QuestJs._io.metamsg("{b:Shortcuts:}You can often just type the first few characters of an item's name and Quest will guess what you mean.  If fact, if you are in a room with Brian, who is holding a ball, and a box, Quest should be able to work out that B,PUT B IN B mean you want Brian to put the ball in the box.")
+      QuestJs._io.metamsg("You can use the up and down arrows to scroll back though your previous typed commands - especially useful if you realise you spelled something wrong. If you do not have arrow keys, use OOPS to retrieve the last typed command so you can edit it. Use AGAIN or just G to repeat the last typed command.")
     }
     if (settings.panes !== "none") {
-      metamsg("{b:User Interface:} To interact with an object, click on its name in the side pane, and a set of possible actions will appear under it. Click on the appropriate action.");
+      QuestJs._io.metamsg("{b:User Interface:} To interact with an object, click on its name in the side pane, and a set of possible actions will appear under it. Click on the appropriate action.");
       if (settings.compassPane) {
         if (settings.symbolsForCompass) {
-          metamsg("You can also use the compass rose at the top to move around. Click the eye symbol, &#128065;, to look at you current location, the pause symbol, &#9208;, to wait or &#128712; for help.");
+          QuestJs._io.metamsg("You can also use the compass rose at the top to move around. Click the eye symbol, &#128065;, to look at you current location, the pause symbol, &#9208;, to wait or &#128712; for help.");
         }
         else {
-          metamsg("You can also use the compass rose at the top to move around. Click 'Lk' to look at you current location, 'Z' to wait or '?' for help.");
+          QuestJs._io.metamsg("You can also use the compass rose at the top to move around. Click 'Lk' to look at you current location, 'Z' to wait or '?' for help.");
         }
       }
     }
     if (settings.additionalHelp !== undefined) {
-      for (let s of settings.additionalHelp) metamsg(s)
+      for (let s of settings.additionalHelp) QuestJs._io.metamsg(s)
     }
     return world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   hintScript:function() {
-    metamsg("Sorry, no hints available.")
+    QuestJs._io.metamsg("Sorry, no hints available.")
     return world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   aboutScript:function() {
-    metamsg("{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.", {settings:settings})
-    if (settings.ifdb) metamsg("IFDB number: " + settings.ifdb)
+    QuestJs._io.metamsg("{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.", {settings:settings})
+    if (settings.ifdb) QuestJs._io.metamsg("IFDB number: " + settings.ifdb)
     if (settings.thanks && settings.thanks.length > 0) {
-      metamsg("Thanks to " + formatList(settings.thanks, {lastJoiner:QuestJs._lang.list_and}) + ".")
+      QuestJs._io.metamsg("Thanks to " + formatList(settings.thanks, {lastJoiner:QuestJs._lang.list_and}) + ".")
     }
     if (settings.additionalAbout !== undefined) {
-      for (let s of settings.additionalAbout) metamsg(s)
+      for (let s of settings.additionalAbout) QuestJs._io.metamsg(s)
     }
     return world.SUCCESS_NO_TURNSCRIPTS
   },
 
   warningsScript:function() {
     switch (typeof settings.warnings) {
-      case 'undefined' : metamsg('No warning have been set for this game.'); break;
-      case 'string' : metamsg(settings.warnings); break;
-      default: for (let el of settings.warnings) metamsg(el)
+      case 'undefined' : QuestJs._io.metamsg('No warning have been set for this game.'); break;
+      case 'string' : QuestJs._io.metamsg(settings.warnings); break;
+      default: for (let el of settings.warnings) QuestJs._io.metamsg(el)
     }
     return world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   saveLoadScript:function() {
-    metamsg("To save your progress, type SAVE followed by the name to save with.");
-    metamsg("To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.");
-    metamsg("To see a list of save games, type DIR.");
+    QuestJs._io.metamsg("To save your progress, type SAVE followed by the name to save with.");
+    QuestJs._io.metamsg("To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.");
+    QuestJs._io.metamsg("To see a list of save games, type DIR.");
     return world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   transcriptScript:function() {
-    metamsg("The TRANSCRIPT or SCRIPT command can be used to handle saving the input and output. This can be very useful when testing a game, as the author can go back through it and see exactly what happened, and how the player got there.");
-    metamsg("Use SCRIPT ON to turn on recording and SCRIPT OFF to turn it off. Use SCRIPT SHOW to display it (it will appear in a new tab; you will not lose your place inthe game). To empty the file, use SCRIPT CLEAR.");
-    metamsg("You can add options to the SCRIPT SHOW to hide various types of text. Use M to hide meta-information (like this), I to hide your input, P to hide parser errors (when the parser says it has no clue what you mean), E to hide programming errors and D to hide debugging messages. These can be combined, so SCRIPT SHOW ED will hide programming errors and debugging messages, and SCRIPT SHOW EDPID will show only the output game text.");
-    metamsg("You can add a comment to the transcript by starting your text with an asterisk (*).")
-    metamsg("You can do TRANSCRIPT WALKTHROUGH or just SCRIPT W to copy the transcript to the clipboard formatted for a walk-through. You can then paste it straight into the code.")
-    metamsg("Everything gets saved to memory, and will be lost if you go to another web page or close your browser. The transcript is not saved when you save your game (but will not be lost when you load a game). If you complete the game the text input will disappear, however if you have a transcript a link will be available to access it.");
-    metamsg("Transcript is currently: " + (io.transcript ? 'on' : 'off'))
+    QuestJs._io.metamsg("The TRANSCRIPT or SCRIPT command can be used to handle saving the input and output. This can be very useful when testing a game, as the author can go back through it and see exactly what happened, and how the player got there.");
+    QuestJs._io.metamsg("Use SCRIPT ON to turn on recording and SCRIPT OFF to turn it off. Use SCRIPT SHOW to display it (it will appear in a new tab; you will not lose your place inthe game). To empty the file, use SCRIPT CLEAR.");
+    QuestJs._io.metamsg("You can add options to the SCRIPT SHOW to hide various types of text. Use M to hide meta-information (like this), I to hide your input, P to hide parser errors (when the parser says it has no clue what you mean), E to hide programming errors and D to hide debugging messages. These can be combined, so SCRIPT SHOW ED will hide programming errors and debugging messages, and SCRIPT SHOW EDPID will show only the output game text.");
+    QuestJs._io.metamsg("You can add a comment to the transcript by starting your text with an asterisk (*).")
+    QuestJs._io.metamsg("You can do TRANSCRIPT WALKTHROUGH or just SCRIPT W to copy the transcript to the clipboard formatted for a walk-through. You can then paste it straight into the code.")
+    QuestJs._io.metamsg("Everything gets saved to memory, and will be lost if you go to another web page or close your browser. The transcript is not saved when you save your game (but will not be lost when you load a game). If you complete the game the text input will disappear, however if you have a transcript a link will be available to access it.");
+    QuestJs._io.metamsg("Transcript is currently: " + (io.transcript ? 'on' : 'off'))
     return world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   topicsScript:function() {
-    metamsg("Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).");
+    QuestJs._io.metamsg("Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).");
     return world.SUCCESS_NO_TURNSCRIPTS;
   },
   
   betaTestIntro:function() {
-    metamsg("This version is for beta-testing (" + settings.version + "). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.")
-    if (settings.textInput) metamsg("You can add your own comments to the transcript by starting a command with *.")
+    QuestJs._io.metamsg("This version is for beta-testing (" + settings.version + "). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.")
+    if (settings.textInput) QuestJs._io.metamsg("You can add your own comments to the transcript by starting a command with *.")
     io.scriptStart()
   },
   
@@ -898,7 +898,7 @@ QuestJs._lang = {
     const arr = QuestJs._lang.conjugations[gender.toLowerCase()];
 
     if (!arr) {
-      errormsg("No conjugations found: conjugations_" + gender.toLowerCase());
+      QuestJs._io.errormsg("No conjugations found: conjugations_" + gender.toLowerCase());
       return verb;
     }
     for (let conj of arr) {

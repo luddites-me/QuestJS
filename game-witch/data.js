@@ -15,25 +15,25 @@ createRoom("yourchambers", {
     if (game.invaded) {
       if (this.firstTimeFlag) {
         this.firstTimeFlag = true
-        msg (" ")
-        msg ("'Jenina! Jenina!' That voice from the painting again.")
-        msg ("'Yes, mother, I'm doing it,' you say, 'I was just brewing it.'")
-        msg ("'What? Oh, that! No, Jenina, there were men in your room.'")
-        msg ("'What men?' With the king out hunting, no one in the castle had the authority to even knock on your door.")
-        msg ("'That's just it. I don't who they were, but they looked a rough sort. Not liveried, though they were armed. I think you should find out what's going on. Carefully.' For once you agree with your mother.")
+        QuestJs._io.msg (" ")
+        QuestJs._io.msg ("'Jenina! Jenina!' That voice from the painting again.")
+        QuestJs._io.msg ("'Yes, mother, I'm doing it,' you say, 'I was just brewing it.'")
+        QuestJs._io.msg ("'What? Oh, that! No, Jenina, there were men in your room.'")
+        QuestJs._io.msg ("'What men?' With the king out hunting, no one in the castle had the authority to even knock on your door.")
+        QuestJs._io.msg ("'That's just it. I don't who they were, but they looked a rough sort. Not liveried, though they were armed. I think you should find out what's going on. Carefully.' For once you agree with your mother.")
       }
     }
   },
   afterFirstEnter:function() {
-    msg (" ")
-    msg ("'Jenina! Jenina!' A shrill shout from the painting hanging on the wall.")
-    msg ("'Yes, mother,' you say wearily.")
-    msg ("'Remember to brew some more Reklindraa,' says your mother, via the painting.")
-    msg ("'Yes, I was going to,' you reply, rolling your eyes.")
-    msg ("'And make sure you give some to the Queen, and the other concubines. Before the king returns.'")
-    msg ("'You think? I was going to wait until he got back, and let him watch.'")
-    msg ("'Don't get sarcastic with me girl!'")
-    msg ("'I have done this before.' You just hope Kendall, the vizier's apprentice, has managed to get you some Janthherb.")
+    QuestJs._io.msg (" ")
+    QuestJs._io.msg ("'Jenina! Jenina!' A shrill shout from the painting hanging on the wall.")
+    QuestJs._io.msg ("'Yes, mother,' you say wearily.")
+    QuestJs._io.msg ("'Remember to brew some more Reklindraa,' says your mother, via the painting.")
+    QuestJs._io.msg ("'Yes, I was going to,' you reply, rolling your eyes.")
+    QuestJs._io.msg ("'And make sure you give some to the Queen, and the other concubines. Before the king returns.'")
+    QuestJs._io.msg ("'You think? I was going to wait until he got back, and let him watch.'")
+    QuestJs._io.msg ("'Don't get sarcastic with me girl!'")
+    QuestJs._io.msg ("'I have done this before.' You just hope Kendall, the vizier's apprentice, has managed to get you some Janthherb.")
   },
   east:new Exit("landing"),
   north:new Exit("yourbedroom"),
@@ -55,8 +55,8 @@ createItem("painting_mother", {
 createItem("mother_men_description", TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
-    msg("'What can you tell me about the men,' you ask your mother.");
-    msg("'Oh, well, let me see. there were two of them. I find it terribly difficult to judge size through these things, but well-built and on the tall side, I would say. Branishing swords, and wearing leather armour and metal helmets. One was quite good-looking, apart from a scar across his chin.'");
+    QuestJs._io.msg("'What can you tell me about the men,' you ask your mother.");
+    QuestJs._io.msg("'Oh, well, let me see. there were two of them. I find it terribly difficult to judge size through these things, but well-built and on the tall side, I would say. Branishing swords, and wearing leather armour and metal helmets. One was quite good-looking, apart from a scar across his chin.'");
   },
 })
 
@@ -64,9 +64,9 @@ createItem("mother_men_description", TOPIC(false), {
 createItem("mother_men_doing", TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
-    msg("'What were the men doing in my rooms?' you ask your mother.");
-    msg("'Looking for you, I suspect. They shouted for you, and went into your bedroom, but had left within moments. I was quiye by luch that I noticed them at all.'");
-    msg("'Yeah...' It was not like she spent every moment of the day watching you.");
+    QuestJs._io.msg("'What were the men doing in my rooms?' you ask your mother.");
+    QuestJs._io.msg("'Looking for you, I suspect. They shouted for you, and went into your bedroom, but had left within moments. I was quiye by luch that I noticed them at all.'");
+    QuestJs._io.msg("'Yeah...' It was not like she spent every moment of the day watching you.");
   },
 })
 
@@ -74,11 +74,11 @@ createItem("mother_men_doing", TOPIC(false), {
 createItem("mother_help", TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
-    msg("'Can you help me find out what's happening?' you ask the painting.");
-    msg("'Me?'");
-    msg("'Yes, you. Do some scrying or something. You used to be good at it.'");
-    msg("'I still am!' she replies haughtily. 'Well, I suppose I could. If you think it is that important.'");
-    msg("'Yes, it really is.'");
+    QuestJs._io.msg("'Can you help me find out what's happening?' you ask the painting.");
+    QuestJs._io.msg("'Me?'");
+    QuestJs._io.msg("'Yes, you. Do some scrying or something. You used to be good at it.'");
+    QuestJs._io.msg("'I still am!' she replies haughtily. 'Well, I suppose I could. If you think it is that important.'");
+    QuestJs._io.msg("'Yes, it really is.'");
   },
 })
 
@@ -86,8 +86,8 @@ createItem("mother_help", TOPIC(false), {
 createItem("mother_scrying1", TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
-    msg("'Have you had any luck scrying?' you ask your mother.");
-    msg("'Give me a chance, dear.'");
+    QuestJs._io.msg("'Have you had any luck scrying?' you ask your mother.");
+    QuestJs._io.msg("'Give me a chance, dear.'");
   },
 })
 
@@ -95,8 +95,8 @@ createItem("mother_scrying1", TOPIC(false), {
 createItem("mother_scrying2", TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
-    msg("'Have you had any more luck scrying?' you ask your mother.");
-    msg("'No. Whatever I try, it's still blocked, I'm afraid.'");
+    QuestJs._io.msg("'Have you had any more luck scrying?' you ask your mother.");
+    QuestJs._io.msg("'No. Whatever I try, it's still blocked, I'm afraid.'");
   },
 })
 
@@ -104,10 +104,10 @@ createItem("mother_scrying2", TOPIC(false), {
 createItem("mother_scrying3", TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
-    msg("'Have you had any luck scrying?' you ask your mother.");
-    msg("'Not a lot - which is rather worrying. As you know, my skill at scrying is not modest...' {i:Unlike you}, you say to yourself. '... And so I can say with some certainty that someone is actively trying to block my attempts. The king is fine, at least for now, I can see him, riding his pet hellcat; it is the business at the castle that is obscured. What will happen when the king returns to the castle, I would not like to think upon.'");
-    msg("'Hmm, well thanks for that.'");
-    msg("'Be careful, dear, dark forces are afoot. Besides us, I mean.'");
+    QuestJs._io.msg("'Have you had any luck scrying?' you ask your mother.");
+    QuestJs._io.msg("'Not a lot - which is rather worrying. As you know, my skill at scrying is not modest...' {i:Unlike you}, you say to yourself. '... And so I can say with some certainty that someone is actively trying to block my attempts. The king is fine, at least for now, I can see him, riding his pet hellcat; it is the business at the castle that is obscured. What will happen when the king returns to the castle, I would not like to think upon.'");
+    QuestJs._io.msg("'Hmm, well thanks for that.'");
+    QuestJs._io.msg("'Be careful, dear, dark forces are afoot. Besides us, I mean.'");
   },
 })
 
@@ -115,8 +115,8 @@ createItem("mother_scrying3", TOPIC(false), {
 createItem("mother_the_plan", TOPIC(true), {
   loc:"painting_mother",
   runscript:function() {
-    msg("'Reminder me of the plan again,' you say, knowing it will annoy your mother.");
-    msg("'Seriously, girl? We've been over this so many times. You are to give birth to the chosen one, who will rule the land for the sisterhood. Do you remember that? So for now, you job is to ensure the queen and the other concubines do not get pregnant. You child must by the only royal heir.'");
+    QuestJs._io.msg("'Reminder me of the plan again,' you say, knowing it will annoy your mother.");
+    QuestJs._io.msg("'Seriously, girl? We've been over this so many times. You are to give birth to the chosen one, who will rule the land for the sisterhood. Do you remember that? So for now, you job is to ensure the queen and the other concubines do not get pregnant. You child must by the only royal heir.'");
   },
 })
 
@@ -124,10 +124,10 @@ createItem("mother_the_plan", TOPIC(true), {
 createItem("mother_father", TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
-    msg("'Who will be the father of my child?' Obviously not the king; no way could that idiot by the father of the chosen one.");
-    msg("'The sisterhood have that in hand, my dear.'");
-    msg("'You don't know, do you?'");
-    msg("Your mother purses her lips. 'No... But I'm sure they'll find someone, even without my help.'");
+    QuestJs._io.msg("'Who will be the father of my child?' Obviously not the king; no way could that idiot by the father of the chosen one.");
+    QuestJs._io.msg("'The sisterhood have that in hand, my dear.'");
+    QuestJs._io.msg("'You don't know, do you?'");
+    QuestJs._io.msg("Your mother purses her lips. 'No... But I'm sure they'll find someone, even without my help.'");
   },
 })
 
@@ -137,13 +137,13 @@ createRoom("laboratory", {
   desc:"This is where you perform your dark rituals and concoct your foul potions. Hidden within the width of the outer walls, it is long and thin, and windowless. Along the long east side are workbenches, and above them shelves lines with jars.",
   afterEnter:function() {
     if (w.janthherb.isAtLoc("w.player")) {
-      msg ("Now you have the janthherb, you will be able to brew the Reklindraa.")
+      QuestJs._io.msg ("Now you have the janthherb, you will be able to brew the Reklindraa.")
     }
     else if (w.janthherb.isAtLoc("w.apprentice")) {
-      msg ("Once you have got the janthherb from Kendall, you will be able to brew the Reklindraa here.")
+      QuestJs._io.msg ("Once you have got the janthherb from Kendall, you will be able to brew the Reklindraa here.")
     }
     else if (!w.janthherb.parent === w._nowhere) {
-      msg ("Once you have the janthherb on you, you will be able to brew the Reklindraa here.")
+      QuestJs._io.msg ("Once you have the janthherb on you, you will be able to brew the Reklindraa here.")
     }
   },
   east:new Exit("yourbedroom"),
@@ -295,17 +295,17 @@ createRoom("apprenticeroom", {
   desc:"This is Kendall's room, the vizier's apprentice. It is pretty basic, with a simple bed, a cabinet and a stool. Because of his position, Randall also has a desk, positioned under the only window.",
   beforeEnter:function() {
     if (!game.invaded) {
-      msg ("You knock on Kendall's door, and go straight in.")
+      QuestJs._io.msg ("You knock on Kendall's door, and go straight in.")
     }
   },
   afterEnter:function() {
     if (this.firstTimeFlag) {
       this.firstTimeFlag = true
-      msg ("Kendall is sat at the desk. He glances round, sees you, and quickly jumps to his feet. 'Lady Jenina, how good to see you,' he says, desparately not staring at your chest.")
+      QuestJs._io.msg ("Kendall is sat at the desk. He glances round, sees you, and quickly jumps to his feet. 'Lady Jenina, how good to see you,' he says, desparately not staring at your chest.")
     }
     else {
       if (appretice.isAtLoc("this")) {
-        msg ("'Hello again, lady Jenina,' says Kendall.")
+        QuestJs._io.msg ("'Hello again, lady Jenina,' says Kendall.")
       }
     }
   },
@@ -401,7 +401,7 @@ createRoom("outergatehouse", {
 createRoom("newbridge", {
   loc:"_outercastle",
   desc:function() {
-    msg ("The three arches of the bridge span the gap between the rocky outcrops that the castle is built on and small hillock, from where the road winds down to the city.")
+    QuestJs._io.msg ("The three arches of the bridge span the gap between the rocky outcrops that the castle is built on and small hillock, from where the road winds down to the city.")
   },
   afterEnter:function() {
     switch (game.snow) {

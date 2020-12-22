@@ -17,10 +17,10 @@ settings.output = function(report) {
   for (let el of report) {
     if (el.level <= settings.attackOutputLevel) {
       if (el.level === 1) {
-        msg(el.t)
+        QuestJs._io.msg(el.t)
       }
       else {
-        metamsg(el.t)
+        QuestJs._io.metamsg(el.t)
       }
     }
   }
@@ -450,8 +450,8 @@ function setValues() {
   game.player.hairColour = $('#para6').html();
   game.player.eyeColour = $('#para7').html();
   game.player.spellColour = $('#para8').html();
-  msg(game.player.alias);
-  msg($("#diag-inner").text());
+  QuestJs._io.msg(game.player.alias);
+  QuestJs._io.msg($("#diag-inner").text());
 }
 
 

@@ -57,10 +57,10 @@ comands.unshift(new QuestJs._command.Cmd('fix_wire', {
   ],
   script:
           if (not object = reel) {
-            msg ("How are you going to do that?")
+            QuestJs._io.msg ("How are you going to do that?")
           }
           else if (spike.wireattached) {
-            msg ("It already is.")
+            QuestJs._io.msg ("It already is.")
           }
           else {
             do (spike, "tieonwire")
@@ -75,13 +75,13 @@ comands.unshift(new QuestJs._command.Cmd('fix_wire_to_spike', {
   ],
   script:
           if (not object2 = spike) {
-            msg ("How are you going to attach anything to that?")
+            QuestJs._io.msg ("How are you going to attach anything to that?")
           }
           if (not object1 = reel) {
-            msg ("How are you going to do that?")
+            QuestJs._io.msg ("How are you going to do that?")
           }
           else if (spike.wireattached) {
-            msg ("It already is.")
+            QuestJs._io.msg ("It already is.")
           }
           else {
             do (spike, "tieonwire")
@@ -100,7 +100,7 @@ comands.unshift(new QuestJs._command.Cmd('bootcheat', {
         player.parent = upper_steam_hall
       }
       else {
-        msg ("No cheating!")
+        QuestJs._io.msg ("No cheating!")
       }
     }))
 
@@ -115,6 +115,6 @@ comands.unshift(new QuestJs._command.Cmd('bootshrink', {
         boots.size = -1
       }
       else {
-        msg ("No cheating!")
+        QuestJs._io.msg ("No cheating!")
       }
     }))

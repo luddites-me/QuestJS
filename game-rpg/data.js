@@ -15,7 +15,7 @@ createItem("me", RPG_PLAYER(), {
   spellCasting:5,
   offensiveBonus:3,
   examine:function(isMultiple) {
-    msg(prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
+    QuestJs._io.msg(prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
   },
 });
 
@@ -117,15 +117,15 @@ createItem("rabbit", RPG_NPC(false), {
   isHostile:function() { return false; },
   talkto:function() {
     if (!this.canTalk()) {
-      msg("You spend a few minutes telling the rabbit about your life, but it does not seem interested. Possibly because it is rabbit.")
+      QuestJs._io.msg("You spend a few minutes telling the rabbit about your life, but it does not seem interested. Possibly because it is rabbit.")
       return
     }
     switch (this.talktoCount) {
       case 0 : 
-        msg("You say 'Hello,' to the rabbit, 'how is it going?'");
-        msg("The rabbit looks at you. 'Need carrots.' It looks plaintively at it round tummy. 'Fading away bunny!");
+        QuestJs._io.msg("You say 'Hello,' to the rabbit, 'how is it going?'");
+        QuestJs._io.msg("The rabbit looks at you. 'Need carrots.' It looks plaintively at it round tummy. 'Fading away bunny!");
         break;
-      default: msg("You wonder what you can talk to the rabbit about."); break;
+      default: QuestJs._io.msg("You wonder what you can talk to the rabbit about."); break;
     }
   },  
 });
@@ -219,7 +219,7 @@ skills.add(new Spell("Fireball", {
   getPrimaryTargets:rpg.getAll,
   modifyOutgoingAttack:function(attack) {
     attack.element = "fire";
-    attack.msg("The room is momentarily filled with fire.", 1)
+    attack.QuestJs._io.msg("The room is momentarily filled with fire.", 1)
   },
 }))
 
@@ -264,7 +264,7 @@ skills.add(new Spell("Lightning bolt", {
 
 skills.add(new Spell("Cursed armour", {
   targetEffect:function(attack) {
-    attack.msg("{nms:target:the:true} armour is reduced.", 1)
+    attack.QuestJs._io.msg("{nms:target:the:true} armour is reduced.", 1)
   },
   icon:'unarmour',
   tooltip:"A lightning bolt jumps from your out-reached hand to you foe!", 
@@ -275,7 +275,7 @@ skills.add(new Spell("Cursed armour", {
 
 skills.add(new SpellSelf("Stoneskin", {
   targetEffect:function(attack) {
-    attack.msg("Your skin becomes as hard as stone - and yet still just as flexible.", 1)
+    attack.QuestJs._io.msg("Your skin becomes as hard as stone - and yet still just as flexible.", 1)
   },
   ongoing:true,
   incompatible:[/skin$/],
@@ -286,7 +286,7 @@ skills.add(new SpellSelf("Stoneskin", {
 
 skills.add(new SpellSelf("Steelskin", {
   targetEffect:function(attack) {
-    attack.msg("Your skin becomes as hard as steel - and yet still just as flexible.", 1)
+    attack.QuestJs._io.msg("Your skin becomes as hard as steel - and yet still just as flexible.", 1)
   },
   ongoing:true,
   duration:3,
@@ -302,12 +302,12 @@ skills.add(new SpellSelf("Unlock", {
     let flag = false
     for (let el of util.exitList(attack.attacker)) {
       if (room[el].locked) {
-        attack.msg("The door to " + util.niceDirection(el) + " unlocks.", 1)
+        attack.QuestJs._io.msg("The door to " + util.niceDirection(el) + " unlocks.", 1)
         room[el].locked = false
         flag = true
       }
     }
-    if (!flag) attack.msg("There are no locked doors.", 1)
+    if (!flag) attack.QuestJs._io.msg("There are no locked doors.", 1)
   },
 }))
 
@@ -315,12 +315,12 @@ skills.add(new Spell("Commune with animal", {
   icon:'commune',
   targetEffect:function(attack) {
     if (attack.target.canTalkFlag) {
-      attack.msg("{nv:attacker:can:true} talk to {nm:target:the} for a short time (like before the spell...).", 1)
+      attack.QuestJs._io.msg("{nv:attacker:can:true} talk to {nm:target:the} for a short time (like before the spell...).", 1)
     }
     else {
       attack.target.canTalkFlag = true
       attack.target.canTalkFlagIsTemporary = true
-      attack.msg("{nv:attacker:can:true} now talk to {nm:target:the} for a short time.", 1)
+      attack.QuestJs._io.msg("{nv:attacker:can:true} now talk to {nm:target:the} for a short time.", 1)
     }
   },
   regex:/commune/,

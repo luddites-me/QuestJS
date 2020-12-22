@@ -11,10 +11,10 @@ comands.unshift(new QuestJs._command.Cmd('wait3', {
   ],
   script:
           if (game.invaded) {
-            msg ("'Well, get going, Jenina,' says the painting. 'You're not going to sort this out just standing their like a bewildered sheep.'")
+            QuestJs._io.msg ("'Well, get going, Jenina,' says the painting. 'You're not going to sort this out just standing their like a bewildered sheep.'")
           }
           else {
-            msg ("'Shape yourself, Jenina,' says the painting. 'You've lots to do.'")
+            QuestJs._io.msg ("'Shape yourself, Jenina,' says the painting. 'You've lots to do.'")
           }
         }))
 
@@ -26,9 +26,9 @@ comands.unshift(new QuestJs._command.Cmd('wait2', {
   ],
   script:
       if (game.invaded) {
-        msg ("No time for hanging around...")
+        QuestJs._io.msg ("No time for hanging around...")
       }
       else {
-        msg ("Time passes...")
+        QuestJs._io.msg ("Time passes...")
       }
     }))

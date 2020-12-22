@@ -19,8 +19,8 @@ createItem("Lucas",
       {
         test:function(p) { return p.text.match(/newcastle/); }, 
         response:function() {
-          msg("'What's Newcastle like?' you ask Kyle.");
-          msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
+          QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
+          QuestJs._io.msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
           trackRelationship(w.Kyle, 1, "background2");
         }},
       
@@ -52,8 +52,8 @@ createItem("Emily",
       {
         test:function(p) { return p.text.match(/newcastle/); }, 
         response:function() {
-          msg("'What's Newcastle like?' you ask Kyle.");
-          msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
+          QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
+          QuestJs._io.msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
           trackRelationship(w.Kyle, 1, "background2");
         }},
       
@@ -94,8 +94,8 @@ createItem("Elijah",
       {
         test:function(p) { return p.text.match(/newcastle/); }, 
         response:function() {
-          msg("'What's Newcastle like?' you ask Kyle.");
-          msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
+          QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
+          QuestJs._io.msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
           trackRelationship(w.Kyle, 1, "background2");
         }},
       
@@ -126,8 +126,8 @@ createItem("Amy",
       {
         test:function(p) { return p.text.match(/newcastle/); }, 
         response:function() {
-          msg("'What's Newcastle like?' you ask Kyle.");
-          msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
+          QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
+          QuestJs._io.msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
           trackRelationship(w.Kyle, 1, "background2");
         }},
       

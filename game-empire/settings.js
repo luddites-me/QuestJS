@@ -118,11 +118,11 @@ settings.setup = function() {
   
   board.setup(boardSettings)
   
-  msg('So here you are in your own throne room...')
-  msg('Becoming the ruler was quite a surprise, but after the goblin hoard wiped out the entire royal family, you were next in line. Your realm is one of the smallest kingdoms on the continent, and it is still reeling from a goblin invasion, so it will be no easy task. Oh, and some of your subjects are demanding a republic...')
-  metamsg('This game is about ruling you kingdom wisely - or not. You will need to talk to your advisors to learn what needs doing, and give them orders to get it done. They are not all necessarily to be trusted...')
-  metamsg('Use the SLEEP command in your bedroom to have time pass (i.e., tale a turn). You may want to use the HELP command too.')
-  metamsg('Good luck, your majesty.')
+  QuestJs._io.msg('So here you are in your own throne room...')
+  QuestJs._io.msg('Becoming the ruler was quite a surprise, but after the goblin hoard wiped out the entire royal family, you were next in line. Your realm is one of the smallest kingdoms on the continent, and it is still reeling from a goblin invasion, so it will be no easy task. Oh, and some of your subjects are demanding a republic...')
+  QuestJs._io.metamsg('This game is about ruling you kingdom wisely - or not. You will need to talk to your advisors to learn what needs doing, and give them orders to get it done. They are not all necessarily to be trusted...')
+  QuestJs._io.metamsg('Use the SLEEP command in your bedroom to have time pass (i.e., tale a turn). You may want to use the HELP command too.')
+  QuestJs._io.metamsg('Good luck, your majesty.')
 }
 
 

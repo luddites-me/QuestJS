@@ -20,7 +20,7 @@ settings.mapLabelRotate = -20
 settings.mapLabelOffset = -5
 settings.mapStyle = {right:'0', top:'200px', width:'400px', height:'400px', 'background-color':'#ddd', border:'3px black solid', 'background-image':'url(game-map/paper.jpg)' }
 settings.mapClick = function(name) {
-  metamsg("You clicked on " + w[name].alias)
+  QuestJs._io.metamsg("You clicked on " + w[name].alias)
 }
 settings.mapAutomapFrom = ['street_middle', 'glade']
 settings.mapMarker = function(loc) {

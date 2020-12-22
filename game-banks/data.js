@@ -20,7 +20,7 @@ createItem("me",
       return this.baseOxygeUse * this.oxygenUseModifier
     },
     examine:function(isMultiple) {
-      msg(prefix(this, isMultiple) + "You feel fine...");
+      QuestJs._io.msg(prefix(this, isMultiple) + "You feel fine...");
     },
     canMove:function(ex) {
       let room1 = w[this.loc];
@@ -28,7 +28,7 @@ createItem("me",
       let room2 = w[ex.name];
       if (typeof room2.vacuum === "string") room2 = w[room2.vacuum];
       if (room1.vacuum === room2.vacuum) return true;
-      msg("The door to " + QuestJs._lang.getName(room2, {article:DEFINITE}) + " will not open while it is " + (room1.vacuum ? 'pressurised' : 'depressurised') + " and " + QuestJs._lang.getName(room1, {article:DEFINITE}) + " is not.");
+      QuestJs._io.msg("The door to " + QuestJs._lang.getName(room2, {article:DEFINITE}) + " will not open while it is " + (room1.vacuum ? 'pressurised' : 'depressurised') + " and " + QuestJs._lang.getName(room1, {article:DEFINITE}) + " is not.");
       return false;
     }
   }
@@ -45,7 +45,7 @@ createItem("your_jumpsuit", WEARABLE(2, ["body"]), {
   onMove:function(toLoc, fromLoc) {
     if (fromLoc === "stasis_pod_drawer") {
       delete w.stasis_pod_drawer.loc;
-      msg("The stasis pod drawer slides shut.");
+      QuestJs._io.msg("The stasis pod drawer slides shut.");
     }
   },
 });
@@ -85,7 +85,7 @@ createRoom("stasis_bay", {
   vacuum:false,
   port:new Exit('hallway'),
   aft:new Exit('cargo_bay'),
-  in:new Exit('stasis_pod_room', { msg:"You climb into the stasis pod.", } ),
+  in:new Exit('stasis_pod_room', { QuestJs._io.msg:"You climb into the stasis pod.", } ),
 });
 
 createItem("pile_of_vomit", {
@@ -116,10 +116,10 @@ createItem("stasis_locker", CONTAINER(true), {
   loc:"stasis_bay",
   examine:function(isMultiple) {
     if (this.closed) {
-      msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored{once: (if there is an emergency, you want the spacesuits by the stasis pods)}.");
+      QuestJs._io.msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored{once: (if there is an emergency, you want the spacesuits by the stasis pods)}.");
     }
     else {
-      msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored. Inside you can see " + formatList(this.getContents(world.LOOK), {lastJoiner:QuestJs._lang.list_and, article:INDEFINITE}) + ".");
+      QuestJs._io.msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored. Inside you can see " + formatList(this.getContents(world.LOOK), {lastJoiner:QuestJs._lang.list_and, article:INDEFINITE}) + ".");
     }
   },
 });
@@ -154,11 +154,11 @@ createRoom("stasis_pod_room", {
   vacuum:"stasis_bay",
   out:new Exit('stasis_bay', {
     use:function() {
-      msg("You climb out of the stasis pod.");
+      QuestJs._io.msg("You climb out of the stasis pod.");
       world.setRoom(game.player, this.name, "out");
       if (w.your_jumpsuit.loc === "stasis_pod_drawer") {
         w.stasis_pod_drawer.loc = "stasis_bay";
-        msg("A drawer under the pod slides open to reveal your jumpsuit.");
+        QuestJs._io.msg("A drawer under the pod slides open to reveal your jumpsuit.");
       }
       return true;
     }      
@@ -176,17 +176,17 @@ createItem("stasis_pod_interior",
     examine:"Externally, the pods are rather less like coffins, as the sides are thick with the stasis equipment, and flared towards the floor. Each stasis pod is about waist height. {stasis_pod_status}.{ifHere:pile_of_vomit: One has a slight splattering of vomit.}",
     close:function(isMultiple, char) {
       if (w.Kyle.deployProbeAction < 5) {
-        msg("You give pod lid a pull, and it starts to descend for a moment, before stopping. 'Commander,' says Xsensi, 'closing the lid of a stasis pod will put you back in stasis. That is not permitted until the satellite is deployed, and not advised until probes have been deployed and data collected.' The lid rises to its fully open position.");
+        QuestJs._io.msg("You give pod lid a pull, and it starts to descend for a moment, before stopping. 'Commander,' says Xsensi, 'closing the lid of a stasis pod will put you back in stasis. That is not permitted until the satellite is deployed, and not advised until probes have been deployed and data collected.' The lid rises to its fully open position.");
         return false;
       }
       if (w.your_jumpsuit.loc === game.player.name) {
-        msg("You give pod lid a pull, and it starts to descend for a moment, before stopping. 'Commander,' says Xsensi, 'your jumpsuit should be left outside the pod when going into stasis.' The lid rises to its fully open position.");
+        QuestJs._io.msg("You give pod lid a pull, and it starts to descend for a moment, before stopping. 'Commander,' says Xsensi, 'your jumpsuit should be left outside the pod when going into stasis.' The lid rises to its fully open position.");
         return false;
       }
       
       w.your_jumpsuit.loc = "stasis_pod_drawer";
       w.stasis_pod_drawer.scenery = true;
-      msg("You give pod lid a pull, and it starts to descend, sealing you in. You feel a sharp pain in your shoulder, and almost immediately you start to feel sleepy... so sleepy you cannot keep your eyes open.");
+      QuestJs._io.msg("You give pod lid a pull, and it starts to descend, sealing you in. You feel a sharp pain in your shoulder, and almost immediately you start to feel sleepy... so sleepy you cannot keep your eyes open.");
       arrival();
       // MORE STUFF HERE ???
       return true;
@@ -205,7 +205,7 @@ createRoom("cargo_bay", {
   vacuum:false,
   forward:new Exit("stasis_bay"),
   port:new Exit("top_deck_aft", {
-    msg:"You walk up the narrow stair way to the top deck.",
+    QuestJs._io.msg:"You walk up the narrow stair way to the top deck.",
     alsoDir:["up"],
   }),
   starboard:new Exit("airlock"),
@@ -304,7 +304,7 @@ createRoom("geolab", {
   vacuum:false,
   forward:new Exit("biolab"),
   starboard:new Exit("probes_aft", {
-    msg:"You walk down the narrow stair way to the bottom deck.",
+    QuestJs._io.msg:"You walk down the narrow stair way to the bottom deck.",
     alsoDir:["down"],
   }),
   aft:new Exit("engineering1"),
@@ -382,7 +382,7 @@ createRoom("probes_aft", {
   desc:"The aft probe hanger has the scientific probes. Each probe is contained in a crate, and needs unpacking before deployment. On the port side there is a delivery system into which a probe can be placed, to be sent to the planet. Various types of probes are available.",
   vacuum:false,
   port:new Exit("geolab", {
-    msg:"You walk up the narrow stair way to the middle deck.",
+    QuestJs._io.msg:"You walk up the narrow stair way to the middle deck.",
     alsoDir:["up"],
   }),
   forward:new Exit("probes_forward"),
@@ -456,7 +456,7 @@ createRoom("top_deck_aft", {
   port:new Exit("guys_cabin"),
   aft:new Exit("girls_cabin"),
   starboard:new Exit("cargo_bay", {
-    msg:"You walk down the narrow stair way to the middle deck.",
+    QuestJs._io.msg:"You walk down the narrow stair way to the middle deck.",
     alsoDir:["down"],
   }),
   forward:new Exit("top_deck_forward"),
@@ -570,34 +570,34 @@ createItem("probe_prototype", COUNTABLE([]), {
   alias:"probe",
   regex:/^(\d+ )?(bio-|geo-|bio|geo)?(probe|satellite|satelite)s?$/,
   launch:function(isMultiple, char) {
-    if (!char.probeType) return falsemsg("To launch a probe, see either Aada or Ostap. For a satellite see Kyle.")
+    if (!char.probeType) return QuestJs._io.falsemsg("To launch a probe, see either Aada or Ostap. For a satellite see Kyle.")
     
     let number = this.extractNumber();
     if (!number) number = 1
 
     if (number === 1) {
-      msg("'Launch a " + char.probeType + ",' you say to " + QuestJs._lang.getName(char, {article:DEFINITE}) + ".")
+      QuestJs._io.msg("'Launch a " + char.probeType + ",' you say to " + QuestJs._lang.getName(char, {article:DEFINITE}) + ".")
     }
     else {
-      msg("'Launch " + number + " " + char.probeType + "s,' you say to " + QuestJs._lang.getName(char, {article:DEFINITE}) + ".")
+      QuestJs._io.msg("'Launch " + number + " " + char.probeType + "s,' you say to " + QuestJs._lang.getName(char, {article:DEFINITE}) + ".")
     }
     if (number > char.probesRemaining) {
-      return falsemsg("'We only have " + char.probesRemaining + " and we should save some for the other planets on our itinerary.'")
+      return QuestJs._io.falsemsg("'We only have " + char.probesRemaining + " and we should save some for the other planets on our itinerary.'")
     }
     
     if (char.probeType === 'satellite') {
       if (number > (2 - char.deployProbeTotal)) {
-        msg("'Are you sure? Protocol says we should deploy no more than two around a single planet.'");
-        msg("'Hey, I'm the captain. It's my bonus on the line here. Get those satellites deployed.'");
+        QuestJs._io.msg("'Are you sure? Protocol says we should deploy no more than two around a single planet.'");
+        QuestJs._io.msg("'Hey, I'm the captain. It's my bonus on the line here. Get those satellites deployed.'");
       }
     }
     else if (number > (5 - char.deployProbeTotal)) {
-      msg("'Are you sure? Protocol says we should deploy no more than five on a single planet.'");
-      msg("'Hey, I'm the captain. It's my bonus on the line here. Get those probes deployed.'");
+      QuestJs._io.msg("'Are you sure? Protocol says we should deploy no more than five on a single planet.'");
+      QuestJs._io.msg("'Hey, I'm the captain. It's my bonus on the line here. Get those probes deployed.'");
     }
     
     if (char.deployProbeAction === 0 || char.deployProbeAction ===4) {
-      msg("'Okay captain.'");
+      QuestJs._io.msg("'Okay captain.'");
       char.setAgenda(["walkTo:probes_aft:" + QuestJs._lang.getName(char, {article:DEFINITE}) + " goes to the probe deployment console.", "text:deployProbe:" + number])
       char.deployProbeAction = 0;
       char.deployProbeCount = 0;
@@ -606,7 +606,7 @@ createItem("probe_prototype", COUNTABLE([]), {
       // already part way through launching
       // skip walking there, skip first deploy action
       // the old number should be replaced
-      msg("'Okay captain.'");
+      QuestJs._io.msg("'Okay captain.'");
       char.setAgenda(["text:deployProbe:" + number])
       char.deployProbeAction = 1;
     }

@@ -20,32 +20,32 @@ createItem("dinner_timetable", AGENDA_FOLLOWER(), {
           test:function() { return !w.soup_can.opened },
           script:function() {
             w.soup_can.opened = true
-            msg("Kyle opens the soup can.")
+            QuestJs._io.msg("Kyle opens the soup can.")
           },
         },
         {
           test:function() { return w.bowls.state === 0 },
           script:function() {
             w.bowls.state = 1
-            msg("Kyle pours soup into the two bowls.")
+            QuestJs._io.msg("Kyle pours soup into the two bowls.")
           },
         },
         {
           test:function() { return w.bowls.state === 1 },
           script:function() {
             w.bowls.state = 2
-            msg("Kyle microwaves the two bowls.")
+            QuestJs._io.msg("Kyle microwaves the two bowls.")
           },
         },
         {
           test:function() { return w.bowls.state === 2 },
           script:function() {
             w.bowls.state = 3
-            msg("Kyle serves the two bowls of delicious soup.")
+            QuestJs._io.msg("Kyle serves the two bowls of delicious soup.")
           },
         },
         {
-          msg:"Kyle eats the soup.",
+          QuestJs._io.msg:"Kyle eats the soup.",
           failed:true,
         },
       ],
@@ -54,7 +54,7 @@ createItem("dinner_timetable", AGENDA_FOLLOWER(), {
       test:function(p) { return p.course === 'main' },
       responses:[
         {
-          msg:"Kyle produces the main course.",
+          QuestJs._io.msg:"Kyle produces the main course.",
           failed:true,
         },
       ],
@@ -73,7 +73,7 @@ QuestJs._commands.unshift(  new QuestJs._command.Cmd('Audio', {
   regex:/^q$/,
   script:function() {
     showMenuWithNumbers('What is your favourite color?', ['Blue', 'Red', 'Yellow', 'Pink'], function(result) {
-      msg("You picked " + result + ".");
+      QuestJs._io.msg("You picked " + result + ".");
     });
   },
 }));

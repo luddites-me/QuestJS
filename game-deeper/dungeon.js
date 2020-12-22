@@ -265,7 +265,7 @@ dungeon.setWayDown = function(levellist) {
       if (dungeon.fromCentre(o.x, o.y) > dist) sublist.push(o)
     }
     dist--
-    //msg(dist)
+    //QuestJs._io.msg(dist)
   }
   const waydown = random.fromArray(sublist)
   waydown.exit_down = true
@@ -333,14 +333,14 @@ dungeon.setUpCentreRoom = function(level, from_room) {
 
 dungeon.drawMap = function() {
   if (!dungeon.mapOptions.show) {
-    metamsg('You do not have a map.')
+    QuestJs._io.metamsg('You do not have a map.')
     return
   }
     
   const room = w[game.player.loc]
   console.log(room)
   if (!room.level) {
-    metamsg('No map available here.')
+    QuestJs._io.metamsg('No map available here.')
     return
   }
   
@@ -367,7 +367,7 @@ dungeon.drawMap = function() {
     map.push('<line x1="75" y1="' + (dungeon.mapSize - 35) + '" x2="' + x2 + '" y2="' + y2 + '" stroke="black" marker-end="url(#head)"/>')
   }
   //if (this.mapBorder) 
-  draw(dungeon.mapSize, dungeon.mapSize, map)
+  QuestJs._io.draw(dungeon.mapSize, dungeon.mapSize, map)
   return true
 }  
   
@@ -391,7 +391,7 @@ createRoom('entrance', {
 dungeon.exitScript = function(char, dirName) {
   const origin = w[char.loc]
   if (!origin.hasExit(dirName)) {
-    msg('You can\'t go ' + dirName)
+    QuestJs._io.msg('You can\'t go ' + dirName)
     return false
   }
 
@@ -400,8 +400,8 @@ dungeon.exitScript = function(char, dirName) {
   // up and down are different!!!
   const dest = w[dungeon.getRoomName(origin.x + dir.x, origin.y + dir.y, origin.level)]
     
-  msg(QuestJs._lang.stop_posture(char))
-  msg(QuestJs._lang.go_successful, {char:char, dir:dirName})
+  QuestJs._io.msg(QuestJs._lang.stop_posture(char))
+  QuestJs._io.msg(QuestJs._lang.go_successful, {char:char, dir:dirName})
   world.setRoom(char, dest)
   return true
 }

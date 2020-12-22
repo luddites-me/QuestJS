@@ -8,7 +8,7 @@
 
 
 const takeATurn = function() {
-  msg("Time passes...")
+  QuestJs._io.msg("Time passes...")
 }
 
 
@@ -101,7 +101,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Sleep', {
       return world.SUCCESS
     }
     else {
-      metamsg("You can only sleep in the bedroom");
+      QuestJs._io.metamsg("You can only sleep in the bedroom");
       return world.FAILED
     }
   },
