@@ -1,9 +1,4 @@
 tmp.*
-*.xml
-*.aslx
-*.yml
-*.rb
-*.txt
 *.zip
 game-x*/
 game-banks-demo/
