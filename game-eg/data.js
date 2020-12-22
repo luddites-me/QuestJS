@@ -119,7 +119,7 @@ createItem("book", TAKEABLE(), READABLE(true), {
   loc:"lounge",
   examine:"A leather-bound book.",
   read:function(isMultiple, char) {
-    if (cmdRules.isHeld(null, char, this, isMultiple)) {
+    if (QuestJs.cmdRules.isHeld(null, char, this, isMultiple)) {
       if (char === w.Lara) {
         msg ("'Okay.' Lara spends a few minutes reading the book.");
         msg ("'I meant, read it to me.'");

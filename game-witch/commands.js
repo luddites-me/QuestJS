@@ -3,7 +3,7 @@
 
 
 
-comands.unshift(new Cmd('wait3', {
+comands.unshift(new QuestJs.command.Cmd('wait3', {
   regex:/^^wait$|^z$$/,
   objects:[
     {ignore:true},
@@ -18,7 +18,7 @@ comands.unshift(new Cmd('wait3', {
           }
         }))
 
-comands.unshift(new Cmd('wait2', {
+comands.unshift(new QuestJs.command.Cmd('wait2', {
   regex:/^^wait$|^z$$/,
   objects:[
     {ignore:true},

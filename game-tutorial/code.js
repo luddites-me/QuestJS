@@ -90,7 +90,7 @@ hint.before = function(name) {
 
   
 
-findCmd('MetaHint').script = function() {
+QuestJs.command.findCmd('MetaHint').script = function() {
   if (typeof hint.data[game.player.hintCounter].hint === 'string') {
     metamsg(hint.data[game.player.hintCounter].hint)
   }
@@ -204,7 +204,7 @@ const walkthroughs = {
 
 
 
-findCmd('MetaSave').script = function() {
+QuestJs.command.findCmd('MetaSave').script = function() {
   script:QuestJs.LANG.saveLoadScript()
   if (hint.before('saveGame')) {
     tmsg("So in Quest 6 SAVE just tells you how to save your game. You need to add a file name to actually save. Do that now! You can call it whatever you want; how about \"tutorial\"?")
@@ -215,7 +215,7 @@ findCmd('MetaSave').script = function() {
 
 
 
-commands.push(new Cmd('Crowbar', {
+commands.push(new QuestJs.command.Cmd('Crowbar', {
   regex:/^(crowbar|level) (.+)$/,
   objects:[
     {ignore:true},
@@ -228,9 +228,9 @@ commands.push(new Cmd('Crowbar', {
 }));
 
 
-commands.unshift(new Cmd('Move', {
+commands.unshift(new QuestJs.command.Cmd('Move', {
   npcCmd:true,
-  rules:[cmdRules.isHere],
+  rules:[QuestJs.cmdRules.isHere],
   regex:/^(move) (.+)$/,
   objects:[
     {ignore:true},
@@ -243,7 +243,7 @@ commands.unshift(new Cmd('Move', {
 
 
 
-commands.push(new Cmd('Tutorial', {
+commands.push(new QuestJs.command.Cmd('Tutorial', {
   regex:/^tutorial$/,
   objects:[
   ],
@@ -275,7 +275,7 @@ const unwrapScript = function(obj1, obj2) {
 }
 
 
-commands.unshift(new Cmd('Wrap1', {
+commands.unshift(new QuestJs.command.Cmd('Wrap1', {
   // wrap fist in newspaper
   regex:/^(?:wrap|cover) (.+) (?:with|in) (.+)$/,
   objects:[
@@ -285,7 +285,7 @@ commands.unshift(new Cmd('Wrap1', {
   script:function(objects) { wrapScript(objects[0][0], objects[1][0]) },
 }));
 
-commands.unshift(new Cmd('Wrap2', {
+commands.unshift(new QuestJs.command.Cmd('Wrap2', {
   // wrap newspaper round fist
   regex:/^(?:wrap) (.+) (?:round|around) (.+)$/,
   objects:[
@@ -295,7 +295,7 @@ commands.unshift(new Cmd('Wrap2', {
   script:function(objects) { wrapScript(objects[1][0], objects[0][0]) },
 }));
 
-commands.unshift(new Cmd('Unwrap1', {
+commands.unshift(new QuestJs.command.Cmd('Unwrap1', {
   // unwrap fist
   regex:/^(?:unwrap|uncover) (.+)$/,
   objects:[
@@ -305,7 +305,7 @@ commands.unshift(new Cmd('Unwrap1', {
   script:function(objects) { unwrapScript(objects[0][0], w.old_newspaper) },
 }));
 
-commands.unshift(new Cmd('Unwrap2', {
+commands.unshift(new QuestJs.command.Cmd('Unwrap2', {
   // take newspaper off fist
   regex:/^(?:take|remove) (.+) (?:off|from) (.+)$/,
   objects:[
@@ -317,7 +317,7 @@ commands.unshift(new Cmd('Unwrap2', {
 
 
 
-commands.unshift(new Cmd('ThrowThrough', {
+commands.unshift(new QuestJs.command.Cmd('ThrowThrough', {
   // throw rope out window
   regex:/^(?:throw|chuck|hurl|toss|pitch|lob|heave) (.+) (?:out of|out|through) (.+)$/,
   objects:[
@@ -355,7 +355,7 @@ const smashWithScript = function(item, dest) {
 }
 
 
-commands.unshift(new Cmd('SmashWith', {
+commands.unshift(new QuestJs.command.Cmd('SmashWith', {
   // throw rope out window
   regex:/^(?:smash|break|destroy) (.+) (?:with|using) (.+)$/,
   objects:[
@@ -368,7 +368,7 @@ commands.unshift(new Cmd('SmashWith', {
 }));
 
 
-commands.unshift(new Cmd('UseToSmash', {
+commands.unshift(new QuestJs.command.Cmd('UseToSmash', {
   // throw rope out window
   regex:/^(?:use|using) (.+?) (?:to |)(?:smash|break|destroy) (.+)$/,
   objects:[
@@ -382,7 +382,7 @@ commands.unshift(new Cmd('UseToSmash', {
 
 
 
-commands.unshift(new Cmd('Attack', {
+commands.unshift(new QuestJs.command.Cmd('Attack', {
   // throw rope out window
   regex:/^(?:attack|kick|punch|hit|strike|kill) (.+?)$/,
   objects:[
@@ -406,7 +406,7 @@ commands.unshift(new Cmd('Attack', {
 
 
 
-commands.unshift(new Cmd('TieUp', {
+commands.unshift(new QuestJs.command.Cmd('TieUp', {
   // throw rope out window
   regex:/^(?:tie up|tie|bind) (.+?)$/,
   objects:[
@@ -435,7 +435,7 @@ commands.unshift(new Cmd('TieUp', {
 
 
 
-commands.push(new Cmd('RudeCommand', {
+commands.push(new QuestJs.command.Cmd('RudeCommand', {
   // throw rope out window
   regex:/^(?:fuck|facefuck|face-fuck|face fuck|bugger|shag|suck|suck off|assfuck|ass-fuck|ass fuck|rape|ass-rape|ass rape) (.+?)$/,
   objects:[
@@ -458,7 +458,7 @@ commands.push(new Cmd('RudeCommand', {
 
 
 /*
-commands.unshift(new Cmd('ThrowAt', {
+commands.unshift(new QuestJs.command.Cmd('ThrowAt', {
   // throw computer at window
   regex:/^(?:wrap|cover) (.+) (?:with|in) (.+)$/,
   objects:[

@@ -39,9 +39,9 @@ function firstTimeTesting() {
 
 
 
-commands.unshift(new Cmd('Test input', {
+commands.unshift(new QuestJs.command.Cmd('Test input', {
   npcCmd:true,
-  rules:[cmdRules.isHere],
+  rules:[QuestJs.cmdRules.isHere],
   regex:/^inp/,
   script:function() {
     msg("First some preamble...")
@@ -64,7 +64,7 @@ commands.unshift(new Cmd('Test input', {
 
 
 
-commands.unshift(  new Cmd('TextReveal', {
+commands.unshift(  new QuestJs.command.Cmd('TextReveal', {
   regex:/^reveal$/,
   script:function() {
     msg("Some text")
@@ -81,7 +81,7 @@ commands.unshift(  new Cmd('TextReveal', {
   },
 }));
   
-commands.unshift(  new Cmd('Image', {
+commands.unshift(  new QuestJs.command.Cmd('Image', {
   regex:/^img$/,
   script:function() {
     msg("Some more text.")
@@ -89,7 +89,7 @@ commands.unshift(  new Cmd('Image', {
   },
 }));
   
-commands.unshift(  new Cmd('Audio', {
+commands.unshift(  new QuestJs.command.Cmd('Audio', {
   regex:/^beep$/,
   script:function() {
     msg("Can you hear this?")
@@ -100,7 +100,7 @@ commands.unshift(  new Cmd('Audio', {
 
 
 
-commands.unshift(  new Cmd('Alpha', {
+commands.unshift(  new QuestJs.command.Cmd('Alpha', {
   regex:/^alpha$/,
   script:function() {
     msg("Some text in Greek: {encode:391:3AC:The quick brown fox jumped over the lazy dog}.")
@@ -121,9 +121,9 @@ commands.unshift(  new Cmd('Alpha', {
 
 
 
-commands.unshift(new Cmd('EgKick', {
+commands.unshift(new QuestJs.command.Cmd('EgKick', {
   npcCmd:true,
-  rules:[cmdRules.isHere],
+  rules:[QuestJs.cmdRules.isHere],
   regex:/^(kick) (.+)$/,
   objects:[
     {ignore:true},
@@ -136,9 +136,9 @@ commands.unshift(new Cmd('EgKick', {
 
 
 
-commands.unshift(new Cmd('EgCharge', {
+commands.unshift(new QuestJs.command.Cmd('EgCharge', {
   npcCmd:true,
-  rules:[cmdRules.isHeld],
+  rules:[QuestJs.cmdRules.isHeld],
   regex:/^(charge) (.+)$/,
   objects:[
     {ignore:true},
@@ -150,9 +150,9 @@ commands.unshift(new Cmd('EgCharge', {
 }));
 
 
-commands.unshift(new Cmd('EgMove', {
+commands.unshift(new QuestJs.command.Cmd('EgMove', {
   npcCmd:true,
-  rules:[cmdRules.isHere],
+  rules:[QuestJs.cmdRules.isHere],
   regex:/^(move) (.+)$/,
   objects:[
     {ignore:true},
@@ -164,7 +164,7 @@ commands.unshift(new Cmd('EgMove', {
 }));
 
 
-commands.unshift(  new Cmd('EgHint', {
+commands.unshift(  new QuestJs.command.Cmd('EgHint', {
     regex:/^hint$|^hints$/,
     script:function() {
       if (w[game.player.loc].hint) {
@@ -180,7 +180,7 @@ commands.unshift(  new Cmd('EgHint', {
 
 
 
-commands.unshift(new Cmd('Test', {
+commands.unshift(new QuestJs.command.Cmd('Test', {
   regex:/^t$/,
   script:function() {
     console.log(w.Emily)

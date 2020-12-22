@@ -3,7 +3,7 @@
 
 
 
-comands.unshift(new Cmd('knock_on_door', {
+comands.unshift(new QuestJs.command.Cmd('knock_on_door', {
   regex:/^knock$/,
   objects:[
     {ignore:true},
@@ -19,7 +19,7 @@ comands.unshift(new Cmd('knock_on_door', {
           Print (s)
         }))
 
-comands.unshift(new Cmd('post_letter', {
+comands.unshift(new QuestJs.command.Cmd('post_letter', {
   regex:/^^(post|push) (letter|envelope)$/,
   objects:[
     {ignore:true},
@@ -29,7 +29,7 @@ comands.unshift(new Cmd('post_letter', {
           Print ("There was no letter box, so just posting the letter was not an option.")
         }))
 
-comands.unshift(new Cmd('climb_telescope', {
+comands.unshift(new QuestJs.command.Cmd('climb_telescope', {
   regex:/^climb$/,
   objects:[
     {ignore:true},
@@ -39,7 +39,7 @@ comands.unshift(new Cmd('climb_telescope', {
           do (telescope, "climb")
         }))
 
-comands.unshift(new Cmd('climb_out', {
+comands.unshift(new QuestJs.command.Cmd('climb_out', {
   regex:/^climb$/,
   objects:[
     {ignore:true},
@@ -49,7 +49,7 @@ comands.unshift(new Cmd('climb_out', {
           do (exit_up_to_roof, "script")
         }))
 
-comands.unshift(new Cmd('fix_wire', {
+comands.unshift(new QuestJs.command.Cmd('fix_wire', {
   regex:/^fix #object#;attach #object#;tie #object#$/,
   objects:[
     {ignore:true},
@@ -67,7 +67,7 @@ comands.unshift(new Cmd('fix_wire', {
           }
         }))
 
-comands.unshift(new Cmd('fix_wire_to_spike', {
+comands.unshift(new QuestJs.command.Cmd('fix_wire_to_spike', {
   regex:/^^(fix|attach|tie) (?<object1>.*) to (?<object2>.*)$$/,
   objects:[
     {ignore:true},
@@ -88,7 +88,7 @@ comands.unshift(new Cmd('fix_wire_to_spike', {
           }
         }))
 
-comands.unshift(new Cmd('bootcheat', {
+comands.unshift(new QuestJs.command.Cmd('bootcheat', {
   regex:/^bootcheat$/,
   objects:[
     {ignore:true},
@@ -104,7 +104,7 @@ comands.unshift(new Cmd('bootcheat', {
       }
     }))
 
-comands.unshift(new Cmd('bootshrink', {
+comands.unshift(new QuestJs.command.Cmd('bootshrink', {
   regex:/^bootshrink$/,
   objects:[
     {ignore:true},
