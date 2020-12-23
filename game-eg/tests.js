@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._test.tests = function () {
   QuestJs._test.title('QuestJs._parser.scoreObjectMatch');
   QuestJs._test.assertEqual(55, QuestJs._parser.scoreObjectMatch('me', QuestJs._w.Buddy, ''));
@@ -341,10 +339,10 @@ QuestJs._test.tests = function () {
     return 'test1';
   };
   QuestJs._w.book.func2 = function (a, b) {
-    return 'test2(' + a + ', ' + b + ')';
+    return `test2(${a}, ${b})`;
   };
   QuestJs._w.book.func3 = function (a) {
-    return 'It is ' + QuestJs._w[a].alias + ' reading the book.';
+    return `It is ${QuestJs._w[a].alias} reading the book.`;
   };
   QuestJs._test.assertEqual(
     'Simple text: p2=test1',
@@ -1139,7 +1137,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertEqual(QuestJs._w.book, QuestJs._w.far_away.four);
   QuestJs._saveLoad.decode(QuestJs._w.far_away, 'five:array:14~12');
   QuestJs._test.assertEqual('14', QuestJs._w.far_away.five[0]);
-  //QuestJs._log.info(QuestJs._w.far_away.north)
+  // QuestJs._log.info(QuestJs._w.far_away.north)
   QuestJs._saveLoad.decode(QuestJs._w.far_away, 'north:exit:lounge:l:h');
   QuestJs._test.assertEqual(true, QuestJs._w.far_away.north.hidden);
   QuestJs._saveLoad.decode(QuestJs._w.far_away, 'six:numberarray:4~67~9');
@@ -1313,7 +1311,7 @@ QuestJs._test.tests = function () {
     'You can go east.',
   ]);
   QuestJs._w.lift.onTransitMove = function (toLoc, fromLoc) {
-    QuestJs._io.msg('MOVING to ' + toLoc + ' from ' + fromLoc);
+    QuestJs._io.msg(`MOVING to ${toLoc} from ${fromLoc}`);
   };
   QuestJs._test.assertCmd('push 1', ['You press the button; nothing happens.']);
   QuestJs._test.assertCmd('push 2', ['That does nothing, the button does not work.']);
@@ -1592,7 +1590,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertCmd('buy trophy', ['You buy the trophy for $0,15.']);
   QuestJs._test.assertEqual(1, QuestJs._w.Buddy.money);
   QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(QuestJs._w.carrot));
-  //QuestJs._log.info(" -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1");
+  // QuestJs._log.info(" -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1");
   QuestJs._test.assertEqual(false, QuestJs._parser.isForSale(QuestJs._w.trophy));
   QuestJs._test.assertCmd('buy trophy', [
     "You can't buy the trophy here - probably because you are already holding it.",
@@ -2021,7 +2019,7 @@ QuestJs._test.tests = function () {
     let countOutstanding = 0;
     let countDone = 0;
     QuestJs._log.info(QuestJs._tp.usedStrings.length);
-    for (let el in QuestJs._lang) {
+    for (const el in QuestJs._lang) {
       if (typeof el !== 'string') continue;
       if (langSkips.find((e) => el.match(e))) continue;
       if (QuestJs._tp.usedStrings.includes(QuestJs._lang[el])) {
@@ -2031,6 +2029,6 @@ QuestJs._test.tests = function () {
       QuestJs._log.info(el);
       countOutstanding += 1;
     }
-    QuestJs._log.info(countOutstanding + '/' + (countOutstanding + countDone));
+    QuestJs._log.info(`${countOutstanding}/${countOutstanding + countDone}`);
   }
 };

@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._settings.title = 'The Dinner Party';
 QuestJs._settings.author = 'The Pixie';
 QuestJs._settings.version = '0.1';
@@ -19,7 +17,7 @@ QuestJs._settings.setup = function () {
 QuestJs._settings.libraries.push('item_links');
 
 QuestJs._settings.toolbar = {
-  content: function () {
+  content() {
     return `Hitpoints : 100`;
   },
   roomdisplay: true,

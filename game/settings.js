@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._settings.title = 'Your new game';
 QuestJs._settings.author = 'Your name here';
 QuestJs._settings.version = '0.1';

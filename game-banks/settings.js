@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._settings.title = 'The Voyages of The Joseph Banks';
 QuestJs._settings.author = 'The Pixie';
 QuestJs._settings.version = '0.1';
@@ -30,11 +28,7 @@ QuestJs._settings.roomTemplate = [
 
 QuestJs._settings.status = [
   function () {
-    return (
-      '<td width="55px" title="You receive a bonus for collecting good data"><b>Bonus:</b></td><td width="20px"></td><td align="right"><b>$' +
-      QuestJs._game.player.bonus +
-      'k</b></td>'
-    );
+    return `<td width="55px" title="You receive a bonus for collecting good data"><b>Bonus:</b></td><td width="20px"></td><td align="right"><b>$${QuestJs._game.player.bonus}k</b></td>`;
   },
   function () {
     return QuestJs._settings.statusReport(QuestJs._game.player);
@@ -55,11 +49,7 @@ QuestJs._settings.status = [
     return QuestJs._settings.statusReport(QuestJs._w.Aada);
   },
   function () {
-    return (
-      '<td colspan="3" style="border:black solid 1px" align="center" title="The current date and time (adjusted for relativistic effects)">' +
-      QuestJs._util.getDateTime() +
-      '</td>'
-    );
+    return `<td colspan="3" style="border:black solid 1px" align="center" title="The current date and time (adjusted for relativistic effects)">${QuestJs._util.getDateTime()}</td>`;
   },
   function () {
     return QuestJs._settings.oxygenReport();
@@ -79,29 +69,23 @@ QuestJs._settings.colourNotes = [
 QuestJs._settings.intervals = [25, 50, 25, 1, 1000];
 QuestJs._settings.intervalDescs = ['worrying', 'fair', 'good', 'perfect'];
 QuestJs._settings.statusReport = function (obj) {
-  let s, colourCode, tooltip;
-  tooltip = obj.alias + ' is ';
+  let s;
+  let colourCode;
+  let tooltip;
+  tooltip = `${obj.alias} is `;
   if (!obj.crewman) tooltip += obj.player ? 'the captain of the ship (i.e., you)' : 'the ship AI';
   if (typeof obj.status === 'string') {
     s = obj.status;
     colourCode = s === 'stasis' ? 5 : 6;
     if (obj.crewman) tooltip += s === 'stasis' ? 'in stasis' : 'dead';
   } else {
-    s = obj.status.toString() + '%';
+    s = `${obj.status.toString()}%`;
     colourCode = QuestJs._util.getByInterval(QuestJs._settings.intervals, obj.status);
-    if (obj.crewman) tooltip += 'in ' + QuestJs._w[obj.loc].alias;
+    if (obj.crewman) tooltip += `in ${QuestJs._w[obj.loc].alias}`;
   }
-  return (
-    '<td title="' +
-    tooltip +
-    '"><i>' +
-    obj.alias +
-    ':</i></td>' +
-    QuestJs._settings.warningLight(colourCode) +
-    '<td align="right">' +
-    s +
-    '</td>'
-  );
+  return `<td title="${tooltip}"><i>${obj.alias}:</i></td>${QuestJs._settings.warningLight(
+    colourCode,
+  )}<td align="right">${s}</td>`;
 };
 QuestJs._settings.oxygenReport = function (obj) {
   // 0.84 kg O2  per day
@@ -115,24 +99,19 @@ QuestJs._settings.oxygenReport = function (obj) {
     QuestJs._settings.intervals,
     QuestJs._w.ship.oxygen / 10,
   );
-  return (
-    '<td title="The ship has a limited amount of oxygen; an adult uses about 6 g every minute, but none while in stasis"><b>Oxygen:</b></td>' +
-    QuestJs._settings.warningLight(colourCode) +
-    '<td align="right"><span style="font-size:0.8em">' +
-    (Math.round(QuestJs._w.ship.oxygen) / 1000).toFixed(3) +
-    ' kg</span></td>'
-  );
+  return `<td title="The ship has a limited amount of oxygen; an adult uses about 6 g every minute, but none while in stasis"><b>Oxygen:</b></td>${QuestJs._settings.warningLight(
+    colourCode,
+  )}<td align="right"><span style="font-size:0.8em">${(
+    Math.round(QuestJs._w.ship.oxygen) / 1000
+  ).toFixed(3)} kg</span></td>`;
 };
 
 QuestJs._settings.warningLight = function (colourCode) {
-  //return "<td style=\"margin:3px;border:black solid 2px; background:" + colour + "\">&nbsp;</td>"
+  // return "<td style=\"margin:3px;border:black solid 2px; background:" + colour + "\">&nbsp;</td>"
 
-  let s = '<td title="' + QuestJs._settings.colourNotes[colourCode] + '">';
+  let s = `<td title="${QuestJs._settings.colourNotes[colourCode]}">`;
   s += '<svg height="12" width="10">';
-  s +=
-    '<circle cx="5" cy="5" r="5" stroke="black" stroke-width="1" fill="' +
-    QuestJs._settings.colours[colourCode] +
-    '" />';
+  s += `<circle cx="5" cy="5" r="5" stroke="black" stroke-width="1" fill="${QuestJs._settings.colours[colourCode]}" />`;
   s += '</svg>';
   s += '</td>';
   return s;
@@ -186,33 +165,29 @@ s +=
   '<tr><td>Sex:</td><td>Male: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
 s += 'Female<input type="radio" id="female" name="sex" value="female" checked></td></tr>';
 s += '<tr><td>Profession:</td><td><select id="job" style="width:300px">';
-for (let prof of professions) {
-  s += '<option value="' + prof.name + '">' + prof.name + '</option>';
+for (const prof of professions) {
+  s += `<option value="${prof.name}">${prof.name}</option>`;
 }
 s += '</select></td></tr>';
 s += '<tr><td>Background:</td><td><select id="background" style="width:300px">';
-for (let back of backgrounds) {
-  s += '<option value="' + back.name + '">' + back.name + '</option>';
+for (const back of backgrounds) {
+  s += `<option value="${back.name}">${back.name}</option>`;
 }
 s += '</select></td></tr></table>';
 
-//QuestJs._settings.startingDialogEnabled = true
+// QuestJs._settings.startingDialogEnabled = true
 QuestJs._settings.startingDialogTitle = 'To start with...';
 QuestJs._settings.startingDialogWidth = 555;
 QuestJs._settings.startingDialogHeight = 565;
 QuestJs._settings.startingDialogHtml = s;
 QuestJs._settings.startingDialogOnClick = function () {
-  let p = QuestJs._game.player;
+  const p = QuestJs._game.player;
   const jobName = $('#job').val();
-  const job = professions.find(function (el) {
-    return el.name === jobName;
-  });
+  const job = professions.find((el) => el.name === jobName);
   QuestJs._w.me.job = job.name;
   QuestJs._w.me.jobBonus = job.bonus;
   const backgroundName = $('#background').val();
-  const background = backgrounds.find(function (el) {
-    return el.name === backgroundName;
-  });
+  const background = backgrounds.find((el) => el.name === backgroundName);
   QuestJs._w.me.background = background.name;
   QuestJs._w.me.backgroundBonus = background.bonus;
   QuestJs._w.me.isFemale = $('#female').is(':checked');

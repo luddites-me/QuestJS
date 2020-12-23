@@ -1,5 +1,3 @@
-'use strict';
-
 // About your game
 QuestJs._settings.title = 'Nation!';
 QuestJs._settings.author = 'The Pixie';
@@ -24,7 +22,7 @@ QuestJs._settings.setup = function () {
     showRegions: true,
     showLabels: true,
     titleStyle: 'font: 20pt bold',
-    /*defs:function() {
+    /* defs:function() {
       let s = '<filter id="dilate"><feMorphology id="morph" operator="dilate" radius="0" /></filter>'
       s += '<animate xlink:href="#morph" id="anim-dialiate" attributeName="radius" from="40" to="0" dur="3s" fill="freeze"/>'
       
@@ -32,14 +30,14 @@ QuestJs._settings.setup = function () {
       s += '<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="50" xChannelSelector="R" yChannelSelector="G"/></filter>'
       s += ' <animate xlink:href="#displacementFilter" id="anim-turbulent" attributeName="scale" from="100" to="0" dur="5s" fill="freeze"/>'
       return s
-    },*/
+    }, */
     switchesPos: { x: 900, y: 80 },
     switchesWidth: 240,
     switches: [
       { on: 'orange', off: 'green', att: 'showRegions', text: 'Toggle region display' },
       { on: 'black', off: 'silver', att: 'showLabels', text: 'Toggle label display' },
     ],
-    /*extras:function() {
+    /* extras:function() {
       let s = '<circle cx="820" cy="70" r="10" fill="'
       s += (this.showRegions ? 'orange' : 'green') + '" onclick="toggle(\'showRegions\')"/>'
       s += '<text x="850" y="77" fill="black">Toggle region display</text>'
@@ -47,39 +45,39 @@ QuestJs._settings.setup = function () {
       s += (this.showLabels ? 'black' : 'grey') + '" onclick="toggle(\'showLabels\')"/>'
       s += '<text x="850" y="97" fill="black">Toggle label display</text>'
       return s
-    },*/
-    getColourAt: function (x, y) {
+    }, */
+    getColourAt(x, y) {
       if (this.showRegions) {
-        for (let el of nation.regions) {
+        for (const el of nation.regions) {
           if (el.contains(x, y)) return el.colour;
         }
       } else {
-        for (let el of nation.regions) {
+        for (const el of nation.regions) {
           if (el.cityAt(x, y)) return 'grey';
         }
       }
       return nation.map[x][y].colour;
     },
-    getFeaturesAt: function (x, y) {
+    getFeaturesAt(x, y) {
       const result = [];
       const city = nation.cityAt(x, y);
       if (city) {
-        result.push('city' + city.pop);
+        result.push(`city${city.pop}`);
         if (this.showLabels) result.push('cityName');
       }
       if (x === 3 && y === 3) result.push('black');
-      //if (x === 8 && y === 1) return ['yellow', 'green']
-      //if (x === 0 && y === 0) return ['go']
+      // if (x === 8 && y === 1) return ['yellow', 'green']
+      // if (x === 0 && y === 0) return ['go']
       return result;
     },
-    getLeftBorder: function (x, y) {
+    getLeftBorder(x, y) {
       if (nation.map[x][y].riverLeft)
-        return 'stroke="blue" stroke-width="' + nation.map[x][y].riverLeft + '"';
+        return `stroke="blue" stroke-width="${nation.map[x][y].riverLeft}"`;
       return false;
     },
-    getRightBorder: function (x, y) {
+    getRightBorder(x, y) {
       if (nation.map[x][y].riverRight)
-        return 'stroke="blue" stroke-width="' + nation.map[x][y].riverRight + '"';
+        return `stroke="blue" stroke-width="${nation.map[x][y].riverRight}"`;
       return false;
     },
     features: {
@@ -94,17 +92,11 @@ QuestJs._settings.setup = function () {
         width: 30,
         height: 60,
         layer: 'labels',
-        script: function (x2, y2, x, y) {
+        script(x2, y2, x, y) {
           const city = nation.cityAt(x, y);
-          return (
-            '<text x="' +
-            x2 +
-            '" y="' +
-            (y2 + 15) +
-            '" style="font-weight:bold;text-anchor:middle" fill="black">' +
-            city.name +
-            '</text>'
-          );
+          return `<text x="${x2}" y="${
+            y2 + 15
+          }" style="font-weight:bold;text-anchor:middle" fill="black">${city.name}</text>`;
         },
       },
       go: { width: 30, height: 30, flatFile: 'square_one.png' },
@@ -117,14 +109,10 @@ QuestJs._settings.setup = function () {
       text: {
         width: 30,
         height: 60,
-        script: function (x, y) {
-          return (
-            '<text x="' +
-            x +
-            '" y="' +
-            (y - 5) +
-            '" style="font-weight:bold;text-anchor:middle" fill="orange">Grumpy!</text>'
-          );
+        script(x, y) {
+          return `<text x="${x}" y="${
+            y - 5
+          }" style="font-weight:bold;text-anchor:middle" fill="orange">Grumpy!</text>`;
         },
       },
     },

@@ -1,8 +1,6 @@
-'use strict';
-
 QuestJs._test.tests = function () {
-  //QuestJs._game.player.skillsLearnt = ["Double attack", "Fireball",  "Commune with animal", "Unlock", "Stoneskin", "Steelskin", "Lightning bolt", "Ice shard", "Psi-blast"]
-  //ioUpdateCustom()
+  // QuestJs._game.player.skillsLearnt = ["Double attack", "Fireball",  "Commune with animal", "Unlock", "Stoneskin", "Steelskin", "Lightning bolt", "Ice shard", "Psi-blast"]
+  // ioUpdateCustom()
 
   QuestJs._test.title('Elements');
   QuestJs._test.assertEqual('fire', elements.opposed('frost'));
@@ -36,7 +34,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertEqual(30, QuestJs._game.player.getArmour());
   QuestJs._settings.armourScaling = 10;
 
-  //TODO
+  // TODO
   // Monster descriptions that include an injury note and optionally hits
   // Also lore and truesight, search
   // behavior - hostile, following, guarding, etc.
@@ -54,7 +52,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertEqual(1, attack0.offensiveBonus);
 
   QuestJs._random.prime(3);
-  //QuestJs._w.goblin.applyAttack(attack0, true, 0)
+  // QuestJs._w.goblin.applyAttack(attack0, true, 0)
   attack0.resolve(QuestJs._w.goblin, true, 0);
   QuestJs._test.assertEqual(40, QuestJs._w.goblin.health);
 
@@ -165,7 +163,7 @@ QuestJs._test.tests = function () {
   QuestJs._random.prime(3);
   attack3.resolve(QuestJs._w.goblin, true, 0);
   QuestJs._test.assertEqual(19, QuestJs._w.goblin.health);
-  //attack3.output(40)
+  // attack3.output(40)
 
   delete QuestJs._w.goblin.fireModifier;
   QuestJs._w.goblin.health = 40;
@@ -208,7 +206,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertCmd('get spellbook', ['You take the spellbook.']);
   QuestJs._test.assertCmd('learn fireball', ['You learn <i>Fireball</i> from the spellbook.']);
   QuestJs._test.assertEqual(['Double attack', 'Fireball'], QuestJs._game.player.skillsLearnt);
-  //goblin, orc, snotling, rabbit
+  // goblin, orc, snotling, rabbit
 
   QuestJs._random.prime(19);
   QuestJs._random.prime(4);

@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._create.createItem('me', RPG_PLAYER(), {
   loc: 'practice_room',
   regex: /^(me|myself|player)$/,
@@ -11,13 +9,11 @@ QuestJs._create.createItem('me', RPG_PLAYER(), {
   armour: 3,
   spellCasting: 5,
   offensiveBonus: 3,
-  examine: function (isMultiple) {
+  examine(isMultiple) {
     QuestJs._io.msg(
-      QuestJs._tools.prefix(this, isMultiple) +
-        'A ' +
-        (this.isFemale ? 'chick' : 'guy') +
-        ' called ' +
-        this.alias,
+      `${QuestJs._tools.prefix(this, isMultiple)}A ${this.isFemale ? 'chick' : 'guy'} called ${
+        this.alias
+      }`,
     );
   },
 });
@@ -41,7 +37,7 @@ QuestJs._create.createItem('flaming_sword', WEAPON('3d6+2'), {
 
 QuestJs._create.createItem('ice_amulet', QuestJs._templates.WEARABLE(4, ['neck']), {
   loc: 'me',
-  modifyIncomingAttack: function (attack) {
+  modifyIncomingAttack(attack) {
     if (this.worn && attack.element === 'frost') {
       attack.damageMultiplier = 0;
       attack.primarySuccess = attack.primarySuccess.replace(
@@ -112,10 +108,10 @@ QuestJs._create.createItem('rabbit', RPG_NPC(false), {
   damage: '2d4',
   health: 20,
   canTalkFlag: false,
-  isHostile: function () {
+  isHostile() {
     return false;
   },
-  talkto: function () {
+  talkto() {
     if (!this.canTalk()) {
       QuestJs._io.msg(
         'You spend a few minutes telling the rabbit about your life, but it does not seem interested. Possibly because it is rabbit.',
@@ -172,7 +168,7 @@ skills.add(
   new Skill('Double attack', {
     icon: 'sword2',
     tooltip: 'Attack one foe twice, but at -2 to the attack roll',
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.offensiveBonus -= 2;
       attack.attackNumber = 2;
     },
@@ -181,7 +177,7 @@ skills.add(
 
 skills.add(
   new Effect('Flaming weapon', {
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.element = 'fire';
     },
   }),
@@ -189,7 +185,7 @@ skills.add(
 
 skills.add(
   new Effect('Frost vulnerability', {
-    modifyIncomingAttack: function (attack) {
+    modifyIncomingAttack(attack) {
       if (attack.element) attack.damageMultiplier *= 2;
     },
   }),
@@ -201,7 +197,7 @@ skills.add(
     tooltip:
       'Attack one foe for normal damage, and any other for 4 damage; at -3 to the attack roll for reach',
     getPrimaryTargets: rpg.getFoes,
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       if (options.secondary) {
         attack.damageNumber = 0;
         attack.damageBonus = 4;
@@ -215,7 +211,7 @@ skills.add(
   new Skill('Sword of Fire', {
     icon: 'sword-fire',
     tooltip: 'Attack with a flaming sword',
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.element = 'fire';
     },
   }),
@@ -225,7 +221,7 @@ skills.add(
   new Skill('Ice Sword', {
     icon: 'sword-ice',
     tooltip: 'Attack with a freezing blade',
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.element = 'ice';
     },
   }),
@@ -239,7 +235,7 @@ skills.add(
     primarySuccess: '{nv:target:reel:true} from the explosion.',
     primaryFailure: '{nv:target:ignore:true} it.',
     getPrimaryTargets: rpg.getAll,
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.element = 'fire';
       attack.msg('The room is momentarily filled with fire.', 1);
     },
@@ -252,7 +248,7 @@ skills.add(
     icon: 'ice-shard',
     tooltip: 'A shard of ice pierces your foe!',
     primarySuccess: 'A shard of ice jumps from {nms:attacker:the} finger to {nm:target:the}!',
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.element = 'frost';
     },
   }),
@@ -265,7 +261,7 @@ skills.add(
     tooltip: 'A blast of mental energy (ignores armour)',
     primarySuccess: 'A blast of raw psi-energy sends {nm:target:the} reeling.',
     primaryFailure: 'A blast of raw psi-energy... is barely noticed by {nm:target:the}.',
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.armourMultiplier = 0;
     },
   }),
@@ -285,10 +281,10 @@ skills.add(
     secondaryFailure:
       'A smaller bolt jumps {nms:attacker:the} target, but entirely misses {nm:target:the}!',
     getSecondaryTargets: rpg.getFoesBut,
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.element = 'storm';
     },
-    onPrimaryFailure: function (attack) {
+    onPrimaryFailure(attack) {
       attack.secondaryTargets = [];
     },
   }),
@@ -296,12 +292,12 @@ skills.add(
 
 skills.add(
   new Spell('Cursed armour', {
-    targetEffect: function (attack) {
+    targetEffect(attack) {
       attack.msg('{nms:target:the:true} armour is reduced.', 1);
     },
     icon: 'unarmour',
     tooltip: 'A lightning bolt jumps from your out-reached hand to you foe!',
-    modifyOutgoingAttack: function (attack) {
+    modifyOutgoingAttack(attack) {
       attack.armourModifier = attack.armourModifier > 2 ? attack.armourModifier - 2 : 0;
     },
   }),
@@ -309,12 +305,12 @@ skills.add(
 
 skills.add(
   new SpellSelf('Stoneskin', {
-    targetEffect: function (attack) {
+    targetEffect(attack) {
       attack.msg('Your skin becomes as hard as stone - and yet still just as flexible.', 1);
     },
     ongoing: true,
     incompatible: [/skin$/],
-    modifyIncomingAttack: function (attack) {
+    modifyIncomingAttack(attack) {
       attack.armourModifier += 2;
     },
   }),
@@ -322,13 +318,13 @@ skills.add(
 
 skills.add(
   new SpellSelf('Steelskin', {
-    targetEffect: function (attack) {
+    targetEffect(attack) {
       attack.msg('Your skin becomes as hard as steel - and yet still just as flexible.', 1);
     },
     ongoing: true,
     duration: 3,
     incompatible: [/skin$/],
-    modifyIncomingAttack: function (attack) {
+    modifyIncomingAttack(attack) {
       attack.armourModifier += 4;
     },
   }),
@@ -336,12 +332,12 @@ skills.add(
 
 skills.add(
   new SpellSelf('Unlock', {
-    targetEffect: function (attack) {
+    targetEffect(attack) {
       const room = QuestJs._w[attack.attacker.loc];
       let flag = false;
-      for (let el of QuestJs._util.exitList(attack.attacker)) {
+      for (const el of QuestJs._util.exitList(attack.attacker)) {
         if (room[el].locked) {
-          attack.msg('The door to ' + QuestJs._util.niceDirection(el) + ' unlocks.', 1);
+          attack.msg(`The door to ${QuestJs._util.niceDirection(el)} unlocks.`, 1);
           room[el].locked = false;
           flag = true;
         }
@@ -354,7 +350,7 @@ skills.add(
 skills.add(
   new Spell('Commune with animal', {
     icon: 'commune',
-    targetEffect: function (attack) {
+    targetEffect(attack) {
       if (attack.target.canTalkFlag) {
         attack.msg(
           '{nv:attacker:can:true} talk to {nm:target:the} for a short time (like before the spell...).',
@@ -370,15 +366,13 @@ skills.add(
     ongoing: true,
     duration: 5,
     automaticSuccess: true,
-    terminatingScript: function (target) {
+    terminatingScript(target) {
       if (target.canTalkFlagIsTemporary) {
         target.canTalkFlag = false;
         delete target.canTalkFlagIsTemporary;
-        return (
-          'The {i:Commune with animal} spell on ' +
-          QuestJs._lang.getName(target, { article: QuestJs._consts.DEFINITE }) +
-          ' expires.'
-        );
+        return `The {i:Commune with animal} spell on ${QuestJs._lang.getName(target, {
+          article: QuestJs._consts.DEFINITE,
+        })} expires.`;
       }
       return '';
     },

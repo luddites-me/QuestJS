@@ -140,7 +140,7 @@ QuestJs._lang = {
     AskAbout: /^(?:ask) (.+) (about|what|who|how|why|where|when) (.+)$/,
     TellAbout: /^(?:tell) (.+) (about|what|who|how|why|where|when) (.+)$/,
 
-    //Debug
+    // Debug
     DebugWalkThrough: /^wt (.+)$/,
     DebugInspect: /^inspect (.+)$/,
     DebugInspectByName: /^inspect2 (.+)$/,
@@ -163,10 +163,10 @@ QuestJs._lang = {
 
   // QuestJs._templates.TAKEABLE
   take_successful: '{nv:char:take:true} {nm:item:the}.',
-  //take_successful_counted:"{nv:char:take:true} {number:count} {nm:item}.",
-  //take_successful_counted_plural:"{nv:char:take:true} {number:count} {nm:item}.",
+  // take_successful_counted:"{nv:char:take:true} {number:count} {nm:item}.",
+  // take_successful_counted_plural:"{nv:char:take:true} {number:count} {nm:item}.",
   drop_successful: '{nv:char:drop:true} {nm:item:the}.',
-  //drop_successful_counted:"{nv:char:drop:true} {number:count} {nm:item}.",
+  // drop_successful_counted:"{nv:char:drop:true} {number:count} {nm:item}.",
   cannot_take: "{pv:char:can't:true} take {ob:item}.",
   cannot_drop: "{pv:char:can't:true} drop {ob:item}.",
   not_carrying: "{pv:char:don't:true} have {ob:item}.",
@@ -179,14 +179,14 @@ QuestJs._lang = {
   drink_successful: '{nv:char:drink:true} {nm:item:the}.',
   cannot_eat: "{nv:item:'be:true} not something you can eat.",
   cannot_drink: "{nv:item:'be:true} not something you can drink.",
-  //cannot_ingest:"{nv:item:'be:true} not something you can ingest.",
+  // cannot_ingest:"{nv:item:'be:true} not something you can ingest.",
 
   // QuestJs._templates.WEARABLE
   wear_successful: '{nv:char:put:true} on {nm:garment:the}.',
   remove_successful: '{nv:char:take:true} {nm:garment:the} off.',
   cannot_wear: "{nv:char:can't:true} wear {ob:item}.",
   cannot_wear_ensemble: 'Individual parts of an ensemble must be worn and removed separately.',
-  //wearing:"{nv:char:'be:true} wearing {ob:garment}.",  // I do not think this is used at all
+  // wearing:"{nv:char:'be:true} wearing {ob:garment}.",  // I do not think this is used at all
   not_wearing: "{nv:char:'be:true} not wearing {ob:item}.",
   cannot_wear_over: "{nv:char:can't:true} put {nm:garment:the} on over {pa:char} {nm:outer}.",
   cannot_remove_under:
@@ -340,30 +340,28 @@ QuestJs._lang = {
   // Complex responses (requiring functions)
 
   // Used deep in the parser, so prefer to use function, rather than string
-  object_unknown_msg: function (name) {
-    return (
-      QuestJs._lang.nounVerb(QuestJs._game.player, "can't", true) +
-      " see anything you might call '" +
-      name +
-      "' here."
-    );
+  object_unknown_msg(name) {
+    return `${QuestJs._lang.nounVerb(
+      QuestJs._game.player,
+      "can't",
+      true,
+    )} see anything you might call '${name}' here.`;
   },
 
   // For furniture
-  stop_posture: function (char) {
+  stop_posture(char) {
     if (!char.posture || char.posture === 'standing') return '';
     let s;
     // You could split up sitting, standing and lying
     if (char.postureFurniture) {
-      s =
-        QuestJs._lang.nounVerb(char, 'get', true) +
-        ' off ' +
-        QuestJs._lang.getName(QuestJs._w[char.postureFurniture], {
+      s = `${QuestJs._lang.nounVerb(char, 'get', true)} off ${QuestJs._lang.getName(
+        QuestJs._w[char.postureFurniture],
+        {
           article: QuestJs._consts.DEFINITE,
-        }) +
-        '.';
+        },
+      )}.`;
     } else {
-      s = QuestJs._lang.nounVerb(char, 'stand', true) + ' up.';
+      s = `${QuestJs._lang.nounVerb(char, 'stand', true)} up.`;
     }
     char.posture = undefined;
     char.postureFurniture = undefined;
@@ -371,59 +369,39 @@ QuestJs._lang = {
   },
 
   // use (or potentially use) different verbs in the responses, so not simple strings
-  say_no_one_here: function (char, verb, text) {
-    return (
-      QuestJs._lang.nounVerb(char, verb, true) +
-      ", '" +
-      QuestJs._tools.sentenceCase(text) +
-      ",' but no one notices."
-    );
+  say_no_one_here(char, verb, text) {
+    return `${QuestJs._lang.nounVerb(char, verb, true)}, '${QuestJs._tools.sentenceCase(
+      text,
+    )},' but no one notices.`;
   },
-  say_no_response: function (char, verb, text) {
+  say_no_response(char, verb, text) {
     return 'No one seemed interested in what you say.';
   },
-  say_no_response_full: function (char, verb, text) {
-    return (
-      QuestJs._lang.nounVerb(char, verb, true) +
-      ", '" +
-      QuestJs._tools.sentenceCase(text) +
-      ",' but no one seemed interested in what you say."
-    );
+  say_no_response_full(char, verb, text) {
+    return `${QuestJs._lang.nounVerb(char, verb, true)}, '${QuestJs._tools.sentenceCase(
+      text,
+    )},' but no one seemed interested in what you say.`;
   },
 
   // If the player does SPEAK TO MARY and Mary has some topics, this will be the menu title.
-  speak_to_menu_title: function (char) {
-    return (
-      'Talk to ' + QuestJs._lang.getName(char, { article: QuestJs._consts.DEFINITE }) + ' about:'
-    );
+  speak_to_menu_title(char) {
+    return `Talk to ${QuestJs._lang.getName(char, { article: QuestJs._consts.DEFINITE })} about:`;
   },
   // If the player does TELL MARY ABOUT HOUSE this will appear before the response.
-  tell_about_intro: function (char, text1, text2) {
-    return (
-      'You tell ' +
-      QuestJs._lang.getName(char, { article: QuestJs._consts.DEFINITE }) +
-      ' ' +
-      text2 +
-      ' ' +
-      text1 +
-      '.'
-    );
+  tell_about_intro(char, text1, text2) {
+    return `You tell ${QuestJs._lang.getName(char, {
+      article: QuestJs._consts.DEFINITE,
+    })} ${text2} ${text1}.`;
   },
   // If the player does ASK MARY ABOUT HOUSE this will appear before the response.
-  ask_about_intro: function (char, text1, text2) {
-    return (
-      'You ask ' +
-      QuestJs._lang.getName(char, { article: QuestJs._consts.DEFINITE }) +
-      ' ' +
-      text2 +
-      ' ' +
-      text1 +
-      '.'
-    );
+  ask_about_intro(char, text1, text2) {
+    return `You ask ${QuestJs._lang.getName(char, {
+      article: QuestJs._consts.DEFINITE,
+    })} ${text2} ${text1}.`;
   },
 
   // Use when the NPC leaves a room; will give a message if the player can observe it
-  npc_leaving_msg: function (npc, dest) {
+  npc_leaving_msg(npc, dest) {
     let s = '';
     let flag = false;
     if (
@@ -434,19 +412,19 @@ QuestJs._lang = {
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s +=
-        QuestJs._lang.nounVerb(npc, 'leave', !flag) +
-        ' ' +
-        QuestJs._lang.getName(QuestJs._w[npc.loc], { article: QuestJs._consts.DEFINITE });
+      s += `${QuestJs._lang.nounVerb(npc, 'leave', !flag)} ${QuestJs._lang.getName(
+        QuestJs._w[npc.loc],
+        { article: QuestJs._consts.DEFINITE },
+      )}`;
       const exit = QuestJs._w[npc.loc].findExit(dest);
-      if (exit) s += ', heading ' + exit.dir;
+      if (exit) s += `, heading ${exit.dir}`;
       s += '.';
       QuestJs._io.msg(s);
     }
   },
 
   // the NPC has already been moved, so npc.loc is the destination
-  npc_entering_msg: function (npc, origin) {
+  npc_entering_msg(npc, origin) {
     let s = '';
     let flag = false;
     if (
@@ -458,12 +436,12 @@ QuestJs._lang = {
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s +=
-        QuestJs._lang.nounVerb(npc, 'enter', !flag) +
-        ' ' +
-        QuestJs._lang.getName(QuestJs._w[npc.loc], { article: QuestJs._consts.DEFINITE });
+      s += `${QuestJs._lang.nounVerb(npc, 'enter', !flag)} ${QuestJs._lang.getName(
+        QuestJs._w[npc.loc],
+        { article: QuestJs._consts.DEFINITE },
+      )}`;
       const exit = QuestJs._w[npc.loc].findExit(origin);
-      if (exit) s += ' from ' + QuestJs._util.niceDirection(exit.dir);
+      if (exit) s += ` from ${QuestJs._util.niceDirection(exit.dir)}`;
       s += '.';
       QuestJs._io.msg(s);
     }
@@ -498,7 +476,7 @@ QuestJs._lang = {
   restart_no: 'Restart cancelled',
   yes_regex: /^(y|yes)$/i,
 
-  helpScript: function () {
+  helpScript() {
     if (QuestJs._settings.textInput) {
       QuestJs._io.metamsg(
         'Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.',
@@ -547,38 +525,36 @@ QuestJs._lang = {
       }
     }
     if (QuestJs._settings.additionalHelp !== undefined) {
-      for (let s of QuestJs._settings.additionalHelp) QuestJs._io.metamsg(s);
+      for (const s of QuestJs._settings.additionalHelp) QuestJs._io.metamsg(s);
     }
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
-  hintScript: function () {
+  hintScript() {
     QuestJs._io.metamsg('Sorry, no hints available.');
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
-  aboutScript: function () {
+  aboutScript() {
     QuestJs._io.metamsg(
       '{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.',
-      { settings: settings },
+      { settings },
     );
-    if (QuestJs._settings.ifdb) QuestJs._io.metamsg('IFDB number: ' + QuestJs._settings.ifdb);
+    if (QuestJs._settings.ifdb) QuestJs._io.metamsg(`IFDB number: ${QuestJs._settings.ifdb}`);
     if (QuestJs._settings.thanks && QuestJs._settings.thanks.length > 0) {
       QuestJs._io.metamsg(
-        'Thanks to ' +
-          QuestJs._tools.formatList(QuestJs._settings.thanks, {
-            lastJoiner: QuestJs._lang.list_and,
-          }) +
-          '.',
+        `Thanks to ${QuestJs._tools.formatList(QuestJs._settings.thanks, {
+          lastJoiner: QuestJs._lang.list_and,
+        })}.`,
       );
     }
     if (QuestJs._settings.additionalAbout !== undefined) {
-      for (let s of QuestJs._settings.additionalAbout) QuestJs._io.metamsg(s);
+      for (const s of QuestJs._settings.additionalAbout) QuestJs._io.metamsg(s);
     }
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
-  warningsScript: function () {
+  warningsScript() {
     switch (typeof QuestJs._settings.warnings) {
       case 'undefined':
         QuestJs._io.metamsg('No warning have been set for this game.');
@@ -587,12 +563,12 @@ QuestJs._lang = {
         QuestJs._io.metamsg(QuestJs._settings.warnings);
         break;
       default:
-        for (let el of QuestJs._settings.warnings) QuestJs._io.metamsg(el);
+        for (const el of QuestJs._settings.warnings) QuestJs._io.metamsg(el);
     }
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
-  saveLoadScript: function () {
+  saveLoadScript() {
     QuestJs._io.metamsg('To save your progress, type SAVE followed by the name to save with.');
     QuestJs._io.metamsg(
       'To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.',
@@ -601,7 +577,7 @@ QuestJs._lang = {
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
-  transcriptScript: function () {
+  transcriptScript() {
     QuestJs._io.metamsg(
       'The TRANSCRIPT or SCRIPT command can be used to handle saving the input and output. This can be very useful when testing a game, as the author can go back through it and see exactly what happened, and how the player got there.',
     );
@@ -620,22 +596,20 @@ QuestJs._lang = {
     QuestJs._io.metamsg(
       'Everything gets saved to memory, and will be lost if you go to another web page or close your browser. The transcript is not saved when you save your game (but will not be lost when you load a game). If you complete the game the text input will disappear, however if you have a transcript a link will be available to access it.',
     );
-    QuestJs._io.metamsg('Transcript is currently: ' + (QuestJs._IO.transcript ? 'on' : 'off'));
+    QuestJs._io.metamsg(`Transcript is currently: ${QuestJs._IO.transcript ? 'on' : 'off'}`);
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
-  topicsScript: function () {
+  topicsScript() {
     QuestJs._io.metamsg(
       'Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).',
     );
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
-  betaTestIntro: function () {
+  betaTestIntro() {
     QuestJs._io.metamsg(
-      'This version is for beta-testing (' +
-        QuestJs._settings.version +
-        '). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.',
+      `This version is for beta-testing (${QuestJs._settings.version}). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.`,
     );
     if (QuestJs._settings.textInput)
       QuestJs._io.metamsg(
@@ -988,27 +962,27 @@ QuestJs._lang = {
   // -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1
   //                                   LANGUAGE FUNCTIONS
 
-  //@DOC
+  // @DOC
   // ## Language Functions
-  //@UNDOC
+  // @UNDOC
 
-  //@DOC
+  // @DOC
   // Returns "the " if appropriate for this item.
   // If the item has 'defArticle' it returns that; if it has a proper name, returns an empty string.
-  addDefiniteArticle: function (item) {
+  addDefiniteArticle(item) {
     if (item.defArticle) {
-      return item.defArticle + ' ';
+      return `${item.defArticle} `;
     }
     return item.properName ? '' : 'the ';
   },
 
-  //@DOC
+  // @DOC
   // Returns "a " or "an " if appropriate for this item.
   // If the item has 'indefArticle' it returns that; if it has a proper name, returns an empty string.
   // If it starts with a vowel, it returns "an ", otherwise "a ".
-  addIndefiniteArticle: function (item) {
+  addIndefiniteArticle(item) {
     if (item.indefArticle) {
-      return item.indefArticle + ' ';
+      return `${item.indefArticle} `;
     }
     if (item.properName) {
       return '';
@@ -1029,7 +1003,7 @@ QuestJs._lang = {
     if (!options) options = {};
     if (!item.alias) item.alias = item.name;
     let s = '';
-    let count = options[item.name + '_count'] ? options[item.name + '_count'] : false;
+    let count = options[`${item.name}_count`] ? options[`${item.name}_count`] : false;
     if (!count && options.loc && item.countable) count = item.countAtLoc(options.loc);
 
     if (
@@ -1039,7 +1013,7 @@ QuestJs._lang = {
       s = options.possessive ? item.pronouns.poss_adj : item.pronouns.subjective;
     } else {
       if (count && count > 1) {
-        s += QuestJs._lang.toWords(count) + ' ';
+        s += `${QuestJs._lang.toWords(count)} `;
       } else if (options.article === QuestJs._consts.DEFINITE) {
         s += QuestJs._lang.addDefiniteArticle(item);
       } else if (options.article === QuestJs._consts.INDEFINITE) {
@@ -1053,7 +1027,7 @@ QuestJs._lang = {
       } else if (item.pluralAlias) {
         s += item.pluralAlias;
       } else {
-        s += item.alias + 's';
+        s += `${item.alias}s`;
       }
       if (options.possessive) {
         if (s.endsWith('s')) {
@@ -1068,11 +1042,11 @@ QuestJs._lang = {
     return options && options.capital ? QuestJs._tools.sentenceCase(s) : s;
   },
 
-  //@DOC
+  // @DOC
   // Returns the given number in words, so 19 would be returned as 'nineteen'.
   // Numbers uner -2000 and over 2000 are returned as a string of digits,
   // so 2001 is returned as '2001'.
-  toWords: function (number) {
+  toWords(number) {
     if (typeof number !== 'number') {
       errormsg('toWords can only handle numbers');
       return number;
@@ -1084,24 +1058,24 @@ QuestJs._lang = {
       number = -number;
     }
     if (number < 2000) {
-      let hundreds = Math.floor(number / 100);
-      number = number % 100;
+      const hundreds = Math.floor(number / 100);
+      number %= 100;
       if (hundreds > 0) {
-        s = s + QuestJs._lang.numberUnits[hundreds] + ' hundred ';
+        s = `${s + QuestJs._lang.numberUnits[hundreds]} hundred `;
         if (number > 0) {
-          s = s + 'and ';
+          s += 'and ';
         }
       }
       if (number < 20) {
         if (number !== 0 || s === '') {
-          s = s + QuestJs._lang.numberUnits[number];
+          s += QuestJs._lang.numberUnits[number];
         }
       } else {
-        let units = number % 10;
-        let tens = Math.floor(number / 10) % 10;
-        s = s + QuestJs._lang.numberTens[tens - 2];
+        const units = number % 10;
+        const tens = Math.floor(number / 10) % 10;
+        s += QuestJs._lang.numberTens[tens - 2];
         if (units !== 0) {
-          s = s + QuestJs._lang.numberUnits[units];
+          s += QuestJs._lang.numberUnits[units];
         }
       }
     } else {
@@ -1110,39 +1084,39 @@ QuestJs._lang = {
     return s;
   },
 
-  //@DOC
+  // @DOC
   // Returns the given number in words as the ordinal, so 19 would be returned as 'nineteenth'.
   // Numbers uner -2000 and over 2000 are returned as a string of digits with 'th' appended,
   // so 2001 is returned as '2001th'.
-  toOrdinal: function (number) {
+  toOrdinal(number) {
     if (typeof number !== 'number') {
       errormsg('toOrdinal can only handle numbers');
       return number;
     }
 
-    let s = QuestJs._lang.toWords(number);
-    for (let or of QuestJs._lang.ordinalReplacements) {
+    const s = QuestJs._lang.toWords(number);
+    for (const or of QuestJs._lang.ordinalReplacements) {
       if (or.regex.test(s)) {
         return s.replace(or.regex, or.replace);
       }
     }
-    return s + 'th';
+    return `${s}th`;
   },
 
-  convertNumbers: function (s) {
+  convertNumbers(s) {
     for (let i = 0; i < QuestJs._lang.numberUnits.length; i += 1) {
-      let regex = new RegExp('\\b' + QuestJs._lang.numberUnits[i] + '\\b');
-      if (regex.test(s)) s = s.replace(regex, '' + i);
+      const regex = new RegExp(`\\b${QuestJs._lang.numberUnits[i]}\\b`);
+      if (regex.test(s)) s = s.replace(regex, `${i}`);
     }
     return s;
   },
 
   // Conjugating
 
-  //@DOC
+  // @DOC
   // Returns the verb properly conjugated for the item, so "go" with a ball would return
   // "goes", but "go" with the player (if using second person pronouns).
-  conjugate: function (item, verb) {
+  conjugate(item, verb) {
     let gender = item.pronouns.subjective;
     if (gender === 'he' || gender === 'she') {
       gender = 'it';
@@ -1150,78 +1124,77 @@ QuestJs._lang = {
     const arr = QuestJs._lang.conjugations[gender.toLowerCase()];
 
     if (!arr) {
-      QuestJs._io.errormsg('No conjugations found: conjugations_' + gender.toLowerCase());
+      QuestJs._io.errormsg(`No conjugations found: conjugations_${gender.toLowerCase()}`);
       return verb;
     }
-    for (let conj of arr) {
+    for (const conj of arr) {
       if (conj.name === verb) {
         return conj.value;
       }
     }
 
-    for (let conj of arr) {
-      const name = conj.name;
-      const value = conj.value;
+    for (const conj of arr) {
+      const { name } = conj;
+      const { value } = conj;
       if (name.startsWith('@') && verb.endsWith(name.substring(1))) {
         return (
           QuestJs._lang.conjugate(item, verb.substring(0, verb.length - name.length + 1)) + value
         );
-      } else if (name.startsWith('*') && verb.endsWith(name.substring(1))) {
+      }
+      if (name.startsWith('*') && verb.endsWith(name.substring(1))) {
         return item, verb.substring(0, verb.length - name.length + 1) + value;
       }
     }
     return verb;
   },
 
-  //@DOC
+  // @DOC
   // Returns the pronoun for the item, followed by the conjugated verb,
   // so "go" with a ball would return "it goes", but "go" with the player (if using second person pronouns)
   // would return "you go".
   // The first letter is capitalised if 'capitalise' is true.
-  pronounVerb: function (item, verb, capitalise) {
-    let s = item.pronouns.subjective + ' ' + QuestJs._lang.conjugate(item, verb);
+  pronounVerb(item, verb, capitalise) {
+    let s = `${item.pronouns.subjective} ${QuestJs._lang.conjugate(item, verb)}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
-  pronounVerbForGroup: function (item, verb, capitalise) {
-    let s = item.groupPronouns().subjective + ' ' + QuestJs._lang.conjugate(item.group(), verb);
+  pronounVerbForGroup(item, verb, capitalise) {
+    let s = `${item.groupPronouns().subjective} ${QuestJs._lang.conjugate(item.group(), verb)}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
-  verbPronoun: function (item, verb, capitalise) {
-    let s = QuestJs._lang.conjugate(item, verb) + ' ' + item.pronouns.subjective;
+  verbPronoun(item, verb, capitalise) {
+    let s = `${QuestJs._lang.conjugate(item, verb)} ${item.pronouns.subjective}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
-  //@DOC
+  // @DOC
   // Returns the name for the item, followed by the conjugated verb,
   // so "go" with a ball would return "the ball goes", but "go" with
   // a some bees would return "the bees go". For the player, (if using second person pronouns)
   // would return the pronoun "you go".
   // The first letter is capitalised if 'capitalise' is true.
-  nounVerb: function (item, verb, capitalise) {
+  nounVerb(item, verb, capitalise) {
     if (item === QuestJs._game.player && !QuestJs._game.player.useProperName) {
       return QuestJs._lang.pronounVerb(item, verb, capitalise);
     }
-    let s =
-      QuestJs._lang.getName(item, { article: QuestJs._consts.DEFINITE }) +
-      ' ' +
-      QuestJs._lang.conjugate(item, verb);
+    let s = `${QuestJs._lang.getName(item, {
+      article: QuestJs._consts.DEFINITE,
+    })} ${QuestJs._lang.conjugate(item, verb)}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
-  verbNoun: function (item, verb, capitalise) {
+  verbNoun(item, verb, capitalise) {
     if (item === QuestJs._game.player) {
       return QuestJs._lang.pronounVerb(item, verb, capitalise);
     }
-    let s =
-      QuestJs._lang.conjugate(item, verb) +
-      ' ' +
-      QuestJs._lang.getName(item, { article: QuestJs._consts.DEFINITE });
+    let s = `${QuestJs._lang.conjugate(item, verb)} ${QuestJs._lang.getName(item, {
+      article: QuestJs._consts.DEFINITE,
+    })}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },

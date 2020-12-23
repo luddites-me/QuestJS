@@ -6,7 +6,7 @@ plugins:
 rules:
   'prettier/prettier':
     - error
-  quoutes:
+  quotes:
     - warn
     - single
   no-param-reassign:

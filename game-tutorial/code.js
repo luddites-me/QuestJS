@@ -1,5 +1,3 @@
-'use strict';
-
 function tmsg(s, params) {
   QuestJs._io._msg(s, params || {}, { cssClass: 'tutorial', tag: 'p' });
 }
@@ -178,7 +176,7 @@ hint.data = [
   },
   {
     name: 'useLift',
-    hint: function () {
+    hint() {
       if (QuestJs._w.me.loc === 'reactor_room') {
         QuestJs._io.metamsg('Head SOUTH, then WEST, then once in the lift, PRESS 3.');
       } else if (QuestJs._w.me.loc === 'laboratory' || QuestJs._w.me.loc === 'lounge') {
@@ -256,18 +254,18 @@ hint.data = [
 
 hint.now = function (name) {
   const n = hint.data.findIndex((el) => el.name === name);
-  if (n === -1) throw 'No hint found called ' + name;
+  if (n === -1) throw `No hint found called ${name}`;
   if (n > QuestJs._game.player.hintCounter) {
     QuestJs._game.player.hintCounter = n;
     if (hint.data[n].tutorial) {
-      for (let s of hint.data[n].tutorial.split('|')) tmsg(s);
+      for (const s of hint.data[n].tutorial.split('|')) tmsg(s);
     }
   }
 };
 
 hint.before = function (name) {
   const n = hint.data.findIndex((el) => el.name === name);
-  if (n === -1) throw 'No hint found called ' + name;
+  if (n === -1) throw `No hint found called ${name}`;
   return n > QuestJs._game.player.hintCounter;
 };
 
@@ -279,8 +277,9 @@ QuestJs._command.findCmd('MetaHint').script = function () {
   } else {
     QuestJs._log.info(hint.data[QuestJs._game.player.hintCounter].name);
     QuestJs._log.info(
-      'hint.data[QuestJs._game.player.hintCounter].hint is a ' +
-        typeof hint.data[QuestJs._game.player.hintCounter].hint,
+      `hint.data[QuestJs._game.player.hintCounter].hint is a ${typeof hint.data[
+        QuestJs._game.player.hintCounter
+      ].hint}`,
     );
   }
   return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
@@ -316,9 +315,9 @@ const walkthroughs = {
     'hint',
     'get crowbar',
     'hint',
-    //"remove hat", "hint",
-    //"put it in box", "hint",
-    //"close lid", "hint",
+    // "remove hat", "hint",
+    // "put it in box", "hint",
+    // "close lid", "hint",
     'crowbar shed',
     'hint',
     'east',
@@ -335,7 +334,7 @@ const walkthroughs = {
     'hint',
     'turn on light',
     'hint',
-    //"save game",
+    // "save game",
     'turn off torch',
     'hint',
     'get all',
@@ -422,12 +421,13 @@ const walkthroughs = {
   ],
 };
 
-QuestJs._tp.addDirective('rope', function (arr, params) {
-  return '<span style="font-family:Montserrat">' + arr.join(':') + '</span>';
-});
+QuestJs._tp.addDirective(
+  'rope',
+  (arr, params) => `<span style="font-family:Montserrat">${arr.join(':')}</span>`,
+);
 
 QuestJs._command.findCmd('MetaSave').script = function () {
-  script: QuestJs._lang.saveLoadScript();
+  QuestJs._lang.saveLoadScript();
   if (hint.before('saveGame')) {
     tmsg(
       'So in Quest 6 SAVE just tells you how to save your QuestJs._game. You need to add a file name to actually save. Do that now! You can call it whatever you want; how about "tutorial"?',
@@ -441,7 +441,7 @@ QuestJs._commands.push(
   new QuestJs._command.Cmd('Crowbar', {
     regex: /^(crowbar|level) (.+)$/,
     objects: [{ ignore: true }, { scope: QuestJs._parser.isHere }],
-    default: function (item) {
+    default(item) {
       QuestJs._io.msg("That's not something you can crowbar open.");
       return QuestJs._world.FAILED;
     },
@@ -454,11 +454,11 @@ QuestJs._commands.unshift(
     rules: [QuestJs.cmdRules.isHere],
     regex: /^(move) (.+)$/,
     objects: [{ ignore: true }, { scope: QuestJs._parser.isHere }],
-    default: function (item, isMultiple, char) {
+    default(item, isMultiple, char) {
       return QuestJs._io.failedmsg(
-        QuestJs._tools.prefix(item, isMultiple) +
-          QuestJs._lang.pronounVerb(item, "'be", true) +
-          ' not something you can move.',
+        `${
+          QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true)
+        } not something you can move.`,
       );
     },
   }),
@@ -468,7 +468,7 @@ QuestJs._commands.push(
   new QuestJs._command.Cmd('Tutorial', {
     regex: /^tutorial$/,
     objects: [],
-    script: function () {
+    script() {
       $('body').toggleClass('hidden');
       QuestJs._io.msg(QuestJs._lang.done_msg);
       return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
@@ -503,7 +503,7 @@ QuestJs._commands.unshift(
     // wrap fist in newspaper
     regex: /^(?:wrap|cover) (.+) (?:with|in) (.+)$/,
     objects: [{ scope: QuestJs._parser.isHeld }, { scope: QuestJs._parser.isHeld }],
-    script: function (objects) {
+    script(objects) {
       wrapScript(objects[0][0], objects[1][0]);
     },
   }),
@@ -514,7 +514,7 @@ QuestJs._commands.unshift(
     // wrap newspaper round fist
     regex: /^(?:wrap) (.+) (?:round|around) (.+)$/,
     objects: [{ scope: QuestJs._parser.isHeld }, { scope: QuestJs._parser.isHeld }],
-    script: function (objects) {
+    script(objects) {
       wrapScript(objects[1][0], objects[0][0]);
     },
   }),
@@ -525,7 +525,7 @@ QuestJs._commands.unshift(
     // unwrap fist
     regex: /^(?:unwrap|uncover) (.+)$/,
     objects: [{ scope: QuestJs._parser.isHeld }, { scope: QuestJs._parser.isHeld }],
-    script: function (objects) {
+    script(objects) {
       unwrapScript(objects[0][0], QuestJs._w.old_newspaper);
     },
   }),
@@ -536,7 +536,7 @@ QuestJs._commands.unshift(
     // take newspaper off fist
     regex: /^(?:take|remove) (.+) (?:off|from) (.+)$/,
     objects: [{ scope: QuestJs._parser.isHeld }, { scope: QuestJs._parser.isHeld }],
-    script: function (objects) {
+    script(objects) {
       unwrapScript(objects[1][0], objects[0][0]);
     },
   }),
@@ -550,16 +550,16 @@ QuestJs._commands.unshift(
       { scope: QuestJs._parser.isHeld },
       { scope: QuestJs._parser.isHere, attName: 'throwThrough' },
     ],
-    script: function (objects) {
+    script(objects) {
       const item = objects[0][0];
       const dest = objects[1][0];
       if (!dest.isThrowThroughable)
         return QuestJs._io.failedmsg("You can't chuck stuff through {nm:dest:the}.", {
-          dest: dest,
+          dest,
         });
       if (!dest.isThrowThroughable(item)) return QuestJs._world.FAILED;
       if (!item.isAtLoc('me'))
-        return QuestJs._io.failedmsg('You are not holding {nm:item:the}.', { item: item });
+        return QuestJs._io.failedmsg('You are not holding {nm:item:the}.', { item });
       dest.throwThrough(item);
       return QuestJs._world.SUCCESS;
     },
@@ -570,7 +570,7 @@ const smashWithScript = function (item, dest) {
   if (dest !== QuestJs._w.office_window)
     return QuestJs._io.failedmsg("That's not something you can smash.");
   if (!item.isAtLoc('me'))
-    return QuestJs._io.failedmsg('You are not holding {nm:item:the}.', { item: item });
+    return QuestJs._io.failedmsg('You are not holding {nm:item:the}.', { item });
   if (QuestJs._w.office_window.smashed)
     return QuestJs._io.falsemsg('The window is already smashed.');
 
@@ -583,10 +583,9 @@ const smashWithScript = function (item, dest) {
     QuestJs._w.office_window.smashed = true;
     hint.now('out');
     return QuestJs._world.SUCCESS;
-  } else {
-    QuestJs._io.msg("You can't smash the window using {nm:item:the}.", { item: item });
-    return QuestJs._world.FAILED;
   }
+  QuestJs._io.msg("You can't smash the window using {nm:item:the}.", { item });
+  return QuestJs._world.FAILED;
 };
 
 QuestJs._commands.unshift(
@@ -597,7 +596,7 @@ QuestJs._commands.unshift(
       { scope: QuestJs._parser.isHere, attName: 'throwThrough' },
       { scope: QuestJs._parser.isHeld },
     ],
-    script: function (objects) {
+    script(objects) {
       return smashWithScript(objects[1][0], objects[0][0]);
     },
   }),
@@ -611,7 +610,7 @@ QuestJs._commands.unshift(
       { scope: QuestJs._parser.isHeld },
       { scope: QuestJs._parser.isHere, attName: 'throwThrough' },
     ],
-    script: function (objects) {
+    script(objects) {
       return smashWithScript(objects[0][0], objects[1][0]);
     },
   }),
@@ -622,7 +621,7 @@ QuestJs._commands.unshift(
     // throw rope out window
     regex: /^(?:attack|kick|punch|hit|strike|kill) (.+?)$/,
     objects: [{ scope: QuestJs._parser.isHere }],
-    script: function (objects) {
+    script(objects) {
       if (objects[0][0].npc) {
         QuestJs._io.msg('You just need to get the data, not beat anyone up!');
         if (!QuestJs._w.me.killFlag) {
@@ -644,7 +643,7 @@ QuestJs._commands.unshift(
     // throw rope out window
     regex: /^(?:tie up|tie|bind) (.+?)$/,
     objects: [{ scope: QuestJs._parser.isHere }],
-    script: function (objects) {
+    script(objects) {
       const tpParams = { item: objects[0][0] };
       if (!QuestJs._w.rope.isAtLoc(QuestJs._game.player)) {
         return QuestJs._io.failedmsg(
@@ -674,7 +673,7 @@ QuestJs._commands.push(
     // throw rope out window
     regex: /^(?:fuck|facefuck|face-fuck|face fuck|bugger|shag|suck|suck off|assfuck|ass-fuck|ass fuck|rape|ass-rape|ass rape) (.+?)$/,
     objects: [{ scope: QuestJs._parser.isHere }],
-    script: function (objects) {
+    script(objects) {
       QuestJs._io.parsermsg(QuestJs._lang.not_known_msg);
       if (!QuestJs._w.me.rudeCmdFlag) {
         tmsg('You had to go there...');

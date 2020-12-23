@@ -1,5 +1,3 @@
-'use strict';
-
 // This function will be called at the start of the game, so can be used
 // to introduce your QuestJs._game.
 QuestJs._settings.setup = function () {
@@ -11,13 +9,14 @@ QuestJs._settings.setup = function () {
 function firstTimeTesting() {
   firsttime(
     232646,
-    function () {
+    () => {
       QuestJs._io.msg(
-        QuestJs._tools.spaces(5) +
-          '{font:trade winds:Te first time 10{sup:2} CH{sub:4} Er {smallcaps:This is small caps}.}',
+        `${QuestJs._tools.spaces(
+          5,
+        )}{font:trade winds:Te first time 10{sup:2} CH{sub:4} Er {smallcaps:This is small caps}.}`,
       );
     },
-    function () {
+    () => {
       QuestJs._io.msg(
         'Every {huge:other} {big:time} betweeb {small:is} {tiny:very small} notmasl.',
       );
@@ -40,19 +39,17 @@ QuestJs._commands.unshift(
     npcCmd: true,
     rules: [QuestJs.cmdRules.isHere],
     regex: /^inp/,
-    script: function () {
+    script() {
       QuestJs._io.msg('First some preamble...');
       QuestJs._io.showMenu(
         'What colour?',
         [QuestJs._w.book, QuestJs._w.coin, QuestJs._w.Kyle, 'None of them'],
-        function (result) {
+        (result) => {
           if (typeof result === 'string') {
-            QuestJs._io.msg('You picked ' + result + '.');
+            QuestJs._io.msg(`You picked ${result}.`);
           } else {
             QuestJs._io.msg(
-              'You picked ' +
-                QuestJs._lang.getName(result, { article: QuestJs._consts.DEFINITE }) +
-                '.',
+              `You picked ${QuestJs._lang.getName(result, { article: QuestJs._consts.DEFINITE })}.`,
             );
           }
         },
@@ -62,7 +59,7 @@ QuestJs._commands.unshift(
       QuestJs._io.showYesNoMenu("Are you sure?", function(result) {
         QuestJs._io.msg("You said " + result + ".")
       })
-    })*/
+    }) */
     },
   }),
 );
@@ -70,7 +67,7 @@ QuestJs._commands.unshift(
 QuestJs._commands.unshift(
   new QuestJs._command.Cmd('TextReveal', {
     regex: /^reveal$/,
-    script: function () {
+    script() {
       QuestJs._io.msg('Some text');
       QuestJs._io.msg('More');
       QuestJs._io._msg(
@@ -82,7 +79,7 @@ QuestJs._commands.unshift(
           effect: QuestJs._IO.unscrambleEffect,
           randomPlacing: true,
           incSpaces: true,
-          pick: function (i) {
+          pick(i) {
             return 'At first this message is shown'.charAt(i);
           },
         },
@@ -101,7 +98,7 @@ QuestJs._commands.unshift(
           tag: 'p',
           effect: QuestJs._IO.unscrambleEffect,
           randomPlacing: true,
-          pick: function () {
+          pick() {
             return '.';
           },
         },
@@ -118,7 +115,7 @@ QuestJs._commands.unshift(
 QuestJs._commands.unshift(
   new QuestJs._command.Cmd('Image', {
     regex: /^img$/,
-    script: function () {
+    script() {
       QuestJs._io.msg('Some more text.');
       QuestJs._io.picture('favicon.png');
     },
@@ -128,7 +125,7 @@ QuestJs._commands.unshift(
 QuestJs._commands.unshift(
   new QuestJs._command.Cmd('Audio', {
     regex: /^beep$/,
-    script: function () {
+    script() {
       QuestJs._io.msg('Can you hear this?');
       QuestJs._io.sound('hrn06.wav');
     },
@@ -138,7 +135,7 @@ QuestJs._commands.unshift(
 QuestJs._commands.unshift(
   new QuestJs._command.Cmd('Alpha', {
     regex: /^alpha$/,
-    script: function () {
+    script() {
       QuestJs._io.msg(
         'Some text in Greek: {encode:391:3AC:The quick brown fox jumped over the lazy dog}.',
       );
@@ -177,13 +174,11 @@ QuestJs._commands.unshift(
     rules: [QuestJs.cmdRules.isHere],
     regex: /^(kick) (.+)$/,
     objects: [{ ignore: true }, { scope: QuestJs._parser.isPresent }],
-    default: function (item, isMultiple, char) {
+    default(item, isMultiple, char) {
       return QuestJs._io.failedmsg(
-        QuestJs._tools.prefix(this, isMultiple) +
-          QuestJs._lang.pronounVerb(char, 'kick', true) +
-          ' ' +
-          this.pronouns.objective +
-          ', but nothing happens.',
+        `${
+          QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.pronounVerb(char, 'kick', true)
+        } ${this.pronouns.objective}, but nothing happens.`,
       );
     },
   }),
@@ -195,11 +190,11 @@ QuestJs._commands.unshift(
     rules: [QuestJs.cmdRules.isHeld],
     regex: /^(charge) (.+)$/,
     objects: [{ ignore: true }, { scope: QuestJs._parser.isHeld }],
-    default: function (item, isMultiple, char) {
+    default(item, isMultiple, char) {
       return QuestJs._io.failedmsg(
-        QuestJs._tools.prefix(item, isMultiple) +
-          QuestJs._lang.pronounVerb(item, "'be", true) +
-          ' not something you can charge.',
+        `${
+          QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true)
+        } not something you can charge.`,
       );
     },
   }),
@@ -211,11 +206,11 @@ QuestJs._commands.unshift(
     rules: [QuestJs.cmdRules.isHere],
     regex: /^(move) (.+)$/,
     objects: [{ ignore: true }, { scope: QuestJs._parser.isHere }],
-    default: function (item, isMultiple, char) {
+    default(item, isMultiple, char) {
       return QuestJs._io.failedmsg(
-        QuestJs._tools.prefix(item, isMultiple) +
-          QuestJs._lang.pronounVerb(item, "'be", true) +
-          ' not something you can move.',
+        `${
+          QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true)
+        } not something you can move.`,
       );
     },
   }),
@@ -224,7 +219,7 @@ QuestJs._commands.unshift(
 QuestJs._commands.unshift(
   new QuestJs._command.Cmd('EgHint', {
     regex: /^hint$|^hints$/,
-    script: function () {
+    script() {
       if (QuestJs._w[QuestJs._game.player.loc].hint) {
         QuestJs._io.metamsg(QuestJs._w[QuestJs._game.player.loc].hint);
       } else {
@@ -237,7 +232,7 @@ QuestJs._commands.unshift(
 QuestJs._commands.unshift(
   new QuestJs._command.Cmd('Test', {
     regex: /^t$/,
-    script: function () {
+    script() {
       QuestJs._log.info(QuestJs._w.Emily);
     },
   }),

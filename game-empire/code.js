@@ -1,5 +1,3 @@
-'use strict';
-
 const takeATurn = function () {
   QuestJs._io.msg('Time passes...');
 };
@@ -30,7 +28,7 @@ QuestJs._settings.professions = [
   'Prostitute',
 ];
 
-$(function () {
+$(() => {
   if (QuestJs._settings.startingDialogDisabled) {
     const p = QuestJs._game.player;
     p.job = 'Merchant';
@@ -45,8 +43,8 @@ $(function () {
   s += '<p>King: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
   s += 'Queen<input type="radio" id="female" name="sex" value="female" checked></p>';
   s += '<p>Background:<select id="job">';
-  for (let profession of QuestJs._settings.professions) {
-    s += '<option value="' + profession + '">' + profession + '</option>';
+  for (const profession of QuestJs._settings.professions) {
+    s += `<option value="${profession}">${profession}</option>`;
   }
   s += '</select></p>';
 
@@ -59,7 +57,7 @@ $(function () {
     buttons: [
       {
         text: 'OK',
-        click: function () {
+        click() {
           $(this).dialog('close');
           const p = QuestJs._game.player;
           p.job = $('#job').val();
@@ -78,14 +76,13 @@ $(function () {
 QuestJs._commands.push(
   new QuestJs._command.Cmd('Sleep', {
     regex: /^sleep$/,
-    script: function () {
+    script() {
       if (QuestJs._game.player.loc === 'royal_bedroom') {
         takeATurn();
         return QuestJs._world.SUCCESS;
-      } else {
-        QuestJs._io.metamsg('You can only sleep in the bedroom');
-        return QuestJs._world.FAILED;
       }
+      QuestJs._io.metamsg('You can only sleep in the bedroom');
+      return QuestJs._world.FAILED;
     },
   }),
 );

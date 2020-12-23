@@ -1,7 +1,5 @@
-'use strict';
-
-//quest.next(char, questname)
-//quest.set(char, questname, const or stepname)
+// quest.next(char, questname)
+// quest.set(char, questname, const or stepname)
 
 quest.create('Charm for Tary', [
   {
@@ -21,11 +19,11 @@ QuestJs._util.openingTimes = function () {
   return true;
 };
 
-QuestJs._tp.addDirective('timeOfDayComment', function (arr, params) {
+QuestJs._tp.addDirective('timeOfDayComment', (arr, params) => {
   const time = QuestJs._util.getCustomDateTimeDict({});
   const location = QuestJs._w[QuestJs._game.player.loc];
   if (!location.timeStatus) return '';
-  let hour = time.hour;
+  let { hour } = time;
   for (let i = 0; i < location.timeStatus.length; i += 1) {
     if (hour < location.timeStatus[i].to) return location.timeStatus[i].t;
     hour -= location.timeStatus[i].to;
@@ -33,9 +31,9 @@ QuestJs._tp.addDirective('timeOfDayComment', function (arr, params) {
   return 'NONE';
 });
 
-QuestJs._tp.addDirective('npcStatus', function (arr, params) {
+QuestJs._tp.addDirective('npcStatus', (arr, params) => {
   const result = [];
-  for (let el of QuestJs._scope.scopeAllNpcHere()) {
+  for (const el of QuestJs._scope.scopeAllNpcHere()) {
     QuestJs._log.info(el.name);
     if (el.locationStatus) {
       const s = el.locationStatus();

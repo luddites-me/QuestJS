@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._test.tests = function () {
   QuestJs._test.title('custom date time');
   QuestJs._test.assertEqual('11 Marisi, 1374, 1:46 am', QuestJs._util.getDateTime());

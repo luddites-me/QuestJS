@@ -1,15 +1,11 @@
-'use strict';
-
 QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
   loc: 'lounge',
   regex: /^(me|myself|player)$/,
-  examine: function (isMultiple) {
+  examine(isMultiple) {
     QuestJs._io.msg(
-      QuestJs._tools.prefix(this, isMultiple) +
-        'A ' +
-        (this.isFemale ? 'chick' : 'guy') +
-        ' called ' +
-        this.alias,
+      `${QuestJs._tools.prefix(this, isMultiple)}A ${this.isFemale ? 'chick' : 'guy'} called ${
+        this.alias
+      }`,
     );
   },
 });
@@ -17,14 +13,14 @@ QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
 QuestJs._create.createItem('knife', QuestJs._templates.TAKEABLE(), {
   loc: 'me',
   sharp: false,
-  examine: function (isMultiple) {
+  examine(isMultiple) {
     if (this.sharp) {
-      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + 'A really sharp knife.');
+      QuestJs._io.msg(`${QuestJs._tools.prefix(this, isMultiple)}A really sharp knife.`);
     } else {
-      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + 'A blunt knife.');
+      QuestJs._io.msg(`${QuestJs._tools.prefix(this, isMultiple)}A blunt knife.`);
     }
   },
-  chargeResponse: function (participant) {
+  chargeResponse(participant) {
     QuestJs._io.msg('There is a loud bang, and the knife is destroyed.');
     delete this.loc;
     return false;

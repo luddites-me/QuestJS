@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
   loc: 'lounge',
   regex: /^(me|myself|player)$/,
@@ -19,10 +17,10 @@ QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(), {
 QuestJs._create.createItem('soup_can', QuestJs._templates.TAKEABLE(), {
   loc: 'lounge',
   examine: 'A large can of tomato soup.{if:soup_can:opened: It has been opened.}',
-  verbFunction: function (l) {
+  verbFunction(l) {
     if (!this.opened) l.push('Open');
   },
-  open: function () {
+  open() {
     if (this.state) return QuestJs._io.falsemsg('It has already been opened.');
     QuestJs._io.msg('You grab the tin opener, and use it to open the can of soup.');
     this.opened = true;
@@ -38,18 +36,18 @@ QuestJs._create.createItem('bowls', QuestJs._templates.TAKEABLE(), {
   loc: 'lounge',
   state: 0,
   examine: 'A set of matching bowls.',
-  verbFunction: function (l) {
+  verbFunction(l) {
     if (this.state) l.push('Empty');
     if (!this.state) l.push('Fill');
   },
-  fill: function () {
+  fill() {
     if (this.state === 10)
       return QuestJs._io.falsemsg('The bowls really need a wash before using them again.');
     if (this.state) return QuestJs._io.falsemsg('The bowls already have soup in them.');
     QuestJs._io.msg('You pour soup into the bowls.');
     this.state = 1;
   },
-  empty: function () {
+  empty() {
     if (this.state === 0 || this.state === 10)
       return QuestJs._io.falsemsg('The bowls are already empty.');
     QuestJs._io.msg('You empty the bowls into the sink.');

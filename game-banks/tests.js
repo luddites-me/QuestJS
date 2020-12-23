@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._test.tests = function () {
   QuestJs._test.title('Planet Analysis');
   QuestJs._w.Xsansi.currentPlanet = 2;

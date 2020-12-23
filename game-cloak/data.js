@@ -9,9 +9,7 @@ QuestJs._lang.no_smell = 'It smells slightly musty.';
 
 QuestJs._lang.no_listen = 'It is quiet as the grave...';
 
-QuestJs._tp.addDirective('cloakHere', function (arr, params) {
-  return cloakHere() ? arr[0] : arr[1];
-});
+QuestJs._tp.addDirective('cloakHere', (arr, params) => (cloakHere() ? arr[0] : arr[1]));
 
 QuestJs._command.findCmd('MetaCredits').script = function () {
   QuestJs._io.metamsg(
@@ -38,7 +36,7 @@ QuestJs._create.createItem('cloak', QuestJs._templates.WEARABLE(), {
 QuestJs._create.createRoom('lobby', {
   desc:
     "There is something oppressive about the {cloakHere:dark:dingy} {once:room}{notOnce:foyer}; a presence in the air that almost suffocates you. It's former glory has all but faded; the walls still sport old posters from productions that ended over twenty years ago. Paint is peeling, dust is everywhere and it smells decidedly musty. You can see doors to the north, west and south.",
-  beforeFirstEnter: function () {
+  beforeFirstEnter() {
     QuestJs._io.msg(
       'You hurry through the night, keen to get out of the rain. Ahead, you can see the old opera house, a brightly-lit beacon of safety.',
     );
@@ -48,7 +46,7 @@ QuestJs._create.createRoom('lobby', {
     QuestJs._io.msg('');
   },
   north: new QuestJs._create.Exit('lobby', {
-    use: function () {
+    use() {
       QuestJs._io.msg(
         'You try the doors out of the opera house, but they are locked. {once:{i:How did that happen?} you wonder.}',
       );
@@ -70,18 +68,17 @@ QuestJs._create.createItem('posters', {
 });
 
 QuestJs._create.createRoom('cloakroom', {
-  desc: function () {
+  desc() {
     let s = 'The cloakroom is {cloakHere:dimly:brightly} lit, and is little more than a cupboard. ';
     if (QuestJs._w.cloak.isAtLoc('hook')) {
-      s = s + 'Your cloak is hung from the only hook.';
+      s += 'Your cloak is hung from the only hook.';
     } else if (QuestJs._w.cloak.isAtLoc(this)) {
-      s =
-        s +
+      s +=
         'There is a single hook, which apparently was not good enough for you, to judge from the cloak on the floor.';
     } else {
-      s = s + 'There is a single hook, which strikes you as strange for a cloakroom.';
+      s += 'There is a single hook, which strikes you as strange for a cloakroom.';
     }
-    return s + ' The only way out is back to the east. ';
+    return `${s} The only way out is back to the east. `;
   },
   east: new QuestJs._create.Exit('lobby'),
 });
@@ -90,7 +87,7 @@ QuestJs._create.createItem('hook', QuestJs._templates.SURFACE(), {
   regex: /^peg$/,
   hookable: true,
   scenery: true,
-  examine: function () {
+  examine() {
     if (QuestJs._w.cloak.isAtLoc('hook')) {
       QuestJs._io.msg('An ornate brass hook, with a cloak hanging from it.');
     } else {
@@ -101,17 +98,16 @@ QuestJs._create.createItem('hook', QuestJs._templates.SURFACE(), {
 });
 
 QuestJs._create.createRoom('bar', {
-  desc: function () {
+  desc() {
     if (cloakHere()) {
       return 'It is too dark to see anything except the door to the north.';
-    } else {
-      return 'The bar is dark, and somehow brooding. It is also thick with dust. So much so that someone has scrawled a message in the dust on the floor. The only exit is north.';
     }
+    return 'The bar is dark, and somehow brooding. It is also thick with dust. So much so that someone has scrawled a message in the dust on the floor. The only exit is north.';
   },
-  beforeEnter: function () {
+  beforeEnter() {
     QuestJs._w.message.visible = !cloakHere();
   },
-  onExit: function () {
+  onExit() {
     QuestJs._w.message.count = 0;
   },
   north: new QuestJs._create.Exit('lobby'),
@@ -126,7 +122,7 @@ QuestJs._create.createItem('message', {
   disturbed: 0,
   scenery: true,
   loc: 'bar',
-  examine: function () {
+  examine() {
     if (cloakHere()) {
       QuestJs._io.msg('You cannot see any message, it is too dark.');
     }
@@ -137,24 +133,22 @@ QuestJs._create.createItem('message', {
     }
     QuestJs._IO.finish();
   },
-  read: function () {
+  read() {
     this.examine();
   },
   eventPeriod: 1,
-  eventIsActive: function () {
+  eventIsActive() {
     return QuestJs._game.player.isAtLoc('bar') && !this.finished;
   },
-  eventScript: function () {
+  eventScript() {
     this.count += 1;
     if (this.count > 1) {
       if (this.disturbed === 0) {
         QuestJs._io.msg('You think it might be a bad idea to disturb things in the dark.');
-      } else {
-        if (!QuestJs._game.player.suppress_background_sounds) {
-          QuestJs._io.msg(
-            'You can hear {random:scratching:something moving in the dark:rasping breathing}.',
-          );
-        }
+      } else if (!QuestJs._game.player.suppress_background_sounds) {
+        QuestJs._io.msg(
+          'You can hear {random:scratching:something moving in the dark:rasping breathing}.',
+        );
       }
       this.disturbed += 1;
     }
@@ -162,7 +156,7 @@ QuestJs._create.createItem('message', {
 });
 
 QuestJs._create.createItem('walls', {
-  examine: function () {
+  examine() {
     if (cloakHere() && QuestJs._game.player.isAtLoc('bar')) {
       QuestJs._io.msg('It is too dark to see the walls.');
     } else {
@@ -171,21 +165,21 @@ QuestJs._create.createItem('walls', {
       );
     }
   },
-  isAtLoc: function (loc, situation) {
+  isAtLoc(loc, situation) {
     if (typeof loc !== 'string') loc = loc.name;
     return QuestJs._w[loc].room && situation === QuestJs._w.PARSER;
   },
 });
 
 QuestJs._create.createItem('ceiling', {
-  examine: function () {
+  examine() {
     if (cloakHere() && QuestJs._game.player.isAtLoc('bar')) {
       QuestJs._io.msg('It is too dark to see the ceiling.');
     } else {
       QuestJs._io.msg('The ceiling is - or was - white. Now it is a dirty grey.');
     }
   },
-  isAtLoc: function (loc, situation) {
+  isAtLoc(loc, situation) {
     if (typeof loc !== 'string') loc = loc.name;
     return QuestJs._w[loc].room && situation === QuestJs._w.PARSER;
   },
@@ -193,14 +187,14 @@ QuestJs._create.createItem('ceiling', {
 
 QuestJs._create.createItem('floor', {
   regex: /^carpet$/,
-  examine: function () {
+  examine() {
     if (cloakHere() && QuestJs._game.player.isAtLoc('bar')) {
       QuestJs._io.msg('It is too dark to see the floor.');
     } else {
       QuestJs._io.msg('A red carpet covers the floor, worn almost though in places.');
     }
   },
-  isAtLoc: function (loc, situation) {
+  isAtLoc(loc, situation) {
     if (typeof loc !== 'string') loc = loc.name;
     return QuestJs._w[loc].room && situation === QuestJs._w.PARSER;
   },
@@ -208,14 +202,14 @@ QuestJs._create.createItem('floor', {
 
 QuestJs._create.createItem('doors', {
   regex: /^carpet$/,
-  examine: function () {
+  examine() {
     if (cloakHere() && QuestJs._game.player.isAtLoc('bar')) {
       QuestJs._io.msg('It is too dark to see the door properly.');
     } else {
       QuestJs._io.msg('All the doors are wooden, and painted white.');
     }
   },
-  isAtLoc: function (loc, situation) {
+  isAtLoc(loc, situation) {
     if (typeof loc !== 'string') loc = loc.name;
     return QuestJs._w[loc].room && situation === QuestJs._w.PARSER;
   },
@@ -225,18 +219,19 @@ QuestJs._commands.push(
   new QuestJs._command.Cmd('HangUp', {
     regex: /^(hang up|hang) (.+)$/,
     objects: [{ ignore: true }, { scope: QuestJs._parser.isHeld }],
-    script: function (objects) {
+    script(objects) {
       if (!objects[0][0].isAtLoc(QuestJs._game.player)) {
         return failedmsg("You're not carrying {sb:obj}.", { obj: objects[0][0] });
-      } else if (objects[0][0].worn) {
-        return failedmsg("Not while you're wearing {sb:obj}!", { obj: objects[0][0] });
-      } else if (!QuestJs._game.player.isAtLoc('cloakroom')) {
-        return failedmsg('Hang {sb:obj} where, exactly?', { obj: objects[0][0] });
-      } else {
-        objects[0][0].moveToFrom('hook');
-        QuestJs._io.msg('You hang {nm:obj:the} on the hook.', { obj: objects[0][0] });
-        return QuestJs._w.SUCCESS;
       }
+      if (objects[0][0].worn) {
+        return failedmsg("Not while you're wearing {sb:obj}!", { obj: objects[0][0] });
+      }
+      if (!QuestJs._game.player.isAtLoc('cloakroom')) {
+        return failedmsg('Hang {sb:obj} where, exactly?', { obj: objects[0][0] });
+      }
+      objects[0][0].moveToFrom('hook');
+      QuestJs._io.msg('You hang {nm:obj:the} on the hook.', { obj: objects[0][0] });
+      return QuestJs._w.SUCCESS;
     },
   }),
 );
@@ -245,18 +240,19 @@ QuestJs._commands.push(
   new QuestJs._command.Cmd('HangUp', {
     regex: /^(hang up|hang) (.+) on (|the )hook$/,
     objects: [{ ignore: true }, { scope: QuestJs._parser.isHeld }, { ignore: true }],
-    script: function (objects) {
+    script(objects) {
       if (!objects[0][0].isAtLoc(QuestJs._game.player)) {
         return failedmsg("You're not carrying {sb:obj}.", { obj: objects[0][0] });
-      } else if (objects[0][0].worn) {
-        return failedmsg("Not while you're wearing {sb:obj}!", { obj: objects[0][0] });
-      } else if (!QuestJs._game.player.isAtLoc('cloakroom')) {
-        return failedmsg('Hang {sb:obj} where, exactly?', { obj: objects[0][0] });
-      } else {
-        objects[0][0].moveToFrom('hook');
-        QuestJs._io.msg('You hang {nm:obj:the} on the hook.', { obj: objects[0][0] });
-        return QuestJs._w.SUCCESS;
       }
+      if (objects[0][0].worn) {
+        return failedmsg("Not while you're wearing {sb:obj}!", { obj: objects[0][0] });
+      }
+      if (!QuestJs._game.player.isAtLoc('cloakroom')) {
+        return failedmsg('Hang {sb:obj} where, exactly?', { obj: objects[0][0] });
+      }
+      objects[0][0].moveToFrom('hook');
+      QuestJs._io.msg('You hang {nm:obj:the} on the hook.', { obj: objects[0][0] });
+      return QuestJs._w.SUCCESS;
     },
   }),
 );

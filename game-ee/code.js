@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._settings.setup = function () {
   QuestJs._io.msg(
     'You open your eyes, and wonder where you are. Some sort of medical facility? You think.',

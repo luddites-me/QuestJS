@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
   loc: 'street_of_the_gods',
   regex: /^(me|myself|player)$/,
@@ -15,7 +13,7 @@ QuestJs._create.createRoom('street_of_the_gods', {
   north: new QuestJs._create.Exit('high_temple'),
   mapX: 400,
   mapY: 450,
-  //mapRegion:'Halmuth',
+  // mapRegion:'Halmuth',
 });
 
 QuestJs._create.createRoom('market_square', {
@@ -48,7 +46,7 @@ QuestJs._create.createRoom('market_square', {
 QuestJs._create.createItem('street_preacher', QuestJs._npc.NPC(false), {
   loc: 'market_square',
   scenery: true,
-  locationStatus: function () {
+  locationStatus() {
     return 'A preacher is stood on an old crate, telling people about woe and doom that will befall them soon; most of the crowd are happy to ignore him.';
   },
 });
@@ -184,7 +182,7 @@ QuestJs._create.createRoom('western_way_3', {
   desc:
     'The Western Way is boring, the author really needs to put stuff in it. To the east is the city of Halbuth',
   east: new QuestJs._create.Exit('western_way_2'),
-  //west:new QuestJs._create.Exit('western_way_1'),
+  // west:new QuestJs._create.Exit('western_way_1'),
   mapX: 461,
   mapY: 646,
   mapRegion: 'Small scale',
@@ -193,7 +191,7 @@ QuestJs._create.createRoom('western_way_3', {
 QuestJs._create.createRoom('granite_bridge', {
   desc:
     'The Granite Bridge is boring, the author really needs to put stuff in it. To the east is the city of Halbuth',
-  //east:new QuestJs._create.Exit('western_way_2'),
+  // east:new QuestJs._create.Exit('western_way_2'),
   west: new QuestJs._create.Exit('wheat_road'),
   mapX: 774,
   mapY: 617,

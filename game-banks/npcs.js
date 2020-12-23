@@ -1,11 +1,9 @@
-'use strict';
-
 // When she goes nuts, sjhe get a crush on Kyle, and gets jealous of Aada
 // If they can die, may need to reflect that in Xsansi's responses.
 // though perjaps it is mourning Kyle that does it for her
 
 QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
-  isAtLoc: function (loc, situation) {
+  isAtLoc(loc, situation) {
     if (typeof loc !== 'string') loc = loc.name;
     return (
       isOnShip() && (situation === QuestJs._world.PARSER || situation === QuestJs._world.SIDE_PANE)
@@ -30,10 +28,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
   askOptions: [
     {
       name: 'mission',
-      test: function (p) {
+      test(p) {
         return p.text.match(/mission/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Remind me of the mission, Xsansi,' you say.");
         QuestJs._io.msg(
           "'The ship's mission is to survey five planets orbiting stars in the Ophiuchus and Serpens constellations. At each planet, a satellite is to be launched to collect data from the surface. At your discretion, bio-probes and geo-probes can be dropped to the surface to collect data. Note that there is no capability for probes to return to the ship or for the ship to land on a planet.'",
@@ -49,12 +47,12 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'crew',
-      test: function (p) {
+      test(p) {
         return p.text.match(/crew|team/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about the crew, Xsansi,' you say.");
-        for (let npc of NPCS)
+        for (const npc of NPCS)
           QuestJs._io.msg(
             QuestJs._text.processText(QuestJs._w.Xsansi.crewStatusTemplate, {
               actor: npc,
@@ -66,10 +64,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'kyle',
-      test: function (p) {
+      test(p) {
         return p.text.match(/kyle/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about Kyle, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           QuestJs._io.msg(
@@ -89,10 +87,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'aada',
-      test: function (p) {
+      test(p) {
         return p.text.match(/house/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about Aada, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           QuestJs._io.msg(
@@ -112,10 +110,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'ha_yoon',
-      test: function (p) {
+      test(p) {
         return p.text.match(/ha-yoon|ha yoon|ha|yoon/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about Ha-yoon, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           QuestJs._io.msg(
@@ -135,10 +133,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'ostap',
-      test: function (p) {
+      test(p) {
         return p.text.match(/ostap/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about Ostap, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           QuestJs._io.msg(
@@ -156,10 +154,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'xsansi',
-      test: function (p) {
+      test(p) {
         return p.text.match(/^(ai|xsan|computer)$/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about yourself, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           QuestJs._io.msg("'The ship's AI is operating within normal tolerances.'");
@@ -173,31 +171,23 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'ship',
-      test: function (p) {
+      test(p) {
         return p.text.match(/status|ship/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'What is the ship's status, Xsansi?' you ask.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
-          let s =
-            "'The ship's current status is: " +
-            QuestJs._w.Xsansi.shipStatus +
-            ' We currently have: ';
-          for (let npc of NPCS) {
+          let s = `'The ship's current status is: ${QuestJs._w.Xsansi.shipStatus} We currently have: `;
+          for (const npc of NPCS) {
             if (npc.probeType) {
-              s +=
-                npc.probesRemaining +
-                ' ' +
-                npc.probeType +
-                (npc.probesRemaining === 1 ? '' : 's') +
-                '; ';
+              s += `${npc.probesRemaining} ${npc.probeType}${
+                npc.probesRemaining === 1 ? '' : 's'
+              }; `;
             }
           }
-          s +=
-            QuestJs._w.Xsansi.seederPods +
-            ' seeder pod' +
-            (QuestJs._w.Xsansi.seederPods === 1 ? '' : 's') +
-            ' ready to be deployed.';
+          s += `${QuestJs._w.Xsansi.seederPods} seeder pod${
+            QuestJs._w.Xsansi.seederPods === 1 ? '' : 's'
+          } ready to be deployed.`;
           QuestJs._io.msg(s);
         } else {
           QuestJs._io.msg(
@@ -209,14 +199,14 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'vacuum',
-      test: function (p) {
+      test(p) {
         return p.text.match(/vacuum|pressur/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'What areas of the ship are not pressurised, Xsansi?' you ask.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           const list = [];
-          for (let key in QuestJs._w) {
+          for (const key in QuestJs._w) {
             if (QuestJs._w[key].vacuum === true && !QuestJs._w[key].isSpace) {
               list.push(QuestJs._w[key].alias);
             }
@@ -225,9 +215,9 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
             QuestJs._io.msg("'All the ship is currently pressurised.'");
           } else {
             QuestJs._io.msg(
-              "'The following areas of the ship are not currently pressurised: " +
-                list.join(', ') +
-                ".'",
+              `'The following areas of the ship are not currently pressurised: ${list.join(
+                ', ',
+              )}.'`,
             );
           }
         } else {
@@ -241,10 +231,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'satellite',
-      test: function (p) {
+      test(p) {
         return p.text.match(/satellite/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about the satellite, Xsansi.'");
         if (QuestJs._w.Xsansi.currentPlanet > 2) {
           QuestJs._w.Xsansi.multiMsg([
@@ -271,10 +261,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'bio-probe',
-      test: function (p) {
+      test(p) {
         return p.text.match(/bioprobe|bio-probe/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about the bio-probes, Xsansi.'");
         if (QuestJs._w.Xsansi.currentPlanet > 2) {
           QuestJs._w.Xsansi.multiMsg(["'They're probes. What else is there to know?'"]);
@@ -288,10 +278,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'geo-probe',
-      test: function (p) {
+      test(p) {
         return p.text.match(/geoprobe|geo-probe/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about the bio-probes, Xsansi.'");
         if (QuestJs._w.Xsansi.currentPlanet > 2) {
           QuestJs._w.Xsansi.multiMsg(["'They're probes. What else is there to know?'"]);
@@ -305,10 +295,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'probe',
-      test: function (p) {
+      test(p) {
         return p.text.match(/probe/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about the probes, Xsansi.'");
         if (QuestJs._w.Xsansi.currentPlanet > 2) {
           QuestJs._w.Xsansi.multiMsg(["'They're probes. What else is there to know?'"]);
@@ -322,10 +312,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'stasis',
-      test: function (p) {
+      test(p) {
         return p.text.match(/stasis/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about the stasis system, Xsansi.'");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           QuestJs._io.msg(
@@ -341,10 +331,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'Joseph Banks',
-      test: function (p) {
+      test(p) {
         return p.text.match(/joseph|banks/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Who was this Joseph Banks guy the ship is named after, Xsansi?'");
         QuestJs._io.msg(
           "'Sir Joseph Banks, 1st Baronet, GCB, PRS was born on 24 February 1743 in London, UK, and died 19 June 1820 in London, UK. He was a naturalist, botanist, and patron of the natural sciences, who played a major role in the colonisation of Australia by Europeans, and is credited with discovering approximately 1,400 species of plants, some 80 of which bear his name.'",
@@ -355,14 +345,14 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'itinerary',
-      test: function (p) {
+      test(p) {
         return p.text.match(/itinerary|stars|planets|route|destinations/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Remind me of the itinerary, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           for (let i = QuestJs._w.Xsansi.currentPlanet; i < PLANETS.length; i += 1) {
-            let s = "'Item " + (i + 1) + ': ' + PLANETS[i].starDesc;
+            let s = `'Item ${i + 1}: ${PLANETS[i].starDesc}`;
             if (i + 2 === PLANETS.length) s += "'";
             QuestJs._io.msg(s);
           }
@@ -376,10 +366,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'radioSignals',
-      test: function (p) {
+      test(p) {
         return p.text.match(/radio|signal/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me of the radio signals, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 2) {
           QuestJs._io.msg("'No radio signals have been detected.'");
@@ -399,20 +389,16 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'planet',
-      test: function (p) {
+      test(p) {
         return p.text.match(/this planet|this star|planet|star|the planet|the star/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Tell me about this planet, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           const planet = PLANETS[QuestJs._w.Xsansi.currentPlanet];
-          let s =
-            "'We are currently in orbit around the planet " +
-            planet.starName +
-            planet.planet +
-            "' she says. '";
-          s += planet.planetDesc + ' ' + planet.atmosphere + ' ';
-          s += planet.lights + ' ' + planet.radio + "'";
+          let s = `'We are currently in orbit around the planet ${planet.starName}${planet.planet}' she says. '`;
+          s += `${planet.planetDesc} ${planet.atmosphere} `;
+          s += `${planet.lights} ${planet.radio}'`;
           QuestJs._io.msg(s);
         } else {
           QuestJs._io.msg("'Go fuck yourself.'");
@@ -422,10 +408,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
     {
       name: 'meteors',
-      test: function (p) {
+      test(p) {
         return p.text.match(/meteor|incident/);
       },
-      script: function () {
+      script() {
         if (QuestJs._w.Xsansi.currentPlanet === 0) {
           QuestJs._io.msg(
             "'Is there any risk of being hit by something, like a meteor shower, Xsansi?' you ask.",
@@ -440,10 +426,7 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
 
           if (QuestJs._w.Xsansi.currentPlanet < 3) {
             QuestJs._io.msg(
-              "'We passed through the periphery of a class D meteor shower on the approach to " +
-                PLANETS[1].starName +
-                PLANETS[1].planet +
-                ". I was able to modify the course of the ship to avoid the worst of the damage, but was constrained by the amount of fuel needed to complete the mission. The ship experienced damage to the upper forward and port areas.'",
+              `'We passed through the periphery of a class D meteor shower on the approach to ${PLANETS[1].starName}${PLANETS[1].planet}. I was able to modify the course of the ship to avoid the worst of the damage, but was constrained by the amount of fuel needed to complete the mission. The ship experienced damage to the upper forward and port areas.'`,
             );
           } else {
             QuestJs._io.msg("'It was a shower of meteors. The clue is in the question.'");
@@ -455,10 +438,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
     {
       name: 'damage',
       regex: /damage/,
-      test: function (p) {
+      test(p) {
         return p.text.match(/damage/);
       },
-      script: function () {
+      script() {
         if (QuestJs._w.Xsansi.currentPlanet === 0) {
           QuestJs._io.msg("'Is the ship damaged at all, Xsansi?' you ask.");
           QuestJs._io.msg("'There is currently no damage to the ship.'");
@@ -475,10 +458,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
     {
       name: 'repairs',
       regex: /repairs/,
-      test: function (p) {
+      test(p) {
         return p.text.match(/repairs/);
       },
-      script: function () {
+      script() {
         if (QuestJs._w.Xsansi.currentPlanet === 0) {
           QuestJs._io.msg("'How do we do repairs, Xsansi?' you ask.");
           QuestJs._io.msg(
@@ -501,10 +484,10 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
     {
       name: 'escape pods',
       regex: /repairs/,
-      test: function (p) {
+      test(p) {
         return p.text.match(/escape pod/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'Where are the escape pods, Xsansi?' you ask.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
           QuestJs._io.msg(
@@ -525,7 +508,7 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
     },
 
     {
-      script: function (p) {
+      script(p) {
         QuestJs._log.info(p);
         QuestJs._io.msg("'Tell me about {text},' you say to Xsansi.", p);
         QuestJs._io.msg("'That is not a area I am knowledgeable in.'");
@@ -547,7 +530,7 @@ QuestJs._create.createItem('Kyle', CREW(false), {
     'Kyle is the computer expert, but also a good cook, and has volunteered for the role of chef. An Australian, he is slim, and below average height, with very short blonde hair, and green eyes.',
 
   // Reactions
-  reactions: function () {
+  reactions() {
     const g = QuestJs._game.player.getOuterWearable('body');
     if (g === false && this.reactionToUndress < 2) {
       if (QuestJs._game.player.isFemale) {
@@ -565,13 +548,13 @@ QuestJs._create.createItem('Kyle', CREW(false), {
   },
 
   // Conversations
-  probesAskResponse: function () {
+  probesAskResponse() {
     QuestJs._io.msg("'What probes do you handle?' you ask Kyle.");
     QuestJs._io.msg(
       "'I launch the satellites, one per planet. No need to tell me, I know the routine. Once in orbit they photograph the planet surface, elay signals from the other probes and listen for radio emissions.",
     );
   },
-  areaAskResponse: function () {
+  areaAskResponse() {
     QuestJs._io.msg(
       "'Communication systems. So I launch the satellite, but unless we find intelligent life, there's not a lot for me to do.' He thinks for a moment. 'Actually my background is computing, so if Xsansi is playing up, I'll have a tinker.'",
     );
@@ -579,7 +562,7 @@ QuestJs._create.createItem('Kyle', CREW(false), {
       "'You will not,' says Xsansi, indignantly. 'I can assure you that I am self-maintaining, and designed to last for centuries.'",
     );
   },
-  backgroundAskResponse: function () {
+  backgroundAskResponse() {
     QuestJs._io.msg("'Er, there' not much to tell really... Just a regular guy.'");
     QuestJs._io.msg("'You're from Australia, right?'");
     QuestJs._io.msg(
@@ -588,10 +571,10 @@ QuestJs._create.createItem('Kyle', CREW(false), {
   },
   askOptions: [
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/newcastle/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
         QuestJs._io.msg(
           "'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'",
@@ -601,10 +584,10 @@ QuestJs._create.createItem('Kyle', CREW(false), {
     },
 
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/sydney/);
       },
-      esponse: function () {
+      esponse() {
         QuestJs._io.msg("'What's Sydney like?' you ask Kyle.");
         QuestJs._io.msg(
           "'It's great! Really great nightlife, just so lively. Everyone said when they banned vehicles from the CBD, back in '68, it would die a death, but I think it made it even better.'",
@@ -615,11 +598,11 @@ QuestJs._create.createItem('Kyle', CREW(false), {
 
     {
       name: 'radioSignals',
-      test: function (p) {
+      test(p) {
         return p.text.match(this.regex);
       },
       regex: /radio|signal/,
-      script: function () {
+      script() {
         QuestJs._io.msg("'Talk to me about the radio signal,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet === 2) {
           if (QuestJs._w.alienShip.status === 0) {
@@ -662,10 +645,10 @@ QuestJs._create.createItem('Kyle', CREW(false), {
 
     {
       regex: /virus|program/,
-      test: function (p) {
+      test(p) {
         return p.text.match(this.regex);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg(
           "'You say the signal could be a virus,' you say to Kyle. 'Is it dangerous?'",
         );
@@ -688,13 +671,13 @@ QuestJs._create.createItem('Kyle', CREW(false), {
   // Satellite deployment
   probeType: 'satellite',
   probesRemaining: 6,
-  probeAction0: function () {
+  probeAction0() {
     QuestJs._io.msg('Kyle sits at the console, and logs in.');
   },
-  probeAction3: function () {
+  probeAction3() {
     QuestJs._io.msg('Kyle watches the satellite as it goes into its prescribed orbit.');
   },
-  probeInPlace: function () {
+  probeInPlace() {
     QuestJs._io.msg("'Ripper!' said Kyle.");
     shipAlert('The satellite is in orbit,');
     currentPlanet().satellite = true;
@@ -739,10 +722,10 @@ QuestJs._create.createItem('Ostap', CREW(false), {
   baseOxygeUse: 9,
 
   // Agenda
-  eventIsActive: function () {
+  eventIsActive() {
     return (this.status = 'okay');
   },
-  stopAgenda: function () {
+  stopAgenda() {
     const agendaLast = this.agenda[this.agenda.length - 1];
     if (agendaLast && /stasisPod/.test(agendaLast)) {
       QuestJs._io.msg("'Ostap, forget what I said; don't get in your stasis pod yet.'");
@@ -760,7 +743,7 @@ QuestJs._create.createItem('Ostap', CREW(false), {
 
   // Reactions
   reactionToUndress: 0,
-  reactions: function () {
+  reactions() {
     const g = QuestJs._game.player.getOuterWearable('body');
     if (g === false && this.reactionToUndress < 2) {
       QuestJs._io.msg(
@@ -775,19 +758,19 @@ QuestJs._create.createItem('Ostap', CREW(false), {
   },
 
   // Conversations
-  probesAskResponse: function () {
+  probesAskResponse() {
     QuestJs._io.msg("'How does a bio-probe work?' you ask Ostap.");
     QuestJs._io.msg(
       "'I control from the lab, find a good sample. First we look at the morphology, with a simple camera. Then pick up a sample, take a slice to look at the microscopic structure - we look for cells, what is inside the cell. If we get enough cells, we can tell it to extract chemical from one type of sub-structure, then we analysis the chemicals by mass spectroscopy and the infra-red spectroscopy. We hope we find something in the library, if not, the results can be taken to Earth.'",
     );
     QuestJs._io.msg("'Okay, cool.'");
   },
-  areaAskResponse: function () {
+  areaAskResponse() {
     QuestJs._io.msg(
       "'I am the biologist. I studied at University of Kiev, then later at Notre Dame, in Paris, I did my Ph.D. thesis on extremophiles, and then I did a lot of work on Xenobiology for Tokyo Life Sciences.'",
     );
   },
-  backgroundAskResponse: function () {
+  backgroundAskResponse() {
     QuestJs._io.msg(
       "'I'm from Nastasiv, near Ternopil.' He sees you blank face. 'In the Ukraine. I grew up with three brothers and two sisters, so it was always noisy.' He smiles. 'Both my sisters, they are biologists too. Well, one a botanist. We take after our babusya - Professor Oliynyk made one of the first synthetic cells in '82.'",
     );
@@ -795,10 +778,10 @@ QuestJs._create.createItem('Ostap', CREW(false), {
   askOptions: [
     {
       nameLost: 'lost probe',
-      test: function (p) {
+      test(p) {
         return p.text.match(/(lost|destroyed) (bio|geo|bio-|geo-)?(probe|contact)/);
       },
-      script: function () {
+      script() {
         if (QuestJs._w.Ostap.lostProbe) {
           QuestJs._io.msg(
             '\'What does Xsansi mean by "contact lost" with that probe?\' you ask Ostap.',
@@ -813,10 +796,10 @@ QuestJs._create.createItem('Ostap', CREW(false), {
     },
     {
       regex: /babusya/,
-      test: function (p) {
+      test(p) {
         return p.text.match(/babusya/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'What does babusya?' you ask Ostap.");
         QuestJs._io.msg(
           "'Is Ukrainian for grandmother. Professor Oliynyk was my father's mother. I think she was disappointed when he became a software engineer, and he felt bad, so encouraged us to follow in her footsteps.'",
@@ -829,22 +812,18 @@ QuestJs._create.createItem('Ostap', CREW(false), {
   // Probe deployment
   probeType: 'bio-probe',
   probesRemaining: 16,
-  probeAction0: function (count) {
+  probeAction0(count) {
     QuestJs._io.msg(
-      "'Okay, " +
-        QuestJs._lang.toWords(count) +
-        ' probe' +
-        (count === 1 ? '' : 's') +
-        " to deploy...' mutters Ostap as he types at the console.",
+      `'Okay, ${QuestJs._lang.toWords(count)} probe${
+        count === 1 ? '' : 's'
+      } to deploy...' mutters Ostap as he types at the console.`,
     );
   },
-  probeAction3: function (count) {
+  probeAction3(count) {
     QuestJs._io.msg(
-      "'Okay, " +
-        QuestJs._lang.toWords(count) +
-        ' probe' +
-        (count === 1 ? '' : 's') +
-        " launched,' says Ostap as he stands up.",
+      `'Okay, ${QuestJs._lang.toWords(count)} probe${
+        count === 1 ? '' : 's'
+      } launched,' says Ostap as he stands up.`,
     );
   },
   data: [
@@ -900,7 +879,7 @@ QuestJs._create.createItem('Aada', CREW(true), {
   baseOxygeUse: 6,
 
   // Reactions
-  reactions: function () {
+  reactions() {
     const g = QuestJs._game.player.getOuterWearable('body');
     if (g === false && this.reactionToUndress < 2) {
       if (QuestJs._game.player.isFemale) {
@@ -921,7 +900,7 @@ QuestJs._create.createItem('Aada', CREW(true), {
   },
 
   // Conversations
-  probesAskResponse: function () {
+  probesAskResponse() {
     QuestJs._io.msg("'How does a geo-probe work?' you ask Aada.");
     QuestJs._io.msg(
       "'Simple. Once deployed on the planet, I send it to an interesting rock, and it extends an arm that takes a sample.'",
@@ -932,13 +911,13 @@ QuestJs._create.createItem('Aada', CREW(true), {
     QuestJs._io.msg("'Er, yeah, I expect so.'");
     QuestJs._w.Aada.geologyFlag1 = true;
   },
-  areaAskResponse: function () {
+  areaAskResponse() {
     QuestJs._io.msg("'I am the geologist.'");
     QuestJs._io.msg("'Okay. So how long have you been in geology?'");
     QuestJs._io.msg("'Well, I've taken an interest for years....'");
     QuestJs._w.Aada.geologyFlag2 = true;
   },
-  backgroundAskResponse: function () {
+  backgroundAskResponse() {
     if (this.relationship < 3) {
       QuestJs._io.msg(
         "'I'd... rather not say. There's nothing sinister, it's just... well, I'd rather you judge me on what I do, rather than where I come from. Does that make sense?'",
@@ -958,10 +937,10 @@ QuestJs._create.createItem('Aada', CREW(true), {
   askOptions: [
     {
       name: 'lost probe',
-      test: function (p) {
+      test(p) {
         return p.text.match(/(lost|destroyed) (bio|geo|bio-|geo-)?(probe|contact)/);
       },
-      script: function () {
+      script() {
         if (QuestJs._w.Ostap.lostProbe) {
           QuestJs._io.msg(
             '\'What does Xsansi mean by "contact lost" with that probe?\' you ask Aada.',
@@ -981,10 +960,10 @@ QuestJs._create.createItem('Aada', CREW(true), {
     },
 
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/lack of*|inability/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'You don't seem that... well up on geology,' you suggest to Aada.");
         QuestJs._io.msg("'What's that supposed to mean?'");
         if (QuestJs._w.Aada.geologyFlag1 && QuestJs._w.Aada.geologyFlag2) {
@@ -1002,10 +981,10 @@ QuestJs._create.createItem('Aada', CREW(true), {
 
   tellOptions: [
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/.* hot/);
       },
-      script: function () {
+      script() {
         QuestJs._io.msg("'You look hot!' you say Aada.");
         QuestJs._io.msg("'If you're trying to get in my knickers, forget it.'");
       },
@@ -1015,41 +994,33 @@ QuestJs._create.createItem('Aada', CREW(true), {
   // Probe deployment
   probeType: 'geo-probe',
   probesRemaining: 16,
-  probeAction0: function (count) {
+  probeAction0(count) {
     if (QuestJs._w.Xsansi.currentPlanet === 0 && this.deployProbeTotal === 0) {
       QuestJs._io.msg(
-        "'Okay, " +
-          QuestJs._lang.toWords(count) +
-          ' probe' +
-          (count === 1 ? '' : 's') +
-          "...' says Aada, looking blankly at the console for a moment. 'How hard can it be?' She starts tapping at the key board.",
+        `'Okay, ${QuestJs._lang.toWords(count)} probe${
+          count === 1 ? '' : 's'
+        }...' says Aada, looking blankly at the console for a moment. 'How hard can it be?' She starts tapping at the key board.`,
       );
     } else {
       QuestJs._io.msg(
-        "'Another " +
-          QuestJs._lang.toWords(count) +
-          ' probe' +
-          (count === 1 ? '' : 's') +
-          "...' says Aada. 'Easy enough.'",
+        `'Another ${QuestJs._lang.toWords(count)} probe${
+          count === 1 ? '' : 's'
+        }...' says Aada. 'Easy enough.'`,
       );
     }
   },
-  probeAction3: function (count) {
+  probeAction3(count) {
     if (QuestJs._w.Xsansi.currentPlanet === 0 && this.deployProbeTotal === count) {
       QuestJs._io.msg(
-        "'There!' says Aada, triumphantly. '" +
-          QuestJs._lang.toWords(count) +
-          ' probe' +
-          (count === 1 ? '' : 's') +
-          " deployed. I knew it couldn't be {i:that} tricky.'",
+        `'There!' says Aada, triumphantly. '${QuestJs._lang.toWords(count)} probe${
+          count === 1 ? '' : 's'
+        } deployed. I knew it couldn't be {i:that} tricky.'`,
       );
     } else {
       QuestJs._io.msg(
-        "'That's another " +
-          QuestJs._lang.toWords(count) +
-          ' probe' +
-          (count === 1 ? '' : 's') +
-          " deployed,' says Aada.",
+        `'That's another ${QuestJs._lang.toWords(count)} probe${
+          count === 1 ? '' : 's'
+        } deployed,' says Aada.`,
       );
     }
   },
@@ -1064,7 +1035,7 @@ QuestJs._create.createItem('Aada', CREW(true), {
     ],
     [
       // planet 1
-      "'It looks much more interesting than " + PLANETS[0].starName + "!' she says excitedly.",
+      `'It looks much more interesting than ${PLANETS[0].starName}!' she says excitedly.`,
       "'The pictures are great, it looks so nice down there. Still trying to make sense of the geology.'",
       "'The soil samples are 20 to 70 percent organic material. The rocks are a mix of igneous and sedimentary. The sedimentary rocks has high carbon content - like limestone - so probably formed from shells and, you know, stuff like that millions of years ago.'",
       "'The soil samples are 20 to 70 percent organic material. The rocks are a mix of igneous and sedimentary. The sedimentary rocks has high carbon content - like limestone - so probably formed from shells and, you know, stuff like that millions of years ago.  The second probe found some metamorphic rock, so it is an active planet - or was until quite recently.'",
@@ -1072,17 +1043,15 @@ QuestJs._create.createItem('Aada', CREW(true), {
     ],
     [
       // planet 2: Kyle should come and see you about this; then this message should change
-      "'Looks like another " + PLANETS[0].starName + ",' says Aada. 'Nothing of interest here.'",
-      "'I thought it was going to be as dull as " +
-        PLANETS[0].starName +
-        ",' says Aada, 'but I think it is quite different. It's dead now, but I think there was life on it once.'|'Based on what?'|'It's just a hunch really, but some of the rocks... they look like ruined buildings.'",
+      `'Looks like another ${PLANETS[0].starName},' says Aada. 'Nothing of interest here.'`,
+      `'I thought it was going to be as dull as ${PLANETS[0].starName},' says Aada, 'but I think it is quite different. It's dead now, but I think there was life on it once.'|'Based on what?'|'It's just a hunch really, but some of the rocks... they look like ruined buildings.'`,
       "'I had a probe drill into one of the strange rock formations, and it's consistent with concrete, well, more-or-less. And hollow. It broke through into an interior after about 0.3 meters.'|'What's inside?'|'I don't know! The probes don't have cameras that can extend though holes.'",
       "'I've got a probe trying to dig a big hole into the building - or whatever it is. I've got some analysis of the black dust. It is basically ash, as we thought, some organic content. Not radioactive though, which was a surprise. I was almost convinced this was the result of a nuclear war.'|'Could it be really old and the radioisotopes have all decayed.'|'It would have to be really old - the half-life of uranium-238 is over 4 billion years. If it was nuclear weapons as we know them there would some uranium-238.'",
       "'The probe managed to get though the wall, and it's definitely a building. Inside the walls and straight and square to each other. No furniture or anything, but a doorway that's about human height.'",
     ],
     [
       // planet 3
-      "'Looks like another " + PLANETS[0].starName + ",' says Aada. 'Not much here.'",
+      `'Looks like another ${PLANETS[0].starName},' says Aada. 'Not much here.'`,
       "'It is quite a new planet - relatively anyway. Lots of volcanoes still as the interior churns up.'",
       "'A lot of granite-like rocks thrown up by the volcanoes, and they look to be high in heavy metals.'",
       "'As I thought, this is a young planet, no chance for sedimentary rocks to form yet, and not much metamorphic either. But a lot of metals, so good for mining. If you don't mind the toxic air!'",
@@ -1105,7 +1074,7 @@ QuestJs._create.createItem('Ha_yoon', CREW(true), {
   baseOxygeUse: 4,
 
   // Reactions
-  reactions: function () {
+  reactions() {
     const g = QuestJs._game.player.getOuterWearable('body');
     if (g === false && this.reactionToUndress < 2) {
       if (QuestJs._game.player.isFemale) {
@@ -1121,13 +1090,13 @@ QuestJs._create.createItem('Ha_yoon', CREW(true), {
   },
 
   // Conversations
-  probesAskResponse: function () {
+  probesAskResponse() {
     QuestJs._io.msg("'How do the probe works?' you ask Ha-yoon.");
     QuestJs._io.msg(
       "'i don't know about the analyse, but each probe is contained in an ablative shell, which is sheds as it descends, with the impact slowed by a combination of parachutes and retro-rockets. Once on the surface, the autonomous probe will start collecting samples, following its programming, moving on crawler tracks. They also have a limited amount of propellent to jump them out of holes.'",
     );
   },
-  areaAskResponse: function () {
+  areaAskResponse() {
     QuestJs._io.msg(
       "'I am the engineer. I worked for PanTech in the asteroids, so I know spaceship systems. This is a bit different as it runs unmanned for decades...'",
     );
@@ -1136,7 +1105,7 @@ QuestJs._create.createItem('Ha_yoon', CREW(true), {
       "'... Which doesn't change the fact there there are stasis systems for the crew and food, which I had never seen before.'",
     );
   },
-  backgroundAskResponse: function () {
+  backgroundAskResponse() {
     QuestJs._io.msg("'I am from Seoul.'");
     QuestJs._io.msg("'Okay... Any family or anything?'");
     QuestJs._io.msg("'No, no family.'");
@@ -1153,8 +1122,8 @@ QuestJs._create.createItem('Ha_yoon', CREW(true), {
 
 const NPCS = [QuestJs._w.Ostap, QuestJs._w.Aada, QuestJs._w.Kyle, QuestJs._w.Ha_yoon];
 
-for (let npc of NPCS) {
+for (const npc of NPCS) {
   createTopics(npc);
   npc.status = 100;
-  for (let i = 0; i < 4; i += 1) npc['rank' + i] = 0;
+  for (let i = 0; i < 4; i += 1) npc[`rank${i}`] = 0;
 }

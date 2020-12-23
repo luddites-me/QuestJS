@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
   loc: 'entrance',
   regex: /^(me|myself|player)$/,

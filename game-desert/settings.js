@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._settings.title = 'Desert';
 QuestJs._settings.author = 'The Pixie';
 QuestJs._settings.version = '1.0';

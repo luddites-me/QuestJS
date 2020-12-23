@@ -1,10 +1,8 @@
-'use strict';
-
 QuestJs._create.createItem('Lucas', QuestJs._npc.NPC(false), {
   notes: 'Black guy, twenties, bi-sexual, good at cooking',
   loc: 'bus',
   status: 'okay',
-  //properName:true,
+  // properName:true,
   alias: 'younger man',
   scenery: true,
   relationship: 0,
@@ -14,10 +12,10 @@ QuestJs._create.createItem('Lucas', QuestJs._npc.NPC(false), {
   // Conversations
   askOptions: [
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/newcastle/);
       },
-      response: function () {
+      response() {
         QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
         QuestJs._io.msg(
           "'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'",
@@ -32,7 +30,7 @@ QuestJs._create.createItem('Emily', QuestJs._npc.NPC(true), {
   notes: 'Redhead, twenties, into spiritualism, plays several instruments',
   loc: 'bus',
   status: 'okay',
-  //properName:true,
+  // properName:true,
   alias: 'younger woman',
   scenery: true,
   relationship: 0,
@@ -42,10 +40,10 @@ QuestJs._create.createItem('Emily', QuestJs._npc.NPC(true), {
   // Conversations
   askOptions: [
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/newcastle/);
       },
-      response: function () {
+      response() {
         QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
         QuestJs._io.msg(
           "'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'",
@@ -61,9 +59,9 @@ QuestJs._create.createItem('Emily', QuestJs._npc.NPC(true), {
     "text:The redhead stands up and stretches. 'You think I've got time to go to the bathroom?'",
     "text:The oriental turns around to look at the redhead. 'We'll make sure he doesn't go without you,' she says.'",
     'walkTo:bus_front',
-    //"joinedBy:Lara:'Sure,' says Lara.",
-    //"walkTo:garden:inTheGardenWithLara:'Look at all the beautiful flowers,' says Arthur.:Through the window you see Arthur say something to Lara.",
-    //"text:Lara smells the flowers.",
+    // "joinedBy:Lara:'Sure,' says Lara.",
+    // "walkTo:garden:inTheGardenWithLara:'Look at all the beautiful flowers,' says Arthur.:Through the window you see Arthur say something to Lara.",
+    // "text:Lara smells the flowers.",
   ],
 });
 
@@ -71,7 +69,7 @@ QuestJs._create.createItem('Elijah', QuestJs._npc.NPC(false), {
   notes: 'forties, conspiracy nut, refusing to fly, quite wealthy',
   loc: 'bus',
   status: 'okay',
-  //properName:true,
+  // properName:true,
   alias: 'older man',
   scenery: true,
   relationship: 0,
@@ -81,10 +79,10 @@ QuestJs._create.createItem('Elijah', QuestJs._npc.NPC(false), {
   // Conversations
   askOptions: [
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/newcastle/);
       },
-      response: function () {
+      response() {
         QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
         QuestJs._io.msg(
           "'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'",
@@ -99,7 +97,7 @@ QuestJs._create.createItem('Amy', QuestJs._npc.NPC(true), {
   notes: 'Korean parentage, thirties, Christian, into video games',
   loc: 'bus',
   status: 'okay',
-  //properName:true,
+  // properName:true,
   alias: 'older woman',
   scenery: true,
   relationship: 0,
@@ -109,10 +107,10 @@ QuestJs._create.createItem('Amy', QuestJs._npc.NPC(true), {
   // Conversations
   askOptions: [
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/newcastle/);
       },
-      response: function () {
+      response() {
         QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
         QuestJs._io.msg(
           "'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'",

@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._settings.title = 'A First Step...';
 QuestJs._settings.author = 'The Pixie';
 QuestJs._settings.version = '1.2';
@@ -29,10 +27,10 @@ QuestJs._settings.status = [
     return '<td>Spell points:</td><td>3</td>';
   },
   function () {
-    return '<td>Health points:</td><td>' + QuestJs._game.player.hitpoints + '</td>';
+    return `<td>Health points:</td><td>${QuestJs._game.player.hitpoints}</td>`;
   },
   function () {
-    return '<td colspan="2">' + QuestJs._game.player.status + '</td>';
+    return `<td colspan="2">${QuestJs._game.player.status}</td>`;
   },
 ];
 

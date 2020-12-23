@@ -1,5 +1,3 @@
-'use strict';
-
 // About your game
 QuestJs._settings.title = 'Deeper';
 QuestJs._settings.author = 'The Pixie';

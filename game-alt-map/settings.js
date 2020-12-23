@@ -1,12 +1,10 @@
-'use strict';
-
 QuestJs._settings.title = 'The City of Halmuth';
 QuestJs._settings.author = 'The Pixie';
 QuestJs._settings.version = '0.1';
 QuestJs._settings.thanks = [];
 QuestJs._settings.warnings = 'No warnings have been set for this game.';
 QuestJs._settings.playMode = 'dev';
-//QuestJs._settings.reportAllSvg = true
+// QuestJs._settings.reportAllSvg = true
 QuestJs._settings.symbolsForCompass = true;
 
 QuestJs._settings.libraries.push('image-map');
@@ -15,10 +13,10 @@ QuestJs._settings.tests = true;
 
 QuestJs._settings.status = [
   function () {
-    return '<td>Health points:</td><td>' + QuestJs._game.player.hitpoints + '</td>';
+    return `<td>Health points:</td><td>${QuestJs._game.player.hitpoints}</td>`;
   },
   function () {
-    return '<td colspan="2">' + QuestJs._util.getDateTime() + '</td>';
+    return `<td colspan="2">${QuestJs._util.getDateTime()}</td>`;
   },
 ];
 
@@ -79,7 +77,7 @@ QuestJs._settings.mapPointsOfInterest = [
     mapY: 300,
     fill: 'blue',
     text: 'Here is something else',
-    isActive: function () {
+    isActive() {
       return true;
     },
   },
@@ -120,29 +118,29 @@ QuestJs._settings.dateTime = {
     time: '%hour%:%minute% %ampm%',
   },
   functions: {
-    dayOfWeek: function (dict) {
+    dayOfWeek(dict) {
       return QuestJs._settings.dateTime.days[
         (dict.day + 365 * dict.year) % QuestJs._settings.dateTime.days.length
       ];
     },
-    dayOfYear: function (dict) {
-      let day = dict.day;
-      for (let el of QuestJs._settings.dateTime.months) {
-        if (el.n > day) return day + 1 + ' ' + el.name;
+    dayOfYear(dict) {
+      let { day } = dict;
+      for (const el of QuestJs._settings.dateTime.months) {
+        if (el.n > day) return `${day + 1} ${el.name}`;
         day -= el.n;
       }
       return 'failed';
     },
-    year: function (dict) {
+    year(dict) {
       return dict.year + 1325;
     },
-    hour: function (dict) {
+    hour(dict) {
       return dict.hour < 13 ? dict.hour : dict.hour - 12;
     },
-    minute: function (dict) {
-      return dict.minute < 10 ? '0' + dict.minute : dict.minute;
+    minute(dict) {
+      return dict.minute < 10 ? `0${dict.minute}` : dict.minute;
     },
-    ampm: function (dict) {
+    ampm(dict) {
       if (dict.minute === 0 && dict.hour === 0) return 'midnight';
       if (dict.minute === 0 && dict.hour === 12) return 'noon';
       return dict.hour < 12 ? 'am' : 'pm';

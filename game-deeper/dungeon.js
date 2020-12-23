@@ -1,5 +1,3 @@
-'use strict';
-
 /*
 Have one prototype dungeon room with six exits, and disable exits as appropriate
 Have themes and regions
@@ -27,111 +25,73 @@ const dungeon = {
       name: 'ew rectangle',
       descs: ['A fair-sized east-west room.', 'This room is retangular.'],
       adjective: 'rectangular',
-      draw: function (x, y, fill) {
-        return (
-          '<rect x="' +
-          (x + 5) +
-          '" y="' +
-          (y + 15) +
-          '" width="40" height="20" stroke="none" fill="' +
-          fill +
-          '"/>'
-        );
+      draw(x, y, fill) {
+        return `<rect x="${x + 5}" y="${
+          y + 15
+        }" width="40" height="20" stroke="none" fill="${fill}"/>`;
       },
     },
     {
       name: 'ns rectangle',
       descs: ['This rectangular room goes north-south.', 'An oblong room, going north-south.'],
       adjective: 'rectangular',
-      draw: function (x, y, fill) {
-        return (
-          '<rect x="' +
-          (x + 15) +
-          '" y="' +
-          (y + 5) +
-          '" width="20" height="40" stroke="none" fill="' +
-          fill +
-          '"/>'
-        );
+      draw(x, y, fill) {
+        return `<rect x="${x + 15}" y="${
+          y + 5
+        }" width="20" height="40" stroke="none" fill="${fill}"/>`;
       },
     },
     {
       name: 'circle',
       descs: ['A circular room.', 'This is a smaller room, the walls forming a circle.'],
       adjective: 'circular',
-      draw: function (x, y, fill) {
-        return (
-          '<circle cx="' +
-          (x + 25) +
-          '" cy="' +
-          (y + 25) +
-          '" r="15" stroke="none" fill="' +
-          fill +
-          '"/>'
-        );
+      draw(x, y, fill) {
+        return `<circle cx="${x + 25}" cy="${y + 25}" r="15" stroke="none" fill="${fill}"/>`;
       },
     },
     {
       name: 'square',
       descs: ['A square room.', 'This room looks square.'],
       adjective: 'square',
-      draw: function (x, y, fill) {
-        return (
-          '<rect x="' +
-          (x + 5) +
-          '" y="' +
-          (y + 5) +
-          '" width="40" height="40" stroke="none" fill="' +
-          fill +
-          '"/>'
-        );
+      draw(x, y, fill) {
+        return `<rect x="${x + 5}" y="${
+          y + 5
+        }" width="40" height="40" stroke="none" fill="${fill}"/>`;
       },
     },
     {
       name: 'small square',
       descs: ['A small, square room.', 'Small and square.'],
       adjective: 'square',
-      draw: function (x, y, fill) {
-        return (
-          '<rect x="' +
-          (x + 10) +
-          '" y="' +
-          (y + 10) +
-          '" width="30" height="30" stroke="none" fill="' +
-          fill +
-          '"/>'
-        );
+      draw(x, y, fill) {
+        return `<rect x="${x + 10}" y="${
+          y + 10
+        }" width="30" height="30" stroke="none" fill="${fill}"/>`;
       },
     },
     {
       name: 'octagon',
       descs: ['This eight-sided room is pretty large.', 'An sizable, octagonal room.'],
       adjective: 'octagonal',
-      draw: function (x, y, fill) {
+      draw(x, y, fill) {
         let s = '<polygon points="';
-        s += x + 5 + ',' + (y + 17) + ' ';
-        s += x + 5 + ',' + (y + 33) + ' ';
-        s += x + 17 + ',' + (y + 45) + ' ';
-        s += x + 33 + ',' + (y + 45) + ' ';
-        s += x + 45 + ',' + (y + 33) + ' ';
-        s += x + 45 + ',' + (y + 17) + ' ';
-        s += x + 33 + ',' + (y + 5) + ' ';
-        s += x + 17 + ',' + (y + 5) + ' ';
-        s += '" stroke="none" fill="' + fill + '"/>';
+        s += `${x + 5},${y + 17} `;
+        s += `${x + 5},${y + 33} `;
+        s += `${x + 17},${y + 45} `;
+        s += `${x + 33},${y + 45} `;
+        s += `${x + 45},${y + 33} `;
+        s += `${x + 45},${y + 17} `;
+        s += `${x + 33},${y + 5} `;
+        s += `${x + 17},${y + 5} `;
+        s += `" stroke="none" fill="${fill}"/>`;
         return s;
       },
     },
   ],
   corridor: {
     name: 'corridor',
-    draw: function (x, y, fill) {
-      return (
-        '<rect x="' +
-        (x + 20) +
-        '" y="' +
-        (y + 20) +
-        '" width="10" height="10" stroke="none" fill="blue"/>'
-      );
+    draw(x, y, fill) {
+      return `<rect x="${x + 20}" y="${y + 20}" width="10" height="10" stroke="none" fill="blue"/>`;
     },
   },
 };
@@ -142,7 +102,7 @@ dungeon.generateLevel = function (from_room) {
   const limit = (dungeon.size - 1) / 2;
   const level = from_room.level + 1;
   let theme;
-  if (3 > level) {
+  if (level < 3) {
     theme = 'e_dungeon';
   } else if (QuestJs._random.chance(50)) {
     theme = from_room.theme;
@@ -156,12 +116,12 @@ dungeon.generateLevel = function (from_room) {
   dungeon.setUpCentreRoom(level, from_room);
   const levellist = dungeon.checkConnectivity(level);
   const waydown = dungeon.setWayDown(levellist);
-  QuestJs._log.info('About to decorate ' + levellist.length);
-  for (let room of levellist) {
+  QuestJs._log.info(`About to decorate ${levellist.length}`);
+  for (const room of levellist) {
     dungeon.decorateRoom(room);
   }
-  //list remove (levellist, waydown)
-  //Populate (levellist, level)
+  // list remove (levellist, waydown)
+  // Populate (levellist, level)
 };
 
 dungeon.decorateRoom = function (room, level, theme) {
@@ -177,7 +137,7 @@ dungeon.decorateRoom = function (room, level, theme) {
     room.desc = QuestJs._random.fromArray(room.roomType.descs);
 
     if (exits.length === 1) {
-      room.desc += ' The only exit is ' + exits.map((el) => el.name) + '.';
+      room.desc += ` The only exit is ${exits.map((el) => el.name)}.`;
     } else {
       room.desc += ' There are exits ';
       room.desc += QuestJs._tools.formatList(
@@ -208,13 +168,10 @@ dungeon.decorateRoom = function (room, level, theme) {
       } else if (room.exit_east && room.exit_west) {
         room.desc = 'You are stood in a tunnel that runs from east to west.';
       } else
-        room.desc =
-          'The tunnel turns a corner here, going ' +
-          QuestJs._tools.formatList(
-            room.getExits().map((el) => el.name),
-            { def: 'a', joiner: ' and' },
-          ) +
-          '.';
+        room.desc = `The tunnel turns a corner here, going ${QuestJs._tools.formatList(
+          room.getExits().map((el) => el.name),
+          { def: 'a', joiner: ' and' },
+        )}.`;
     }
   }
 };
@@ -225,7 +182,7 @@ dungeon.decorateRoom = function (room, level, theme) {
 dungeon.generateBasicRooms = function (level, theme) {
   for (let x = -dungeon.size; x <= dungeon.size; x += 1) {
     for (let y = -dungeon.size; y <= dungeon.size; y += 1) {
-      //QuestJs._log.info('x=' + x + ' y=' + y + ' p=' + (100 - dungeon.cellpercentage * dungeon.fromCentre(x, y) / dungeon.size))
+      // QuestJs._log.info('x=' + x + ' y=' + y + ' p=' + (100 - dungeon.cellpercentage * dungeon.fromCentre(x, y) / dungeon.size))
       if (
         QuestJs._random.chance(
           100 - (dungeon.cellpercentage * dungeon.fromCentre(x, y)) / dungeon.size,
@@ -241,11 +198,11 @@ dungeon.generateBasicRooms = function (level, theme) {
 // Also creates exits to south and west if there is a room there and at QuestJs._random.
 dungeon.generateBasicRoom = function (level, x, y, theme) {
   const name = dungeon.getRoomName(x, y, level);
-  //QuestJs._log.info(name)
+  // QuestJs._log.info(name)
   const name_west = dungeon.getRoomName(x - 1, y, level);
   const name_south = dungeon.getRoomName(x, y - 1, level);
   const room = QuestJs._create.cloneObject('dungeon_cell_prototype', undefined, name);
-  //QuestJs._log.info(room)
+  // QuestJs._log.info(room)
   room.accessible = false;
   room.alias = 'Lost in a dungeon';
   room.level = level;
@@ -308,11 +265,11 @@ dungeon.setWayDown = function (levellist) {
   const sublist = [];
   let dist = 7;
   while (sublist.length === 0) {
-    for (let o of levellist) {
+    for (const o of levellist) {
       if (dungeon.fromCentre(o.x, o.y) > dist) sublist.push(o);
     }
     dist -= 1;
-    //QuestJs._io.msg(dist)
+    // QuestJs._io.msg(dist)
   }
   const waydown = QuestJs._random.fromArray(sublist);
   waydown.exit_down = true;
@@ -324,20 +281,20 @@ dungeon.fromCentre = function (x, y) {
 };
 
 dungeon.getRoomName = function (x, y, level) {
-  return 'cell_' + x + '_' + y + '_' + level;
+  return `cell_${x}_${y}_${level}`;
 };
 
 dungeon.exitCount = function (room) {
   let count = 0;
-  for (let dir of dungeon.dirs) {
-    if (room['exit_' + dir.name]) count += 1;
+  for (const dir of dungeon.dirs) {
+    if (room[`exit_${dir.name}`]) count += 1;
   }
   return count;
 };
 
 dungeon.flagAllAdjacent = function (room) {
   let flag = false;
-  for (let dir of dungeon.dirs) flag = flag || dungeon.flagAdjacent(room, dir);
+  for (const dir of dungeon.dirs) flag = flag || dungeon.flagAdjacent(room, dir);
   return flag;
 };
 
@@ -345,7 +302,7 @@ dungeon.flagAllAdjacent = function (room) {
 // Returns false if there is no room or if there is no exit from this room to that room.
 // Expects dir to be a dictionary from QuestJs._lang.exit_list
 dungeon.findAdjacent = function (room, dir) {
-  if (!room['exit_' + dir.name]) return false;
+  if (!room[`exit_${dir.name}`]) return false;
   return QuestJs._w[dungeon.getRoomName(room.x + dir.x, room.y + dir.y, room.level)];
 };
 
@@ -359,7 +316,7 @@ dungeon.flagAdjacent = function (room, dir) {
   return true;
 };
 
-//Mostly just creates an exit from the centre to the from_room.
+// Mostly just creates an exit from the centre to the from_room.
 dungeon.setUpCentreRoom = function (level, from_room) {
   const centreroom = QuestJs._w[dungeon.getRoomName(0, 0, level)];
   centreroom.exit_up = true;
@@ -379,7 +336,7 @@ dungeon.drawMap = function () {
     return;
   }
 
-  //if (QuestJs._w[this.getRoomName(0, 0, room.level)] === undefined) return false
+  // if (QuestJs._w[this.getRoomName(0, 0, room.level)] === undefined) return false
 
   const map = [];
   map.push(
@@ -387,11 +344,7 @@ dungeon.drawMap = function () {
   );
 
   map.push(
-    '<rect x="0" y="0" width="' +
-      dungeon.mapSize +
-      '" height="' +
-      dungeon.mapSize +
-      '" stroke="black" fill="none"/>',
+    `<rect x="0" y="0" width="${dungeon.mapSize}" height="${dungeon.mapSize}" stroke="black" fill="none"/>`,
   );
   for (let x = -this.size; x <= this.size; x += 1) {
     for (let y = -this.size; y <= this.size; y += 1) {
@@ -405,27 +358,23 @@ dungeon.drawMap = function () {
       );
     }
   }
-  map.push('<text x="15" y="35" fill="black" font-size="2em">Level ' + room.level + '</text>');
+  map.push(`<text x="15" y="35" fill="black" font-size="2em">Level ${room.level}</text>`);
 
   if (room.x !== undefined && dungeon.mapOptions.showYouAreHere) {
     map.push(
-      '<text x="75" y="' +
-        (dungeon.mapSize - 20) +
-        '" text-anchor="middle" fill="black" font-size="1.5em">You are here</text>',
+      `<text x="75" y="${
+        dungeon.mapSize - 20
+      }" text-anchor="middle" fill="black" font-size="1.5em">You are here</text>`,
     );
     const x2 = (room.x + this.size + 0.3) * this.cellSize - dungeon.mapOffset;
     const y2 = (this.size - room.y + 0.7) * this.cellSize - dungeon.mapOffset;
     map.push(
-      '<line x1="75" y1="' +
-        (dungeon.mapSize - 35) +
-        '" x2="' +
-        x2 +
-        '" y2="' +
-        y2 +
-        '" stroke="black" marker-end="url(#head)"/>',
+      `<line x1="75" y1="${
+        dungeon.mapSize - 35
+      }" x2="${x2}" y2="${y2}" stroke="black" marker-end="url(#head)"/>`,
     );
   }
-  //if (this.mapBorder)
+  // if (this.mapBorder)
   QuestJs._io.draw(dungeon.mapSize, dungeon.mapSize, map);
   return true;
 };
@@ -439,7 +388,7 @@ QuestJs._create.createRoom('entrance', {
   theme: 0,
   desc: 'The stairs go down...',
   down: new QuestJs._create.Exit(dungeon.getRoomName(0, 0, 1)),
-  afterFirstEnter: function () {
+  afterFirstEnter() {
     dungeon.generateLevel(this);
   },
 });
@@ -447,7 +396,7 @@ QuestJs._create.createRoom('entrance', {
 dungeon.exitScript = function (char, dirName) {
   const origin = QuestJs._w[char.loc];
   if (!origin.hasExit(dirName)) {
-    QuestJs._io.msg("You can't go " + dirName);
+    QuestJs._io.msg(`You can't go ${dirName}`);
     return false;
   }
 
@@ -457,7 +406,7 @@ dungeon.exitScript = function (char, dirName) {
   const dest = QuestJs._w[dungeon.getRoomName(origin.x + dir.x, origin.y + dir.y, origin.level)];
 
   QuestJs._io.msg(QuestJs._lang.stop_posture(char));
-  QuestJs._io.msg(QuestJs._lang.go_successful, { char: char, dir: dirName });
+  QuestJs._io.msg(QuestJs._lang.go_successful, { char, dir: dirName });
   QuestJs._world.setRoom(char, dest);
   return true;
 };
@@ -472,15 +421,15 @@ QuestJs._create.createRoom('dungeon_cell_prototype', {
   south: new QuestJs._create.Exit('entrance', { use: dungeon.exitScript }),
   east: new QuestJs._create.Exit('entrance', { use: dungeon.exitScript }),
   west: new QuestJs._create.Exit('entrance', { use: dungeon.exitScript }),
-  afterFirstEnter: function () {
+  afterFirstEnter() {
     if (this.exit_down) {
       dungeon.generateLevel(this);
     }
   },
 
-  getExits: function (options) {
+  getExits(options) {
     const exits = [];
-    for (let ex of QuestJs._lang.exit_list) {
+    for (const ex of QuestJs._lang.exit_list) {
       if (ex.type !== 'nocmd' && this.hasExit(ex.name, options)) {
         exits.push(ex);
       }
@@ -488,60 +437,34 @@ QuestJs._create.createRoom('dungeon_cell_prototype', {
     return exits;
   },
 
-  hasExit: function (dir, options) {
+  hasExit(dir, options) {
     if (!this[dir]) return false;
-    return this['exit_' + dir];
+    return this[`exit_${dir}`];
   },
 
-  getSvg: function (x, y) {
+  getSvg(x, y) {
     const fill =
       (this.exit_up || this.exit_down) && dungeon.mapOptions.showUpDown ? 'yellow' : 'red';
-    //const fill = this.accessible ? 'yellow' : 'red'
+    // const fill = this.accessible ? 'yellow' : 'red'
     let s = '';
     if (this.exit_south)
-      s +=
-        '<rect x="' +
-        (x + 20) +
-        '" y="' +
-        (y + 30) +
-        '" width="10" height="20" stroke="none" fill="blue"/>';
+      s += `<rect x="${x + 20}" y="${y + 30}" width="10" height="20" stroke="none" fill="blue"/>`;
     if (this.exit_east)
-      s +=
-        '<rect x="' +
-        (x + 30) +
-        '" y="' +
-        (y + 20) +
-        '" width="20" height="10" stroke="none" fill="blue"/>';
+      s += `<rect x="${x + 30}" y="${y + 20}" width="20" height="10" stroke="none" fill="blue"/>`;
     if (this.exit_north)
-      s +=
-        '<rect x="' +
-        (x + 20) +
-        '" y="' +
-        y +
-        '" width="10" height="20" stroke="none" fill="blue"/>';
+      s += `<rect x="${x + 20}" y="${y}" width="10" height="20" stroke="none" fill="blue"/>`;
     if (this.exit_west)
-      s +=
-        '<rect x="' +
-        x +
-        '" y="' +
-        (y + 20) +
-        '" width="20" height="10" stroke="none" fill="blue"/>';
+      s += `<rect x="${x}" y="${y + 20}" width="20" height="10" stroke="none" fill="blue"/>`;
     s += this.roomType.draw(x, y, fill);
     if (dungeon.mapOptions.showUpDown) {
       if (this.exit_up)
-        s +=
-          '<text text-anchor="middle" x="' +
-          (x + dungeon.cellSize / 2) +
-          '" y="' +
-          (y + 30) +
-          '" fill="black">Up</text>';
+        s += `<text text-anchor="middle" x="${x + dungeon.cellSize / 2}" y="${
+          y + 30
+        }" fill="black">Up</text>`;
       if (this.exit_down)
-        s +=
-          '<text text-anchor="middle" x="' +
-          (x + dungeon.cellSize / 2) +
-          '" y="' +
-          (y + 30) +
-          '" fill="black">Down</text>';
+        s += `<text text-anchor="middle" x="${x + dungeon.cellSize / 2}" y="${
+          y + 30
+        }" fill="black">Down</text>`;
     }
     return s;
   },

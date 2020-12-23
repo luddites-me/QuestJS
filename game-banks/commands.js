@@ -1,5 +1,3 @@
-'use strict';
-
 /*
 QuestJs._commands.push(new QuestJs._command.Cmd('Kick', {
   npcCmd:true,
@@ -93,7 +91,7 @@ QuestJs._commands.push(
     regex: /^pressuri[sz]e (.+)$/,
     npcCmd: true,
     objects: [{ scope: 'isRoom' }],
-    script: function (objects) {
+    script(objects) {
       return handlePressurise(QuestJs._game.player, objects, true);
     },
   }),
@@ -103,13 +101,13 @@ QuestJs._commands.push(
     regex: /^(depressuri[sz]e|evacuate) (.+)$/,
     npcCmd: true,
     objects: [{ ignore: true }, { scope: 'isRoom' }],
-    script: function (objects) {
+    script(objects) {
       return handlePressurise(QuestJs._game.player, objects, false);
     },
   }),
 );
 
-/*QuestJs._commands.push(new QuestJs._command.Cmd('NpcPressurise1', {
+/* QuestJs._commands.push(new QuestJs._command.Cmd('NpcPressurise1', {
   regex:/^(.+), ?pressuri[sz]e (.+)$/,
   objects:[
     {scope:QuestJs._parser.isHere, attName:"npc"},
@@ -178,12 +176,12 @@ QuestJs._commands.push(new QuestJs._command.Cmd('NpcDepressurise2', {
     objects.shift();
     return handlePressurise(npc, objects, false);
   },
-}));*/
+})); */
 
 function handlePressurise(char, objects, pressurise) {
   const baseRoom = objects[0][0];
   if (!baseRoom.room) {
-    QuestJs._io.msg("You can't " + (pressurise ? pressurise : depressurise) + ' that.');
+    QuestJs._io.msg(`You can't ${pressurise || depressurise} that.`);
     return QuestJs._world.FAILED;
   }
   if (char === QuestJs._game.player) {
@@ -206,13 +204,9 @@ function handlePressurise(char, objects, pressurise) {
   const mainRoom = typeof baseRoom.vacuum === 'string' ? QuestJs._w[baseRoom.vacuum] : baseRoom;
   if (mainRoom.vacuum !== pressurise) {
     QuestJs._io.msg(
-      "'" +
-        QuestJs._tools.sentenceCase(
-          QuestJs._lang.getName(mainRoom, { article: QuestJs._consts.DEFINITE }),
-        ) +
-        ' is already ' +
-        (pressurise ? 'pressurised' : 'depressurised') +
-        '.',
+      `'${QuestJs._tools.sentenceCase(
+        QuestJs._lang.getName(mainRoom, { article: QuestJs._consts.DEFINITE }),
+      )} is already ${pressurise ? 'pressurised' : 'depressurised'}.`,
     );
     return QuestJs._world.SUCCESS;
   }
@@ -224,26 +218,26 @@ function handlePressurise(char, objects, pressurise) {
   }
   if (!pressurise) {
     QuestJs._io.msg(
-      "'Evacuating " +
-        QuestJs._lang.getName(mainRoom, { article: QuestJs._consts.DEFINITE }) +
-        "... Room is now under vacuum.'",
+      `'Evacuating ${QuestJs._lang.getName(mainRoom, {
+        article: QuestJs._consts.DEFINITE,
+      })}... Room is now under vacuum.'`,
     );
     mainRoom.vacuum = true;
     return QuestJs._world.SUCCESS;
   }
   if (mainRoom.leaks) {
     QuestJs._io.msg(
-      "'Pressurising " +
-        QuestJs._lang.getName(mainRoom, { article: QuestJs._consts.DEFINITE }) +
-        "... Pressurisation failed.'",
+      `'Pressurising ${QuestJs._lang.getName(mainRoom, {
+        article: QuestJs._consts.DEFINITE,
+      })}... Pressurisation failed.'`,
     );
     return QuestJs._world.SUCCESS;
   }
 
   QuestJs._io.msg(
-    "'Pressurising " +
-      QuestJs._lang.getName(mainRoom, { article: QuestJs._consts.DEFINITE }) +
-      "... Room is now pressurised.'",
+    `'Pressurising ${QuestJs._lang.getName(mainRoom, {
+      article: QuestJs._consts.DEFINITE,
+    })}... Room is now pressurised.'`,
   );
   mainRoom.vacuum = false;
   return QuestJs._world.SUCCESS;
@@ -253,7 +247,7 @@ QuestJs._commands.push(
   new QuestJs._command.Cmd('Approach', {
     regex: /^approach (.+)$/,
     objects: [{ scope: 'isShip' }],
-    script: function (objects) {
+    script(objects) {
       if (!objects[0][0].isShip) {
         QuestJs._io.metamsg(
           'The APPROACH command is for piloting the ship to a specific destination; a satellite or vessel for example.',
@@ -285,7 +279,7 @@ QuestJs._commands.push(
   new QuestJs._command.Cmd('Scan', {
     regex: /^scan (.+)$/,
     objects: [{ scope: 'isShip' }],
-    script: function (objects) {
+    script(objects) {
       if (!objects[0][0].isShip) {
         QuestJs._io.metamsg(
           'The SCAN command is for scanning a target nearby in space, having approached it; a satellite or vessel for example.',
@@ -333,23 +327,23 @@ function isShip(item) {
 QuestJs._commands.push(
   new QuestJs._command.Cmd('ProbeStatus', {
     regex: /^probes?$/,
-    script: function () {
+    script() {
       const arr = getProbes();
-      QuestJs._io.metamsg('Found ' + arr.length + ' probes');
-      for (let probe of arr) {
+      QuestJs._io.metamsg(`Found ${arr.length} probes`);
+      for (const probe of arr) {
         QuestJs._io.metamsg(' -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1');
-        QuestJs._io.metamsg('Probe:' + probe.alias);
-        QuestJs._io.metamsg('Status:' + probe.status);
-        QuestJs._io.metamsg('launchCounter:' + probe.launchCounter);
-        QuestJs._io.metamsg('probeType:' + probe.probeType);
-        QuestJs._io.metamsg('planetNumber:' + probe.planetNumber);
+        QuestJs._io.metamsg(`Probe:${probe.alias}`);
+        QuestJs._io.metamsg(`Status:${probe.status}`);
+        QuestJs._io.metamsg(`launchCounter:${probe.launchCounter}`);
+        QuestJs._io.metamsg(`probeType:${probe.probeType}`);
+        QuestJs._io.metamsg(`planetNumber:${probe.planetNumber}`);
       }
       QuestJs._io.metamsg(' -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1');
-      QuestJs._io.metamsg('Geology:' + currentPlanet().geology);
-      QuestJs._io.metamsg('Biology:' + currentPlanet().biology);
-      QuestJs._io.metamsg('Radio:' + currentPlanet().coms);
-      QuestJs._io.metamsg('Satellite:' + currentPlanet().satellite);
-      QuestJs._io.metamsg('Active:' + currentPlanet().eventIsActive());
+      QuestJs._io.metamsg(`Geology:${currentPlanet().geology}`);
+      QuestJs._io.metamsg(`Biology:${currentPlanet().biology}`);
+      QuestJs._io.metamsg(`Radio:${currentPlanet().coms}`);
+      QuestJs._io.metamsg(`Satellite:${currentPlanet().satellite}`);
+      QuestJs._io.metamsg(`Active:${currentPlanet().eventIsActive()}`);
       return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
     },
   }),
@@ -358,7 +352,7 @@ QuestJs._commands.push(
 QuestJs._commands.unshift(
   new QuestJs._command.Cmd('MapUpdate', {
     regex: /^map?$/,
-    script: function () {
+    script() {
       updateMap();
       QuestJs._io.metamsg('Done');
       return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
@@ -391,7 +385,7 @@ QuestJs._command.findCmd('MetaHelp').script = function () {
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpGen', {
     regex: /^(?:\?|help) gen.*$/,
-    script: function () {
+    script() {
       QuestJs._lang.helpScript();
     },
   }),
@@ -400,7 +394,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpGame', {
     regex: /^(?:\?|help) game$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg(
         'At each planet, you need to assess how many bio-probes and how many geo-probes to launch. Do {color:red:HELP PROBES} for details on that. You can {color:red:ASK AI ABOUT SHIP} to find how many of each probe is left.',
       );
@@ -421,7 +415,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpNPCs', {
     regex: /^(?:\?|help) npcs?$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg('{b:Interacting with NPCs:}');
       QuestJs._io.metamsg(
         'You can ask an NPC to do something by using the same command you would use to have yourself do something, but prefixed with {color:red:[name],} (note the comma) or {color:red:TELL [name] TO}.',
@@ -438,7 +432,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpProbes', {
     regex: /^(?:\?|help) probes?$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg('{b:Using probes:}');
       QuestJs._io.metamsg(
         'Kyle will automatically deploy a satellite on arrival at a new planet, but you need to tell your crew to deploy probes for the surface. Wait for Xsansi to announce that the satellite is in orbit, then {color:red:ASK XSANSI ABOUT PLANET}. You can then assess what probes you want to deploy.',
@@ -463,7 +457,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpStasis', {
     regex: /^(?:\?|help) stasis$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg('{b:Stasis:}');
       QuestJs._io.metamsg(
         'Once you are in stasis, years will pass whilst the ship navigates to the next star system, so this is how to move the story forward to the next planet to survey.',
@@ -480,7 +474,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpVacuum', {
     regex: /^(?:\?|help) (?:vacuum|d?e?pressur.+)$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg('{b:Vacuum:}');
       QuestJs._io.metamsg(
         'Each section of the ship can be pressurised or depressurised by Xsansi, just ask {color:red:XSANSI, PRESSURIZE THE CARGO BAY} or {color:red:AI, DEPRESSURISE ENGINEERING}. Note that safety overrides may prevent Xsansi from complying.',
@@ -496,7 +490,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpDock', {
     regex: /^(?:\?|help) (?:dock|docking)$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg('{b:Docking:}');
       QuestJs._io.metamsg(
         'From the flight-deck, you can get closer to another ship, either to get a better look or to dock with it; {color:red:XSANSI, APPROACH SHUTTLE} or {color:red:AI, APPROACH SHIP}. Obviously there must be an vessel around.',
@@ -512,7 +506,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpUniverse', {
     regex: /^(?:\?|help) universe$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg('{b:The game world:}');
       QuestJs._io.metamsg(
         'I originally {i:tried} to go hard science fiction; these are real stars the ship visits! However, I have assumed artificial gravity, which is required to orientate the game (once you have down, you have port, up and starboard).',
@@ -531,7 +525,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpSystem', {
     regex: /^(?:\?|help) system?$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg('{b:The Game System:}');
       QuestJs._io.metamsg(
         'This game was written for Quest 6, which means it is running entirely in JavaScript in your browser. Compared to Quest 5 (which I am also familiar with) this means that you do not need to download any software to run it, and there is no annoying lag while you wait for a server to respond. Compared to Inform... well, it allows authors to directly access a modern programming language (though the point of Inform 7, of course, is to keep the programming language at bay).',
@@ -550,7 +544,7 @@ QuestJs._commands.push(
 QuestJs._commands.push(
   new QuestJs._command.Cmd('HelpCredits', {
     regex: /^(?:\? |help )?(?:credits?|about)$/,
-    script: function () {
+    script() {
       QuestJs._io.metamsg('{b:Credits:}');
       QuestJs._io.metamsg('This was written by The Pixie, on a game system created by The Pixie.');
       return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;

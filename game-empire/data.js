@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
   loc: 'throne_room',
   regex: /^(me|myself|player)$/,
@@ -29,7 +27,7 @@ QuestJs._create.createRoom('great_hall', {
   north: new QuestJs._create.Exit('throne_room'),
   south: new QuestJs._create.Exit('chapel'),
   west: new QuestJs._create.Exit('laboratory'),
-  //east:new QuestJs._create.Exit('gallery'),
+  // east:new QuestJs._create.Exit('gallery'),
 });
 
 QuestJs._create.createRoom('chapel', {

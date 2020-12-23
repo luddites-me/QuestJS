@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._npc_utilities.talkto = function () {
   if (!QuestJs._game.player.canTalk(this)) return false;
   const topics = this.getTopics(this);
@@ -10,7 +8,7 @@ QuestJs._npc_utilities.talkto = function () {
     });
   topics.push(QuestJs._lang.never_mind);
 
-  showSidePaneOptions(this, topics, function (result) {
+  showSidePaneOptions(this, topics, (result) => {
     $('#sidepane-menu').remove();
     if (result !== QuestJs._lang.never_mind) {
       result.runscript();
@@ -22,18 +20,13 @@ QuestJs._npc_utilities.talkto = function () {
 
 function showSidePaneOptions(item, options, fn) {
   const opts = { article: QuestJs._consts.DEFINITE, capital: true };
-  QuestJs._IO.input('', options, false, fn, function (options) {
-    let s =
-      '<div id="sidepane-menu"><p class="sidepane-menu-title">Talk to ' +
-      QuestJs._lang.getName(item, { article: QuestJs._consts.DEFINITE }) +
-      ':</p>';
+  QuestJs._IO.input('', options, false, fn, (options) => {
+    let s = `<div id="sidepane-menu"><p class="sidepane-menu-title">Talk to ${QuestJs._lang.getName(
+      item,
+      { article: QuestJs._consts.DEFINITE },
+    )}:</p>`;
     for (let i = 0; i < options.length; i += 1) {
-      s +=
-        '<p value="' +
-        i +
-        '" onclick="QuestJs._IO.menuResponse(' +
-        i +
-        ')" class="sidepane-menu-option">';
+      s += `<p value="${i}" onclick="QuestJs._IO.menuResponse(${i})" class="sidepane-menu-option">`;
       s += typeof options[i] === 'string' ? options[i] : QuestJs._lang.getName(options[i], opts);
       s += '</p>';
     }
@@ -47,7 +40,7 @@ QuestJs._create.createItem('Buddy', QuestJs._npc.NPC(false), {
   money: 10,
   properName: true,
   examine: 'An orangutan!',
-  talkto: function () {
+  talkto() {
     const res = quest.getState('A carrot for Buddy', this);
     QuestJs._log.info(res);
     if (!res.status) {
@@ -64,14 +57,14 @@ QuestJs._create.createItem('Buddy', QuestJs._npc.NPC(false), {
 QuestJs._create.createItem('knife', QuestJs._templates.TAKEABLE(), {
   loc: 'Buddy',
   sharp: false,
-  examine: function (isMultiple) {
+  examine(isMultiple) {
     if (this.sharp) {
-      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + 'A really sharp knife.');
+      QuestJs._io.msg(`${QuestJs._tools.prefix(this, isMultiple)}A really sharp knife.`);
     } else {
-      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + 'A blunt knife.');
+      QuestJs._io.msg(`${QuestJs._tools.prefix(this, isMultiple)}A blunt knife.`);
     }
   },
-  chargeResponse: function (participant) {
+  chargeResponse(participant) {
     QuestJs._io.msg('There is a loud bang, and the knife is destroyed.');
     delete this.loc;
     return false;
@@ -96,7 +89,7 @@ QuestJs._create.createRoom('dining_room_on_stool', {
   east: new QuestJs._create.Exit('lounge', { mapIgnore: true }),
   down: new QuestJs._create.Exit('dining_room', { mapIgnore: true }),
   alias: 'dining room (on a stool)',
-  //loc:"dining_room",
+  // loc:"dining_room",
 });
 
 QuestJs._create.createRoom('hole', {
@@ -106,7 +99,7 @@ QuestJs._create.createRoom('hole', {
 QuestJs._create.createItem('book', QuestJs._templates.TAKEABLE(), READABLE(true), {
   loc: 'lounge',
   examine: 'A leather-bound book.',
-  read: function (isMultiple, char) {
+  read(isMultiple, char) {
     if (QuestJs.cmdRules.isHeld(null, char, this, isMultiple)) {
       if (char === QuestJs._w.Lara) {
         QuestJs._io.msg("'Okay.' Lara spends a few minutes reading the book.");
@@ -118,16 +111,15 @@ QuestJs._create.createItem('book', QuestJs._templates.TAKEABLE(), READABLE(true)
         );
       } else {
         QuestJs._io.msg(
-          QuestJs._tools.prefix(this, isMultiple) +
-            'It is not in a language ' +
-            QuestJs._lang.pronounVerb(char, 'understand') +
-            '.',
+          `${QuestJs._tools.prefix(
+            this,
+            isMultiple,
+          )}It is not in a language ${QuestJs._lang.pronounVerb(char, 'understand')}.`,
         );
       }
       return true;
-    } else {
-      return false;
     }
+    return false;
   },
   lookinside: 'The book has pages and pages of text, but you do not even recongise the text.',
 });
@@ -144,31 +136,31 @@ QuestJs._create.createItem('boots', QuestJs._templates.WEARABLE(), {
 });
 
 QuestJs._create.createItem('waterskin', QuestJs._templates.TAKEABLE(), {
-  examine: function (isMultiple) {
+  examine(isMultiple) {
     QuestJs._io.msg(
-      QuestJs._tools.prefix(this, isMultiple) +
-        'The waterskin is ' +
-        Math.floor((this.full / this.capacity) * 100) +
-        '% full.',
+      `${QuestJs._tools.prefix(this, isMultiple)}The waterskin is ${Math.floor(
+        (this.full / this.capacity) * 100,
+      )}% full.`,
     );
   },
   capacity: 10,
   full: 3,
   loc: 'lounge',
-  fill: function (isMultiple) {
+  fill(isMultiple) {
     if (QuestJs._game.player.loc != 'garage') {
       QuestJs._io.msg(
-        QuestJs._tools.prefix(this, isMultiple) + 'There is nothing to charge the torch with here.',
+        `${QuestJs._tools.prefix(this, isMultiple)}There is nothing to charge the torch with here.`,
       );
       return false;
-    } else {
-      QuestJs._io.msg(
-        QuestJs._tools.prefix(this, isMultiple) +
-          'You charge the torch - it should last for hours now.',
-      );
-      this.power = 20;
-      return true;
     }
+    QuestJs._io.msg(
+      `${QuestJs._tools.prefix(
+        this,
+        isMultiple,
+      )}You charge the torch - it should last for hours now.`,
+    );
+    this.power = 20;
+    return true;
   },
 });
 
@@ -179,7 +171,7 @@ QuestJs._create.createItem(
   {
     examine: 'A cabinet with a glass front.',
     transparent: true,
-    isAtLoc: function (loc) {
+    isAtLoc(loc) {
       if (typeof loc !== 'string') loc = loc.name;
       return loc == 'lounge' || loc == 'dining_room';
     },
@@ -218,7 +210,7 @@ QuestJs._create.createItem(
 
 QuestJs._create.createItem('sandwich', QuestJs._templates.EDIBLE(false), {
   loc: 'lounge',
-  onIngesting: function () {
+  onIngesting() {
     QuestJs._io.msg('That was great!');
   },
 });
@@ -232,11 +224,12 @@ QuestJs._create.createItem('ornate_doll', QuestJs._templates.TAKEABLE(), {
 QuestJs._create.createItem('coin', QuestJs._templates.TAKEABLE(), {
   loc: 'lounge',
   examine: 'A gold coin.',
-  take: function (isMultiple, participant) {
+  take(isMultiple, participant) {
     QuestJs._io.msg(
-      QuestJs._tools.prefix(this, isMultiple) +
-        QuestJs._lang.pronounVerb(participant, 'try', true) +
-        ' to pick up the coin, but it just will not budge.',
+      `${
+        QuestJs._tools.prefix(this, isMultiple) +
+        QuestJs._lang.pronounVerb(participant, 'try', true)
+      } to pick up the coin, but it just will not budge.`,
     );
     return false;
   },
@@ -256,14 +249,14 @@ QuestJs._create.createItem(
     loc: 'lounge',
     examine: 'A small red torch.',
     regex: /^torch$/,
-    lightSource: function () {
+    lightSource() {
       return this.switchedon ? QuestJs._world.LIGHT_FULL : QuestJs._world.LIGHT_NONE;
     },
     eventPeriod: 1,
-    eventIsActive: function () {
+    eventIsActive() {
       return this.switchedon;
     },
-    eventScript: function () {
+    eventScript() {
       this.power -= 1;
       if (this.power === 2) {
         QuestJs._io.msg('The torch flickers.');
@@ -283,10 +276,13 @@ QuestJs._create.createItem(
       return true;
     },
     power: 2,
-    chargeResponse: function (participant) {
+    chargeResponse(participant) {
       QuestJs._io.msg(
-        QuestJs._lang.pronounVerb(participant, 'push', true) +
-          ' the button. There is a brief hum of power, and a flash.',
+        `${QuestJs._lang.pronounVerb(
+          participant,
+          'push',
+          true,
+        )} the button. There is a brief hum of power, and a flash.`,
       );
       QuestJs._w.flashlight.power = 20;
       return true;
@@ -309,9 +305,9 @@ QuestJs._create.createRoom('dining_room', {
 QuestJs._create.createItem('chair', QuestJs._templates.FURNITURE({ sit: true }), {
   loc: 'dining_room',
   examine: 'A wooden chair.',
-  onSit: function (char) {
+  onSit(char) {
     QuestJs._io.msg(
-      'The chair makes a strange noise when ' + QuestJs._lang.nounVerb(char, 'sit') + ' on it.',
+      `The chair makes a strange noise when ${QuestJs._lang.nounVerb(char, 'sit')} on it.`,
     );
   },
 });
@@ -320,13 +316,13 @@ QuestJs._create.createRoom('lift', QuestJs._templates.TRANSIT('east'), {
   desc: 'A curious lift.',
   east: new QuestJs._create.Exit('dining_room'),
   transitMenuPrompt: 'Where do you want to go?',
-  //afterEnter:transitOfferMenu,
-  //transitAutoMove:true,
-  //onTransitMove:function(toLoc, fromLoc) { QuestJs._io.debugmsg("MOVING to " + toLoc + " from " + fromLoc); },
-  //transitCheck:function() {
+  // afterEnter:transitOfferMenu,
+  // transitAutoMove:true,
+  // onTransitMove:function(toLoc, fromLoc) { QuestJs._io.debugmsg("MOVING to " + toLoc + " from " + fromLoc); },
+  // transitCheck:function() {
   //  QuestJs._io.msg("The lift is out of order");
   //  return false;
-  //},
+  // },
 });
 
 // calling it button_0 make it appear before button_1 in lists
@@ -371,23 +367,23 @@ QuestJs._create.createRoom('kitchen', {
     'A clean room{if:clock:scenery:, a clock hanging on the wall}. There is a sink in the corner.',
   west: new QuestJs._create.Exit('lounge'),
   down: new QuestJs._create.Exit('basement', {
-    isHidden: function () {
+    isHidden() {
       return QuestJs._w.trapdoor.closed;
     },
-    msg: function (isMultiple, char) {
+    msg(isMultiple, char) {
       if (char === QuestJs._game.player) {
         QuestJs._io.msg('You go through the trapdoor, and down the ladder.');
       } else {
         QuestJs._io.msg(
-          'You watch ' +
-            QuestJs._lang.getName(char, { article: QuestJs._consts.DEFINITE }) +
-            ' disappear through the trapdoor.',
+          `You watch ${QuestJs._lang.getName(char, {
+            article: QuestJs._consts.DEFINITE,
+          })} disappear through the trapdoor.`,
         );
       }
     },
   }),
   north: new QuestJs._create.Exit('garage'),
-  afterFirstEnter: function () {
+  afterFirstEnter() {
     QuestJs._io.msg('A fresh smell here!');
   },
   hint: 'This room features two doors that open and close. The garage door needs a key.',
@@ -425,7 +421,7 @@ QuestJs._create.createItem('kitchen_sink', {
   loc: 'kitchen',
   scenery: true,
   examine: 'A dirty sink.',
-  isSourceOf: function (subst) {
+  isSourceOf(subst) {
     return subst === 'water' || subst === 'lemonade';
   },
 });
@@ -440,11 +436,11 @@ QuestJs._create.createRoom('basement', {
   desc: 'A dank room, with piles of crates everywhere.',
   darkDesc: 'It is dark, but you can just see the outline of the trapdoor above you.',
   up: new QuestJs._create.Exit('kitchen', {
-    isHidden: function () {
+    isHidden() {
       return false;
     },
   }),
-  lightSource: function () {
+  lightSource() {
     return QuestJs._w.light_switch.switchedon
       ? QuestJs._world.LIGHT_FULL
       : QuestJs._world.LIGHT_NONE;
@@ -457,20 +453,19 @@ QuestJs._create.createItem('light_switch', QuestJs._templates.SWITCHABLE(false),
   loc: 'basement',
   examine: 'A switch, presumably for the light.',
   alias: 'light switch',
-  checkCanSwitchOn: function () {
+  checkCanSwitchOn() {
     if (!QuestJs._w.crates.moved) {
       QuestJs._io.msg('You cannot reach the light switch, without first moving the crates.');
       return false;
-    } else {
-      return true;
     }
+    return true;
   },
 });
 
 QuestJs._create.createItem('crates', {
   loc: 'basement',
   examine: 'A bunch of old crates.',
-  move: function () {
+  move() {
     QuestJs._io.msg('You move the crates, so the light switch is accessible.');
     this.moved = true;
     return true;
@@ -501,7 +496,7 @@ QuestJs._create.createItem('charger', {
   examine:
     'A device bigger than a washing machine to charge a torch? It has a compartment and a button. {charger_state}.',
   mended: false,
-  use: function () {
+  use() {
     QuestJs._io.metamsg(
       'To use the charge, you need to put the torch in the compartment and press the button.',
     );
@@ -516,7 +511,7 @@ QuestJs._create.createItem(
     alias: 'compartment',
     examine:
       'The compartment is just the right size for the torch. It is {if:charger_compartment:closed:closed:open}.',
-    testRestrictions: function (item) {
+    testRestrictions(item) {
       const contents = QuestJs._w.charger_compartment.getContents(QuestJs._world.LOOK);
       if (contents.length > 0) {
         QuestJs._io.msg('The compartment is full.');
@@ -534,22 +529,25 @@ QuestJs._create.createItem(
   {
     examine: 'A big red button.',
     alias: 'button',
-    push: function (isMultiple, char) {
+    push(isMultiple, char) {
       const contents = QuestJs._w.charger_compartment.getContents(QuestJs._world.ALL)[0];
       if (!QuestJs._w.charger_compartment.closed || !contents) {
         QuestJs._io.msg(
-          QuestJs._lang.pronounVerb(char, 'push', true) + ' the button, but nothing happens.',
+          `${QuestJs._lang.pronounVerb(char, 'push', true)} the button, but nothing happens.`,
         );
         return false;
-      } else if (!contents.chargeResponse) {
-        QuestJs._io.msg(
-          QuestJs._lang.pronounVerb(char, 'push', true) +
-            ' the button. There is a brief hum of power, but nothing happens.',
-        );
-        return false;
-      } else {
-        return contents.chargeResponse(char);
       }
+      if (!contents.chargeResponse) {
+        QuestJs._io.msg(
+          `${QuestJs._lang.pronounVerb(
+            char,
+            'push',
+            true,
+          )} the button. There is a brief hum of power, but nothing happens.`,
+        );
+        return false;
+      }
+      return contents.chargeResponse(char);
     },
   },
 );
@@ -669,11 +667,11 @@ QuestJs._create.createRoom('far_away', {
 
 QuestJs._create.createItem('Arthur', QuestJs._npc.NPC(false), {
   loc: 'garden',
-  examine: function (isMultiple) {
+  examine(isMultiple) {
     if (this.suspended) {
-      QuestJs._io.msg(QuestJs._tools.prefix(item, isMultiple) + 'Arthur is asleep.');
+      QuestJs._io.msg(`${QuestJs._tools.prefix(item, isMultiple)}Arthur is asleep.`);
     } else {
-      QuestJs._io.msg(QuestJs._tools.prefix(item, isMultiple) + 'Arthur is awake.');
+      QuestJs._io.msg(`${QuestJs._tools.prefix(item, isMultiple)}Arthur is awake.`);
     }
   },
   suspended: true,
@@ -686,7 +684,7 @@ QuestJs._create.createItem('Arthur', QuestJs._npc.NPC(false), {
     "walkTo:garden:inTheGardenWithLara:'Look at all the beautiful flowers,' says Arthur.:Through the window you see Arthur say something to Lara.",
     'text:Lara smells the flowers.',
   ],
-  inTheGardenWithLara: function (arr) {
+  inTheGardenWithLara(arr) {
     if (this.isHere()) {
       QuestJs._io.msg(arr[0]);
     }
@@ -694,7 +692,7 @@ QuestJs._create.createItem('Arthur', QuestJs._npc.NPC(false), {
       QuestJs._io.msg(arr[1]);
     }
   },
-  talkto: function () {
+  talkto() {
     QuestJs._io.msg("'Hey, wake up,' you say to Arthur.");
     this.suspended = false;
     this.pause();
@@ -709,43 +707,43 @@ QuestJs._create.createItem('Arthur', QuestJs._npc.NPC(false), {
 });
 
 QuestJs._create.createItem('ball', {
-  //loc:"Kyle",
+  // loc:"Kyle",
   examine: 'Some old boots.',
 });
 
 QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(false), {
   loc: 'lounge',
-  //alias:'Bobby',
+  // alias:'Bobby',
   examine: 'A grizzly bear. But cute.',
   properName: true,
-  //agenda:["text:Hello", "wait:2:ending", "text:goodbye"],
-  //agenda:["patrol:dining_room:lounge:kitchen:lounge"],
+  // agenda:["text:Hello", "wait:2:ending", "text:goodbye"],
+  // agenda:["patrol:dining_room:lounge:kitchen:lounge"],
   askOptions: [
     {
       name: 'House',
-      test: function (p) {
+      test(p) {
         return p.text.match(/house/);
       },
       msg: "'I like it,' says Kyle.",
     },
     {
       name: 'Garden',
-      test: function (p) {
+      test(p) {
         return p.text.match(/garden/);
       },
       responses: [
         {
-          test: function (p) {
+          test(p) {
             return QuestJs._w.garden.fixed;
           },
           msg: "'Looks much better now,' Kyle says with a grin.",
         },
         {
-          test: function (p) {
+          test(p) {
             return QuestJs._w.Kyle.needsWorkCount === 0;
           },
           msg: "'Needs some work,' Kyle says with a sign.",
-          script: function (p) {
+          script(p) {
             QuestJs._w.Kyle.needsWorkCount += 1;
           },
         },
@@ -755,7 +753,7 @@ QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(false), {
       ],
     },
     {
-      test: function (p) {
+      test(p) {
         return p.text.match(/park/);
       },
       responses: [
@@ -769,7 +767,7 @@ QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(false), {
     },
     {
       name: 'Fountain',
-      test: function (p) {
+      test(p) {
         return p.text.match(/fountain/) && p.actor.specialFlag;
       },
       msg: "'The fountain does not work.'",
@@ -777,7 +775,7 @@ QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(false), {
     {
       name: 'Swings',
       silent: true,
-      test: function (p) {
+      test(p) {
         return p.text.match(/swing/);
       },
       msg: "'The swings are fun!'",
@@ -788,7 +786,7 @@ QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(false), {
     },
   ],
   needsWorkCount: 0,
-  talkto: function () {
+  talkto() {
     switch (this.talktoCount) {
       case 0:
         QuestJs._io.msg("You say 'Hello,' to Kyle, and he replies in kind.");
@@ -815,20 +813,20 @@ QuestJs._create.createItem('kyle_question', QuestJs._npc.QUESTION(), {
   responses: [
     {
       regex: /^(yes)$/,
-      response: function () {
+      response() {
         QuestJs._io.msg("'Oh, cool,' says Kyle.");
       },
     },
     {
       regex: /^(no)$/,
-      response: function () {
+      response() {
         QuestJs._io.msg(
           "'Oh, well, Lara, this is Tester, he or she is testing Quest 6,' says Kyle.",
         );
       },
     },
     {
-      response: function () {
+      response() {
         QuestJs._io.msg(
           "'I don't know what that means,' says Kyle. 'It's a simple yes-no question.'",
         );
@@ -848,7 +846,7 @@ QuestJs._create.createItem('Kyle_The_Garden', QuestJs._npc.TOPIC(true), {
   loc: 'Kyle',
   alias: "What's the deal with the garden?",
   nowShow: ['Mary_The_Garden_Again'],
-  script: function () {
+  script() {
     QuestJs._io.msg("You ask Kyle about the garden, but he's not talking.");
   },
 });
@@ -856,7 +854,7 @@ QuestJs._create.createItem('Kyle_The_Garden', QuestJs._npc.TOPIC(true), {
 QuestJs._create.createItem('Kyle_The_Garden_Again', QuestJs._npc.TOPIC(false), {
   loc: 'Kyle',
   alias: "Seriously, what's the deal with the garden?",
-  script: function () {
+  script() {
     QuestJs._io.msg("You ask Kyle about the garden, but he's STILL not talking.");
   },
 });
@@ -864,7 +862,7 @@ QuestJs._create.createItem('Kyle_The_Garden_Again', QuestJs._npc.TOPIC(false), {
 QuestJs._create.createItem('Kyle_The_Weather', QuestJs._npc.TOPIC(true), {
   loc: 'Kyle',
   alias: 'The weather',
-  script: function () {
+  script() {
     QuestJs._io.msg('You talk to Kyle about the weather.');
   },
 });
@@ -874,7 +872,7 @@ QuestJs._create.createItem('Lara', QuestJs._npc.NPC(true), {
   examine: 'A normal-sized bunny.',
   properName: true,
   happy: false,
-  giveReaction: function (item, multiple, char) {
+  giveReaction(item, multiple, char) {
     if (item === QuestJs._w.ring) {
       QuestJs._io.msg(
         "'Oh, my,' says Lara. 'How delightful.' She slips the ring on her finger, then hands you a key.",
@@ -890,32 +888,30 @@ QuestJs._create.createItem('Lara', QuestJs._npc.NPC(true), {
       QuestJs._io.msg("'Why would I want {i:that}?'");
     }
   },
-  getAgreementTake: function (item) {
+  getAgreementTake(item) {
     if (item === QuestJs._w.brick) {
       QuestJs._io.msg("'I'm not picking up any bricks,' says Lara indignantly.");
       return false;
     }
     return true;
   },
-  getAgreementGo: function (dir) {
+  getAgreementGo(dir) {
     if (!this.happy) {
-      QuestJs._io.msg(
-        "'I'm not going " + dir + ",' says Lara indignantly. 'I don't like that room.'",
-      );
+      QuestJs._io.msg(`'I'm not going ${dir},' says Lara indignantly. 'I don't like that room.'`);
       return false;
     }
     return true;
   },
-  getAgreementDrop: function () {
+  getAgreementDrop() {
     return true;
   },
-  getAgreementStand: function () {
+  getAgreementStand() {
     return true;
   },
-  getAgreementRead: function () {
+  getAgreementRead() {
     return true;
   },
-  getAgreementPosture: function () {
+  getAgreementPosture() {
     if (!this.happy) {
       QuestJs._io.msg("'I don't think so!' says Lara indignantly.");
       return false;
@@ -926,7 +922,7 @@ QuestJs._create.createItem('Lara', QuestJs._npc.NPC(true), {
     QuestJs._io.msg("'I'm not doing that!' says Lara indignantly.");
     return false;
   },
-  canTalkPlayer: function () {
+  canTalkPlayer() {
     return true;
   },
 
@@ -935,7 +931,7 @@ QuestJs._create.createItem('Lara', QuestJs._npc.NPC(true), {
     {
       regex: /^(hi|hello)$/,
       id: 'hello',
-      response: function () {
+      response() {
         QuestJs._io.msg("'Oh, hello there,' replies Lara.");
         if (QuestJs._w.Kyle.isHere()) {
           QuestJs._io.msg("'Have you two met before?' asks Kyle.");
@@ -949,7 +945,7 @@ QuestJs._create.createItem('Lara', QuestJs._npc.NPC(true), {
 QuestJs._create.createItem('Lara_garage_key', QuestJs._npc.TOPIC(true), {
   loc: 'Lara',
   alias: 'Can I have the garden key?',
-  script: function () {
+  script() {
     QuestJs._io.msg(
       'You ask Lara about the garage key; she agrees to give it to you if you give her a ring. Perhaps there is one in the glass cabinet?',
     );
@@ -959,7 +955,7 @@ QuestJs._create.createItem('Lara_garage_key', QuestJs._npc.TOPIC(true), {
 QuestJs._create.createItem('Lara_very_attractive', QuestJs._npc.TOPIC(true), {
   loc: 'Lara',
   alias: "You're very attractive",
-  script: function () {
+  script() {
     QuestJs._io.msg(
       "You tell Lara she looks very attractive. 'Why thank you!' she replies, smiling at last.",
     );
@@ -970,7 +966,7 @@ QuestJs._create.createItem('Lara_very_attractive', QuestJs._npc.TOPIC(true), {
 QuestJs._create.createItem('Lara_carrots', QuestJs._npc.TOPIC(true), {
   loc: 'Lara',
   alias: 'I hear you like carrots',
-  script: function () {
+  script() {
     QuestJs._io.msg(
       "'Need carrots!' she says with feeling. 'Fading away bunny!' She looks mournfully at her ample tummy.",
     );
@@ -982,7 +978,7 @@ QuestJs._create.createItem('walls', {
   examine: "They're walls, what are you expecting?",
   regex: /^wall$/,
   scenery: true,
-  isAtLoc: function (loc, situation) {
+  isAtLoc(loc, situation) {
     if (typeof loc !== 'string') loc = loc.name;
     return QuestJs._w[loc].room && situation === QuestJs._world.PARSER;
   },
@@ -996,7 +992,7 @@ QuestJs._create.createItem('brick', QuestJs._templates.COUNTABLE({ lounge: 7, di
 QuestJs._create.createRoom('shop', {
   desc: 'A funny little shop.',
   south: new QuestJs._create.Exit('road'),
-  willBuy: function (obj) {
+  willBuy(obj) {
     return obj === QuestJs._w.trophy;
   },
 });
@@ -1053,7 +1049,7 @@ QuestJs._create.createItem('tower', ZONE_FEATURE('desert', -1, 3, 4), {
 QuestJs._create.createItem('barrier', ZONE_BORDER('desert'), {
   examine: 'It is invisible!',
   scenery: true,
-  border: function (x, y) {
+  border(x, y) {
     return x * x + y * y > 55;
   },
   borderMsg: 'You try to head #, but hit an invisible barrier.',
@@ -1063,10 +1059,10 @@ QuestJs._create.createItem('barrier', ZONE_BORDER('desert'), {
 QuestJs._create.createItem('canyon', ZONE_BORDER('desert'), {
   examine: 'It looks very deep!',
   scenery: true,
-  border: function (x, y) {
+  border(x, y) {
     return x - y > 5;
   },
-  //borderMsg:"You cannot go #, the canyon is too wide to jump and too steep to climb.",
+  // borderMsg:"You cannot go #, the canyon is too wide to jump and too steep to climb.",
   borderDesc:
     'There is a deep canyon southeast of you, running from the southwest to the northeast.',
 });
@@ -1089,13 +1085,13 @@ QuestJs._create.createRoom('desert', ZONE(), {
       desc: 'You are stood on a road heading west through a desert, and east over a bridge.',
     },
     {
-      when: function (x, y) {
+      when(x, y) {
         return y === 0;
       },
       desc: 'You are stood on a road running east to west through a desert.',
     },
     {
-      when: function (x, y) {
+      when(x, y) {
         return y > 0;
       },
       desc: 'You are stood in the desert, north of the road.',
@@ -1127,7 +1123,7 @@ QuestJs._create.createRoom('bridge', {
   desc: 'From the bridge you can just how deep the canyon is.',
   west: new QuestJs._create.Exit('desert'),
   east: new QuestJs._create.Exit('road'),
-  beforeEnter: function () {
+  beforeEnter() {
     QuestJs._game.player.positionX = 5;
     QuestJs._game.player.positionY = 0;
   },
@@ -1140,7 +1136,7 @@ QuestJs._create.createRoom('inside_tower', {
   north: new QuestJs._create.Exit('shop'),
   alias: 'Inside the tower',
   properName: true,
-  beforeEnter: function () {
+  beforeEnter() {
     QuestJs._game.player.positionX = -1;
     QuestJs._game.player.positionY = 3;
   },
@@ -1155,10 +1151,10 @@ QuestJs._create.createItem('piggy_suu', QuestJs._npc.NPC(true), {
 
 QuestJs._create.createItem('timetable', QuestJs._npc.AGENDA_FOLLOWER(), {
   counter: 0,
-  script: function (n) {
+  script(n) {
     this.counter += n[0] ? parseInt(n[0]) : 1;
   },
-  check: function () {
+  check() {
     return this.flag;
   },
 });

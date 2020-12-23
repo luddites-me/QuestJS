@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._settings.title = 'A First RPG...';
 QuestJs._settings.author = 'The Pixie';
 QuestJs._settings.version = '1.1';
@@ -14,7 +12,7 @@ QuestJs._settings.attackOutputLevel = 10;
 QuestJs._settings.armourScaling = 10;
 QuestJs._settings.noTalkTo = false;
 QuestJs._settings.output = function (report) {
-  for (let el of report) {
+  for (const el of report) {
     if (el.level <= QuestJs._settings.attackOutputLevel) {
       if (el.level === 1) {
         QuestJs._io.msg(el.t);
@@ -54,29 +52,29 @@ QuestJs._settings.dateTime = {
     time: '%hour%:%minute% %ampm%',
   },
   functions: {
-    dayOfWeek: function (dict) {
+    dayOfWeek(dict) {
       return QuestJs._settings.dateTime.days[
         (dict.day + 365 * dict.year) % QuestJs._settings.dateTime.days.length
       ];
     },
-    dayOfYear: function (dict) {
-      let day = dict.day;
-      for (let el of QuestJs._settings.dateTime.months) {
-        if (el.n > day) return day + 1 + ' ' + el.name;
+    dayOfYear(dict) {
+      let { day } = dict;
+      for (const el of QuestJs._settings.dateTime.months) {
+        if (el.n > day) return `${day + 1} ${el.name}`;
         day -= el.n;
       }
       return 'failed';
     },
-    year: function (dict) {
-      return 'AD ' + (dict.year + 1000);
+    year(dict) {
+      return `AD ${dict.year + 1000}`;
     },
-    hour: function (dict) {
+    hour(dict) {
       return dict.hour < 13 ? dict.hour : dict.hour - 12;
     },
-    minute: function (dict) {
-      return dict.minute < 10 ? '0' + dict.minute : dict.minute;
+    minute(dict) {
+      return dict.minute < 10 ? `0${dict.minute}` : dict.minute;
     },
-    ampm: function (dict) {
+    ampm(dict) {
       if (dict.minute === 0 && dict.hour === 0) return 'midnight';
       if (dict.minute === 0 && dict.hour === 12) return 'noon';
       return dict.hour < 12 ? 'am' : 'pm';
@@ -139,11 +137,11 @@ QuestJs._settings.customUI = function () {
   document.writeln('<div id="choose-weapon-div" title="Select a weapon">');
   document.writeln('<select id="weapon-select"></select>');
   document.writeln('</div>');
-  $(function () {
+  $(() => {
     $('#choose-weapon-div').dialog({
       autoOpen: false,
       buttons: {
-        OK: function () {
+        OK() {
           skillUI.chosenWeapon();
         },
       },
@@ -154,12 +152,9 @@ QuestJs._settings.customUI = function () {
 QuestJs._settings.updateCustomUI = function () {
   $('#weaponImage').attr(
     'src',
-    QuestJs._settings.imagesFolder +
-      'icon-' +
-      QuestJs._game.player.getEquippedWeapon().image +
-      '.png',
+    `${QuestJs._settings.imagesFolder}icon-${QuestJs._game.player.getEquippedWeapon().image}.png`,
   );
-  $('#weapon-td').prop('title', 'Weapon: ' + QuestJs._game.player.getEquippedWeapon().alias);
+  $('#weapon-td').prop('title', `Weapon: ${QuestJs._game.player.getEquippedWeapon().alias}`);
 
   $('#hits-indicator').css(
     'padding-right',
@@ -167,7 +162,7 @@ QuestJs._settings.updateCustomUI = function () {
   );
   $('#hits-td').prop(
     'title',
-    'Hits: ' + QuestJs._game.player.health + '/' + QuestJs._game.player.maxHealth,
+    `Hits: ${QuestJs._game.player.health}/${QuestJs._game.player.maxHealth}`,
   );
 
   $('#pp-indicator').css(
@@ -176,7 +171,7 @@ QuestJs._settings.updateCustomUI = function () {
   );
   $('#pp-td').prop(
     'title',
-    'Power points: ' + QuestJs._game.player.pp + '/' + QuestJs._game.player.maxPP,
+    `Power points: ${QuestJs._game.player.pp}/${QuestJs._game.player.maxPP}`,
   );
 
   $('#armour-indicator').css(
@@ -185,20 +180,20 @@ QuestJs._settings.updateCustomUI = function () {
   );
   $('#armour-td').prop(
     'title',
-    'Armour: ' + QuestJs._game.player.armour + '/' + QuestJs._game.player.maxArmour,
+    `Armour: ${QuestJs._game.player.armour}/${QuestJs._game.player.maxArmour}`,
   );
 
-  //QuestJs._log.info($('#hits-td').prop('title'));
+  // QuestJs._log.info($('#hits-td').prop('title'));
 
-  //QuestJs._log.info(QuestJs._game.player.skillsLearnt)
+  // QuestJs._log.info(QuestJs._game.player.skillsLearnt)
   skillUI.removeAllButtons();
-  for (let skill of skills.list) {
-    //QuestJs._log.info(skill.name)
+  for (const skill of skills.list) {
+    // QuestJs._log.info(skill.name)
     if (QuestJs._game.player.skillsLearnt.includes(skill.name)) {
       skillUI.setButton(skill);
     }
   }
-  for (let key in QuestJs._w) {
+  for (const key in QuestJs._w) {
     if (QuestJs._w[key].health !== undefined && QuestJs._w[key].maxHealth === undefined) {
       QuestJs._w[key].maxHealth = QuestJs._w[key].health;
     }
@@ -209,18 +204,13 @@ const skillUI = {
   skills: [],
   selected: false,
 
-  setButton: function (skill) {
+  setButton(skill) {
     if (!skill.icon) skill.icon = skill.name.toLowerCase();
-    const cell = $('#cell' + skillUI.skills.length);
-    let s = '<div class="skill-container" title="' + skill.tooltip + '" >';
-    s +=
-      '<img class="skill-image" src="' +
-      QuestJs._settings.imagesFolder +
-      'icon-' +
-      skill.icon +
-      '.png"/>';
+    const cell = $(`#cell${skillUI.skills.length}`);
+    let s = `<div class="skill-container" title="${skill.tooltip}" >`;
+    s += `<img class="skill-image" src="${QuestJs._settings.imagesFolder}icon-${skill.icon}.png"/>`;
     if (skill.spell)
-      s += '<img class="skill-image" src="' + QuestJs._settings.imagesFolder + 'flag-spell.png"/>';
+      s += `<img class="skill-image" src="${QuestJs._settings.imagesFolder}flag-spell.png"/>`;
     s += '</div>';
     cell.html(s);
     cell.click(skillUI.buttonClickHandler);
@@ -230,58 +220,58 @@ const skillUI = {
     skillUI.skills.push(skill);
   },
 
-  resetButtons: function () {
-    //QuestJs._log.info('reset')
+  resetButtons() {
+    // QuestJs._log.info('reset')
     for (let i = 0; i < skillUI.skills.length; i += 1) {
-      $('#cell' + i).css('background-color', 'black');
+      $(`#cell${i}`).css('background-color', 'black');
     }
     $('#castButton').prop('disabled', true);
     skillUI.selected = false;
   },
 
-  removeAllButtons: function () {
+  removeAllButtons() {
     for (let i = 0; i < skillUI.skills.length; i += 1) {
-      $('#cell' + i).html('');
+      $(`#cell${i}`).html('');
     }
     skillUI.skills = [];
     $('#castButton').prop('disabled', true);
     skillUI.selected = false;
   },
 
-  buttonClickHandler: function (event) {
+  buttonClickHandler(event) {
     QuestJs._log.info(event);
     skillUI.resetButtons();
 
     const n = parseInt(event.currentTarget.id.replace('cell', ''));
     QuestJs._log.info(n);
     skillUI.selected = n;
-    const cell = $('#cell' + n);
+    const cell = $(`#cell${n}`);
     cell.css('background-color', 'yellow');
     const skill = skillUI.skills[n];
     if (skill.noTarget) $('#castButton').prop('disabled', false);
   },
 
-  getSkillFromButtons: function () {
+  getSkillFromButtons() {
     return skillUI.selected ? skillUI.skills[skillUI.selected] : null;
   },
 
-  castButtonClick: function () {
+  castButtonClick() {
     QuestJs._log.info('CKLOICK!!!');
-    QuestJs._log.info('CKLOICK!!! ' + skillUI.selected);
-    QuestJs._log.info('CKLOICK!!! ' + skillUI.skills);
-    QuestJs._log.info('CKLOICK!!! ' + skillUI.skills[skillUI.selected].name);
+    QuestJs._log.info(`CKLOICK!!! ${skillUI.selected}`);
+    QuestJs._log.info(`CKLOICK!!! ${skillUI.skills}`);
+    QuestJs._log.info(`CKLOICK!!! ${skillUI.skills[skillUI.selected].name}`);
   },
 
-  chooseWeapon: function () {
+  chooseWeapon() {
     QuestJs._log.info('in chooseWeapon');
     const weapons = [];
-    for (let o in QuestJs._w) {
+    for (const o in QuestJs._w) {
       if (
         QuestJs._w[o].isAtLoc(QuestJs._game.player, QuestJs._world.SCOPING) &&
         QuestJs._w[o].weapon
       ) {
         QuestJs._log.info(o);
-        weapons.push('<option value="' + o + '">' + QuestJs._w[o].listalias + '</option>');
+        weapons.push(`<option value="${o}">${QuestJs._w[o].listalias}</option>`);
       }
     }
     const s = weapons.join('');
@@ -292,10 +282,10 @@ const skillUI = {
     $('#choose-weapon-div').dialog('open');
   },
 
-  chosenWeapon: function () {
+  chosenWeapon() {
     $('#choose-weapon-div').dialog('close');
     const selected = $('#weapon-select').val();
-    QuestJs._log.info('in chosenWeapon: ' + selected);
+    QuestJs._log.info(`in chosenWeapon: ${selected}`);
     QuestJs._w[selected].equip(false, QuestJs._game.player);
     QuestJs._world.endTurn(QuestJs._world.SUCCESS);
   },
@@ -310,7 +300,7 @@ QuestJs._settings.professions = [
   { name: 'Merchant', bonus: 'charisma' },
 ];
 
-$(function () {
+$(() => {
   if (QuestJs._settings.startingDialogDisabled) {
     const p = QuestJs._w.me;
     p.job = QuestJs._settings.professions[0];
@@ -326,8 +316,8 @@ $(function () {
   s += '<p>Male: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
   s += 'Female<input type="radio" id="female" name="sex" value="female" checked></p>';
   s += '<p>Job:<select id="job">';
-  for (let profession of QuestJs._settings.professions) {
-    s += '<option value="' + profession.name + '">' + profession.name + '</option>';
+  for (const profession of QuestJs._settings.professions) {
+    s += `<option value="${profession.name}">${profession.name}</option>`;
   }
   s += '</select></p>';
 
@@ -344,13 +334,11 @@ $(function () {
     buttons: [
       {
         text: 'OK',
-        click: function () {
+        click() {
           $(this).dialog('close');
           const p = QuestJs._game.player;
           const job = $('#job').val();
-          p.job = QuestJs._settings.professions.find(function (el) {
-            return el.name === job;
-          });
+          p.job = QuestJs._settings.professions.find((el) => el.name === job);
           p.isFemale = $('#female').is(':checked');
           QuestJs._settings.gui = $('#gui').is(':checked');
           p.fullname = $('#namefield').val();

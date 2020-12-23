@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._settings.title = 'Quest 6 Map Demo';
 QuestJs._settings.author = 'The Pixie';
 QuestJs._settings.version = '0.1';
@@ -28,7 +26,7 @@ QuestJs._settings.mapStyle = {
   'background-image': 'url(game-map/paper.jpg)',
 };
 QuestJs._settings.mapClick = function (name) {
-  QuestJs._io.metamsg('You clicked on ' + QuestJs._w[name].alias);
+  QuestJs._io.metamsg(`You clicked on ${QuestJs._w[name].alias}`);
 };
 QuestJs._settings.mapAutomapFrom = ['street_middle', 'glade'];
 QuestJs._settings.mapMarker = function (loc) {
@@ -50,10 +48,10 @@ QuestJs._settings.mapMarker = function (loc) {
 QuestJs._settings.mapExtras = function () {
   const result = [];
   const room = QuestJs._w[QuestJs._game.player.loc];
-  /*for (let o of [QuestJs._w.Robot, QuestJs._w.Lara, QuestJs._w.Kyle]) {
+  /* for (let o of [QuestJs._w.Robot, QuestJs._w.Lara, QuestJs._w.Kyle]) {
     if (QuestJs._w[o.loc].mapZ !== room.mapZ || QuestJs._w[o.loc].mapRegion !== room.mapRegion) continue
     result.push(o.mapDrawBase())
-  }*/
+  } */
   result.push(
     map.polygon(
       room,

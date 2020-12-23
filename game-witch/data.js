@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._create.createRoom('_oldcastle', {
   desc: 'None',
 });
@@ -8,8 +6,8 @@ QuestJs._create.createRoom('yourchambers', {
   loc: '_oldcastle',
   desc:
     'This room is your public face to the world; this is where you greet visitors who want to bend your ear or outright bribe you. Even the King himself has visited you here once or twice, and so you have taken the time to esure the room is richly furnished over the years. The walls are hung with tapestries, the chairs are well-upholstered, and the desk is an exquisite example of marquetry. In each corner a vase stands on it own pedastal.<br/>To the north is your bedroom; a private room for you alone. To the northwest, hidden by a tapestry, and enchantments too, is a secret passage to your laboratory. Naturally the laboratory is for you alone too. You exit your chambers via the door to the east, whilst to the south is a window over looking the higher courtyard.',
-  beforeFirstEnter: function () {},
-  afterEnter: function () {
+  beforeFirstEnter() {},
+  afterEnter() {
     if (QuestJs._game.invaded) {
       if (this.firstTimeFlag) {
         this.firstTimeFlag = true;
@@ -26,7 +24,7 @@ QuestJs._create.createRoom('yourchambers', {
       }
     }
   },
-  afterFirstEnter: function () {
+  afterFirstEnter() {
     QuestJs._io.msg(' ');
     QuestJs._io.msg("'Jenina! Jenina!' A shrill shout from the painting hanging on the wall.");
     QuestJs._io.msg("'Yes, mother,' you say wearily.");
@@ -58,7 +56,7 @@ QuestJs._create.createItem('painting_mother', {
 
 QuestJs._create.createItem('mother_men_description', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
-  runscript: function () {
+  runscript() {
     QuestJs._io.msg("'What can you tell me about the men,' you ask your mother.");
     QuestJs._io.msg(
       "'Oh, well, let me see. there were two of them. I find it terribly difficult to judge size through these things, but well-built and on the tall side, I would say. Branishing swords, and wearing leather armour and metal helmets. One was quite good-looking, apart from a scar across his chin.'",
@@ -68,7 +66,7 @@ QuestJs._create.createItem('mother_men_description', QuestJs._npc.TOPIC(false), 
 
 QuestJs._create.createItem('mother_men_doing', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
-  runscript: function () {
+  runscript() {
     QuestJs._io.msg("'What were the men doing in my rooms?' you ask your mother.");
     QuestJs._io.msg(
       "'Looking for you, I suspect. They shouted for you, and went into your bedroom, but had left within moments. I was quiye by luch that I noticed them at all.'",
@@ -79,7 +77,7 @@ QuestJs._create.createItem('mother_men_doing', QuestJs._npc.TOPIC(false), {
 
 QuestJs._create.createItem('mother_help', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
-  runscript: function () {
+  runscript() {
     QuestJs._io.msg("'Can you help me find out what's happening?' you ask the painting.");
     QuestJs._io.msg("'Me?'");
     QuestJs._io.msg("'Yes, you. Do some scrying or something. You used to be good at it.'");
@@ -92,7 +90,7 @@ QuestJs._create.createItem('mother_help', QuestJs._npc.TOPIC(false), {
 
 QuestJs._create.createItem('mother_scrying1', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
-  runscript: function () {
+  runscript() {
     QuestJs._io.msg("'Have you had any luck scrying?' you ask your mother.");
     QuestJs._io.msg("'Give me a chance, dear.'");
   },
@@ -100,7 +98,7 @@ QuestJs._create.createItem('mother_scrying1', QuestJs._npc.TOPIC(false), {
 
 QuestJs._create.createItem('mother_scrying2', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
-  runscript: function () {
+  runscript() {
     QuestJs._io.msg("'Have you had any more luck scrying?' you ask your mother.");
     QuestJs._io.msg("'No. Whatever I try, it's still blocked, I'm afraid.'");
   },
@@ -108,7 +106,7 @@ QuestJs._create.createItem('mother_scrying2', QuestJs._npc.TOPIC(false), {
 
 QuestJs._create.createItem('mother_scrying3', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
-  runscript: function () {
+  runscript() {
     QuestJs._io.msg("'Have you had any luck scrying?' you ask your mother.");
     QuestJs._io.msg(
       "'Not a lot - which is rather worrying. As you know, my skill at scrying is not modest...' {i:Unlike you}, you say to yourself. '... And so I can say with some certainty that someone is actively trying to block my attempts. The king is fine, at least for now, I can see him, riding his pet hellcat; it is the business at the castle that is obscured. What will happen when the king returns to the castle, I would not like to think upon.'",
@@ -120,7 +118,7 @@ QuestJs._create.createItem('mother_scrying3', QuestJs._npc.TOPIC(false), {
 
 QuestJs._create.createItem('mother_the_plan', QuestJs._npc.TOPIC(true), {
   loc: 'painting_mother',
-  runscript: function () {
+  runscript() {
     QuestJs._io.msg("'Reminder me of the plan again,' you say, knowing it will annoy your mother.");
     QuestJs._io.msg(
       "'Seriously, girl? We've been over this so many times. You are to give birth to the chosen one, who will rule the land for the sisterhood. Do you remember that? So for now, you job is to ensure the queen and the other concubines do not get pregnant. You child must by the only royal heir.'",
@@ -130,7 +128,7 @@ QuestJs._create.createItem('mother_the_plan', QuestJs._npc.TOPIC(true), {
 
 QuestJs._create.createItem('mother_father', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
-  runscript: function () {
+  runscript() {
     QuestJs._io.msg(
       "'Who will be the father of my child?' Obviously not the king; no way could that idiot by the father of the chosen one.",
     );
@@ -146,7 +144,7 @@ QuestJs._create.createRoom('laboratory', {
   loc: '_oldcastle',
   desc:
     'This is where you perform your dark rituals and concoct your foul potions. Hidden within the width of the outer walls, it is long and thin, and windowless. Along the long east side are workbenches, and above them shelves lines with jars.',
-  afterEnter: function () {
+  afterEnter() {
     if (QuestJs._w.janthherb.isAtLoc('QuestJs._w.player')) {
       QuestJs._io.msg('Now you have the janthherb, you will be able to brew the Reklindraa.');
     } else if (QuestJs._w.janthherb.isAtLoc('QuestJs._w.apprentice')) {
@@ -218,7 +216,7 @@ QuestJs._create.createRoom('newhallbalcony', {
   loc: '_newcastle',
   desc:
     'This wide balcony overlooks the new hall. In summer, bands play here during balls and banquets, which can make access to the old castle awkward. Steps head down into the hall itself, whilst there are doors to the north, back to the old castle, and south to the gallery.',
-  afterEnter: function () {
+  afterEnter() {
     if (QuestJs._w.mother_help.count > 0) {
       QuestJs._w.mother_scrying1.hide();
       QuestJs._w.mother_scrying2.show();
@@ -259,10 +257,10 @@ QuestJs._create.createRoom('diningroomwest', {
   loc: '_newcastle',
   desc:
     'Like the other end, the west end of the dining room has a hearth, and it is pleasantly warm here.<br/>A door to the north leads to the decidedly colder Inner Ward, and to the west to the kitchens.',
-  beforeFirstEnter: function () {
+  beforeFirstEnter() {
     if (!QuestJs._w.diningroomwest.done) {
-      let l = this.description.split('<br/>');
-      this.description = QuestJs._w.diningroomwest.longdesc + '<br/>' + l[1];
+      const l = this.description.split('<br/>');
+      this.description = `${QuestJs._w.diningroomwest.longdesc}<br/>${l[1]}`;
       QuestJs._w.diningroomwest.done = true;
     }
   },
@@ -275,10 +273,10 @@ QuestJs._create.createRoom('diningroomeast', {
   loc: '_newcastle',
   desc:
     'Like the other end, the east end of the dining room has a hearth, and it is pleasantly warm here.<br/>A door to the north leads to a flight of steps up to the lesser gallery.',
-  beforeFirstEnter: function () {
+  beforeFirstEnter() {
     if (!QuestJs._w.diningroomwest.done) {
-      let l = this.description.split('<br/>');
-      this.description = QuestJs._w.diningroomwest.longdesc + '<br/>' + l[1];
+      const l = this.description.split('<br/>');
+      this.description = `${QuestJs._w.diningroomwest.longdesc}<br/>${l[1]}`;
       QuestJs._w.diningroomwest.done = true;
     }
   },
@@ -303,21 +301,19 @@ QuestJs._create.createRoom('apprenticeroom', {
   loc: '_newcastle',
   desc:
     "This is Kendall's room, the vizier's apprentice. It is pretty basic, with a simple bed, a cabinet and a stool. Because of his position, Randall also has a desk, positioned under the only window.",
-  beforeEnter: function () {
+  beforeEnter() {
     if (!QuestJs._game.invaded) {
       QuestJs._io.msg("You knock on Kendall's door, and go straight in.");
     }
   },
-  afterEnter: function () {
+  afterEnter() {
     if (this.firstTimeFlag) {
       this.firstTimeFlag = true;
       QuestJs._io.msg(
         "Kendall is sat at the desk. He glances round, sees you, and quickly jumps to his feet. 'Lady Jenina, how good to see you,' he says, desparately not staring at your chest.",
       );
-    } else {
-      if (appretice.isAtLoc('this')) {
-        QuestJs._io.msg("'Hello again, lady Jenina,' says Kendall.");
-      }
+    } else if (appretice.isAtLoc('this')) {
+      QuestJs._io.msg("'Hello again, lady Jenina,' says Kendall.");
     }
   },
   west: new QuestJs._create.Exit('lessergallery'),
@@ -405,12 +401,12 @@ QuestJs._create.createRoom('outergatehouse', {
 
 QuestJs._create.createRoom('newbridge', {
   loc: '_outercastle',
-  desc: function () {
+  desc() {
     QuestJs._io.msg(
       'The three arches of the bridge span the gap between the rocky outcrops that the castle is built on and small hillock, from where the road winds down to the city.',
     );
   },
-  afterEnter: function () {
+  afterEnter() {
     switch (QuestJs._game.snow) {
       case 0:
         s += 'The bridge is covered in snow. Fortunately you have no need to visit the city today.';

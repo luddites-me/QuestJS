@@ -1,5 +1,3 @@
-'use strict';
-
 QuestJs._test.tests = function () {
   QuestJs._test.title('Equip');
   QuestJs._test.assertCmd('equip knife', 'You draw the knife.');
