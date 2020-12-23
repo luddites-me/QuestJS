@@ -12,9 +12,9 @@ quest.create('Charm for Tary', [
 
 
 
-util.openingTimes = function () {
-  if (util.isAfter('1700')) return QuestJs._io.falsemsg('The business is now closed.')
-  if (!util.isAfter('0800')) return QuestJs._io.falsemsg('The business closed until eight.')
+QuestJs._util.openingTimes = function () {
+  if (QuestJs._util.isAfter('1700')) return QuestJs._io.falsemsg('The business is now closed.')
+  if (!QuestJs._util.isAfter('0800')) return QuestJs._io.falsemsg('The business closed until eight.')
   return true
 }
     
@@ -22,7 +22,7 @@ util.openingTimes = function () {
 
 
 QuestJs._tp.addDirective("timeOfDayComment", function(arr, params) {
-  const time = util.getCustomDateTimeDict({})
+  const time = QuestJs._util.getCustomDateTimeDict({})
   const location = w[game.player.loc]
   if (!location.timeStatus) return ''
   let hour = time.hour
@@ -35,7 +35,7 @@ QuestJs._tp.addDirective("timeOfDayComment", function(arr, params) {
   
 QuestJs._tp.addDirective("npcStatus", function(arr, params) {
   const result = []
-  for (let el of scopeAllNpcHere()) {
+  for (let el of QuestJs._scope.scopeAllNpcHere()) {
     QuestJs._log.info(el.name)
     if (el.locationStatus) {
       const s = el.locationStatus()

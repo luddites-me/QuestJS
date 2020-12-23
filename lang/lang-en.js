@@ -406,7 +406,7 @@ QuestJs._lang = {
     if (flag || npc.inSight()) {
       s += QuestJs._lang.nounVerb(npc, "enter", !flag) + " " + QuestJs._lang.getName(w[npc.loc], {article:QuestJs._consts.DEFINITE});
       const exit = w[npc.loc].findExit(origin);
-      if (exit) s += " from " + util.niceDirection(exit.dir);
+      if (exit) s += " from " + QuestJs._util.niceDirection(exit.dir);
       s += ".";
       QuestJs._io.msg(s);
     }
@@ -792,7 +792,7 @@ QuestJs._lang = {
         }
       }
     }
-    s += util.getNameModifiers(item, options)
+    s += QuestJs._util.getNameModifiers(item, options)
 
     return (options && options.capital ? QuestJs._tools.sentenceCase(s) : s)
   },

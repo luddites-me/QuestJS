@@ -11,7 +11,7 @@ createItem("dinner_timetable", QuestJs._npc.AGENDA_FOLLOWER(), {
     'run:stepped:main',
     'run:stepped:desert',
   ],
-  stepped:function(arr) { return !respond({course:arr[0], actor:w.Kyle}, this.steps) },
+  stepped:function(arr) { return !QuestJs._util.respond({course:arr[0], actor:w.Kyle}, this.steps) },
   steps:[
     {
       test:function(p) { return p.course === 'starter' },

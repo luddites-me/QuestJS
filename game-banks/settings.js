@@ -38,7 +38,7 @@ QuestJs._settings.status = [
   function() { return QuestJs._settings.statusReport(w.Kyle) },
   function() { return QuestJs._settings.statusReport(w.Ostap) },
   function() { return QuestJs._settings.statusReport(w.Aada) },
-  function() { return '<td colspan="3" style="border:black solid 1px" align="center" title="The current date and time (adjusted for relativistic effects)">' + util.getDateTime() + '</td>' },
+  function() { return '<td colspan="3" style="border:black solid 1px" align="center" title="The current date and time (adjusted for relativistic effects)">' + QuestJs._util.getDateTime() + '</td>' },
   function() { return QuestJs._settings.oxygenReport() },
 ];
 
@@ -58,7 +58,7 @@ QuestJs._settings.statusReport = function(obj) {
   }
   else {
     s = obj.status.toString() + '%'
-    colourCode = util.getByInterval(QuestJs._settings.intervals, obj.status)
+    colourCode = QuestJs._util.getByInterval(QuestJs._settings.intervals, obj.status)
     if (obj.crewman) tooltip += 'in ' + w[obj.loc].alias
   }
   return '<td title="' + tooltip + '"><i>' + obj.alias + ':</i></td>' + QuestJs._settings.warningLight(colourCode) + '<td align="right">' + s + '</td>'
@@ -68,8 +68,8 @@ QuestJs._settings.oxygenReport = function(obj) {
   // https://ntrs.nasa.gov/citations/20040012725
   // so 0.58 g/m
   QuestJs._log.info(w.ship.oxygen)
-  QuestJs._log.info(util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 50))
-  const colourCode = util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 10)
+  QuestJs._log.info(QuestJs._util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 50))
+  const colourCode = QuestJs._util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 10)
   return '<td title="The ship has a limited amount of oxygen; an adult uses about 6 g every minute, but none while in stasis"><b>Oxygen:</b></td>' + QuestJs._settings.warningLight(colourCode) + '<td align="right"><span style="font-size:0.8em">' + (Math.round(w.ship.oxygen) / 1000).toFixed(3) + ' kg</span></td>'
 }
 

@@ -15,7 +15,7 @@ QuestJs._settings.tests = true
 
 QuestJs._settings.status = [
   function() { return '<td>Health points:</td><td>' + game.player.hitpoints + '</td>' },
-  function() { return '<td colspan="2">' + util.getDateTime() + '</td>' },
+  function() { return '<td colspan="2">' + QuestJs._util.getDateTime() + '</td>' },
 ]
 
 QuestJs._settings.roomTemplate = [

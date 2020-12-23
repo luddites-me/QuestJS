@@ -12,7 +12,7 @@ QuestJs._settings.symbolsForCompass = true
 QuestJs._settings.setup = function() {
   QuestJs._log.info(w.dinner_timetable.steps)
   QuestJs._log.info(w.dinner_timetable.steps.length)
-  util.verifyResponses(w.dinner_timetable.steps)
+  QuestJs._util.verifyResponses(w.dinner_timetable.steps)
 }
 
 QuestJs._settings.libraries.push('item_links')

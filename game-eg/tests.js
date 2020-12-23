@@ -104,22 +104,22 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertEqual(['boots', 'book', 'cardboard_box'], QuestJs._array.clone(testAry2, {compress:true}));
 
 
-  QuestJs._test.title("util.getByInterval")
+  QuestJs._test.title("QuestJs._util.getByInterval")
   const intervals = [2, 14, 4]
-  QuestJs._test.assertEqual(0, util.getByInterval(intervals, 0))
-  QuestJs._test.assertEqual(0, util.getByInterval(intervals, 1))
-  QuestJs._test.assertEqual(1, util.getByInterval(intervals, 2))
-  QuestJs._test.assertEqual(1, util.getByInterval(intervals, 15))
-  QuestJs._test.assertEqual(2, util.getByInterval(intervals, 16))
-  QuestJs._test.assertEqual(2, util.getByInterval(intervals, 19))
-  QuestJs._test.assertEqual(false, util.getByInterval(intervals, 20))
+  QuestJs._test.assertEqual(0, QuestJs._util.getByInterval(intervals, 0))
+  QuestJs._test.assertEqual(0, QuestJs._util.getByInterval(intervals, 1))
+  QuestJs._test.assertEqual(1, QuestJs._util.getByInterval(intervals, 2))
+  QuestJs._test.assertEqual(1, QuestJs._util.getByInterval(intervals, 15))
+  QuestJs._test.assertEqual(2, QuestJs._util.getByInterval(intervals, 16))
+  QuestJs._test.assertEqual(2, QuestJs._util.getByInterval(intervals, 19))
+  QuestJs._test.assertEqual(false, QuestJs._util.getByInterval(intervals, 20))
 
 
 
-  QuestJs._test.title("util.reverseDirection")
-  QuestJs._test.assertEqual('north', util.reverseDirection('south'))
-  QuestJs._test.assertEqual('up', util.reverseDirection('down'))
-  QuestJs._test.assertEqual('north', util.reverseDirectionObj('south').name)
+  QuestJs._test.title("QuestJs._util.reverseDirection")
+  QuestJs._test.assertEqual('north', QuestJs._util.reverseDirection('south'))
+  QuestJs._test.assertEqual('up', QuestJs._util.reverseDirection('down'))
+  QuestJs._test.assertEqual('north', QuestJs._util.reverseDirectionObj('south').name)
 
 
 
@@ -257,21 +257,21 @@ QuestJs._test.tests = function() {
   
   
   QuestJs._test.title("date time")
-  QuestJs._test.assertEqual("14 Feb 2019, 09:43", util.getDateTime())
-  const dateTimeDict = util.getDateTimeDict()
+  QuestJs._test.assertEqual("14 Feb 2019, 09:43", QuestJs._util.getDateTime())
+  const dateTimeDict = QuestJs._util.getDateTimeDict()
   QuestJs._test.assertEqual("February", dateTimeDict.month)
   QuestJs._test.assertEqual(9, dateTimeDict.hour)
   QuestJs._test.assertEqual("It is 14 Feb 2019, 09:43", QuestJs._text.processText("It is {dateTime}"));
   QuestJs._test.assertEqual("-Two-Three-", QuestJs._text.processText("{hour:3:8:One}-{hour:5:10:Two}-{hour:9:10:Three}-{hour:10:99:Four}"));
-  QuestJs._test.assertEqual(9, util.seconds(9))
-  QuestJs._test.assertEqual(127, util.seconds(7, 2))
-  QuestJs._test.assertEqual(127 + 3 * 3600, util.seconds(7, 2, 3))
-  QuestJs._test.assertEqual(127 + 3 * 3600 + 2 * 24 * 3600, util.seconds(7, 2, 3, 2))
+  QuestJs._test.assertEqual(9, QuestJs._util.seconds(9))
+  QuestJs._test.assertEqual(127, QuestJs._util.seconds(7, 2))
+  QuestJs._test.assertEqual(127 + 3 * 3600, QuestJs._util.seconds(7, 2, 3))
+  QuestJs._test.assertEqual(127 + 3 * 3600 + 2 * 24 * 3600, QuestJs._util.seconds(7, 2, 3, 2))
 
-  QuestJs._test.assertEqual(true, util.isAfter('February 14, 2019 09:42:00'))
-  QuestJs._test.assertEqual(false, util.isAfter('February 14, 2019 09:43:00'))
-  QuestJs._test.assertEqual(false, util.isAfter('0943'))
-  QuestJs._test.assertEqual(true, util.isAfter('0942'))
+  QuestJs._test.assertEqual(true, QuestJs._util.isAfter('February 14, 2019 09:42:00'))
+  QuestJs._test.assertEqual(false, QuestJs._util.isAfter('February 14, 2019 09:43:00'))
+  QuestJs._test.assertEqual(false, QuestJs._util.isAfter('0943'))
+  QuestJs._test.assertEqual(true, QuestJs._util.isAfter('0942'))
 
 
 
@@ -1054,7 +1054,7 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertCmd("drop carrot", ["You drop the carrot."])
   
   QuestJs._test.title("changing POV")
-  util.changePOV(w.piggy_suu)
+  QuestJs._util.changePOV(w.piggy_suu)
   QuestJs._test.assertCmd("l", ["The bridge", "From the bridge you can just how deep the canyon is.", "You can go east or west."])
   QuestJs._test.assertCmd("e", ["You head east.", "The road", "A road heading west over a bridge. You can see a shop to the north.", "You can see Buddy (holding a flashlight and a garage key; wearing a suit) and a carrot here.", "You can go east, north or west."])
 

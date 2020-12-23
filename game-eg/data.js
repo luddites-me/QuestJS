@@ -94,7 +94,7 @@ createRoom("lounge", {
 });
 
 
-util.changePOV(w.Buddy)
+QuestJs._util.changePOV(w.Buddy)
 
 
 
