@@ -16,7 +16,8 @@ const PLANETS = [
       'The planet is predominantly grey rock. There are no bodies of water on the surface and no cloud cover. It is 6.8 times the mass of Earth.',
     starDesc:
       'HD 154088 is a seventh magnitude metal-rich K-type main sequence star that lies approximately 58 light-years from Earth in the constellation of Ophiuchus.',
-    probeLandingSuccess: 'ynyyyynyyyynyyynnyyynnnyynyyyyyyyynynyyynynnynyyyyyyyynynyyy',
+    probeLandingSuccess:
+      'ynyyyynyyyynyyynnyyynnnyynyyyyyyyynynyyynynnynyyyyyyyynynyyy',
     geoProbeRanks: [[3, 7, 12], [5], [4], [6]],
     geoProbeBonusPerRank: 2,
     bioProbeRanks: [[3, 7, 10], [2, 6], [2, 7], [6]],
@@ -56,7 +57,8 @@ const PLANETS = [
       'The planet surface is about 75% water. The land surfaces are predominantly purple. Cloud cover is about 40%.',
     starDesc:
       'HD 168746 is an 8th magnitude star in the constellation of Serpens, 139 light years from Earth. It is very similar to our Sun, a yellow dwarf star (spectral class G5V).',
-    probeLandingSuccess: 'yyyynyyyyyynyyyyynynyyynnnyynyyyyyyyynynyyynynnynyyyyyyyynynyyy',
+    probeLandingSuccess:
+      'yyyynyyyyyynyyyyynynyyynnnyynyyyyyyyynynyyynynnynyyyyyyyynynyyy',
     geoProbeRanks: [[3, 8, 12], [6], [7], [5]],
     geoProbeBonusPerRank: 5,
     bioProbeRanks: [
@@ -95,7 +97,8 @@ const PLANETS = [
       }
     },
     Kyle_how_are_you: "'I'm okay,' he says, a little uncertainly.",
-    Ostap_how_are_you: "'When I woke, that was not good! But now, I am feeling good.'",
+    Ostap_how_are_you:
+      "'When I woke, that was not good! But now, I am feeling good.'",
     Aada_how_are_you: "'I'm okay.'",
     Ha_yoon_how_are_you:
       "'Not so good; I didn't think the stasis would be this bad. But I can still do my job.'",
@@ -115,8 +118,9 @@ const PLANETS = [
       'The planet surface is about 17% water. The land surfaces are predominantly black. Cloud cover is about 20%.',
     starDesc:
       'HD 168443 is a yellow dwarf star of (spectral type G5) about the mass of the Sun. It is in the constellation of Serpens Cauda, 129 light years from the Solar System. It is actually part of a binary, the other star is a brown dwarf, with a very long orbital period.',
-    arrivalTime: new Date('October 21, 2362 06:21:39'),
-    probeLandingSuccess: 'yynyynyyyynyynyyyyynynyyynnnyynyyyyyyyynynyyynynnynyyyyyyyynynyyy',
+    arrivalTime: new Date("October 21, 2362 06:21:39"),
+    probeLandingSuccess:
+      'yynyynyyyynyynyyyyynynyyynnnyynyyyyyyyynynyyynynnynyyyyyyyynynyyy',
     geoProbeRanks: [[3, 8, 15], [4], [3], [4]],
     geoProbeBonusPerRank: 4,
     bioProbeRanks: [[4, 7, 11], [4, 8], [3, 7], [3]],
@@ -133,9 +137,11 @@ const PLANETS = [
       QuestJs._w.Xsansi.pressureOverride = false;
     },
     Kyle_how_are_you: "'I'm okay. Well, not so bad, anyway.'",
-    Ostap_how_are_you: "'I feel sick,' he says with a grin, 'but I keep going.'",
+    Ostap_how_are_you:
+      "'I feel sick,' he says with a grin, 'but I keep going.'",
     Aada_how_are_you: "'I'm great.'",
-    Ha_yoon_how_are_you: "'Feeling sick and dizzy, but I think I can keep going.'",
+    Ha_yoon_how_are_you:
+      "'Feeling sick and dizzy, but I think I can keep going.'",
   },
 
   {
@@ -152,7 +158,8 @@ const PLANETS = [
       'The planet surface is about 63% water. The land surfaces are predominantly grey and red. Cloud cover is about 25%. Several active volcanoes have been noted.',
     starDesc:
       'HD 148427 is a 7th-magnitude K-type sub-giant star approximately 193 light years away in the constellation Ophiuchus. Its mass is 45% greater than the Sun, and it is three times the size and six times more luminous, although its age is 2½ billion years.',
-    probeLandingSuccess: 'yyyyyynyyyyyyyyynynyyynnnyynyyyyyyyynynyyynynnynyyyyyyyynynyyy',
+    probeLandingSuccess:
+      'yyyyyynyyyyyyyyynynyyynnnyynyyyyyyyynynyyynynnynyyyyyyyynynyyy',
     geoProbeRanks: [[4, 9, 16], [], [4]],
     geoProbeBonusPerRank: 5,
     bioProbeRanks: [[3, 8, 15], [3], [4]],
@@ -180,7 +187,8 @@ const PLANETS = [
     atmosphere: 'Pretty good.',
     radio: 'Radio signals have been detected.',
     lights: 'There are numerous light sources on the night side of the planet.',
-    probeLandingSuccess: 'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
+    probeLandingSuccess:
+      'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
     planetDesc:
       'The planet surface is about 56% water. The land surfaces are predominantly green. Cloud cover is about 30%.',
     starDesc:

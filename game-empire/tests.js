@@ -1,6 +1,11 @@
 QuestJs._test.tests = function () {
   QuestJs._test.title('name');
-  const region = new Region('my region', 'red', 7, '4,5 3,7 2,8 2,8 3,8 3,7 5,6');
+  const region = new Region(
+    'my region',
+    'red',
+    7,
+    '4,5 3,7 2,8 2,8 3,8 3,7 5,6'
+  );
   QuestJs._test.assertEqual(34, region.count);
   QuestJs._test.assertEqual(7, region.minX);
   QuestJs._test.assertEqual(13, region.maxX);

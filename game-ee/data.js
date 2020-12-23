@@ -20,7 +20,7 @@ QuestJs._create.createItem('consult_brittany', QuestJs._npc.TOPIC(true), {
   nowShow: ['consult_fastness', 'consult_fastness_council'],
   script() {
     QuestJs._io.msg(
-      '{b:Ship: Brittany}|The SS Brittany was a frigate of the Systems Accord fleet, fitted with specialised stealth and exploration equipment It was lost in a battle with the Gith six months ago.',
+      '{b:Ship: Brittany}|The SS Brittany was a frigate of the Systems Accord fleet, fitted with specialised stealth and exploration equipment It was lost in a battle with the Gith six months ago.'
     );
   },
 });
@@ -31,7 +31,7 @@ QuestJs._create.createItem('consult_accord', QuestJs._npc.TOPIC(true), {
   nowShow: ['consult_fastness', 'consult_fastness_council'],
   script() {
     QuestJs._io.msg(
-      '{b:Organisation: Systems Accord}|The Accord is an agreement between Earth and most human colony worlds. It involves trade agreements, defence agreements and a common legal system. it was established in 2465, and now includes over sixty worlds, howabout at least twenty human colonies are not part of the Accord, feeling it to be too restrictive.',
+      '{b:Organisation: Systems Accord}|The Accord is an agreement between Earth and most human colony worlds. It involves trade agreements, defence agreements and a common legal system. it was established in 2465, and now includes over sixty worlds, howabout at least twenty human colonies are not part of the Accord, feeling it to be too restrictive.'
     );
   },
 });
@@ -42,7 +42,7 @@ QuestJs._create.createItem('consult_garmr', QuestJs._npc.TOPIC(true), {
   nowShow: ['consult_fastness', 'consult_fastness_council'],
   script() {
     QuestJs._io.msg(
-      '{b:Organisation: GARMR}|GARMR is a para-milirary organisation that hold to human supremacy at the expense of other species. Due to their disregard for the lives of alien species in their activities, they are considered a terrorist organisation by both the Systems Accord and the Fastness Council.|GARMR stands for Guardian Agent Response for Mankind Required. That it is als the name of the guarddog of Hell in Norse mythology is just coincidence...',
+      '{b:Organisation: GARMR}|GARMR is a para-milirary organisation that hold to human supremacy at the expense of other species. Due to their disregard for the lives of alien species in their activities, they are considered a terrorist organisation by both the Systems Accord and the Fastness Council.|GARMR stands for Guardian Agent Response for Mankind Required. That it is als the name of the guarddog of Hell in Norse mythology is just coincidence...'
     );
   },
 });
@@ -52,46 +52,69 @@ QuestJs._create.createItem('consult_fastness', QuestJs._npc.TOPIC(false), {
   alias: 'Station: Fastness',
   script() {
     QuestJs._io.msg(
-      '{b:Station: Fastness}|The Fastness is a huge, deep-space orbital, built eons ago. As an independent site, it has become a meeting place of all the great space-faring aliens, and is the home of the Fastness Council|It is definitely not a trap.',
+      '{b:Station: Fastness}|The Fastness is a huge, deep-space orbital, built eons ago. As an independent site, it has become a meeting place of all the great space-faring aliens, and is the home of the Fastness Council|It is definitely not a trap.'
     );
   },
 });
 
-QuestJs._create.createItem('consult_fastness_council', QuestJs._npc.TOPIC(false), {
-  loc: 'all_tool',
-  alias: 'Organisation: Fastness Council',
-  script() {
-    QuestJs._io.msg(
-      '{b:Organisation: Fastness Council}|The council is the body responsibly for resolving inter-species disputes, and is run by the more important space-faring races (in their opinion anyway).',
-    );
+QuestJs._create.createItem(
+  'consult_fastness_council',
+  QuestJs._npc.TOPIC(false),
+  {
+    loc: 'all_tool',
+    alias: 'Organisation: Fastness Council',
+    script() {
+      QuestJs._io.msg(
+        '{b:Organisation: Fastness Council}|The council is the body responsibly for resolving inter-species disputes, and is run by the more important space-faring races (in their opinion anyway).'
+      );
+    },
   },
-});
+);
 
-QuestJs._create.createRoom('brittany_lift', QuestJs._templates.TRANSIT('north'), {
-  desc: 'The lift is large and well l;it, with a set of buttons at the back.',
-  north: new QuestJs._create.Exit('flight_deck'),
-});
-QuestJs._create.createItem('button_1', QuestJs._templates.TRANSIT_BUTTON('brittany_lift'), {
-  alias: 'Button: 1',
-  examine: 'A button with the number 1 on it.',
-  transitDest: 'captains_room',
-  transitAlreadyHere: 'You press the button; nothing happens.',
-  transitGoToDest: 'You press the button; the door closes  and the lift goes to level 1.',
-});
-QuestJs._create.createItem('button_2', QuestJs._templates.TRANSIT_BUTTON('brittany_lift'), {
-  alias: 'Button: 2',
-  examine: 'A button with the number 2 on it.',
-  transitDest: 'flight_deck',
-  transitAlreadyHere: 'You press the button; nothing happens.',
-  transitGoToDest: 'You press the button; the door closes  and the lift goes to level 2.',
-});
-QuestJs._create.createItem('button_3', QuestJs._templates.TRANSIT_BUTTON('brittany_lift'), {
-  alias: 'Button: 3',
-  examine: 'A button with the number 3 on it.',
-  transitDest: 'mess',
-  transitAlreadyHere: 'You press the button; nothing happens.',
-  transitGoToDest: 'You press the button; the door closes  and the lift goes to level 3.',
-});
+QuestJs._create.createRoom(
+  'brittany_lift',
+  QuestJs._templates.TRANSIT('north'),
+  {
+    desc: 'The lift is large and well l;it, with a set of buttons at the back.',
+    north: new QuestJs._create.Exit('flight_deck'),
+  },
+);
+QuestJs._create.createItem(
+  'button_1',
+  QuestJs._templates.TRANSIT_BUTTON('brittany_lift'),
+  {
+    alias: 'Button: 1',
+    examine: 'A button with the number 1 on it.',
+    transitDest: 'captains_room',
+    transitAlreadyHere: 'You press the button; nothing happens.',
+    transitGoToDest:
+      'You press the button; the door closes  and the lift goes to level 1.',
+  },
+);
+QuestJs._create.createItem(
+  'button_2',
+  QuestJs._templates.TRANSIT_BUTTON('brittany_lift'),
+  {
+    alias: 'Button: 2',
+    examine: 'A button with the number 2 on it.',
+    transitDest: 'flight_deck',
+    transitAlreadyHere: 'You press the button; nothing happens.',
+    transitGoToDest:
+      'You press the button; the door closes  and the lift goes to level 2.',
+  },
+);
+QuestJs._create.createItem(
+  'button_3',
+  QuestJs._templates.TRANSIT_BUTTON('brittany_lift'),
+  {
+    alias: 'Button: 3',
+    examine: 'A button with the number 3 on it.',
+    transitDest: 'mess',
+    transitAlreadyHere: 'You press the button; nothing happens.',
+    transitGoToDest:
+      'You press the button; the door closes  and the lift goes to level 3.',
+  },
+);
 
 QuestJs._create.createRoom('captains_room', {
   desc: '.',

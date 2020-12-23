@@ -5,4 +5,7 @@ QuestJs._settings.version = '3.0';
 QuestJs._settings.thanks = [];
 QuestJs._settings.files = ['geography', 'code', 'data', 'npcs'];
 
-QuestJs._settings.roomTemplate = ['{hereDesc}', '{objectsHere:You can see {objects} here.}'];
+QuestJs._settings.roomTemplate = [
+  '{hereDesc}',
+  '{objectsHere:You can see {objects} here.}',
+];

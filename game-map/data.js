@@ -22,7 +22,8 @@ QuestJs._create.createRoom('kitchen', {
 });
 
 QuestJs._create.createRoom('dining_room', {
-  desc: 'The dining room is boring, the author really needs to put stuff in it.',
+  desc:
+    'The dining room is boring, the author really needs to put stuff in it.',
   east: new QuestJs._create.Exit('lounge'),
   west: new QuestJs._create.Exit('garden_east', {
     mapOffsetY: -1,
@@ -35,7 +36,7 @@ QuestJs._create.createRoom('dining_room', {
             [-35, 0],
             [-35, 25],
           ],
-          'fill:none',
+          'fill:none'
         ) +
         map.polygon(
           toRoom,
@@ -44,7 +45,7 @@ QuestJs._create.createRoom('dining_room', {
             [-5, -30],
             [5, -30],
           ],
-          'stroke:none',
+          'stroke:none'
         )
       );
       return s;
@@ -65,7 +66,8 @@ QuestJs._create.createRoom('hall', {
 });
 
 QuestJs._create.createRoom('conservatory', {
-  desc: 'The conservatory is boring, the author really needs to put stuff in it.',
+  desc:
+    'The conservatory is boring, the author really needs to put stuff in it.',
   north: new QuestJs._create.Exit('hall', { mapOffsetX: 0.5 }),
   west: new QuestJs._create.Exit('shed'),
   mapColour: '#88f',
@@ -88,7 +90,7 @@ QuestJs._create.createItem('Lara', QuestJs._npc.NPC(true), {
         [-5, -5],
         [10, 10],
       ],
-      'fill:red;stroke:black',
+      'fill:red;stroke:black'
     );
   },
 });
@@ -104,7 +106,7 @@ QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(false), {
         [0, 0],
         [10, 10],
       ],
-      'fill:blue;stroke:black',
+      'fill:blue;stroke:black'
     );
   },
 });
@@ -119,13 +121,14 @@ QuestJs._create.createItem('Robot', QuestJs._npc.NPC(false), {
         [-10, -10],
         [10, 10],
       ],
-      'fill:silver;stroke:black',
+      'fill:silver;stroke:black'
     );
   },
 });
 
 QuestJs._create.createRoom('garden_east', {
-  desc: 'The east end of the garden is boring, the author really needs to put stuff in it.',
+  desc:
+    'The east end of the garden is boring, the author really needs to put stuff in it.',
   east: new QuestJs._create.Exit('kitchen'),
   west: new QuestJs._create.Exit('garden_west'),
   south: new QuestJs._create.Exit('shed', { mapOffsetX: 0.5 }),
@@ -137,7 +140,7 @@ QuestJs._create.createRoom('garden_east', {
           [-25, -16],
           [41, 32],
         ],
-        'stroke:none;fill:#8f8',
+        'stroke:none;fill:#8f8'
       ) +
       map.polyline(
         this,
@@ -147,14 +150,15 @@ QuestJs._create.createRoom('garden_east', {
           [16, 16],
           [-25, 16],
         ],
-        'stroke:black;fill:none',
+        'stroke:black;fill:none'
       )
     );
   },
 });
 
 QuestJs._create.createRoom('garden_west', {
-  desc: 'The west end of the garden is boring, the author really needs to put stuff in it.',
+  desc:
+    'The west end of the garden is boring, the author really needs to put stuff in it.',
   east: new QuestJs._create.Exit('garden_east'),
   south: new QuestJs._create.Exit('fairy_grotto', {
     mapOffsetY: -2,
@@ -167,7 +171,7 @@ QuestJs._create.createRoom('garden_west', {
           [-30, 10],
           [0, 65],
         ],
-        'fill:none',
+        'fill:none'
       );
     },
   }),
@@ -179,7 +183,7 @@ QuestJs._create.createRoom('garden_west', {
           [-16, -16],
           [41, 32],
         ],
-        'stroke:none;fill:#8f8',
+        'stroke:none;fill:#8f8'
       ) +
       map.polyline(
         this,
@@ -189,14 +193,15 @@ QuestJs._create.createRoom('garden_west', {
           [-16, 16],
           [25, 16],
         ],
-        'stroke:black;fill:none',
+        'stroke:black;fill:none'
       )
     );
   },
 });
 
 QuestJs._create.createRoom('fairy_grotto', {
-  desc: 'The fairy grotto is amazing! But the author really needs to put stuff in it.',
+  desc:
+    'The fairy grotto is amazing! But the author really needs to put stuff in it.',
   north: new QuestJs._create.Exit('garden_west', { mapIgnore: true }),
   mapDrawBase() {
     return map.polyroom(
@@ -207,7 +212,7 @@ QuestJs._create.createRoom('fairy_grotto', {
         [0, -20],
         [-20, 0],
       ],
-      'stroke:black;fill:#cfc',
+      'stroke:black;fill:#cfc'
     );
   },
 });
@@ -237,14 +242,15 @@ QuestJs._create.createRoom('street_middle', {
         [-16, -66],
         [32, 132],
       ],
-      'stroke:black;fill:grey',
+      'stroke:black;fill:grey'
     );
     return s;
   },
 });
 
 QuestJs._create.createRoom('street_north', {
-  desc: 'The street_north is boring, the author really needs to put stuff in it.',
+  desc:
+    'The street_north is boring, the author really needs to put stuff in it.',
   south: new QuestJs._create.Exit('street_middle'),
   north: new QuestJs._create.Exit('bus'),
   mapDrawBase() {
@@ -256,7 +262,8 @@ QuestJs._create.createRoom('street_north', {
 });
 
 QuestJs._create.createRoom('street_south', {
-  desc: 'The street_south is boring, the author really needs to put stuff in it.',
+  desc:
+    'The street_south is boring, the author really needs to put stuff in it.',
   north: new QuestJs._create.Exit('street_middle'),
   mapDrawBase() {
     return '';
@@ -285,25 +292,35 @@ QuestJs._create.createRoom('bus', QuestJs._templates.TRANSIT('south'), {
   mapDrawBase(level, el) {
     let s = `  <path style="fill:#888" d="${this.busSvg}" id="bus-path" transform="translate(`;
     s += `${el.mapX - 25} ${el.mapY - 25}`;
-    s += `) scale(0.1 0.1)"${el.mapZ === level ? map.getClickAttrs(this) : ''}n/>`;
+    s += `) scale(0.1 0.1)"${
+      el.mapZ === level ? map.getClickAttrs(this) : ''
+    }n/>`;
     return s;
   },
 });
 
-QuestJs._create.createItem('button_street', QuestJs._templates.TRANSIT_BUTTON('bus'), {
-  alias: 'Button: Street',
-  examine: 'A button with the word "High Street" on it.',
-  transitDest: 'street_north',
-  transitDestAlias: 'High Street',
-  transitAlreadyHere: "You're already there mate!",
-  transitGoToDest: 'The drive puts the bus in gear, and sets off.',
-});
+QuestJs._create.createItem(
+  'button_street',
+  QuestJs._templates.TRANSIT_BUTTON('bus'),
+  {
+    alias: 'Button: Street',
+    examine: 'A button with the word "High Street" on it.',
+    transitDest: 'street_north',
+    transitDestAlias: 'High Street',
+    transitAlreadyHere: "You're already there mate!",
+    transitGoToDest: 'The drive puts the bus in gear, and sets off.',
+  },
+);
 
-QuestJs._create.createItem('button_glade', QuestJs._templates.TRANSIT_BUTTON('bus'), {
-  alias: 'Button: Glade',
-  examine: 'A button with the word "Hidden Glade" on it.',
-  transitDest: 'glade',
-  transitDestAlias: 'Hidden Glade',
-  transitAlreadyHere: "You're already there mate!",
-  transitGoToDest: 'The drive puts the bus in gear, and sets off.',
-});
+QuestJs._create.createItem(
+  'button_glade',
+  QuestJs._templates.TRANSIT_BUTTON('bus'),
+  {
+    alias: 'Button: Glade',
+    examine: 'A button with the word "Hidden Glade" on it.',
+    transitDest: 'glade',
+    transitDestAlias: 'Hidden Glade',
+    transitAlreadyHere: "You're already there mate!",
+    transitGoToDest: 'The drive puts the bus in gear, and sets off.',
+  },
+);

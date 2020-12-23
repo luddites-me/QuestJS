@@ -18,7 +18,7 @@ function firstTimeTesting() {
     },
     () => {
       QuestJs._io.msg(
-        'Every {huge:other} {big:time} betweeb {small:is} {tiny:very small} notmasl.',
+        'Every {huge:other} {big:time} betweeb {small:is} {tiny:very small} notmasl.'
       );
     },
   );
@@ -49,7 +49,9 @@ QuestJs._commands.unshift(
             QuestJs._io.msg(`You picked ${result}.`);
           } else {
             QuestJs._io.msg(
-              `You picked ${QuestJs._lang.getName(result, { article: QuestJs._consts.DEFINITE })}.`,
+              `You picked ${QuestJs._lang.getName(result, {
+                article: QuestJs._consts.DEFINITE,
+              })}.`,
             );
           }
         },
@@ -137,32 +139,32 @@ QuestJs._commands.unshift(
     regex: /^alpha$/,
     script() {
       QuestJs._io.msg(
-        'Some text in Greek: {encode:391:3AC:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Greek: {encode:391:3AC:The quick brown fox jumped over the lazy dog}.'
       );
       QuestJs._io.msg(
-        'Some text in Cyrillic: {encode:402:431:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Cyrillic: {encode:402:431:The quick brown fox jumped over the lazy dog}.'
       );
       QuestJs._io.msg(
-        'Some text in Armenian {encode:531:561:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Armenian {encode:531:561:The quick brown fox jumped over the lazy dog}.'
       );
 
       QuestJs._io.msg(
-        'Some text in Devanagari: {encode:904:904:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Devanagari: {encode:904:904:The quick brown fox jumped over the lazy dog}.'
       );
       QuestJs._io.msg(
-        'Some text in Thai {encode:E01:E01:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Thai {encode:E01:E01:The quick brown fox jumped over the lazy dog}.'
       );
       QuestJs._io.msg(
-        'Some text in Tibetan {encode:F20:F20:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Tibetan {encode:F20:F20:The quick brown fox jumped over the lazy dog}.'
       );
       QuestJs._io.msg(
-        'Some text in Khmer {encode:1780:1780:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Khmer {encode:1780:1780:The quick brown fox jumped over the lazy dog}.'
       );
       QuestJs._io.msg(
-        'Some text in Javan {encode:A985:A985:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Javan {encode:A985:A985:The quick brown fox jumped over the lazy dog}.'
       );
       QuestJs._io.msg(
-        'Some text in Nko {encode:7C1:7C1:The quick brown fox jumped over the lazy dog}.',
+        'Some text in Nko {encode:7C1:7C1:The quick brown fox jumped over the lazy dog}.'
       );
     },
   }),
@@ -177,7 +179,8 @@ QuestJs._commands.unshift(
     default(item, isMultiple, char) {
       return QuestJs._io.failedmsg(
         `${
-          QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.pronounVerb(char, 'kick', true)
+          QuestJs._tools.prefix(this, isMultiple) +
+          QuestJs._lang.pronounVerb(char, 'kick', true)
         } ${this.pronouns.objective}, but nothing happens.`,
       );
     },
@@ -193,7 +196,8 @@ QuestJs._commands.unshift(
     default(item, isMultiple, char) {
       return QuestJs._io.failedmsg(
         `${
-          QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true)
+          QuestJs._tools.prefix(item, isMultiple) +
+          QuestJs._lang.pronounVerb(item, "'be", true)
         } not something you can charge.`,
       );
     },
@@ -209,7 +213,8 @@ QuestJs._commands.unshift(
     default(item, isMultiple, char) {
       return QuestJs._io.failedmsg(
         `${
-          QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true)
+          QuestJs._tools.prefix(item, isMultiple) +
+          QuestJs._lang.pronounVerb(item, "'be", true)
         } not something you can move.`,
       );
     },

@@ -1,8 +1,16 @@
 QuestJs._create.createItem('dinner_timetable', QuestJs._npc.AGENDA_FOLLOWER(), {
   // suspended:true,
-  agenda: ['wait', 'run:stepped:starter', 'run:stepped:main', 'run:stepped:desert'],
+  agenda: [
+    'wait',
+    'run:stepped:starter',
+    'run:stepped:main',
+    'run:stepped:desert',
+  ],
   stepped(arr) {
-    return !QuestJs._util.respond({ course: arr[0], actor: QuestJs._w.Kyle }, this.steps);
+    return !QuestJs._util.respond(
+      { course: arr[0], actor: QuestJs._w.Kyle },
+      this.steps,
+    );
   },
   steps: [
     {

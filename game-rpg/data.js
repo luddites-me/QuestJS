@@ -11,9 +11,9 @@ QuestJs._create.createItem('me', RPG_PLAYER(), {
   offensiveBonus: 3,
   examine(isMultiple) {
     QuestJs._io.msg(
-      `${QuestJs._tools.prefix(this, isMultiple)}A ${this.isFemale ? 'chick' : 'guy'} called ${
-        this.alias
-      }`,
+      `${QuestJs._tools.prefix(this, isMultiple)}A ${
+        this.isFemale ? 'chick' : 'guy'
+      } called ${this.alias}`,
     );
   },
 });
@@ -35,21 +35,26 @@ QuestJs._create.createItem('flaming_sword', WEAPON('3d6+2'), {
   activeEffects: ['Flaming weapon'],
 });
 
-QuestJs._create.createItem('ice_amulet', QuestJs._templates.WEARABLE(4, ['neck']), {
-  loc: 'me',
-  modifyIncomingAttack(attack) {
-    if (this.worn && attack.element === 'frost') {
-      attack.damageMultiplier = 0;
-      attack.primarySuccess = attack.primarySuccess.replace(
-        /[.!]/,
-        ', but the ice amulet protects {sb:target}, and {pv:target:take} no damage.',
-      );
-    }
+QuestJs._create.createItem(
+  'ice_amulet',
+  QuestJs._templates.WEARABLE(4, ['neck']),
+  {
+    loc: 'me',
+    modifyIncomingAttack(attack) {
+      if (this.worn && attack.element === 'frost') {
+        attack.damageMultiplier = 0;
+        attack.primarySuccess = attack.primarySuccess.replace(
+          /[.!]/,
+          ', but the ice amulet protects {sb:target}, and {pv:target:take} no damage.'
+        );
+      }
+    },
   },
-});
+);
 
 QuestJs._create.createRoom('practice_room', {
-  desc: 'A large room with straw scattered across the floor. The only exit is west',
+  desc:
+    'A large room with straw scattered across the floor. The only exit is west',
   west: new QuestJs._create.Exit('great_hall'),
   south: new QuestJs._create.Exit('cupboard', {
     locked: true,
@@ -114,7 +119,7 @@ QuestJs._create.createItem('rabbit', RPG_NPC(false), {
   talkto() {
     if (!this.canTalk()) {
       QuestJs._io.msg(
-        'You spend a few minutes telling the rabbit about your life, but it does not seem interested. Possibly because it is rabbit.',
+        'You spend a few minutes telling the rabbit about your life, but it does not seem interested. Possibly because it is rabbit.'
       );
       return;
     }
@@ -138,7 +143,13 @@ QuestJs._create.createItem('chest', QuestJs._templates.CONTAINER(true), {
 
 QuestJs._create.createItem(
   'spellbook',
-  SPELLBOOK(['Fireball', 'Stoneskin', 'Steelskin', 'Lightning bolt', 'Ice shard']),
+  SPELLBOOK([
+    'Fireball',
+    'Stoneskin',
+    'Steelskin',
+    'Lightning bolt',
+    'Ice shard',
+  ]),
   {
     loc: 'practice_room',
   },
@@ -149,10 +160,14 @@ QuestJs._create.createItem('helmet', QuestJs._templates.WEARABLE(2, ['head']), {
   armour: 10,
 });
 
-QuestJs._create.createItem('chestplate', QuestJs._templates.WEARABLE(2, ['chest']), {
-  loc: 'practice_room',
-  armour: 20,
-});
+QuestJs._create.createItem(
+  'chestplate',
+  QuestJs._templates.WEARABLE(2, ['chest']),
+  {
+    loc: 'practice_room',
+    armour: 20,
+  },
+);
 
 QuestJs._create.createItem('boots', QuestJs._templates.WEARABLE(2, ['feet']), {
   loc: 'practice_room',
@@ -247,7 +262,8 @@ skills.add(
     damage: '3d6',
     icon: 'ice-shard',
     tooltip: 'A shard of ice pierces your foe!',
-    primarySuccess: 'A shard of ice jumps from {nms:attacker:the} finger to {nm:target:the}!',
+    primarySuccess:
+      'A shard of ice jumps from {nms:attacker:the} finger to {nm:target:the}!',
     modifyOutgoingAttack(attack) {
       attack.element = 'frost';
     },
@@ -260,7 +276,8 @@ skills.add(
     icon: 'psi-blast',
     tooltip: 'A blast of mental energy (ignores armour)',
     primarySuccess: 'A blast of raw psi-energy sends {nm:target:the} reeling.',
-    primaryFailure: 'A blast of raw psi-energy... is barely noticed by {nm:target:the}.',
+    primaryFailure:
+      'A blast of raw psi-energy... is barely noticed by {nm:target:the}.',
     modifyOutgoingAttack(attack) {
       attack.armourMultiplier = 0;
     },
@@ -275,7 +292,8 @@ skills.add(
     tooltip: 'A lightning bolt jumps from your out-reached hand to you foe!',
     primarySuccess:
       'A lightning bolt jumps from {nms:attacker:the} out-reached hand to {nm:target:the}!',
-    secondarySuccess: 'A smaller bolt jumps {nms:attacker:the} target to {nm:target:the}!',
+    secondarySuccess:
+      'A smaller bolt jumps {nms:attacker:the} target to {nm:target:the}!',
     primaryFailure:
       'A lightning bolt jumps from {nms:attacker:the} out-reached hand to {nm:target:the}, fizzling out before it can actually do anything.',
     secondaryFailure:
@@ -298,7 +316,8 @@ skills.add(
     icon: 'unarmour',
     tooltip: 'A lightning bolt jumps from your out-reached hand to you foe!',
     modifyOutgoingAttack(attack) {
-      attack.armourModifier = attack.armourModifier > 2 ? attack.armourModifier - 2 : 0;
+      attack.armourModifier =
+        attack.armourModifier > 2 ? attack.armourModifier - 2 : 0;
     },
   }),
 );
@@ -306,7 +325,10 @@ skills.add(
 skills.add(
   new SpellSelf('Stoneskin', {
     targetEffect(attack) {
-      attack.msg('Your skin becomes as hard as stone - and yet still just as flexible.', 1);
+      attack.msg(
+        'Your skin becomes as hard as stone - and yet still just as flexible.',
+        1,
+      );
     },
     ongoing: true,
     incompatible: [/skin$/],
@@ -319,7 +341,10 @@ skills.add(
 skills.add(
   new SpellSelf('Steelskin', {
     targetEffect(attack) {
-      attack.msg('Your skin becomes as hard as steel - and yet still just as flexible.', 1);
+      attack.msg(
+        'Your skin becomes as hard as steel - and yet still just as flexible.',
+        1,
+      );
     },
     ongoing: true,
     duration: 3,
@@ -337,7 +362,10 @@ skills.add(
       let flag = false;
       for (const el of QuestJs._util.exitList(attack.attacker)) {
         if (room[el].locked) {
-          attack.msg(`The door to ${QuestJs._util.niceDirection(el)} unlocks.`, 1);
+          attack.msg(
+            `The door to ${QuestJs._util.niceDirection(el)} unlocks.`,
+            1,
+          );
           room[el].locked = false;
           flag = true;
         }
@@ -359,7 +387,10 @@ skills.add(
       } else {
         attack.target.canTalkFlag = true;
         attack.target.canTalkFlagIsTemporary = true;
-        attack.msg('{nv:attacker:can:true} now talk to {nm:target:the} for a short time.', 1);
+        attack.msg(
+          '{nv:attacker:can:true} now talk to {nm:target:the} for a short time.',
+          1,
+        );
       }
     },
     regex: /commune/,
@@ -370,9 +401,12 @@ skills.add(
       if (target.canTalkFlagIsTemporary) {
         target.canTalkFlag = false;
         delete target.canTalkFlagIsTemporary;
-        return `The {i:Commune with animal} spell on ${QuestJs._lang.getName(target, {
-          article: QuestJs._consts.DEFINITE,
-        })} expires.`;
+        return `The {i:Commune with animal} spell on ${QuestJs._lang.getName(
+          target,
+          {
+            article: QuestJs._consts.DEFINITE,
+          },
+        )} expires.`;
       }
       return '';
     },

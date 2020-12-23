@@ -12,14 +12,18 @@ QuestJs._create.createItem('robot', QuestJs._npc.NPC(false), {
     if (QuestJs._w.me.hints < 250 && this.loc === 'reactor_room') {
       QuestJs._io.msg('You noti.');
       tmsg(
-        'Of course, there may be other topics you can ask about, so you might want to experiment. But that does NOT mean you should start asking about every rude word you can think of.',
+        'Of course, there may be other topics you can ask about, so you might want to experiment. But that does NOT mean you should start asking about every rude word you can think of.'
       );
       QuestJs._w.me.hints = 220;
     }
   },
 
   isAtLoc(loc, situation) {
-    if (situation === QuestJs._world.PARSER && QuestJs._w.me.loc === 'laboratory') return true;
+    if (
+      situation === QuestJs._world.PARSER &&
+      QuestJs._w.me.loc === 'laboratory'
+    )
+      return true;
     return this.loc === loc;
   },
 
@@ -50,10 +54,10 @@ QuestJs._create.createItem('robot', QuestJs._npc.NPC(false), {
         );
         if (QuestJs._w.me.hints < 220) {
           tmsg(
-            'When you ask about one topic, you might learn about others. If you are stuck, try the TOPICS command. In Quest 6, topics are determined according to the character, so you need to specific that, i.e., TOPICS FOR ROBOT.',
+            'When you ask about one topic, you might learn about others. If you are stuck, try the TOPICS command. In Quest 6, topics are determined according to the character, so you need to specific that, i.e., TOPICS FOR ROBOT.'
           );
           tmsg(
-            'Of course, there may be other topics you can ask about, so you might want to experiment. But that does NOT mean you should start asking about every rude word you can think of.',
+            'Of course, there may be other topics you can ask about, so you might want to experiment. But that does NOT mean you should start asking about every rude word you can think of.'
           );
           QuestJs._w.me.hints = 220;
         }
@@ -107,7 +111,7 @@ QuestJs._create.createItem('robot', QuestJs._npc.NPC(false), {
         );
         if (QuestJs._w.me.hints < 270) {
           tmsg(
-            'So we need to head north, but that door is too heavy to open yourself; you need to get the robot to do it. We can tell the robot to do something with TELL ROBOT TO. followed by the usual command, or just ROBOT, (note the comma). Once the door is open, head to the reactor.',
+            'So we need to head north, but that door is too heavy to open yourself; you need to get the robot to do it. We can tell the robot to do something with TELL ROBOT TO. followed by the usual command, or just ROBOT, (note the comma). Once the door is open, head to the reactor.'
           );
           QuestJs._w.me.hints = 270;
         }
@@ -116,7 +120,9 @@ QuestJs._create.createItem('robot', QuestJs._npc.NPC(false), {
     {
       name: 'lift',
       test(p) {
-        return p.text.match(/\b(lift|elevator)\b/) && QuestJs._w.lift.visited > 0;
+        return (
+          p.text.match(/\b(lift|elevator)\b/) && QuestJs._w.lift.visited > 0
+        );
       },
       script() {
         QuestJs._io.msg("'What's the deal with the lift?' you ask the robot.");
@@ -130,7 +136,9 @@ QuestJs._create.createItem('robot', QuestJs._npc.NPC(false), {
           );
         }
         if (QuestJs._w.me.hints < 260) {
-          tmsg('We need to So we need the reactor to be running. Better ask the robot about that.');
+          tmsg(
+            'We need to So we need the reactor to be running. Better ask the robot about that.'
+          );
           QuestJs._w.me.hints = 260;
         }
       },
@@ -148,7 +156,9 @@ QuestJs._create.createItem('robot', QuestJs._npc.NPC(false), {
     },
     {
       test(p) {
-        return p.text.match(/fuck|shit|crap|wank|cunt|masturabat|tit|cock|pussy|dick/);
+        return p.text.match(
+          /fuck|shit|crap|wank|cunt|masturabat|tit|cock|pussy|dick/,
+        );
       },
       script() {
         QuestJs._io.msg('The robot certainly has no interest in {i:that}!');
@@ -169,23 +179,34 @@ QuestJs._create.createItem('robot', QuestJs._npc.NPC(false), {
     {
       name: 'vomit',
       test(p) {
-        return p.text.match(/\b(vomit|puke|sick)\b/) && QuestJs._w.vomit.loc === 'reactor_room';
+        return (
+          p.text.match(/\b(vomit|puke|sick)\b/) &&
+          QuestJs._w.vomit.loc === 'reactor_room'
+        );
       },
       script() {
         QuestJs._io.msg(
           "'Er, so it looks like there might be some vomit over there,' you say, a little sheepishly.",
         );
-        QuestJs._io.msg("'I suppose you expect me to clean it up?' he replies.");
+        QuestJs._io.msg(
+          "'I suppose you expect me to clean it up?' he replies.",
+        );
         QuestJs._io.msg("'Well, you are a robot...'");
         QuestJs._io.msg("'And therefore subservient?'");
-        QuestJs._io.msg("'No, no... Er, and therefore you have no sense of smell.'");
-        QuestJs._io.msg("'Hmm. I will deal with the erstwhile contents of your stomach in a bit.'");
+        QuestJs._io.msg(
+          "'No, no... Er, and therefore you have no sense of smell.'",
+        );
+        QuestJs._io.msg(
+          "'Hmm. I will deal with the erstwhile contents of your stomach in a bit.'",
+        );
       },
       failed: true,
     },
     {
       test(p) {
-        return p.text.match(/fuck|shit|crap|wank|cunt|masturabat|tit|cock|pussy|dick/);
+        return p.text.match(
+          /fuck|shit|crap|wank|cunt|masturabat|tit|cock|pussy|dick/,
+        );
       },
       script() {
         QuestJs._io.msg('The robot certainly has no interest in {i:that}!');
@@ -211,9 +232,13 @@ QuestJs._create.createItem('Professor_Kleinscope', QuestJs._npc.NPC(false), {
   talkto() {
     if (!this.flag) {
       QuestJs._io.msg("You say 'Hello,' to Professor Kleinscope.");
-      QuestJs._io.msg("He looks up, apparently seeing you for the first time. 'Hello,yes?'");
+      QuestJs._io.msg(
+        "He looks up, apparently seeing you for the first time. 'Hello,yes?'",
+      );
       QuestJs._io.msg("'Your dinner is ready.'");
-      QuestJs._io.msg("'What? Already? Well, I better get downstairs then!' He gets to his feet.");
+      QuestJs._io.msg(
+        "'What? Already? Well, I better get downstairs then!' He gets to his feet.",
+      );
       tmsg('Maybe now he is not sitting there we can use the computer.');
       this.flag = true;
       QuestJs._w.me.hints = 410;
@@ -235,7 +260,9 @@ QuestJs._create.createItem('Professor_Kleinscope', QuestJs._npc.NPC(false), {
     }
   },
   getAgreement() {
-    QuestJs._io.msg("'I'm far to busy to do that!' says Kleinscope indignantly.");
+    QuestJs._io.msg(
+      "'I'm far to busy to do that!' says Kleinscope indignantly.",
+    );
     return false;
   },
 });

@@ -51,13 +51,19 @@ const CREW = function (isFemale) {
       return false;
     }
     if (char !== QuestJs._w.Xsansi) {
-      QuestJs._io.msg("'{nm:char}, can you revive {nm:actor}?' you ask.", tpParams);
+      QuestJs._io.msg(
+        "'{nm:char}, can you revive {nm:actor}?' you ask.",
+        tpParams,
+      );
       QuestJs._io.msg("'Probably best to leave that to Xsansi.'");
       return false;
     }
     if (!this.inPod) {
       QuestJs._io.msg("'Xsansi, please revive {nm:actor},' you say.", tpParams);
-      QuestJs._io.msg("'Crew member {nm:actor} is not currently in stasis.'", tpParams);
+      QuestJs._io.msg(
+        "'Crew member {nm:actor} is not currently in stasis.'",
+        tpParams,
+      );
       return false;
     }
     // check number revived TODO!!!
@@ -82,7 +88,10 @@ const CREW = function (isFemale) {
     } else if (this.posture) {
       s += ` {pv:actor:be:true} ${this.posture}.`;
     }
-    QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + this.desc + s, tpParams);
+    QuestJs._io.msg(
+      QuestJs._tools.prefix(this, isMultiple) + this.desc + s,
+      tpParams,
+    );
   };
   res.stasis = function () {
     const tpParams = { actor: this };
@@ -91,7 +100,10 @@ const CREW = function (isFemale) {
       tpParams,
     );
     if (this.deployProbeTotal === 0) {
-      QuestJs._io.msg("'You don't think I should deploy a probe first?'", tpParams);
+      QuestJs._io.msg(
+        "'You don't think I should deploy a probe first?'",
+        tpParams,
+      );
       QuestJs._io.msg("'I'm the captain,' you remind {ob:actor}.", tpParams);
     }
     QuestJs._io.msg(this.okay);
@@ -156,7 +168,7 @@ const CREW = function (isFemale) {
         break;
       case 2:
         QuestJs._io.msg(
-          '{nv:actor:launch:true} the {ordinal:count} {param:actor:probeType}.',
+          "{nv:actor:launch:true} the {ordinal:count} {param:actor:probeType}.",
           tpParams,
         );
         this.actuallyDeployProbe(count);
@@ -294,7 +306,10 @@ function createTopics(npc) {
     },
     script(response) {
       const tpParams = { actor: response.actor };
-      QuestJs._io.msg("'What's your report on {planet}?' you ask {nm:actor:the}.", tpParams);
+      QuestJs._io.msg(
+        "'What's your report on {planet}?' you ask {nm:actor:the}.",
+        tpParams,
+      );
       QuestJs._io.msg(planetAnalysis(response), tpParams);
     },
   });
@@ -316,9 +331,12 @@ function createTopics(npc) {
     },
     script(response) {
       QuestJs._io.msg(
-        `'What is your area of expertise?' you ask ${QuestJs._lang.getName(response.actor, {
-          article: QuestJs._consts.DEFINITE,
-        })}.`,
+        `'What is your area of expertise?' you ask ${QuestJs._lang.getName(
+          response.actor,
+          {
+            article: QuestJs._consts.DEFINITE,
+          },
+        )}.`,
       );
       response.actor.areaAskResponse();
     },
@@ -331,9 +349,12 @@ function createTopics(npc) {
     },
     script(response) {
       QuestJs._io.msg(
-        `'Tell me about yourself,' you say to ${QuestJs._lang.getName(response.actor, {
-          article: QuestJs._consts.DEFINITE,
-        })}.`,
+        `'Tell me about yourself,' you say to ${QuestJs._lang.getName(
+          response.actor,
+          {
+            article: QuestJs._consts.DEFINITE,
+          },
+        )}.`,
       );
       response.actor.backgroundAskResponse();
       trackRelationship(response.actor, 1, 'background');
@@ -351,17 +372,25 @@ function howAreYouFeeling(response) {
       article: QuestJs._consts.DEFINITE,
     })}.`,
   );
-  QuestJs._io.msg(PLANETS[QuestJs._w.Xsansi.currentPlanet][`${response.actor.name}_how_are_you`]);
+  QuestJs._io.msg(
+    PLANETS[QuestJs._w.Xsansi.currentPlanet][
+      `${response.actor.name}_how_are_you`
+    ],
+  );
 }
 
 function planetAnalysis(response) {
   const arr = response.actor.data[QuestJs._w.Xsansi.currentPlanet];
   if (Object.keys(arr).length === 0)
-    return QuestJs._io.falsemsg('You should talk to Aada or Ostap about that stuff.');
+    return QuestJs._io.falsemsg(
+      'You should talk to Aada or Ostap about that stuff.'
+    );
 
   let rank = response.actor[`rank${QuestJs._w.Xsansi.currentPlanet}`];
   if (rank === undefined)
-    return QuestJs._io.falsemsg('You should talk to Aada or Ostap about that stuff.');
+    return QuestJs._io.falsemsg(
+      'You should talk to Aada or Ostap about that stuff.'
+    );
   rank >>= 1;
   if (rank >= arr.length) rank = arr.length - 1;
   return arr[rank];
@@ -395,7 +424,8 @@ function arrival() {
   QuestJs._w.Xsansi.currentPlanet += 1;
   PLANETS[QuestJs._w.Xsansi.currentPlanet].onArrival();
   QuestJs._game.elapsedTime = 0;
-  QuestJs._game.startTime = PLANETS[QuestJs._w.Xsansi.currentPlanet].arrivalTime;
+  QuestJs._game.startTime =
+    PLANETS[QuestJs._w.Xsansi.currentPlanet].arrivalTime;
   QuestJs._w.Aada.deployProbeTotal = 0;
   QuestJs._w.Ostap.deployProbeTotal = 0;
   updateTopics(QuestJs._w.Xsansi, QuestJs._w.Xsansi.currentPlanet);
@@ -433,7 +463,8 @@ function reviveNpc(npc, object) {}
 function getProbes() {
   const arr = [];
   for (const key in QuestJs._w) {
-    if (QuestJs._w[key].clonePrototype === QuestJs._w.probe_prototype) arr.push(QuestJs._w[key]);
+    if (QuestJs._w[key].clonePrototype === QuestJs._w.probe_prototype)
+      arr.push(QuestJs._w[key]);
   }
   return arr;
 }
@@ -464,21 +495,29 @@ function probeLandsOkay() {
   return flag;
 }
 
-QuestJs._settings.deckNames = { layer1: 'Deck 2', layer3: 'Deck 1', layer4: 'Deck 3' };
+QuestJs._settings.deckNames = {
+  layer1: 'Deck 2',
+  layer3: 'Deck 1',
+  layer4: 'Deck 3',
+};
 
 function updateMap() {
   $('#layer1').hide();
   $('#layer3').hide();
   $('#layer4').hide();
   const currentDeck = QuestJs._w[QuestJs._game.player.loc].deckName;
-  $('#map').attr('title', `The Joseph Banks, ${QuestJs._settings.deckNames[currentDeck]}`);
-  if (!currentDeck) return QuestJs._io.errormsg(`No deckName for ${QuestJs._game.player.loc}`);
+  $('#map').attr(
+    'title',
+    `The Joseph Banks, ${QuestJs._settings.deckNames[currentDeck]}`,
+  );
+  if (!currentDeck)
+    return QuestJs._io.errormsg(`No deckName for ${QuestJs._game.player.loc}`);
   $(`#${currentDeck}`).show();
   for (const key in QuestJs._w) {
     if (QuestJs._w[key].svgId)
       $(`#${QuestJs._w[key].svgId}`).css(
         'fill',
-        isRoomPressured(QuestJs._w[key]) ? '#777' : '#222',
+        isRoomPressured(QuestJs._w[key]) ? '#777' : '#222'
       );
   }
   const mySvgId = QuestJs._w[QuestJs._game.player.loc].svgId;
@@ -496,7 +535,10 @@ function updateMap() {
   }
   $('#rect10').css('fill', QuestJs._settings.darkModeActive ? '#333' : '#bbb');
   for (const id of [3334, 2800, 2788, 3330]) {
-    $(`#text${id}`).css('fill', QuestJs._settings.darkModeActive ? 'white' : 'black');
+    $(`#text${id}`).css(
+      'fill',
+      QuestJs._settings.darkModeActive ? 'white' : 'black'
+    );
     $(`#text${id}`).css('font-family', 'Orbitron, sans-serif');
   }
 }

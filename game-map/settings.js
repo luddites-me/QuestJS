@@ -42,7 +42,7 @@ QuestJs._settings.mapMarker = function (loc) {
       [-10, -18],
       [-15, -20],
     ],
-    'stroke:none;fill:black;pointer-events:none;opacity:0.3',
+    'stroke:none;fill:black;pointer-events:none;opacity:0.3'
   );
 };
 QuestJs._settings.mapExtras = function () {
@@ -65,7 +65,7 @@ QuestJs._settings.mapExtras = function () {
         [170, 120],
         [153, 117],
       ],
-      'stroke:black;fill:yellow;',
+      'stroke:black;fill:yellow;'
     ),
   );
   result.push(map.text(room, 'N', [150, 100], 'fill:black;font-size:14pt'));

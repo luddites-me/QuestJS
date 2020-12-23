@@ -16,7 +16,10 @@ QuestJs._settings.files = ['code', 'data', 'npcs'];
 QuestJs._settings.panes = 'left';
 QuestJs._settings.statusPane = false;
 
-QuestJs._settings.roomTemplate = ['{hereDesc}', '{objectsHere:You can see {objects} here.}'];
+QuestJs._settings.roomTemplate = [
+  '{hereDesc}',
+  '{objectsHere:You can see {objects} here.}',
+];
 
 QuestJs._settings.intro = 'You wake up, and realise the bus has stopped.';
 

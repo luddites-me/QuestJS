@@ -3,9 +3,9 @@ QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
   regex: /^(me|myself|player)$/,
   examine(isMultiple) {
     QuestJs._io.msg(
-      `${QuestJs._tools.prefix(this, isMultiple)}A ${this.isFemale ? 'chick' : 'guy'} called ${
-        this.alias
-      }`,
+      `${QuestJs._tools.prefix(this, isMultiple)}A ${
+        this.isFemale ? 'chick' : 'guy'
+      } called ${this.alias}`,
     );
   },
 });
@@ -15,9 +15,13 @@ QuestJs._create.createItem('knife', QuestJs._templates.TAKEABLE(), {
   sharp: false,
   examine(isMultiple) {
     if (this.sharp) {
-      QuestJs._io.msg(`${QuestJs._tools.prefix(this, isMultiple)}A really sharp knife.`);
+      QuestJs._io.msg(
+        `${QuestJs._tools.prefix(this, isMultiple)}A really sharp knife.`,
+      );
     } else {
-      QuestJs._io.msg(`${QuestJs._tools.prefix(this, isMultiple)}A blunt knife.`);
+      QuestJs._io.msg(
+        `${QuestJs._tools.prefix(this, isMultiple)}A blunt knife.`,
+      );
     }
   },
   chargeResponse(participant) {

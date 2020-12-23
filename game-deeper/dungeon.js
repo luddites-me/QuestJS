@@ -32,8 +32,11 @@ const dungeon = {
       },
     },
     {
-      name: 'ns rectangle',
-      descs: ['This rectangular room goes north-south.', 'An oblong room, going north-south.'],
+      name: "ns rectangle",
+      descs: [
+        'This rectangular room goes north-south.',
+        'An oblong room, going north-south.',
+      ],
       adjective: 'rectangular',
       draw(x, y, fill) {
         return `<rect x="${x + 15}" y="${
@@ -42,11 +45,16 @@ const dungeon = {
       },
     },
     {
-      name: 'circle',
-      descs: ['A circular room.', 'This is a smaller room, the walls forming a circle.'],
+      name: "circle",
+      descs: [
+        'A circular room.',
+        'This is a smaller room, the walls forming a circle.',
+      ],
       adjective: 'circular',
       draw(x, y, fill) {
-        return `<circle cx="${x + 25}" cy="${y + 25}" r="15" stroke="none" fill="${fill}"/>`;
+        return `<circle cx="${x + 25}" cy="${
+          y + 25
+        }" r="15" stroke="none" fill="${fill}"/>`;
       },
     },
     {
@@ -70,8 +78,11 @@ const dungeon = {
       },
     },
     {
-      name: 'octagon',
-      descs: ['This eight-sided room is pretty large.', 'An sizable, octagonal room.'],
+      name: "octagon",
+      descs: [
+        'This eight-sided room is pretty large.',
+        'An sizable, octagonal room.',
+      ],
       adjective: 'octagonal',
       draw(x, y, fill) {
         let s = '<polygon points="';
@@ -91,7 +102,9 @@ const dungeon = {
   corridor: {
     name: 'corridor',
     draw(x, y, fill) {
-      return `<rect x="${x + 20}" y="${y + 20}" width="10" height="10" stroke="none" fill="blue"/>`;
+      return `<rect x="${x + 20}" y="${
+        y + 20
+      }" width="10" height="10" stroke="none" fill="blue"/>`;
     },
   },
 };
@@ -152,12 +165,14 @@ dungeon.decorateRoom = function (room, level, theme) {
       room.desc = 'Two tunnels meet and cross.';
     }
     if (exits.length === 3) {
-      if (!room.exit_north) room.desc = 'A tunnel from the south meets one going east to west.';
+      if (!room.exit_north)
+        room.desc = 'A tunnel from the south meets one going east to west.';
       if (!room.exit_east)
         room.desc =
           'You are at a junction between a tunnel from the west and another going north to south.';
       if (!room.exit_south)
-        room.desc = 'A tunnel going east to west has a side passage to the north.';
+        room.desc =
+          'A tunnel going east to west has a side passage to the north.';
       if (!room.exit_west)
         room.desc =
           'This is an intersection between a tunnel from the east and another going north to south.';
@@ -185,7 +200,8 @@ dungeon.generateBasicRooms = function (level, theme) {
       // QuestJs._log.info('x=' + x + ' y=' + y + ' p=' + (100 - dungeon.cellpercentage * dungeon.fromCentre(x, y) / dungeon.size))
       if (
         QuestJs._random.chance(
-          100 - (dungeon.cellpercentage * dungeon.fromCentre(x, y)) / dungeon.size,
+          100 -
+            (dungeon.cellpercentage * dungeon.fromCentre(x, y)) / dungeon.size,
         )
       ) {
         dungeon.generateBasicRoom(level, x, y, theme);
@@ -201,7 +217,11 @@ dungeon.generateBasicRoom = function (level, x, y, theme) {
   // QuestJs._log.info(name)
   const name_west = dungeon.getRoomName(x - 1, y, level);
   const name_south = dungeon.getRoomName(x, y - 1, level);
-  const room = QuestJs._create.cloneObject('dungeon_cell_prototype', undefined, name);
+  const room = QuestJs._create.cloneObject(
+    'dungeon_cell_prototype',
+    undefined,
+    name,
+  );
   // QuestJs._log.info(room)
   room.accessible = false;
   room.alias = 'Lost in a dungeon';
@@ -209,16 +229,26 @@ dungeon.generateBasicRoom = function (level, x, y, theme) {
   room.x = x;
   room.y = y;
   const room_west = QuestJs._w[name_west];
-  if (room_west !== undefined && QuestJs._random.chance(dungeon.exitpercentage)) {
+  if (
+    room_west !== undefined &&
+    QuestJs._random.chance(dungeon.exitpercentage)
+  ) {
     room.exit_west = true;
     room_west.exit_east = true;
-    room_west.exit_east_type = room.exit_west_type = QuestJs._random.int(dungeon.themescount);
+    room_west.exit_east_type = room.exit_west_type = QuestJs._random.int(
+      dungeon.themescount,
+    );
   }
   const room_south = QuestJs._w[name_south];
-  if (room_south !== undefined && QuestJs._random.chance(dungeon.exitpercentage)) {
+  if (
+    room_south !== undefined &&
+    QuestJs._random.chance(dungeon.exitpercentage)
+  ) {
     room.exit_south = true;
     room_south.exit_north = true;
-    room_south.exit_north_type = room.exit_south_type = QuestJs._random.int(dungeon.themescount);
+    room_south.exit_north_type = room.exit_south_type = QuestJs._random.int(
+      dungeon.themescount,
+    );
   }
   QuestJs._w[name] = room;
 };
@@ -294,7 +324,8 @@ dungeon.exitCount = function (room) {
 
 dungeon.flagAllAdjacent = function (room) {
   let flag = false;
-  for (const dir of dungeon.dirs) flag = flag || dungeon.flagAdjacent(room, dir);
+  for (const dir of dungeon.dirs)
+    flag = flag || dungeon.flagAdjacent(room, dir);
   return flag;
 };
 
@@ -303,7 +334,9 @@ dungeon.flagAllAdjacent = function (room) {
 // Expects dir to be a dictionary from QuestJs._lang.exit_list
 dungeon.findAdjacent = function (room, dir) {
   if (!room[`exit_${dir.name}`]) return false;
-  return QuestJs._w[dungeon.getRoomName(room.x + dir.x, room.y + dir.y, room.level)];
+  return QuestJs._w[
+    dungeon.getRoomName(room.x + dir.x, room.y + dir.y, room.level)
+  ];
 };
 
 // Attempts to flag the room in the given direction as accessible.
@@ -358,7 +391,9 @@ dungeon.drawMap = function () {
       );
     }
   }
-  map.push(`<text x="15" y="35" fill="black" font-size="2em">Level ${room.level}</text>`);
+  map.push(
+    `<text x="15" y="35" fill="black" font-size="2em">Level ${room.level}</text>`,
+  );
 
   if (room.x !== undefined && dungeon.mapOptions.showYouAreHere) {
     map.push(
@@ -403,7 +438,10 @@ dungeon.exitScript = function (char, dirName) {
   const dir = QuestJs._lang.exit_list.find((el) => el.name === dirName);
 
   // up and down are different!!!
-  const dest = QuestJs._w[dungeon.getRoomName(origin.x + dir.x, origin.y + dir.y, origin.level)];
+  const dest =
+    QuestJs._w[
+      dungeon.getRoomName(origin.x + dir.x, origin.y + dir.y, origin.level)
+    ];
 
   QuestJs._io.msg(QuestJs._lang.stop_posture(char));
   QuestJs._io.msg(QuestJs._lang.go_successful, { char, dir: dirName });
@@ -444,17 +482,27 @@ QuestJs._create.createRoom('dungeon_cell_prototype', {
 
   getSvg(x, y) {
     const fill =
-      (this.exit_up || this.exit_down) && dungeon.mapOptions.showUpDown ? 'yellow' : 'red';
+      (this.exit_up || this.exit_down) && dungeon.mapOptions.showUpDown
+        ? 'yellow'
+        : 'red';
     // const fill = this.accessible ? 'yellow' : 'red'
     let s = '';
     if (this.exit_south)
-      s += `<rect x="${x + 20}" y="${y + 30}" width="10" height="20" stroke="none" fill="blue"/>`;
+      s += `<rect x="${x + 20}" y="${
+        y + 30
+      }" width="10" height="20" stroke="none" fill="blue"/>`;
     if (this.exit_east)
-      s += `<rect x="${x + 30}" y="${y + 20}" width="20" height="10" stroke="none" fill="blue"/>`;
+      s += `<rect x="${x + 30}" y="${
+        y + 20
+      }" width="20" height="10" stroke="none" fill="blue"/>`;
     if (this.exit_north)
-      s += `<rect x="${x + 20}" y="${y}" width="10" height="20" stroke="none" fill="blue"/>`;
+      s += `<rect x="${
+        x + 20
+      }" y="${y}" width="10" height="20" stroke="none" fill="blue"/>`;
     if (this.exit_west)
-      s += `<rect x="${x}" y="${y + 20}" width="20" height="10" stroke="none" fill="blue"/>`;
+      s += `<rect x="${x}" y="${
+        y + 20
+      }" width="20" height="10" stroke="none" fill="blue"/>`;
     s += this.roomType.draw(x, y, fill);
     if (dungeon.mapOptions.showUpDown) {
       if (this.exit_up)

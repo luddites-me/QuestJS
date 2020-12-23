@@ -40,8 +40,10 @@ $(() => {
   diag.prop('title', 'Who are you?');
   let s;
   s = '<p>Name: <input id="namefield" type="text" value="Zoxx" /></p>';
-  s += '<p>King: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
-  s += 'Queen<input type="radio" id="female" name="sex" value="female" checked></p>';
+  s +=
+    '<p>King: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
+  s +=
+    'Queen<input type="radio" id="female" name="sex" value="female" checked></p>';
   s += '<p>Background:<select id="job">';
   for (const profession of QuestJs._settings.professions) {
     s += `<option value="${profession}">${profession}</option>`;

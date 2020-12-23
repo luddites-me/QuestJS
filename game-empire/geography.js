@@ -17,7 +17,9 @@ class Region {
       const from = parseInt(pair[0]);
       const to = parseInt(pair[1]);
       if (from > to)
-        QuestJs._log.info(`WARNING: Numbers reversed in region (${from} is greater than ${to})`);
+        QuestJs._log.info(
+          `WARNING: Numbers reversed in region (${from} is greater than ${to})`,
+        );
       this.froms.push(from);
       this.tos.push(to);
       this.count += to - from + 1;
@@ -79,10 +81,25 @@ const nation = {
     return this.resources.find((el) => el.name === s);
   },
   resources: [
-    { name: 'carrots', desc: 'Rabbits eat carrots.', spoilage: 0.07, amount: 10 },
+    {
+      name: "carrots",
+      desc: "Rabbits eat carrots.",
+      spoilage: 0.07,
+      amount: 10,
+    },
     { name: 'wheat', desc: 'Used to make pasta.', spoilage: 0.11, amount: 15 },
-    { name: 'pasta', desc: 'Bears eat pasta, often with honey.', spoilage: 0.03, amount: 5 },
-    { name: 'honey', desc: 'Bears like honey. A lot.', spoilage: 0.01, amount: 5 },
+    {
+      name: "pasta",
+      desc: "Bears eat pasta, often with honey.",
+      spoilage: 0.03,
+      amount: 5,
+    },
+    {
+      name: "honey",
+      desc: "Bears like honey. A lot.",
+      spoilage: 0.01,
+      amount: 5,
+    },
   ],
 };
 /*
@@ -114,20 +131,25 @@ nation.regions = [
     'Seaside',
     '#8888ff',
     12,
-    '4,7 4,7 4,8 4,9 4,12 4,13 4,14 5,14 6,15 7,15 9,14 9,13 10,12 11,11',
+    '4,7 4,7 4,8 4,9 4,12 4,13 4,14 5,14 6,15 7,15 9,14 9,13 10,12 11,11'
   ),
-  new Region('Piggyville', 'pink', 22, '15,18 14,21 13,21 12,20 12,20 16,20 14,18 15,16'),
+  new Region(
+    'Piggyville',
+    'pink',
+    22,
+    '15,18 14,21 13,21 12,20 12,20 16,20 14,18 15,16'
+  ),
   new Region(
     'Nicetown',
     'yellow',
     5,
-    '12,15 12,17 12,18 12,18 12,17 9,17 9,17 8,16 8,15 9,14, 10,12',
+    '12,15 12,17 12,18 12,18 12,17 9,17 9,17 8,16 8,15 9,14, 10,12'
   ),
   new Region(
     'Picnicland',
     '#ff8080',
     9,
-    '18,20 18,21 18,21 17,22 16,23 15,23 13,22 13,22 14,21 15,21 15,22 16,22 16,22 19,21',
+    '18,20 18,21 18,21 17,22 16,23 15,23 13,22 13,22 14,21 15,21 15,22 16,22 16,22 19,21'
   ),
 ];
 
@@ -137,17 +159,23 @@ nation.regions[1].addCity(
   18,
   11,
   7,
-  'The main city, on the confluence of two rivers.',
+  'The main city, on the confluence of two rivers.'
 );
 nation.regions[2].addCity(
   'Quieton',
   13,
   19,
   1,
-  'The smallest city, and most isolated, being further from the sea.',
+  'The smallest city, and most isolated, being further from the sea.'
 );
 nation.regions[3].addCity('Apeville', 13, 11, 2, 'A beautiful city.');
-nation.regions[4].addCity('Bearport', 26, 15, 5, 'A busy port, with a notable fishing industry.');
+nation.regions[4].addCity(
+  'Bearport',
+  26,
+  15,
+  5,
+  'A busy port, with a notable fishing industry.'
+);
 
 nation.units = [
   {

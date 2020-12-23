@@ -13,7 +13,8 @@ quest.create('Charm for Tary', [
 ]);
 
 QuestJs._util.openingTimes = function () {
-  if (QuestJs._util.isAfter('1700')) return QuestJs._io.falsemsg('The business is now closed.');
+  if (QuestJs._util.isAfter('1700'))
+    return QuestJs._io.falsemsg('The business is now closed.');
   if (!QuestJs._util.isAfter('0800'))
     return QuestJs._io.falsemsg('The business closed until eight.');
   return true;

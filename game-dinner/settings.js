@@ -23,7 +23,13 @@ QuestJs._settings.toolbar = {
   roomdisplay: true,
   buttons: [
     { id: 'about', title: 'About', icon: 'fa-info', cmd: 'about', href: '#' },
-    { id: 'save', title: 'Save', icon: 'fa-save', cmd: 'save saved_game', href: '#' },
+    {
+      id: "save",
+      title: 'Save',
+      icon: "fa-save",
+      cmd: "save saved_game",
+      href: "#",
+    },
     { id: 'print', title: 'Print', icon: 'fa-print', onclick: '#', href: '#' },
   ],
 };

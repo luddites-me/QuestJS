@@ -34,8 +34,18 @@ QuestJs._settings.setup = function () {
     switchesPos: { x: 900, y: 80 },
     switchesWidth: 240,
     switches: [
-      { on: 'orange', off: 'green', att: 'showRegions', text: 'Toggle region display' },
-      { on: 'black', off: 'silver', att: 'showLabels', text: 'Toggle label display' },
+      {
+        on: "orange",
+        off: "green",
+        att: "showRegions",
+        text: 'Toggle region display',
+      },
+      {
+        on: "black",
+        off: "silver",
+        att: "showLabels",
+        text: 'Toggle label display',
+      },
     ],
     /* extras:function() {
       let s = '<circle cx="820" cy="70" r="10" fill="'
@@ -96,15 +106,29 @@ QuestJs._settings.setup = function () {
           const city = nation.cityAt(x, y);
           return `<text x="${x2}" y="${
             y2 + 15
-          }" style="font-weight:bold;text-anchor:middle" fill="black">${city.name}</text>`;
+          }" style="font-weight:bold;text-anchor:middle" fill="black">${
+            city.name
+          }</text>`;
         },
       },
       go: { width: 30, height: 30, flatFile: 'square_one.png' },
       black: { width: 30, height: 60, x: 0, y: -2, file: 'icon_man.png' },
       blue: { width: 30, height: 60, x: 5, y: 0, file: 'icon_man_blue.png' },
       red: { width: 30, height: 60, x: 10, y: 2, file: 'icon_man_red.png' },
-      yellow: { width: 30, height: 60, x: -5, y: 4, file: 'icon_man_yellow.png' },
-      green: { width: 30, height: 60, x: -10, y: 6, file: 'icon_man_green.png' },
+      yellow: {
+        width: 30,
+        height: 60,
+        x: -5,
+        y: 4,
+        file: "icon_man_yellow.png",
+      },
+      green: {
+        width: 30,
+        height: 60,
+        x: -10,
+        y: 6,
+        file: "icon_man_green.png",
+      },
       text2: { text: 'Something', style: 'font-weight:bold', colour: 'orange' },
       text: {
         width: 30,
@@ -130,13 +154,13 @@ QuestJs._settings.setup = function () {
 
   QuestJs._io.msg('So here you are in your own throne room...');
   QuestJs._io.msg(
-    'Becoming the ruler was quite a surprise, but after the goblin hoard wiped out the entire royal family, you were next in line. Your realm is one of the smallest kingdoms on the continent, and it is still reeling from a goblin invasion, so it will be no easy task. Oh, and some of your subjects are demanding a republic...',
+    'Becoming the ruler was quite a surprise, but after the goblin hoard wiped out the entire royal family, you were next in line. Your realm is one of the smallest kingdoms on the continent, and it is still reeling from a goblin invasion, so it will be no easy task. Oh, and some of your subjects are demanding a republic...'
   );
   QuestJs._io.metamsg(
-    'This game is about ruling you kingdom wisely - or not. You will need to talk to your advisors to learn what needs doing, and give them orders to get it done. They are not all necessarily to be trusted...',
+    'This game is about ruling you kingdom wisely - or not. You will need to talk to your advisors to learn what needs doing, and give them orders to get it done. They are not all necessarily to be trusted...'
   );
   QuestJs._io.metamsg(
-    'Use the SLEEP command in your bedroom to have time pass (i.e., tale a turn). You may want to use the HELP command too.',
+    'Use the SLEEP command in your bedroom to have time pass (i.e., tale a turn). You may want to use the HELP command too.'
   );
   QuestJs._io.metamsg('Good luck, your majesty.');
 };

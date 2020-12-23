@@ -65,7 +65,7 @@ QuestJs._settings.mapMarker = function (loc) {
       [-10, -18],
       [-15, -20],
     ],
-    'stroke:none;fill:black;pointer-events:none;opacity:0.5',
+    'stroke:none;fill:black;pointer-events:none;opacity:0.5'
   );
 };
 

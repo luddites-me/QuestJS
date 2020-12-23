@@ -1,26 +1,26 @@
 QuestJs._tp.addDirective('gem', (arr, params) =>
   QuestJs._random.fromArray(
-    'ruby|sapphire|crystal|amethyst|emerald|diamond|opal|moonstone|chrysoberyl|garnet|jade|sunstone|topaz|tourmaline|turquoise',
+    'ruby|sapphire|crystal|amethyst|emerald|diamond|opal|moonstone|chrysoberyl|garnet|jade|sunstone|topaz|tourmaline|turquoise'
   ),
 );
 QuestJs._tp.addDirective('gems', (arr, params) =>
   QuestJs._random.fromArray(
-    'rubies|sapphires|crystals|amethysts|emeralds|diamonds|opals|moonstones|chrysoberyls|garnets|jades|sunstones|topazes|tourmalines|turquoises',
+    'rubies|sapphires|crystals|amethysts|emeralds|diamonds|opals|moonstones|chrysoberyls|garnets|jades|sunstones|topazes|tourmalines|turquoises'
   ),
 );
 QuestJs._tp.addDirective('precious metal', (arr, params) =>
   QuestJs._random.fromArray(
-    'electrum|gold|silver|silver|silver|white gold|crown gold|meteorite iron|mithril|adamantine|blood alloy',
+    'electrum|gold|silver|silver|silver|white gold|crown gold|meteorite iron|mithril|adamantine|blood alloy'
   ),
 );
 QuestJs._tp.addDirective('base metal', (arr, params) =>
   QuestJs._random.fromArray(
-    'brass|pewter|bronze|iron|steel|lead|copper|brass|pewter|bronze|iron|steel|lead|copper|constantan|phosphor bronze|speculum|terne',
+    'brass|pewter|bronze|iron|steel|lead|copper|brass|pewter|bronze|iron|steel|lead|copper|constantan|phosphor bronze|speculum|terne'
   ),
 );
 QuestJs._tp.addDirective('stone', (arr, params) =>
   QuestJs._random.fromArray(
-    'alabaster|soapstone|chlorite|wonderstone|limestone|onyx|obsidian|marble|moonstone|coral|amber|agate',
+    'alabaster|soapstone|chlorite|wonderstone|limestone|onyx|obsidian|marble|moonstone|coral|amber|agate'
   ),
 );
 

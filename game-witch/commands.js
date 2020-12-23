@@ -8,7 +8,9 @@ QuestJs._commands.unshift(
           "'Well, get going, Jenina,' says the painting. 'You're not going to sort this out just standing their like a bewildered sheep.'",
         );
       } else {
-        QuestJs._io.msg("'Shape yourself, Jenina,' says the painting. 'You've lots to do.'");
+        QuestJs._io.msg(
+          "'Shape yourself, Jenina,' says the painting. 'You've lots to do.'",
+        );
       }
     },
   }),

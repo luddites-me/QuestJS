@@ -12,9 +12,15 @@ QuestJs._create.createRoom('yourchambers', {
       if (this.firstTimeFlag) {
         this.firstTimeFlag = true;
         QuestJs._io.msg(' ');
-        QuestJs._io.msg("'Jenina! Jenina!' That voice from the painting again.");
-        QuestJs._io.msg("'Yes, mother, I'm doing it,' you say, 'I was just brewing it.'");
-        QuestJs._io.msg("'What? Oh, that! No, Jenina, there were men in your room.'");
+        QuestJs._io.msg(
+          "'Jenina! Jenina!' That voice from the painting again.",
+        );
+        QuestJs._io.msg(
+          "'Yes, mother, I'm doing it,' you say, 'I was just brewing it.'",
+        );
+        QuestJs._io.msg(
+          "'What? Oh, that! No, Jenina, there were men in your room.'",
+        );
         QuestJs._io.msg(
           "'What men?' With the king out hunting, no one in the castle had the authority to even knock on your door.",
         );
@@ -26,14 +32,20 @@ QuestJs._create.createRoom('yourchambers', {
   },
   afterFirstEnter() {
     QuestJs._io.msg(' ');
-    QuestJs._io.msg("'Jenina! Jenina!' A shrill shout from the painting hanging on the wall.");
+    QuestJs._io.msg(
+      "'Jenina! Jenina!' A shrill shout from the painting hanging on the wall.",
+    );
     QuestJs._io.msg("'Yes, mother,' you say wearily.");
-    QuestJs._io.msg("'Remember to brew some more Reklindraa,' says your mother, via the painting.");
+    QuestJs._io.msg(
+      "'Remember to brew some more Reklindraa,' says your mother, via the painting.",
+    );
     QuestJs._io.msg("'Yes, I was going to,' you reply, rolling your eyes.");
     QuestJs._io.msg(
       "'And make sure you give some to the Queen, and the other concubines. Before the king returns.'",
     );
-    QuestJs._io.msg("'You think? I was going to wait until he got back, and let him watch.'");
+    QuestJs._io.msg(
+      "'You think? I was going to wait until he got back, and let him watch.'",
+    );
     QuestJs._io.msg("'Don't get sarcastic with me girl!'");
     QuestJs._io.msg(
       "'I have done this before.' You just hope Kendall, the vizier's apprentice, has managed to get you some Janthherb.",
@@ -54,33 +66,47 @@ QuestJs._create.createItem('painting_mother', {
     'This is a painting of your mother, from the chest up, wearing a white dress and rather too much jewellery. Its eyes seem to follow you round the room, which is probably because your mother uses the painting to watch you. If necessary you can talk to her through the painting, but usually the communication is in the opposite direction.',
 });
 
-QuestJs._create.createItem('mother_men_description', QuestJs._npc.TOPIC(false), {
-  loc: 'painting_mother',
-  runscript() {
-    QuestJs._io.msg("'What can you tell me about the men,' you ask your mother.");
-    QuestJs._io.msg(
-      "'Oh, well, let me see. there were two of them. I find it terribly difficult to judge size through these things, but well-built and on the tall side, I would say. Branishing swords, and wearing leather armour and metal helmets. One was quite good-looking, apart from a scar across his chin.'",
-    );
+QuestJs._create.createItem(
+  'mother_men_description',
+  QuestJs._npc.TOPIC(false),
+  {
+    loc: 'painting_mother',
+    runscript() {
+      QuestJs._io.msg(
+        "'What can you tell me about the men,' you ask your mother.",
+      );
+      QuestJs._io.msg(
+        "'Oh, well, let me see. there were two of them. I find it terribly difficult to judge size through these things, but well-built and on the tall side, I would say. Branishing swords, and wearing leather armour and metal helmets. One was quite good-looking, apart from a scar across his chin.'",
+      );
+    },
   },
-});
+);
 
 QuestJs._create.createItem('mother_men_doing', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
   runscript() {
-    QuestJs._io.msg("'What were the men doing in my rooms?' you ask your mother.");
+    QuestJs._io.msg(
+      "'What were the men doing in my rooms?' you ask your mother.",
+    );
     QuestJs._io.msg(
       "'Looking for you, I suspect. They shouted for you, and went into your bedroom, but had left within moments. I was quiye by luch that I noticed them at all.'",
     );
-    QuestJs._io.msg("'Yeah...' It was not like she spent every moment of the day watching you.");
+    QuestJs._io.msg(
+      "'Yeah...' It was not like she spent every moment of the day watching you.",
+    );
   },
 });
 
 QuestJs._create.createItem('mother_help', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
   runscript() {
-    QuestJs._io.msg("'Can you help me find out what's happening?' you ask the painting.");
+    QuestJs._io.msg(
+      "'Can you help me find out what's happening?' you ask the painting.",
+    );
     QuestJs._io.msg("'Me?'");
-    QuestJs._io.msg("'Yes, you. Do some scrying or something. You used to be good at it.'");
+    QuestJs._io.msg(
+      "'Yes, you. Do some scrying or something. You used to be good at it.'",
+    );
     QuestJs._io.msg(
       "'I still am!' she replies haughtily. 'Well, I suppose I could. If you think it is that important.'",
     );
@@ -99,7 +125,9 @@ QuestJs._create.createItem('mother_scrying1', QuestJs._npc.TOPIC(false), {
 QuestJs._create.createItem('mother_scrying2', QuestJs._npc.TOPIC(false), {
   loc: 'painting_mother',
   runscript() {
-    QuestJs._io.msg("'Have you had any more luck scrying?' you ask your mother.");
+    QuestJs._io.msg(
+      "'Have you had any more luck scrying?' you ask your mother.",
+    );
     QuestJs._io.msg("'No. Whatever I try, it's still blocked, I'm afraid.'");
   },
 });
@@ -112,14 +140,18 @@ QuestJs._create.createItem('mother_scrying3', QuestJs._npc.TOPIC(false), {
       "'Not a lot - which is rather worrying. As you know, my skill at scrying is not modest...' {i:Unlike you}, you say to yourself. '... And so I can say with some certainty that someone is actively trying to block my attempts. The king is fine, at least for now, I can see him, riding his pet hellcat; it is the business at the castle that is obscured. What will happen when the king returns to the castle, I would not like to think upon.'",
     );
     QuestJs._io.msg("'Hmm, well thanks for that.'");
-    QuestJs._io.msg("'Be careful, dear, dark forces are afoot. Besides us, I mean.'");
+    QuestJs._io.msg(
+      "'Be careful, dear, dark forces are afoot. Besides us, I mean.'",
+    );
   },
 });
 
 QuestJs._create.createItem('mother_the_plan', QuestJs._npc.TOPIC(true), {
   loc: 'painting_mother',
   runscript() {
-    QuestJs._io.msg("'Reminder me of the plan again,' you say, knowing it will annoy your mother.");
+    QuestJs._io.msg(
+      "'Reminder me of the plan again,' you say, knowing it will annoy your mother.",
+    );
     QuestJs._io.msg(
       "'Seriously, girl? We've been over this so many times. You are to give birth to the chosen one, who will rule the land for the sisterhood. Do you remember that? So for now, you job is to ensure the queen and the other concubines do not get pregnant. You child must by the only royal heir.'",
     );
@@ -146,14 +178,16 @@ QuestJs._create.createRoom('laboratory', {
     'This is where you perform your dark rituals and concoct your foul potions. Hidden within the width of the outer walls, it is long and thin, and windowless. Along the long east side are workbenches, and above them shelves lines with jars.',
   afterEnter() {
     if (QuestJs._w.janthherb.isAtLoc('QuestJs._w.player')) {
-      QuestJs._io.msg('Now you have the janthherb, you will be able to brew the Reklindraa.');
+      QuestJs._io.msg(
+        'Now you have the janthherb, you will be able to brew the Reklindraa.'
+      );
     } else if (QuestJs._w.janthherb.isAtLoc('QuestJs._w.apprentice')) {
       QuestJs._io.msg(
-        'Once you have got the janthherb from Kendall, you will be able to brew the Reklindraa here.',
+        'Once you have got the janthherb from Kendall, you will be able to brew the Reklindraa here.'
       );
     } else if (!QuestJs._w.janthherb.parent === QuestJs._w._nowhere) {
       QuestJs._io.msg(
-        'Once you have the janthherb on you, you will be able to brew the Reklindraa here.',
+        'Once you have the janthherb on you, you will be able to brew the Reklindraa here.'
       );
     }
   },
@@ -403,13 +437,14 @@ QuestJs._create.createRoom('newbridge', {
   loc: '_outercastle',
   desc() {
     QuestJs._io.msg(
-      'The three arches of the bridge span the gap between the rocky outcrops that the castle is built on and small hillock, from where the road winds down to the city.',
+      'The three arches of the bridge span the gap between the rocky outcrops that the castle is built on and small hillock, from where the road winds down to the city.'
     );
   },
   afterEnter() {
     switch (QuestJs._game.snow) {
       case 0:
-        s += 'The bridge is covered in snow. Fortunately you have no need to visit the city today.';
+        s +=
+          'The bridge is covered in snow. Fortunately you have no need to visit the city today.';
         break;
       case 1:
         s +=
@@ -446,8 +481,9 @@ QuestJs._create.createRoom('walkway', {
 });
 
 QuestJs._create.createRoom('captainroom', {
-  loc: '_outercastle',
-  desc: 'The captain of the royal guard is a prestingious position, and this is his private room.',
+  loc: "_outercastle",
+  desc:
+    'The captain of the royal guard is a prestingious position, and this is his private room.',
   northeast: new QuestJs._create.Exit('walkway'),
 });
 

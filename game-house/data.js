@@ -15,7 +15,7 @@ QuestJs._create.createItem('h_animate_corpse1', {
   loc: 'hints',
   examine() {
     QuestJs._io.msg(
-      'So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is..?',
+      'So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is..?'
     );
     this.passed = true;
   },
@@ -25,7 +25,7 @@ QuestJs._create.createItem('h_animate_corpse2', {
   loc: 'hints',
   examine() {
     QuestJs._io.msg(
-      'So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning.',
+      'So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning.'
     );
     this.passed = true;
   },
@@ -35,7 +35,7 @@ QuestJs._create.createItem('h_animate_corpse3', {
   loc: 'hints',
   examine() {
     QuestJs._io.msg(
-      'So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning. There is a reel of wire, just apply lightning to the other end.',
+      'So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning. There is a reel of wire, just apply lightning to the other end.'
     );
     this.passed = true;
   },
@@ -68,7 +68,8 @@ QuestJs._create.createItem('h_animate_corpse7', {
 
 QuestJs._create.createItem('h_animate_corpse8', {
   loc: 'hints',
-  examine: 'You need to get those boots repaired before Patch will put them on.',
+  examine:
+    'You need to get those boots repaired before Patch will put them on.',
 });
 
 QuestJs._create.createRoom('environment', {});
@@ -89,7 +90,9 @@ QuestJs._create.createItem('generic_window', {
       Print('The room felt rather claustrophic with no windows in it.');
     } else if (QuestJs._w.generic_window.bricked_up) {
       if (QuestJs._w.player.parent === this.roomsmashed || this.noted) {
-        Print('Mandy looked at the bricked up window. No way was she getting out that way.');
+        Print(
+          'Mandy looked at the bricked up window. No way was she getting out that way.'
+        );
       } else {
         Print(
           `Mandy looked at the bricked up window. No way was she getting out that way. Wait. The window she had smashed was in the ${LCase(
@@ -100,7 +103,7 @@ QuestJs._create.createItem('generic_window', {
       }
     } else if (QuestJs._w.player.parent.windowsface === 'north') {
       Print(
-        'Mandy looked out the window at the countryside; fields, trees, and there was her home, a barn converstion her parents had purchased three years ago. But how could that be? No way was her home visible from this house; Highfield Lane twisted around far too much for that.',
+        'Mandy looked out the window at the countryside; fields, trees, and there was her home, a barn converstion her parents had purchased three years ago. But how could that be? No way was her home visible from this house; Highfield Lane twisted around far too much for that.'
       );
     } else {
       Print(
@@ -124,7 +127,7 @@ QuestJs._create.createItem('glass_shards', {
   pronouns: QuestJs._lang.pronouns.plural,
   examine() {
     Print(
-      'The shards were the remains of the window. Jagged pieces of glass, some as long as her arm, some almost too small to see.',
+      'The shards were the remains of the window. Jagged pieces of glass, some as long as her arm, some almost too small to see.'
     );
   },
 });
@@ -134,7 +137,7 @@ QuestJs._create.createItem('glass_shard', {
   scenery: true,
   examine() {
     Print(
-      'Mandy carefully looked at shard of glass. Through it she could still see the countryside near her home. She turned it over, and there it was again, but from this side the view was reversed, as though seen through a mirror.',
+      'Mandy carefully looked at shard of glass. Through it she could still see the countryside near her home. She turned it over, and there it was again, but from this side the view was reversed, as though seen through a mirror.'
     );
   },
 });
@@ -172,7 +175,7 @@ QuestJs._create.createRoom('highfield_lane', {
   loc: 'zone_external',
   desc() {
     Print(
-      'Mandy was standing, feeling a little anxious, on the pavement outside The House, which stood in a neatly kept garden to the east. The road continued north, through the countryside, towards her home, and then onwards to Hedlington, while southward, Highfield Lane made its way back into town.',
+      'Mandy was standing, feeling a little anxious, on the pavement outside The House, which stood in a neatly kept garden to the east. The road continued north, through the countryside, towards her home, and then onwards to Hedlington, while southward, Highfield Lane made its way back into town.'
     );
     if (QuestJs._w.letter.parent === this && letter.scenery) {
       QuestJs._io.msg(' ');
@@ -210,9 +213,12 @@ QuestJs._create.createItem('pen', {
 QuestJs._create.createItem('shakespeare_book', {
   loc: 'school_bag',
   examine() {
-    if (this.state === 0 && QuestJs._lang.getName(this, {}) == '"Antony and Cleopatra"') {
+    if (
+      this.state === 0 &&
+      QuestJs._lang.getName(this, {}) == '"Antony and Cleopatra"'
+    ) {
       Print(
-        'Mandy glanced at her copy of Antony and Cleopatra. She really should get around to actually reading it some time, what with an exam on it in just a few weeks.',
+        'Mandy glanced at her copy of Antony and Cleopatra. She really should get around to actually reading it some time, what with an exam on it in just a few weeks.'
       );
     } else {
       if (this.state === 0) {
@@ -236,7 +242,7 @@ QuestJs._create.createItem('shakespeare_book', {
         QuestJs._lang.getName(this, {}) === '"Hamlet"'
       ) {
         Print(
-          'Then she remembered the Clockwork Thespian. The soul of wit. Hamlet, act 2, scene 2. Quickly she thumbed through. Brevity! Brevity is the soul of wit.',
+          'Then she remembered the Clockwork Thespian. The soul of wit. Hamlet, act 2, scene 2. Quickly she thumbed through. Brevity! Brevity is the soul of wit.'
         );
         this.state = 2;
         QuestJs._w.clockwork_thespian.state = 101;
@@ -254,14 +260,16 @@ QuestJs._create.createItem('uniform', {
   loc: 'player',
   scenery: true,
   examine() {
-    Print(`Mandy was wearing ${QuestJs._w.player.parent.parent.QuestJs._w.uniform}.`);
+    Print(
+      `Mandy was wearing ${QuestJs._w.player.parent.parent.QuestJs._w.uniform}.`,
+    );
     if (
       !QuestJs._w.player.parent.parent === QuestJs._w.zone_external &&
       !QuestJs._w.player.uniform.noted
     ) {
       QuestJs._w.player.uniform.noted = true;
       Print(
-        'That was definitely not the uniform of Kyderbrook High School that she had been wearing when she had entered the house!',
+        'That was definitely not the uniform of Kyderbrook High School that she had been wearing when she had entered the house!'
       );
     }
   },
@@ -288,18 +296,20 @@ QuestJs._create.createItem('house', {
 QuestJs._create.createItem('other_houses', {
   loc: 'highfield_lane',
   scenery: true,
-  examine: 'The other houses on the steet looked just like number 23. Just... not evil.',
+  examine:
+    'The other houses on the steet looked just like number 23. Just... not evil.',
 });
 
 QuestJs._create.createRoom('garden_location', {
   loc: 'zone_external',
   desc() {
     Print(
-      'The garden was simple, but well maintained. A gravel path curved from the road, to the west, to The House, to the east. On either side, the lawn was lush and well-trimmed. The garden was bordered by a hedge to north and south. To the west there were rose bushes, though Mandy had never seen them have flowers.',
+      'The garden was simple, but well maintained. A gravel path curved from the road, to the west, to The House, to the east. On either side, the lawn was lush and well-trimmed. The garden was bordered by a hedge to north and south. To the west there were rose bushes, though Mandy had never seen them have flowers.'
     );
     if (QuestJs._w.door.isopen) {
       if (exit_to_house.knocked) {
-        const s = 'Mandy was sure it had been closed when she had knocked on it.';
+        const s =
+          'Mandy was sure it had been closed when she had knocked on it.';
       } else {
         s = 'Had it been open when she first looked? Mandy could not remember.';
       }
@@ -374,7 +384,7 @@ QuestJs._create.createRoom('front_hall', {
   scenery: true,
   desc() {
     Print(
-      'The hall was bigger than Mandy had expected, quite an impressive room really. There were doors to the north and south, while the east wall displayed a number of painting. The walls and ceiling were panelled with dark wood, the foor was tiled in a geometric design that was vaguely unnerving.',
+      'The hall was bigger than Mandy had expected, quite an impressive room really. There were doors to the north and south, while the east wall displayed a number of painting. The walls and ceiling were panelled with dark wood, the foor was tiled in a geometric design that was vaguely unnerving.'
     );
   },
   afterFirstEnter() {
@@ -419,7 +429,9 @@ QuestJs._create.createRoom('brass_dining_room', {
       "This room was dominated by an elegant, dark wood table, well polished, with brass legs shaped like a lion's, and laid out with eight dinner QuestJs._settings. Eight chairs, in matching style, surrounded it.  At the table, ";
     QuestJs._io.msg(' ');
     if (this.mannequin_count < 9) {
-      s += `${toWords(this.mannequin_count)} mannequins were sat, dressed up in clothes and wig.`;
+      s += `${toWords(
+        this.mannequin_count,
+      )} mannequins were sat, dressed up in clothes and wig.`;
     } else if (this.mannequin_count === 9) {
       s +=
         'eight mannequins were sat, dressed up in clothes and wig; a nineth was stood behind one of the chairs.';
@@ -476,7 +488,8 @@ QuestJs._create.createItem('clock', QuestJs._templates.SURFACE(open), {
       this.lookturn = QuestJs._game.turn;
     }
     if (QuestJs._w.large_key.isAtLoc('this')) {
-      s += ' Mandy could see the key for winding the clock up was in the side of the clock.';
+      s +=
+        ' Mandy could see the key for winding the clock up was in the side of the clock.';
     }
     Print(s);
   },
@@ -490,7 +503,8 @@ QuestJs._create.createItem('large_key', {
 QuestJs._create.createItem('vic_chair', {
   loc: 'brass_dining_room',
   scenery: true,
-  examine: 'The chair was made of dark wood, with a high back and a padded seat.',
+  examine:
+    'The chair was made of dark wood, with a high back and a padded seat.',
 });
 
 QuestJs._create.createItem('vic_table', {
@@ -513,12 +527,12 @@ QuestJs._create.createRoom('theatre_stage', {
   scenery: true,
   desc() {
     Print(
-      'This is even smaller than the stage at Kyderbrook, thought Mandy. There was barely room for both her and the inanimate figure stood to the side. The only way to go was back through the curtains to the south.',
+      'This is even smaller than the stage at Kyderbrook, thought Mandy. There was barely room for both her and the inanimate figure stood to the side. The only way to go was back through the curtains to the south.'
     );
   },
   beforeFirstEnter() {
     Print(
-      'Mandy pushed the curtain aside and looked beyond. She was startled for a moment to see a figure there, but it was quite inanimate.',
+      'Mandy pushed the curtain aside and looked beyond. She was startled for a moment to see a figure there, but it was quite inanimate.'
     );
     QuestJs._io.msg(' ');
   },
@@ -530,11 +544,11 @@ QuestJs._create.createItem('clockwork_thespian', {
   examine() {
     if (QuestJs._w.clockwork_thespian.state === 0) {
       Print(
-        'The figure seemed to have been manufactured to resemble a man of impressive proportions, in height, but also in the girth of his chest. And its groin too, Mandy noticed with a wry smile. It, or he, was constructed of brass, and looked to be jointed. He was clothed in a frilly off-white shirt, and dark baggy trousers, as well as a floppy hat. Mandy noticed there was a hole in the back of his shirt, and a corresponding hole in his back, where a simple, if large, key might fit.',
+        'The figure seemed to have been manufactured to resemble a man of impressive proportions, in height, but also in the girth of his chest. And its groin too, Mandy noticed with a wry smile. It, or he, was constructed of brass, and looked to be jointed. He was clothed in a frilly off-white shirt, and dark baggy trousers, as well as a floppy hat. Mandy noticed there was a hole in the back of his shirt, and a corresponding hole in his back, where a simple, if large, key might fit.'
       );
     } else {
       Print(
-        'The clockwork thespian seemed to have been manufactured to resemble a man of impressive proportions, in height, but also in the girth of his chest. And his groin too, Mandy noticed with a wry smile. He was constructed of brass, and looked to be jointed. He was clothed in a frilly off-white shirt, and dark baggy trousers, as well as a floppy hat.',
+        'The clockwork thespian seemed to have been manufactured to resemble a man of impressive proportions, in height, but also in the girth of his chest. And his groin too, Mandy noticed with a wry smile. He was constructed of brass, and looked to be jointed. He was clothed in a frilly off-white shirt, and dark baggy trousers, as well as a floppy hat.'
       );
     }
   },
@@ -587,11 +601,11 @@ QuestJs._create.createItem('white_knight', {
   examine() {
     if (this.active) {
       Print(
-        'Mandy looked at the white knight. She had not spotted there was only one, perhaps that was why white was losing.',
+        'Mandy looked at the white knight. She had not spotted there was only one, perhaps that was why white was losing.'
       );
     } else {
       Print(
-        'The chess pieces were all wooden and exquisitely carved. The queen looked like a warrior woman in armour, the pawns held pikes. White pieces seemed to be carved from ivory, whilst black were wooden, but they were otherwise identical.',
+        'The chess pieces were all wooden and exquisitely carved. The queen looked like a warrior woman in armour, the pawns held pikes. White pieces seemed to be carved from ivory, whilst black were wooden, but they were otherwise identical.'
       );
     }
   },
@@ -783,10 +797,14 @@ QuestJs._create.createItem('boots', {
         break;
       default:
         if (this.size > 0) {
-          s = `The ${LCase(QuestJs._lang.getName(this, {}))} was of gigantic proportions!`;
+          s = `The ${LCase(
+          QuestJs._lang.getName(this, {}),
+        )} was of gigantic proportions!`;
           break;
         } else {
-          s = `The ${LCase(QuestJs._lang.getName(this, {}))} was too tiny to see properly.`;
+          s = `The ${LCase(
+          QuestJs._lang.getName(this, {}),
+        )} was too tiny to see properly.`;
         }
     }
     if (!this.mended) {
@@ -841,7 +859,8 @@ QuestJs._create.createRoom('zone_flora', {});
 QuestJs._create.createItem('flora_floor', {
   loc: 'zone_flora',
   scenery: true,
-  examine: 'The floor was a lattice of wrought iron, painted white, and flaking in a few places.',
+  examine:
+    'The floor was a lattice of wrought iron, painted white, and flaking in a few places.',
 });
 
 QuestJs._create.createItem('flora_walls', {
@@ -918,9 +937,13 @@ QuestJs._create.createItem('wm_hello', QuestJs._npc.TOPIC(true), {
     QuestJs._io.msg('');
     QuestJs._io.msg("'Who are you?' Mandy asked the man at te desk.");
     QuestJs._io.msg('');
-    QuestJs._io.msg("'Me? I'm Winfield Malovich. This is my house. Who are you?'");
+    QuestJs._io.msg(
+      "'Me? I'm Winfield Malovich. This is my house. Who are you?'",
+    );
     QuestJs._io.msg('');
-    QuestJs._io.msg("'I was just passing the house.. and I kind of got trapped here.'");
+    QuestJs._io.msg(
+      "'I was just passing the house.. and I kind of got trapped here.'",
+    );
     QuestJs._io.msg('');
     QuestJs._io.msg(
       "'<i>Story of my life</i>! This was my house once,' he said. 'I built the analytical machine you see before you. Now, well, I think it belongs to itself now. You can talk to it, you know. Only thing that keeps me sane, oh the <i>midnight memories</i> we've shared.' Mandy felt unconvinced it had kept him sane.",
@@ -967,7 +990,9 @@ QuestJs._create.createItem('wm_no_way_out', QuestJs._npc.TOPIC(false), {
     QuestJs._io.msg('');
     QuestJs._io.msg("'Is there no way out?'");
     QuestJs._io.msg('');
-    QuestJs._io.msg("'None. The walls might as well be made of <i>steel, my girl</i>.'");
+    QuestJs._io.msg(
+      "'None. The walls might as well be made of <i>steel, my girl</i>.'",
+    );
 
     // list add (this.songlist, "Steal my girl")
   },
@@ -1045,15 +1070,21 @@ QuestJs._create.createItem('wm_1911', QuestJs._npc.TOPIC(false), {
     QuestJs._io.msg('');
     QuestJs._io.msg("'You have been here since 1911?'");
     QuestJs._io.msg('');
-    QuestJs._io.msg("'The King was due to have his Delhi Durbar in a few weeks.'");
+    QuestJs._io.msg(
+      "'The King was due to have his Delhi Durbar in a few weeks.'",
+    );
     QuestJs._io.msg('');
     QuestJs._io.msg("'Er, which king was that?'");
     QuestJs._io.msg('');
-    QuestJs._io.msg("'George V. I suppose he is just <history</i> to you. Who's king now?'");
+    QuestJs._io.msg(
+      "'George V. I suppose he is just <history</i> to you. Who's king now?'",
+    );
     QuestJs._io.msg('');
     QuestJs._io.msg("'Queen. Queen Elizabeth II.'");
     QuestJs._io.msg('');
-    QuestJs._io.msg("'A queen? Jolly good. England became great under Queen Victoria.'");
+    QuestJs._io.msg(
+      "'A queen? Jolly good. England became great under Queen Victoria.'",
+    );
   },
 });
 
@@ -1148,7 +1179,10 @@ QuestJs._create.createItem('reel', {
     } else if (this.count === 1) {
       s +=
         'she guessed there was about twenty meters of wire on the spindle (which was also metal), and more heading down the stairs to the laboratory.';
-    } else if (this.count === 1 && QuestJs._w.player.parent == QuestJs._w.great_gallery) {
+    } else if (
+      this.count === 1 &&
+      QuestJs._w.player.parent == QuestJs._w.great_gallery
+    ) {
       s +=
         'she guessed there was about fifteen meters of wire on the spindle (which was also metal), and more dropping down to the hall below and heading down the stairs to the laboratory.';
     } else if (this.count === 5) {
@@ -1180,7 +1214,8 @@ QuestJs._create.createItem('alchemy_bench', {
 QuestJs._create.createItem('scorch_marks', {
   loc: 'alchemy_lab',
   scenery: true,
-  examine: 'Mandy could not tell if the scorch marks were caused by heat or acid.',
+  examine:
+    'Mandy could not tell if the scorch marks were caused by heat or acid.',
 });
 
 QuestJs._create.createItem('glass_apparatus', {
@@ -1195,7 +1230,7 @@ QuestJs._create.createItem('patchwork_body', {
   examine() {
     this.state = 1;
     Print(
-      'Mandy gingerly inspected the corpse on the table. It was naked, but nothing to suggest it was either male or female. As she looked closer, she could see stitch marks, and with a growing sense of nausea, she relaised it was not a corpse, but the stitched together parts of several corpses.',
+      'Mandy gingerly inspected the corpse on the table. It was naked, but nothing to suggest it was either male or female. As she looked closer, she could see stitch marks, and with a growing sense of nausea, she relaised it was not a corpse, but the stitched together parts of several corpses.'
     );
   },
 });
@@ -1237,10 +1272,12 @@ QuestJs._create.createItem('telescope', {
         s += ' It was currently almost vertically,';
         break;
       case 3:
-        s += ' It was currently angled about thirty degrees above the horizontal,';
+        s +=
+          ' It was currently angled about thirty degrees above the horizontal,';
         break;
       default:
-        s += ' It was currently angled about sixty degrees above the horizontal,';
+        s +=
+          ' It was currently angled about sixty degrees above the horizontal,';
         break;
     }
     switch (QuestJs._w.middle_wheel.state) {
@@ -1267,19 +1304,22 @@ QuestJs._create.createItem('telescope', {
 QuestJs._create.createItem('left_wheel', {
   loc: 'observatory',
   scenery: true,
-  examine: 'The left wheel was about seven centimeters across, and made of brass.',
+  examine:
+    'The left wheel was about seven centimeters across, and made of brass.',
 });
 
 QuestJs._create.createItem('middle_wheel', {
   loc: 'observatory',
   scenery: true,
-  examine: 'The midde wheel was about seven centimeters across, and made of brass.',
+  examine:
+    'The midde wheel was about seven centimeters across, and made of brass.',
 });
 
 QuestJs._create.createItem('right_wheel', {
   loc: 'observatory',
   scenery: true,
-  examine: 'The right wheel was about seven centimeters across, and made of brass.',
+  examine:
+    'The right wheel was about seven centimeters across, and made of brass.',
 });
 
 QuestJs._create.createItem('controls', {
@@ -1312,12 +1352,14 @@ QuestJs._create.createItem('chamber_pot', {
 QuestJs._create.createRoom('observatory_up', {
   loc: 'zone_medieval',
   desc() {
-    let s = 'Mandy was stood on the top of the mechanism that supported the telescope. ';
+    let s =
+      'Mandy was stood on the top of the mechanism that supported the telescope. ';
     if (QuestJs._w.telescope.roofopen) {
       s +=
         'If she reached, she could probably pull herself up onto the roof from her, she thought.';
     } else {
-      s += 'If she reached, she could probably touch the ceiling from her, she thought.';
+      s +=
+        'If she reached, she could probably touch the ceiling from her, she thought.';
     }
     Print(s);
   },
@@ -1349,7 +1391,7 @@ QuestJs._create.createRoom('roof_location', {
   beforeEnter() {},
   afterFirstEnter() {
     Print(
-      'As she looked harder, she realised she could not see the Ash Tree Estate, instead there were only fields. Perhaps no bad thing, she thought, but then she noticed that there was no modern housing at all. This was what the town had looked like before the war.',
+      'As she looked harder, she realised she could not see the Ash Tree Estate, instead there were only fields. Perhaps no bad thing, she thought, but then she noticed that there was no modern housing at all. This was what the town had looked like before the war.'
     );
   },
   down: new QuestJs._create.Exit('observatory_up'),
@@ -1368,10 +1410,12 @@ QuestJs._create.createItem('spike', {
   examine() {
     if (this.wireattached) {
       Print(
-        'The spike was made of black metal, and was straight apart from a single loop, to which a wire was attached.',
+        'The spike was made of black metal, and was straight apart from a single loop, to which a wire was attached.'
       );
     } else {
-      Print('The spike was made of black metal, and was straight apart from a single loop.');
+      Print(
+        'The spike was made of black metal, and was straight apart from a single loop.'
+      );
     }
   },
 });
@@ -1558,7 +1602,9 @@ QuestJs._create.createItem('tinyman_hello', QuestJs._npc.TOPIC(false), {
     QuestJs._io.msg('');
     QuestJs._io.msg("'Er, hi,' Mandy said to the little man.");
     QuestJs._io.msg('');
-    QuestJs._io.msg("He looked up from his work. 'Hello, miss,' he said in a high-pitched voice.");
+    QuestJs._io.msg(
+      "He looked up from his work. 'Hello, miss,' he said in a high-pitched voice.",
+    );
   },
 });
 
@@ -1598,29 +1644,43 @@ QuestJs._create.createItem('tinyman_what_doing', QuestJs._npc.TOPIC(false), {
   },
 });
 
-QuestJs._create.createItem('tinyman_mend_boots_normal', QuestJs._npc.TOPIC(false), {
-  loc: 'tiny_man',
-  runscript() {
-    QuestJs._io.msg('');
-    QuestJs._io.msg("'Could you mend some boots?' Mandy showed him the boots.");
-    QuestJs._io.msg('');
-    QuestJs._io.msg(
-      "'Are you kidding me? They're enormous! 'ow could I get a needle through leather that thick?'",
-    );
+QuestJs._create.createItem(
+  'tinyman_mend_boots_normal',
+  QuestJs._npc.TOPIC(false),
+  {
+    loc: 'tiny_man',
+    runscript() {
+      QuestJs._io.msg('');
+      QuestJs._io.msg(
+        "'Could you mend some boots?' Mandy showed him the boots.",
+      );
+      QuestJs._io.msg('');
+      QuestJs._io.msg(
+        "'Are you kidding me? They're enormous! 'ow could I get a needle through leather that thick?'",
+      );
+    },
   },
-});
+);
 
-QuestJs._create.createItem('tinyman_mend_boots_small', QuestJs._npc.TOPIC(false), {
-  loc: 'tiny_man',
-  runscript() {
-    QuestJs._io.msg('');
-    QuestJs._io.msg("'Could you mend some boots?' Mandy showed him the boots.");
-    QuestJs._io.msg('');
-    QuestJs._io.msg("'I should think so. Toss 'em over here, and I'll 'ave a go.'");
+QuestJs._create.createItem(
+  'tinyman_mend_boots_small',
+  QuestJs._npc.TOPIC(false),
+  {
+    loc: 'tiny_man',
+    runscript() {
+      QuestJs._io.msg('');
+      QuestJs._io.msg(
+        "'Could you mend some boots?' Mandy showed him the boots.",
+      );
+      QuestJs._io.msg('');
+      QuestJs._io.msg(
+        "'I should think so. Toss 'em over here, and I'll 'ave a go.'",
+      );
 
-    tiny_man.state = 1;
+      tiny_man.state = 1;
+    },
   },
-});
+);
 
 QuestJs._create.createItem('tinyman_where_live', QuestJs._npc.TOPIC(false), {
   loc: 'tiny_man',
@@ -1628,7 +1688,9 @@ QuestJs._create.createItem('tinyman_where_live', QuestJs._npc.TOPIC(false), {
     QuestJs._io.msg('');
     QuestJs._io.msg("'So where <i>do </i>you live?'");
     QuestJs._io.msg('');
-    QuestJs._io.msg("'14 Clarence Street. Least, that's where I lived before I come in 'ere.'");
+    QuestJs._io.msg(
+      "'14 Clarence Street. Least, that's where I lived before I come in 'ere.'",
+    );
     QuestJs._io.msg('');
     QuestJs._io.msg(
       "'Clarence Street? I know that road, Charlene Porter lives there.' It was a terrace house, built in the later ninettenth century, near the centre of town.",
@@ -1728,7 +1790,8 @@ QuestJs._create.createRoom('deeper_mine', {
       s +=
         ' There were bits of coal and rock strewn across the floor, and Patch was busy adding to them.';
     } else if (this.state === 4) {
-      s += ' The floor was ankle deep in coal and rock, and Patch was busy adding to them.';
+      s +=
+        ' The floor was ankle deep in coal and rock, and Patch was busy adding to them.';
     } else if (this.state === 5) {
       s +=
         ' The floor was knee deep in coal and rock, and the tunnel now continued some way to the southeast. Mandy could heard Patch still working down there.';
@@ -1760,7 +1823,8 @@ QuestJs._create.createItem('coal', {
   loc: 'deeper_mine',
   scenery: true,
   pronouns: QuestJs._lang.pronouns.plural,
-  examine: 'As Mandy looked closely, she could see there was definitely coal in the rockface here.',
+  examine:
+    'As Mandy looked closely, she could see there was definitely coal in the rockface here.',
 });
 
 QuestJs._create.createItem('sack', {

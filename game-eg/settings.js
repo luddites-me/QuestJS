@@ -48,7 +48,7 @@ QuestJs._settings.setup = function () {
   QuestJs._io.createPaneBox(
     2,
     'Extra options',
-    '<button onclick="alert(\'Here!\')">Alert</button>',
+    "<button onclick=\"alert('Here!')\">Alert</button>",
   );
 };
 
@@ -59,4 +59,8 @@ QuestJs._settings.mapStyle = {
   height: '300px',
   'background-color': 'yellow',
 };
-QuestJs._settings.mapLabelStyle = { 'font-size': '8pt', 'font-weight': 'bold', color: 'blue' };
+QuestJs._settings.mapLabelStyle = {
+  'font-size': '8pt',
+  'font-weight': 'bold',
+  color: "blue",
+};

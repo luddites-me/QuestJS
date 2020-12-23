@@ -7,14 +7,29 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertEqual('frost', elements.opposed('fire'));
 
   QuestJs._test.title('Equip');
-  QuestJs._test.assertEqual('unarmed', QuestJs._game.player.getEquippedWeapon().alias);
-  QuestJs._test.assertCmd('i', 'You are carrying a flail, an ice amulet and a knife.');
+  QuestJs._test.assertEqual(
+    'unarmed',
+    QuestJs._game.player.getEquippedWeapon().alias,
+  );
+  QuestJs._test.assertCmd(
+    'i',
+    'You are carrying a flail, an ice amulet and a knife.'
+  );
   QuestJs._test.assertCmd('equip knife', 'You draw the knife.');
-  QuestJs._test.assertCmd('i', 'You are carrying a flail, an ice amulet and a knife (equipped).');
-  QuestJs._test.assertEqual('knife', QuestJs._game.player.getEquippedWeapon().alias);
+  QuestJs._test.assertCmd(
+    'i',
+    'You are carrying a flail, an ice amulet and a knife (equipped).'
+  );
+  QuestJs._test.assertEqual(
+    'knife',
+    QuestJs._game.player.getEquippedWeapon().alias,
+  );
   QuestJs._test.assertCmd('equip knife', 'It already is.');
   QuestJs._test.assertCmd('drop knife', 'You drop the knife.');
-  QuestJs._test.assertEqual('unarmed', QuestJs._game.player.getEquippedWeapon().alias);
+  QuestJs._test.assertEqual(
+    'unarmed',
+    QuestJs._game.player.getEquippedWeapon().alias,
+  );
   QuestJs._test.assertEqual(undefined, QuestJs._game.player.equipped);
   QuestJs._test.assertCmd('take knife', 'You take the knife.');
   QuestJs._test.assertCmd('unequip knife', 'It already is.');
@@ -121,8 +136,14 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertCmd('get shotgun', 'You take the shotgun.');
   QuestJs._test.assertCmd('equip shotgun', 'You draw the shotgun.');
   QuestJs._random.prime(2);
-  QuestJs._test.assertCmd('attack goblin', ['You attack the goblin.', 'A miss!']);
-  QuestJs._test.assertCmd('attack goblin', ['You attack the goblin.', 'Out of ammo!']);
+  QuestJs._test.assertCmd('attack goblin', [
+    'You attack the goblin.',
+    'A miss!',
+  ]);
+  QuestJs._test.assertCmd('attack goblin', [
+    'You attack the goblin.',
+    'Out of ammo!',
+  ]);
   QuestJs._test.assertCmd('drop shotgun', 'You drop the shotgun.');
 
   QuestJs._test.title('Attack.createAttack  (fireball)');
@@ -133,7 +154,10 @@ QuestJs._test.tests = function () {
 
   const attack3 = Attack.createAttack(QuestJs._game.player, QuestJs._w.goblin);
 
-  QuestJs._test.assertEqual('spellCasting', attack3.skill.statForOffensiveBonus);
+  QuestJs._test.assertEqual(
+    'spellCasting',
+    attack3.skill.statForOffensiveBonus,
+  );
   QuestJs._test.assertEqual(5, QuestJs._w.me.spellCasting);
 
   QuestJs._test.assertEqual('me', attack3.attacker.name);
@@ -190,22 +214,36 @@ QuestJs._test.tests = function () {
   QuestJs._random.prime(4);
   QuestJs._w.flail.equipped = true;
 
-  QuestJs._test.assertCmd('attack goblin', ['You attack the goblin.', /A miss/]);
+  QuestJs._test.assertCmd('attack goblin', [
+    'You attack the goblin.',
+    /A miss/,
+  ]);
   QuestJs._test.assertEqual(40, QuestJs._w.goblin.health);
 
   delete QuestJs._w.flail.equipped;
 
   QuestJs._test.title('learn fireball');
   QuestJs._game.player.skillsLearnt = ['Double attack'];
-  QuestJs._test.assertCmd('cast nonsense', ['There is no spell called nonsense.']);
-  QuestJs._test.assertCmd('cast fireball', ['You do not know the spell <i>Fireball</i>.']);
-  QuestJs._test.assertCmd('learn nonsense', ['There is no spell called nonsense.']);
+  QuestJs._test.assertCmd('cast nonsense', [
+    'There is no spell called nonsense.',
+  ]);
+  QuestJs._test.assertCmd('cast fireball', [
+    'You do not know the spell <i>Fireball</i>.',
+  ]);
+  QuestJs._test.assertCmd('learn nonsense', [
+    'There is no spell called nonsense.',
+  ]);
   QuestJs._test.assertCmd('learn fireball', [
     'You do not have anything you can learn <i>Fireball</i> from.',
   ]);
   QuestJs._test.assertCmd('get spellbook', ['You take the spellbook.']);
-  QuestJs._test.assertCmd('learn fireball', ['You learn <i>Fireball</i> from the spellbook.']);
-  QuestJs._test.assertEqual(['Double attack', 'Fireball'], QuestJs._game.player.skillsLearnt);
+  QuestJs._test.assertCmd('learn fireball', [
+    'You learn <i>Fireball</i> from the spellbook.',
+  ]);
+  QuestJs._test.assertEqual(
+    ['Double attack', 'Fireball'],
+    QuestJs._game.player.skillsLearnt,
+  );
   // goblin, orc, snotling, rabbit
 
   QuestJs._random.prime(19);
@@ -235,9 +273,17 @@ QuestJs._test.tests = function () {
   QuestJs._w.orc.health = 60;
 
   QuestJs._test.title('learn Ice shard');
-  QuestJs._test.assertCmd('learn ice shard', ['You learn <i>Ice shard</i> from the spellbook.']);
-  QuestJs._game.player.skillsLearnt = ['Double attack', 'Fireball', 'Ice shard'];
-  QuestJs._test.assertCmd('cast ice shard', ['You need a target for the spell <i>Ice shard</i>.']);
+  QuestJs._test.assertCmd('learn ice shard', [
+    'You learn <i>Ice shard</i> from the spellbook.',
+  ]);
+  QuestJs._game.player.skillsLearnt = [
+    'Double attack',
+    'Fireball',
+    'Ice shard',
+  ];
+  QuestJs._test.assertCmd('cast ice shard', [
+    'You need a target for the spell <i>Ice shard</i>.',
+  ]);
   QuestJs._test.assertCmd('drop spellbook', ['You drop the spellbook.']);
   skillUI.getSkillFromButtons = function () {
     return skills.findName('Ice shard');
@@ -268,7 +314,11 @@ QuestJs._test.tests = function () {
   skillUI.getSkillFromButtons = oldgetSkillFromButtons;
 
   QuestJs._test.title('Lightning bolt');
-  QuestJs._game.player.skillsLearnt = ['Double attack', 'Fireball', 'Lightning bolt'];
+  QuestJs._game.player.skillsLearnt = [
+    'Double attack',
+    'Fireball',
+    'Lightning bolt',
+  ];
   QuestJs._test.assertCmd('cast lightning bolt', [
     'You need a target for the spell <i>Lightning bolt</i>.',
   ]);
@@ -359,8 +409,12 @@ QuestJs._test.tests = function () {
 
   QuestJs._test.title('learn ongoing spells');
   QuestJs._test.assertCmd('get spellbook', ['You take the spellbook.']);
-  QuestJs._test.assertCmd('learn steelskin', ['You learn <i>Steelskin</i> from the spellbook.']);
-  QuestJs._test.assertCmd('learn stoneskin', ['You learn <i>Stoneskin</i> from the spellbook.']);
+  QuestJs._test.assertCmd('learn steelskin', [
+    'You learn <i>Steelskin</i> from the spellbook.',
+  ]);
+  QuestJs._test.assertCmd('learn stoneskin', [
+    'You learn <i>Stoneskin</i> from the spellbook.',
+  ]);
   QuestJs._test.assertCmd('drop spellbook', ['You drop the spellbook.']);
   QuestJs._test.assertEqual([], QuestJs._game.player.activeEffects);
   QuestJs._test.assertCmd('cast stoneskin', [
@@ -382,8 +436,14 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertEqual(2, QuestJs._game.player.countdown_Steelskin);
   QuestJs._test.assertCmd('z', ['You wait one turn.']);
   QuestJs._test.assertEqual(1, QuestJs._game.player.countdown_Steelskin);
-  QuestJs._test.assertCmd('z', ['You wait one turn.', 'The <i>Steelskin</i> spell terminates.']);
-  QuestJs._test.assertEqual(undefined, QuestJs._game.player.countdown_Steelskin);
+  QuestJs._test.assertCmd('z', [
+    'You wait one turn.',
+    'The <i>Steelskin</i> spell terminates.',
+  ]);
+  QuestJs._test.assertEqual(
+    undefined,
+    QuestJs._game.player.countdown_Steelskin,
+  );
   QuestJs._test.assertEqual([], QuestJs._game.player.activeEffects);
   QuestJs._test.assertCmd('z', ['You wait one turn.']);
 
@@ -400,8 +460,14 @@ QuestJs._test.tests = function () {
   // should also open other door!!!
 
   QuestJs._test.title('cast Commune with animal');
-  QuestJs._game.player.skillsLearnt = ['Double attack', 'Fireball', 'Commune with animal'];
-  QuestJs._test.assertCmd('talk to rabbit', [/You spend a few minutes telling the rabbit/]);
+  QuestJs._game.player.skillsLearnt = [
+    'Double attack',
+    'Fireball',
+    'Commune with animal',
+  ];
+  QuestJs._test.assertCmd('talk to rabbit', [
+    /You spend a few minutes telling the rabbit/,
+  ]);
   QuestJs._test.assertCmd('cast commune on rabbit', [
     'You cast <i>Commune with animal</i>.',
     'You can now talk to the rabbit for a short time.',

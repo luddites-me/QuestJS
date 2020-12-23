@@ -11,7 +11,9 @@ QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
     return this.baseOxygeUse * this.oxygenUseModifier;
   },
   examine(isMultiple) {
-    QuestJs._io.msg(`${QuestJs._tools.prefix(this, isMultiple)}You feel fine...`);
+    QuestJs._io.msg(
+      `${QuestJs._tools.prefix(this, isMultiple)}You feel fine...`,
+    );
   },
   canMove(ex) {
     let room1 = QuestJs._w[this.loc];
@@ -24,35 +26,45 @@ QuestJs._create.createItem('me', QuestJs._templates.PLAYER(), {
         article: QuestJs._consts.DEFINITE,
       })} will not open while it is ${
         room1.vacuum ? 'pressurised' : 'depressurised'
-      } and ${QuestJs._lang.getName(room1, { article: QuestJs._consts.DEFINITE })} is not.`,
+      } and ${QuestJs._lang.getName(room1, {
+        article: QuestJs._consts.DEFINITE,
+      })} is not.`,
     );
     return false;
   },
 });
 
-QuestJs._create.createItem('your_jumpsuit', QuestJs._templates.WEARABLE(2, ['body']), {
-  alias: 'jumpsuit',
-  loc: 'stasis_pod_drawer',
-  defArticle: 'your',
-  indefArticle: 'your',
-  examine:
-    'Your jumpsuit is tight, but comfortable; a dark grey colour, with a slight metallic sheen.',
-  onMove(toLoc, fromLoc) {
-    if (fromLoc === 'stasis_pod_drawer') {
-      delete QuestJs._w.stasis_pod_drawer.loc;
-      QuestJs._io.msg('The stasis pod drawer slides shut.');
-    }
+QuestJs._create.createItem(
+  'your_jumpsuit',
+  QuestJs._templates.WEARABLE(2, ['body']),
+  {
+    alias: 'jumpsuit',
+    loc: 'stasis_pod_drawer',
+    defArticle: 'your',
+    indefArticle: 'your',
+    examine:
+      'Your jumpsuit is tight, but comfortable; a dark grey colour, with a slight metallic sheen.',
+    onMove(toLoc, fromLoc) {
+      if (fromLoc === 'stasis_pod_drawer') {
+        delete QuestJs._w.stasis_pod_drawer.loc;
+        QuestJs._io.msg('The stasis pod drawer slides shut.');
+      }
+    },
   },
-});
+);
 
-QuestJs._create.createItem('your_underwear', QuestJs._templates.WEARABLE(1, ['body']), {
-  alias: 'underwear',
-  loc: 'me',
-  worn: true,
-  defArticle: 'your',
-  indefArticle: 'your',
-  examine: 'Your underwear is standard issue; white and functional.',
-});
+QuestJs._create.createItem(
+  'your_underwear',
+  QuestJs._templates.WEARABLE(1, ['body']),
+  {
+    alias: 'underwear',
+    loc: 'me',
+    worn: true,
+    defArticle: 'your',
+    indefArticle: 'your',
+    examine: 'Your underwear is standard issue; white and functional.',
+  },
+);
 
 // -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // STARBOARD POD
@@ -76,15 +88,21 @@ QuestJs._create.createRoom('stasis_bay', {
       case 4:
         return 'Currently only your pod and the spare pod are open.';
       case 1:
-        return `${QuestJs._lang.getName(arr[0], { possessive: true })} stasis pod is closed.`;
+        return `${QuestJs._lang.getName(arr[0], {
+        possessive: true,
+      })} stasis pod is closed.`;
       default:
-        return `The stasis pods of ${QuestJs._tools.formatList(arr)} are closed.`;
+        return `The stasis pods of ${QuestJs._tools.formatList(
+        arr,
+      )} are closed.`;
     }
   },
   vacuum: false,
   port: new QuestJs._create.Exit('hallway'),
   aft: new QuestJs._create.Exit('cargo_bay'),
-  in: new QuestJs._create.Exit('stasis_pod_room', { msg: 'You climb into the stasis pod.' }),
+  in: new QuestJs._create.Exit('stasis_pod_room', {
+    msg: 'You climb into the stasis pod.',
+  }),
 });
 
 QuestJs._create.createItem('pile_of_vomit', {
@@ -103,52 +121,64 @@ QuestJs._create.createItem('stasis_pod', {
     'Externally, the pods are rather less like coffins, as the sides are thick with the stasis equipment, and flared towards the floor. Each stasis pod is about waist height. {stasis_pod_status}{ifHere:pile_of_vomit: One has a slight splattering of vomit.}',
 });
 
-QuestJs._create.createItem('stasis_pod_drawer', QuestJs._templates.CONTAINER(false), {
-  alias: 'drawer',
-  scenery: true,
-  loc: 'stasis_bay',
-  closed: false,
-  examine:
-    'The drawer extends out from the foot of the pod; it is white and quite shallow, and almost the width of the pod.{ifHere:pile_of_vomit: Fortunately, it is well away from the vomit.}',
-});
-
-QuestJs._create.createItem('stasis_locker', QuestJs._templates.CONTAINER(true), {
-  alias: 'locker',
-  scenery: true,
-  loc: 'stasis_bay',
-  examine(isMultiple) {
-    if (this.closed) {
-      QuestJs._io.msg(
-        `${QuestJs._tools.prefix(
-          this,
-          isMultiple,
-        )}This metal locker is taller than you, and just as wide; it is where spacesuits are stored{once: (if there is an emergency, you want the spacesuits by the stasis pods)}.`,
-      );
-    } else {
-      QuestJs._io.msg(
-        `${QuestJs._tools.prefix(
-          this,
-          isMultiple,
-        )}This metal locker is taller than you, and just as wide; it is where spacesuits are stored. Inside you can see ${QuestJs._tools.formatList(
-          this.getContents(QuestJs._world.LOOK),
-          {
-            lastJoiner: QuestJs._lang.list_and,
-            article: QuestJs._consts.INDEFINITE,
-          },
-        )}.`,
-      );
-    }
+QuestJs._create.createItem(
+  'stasis_pod_drawer',
+  QuestJs._templates.CONTAINER(false),
+  {
+    alias: 'drawer',
+    scenery: true,
+    loc: 'stasis_bay',
+    closed: false,
+    examine:
+      'The drawer extends out from the foot of the pod; it is white and quite shallow, and almost the width of the pod.{ifHere:pile_of_vomit: Fortunately, it is well away from the vomit.}',
   },
-});
+);
 
-QuestJs._create.createItem('your_spacesuit', QuestJs._templates.WEARABLE(2, ['body']), {
-  alias: 'spacesuit',
-  loc: 'stasis_locker',
-  defArticle: 'your',
-  indefArticle: 'your',
-  examine:
-    'Your spacesuit is a pale grey colour, with bright yellow flashes on the arms and legs for visibility.',
-});
+QuestJs._create.createItem(
+  'stasis_locker',
+  QuestJs._templates.CONTAINER(true),
+  {
+    alias: 'locker',
+    scenery: true,
+    loc: 'stasis_bay',
+    examine(isMultiple) {
+      if (this.closed) {
+        QuestJs._io.msg(
+          `${QuestJs._tools.prefix(
+            this,
+            isMultiple,
+          )}This metal locker is taller than you, and just as wide; it is where spacesuits are stored{once: (if there is an emergency, you want the spacesuits by the stasis pods)}.`,
+        );
+      } else {
+        QuestJs._io.msg(
+          `${QuestJs._tools.prefix(
+            this,
+            isMultiple,
+          )}This metal locker is taller than you, and just as wide; it is where spacesuits are stored. Inside you can see ${QuestJs._tools.formatList(
+            this.getContents(QuestJs._world.LOOK),
+            {
+              lastJoiner: QuestJs._lang.list_and,
+              article: QuestJs._consts.INDEFINITE,
+            },
+          )}.`,
+        );
+      }
+    },
+  },
+);
+
+QuestJs._create.createItem(
+  'your_spacesuit',
+  QuestJs._templates.WEARABLE(2, ['body']),
+  {
+    alias: 'spacesuit',
+    loc: 'stasis_locker',
+    defArticle: 'your',
+    indefArticle: 'your',
+    examine:
+      'Your spacesuit is a pale grey colour, with bright yellow flashes on the arms and legs for visibility.',
+  },
+);
 
 QuestJs._create.createItem('other_spacesuit', {
   alias: 'spare spacesuit',
@@ -169,45 +199,51 @@ QuestJs._create.createRoom('stasis_pod_room', {
       QuestJs._world.setRoom(QuestJs._game.player, this.name, 'out');
       if (QuestJs._w.your_jumpsuit.loc === 'stasis_pod_drawer') {
         QuestJs._w.stasis_pod_drawer.loc = 'stasis_bay';
-        QuestJs._io.msg('A drawer under the pod slides open to reveal your jumpsuit.');
+        QuestJs._io.msg(
+          'A drawer under the pod slides open to reveal your jumpsuit.'
+        );
       }
       return true;
     },
   }),
 });
 
-QuestJs._create.createItem('stasis_pod_interior', QuestJs._templates.OPENABLE(true), {
-  alias: 'stasis pod',
-  regex: /^(stasis pod|pod|lid)$/,
-  scenery: true,
-  loc: 'stasis_pod_room',
-  closed: false,
-  examine:
-    'Externally, the pods are rather less like coffins, as the sides are thick with the stasis equipment, and flared towards the floor. Each stasis pod is about waist height. {stasis_pod_status}.{ifHere:pile_of_vomit: One has a slight splattering of vomit.}',
-  close(isMultiple, char) {
-    if (QuestJs._w.Kyle.deployProbeAction < 5) {
-      QuestJs._io.msg(
-        "You give pod lid a pull, and it starts to descend for a moment, before stopping. 'Commander,' says Xsensi, 'closing the lid of a stasis pod will put you back in stasis. That is not permitted until the satellite is deployed, and not advised until probes have been deployed and data collected.' The lid rises to its fully open position.",
-      );
-      return false;
-    }
-    if (QuestJs._w.your_jumpsuit.loc === QuestJs._game.player.name) {
-      QuestJs._io.msg(
-        "You give pod lid a pull, and it starts to descend for a moment, before stopping. 'Commander,' says Xsensi, 'your jumpsuit should be left outside the pod when going into stasis.' The lid rises to its fully open position.",
-      );
-      return false;
-    }
+QuestJs._create.createItem(
+  'stasis_pod_interior',
+  QuestJs._templates.OPENABLE(true),
+  {
+    alias: 'stasis pod',
+    regex: /^(stasis pod|pod|lid)$/,
+    scenery: true,
+    loc: 'stasis_pod_room',
+    closed: false,
+    examine:
+      'Externally, the pods are rather less like coffins, as the sides are thick with the stasis equipment, and flared towards the floor. Each stasis pod is about waist height. {stasis_pod_status}.{ifHere:pile_of_vomit: One has a slight splattering of vomit.}',
+    close(isMultiple, char) {
+      if (QuestJs._w.Kyle.deployProbeAction < 5) {
+        QuestJs._io.msg(
+          "You give pod lid a pull, and it starts to descend for a moment, before stopping. 'Commander,' says Xsensi, 'closing the lid of a stasis pod will put you back in stasis. That is not permitted until the satellite is deployed, and not advised until probes have been deployed and data collected.' The lid rises to its fully open position.",
+        );
+        return false;
+      }
+      if (QuestJs._w.your_jumpsuit.loc === QuestJs._game.player.name) {
+        QuestJs._io.msg(
+          "You give pod lid a pull, and it starts to descend for a moment, before stopping. 'Commander,' says Xsensi, 'your jumpsuit should be left outside the pod when going into stasis.' The lid rises to its fully open position.",
+        );
+        return false;
+      }
 
-    QuestJs._w.your_jumpsuit.loc = 'stasis_pod_drawer';
-    QuestJs._w.stasis_pod_drawer.scenery = true;
-    QuestJs._io.msg(
-      'You give pod lid a pull, and it starts to descend, sealing you in. You feel a sharp pain in your shoulder, and almost immediately you start to feel sleepy... so sleepy you cannot keep your eyes open.',
-    );
-    arrival();
-    // MORE STUFF HERE ???
-    return true;
+      QuestJs._w.your_jumpsuit.loc = 'stasis_pod_drawer';
+      QuestJs._w.stasis_pod_drawer.scenery = true;
+      QuestJs._io.msg(
+        'You give pod lid a pull, and it starts to descend, sealing you in. You feel a sharp pain in your shoulder, and almost immediately you start to feel sleepy... so sleepy you cannot keep your eyes open.'
+      );
+      arrival();
+      // MORE STUFF HERE ???
+      return true;
+    },
   },
-});
+);
 
 QuestJs._create.createRoom('cargo_bay', {
   deckName: 'layer1',
@@ -412,7 +448,11 @@ QuestJs._create.createRoom('top_deck_forward', {
   desc() {
     if (!QuestJs._w.top_deck_aft.meFirst) {
       this.meFirst = true;
-      return QuestJs._w.top_deck_aft.descStart + this.descThis + QuestJs._w.top_deck_aft.descFinish;
+      return (
+        QuestJs._w.top_deck_aft.descStart +
+        this.descThis +
+        QuestJs._w.top_deck_aft.descFinish
+      );
     }
 
     return this.descThis;
@@ -428,15 +468,20 @@ QuestJs._create.createRoom('top_deck_forward', {
 });
 
 QuestJs._create.createRoom('top_deck_aft', {
-  deckName: 'layer4',
-  svgId: 'rect3976',
-  descStart: 'The top deck is where the living quarters - such as they are - are accessed. ',
+  deckName: "layer4",
+  svgId: "rect3976",
+  descStart:
+    'The top deck is where the living quarters - such as they are - are accessed. ',
   descFinish:
     ' The corridor is very utilitarian, with a metal floor and ceiling. The sides are mostly covered in white plastic panels, as a small concession to aesthetics.',
   desc() {
     if (!QuestJs._w.top_deck_forward.meFirst) {
       this.meFirst = true;
-      return QuestJs._w.top_deck_aft.descStart + this.descThis + QuestJs._w.top_deck_aft.descFinish;
+      return (
+        QuestJs._w.top_deck_aft.descStart +
+        this.descThis +
+        QuestJs._w.top_deck_aft.descFinish
+      );
     }
 
     return this.descThis;
@@ -546,138 +591,159 @@ QuestJs._create.createItem('ship', {
 
 // Probes are cloned from this
 //
-QuestJs._create.createItem('probe_prototype', QuestJs._templates.COUNTABLE([]), {
-  alias: 'probe',
-  regex: /^(\d+ )?(bio-|geo-|bio|geo)?(probe|satellite|satelite)s?$/,
-  launch(isMultiple, char) {
-    if (!char.probeType)
-      return QuestJs._io.falsemsg(
-        'To launch a probe, see either Aada or Ostap. For a satellite see Kyle.',
-      );
-
-    let number = this.extractNumber();
-    if (!number) number = 1;
-
-    if (number === 1) {
-      QuestJs._io.msg(
-        `'Launch a ${char.probeType},' you say to ${QuestJs._lang.getName(char, {
-          article: QuestJs._consts.DEFINITE,
-        })}.`,
-      );
-    } else {
-      QuestJs._io.msg(
-        `'Launch ${number} ${char.probeType}s,' you say to ${QuestJs._lang.getName(char, {
-          article: QuestJs._consts.DEFINITE,
-        })}.`,
-      );
-    }
-    if (number > char.probesRemaining) {
-      return QuestJs._io.falsemsg(
-        `'We only have ${char.probesRemaining} and we should save some for the other planets on our itinerary.'`,
-      );
-    }
-
-    if (char.probeType === 'satellite') {
-      if (number > 2 - char.deployProbeTotal) {
-        QuestJs._io.msg(
-          "'Are you sure? Protocol says we should deploy no more than two around a single planet.'",
+QuestJs._create.createItem(
+  'probe_prototype',
+  QuestJs._templates.COUNTABLE([]),
+  {
+    alias: 'probe',
+    regex: /^(\d+ )?(bio-|geo-|bio|geo)?(probe|satellite|satelite)s?$/,
+    launch(isMultiple, char) {
+      if (!char.probeType)
+        return QuestJs._io.falsemsg(
+          'To launch a probe, see either Aada or Ostap. For a satellite see Kyle.'
         );
+
+      let number = this.extractNumber();
+      if (!number) number = 1;
+
+      if (number === 1) {
         QuestJs._io.msg(
-          "'Hey, I'm the captain. It's my bonus on the line here. Get those satellites deployed.'",
+          `'Launch a ${char.probeType},' you say to ${QuestJs._lang.getName(
+            char,
+            {
+              article: QuestJs._consts.DEFINITE,
+            },
+          )}.`,
         );
-      }
-    } else if (number > 5 - char.deployProbeTotal) {
-      QuestJs._io.msg(
-        "'Are you sure? Protocol says we should deploy no more than five on a single planet.'",
-      );
-      QuestJs._io.msg(
-        "'Hey, I'm the captain. It's my bonus on the line here. Get those probes deployed.'",
-      );
-    }
-
-    if (char.deployProbeAction === 0 || char.deployProbeAction === 4) {
-      QuestJs._io.msg("'Okay captain.'");
-      char.setAgenda([
-        `walkTo:probes_aft:${QuestJs._lang.getName(char, {
-          article: QuestJs._consts.DEFINITE,
-        })} goes to the probe deployment console.`,
-        `text:deployProbe:${number}`,
-      ]);
-      char.deployProbeAction = 0;
-      char.deployProbeCount = 0;
-    } else {
-      // already part way through launching
-      // skip walking there, skip first deploy action
-      // the old number should be replaced
-      QuestJs._io.msg("'Okay captain.'");
-      char.setAgenda([`text:deployProbe:${number}`]);
-      char.deployProbeAction = 1;
-    }
-    return true;
-  },
-  launchCounter: 0,
-  status: 'In flight',
-  countAtLoc(loc) {
-    return 0;
-  },
-  eventIsActive() {
-    return this.clonePrototype;
-  },
-  cloneMe(owner) {
-    const probe = QuestJs._create.cloneObject(this);
-    probe.alias = `${QuestJs._tools.sentenceCase(owner.probeType)} ${QuestJs._tools.toRoman(
-      owner.deployProbeOverallTotal,
-    )}`;
-    probe.probeType = owner.probeType;
-    probe.planetNumber = QuestJs._w.Xsansi.currentPlanet;
-    probe.probeNumber = owner.deployProbeTotal;
-    probe.owner = owner.name;
-    probe.parsePriority = -100;
-    probe.eventScript =
-      owner.probeType === 'satellite' ? this.satelliteEventScript : this.probeEventScript;
-    return probe;
-  },
-
-  probeEventScript() {
-    this.launchCounter += 1;
-    if (this.launchCounter === TURNS_TO_LANDING) {
-      if (probeLandsOkay()) {
-        this.status = 'Landing';
-        shipAlert(`${this.alias} has successfully landed on the planet.`);
       } else {
-        shipAlert(
-          `Contact with ${this.alias} has been lost as it attempted to land on the planet.`,
+        QuestJs._io.msg(
+          `'Launch ${number} ${
+            char.probeType
+          }s,' you say to ${QuestJs._lang.getName(char, {
+            article: QuestJs._consts.DEFINITE,
+          })}.`,
         );
-        this.launched = false;
-        this.status = 'Destroyed';
       }
-    }
-    if (this.launchCounter === TURNS_TO_LANDING + 1) {
-      this.status = 'Exploring';
-    }
-    const arr =
-      PLANETS[this.planetNumber][`${this.probeType.substring(0, 3)}ProbeRanks`][
-        this.probeNumber - 1
-      ];
-    if (arr !== undefined && arr.includes(this.launchCounter - TURNS_TO_LANDING)) {
-      QuestJs._w[this.owner][`rank${this.planetNumber}`] += 1;
-      QuestJs._game.player.bonus +=
-        PLANETS[this.planetNumber][`${this.probeType.substring(0, 3)}ProbeBonusPerRank`];
-    }
-  },
+      if (number > char.probesRemaining) {
+        return QuestJs._io.falsemsg(
+          `'We only have ${char.probesRemaining} and we should save some for the other planets on our itinerary.'`,
+        );
+      }
 
-  satelliteEventScript() {
-    this.launchCounter += 1;
-    if (this.launchCounter === TURNS_TO_ORBIT) {
-      this.status = 'In orbit';
-      shipAlert(`${this.alias} has successfully entered orbit around the planet.`);
-    }
-    if (this.launchCounter === TURNS_TO_ORBIT + 1) {
-      this.status = 'Scanning';
-    }
-    if (this.launchCounter > TURNS_TO_ORBIT + 1 && this.launchCounter % 4 === 0) {
-      QuestJs._game.player.bonus += 1;
-      QuestJs._w[this.owner].rank += 1;
-    }
+      if (char.probeType === 'satellite') {
+        if (number > 2 - char.deployProbeTotal) {
+          QuestJs._io.msg(
+            "'Are you sure? Protocol says we should deploy no more than two around a single planet.'",
+          );
+          QuestJs._io.msg(
+            "'Hey, I'm the captain. It's my bonus on the line here. Get those satellites deployed.'",
+          );
+        }
+      } else if (number > 5 - char.deployProbeTotal) {
+        QuestJs._io.msg(
+          "'Are you sure? Protocol says we should deploy no more than five on a single planet.'",
+        );
+        QuestJs._io.msg(
+          "'Hey, I'm the captain. It's my bonus on the line here. Get those probes deployed.'",
+        );
+      }
+
+      if (char.deployProbeAction === 0 || char.deployProbeAction === 4) {
+        QuestJs._io.msg("'Okay captain.'");
+        char.setAgenda([
+          `walkTo:probes_aft:${QuestJs._lang.getName(char, {
+            article: QuestJs._consts.DEFINITE,
+          })} goes to the probe deployment console.`,
+          `text:deployProbe:${number}`,
+        ]);
+        char.deployProbeAction = 0;
+        char.deployProbeCount = 0;
+      } else {
+        // already part way through launching
+        // skip walking there, skip first deploy action
+        // the old number should be replaced
+        QuestJs._io.msg("'Okay captain.'");
+        char.setAgenda([`text:deployProbe:${number}`]);
+        char.deployProbeAction = 1;
+      }
+      return true;
+    },
+    launchCounter: 0,
+    status: 'In flight',
+    countAtLoc(loc) {
+      return 0;
+    },
+    eventIsActive() {
+      return this.clonePrototype;
+    },
+    cloneMe(owner) {
+      const probe = QuestJs._create.cloneObject(this);
+      probe.alias = `${QuestJs._tools.sentenceCase(
+        owner.probeType,
+      )} ${QuestJs._tools.toRoman(owner.deployProbeOverallTotal)}`;
+      probe.probeType = owner.probeType;
+      probe.planetNumber = QuestJs._w.Xsansi.currentPlanet;
+      probe.probeNumber = owner.deployProbeTotal;
+      probe.owner = owner.name;
+      probe.parsePriority = -100;
+      probe.eventScript =
+        owner.probeType === 'satellite'
+          ? this.satelliteEventScript
+          : this.probeEventScript;
+      return probe;
+    },
+
+    probeEventScript() {
+      this.launchCounter += 1;
+      if (this.launchCounter === TURNS_TO_LANDING) {
+        if (probeLandsOkay()) {
+          this.status = 'Landing';
+          shipAlert(`${this.alias} has successfully landed on the planet.`);
+        } else {
+          shipAlert(
+            `Contact with ${this.alias} has been lost as it attempted to land on the planet.`,
+          );
+          this.launched = false;
+          this.status = 'Destroyed';
+        }
+      }
+      if (this.launchCounter === TURNS_TO_LANDING + 1) {
+        this.status = 'Exploring';
+      }
+      const arr =
+        PLANETS[this.planetNumber][
+          `${this.probeType.substring(0, 3)}ProbeRanks`
+        ][this.probeNumber - 1];
+      if (
+        arr !== undefined &&
+        arr.includes(this.launchCounter - TURNS_TO_LANDING)
+      ) {
+        QuestJs._w[this.owner][`rank${this.planetNumber}`] += 1;
+        QuestJs._game.player.bonus +=
+          PLANETS[this.planetNumber][
+            `${this.probeType.substring(0, 3)}ProbeBonusPerRank`
+          ];
+      }
+    },
+
+    satelliteEventScript() {
+      this.launchCounter += 1;
+      if (this.launchCounter === TURNS_TO_ORBIT) {
+        this.status = 'In orbit';
+        shipAlert(
+          `${this.alias} has successfully entered orbit around the planet.`,
+        );
+      }
+      if (this.launchCounter === TURNS_TO_ORBIT + 1) {
+        this.status = 'Scanning';
+      }
+      if (
+        this.launchCounter > TURNS_TO_ORBIT + 1 &&
+        this.launchCounter % 4 === 0
+      ) {
+        QuestJs._game.player.bonus += 1;
+        QuestJs._w[this.owner].rank += 1;
+      }
+    },
   },
-});
+);

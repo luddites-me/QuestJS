@@ -46,7 +46,15 @@ QuestJs._settings.dateTime = {
     { name: 'November', n: 30 },
     { name: 'December', n: 31 },
   ],
-  days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+  days: [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ],
   formats: {
     def: '%dayOfWeek% %dayOfYear%, %year%, %hour%:%minute% %ampm%',
     time: '%hour%:%minute% %ampm%',
@@ -152,9 +160,14 @@ QuestJs._settings.customUI = function () {
 QuestJs._settings.updateCustomUI = function () {
   $('#weaponImage').attr(
     'src',
-    `${QuestJs._settings.imagesFolder}icon-${QuestJs._game.player.getEquippedWeapon().image}.png`,
+    `${QuestJs._settings.imagesFolder}icon-${
+      QuestJs._game.player.getEquippedWeapon().image
+    }.png`,
   );
-  $('#weapon-td').prop('title', `Weapon: ${QuestJs._game.player.getEquippedWeapon().alias}`);
+  $('#weapon-td').prop(
+    'title',
+    `Weapon: ${QuestJs._game.player.getEquippedWeapon().alias}`,
+  );
 
   $('#hits-indicator').css(
     'padding-right',
@@ -194,7 +207,10 @@ QuestJs._settings.updateCustomUI = function () {
     }
   }
   for (const key in QuestJs._w) {
-    if (QuestJs._w[key].health !== undefined && QuestJs._w[key].maxHealth === undefined) {
+    if (
+      QuestJs._w[key].health !== undefined &&
+      QuestJs._w[key].maxHealth === undefined
+    ) {
       QuestJs._w[key].maxHealth = QuestJs._w[key].health;
     }
   }
@@ -271,7 +287,9 @@ const skillUI = {
         QuestJs._w[o].weapon
       ) {
         QuestJs._log.info(o);
-        weapons.push(`<option value="${o}">${QuestJs._w[o].listalias}</option>`);
+        weapons.push(
+          `<option value="${o}">${QuestJs._w[o].listalias}</option>`,
+        );
       }
     }
     const s = weapons.join('');
@@ -313,8 +331,10 @@ $(() => {
   diag.prop('title', 'Who are you?');
   let s;
   s = '<p>Name: <input id="namefield" type="text" value="Zoxx" /></p>';
-  s += '<p>Male: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
-  s += 'Female<input type="radio" id="female" name="sex" value="female" checked></p>';
+  s +=
+    '<p>Male: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
+  s +=
+    'Female<input type="radio" id="female" name="sex" value="female" checked></p>';
   s += '<p>Job:<select id="job">';
   for (const profession of QuestJs._settings.professions) {
     s += `<option value="${profession.name}">${profession.name}</option>`;

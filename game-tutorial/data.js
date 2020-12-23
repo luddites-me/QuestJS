@@ -27,14 +27,14 @@ QuestJs._create.createRoom('lounge', {
     'The lounge is pleasant, if rather bare. There is a{if:kitchen_door:locked: locked} door to the north. A door to the west leads to the lift.',
   afterFirstEnter() {
     QuestJs._io.msg(
-      'The man you need to find is upstairs, but the lift does not work - it has no power. How can you get to him?',
+      'The man you need to find is upstairs, but the lift does not work - it has no power. How can you get to him?'
     );
     tmsg(
-      'This is the first room, and the text is telling you about it. If there were things here, you would probably be told about them in the room description, but we will come on to that later. You will also usually be told of any exits. This room has an exit north, but it is currently locked.',
+      'This is the first room, and the text is telling you about it. If there were things here, you would probably be told about them in the room description, but we will come on to that later. You will also usually be told of any exits. This room has an exit north, but it is currently locked.'
     );
     tmsg('We will get to the lift later.');
     tmsg(
-      'Before going any further, we should look at what is on the screen. Below this text, you should see a cursor. In this game it is a > sign, but other games might use different symbols or have a box. You type commands in there. Try it now by typing WAIT (I am going to write commands for you to type in capitals to diffentiate them; you do not need to).',
+      'Before going any further, we should look at what is on the screen. Below this text, you should see a cursor. In this game it is a > sign, but other games might use different symbols or have a box. You type commands in there. Try it now by typing WAIT (I am going to write commands for you to type in capitals to diffentiate them; you do not need to).'
     );
   },
   north: new QuestJs._create.Exit('kitchen'),
@@ -51,22 +51,22 @@ QuestJs._create.createRoom('lounge', {
     switch (this.eventCount) {
       case 1:
         tmsg(
-          'Typing WAIT made time pass in the game, while the player-character did nothing. You can also just type Z, which is a shortcut for WAIT.',
+          "Typing WAIT made time pass in the game, while the player-character did nothing. You can also just type Z, which is a shortcut for WAIT."
         );
         tmsg(
-          'Look to the left, and you will see a panel; you can perform a lot of actions here without typing anything at all. In some games it is on the right, and many do not have it at all, so we will mostly ignore it, but for now click the &#9208; to again wait one turn.',
+        "Look to the left, and you will see a panel; you can perform a lot of actions here without typing anything at all. In some games it is on the right, and many do not have it at all, so we will mostly ignore it, but for now click the &#9208; to again wait one turn.",
         );
         QuestJs._io.ambient('Light-Years_V001_Looping', 5);
         break;
       case 2:
         tmsg(
-          'Some games have commands that tell you about the game or set it up differently to suit the player. In Quest 6 (but not necessarily other games) none of these count as a turn, so try a couple, and when you are done, do WAIT again.',
+          "Some games have commands that tell you about the game or set it up differently to suit the player. In Quest 6 (but not necessarily other games) none of these count as a turn, so try a couple, and when you are done, do WAIT again."
         );
         tmsg(
-          'Type DARK to toggle dark mode; some users find if easier to see light text on a dark background. Type SPOKEN to toggle hearing the text read out. Type SILENT to toggle the sounds and music (not that there are any in this game).',
+          "Type DARK to toggle dark mode; some users find if easier to see light text on a dark background. Type SPOKEN to toggle hearing the text read out. Type SILENT to toggle the sounds and music (not that there are any in this game)."
         );
         tmsg(
-          'You can also type HELP to see some general instructions. You can also do ABOUT or CREDITS. Less common is the HINT command; if implemented it will give you a clue of what to do next. In this game, as it is a tutorial, it will tell you exactly what to do.',
+          "You can also type HELP to see some general instructions. You can also do ABOUT or CREDITS. Less common is the HINT command; if implemented it will give you a clue of what to do next. In this game, as it is a tutorial, it will tell you exactly what to do."
         );
         tmsg(
           "For completeness, I will also mention TRANSCRIPT (or just SCRIPT), which will record your game session, and can be useful when testing someone's QuestJs._game. You can also use BRIEF, TERSE and VERBOSE to control how often room descriptions are shown, but I suggest we keep it VERBOSE for this tutorial.",
@@ -75,12 +75,14 @@ QuestJs._create.createRoom('lounge', {
         break;
       case 3:
         QuestJs._w.kitchen_door.locked = false;
-        tmsg('Time to move on. Something tells me that door to the north is not locked any more.');
         tmsg(
-          'You might want to look at the room again before we go. Type LOOK or just L. Hopefully it no longer says the door is locked. By the way, in some games you can use the EXITS commands to see what exits are available.',
+          "Time to move on. Something tells me that door to the north is not locked any more."
+      );
+        tmsg(
+        "You might want to look at the room again before we go. Type LOOK or just L. Hopefully it no longer says the door is locked. By the way, in some games you can use the EXITS commands to see what exits are available.",
         );
         tmsg(
-          'Movement in adventure games is done following compass directions. To go north, type GO NORTH, or NORTH or just N.',
+          "Movement in adventure games is done following compass directions. To go north, type GO NORTH, or NORTH or just N."
         );
         tmsg(
           'You can also use the compass rose at the top left, or, in Quest 6, if your computer has a number pad, ensure "Num Lock" is on, and press the up key (i.e., 8).',
@@ -115,7 +117,8 @@ QuestJs._create.createItem(
 QuestJs._create.createRoom('basement', {
   desc:
     'A dank room, with a whole load of crates piled {ifNot:crates:moved:against the west wall}{if:crates:moved:up in the middle of the room. There is a door to the west}. Cobwebs hang from every beam.',
-  darkDesc: 'The basement is dark and full of cobwebs. The only way out is back up the ladder.',
+  darkDesc:
+    'The basement is dark and full of cobwebs. The only way out is back up the ladder.',
   up: new QuestJs._create.Exit('kitchen', {
     isHidden() {
       return false;
@@ -125,7 +128,8 @@ QuestJs._create.createRoom('basement', {
     isHidden() {
       return (
         !QuestJs._w.crates.moved ||
-        (!QuestJs._w.light_switch.switchedon && !QuestJs._w.flashlight.switchedon)
+        (!QuestJs._w.light_switch.switchedon &&
+          !QuestJs._w.flashlight.switchedon)
       );
     },
   }),
@@ -139,18 +143,28 @@ QuestJs._create.createRoom('basement', {
     return QuestJs._w.me.loc === this.name;
   },
   eventScript() {
-    if (QuestJs._w.flashlight.switchedon && !this.flag1) hint.now('turnOnLight');
-    if (!QuestJs._w.flashlight.switchedon && QuestJs._w.light_switch.switchedon && !this.flag2)
+    if (QuestJs._w.flashlight.switchedon && !this.flag1)
+      hint.now('turnOnLight');
+    if (
+      !QuestJs._w.flashlight.switchedon &&
+      QuestJs._w.light_switch.switchedon &&
+      !this.flag2
+    )
       hint.now('getAll');
-    if (QuestJs._parser.currentCommand.all && hint.before('moveCrates')) hint.now('moveCrates');
+    if (QuestJs._parser.currentCommand.all && hint.before('moveCrates'))
+      hint.now('moveCrates');
   },
 });
 
-QuestJs._create.createItem('light_switch', QuestJs._templates.SWITCHABLE(false), {
-  loc: 'basement',
-  examine: 'A switch, presumably for the light.',
-  regex: /light|switch/,
-});
+QuestJs._create.createItem(
+  'light_switch',
+  QuestJs._templates.SWITCHABLE(false),
+  {
+    loc: 'basement',
+    examine: 'A switch, presumably for the light.',
+    regex: /light|switch/,
+  },
+);
 
 QuestJs._create.createItem('crates', {
   loc: 'basement',
@@ -158,13 +172,15 @@ QuestJs._create.createItem('crates', {
   pronouns: QuestJs._lang.pronouns.plural,
   move() {
     if (!this.moved) {
-      QuestJs._io.msg('You move the crates... And find a passage was hidden behind them.');
+      QuestJs._io.msg(
+        'You move the crates... And find a passage was hidden behind them.'
+      );
       hint.now('enterPassage');
       this.moved = true;
       return true;
     }
     QuestJs._io.msg(
-      'You feel pretty sure moving the crates again will not reveal any more hidden doors.',
+      'You feel pretty sure moving the crates again will not reveal any more hidden doors.'
     );
     return false;
   },
@@ -182,7 +198,7 @@ QuestJs._create.createItem('crates', {
 QuestJs._create.createItem('cobwebs', {
   examine() {
     QuestJs._io.msg(
-      'There are a lot! You wonder if it is worse if there are a thousand spiders down here... Or just one very big one.',
+      'There are a lot! You wonder if it is worse if there are a thousand spiders down here... Or just one very big one.'
     );
     if (!this.flag) {
       tmsg(
@@ -203,12 +219,17 @@ QuestJs._create.createItem('cobwebs', {
   scenery: true,
 });
 
-QuestJs._create.createItem('old_newspaper', QuestJs._templates.TAKEABLE(), READABLE(), {
-  examine: 'A newspaper from the eighties; yellow with age.',
-  read:
-    'You spend a few minutes reading about what happens on the day 14th June 1987 (or perhaps the day before). A somewhat mocking article about an archaeologist, Dr Ruudhorn, and Atlantis catches your eye.',
-  loc: 'basement',
-});
+QuestJs._create.createItem(
+  'old_newspaper',
+  QuestJs._templates.TAKEABLE(),
+  READABLE(),
+  {
+    examine: 'A newspaper from the eighties; yellow with age.',
+    read:
+      'You spend a few minutes reading about what happens on the day 14th June 1987 (or perhaps the day before). A somewhat mocking article about an archaeologist, Dr Ruudhorn, and Atlantis catches your eye.',
+    loc: 'basement',
+  },
+);
 
 QuestJs._create.createItem('rope', QuestJs._templates.ROPE(false), {
   examine: 'About 25 foot long; it looks old, but serviceable.',
@@ -237,7 +258,7 @@ QuestJs._create.createRoom('garden', {
     use() {
       if (QuestJs._w.shed_door.locked) {
         QuestJs._io.msg(
-          'You shed door is padlocked. If only you have something to break it off...',
+          'You shed door is padlocked. If only you have something to break it off...'
         );
         return false;
       }
@@ -249,12 +270,14 @@ QuestJs._create.createRoom('garden', {
   onSmell() {
     QuestJs._io.msg('You can smell the freshly-cut grass!');
     if (hint.before('xBox')) {
-      tmsg('You can also smell specific items, so SMELL GRASS would have also worked.');
+      tmsg(
+        'You can also smell specific items, so SMELL GRASS would have also worked.'
+      );
       QuestJs._io.msg(
-        'A large wooden box falls from the sky! Miraculously, it seems to have survived intact.',
+        'A large wooden box falls from the sky! Miraculously, it seems to have survived intact.'
       );
       tmsg(
-        'The box is a container, which means you can put things inside it and maybe find things already in it. Perhaps we should start by looking at it.',
+        'The box is a container, which means you can put things inside it and maybe find things already in it. Perhaps we should start by looking at it.'
       );
       QuestJs._w.box.loc = 'garden';
       hint.now('xBox');
@@ -283,12 +306,14 @@ QuestJs._create.createItem('grass', {
   smell() {
     QuestJs._io.msg('You can smell the grass; it has just been cut!');
     if (hint.before('xBox')) {
-      tmsg('You can also smell the whole location, so just SMELL would have also worked.');
+      tmsg(
+        'You can also smell the whole location, so just SMELL would have also worked.'
+      );
       QuestJs._io.msg(
-        'A large wooden box falls from the sky! Miraculously, it seems to have survived intact.',
+        'A large wooden box falls from the sky! Miraculously, it seems to have survived intact.'
       );
       tmsg(
-        'The box is a container, which means you can put things inside it and maybe find things already in it. Perhaps we should start by looking at it.',
+        'The box is a container, which means you can put things inside it and maybe find things already in it. Perhaps we should start by looking at it.'
       );
       QuestJs._w.box.loc = 'garden';
       hint.now('xBox');
@@ -306,7 +331,7 @@ QuestJs._create.createItem(
       const tpParams = { char: QuestJs._game.player, container: this };
       tpParams.list = this.listContents(QuestJs._world.LOOK);
       QuestJs._io.msg(
-        'It is large, wooden box. It does not look very substantial, but it survived the fall nevertheless. There is a label on the {ifNot:box:closed:open }lid.',
+        'It is large, wooden box. It does not look very substantial, but it survived the fall nevertheless. There is a label on the {ifNot:box:closed:open }lid.'
       );
       if (!this.closed) QuestJs._io.msg(QuestJs._lang.look_inside, tpParams);
       if (!this.flag2) hint.now('readBox');
@@ -320,7 +345,11 @@ QuestJs._create.createItem(
       this.locked = false;
     },
     closeMsg() {
-      if (this.loc && QuestJs._w.hat.loc === 'box' && QuestJs._w.crowbar.loc !== 'box') {
+      if (
+        this.loc &&
+        QuestJs._w.hat.loc === 'box' &&
+        QuestJs._w.crowbar.loc !== 'box'
+      ) {
         QuestJs._io.msg(
           "You close the lid. 'Thank you for your custom!' says the box. It starts to shake violently then leaps into the air, rapidly disappearing from sight.",
         );
@@ -345,7 +374,9 @@ QuestJs._create.createItem('crowbar', QuestJs._templates.TAKEABLE(), {
   use(isMultiple, char) {
     if (char.loc === 'laboratory' && QuestJs._w.lab_door.locked) {
       QuestJs._io.msg('The crowbar is not going to help open that door.');
-      tmsg('Nice try, but you have to get the robot to open this door, not the crowbar.');
+      tmsg(
+        'Nice try, but you have to get the robot to open this door, not the crowbar.'
+      );
       return false;
     }
     if (char.loc === 'office' && QuestJs._w.lab_door.locked) {
@@ -353,7 +384,9 @@ QuestJs._create.createItem('crowbar', QuestJs._templates.TAKEABLE(), {
       return false;
     }
     if (char.loc !== 'garden')
-      return QuestJs._io.falsemsg('There is nothing to use the crowbar on here.');
+      return QuestJs._io.falsemsg(
+        'There is nothing to use the crowbar on here.'
+      );
     return QuestJs._w.shed_door.crowbar();
   },
 });
@@ -365,8 +398,11 @@ QuestJs._create.createItem('shed_door', {
   locked: true,
   scenery: true,
   crowbar() {
-    if (!this.locked) return QuestJs._io.falsemsg('The padlock is already off the lock.');
-    QuestJs._io.msg('You put the crowbar to the padlock, and give a pull. The padlock breaks.');
+    if (!this.locked)
+      return QuestJs._io.falsemsg('The padlock is already off the lock.');
+    QuestJs._io.msg(
+      'You put the crowbar to the padlock, and give a pull. The padlock breaks.'
+    );
     this.locked = false;
     return true;
   },
@@ -391,7 +427,9 @@ QuestJs._create.createItem(
     examine: 'A small red torch.',
     parserAltNames: ['torch'],
     lightSource() {
-      return this.switchedon ? QuestJs._world.LIGHT_FULL : QuestJs._world.LIGHT_NONE;
+      return this.switchedon
+        ? QuestJs._world.LIGHT_FULL
+        : QuestJs._world.LIGHT_NONE;
     },
     onMove(toLoc) {
       if (!this.flag1 && toLoc === 'me') {
@@ -456,9 +494,12 @@ QuestJs._create.createItem('lab_door', QuestJs._templates.OPENABLE(false), {
   loc: 'laboratory',
   open(isMultiple, char) {
     if (!this.closed) {
-      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.already, {
-        item: this,
-      });
+      QuestJs._io.msg(
+        QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.already,
+        {
+          item: this,
+        },
+      );
       return false;
     }
     if (char.strong) {
@@ -467,7 +508,9 @@ QuestJs._create.createItem('lab_door', QuestJs._templates.OPENABLE(false), {
       hint.now('northToReactor');
       return true;
     }
-    QuestJs._io.msg(`${QuestJs._tools.prefix(this, isMultiple)}The door is too heavy to open.`);
+    QuestJs._io.msg(
+      `${QuestJs._tools.prefix(this, isMultiple)}The door is too heavy to open.`,
+    );
     return false;
   },
 });
@@ -486,21 +529,27 @@ QuestJs._create.createItem('instruments', {
   scenery: true,
 });
 
-QuestJs._create.createItem('brand_badges', QuestJs._templates.COMPONENT('instruments'), {
-  examine() {
-    QuestJs._io.msg(
-      'The badges on the various instruments are all the same; "Zeta Industries". They appear to be hand-drawn.',
-    );
-    if (!this.flag1) {
-      tmsg('Cool, you are using your initiative to look deeper. This can be vital in some games.');
-      tmsg('But not this one.');
-    }
-    this.flag1 = true;
+QuestJs._create.createItem(
+  'brand_badges',
+  QuestJs._templates.COMPONENT('instruments'),
+  {
+    examine() {
+      QuestJs._io.msg(
+        'The badges on the various instruments are all the same; "Zeta Industries". They appear to be hand-drawn.',
+      );
+      if (!this.flag1) {
+        tmsg(
+          'Cool, you are using your initiative to look deeper. This can be vital in some games.'
+        );
+        tmsg('But not this one.');
+      }
+      this.flag1 = true;
+    },
+    regex: /badge/,
+    loc: 'laboratory',
+    scenery: true,
   },
-  regex: /badge/,
-  loc: 'laboratory',
-  scenery: true,
-});
+);
 
 QuestJs._create.createRoom('reactor_room', {
   desc() {
@@ -559,7 +608,7 @@ QuestJs._create.createRoom('reactor', QuestJs._templates.CONTAINER(false), {
   itemDropped(item) {
     if (QuestJs._w.control_rod.loc === this.name) {
       QuestJs._io.msg(
-        'The reactor starts to glow with a blue light, and you can hear it is now buzzing.',
+        'The reactor starts to glow with a blue light, and you can hear it is now buzzing.'
       );
       QuestJs._w.reactor_room.reactorRunning = true;
       hint.now('useLift');
@@ -600,7 +649,9 @@ QuestJs._create.createItem('control_rod', QuestJs._templates.TAKEABLE(), {
     );
     this.moveToFrom(char.name);
     if (flag) {
-      QuestJs._io.msg('The blue light in the reactor winks out and the buzz dies.');
+      QuestJs._io.msg(
+        'The blue light in the reactor winks out and the buzz dies.'
+      );
       QuestJs._w.reactor_room.reactorRunning = false;
     }
     hint.now('rRInR');
@@ -609,11 +660,15 @@ QuestJs._create.createItem('control_rod', QuestJs._templates.TAKEABLE(), {
   loc: 'control_rod_repository',
 });
 
-QuestJs._create.createItem('control_rod_repository', QuestJs._templates.SURFACE(), {
-  examine:
-    'The control rod repository is a cross between a shelf and a cradle; it is attached to the wall like a shelf, but shaped like a cradle to hold the control rod.',
-  loc: 'reactor_room',
-});
+QuestJs._create.createItem(
+  'control_rod_repository',
+  QuestJs._templates.SURFACE(),
+  {
+    examine:
+      'The control rod repository is a cross between a shelf and a cradle; it is attached to the wall like a shelf, but shaped like a cradle to hold the control rod.',
+    loc: 'reactor_room',
+  },
+);
 
 QuestJs._create.createRoom('office', {
   desc() {
@@ -623,7 +678,7 @@ QuestJs._create.createRoom('office', {
     use() {
       if (QuestJs._w.office.lift_exit_locked)
         return QuestJs._io.falsemsg(
-          'The lift door is closed. You suspect Professor Kleinscope is in he lift and on his way up right now.',
+          'The lift door is closed. You suspect Professor Kleinscope is in he lift and on his way up right now.'
         );
       QuestJs._io.msg('You walk back into the lift.');
       QuestJs._world.setRoom(QuestJs._w.me, this.name, this.dir);
@@ -635,19 +690,19 @@ QuestJs._create.createRoom('office', {
         QuestJs._io.falsemsg('There is a pane of glass in the way.');
       if (!QuestJs._w.rope.locs.includes('outside')) {
         QuestJs._io.msg(
-          'You look out the window. If is a long way down to the ground, and there are no hand-holds. You need a way to climb down.',
+          'You look out the window. If is a long way down to the ground, and there are no hand-holds. You need a way to climb down.'
         );
         hint.now('climbOut');
         return false;
       }
       QuestJs._io.msg(
-        'You climb out the window, and down the rope, quickly reaching the ground. You jump in your SUV, and drive away. A job well done.',
+        'You climb out the window, and down the rope, quickly reaching the ground. You jump in your SUV, and drive away. A job well done.'
       );
       QuestJs._io.msg(' ');
       QuestJs._io.msg('Congratulations, you have won!');
       QuestJs._io.msg(' ');
       tmsg(
-        'So this is where we say good bye; you have completed the game, and hopefully now have a pretty good idea of how to play parser-based adventure games (and perhaps even write some too).',
+        'So this is where we say good bye; you have completed the game, and hopefully now have a pretty good idea of how to play parser-based adventure games (and perhaps even write some too).'
       );
       QuestJs._IO.finish();
       return true;
@@ -666,11 +721,13 @@ QuestJs._create.createItem('office_window', {
     if (this.smashed) {
       QuestJs._io.msg('The window is tall and wide... and smashed.');
     } else {
-      QuestJs._io.msg('The window is tall and wide; it does not look like it will open.');
+      QuestJs._io.msg(
+        'The window is tall and wide; it does not look like it will open.'
+      );
     }
     if (!this.lookedout) {
       tmsg(
-        'You might want to try LOOK OUT WINDOW; may be more interesting than the window itself.',
+        'You might want to try LOOK OUT WINDOW; may be more interesting than the window itself.'
       );
       this.lookedout = true;
     }
@@ -682,10 +739,13 @@ QuestJs._create.createItem('office_window', {
     let s =
       'Out of the window you can see the street at the front of the house. Your black SUV is parked at the side on the road.';
     if (this.outside.length > 0)
-      s += ` On the street below the house you can see ${QuestJs._tools.formatList(this.outside, {
-        article: QuestJs._consts.DEFINITE,
-        lastJoiner: QuestJs._lang.list_and,
-      })}.`;
+      s += ` On the street below the house you can see ${QuestJs._tools.formatList(
+        this.outside,
+        {
+          article: QuestJs._consts.DEFINITE,
+          lastJoiner: QuestJs._lang.list_and,
+        },
+      )}.`;
     QuestJs._io.msg(s);
   },
   smash() {
@@ -694,32 +754,36 @@ QuestJs._create.createItem('office_window', {
     }
     if (QuestJs._w.old_newspaper.fist_wrapped) {
       QuestJs._io.msg(
-        'With your fist wrapped in the old newspaper, you punch it through the window, breaking the glass. You take a moment to knock away the remaining jagged shards in the frame.',
+        'With your fist wrapped in the old newspaper, you punch it through the window, breaking the glass. You take a moment to knock away the remaining jagged shards in the frame.'
       );
       this.smashed = true;
       hint.now('out');
       return true;
     }
     QuestJs._io.msg(
-      'You are about to put your fist through the window when it occurs to you that your hand will get ripped to shreds by the glass fragments, and you really do not want to leave DNA evidence here. It is definitely not that you hate the sight of blood.',
+      'You are about to put your fist through the window when it occurs to you that your hand will get ripped to shreds by the glass fragments, and you really do not want to leave DNA evidence here. It is definitely not that you hate the sight of blood.'
     );
     hint.now('wrapFist');
     return false;
   },
   isThrowThroughable(item) {
     if (this.smashed) return true;
-    return QuestJs._io.falsemsg("You can't throw anything out of the window, it is closed.");
+    return QuestJs._io.falsemsg(
+      "You can't throw anything out of the window, it is closed.",
+    );
   },
   throwThrough(item) {
     if (item !== QuestJs._w.rope) {
-      QuestJs._io.msg('You lob {nm:item:the} out the window; it lands on the street below.');
+      QuestJs._io.msg(
+        'You lob {nm:item:the} out the window; it lands on the street below.'
+      );
       delete item.loc;
       office_window.outside.push(item);
       return true;
     }
     if (!item.tiedTo1 && !item.tiedTo2)
       return QuestJs._io.falsemsg(
-        'You are about to heave the rope out the window when it occurs to you that it might be useful to tie one end to something first.',
+        'You are about to heave the rope out the window when it occurs to you that it might be useful to tie one end to something first.'
       );
     if (item.tiedTo1 && item.tiedTo2)
       falsedmsg(
@@ -751,44 +815,57 @@ QuestJs._create.createItem('painting', {
       );
     } else {
       QuestJs._io.msg(
-        'You look behind the painting, but inexplicably there is no safe there. But there is a post-it note stuck to the back of the picture.',
+        'You look behind the painting, but inexplicably there is no safe there. But there is a post-it note stuck to the back of the picture.'
       );
     }
   },
 });
 
-QuestJs._create.createItem('postit_note', QuestJs._templates.TAKEABLE(), READABLE(), {
-  alias: 'post-it note',
-  examine: 'The sticky yellow note has something written on it; the number {show:computer:code}.',
-  read: 'The post-it note just has six digits written on it: {show:computer:code}.',
-  loc: 'office',
-  scenery: true,
-});
-
-QuestJs._create.createItem('chair', QuestJs._templates.FURNITURE({ sit: true, stand: true }), {
-  examine: 'This is an elegant, white office chair in good condition.',
-  loc: 'office',
-  scenery: true,
-  onSit(char) {
-    if (QuestJs._w.Professor_Kleinscope.loc === 'office') {
-      QuestJs._io.msg("'Making yourself at home, I see...' notes Professor Kleinscope.");
-    }
+QuestJs._create.createItem(
+  'postit_note',
+  QuestJs._templates.TAKEABLE(),
+  READABLE(),
+  {
+    alias: 'post-it note',
+    examine:
+      'The sticky yellow note has something written on it; the number {show:computer:code}.',
+    read:
+      'The post-it note just has six digits written on it: {show:computer:code}.',
+    loc: 'office',
+    scenery: true,
   },
-  onStand(char) {
-    if (QuestJs._w.Professor_Kleinscope.loc === 'office') {
+);
+
+QuestJs._create.createItem(
+  'chair',
+  QuestJs._templates.FURNITURE({ sit: true, stand: true }),
+  {
+    examine: 'This is an elegant, white office chair in good condition.',
+    loc: 'office',
+    scenery: true,
+    onSit(char) {
+      if (QuestJs._w.Professor_Kleinscope.loc === 'office') {
+        QuestJs._io.msg(
+          "'Making yourself at home, I see...' notes Professor Kleinscope.",
+        );
+      }
+    },
+    onStand(char) {
+      if (QuestJs._w.Professor_Kleinscope.loc === 'office') {
+        QuestJs._io.msg(
+          "'I'd rather you kept your feet {i:off} the furniture,' says Professor Kleinscope crossly.",
+        );
+      }
+    },
+    testForPosture(char, posture) {
+      if (QuestJs._w.Professor_Kleinscope.flag) return true;
       QuestJs._io.msg(
-        "'I'd rather you kept your feet {i:off} the furniture,' says Professor Kleinscope crossly.",
+        `You think about ${posture} on the chair, but are unsure how Professor Kleinscope feel about it - given he is already sat on it.`,
       );
-    }
+      return false;
+    },
   },
-  testForPosture(char, posture) {
-    if (QuestJs._w.Professor_Kleinscope.flag) return true;
-    QuestJs._io.msg(
-      `You think about ${posture} on the chair, but are unsure how Professor Kleinscope feel about it - given he is already sat on it.`,
-    );
-    return false;
-  },
-});
+);
 
 QuestJs._create.createItem('desk', {
   examine: 'The desk is artfully curved, and made of a pale wood.',
@@ -805,7 +882,7 @@ QuestJs._create.createItem('computer', {
   use() {
     if (!QuestJs._w.Professor_Kleinscope.flag) {
       QuestJs._io.msg(
-        'You cannot use the computer while Professor Kleinscope is sat there using it himself!',
+        'You cannot use the computer while Professor Kleinscope is sat there using it himself!'
       );
       hint.now('talkProf');
     } else if (QuestJs._w.Professor_Kleinscope.loc === 'office') {
@@ -813,7 +890,7 @@ QuestJs._create.createItem('computer', {
         "You reach a hand out to the keyboard. 'Hands off!' insists the Professor.{once: 'I have some very important files on there, and I don't want the likes of you messing with them.'}",
       );
       tmsg(
-        'I have a feeling if we just wait a few turns Kleinscope will head off and look for his dinner.',
+        'I have a feeling if we just wait a few turns Kleinscope will head off and look for his dinner.'
       );
     } else {
       QuestJs._io.msg(
@@ -831,7 +908,7 @@ QuestJs._create.createItem('computer', {
             "As you remove the USB stick, an alarm sounds, and you hear a voice: 'Warning: Illegal access to USB port detected. Warning: Illegal access to USB port detected.'",
           );
           tmsg(
-            'Who knew such an old computer would be protected like that? The Professor will be here soon, coming up the lift. You need to find another way out. How about the window?',
+            'Who knew such an old computer would be protected like that? The Professor will be here soon, coming up the lift. You need to find another way out. How about the window?'
           );
           tmsg(
             "I've held you hand for long enough, let's see if you can do this on your own - but remember, you can use the HINT command if you are stuck.",
@@ -843,7 +920,7 @@ QuestJs._create.createItem('computer', {
             !QuestJs._w.rope.isAtLoc('office')
           ) {
             tmsg(
-              'That said, I see you lost the newspaper and the rope somewhere. First rule of playing adventure games; never leave anything behind unless you have to. Through the magical power of Tutorial-Guy, I will summon them here for you, just on the off-chance they will be needed.',
+              'That said, I see you lost the newspaper and the rope somewhere. First rule of playing adventure games; never leave anything behind unless you have to. Through the magical power of Tutorial-Guy, I will summon them here for you, just on the off-chance they will be needed.'
             );
             QuestJs._w.old_newspaper.loc = 'office';
             QuestJs._w.rope.locs = ['office'];
@@ -854,12 +931,15 @@ QuestJs._create.createItem('computer', {
             QuestJs._w.old_newspaper.loc !== 'office'
           ) {
             tmsg(
-              'That said, I see you lost the newspaper somewhere. First rule of playing adventure games; never leave anything behind unless you have to. Through the magical power of Tutorial-Guy, I will summon it here for you, just on the off-chance it will be needed.',
+              'That said, I see you lost the newspaper somewhere. First rule of playing adventure games; never leave anything behind unless you have to. Through the magical power of Tutorial-Guy, I will summon it here for you, just on the off-chance it will be needed.'
             );
             QuestJs._w.old_newspaper.loc = 'office';
-          } else if (!QuestJs._w.rope.isAtLoc('me') && !QuestJs._w.rope.isAtLoc('office')) {
+          } else if (
+            !QuestJs._w.rope.isAtLoc('me') &&
+            !QuestJs._w.rope.isAtLoc('office')
+          ) {
             tmsg(
-              'That said, I see you lost the rope somewhere. First rule of playing adventure games; never leave anything behind unless you have to. Through the magical power of Tutorial-Guy, I will summon it here for you, just on the off-chance it will be needed.',
+              'That said, I see you lost the rope somewhere. First rule of playing adventure games; never leave anything behind unless you have to. Through the magical power of Tutorial-Guy, I will summon it here for you, just on the off-chance it will be needed.'
             );
             QuestJs._w.rope.locs = ['office'];
             delete QuestJs._w.rope.tiedTo1;
@@ -869,7 +949,9 @@ QuestJs._create.createItem('computer', {
           hint.now('smashWindow');
           QuestJs._w.office.lift_exit_locked = true;
         } else {
-          QuestJs._io.msg(`You type "${result}", but it fails to unlock the computer.`);
+          QuestJs._io.msg(
+            `You type "${result}", but it fails to unlock the computer.`,
+          );
           hint.now('findCode');
         }
       });
@@ -892,8 +974,13 @@ QuestJs._create.createRoom('lift', QuestJs._templates.TRANSIT('east'), {
       hint.now('askRLift');
       return false;
     }
-    if (QuestJs._w.rope.locs.includes('lift') && QuestJs._w.rope.locs.length > 2) {
-      QuestJs._io.msg('The lift door closes... gets stopped by the rope, and then opens again.');
+    if (
+      QuestJs._w.rope.locs.includes('lift') &&
+      QuestJs._w.rope.locs.length > 2
+    ) {
+      QuestJs._io.msg(
+        'The lift door closes... gets stopped by the rope, and then opens again.'
+      );
       if (!this.ropeFlag) {
         tmsg(
           "What have you done? I said nothing about tying the rope to something! I've got a bad feeling about this...",
@@ -909,29 +996,44 @@ QuestJs._create.createRoom('lift', QuestJs._templates.TRANSIT('east'), {
   },
 });
 
-QuestJs._create.createItem('button_3', QuestJs._templates.TRANSIT_BUTTON('lift'), {
-  alias: 'Button: 3',
-  examine: 'A button with the letter 3 on it.',
-  transitDest: 'office',
-  title: 'Level 3: Office',
-  transitAlreadyHere: 'You press the button; nothing happens.',
-  transitGoToDest: 'You press the button; the door closes and the lift ascends.',
-});
+QuestJs._create.createItem(
+  'button_3',
+  QuestJs._templates.TRANSIT_BUTTON('lift'),
+  {
+    alias: 'Button: 3',
+    examine: 'A button with the letter 3 on it.',
+    transitDest: 'office',
+    title: 'Level 3: Office',
+    transitAlreadyHere: 'You press the button; nothing happens.',
+    transitGoToDest:
+      'You press the button; the door closes and the lift ascends.',
+  },
+);
 
-QuestJs._create.createItem('button_2', QuestJs._templates.TRANSIT_BUTTON('lift'), {
-  alias: 'Button: 2',
-  examine: 'A button with the letter 2 on it.',
-  title: 'Level 2: Lounge',
-  transitDest: 'lounge',
-  transitAlreadyHere: 'You press the button; nothing happens.',
-  transitGoToDest: 'You press the button; the door closes and the lift moves.',
-});
+QuestJs._create.createItem(
+  'button_2',
+  QuestJs._templates.TRANSIT_BUTTON('lift'),
+  {
+    alias: 'Button: 2',
+    examine: 'A button with the letter 2 on it.',
+    title: 'Level 2: Lounge',
+    transitDest: 'lounge',
+    transitAlreadyHere: 'You press the button; nothing happens.',
+    transitGoToDest:
+      'You press the button; the door closes and the lift moves.',
+  },
+);
 
-QuestJs._create.createItem('button_1', QuestJs._templates.TRANSIT_BUTTON('lift'), {
-  alias: 'Button: 1',
-  examine: 'A button with the letter 1 on it.',
-  title: 'Level 1: Laboratory',
-  transitDest: 'laboratory',
-  transitAlreadyHere: 'You press the button; nothing happens.',
-  transitGoToDest: 'You press the button; the door closes and the lift descends.',
-});
+QuestJs._create.createItem(
+  'button_1',
+  QuestJs._templates.TRANSIT_BUTTON('lift'),
+  {
+    alias: 'Button: 1',
+    examine: 'A button with the letter 1 on it.',
+    title: 'Level 1: Laboratory',
+    transitDest: 'laboratory',
+    transitAlreadyHere: 'You press the button; nothing happens.',
+    transitGoToDest:
+      'You press the button; the door closes and the lift descends.',
+  },
+);

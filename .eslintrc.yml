@@ -1,17 +1,75 @@
 extends:
   - airbnb
+  - plugin:import/errors
+  - plugin:import/typescript
+  - plugin:import/warnings
+  - plugin:json/recommended
+  - plugin:prettier/recommended
+  - plugin:yaml/recommended
   - prettier
 plugins:
-  - prettier
+  - import
+  - json
+  - markdown
+  - yaml
 rules:
-  'prettier/prettier':
+  max-len:
+    - warn
+    - code: 120
+  indent:
+    - error
+    - 2
+  semi:
+    - error
+    - always
+  comma-dangle:
     - error
   quotes:
     - warn
     - single
+    - avoidEscape: true
   no-param-reassign:
     - error
     - props: false
   no-underscore-dangle: off
+  import/prefer-default-export: off
+  key-spacing:
+    - 2
+    - align:
+        on: colon
+        beforeColon: true
+  sort-keys:
+    - warn
+    - asc
+    - caseSensitive: false
+      natural: true
+      minKeys: 2
+  sort-vars:
+    - warn
+    - ignoreCase: true
+  'json/*':
+    - warn
+    - allowComments: true
+  lines-between-class-members:
+    - error
+    - always
+  camelcase:
+    - 1
+    - ignoreImports: true
+  eol-last:
+    - error
+    - always
+settings:
+  react:
+    version: detect
+parserOptions:
+  ecmaVersion: 11
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+env:
+  es6: true
+  browser: true
+  node: true
 globals:
   QuestJs: writeable

@@ -56,7 +56,15 @@ QuestJs._settings.status = [
   },
 ];
 
-QuestJs._settings.colours = ['red', 'yellow', 'blue', 'lime', 'lime', 'grey', 'black'];
+QuestJs._settings.colours = [
+  'red',
+  'yellow',
+  'blue',
+  'lime',
+  'lime',
+  'grey',
+  'black',
+];
 QuestJs._settings.colourNotes = [
   'Red indicates something is seriously wrong; action should be taken to avoid death',
   'Yellow indicates cause for concern',
@@ -73,17 +81,25 @@ QuestJs._settings.statusReport = function (obj) {
   let colourCode;
   let tooltip;
   tooltip = `${obj.alias} is `;
-  if (!obj.crewman) tooltip += obj.player ? 'the captain of the ship (i.e., you)' : 'the ship AI';
+  if (!obj.crewman)
+    tooltip += obj.player
+      ? 'the captain of the ship (i.e., you)'
+      : 'the ship AI';
   if (typeof obj.status === 'string') {
     s = obj.status;
     colourCode = s === 'stasis' ? 5 : 6;
     if (obj.crewman) tooltip += s === 'stasis' ? 'in stasis' : 'dead';
   } else {
     s = `${obj.status.toString()}%`;
-    colourCode = QuestJs._util.getByInterval(QuestJs._settings.intervals, obj.status);
+    colourCode = QuestJs._util.getByInterval(
+      QuestJs._settings.intervals,
+      obj.status,
+    );
     if (obj.crewman) tooltip += `in ${QuestJs._w[obj.loc].alias}`;
   }
-  return `<td title="${tooltip}"><i>${obj.alias}:</i></td>${QuestJs._settings.warningLight(
+  return `<td title="${tooltip}"><i>${
+    obj.alias
+  }:</i></td>${QuestJs._settings.warningLight(
     colourCode,
   )}<td align="right">${s}</td>`;
 };
@@ -93,7 +109,10 @@ QuestJs._settings.oxygenReport = function (obj) {
   // so 0.58 g/m
   QuestJs._log.info(QuestJs._w.ship.oxygen);
   QuestJs._log.info(
-    QuestJs._util.getByInterval(QuestJs._settings.intervals, QuestJs._w.ship.oxygen / 50),
+    QuestJs._util.getByInterval(
+      QuestJs._settings.intervals,
+      QuestJs._w.ship.oxygen / 50,
+    ),
   );
   const colourCode = QuestJs._util.getByInterval(
     QuestJs._settings.intervals,
@@ -163,7 +182,8 @@ s +=
   '<tr><td>Name:</td><td><input id="namefield" type="text" value="Ariel" style="width:300px" /></td></tr>';
 s +=
   '<tr><td>Sex:</td><td>Male: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
-s += 'Female<input type="radio" id="female" name="sex" value="female" checked></td></tr>';
+s +=
+  'Female<input type="radio" id="female" name="sex" value="female" checked></td></tr>';
 s += '<tr><td>Profession:</td><td><select id="job" style="width:300px">';
 for (const prof of professions) {
   s += `<option value="${prof.name}">${prof.name}</option>`;

@@ -60,7 +60,7 @@ hint.data = [
     name: 'crowbar',
     hint: 'CROWBAR THE SHED DOOR and then GO EAST.',
     tutorial:
-      'Cool... Wait, does that mean you\'re now naked? Let\'s assume not! So we have a crowbar, we can get into the shed.|Up to now we have been using commands that pretty much every game will understand, but games will usually have their own set of commands unique to them, as required by the plot. This game is no different.|One of the problems when playing - and when authoring - a text adventure is deciding how a command should be phrased (a problem known as "guess the verb"). Are we going to CROWBAR THE SHED or LEVER OPEN THE DOOR or what? Often it takes some experimenting, though sometimes the text will give you a hint - always worth trying any verb that is used in the text (at least you can be sure the author knows that word).|Often the generic USE will work, so is worth a try.',
+      "Cool... Wait, does that mean you're now naked? Let's assume not! So we have a crowbar, we can get into the shed.|Up to now we have been using commands that pretty much every game will understand, but games will usually have their own set of commands unique to them, as required by the plot. This game is no different.|One of the problems when playing - and when authoring - a text adventure is deciding how a command should be phrased (a problem known as \"guess the verb\"). Are we going to CROWBAR THE SHED or LEVER OPEN THE DOOR or what? Often it takes some experimenting, though sometimes the text will give you a hint - always worth trying any verb that is used in the text (at least you can be sure the author knows that word).|Often the generic USE will work, so is worth a try.",
   },
   {
     name: 'getTorch',
@@ -93,7 +93,11 @@ hint.data = [
     tutorial:
       'Great, you used ALL!|Note that ALL will not include items that are scenery, so not the cobwebs (which are actual objects now, honest - try TAKE COBWEBS), and there are some objected we could not pick up.|You also DROP ALL, WEAR ALL, etc. though some commands will not like it. You could also try DROP ALL BUT QuestJs._templates.ROPE.|You might also want to try eating the apple or reading the newspaper.|When you are done, on with the plot! We cannot take the crates with us, but trying to do so was useful because the response gave us a clue as to what we can do - we can move them.',
   },
-  { name: 'enterPassage', hint: 'Head WEST.', tutorial: 'Now we are getting somewhere!' },
+  {
+    name: "enterPassage",
+    hint: "Head WEST.",
+    tutorial: 'Now we are getting somewhere!',
+  },
   {
     name: 'save',
     hint: 'Type SAVE.',
@@ -129,13 +133,15 @@ hint.data = [
   { name: '', hint: 'ASK THE ROBOT ABOUT THE ZETA_REACTOR.', tutorial: '' },
   {
     name: '',
-    hint: 'Ask the robot to open the door with ROBOT,OPEN DOOR, then head through it, N.',
+    hint:
+      'Ask the robot to open the door with ROBOT,OPEN DOOR, then head through it, N.',
     tutorial: '',
   },
   {
     name: 'northToReactor',
     hint: 'Head NORTH.',
-    tutorial: 'Great, the robot could do it no trouble. Now we are on our way again.',
+    tutorial:
+      'Great, the robot could do it no trouble. Now we are on our way again.',
   },
   {
     name: 'getRod',
@@ -164,28 +170,39 @@ hint.data = [
   },
   {
     name: 'rRInR',
-    hint: 'Tell the robot to put the rod i the reactor (ROBOT,PUT ROD IN REACT).',
+    hint:
+      'Tell the robot to put the rod i the reactor (ROBOT,PUT ROD IN REACT).',
     tutorial:
       'Now you need to tell the robot to put the rod in the reactor. Try R,PUT R IN R and see how it fares!',
   },
-  { name: '', hint: 'Tell the robot to get the rod (ROBOT,GET ROD).', tutorial: '' },
+  {
+    name: "",
+    hint: "Tell the robot to get the rod (ROBOT,GET ROD).",
+    tutorial: '',
+  },
   {
     name: '',
-    hint: 'Tell the robot to put the rod in the reactor (ROBOT,PUT ROD IN REACTOR).',
+    hint:
+      'Tell the robot to put the rod in the reactor (ROBOT,PUT ROD IN REACTOR).',
     tutorial: '',
   },
   {
     name: 'useLift',
     hint() {
       if (QuestJs._w.me.loc === 'reactor_room') {
-        QuestJs._io.metamsg('Head SOUTH, then WEST, then once in the lift, PRESS 3.');
-      } else if (QuestJs._w.me.loc === 'laboratory' || QuestJs._w.me.loc === 'lounge') {
+        QuestJs._io.metamsg(
+          'Head SOUTH, then WEST, then once in the lift, PRESS 3.'
+        );
+      } else if (
+        QuestJs._w.me.loc === 'laboratory' ||
+        QuestJs._w.me.loc === 'lounge'
+      ) {
         QuestJs._io.metamsg('Head WEST, then once in the lift, PRESS 3.');
       } else if (QuestJs._w.me.loc === 'lift') {
         QuestJs._io.metamsg('PRESS 3.');
       } else {
         QuestJs._io.metamsg(
-          'Head to either the lounge or the laboratory, then go WEST, then once in the lift, PRESS 3.',
+          'Head to either the lounge or the laboratory, then go WEST, then once in the lift, PRESS 3.'
         );
       }
     },
@@ -272,7 +289,9 @@ hint.before = function (name) {
 QuestJs._command.findCmd('MetaHint').script = function () {
   if (typeof hint.data[QuestJs._game.player.hintCounter].hint === 'string') {
     QuestJs._io.metamsg(hint.data[QuestJs._game.player.hintCounter].hint);
-  } else if (typeof hint.data[QuestJs._game.player.hintCounter].hint === 'function') {
+  } else if (
+    typeof hint.data[QuestJs._game.player.hintCounter].hint === 'function'
+  ) {
     hint.data[QuestJs._game.player.hintCounter].hint();
   } else {
     QuestJs._log.info(hint.data[QuestJs._game.player.hintCounter].name);
@@ -423,7 +442,8 @@ const walkthroughs = {
 
 QuestJs._tp.addDirective(
   'rope',
-  (arr, params) => `<span style="font-family:Montserrat">${arr.join(':')}</span>`,
+  (arr, params) =>
+    `<span style="font-family:Montserrat">${arr.join(':')}</span>`,
 );
 
 QuestJs._command.findCmd('MetaSave').script = function () {
@@ -457,7 +477,8 @@ QuestJs._commands.unshift(
     default(item, isMultiple, char) {
       return QuestJs._io.failedmsg(
         `${
-          QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true)
+          QuestJs._tools.prefix(item, isMultiple) +
+          QuestJs._lang.pronounVerb(item, "'be", true)
         } not something you can move.`,
       );
     },
@@ -491,10 +512,14 @@ const wrapScript = function (obj1, obj2) {
 const unwrapScript = function (obj1, obj2) {
   if (obj2 !== QuestJs._w.old_newspaper)
     return QuestJs._io.failedmsg('They are not wrapped together.');
-  if (obj1 !== QuestJs._w.fist) return QuestJs._io.failedmsg('They are not wrapped together.');
-  if (!obj2.fist_wrapped) return QuestJs._io.failedmsg('They are not wrapped together.');
+  if (obj1 !== QuestJs._w.fist)
+    return QuestJs._io.failedmsg('They are not wrapped together.');
+  if (!obj2.fist_wrapped)
+    return QuestJs._io.failedmsg('They are not wrapped together.');
   obj2.fist_wrapped = false;
-  QuestJs._io.msg('You carefully unwrap the old newspaper from around your fist.');
+  QuestJs._io.msg(
+    'You carefully unwrap the old newspaper from around your fist.'
+  );
   return QuestJs._world.SUCCESS;
 };
 
@@ -502,7 +527,10 @@ QuestJs._commands.unshift(
   new QuestJs._command.Cmd('Wrap1', {
     // wrap fist in newspaper
     regex: /^(?:wrap|cover) (.+) (?:with|in) (.+)$/,
-    objects: [{ scope: QuestJs._parser.isHeld }, { scope: QuestJs._parser.isHeld }],
+    objects: [
+      { scope: QuestJs._parser.isHeld },
+      { scope: QuestJs._parser.isHeld },
+    ],
     script(objects) {
       wrapScript(objects[0][0], objects[1][0]);
     },
@@ -513,7 +541,10 @@ QuestJs._commands.unshift(
   new QuestJs._command.Cmd('Wrap2', {
     // wrap newspaper round fist
     regex: /^(?:wrap) (.+) (?:round|around) (.+)$/,
-    objects: [{ scope: QuestJs._parser.isHeld }, { scope: QuestJs._parser.isHeld }],
+    objects: [
+      { scope: QuestJs._parser.isHeld },
+      { scope: QuestJs._parser.isHeld },
+    ],
     script(objects) {
       wrapScript(objects[1][0], objects[0][0]);
     },
@@ -524,7 +555,10 @@ QuestJs._commands.unshift(
   new QuestJs._command.Cmd('Unwrap1', {
     // unwrap fist
     regex: /^(?:unwrap|uncover) (.+)$/,
-    objects: [{ scope: QuestJs._parser.isHeld }, { scope: QuestJs._parser.isHeld }],
+    objects: [
+      { scope: QuestJs._parser.isHeld },
+      { scope: QuestJs._parser.isHeld },
+    ],
     script(objects) {
       unwrapScript(objects[0][0], QuestJs._w.old_newspaper);
     },
@@ -535,7 +569,10 @@ QuestJs._commands.unshift(
   new QuestJs._command.Cmd('Unwrap2', {
     // take newspaper off fist
     regex: /^(?:take|remove) (.+) (?:off|from) (.+)$/,
-    objects: [{ scope: QuestJs._parser.isHeld }, { scope: QuestJs._parser.isHeld }],
+    objects: [
+      { scope: QuestJs._parser.isHeld },
+      { scope: QuestJs._parser.isHeld },
+    ],
     script(objects) {
       unwrapScript(objects[1][0], objects[0][0]);
     },
@@ -554,12 +591,17 @@ QuestJs._commands.unshift(
       const item = objects[0][0];
       const dest = objects[1][0];
       if (!dest.isThrowThroughable)
-        return QuestJs._io.failedmsg("You can't chuck stuff through {nm:dest:the}.", {
-          dest,
-        });
+        return QuestJs._io.failedmsg(
+          "You can't chuck stuff through {nm:dest:the}.",
+          {
+            dest,
+          },
+        );
       if (!dest.isThrowThroughable(item)) return QuestJs._world.FAILED;
       if (!item.isAtLoc('me'))
-        return QuestJs._io.failedmsg('You are not holding {nm:item:the}.', { item });
+        return QuestJs._io.failedmsg('You are not holding {nm:item:the}.', {
+          item,
+        });
       dest.throwThrough(item);
       return QuestJs._world.SUCCESS;
     },
@@ -570,16 +612,20 @@ const smashWithScript = function (item, dest) {
   if (dest !== QuestJs._w.office_window)
     return QuestJs._io.failedmsg("That's not something you can smash.");
   if (!item.isAtLoc('me'))
-    return QuestJs._io.failedmsg('You are not holding {nm:item:the}.', { item });
+    return QuestJs._io.failedmsg('You are not holding {nm:item:the}.', {
+      item,
+    });
   if (QuestJs._w.office_window.smashed)
     return QuestJs._io.falsemsg('The window is already smashed.');
 
   if (item === QuestJs._w.crowbar) {
     QuestJs._io.msg(
-      'You strike the window with the crowbar, breaking the glass. You take a moment to knock away the remaining jagged shards in the frame.',
+      'You strike the window with the crowbar, breaking the glass. You take a moment to knock away the remaining jagged shards in the frame.'
     );
     if (QuestJs._w.Professor_Kleinscope.isHere())
-      QuestJs._io.msg('Strangely, Professor Kleinscope does not seem to notice.');
+      QuestJs._io.msg(
+        'Strangely, Professor Kleinscope does not seem to notice.'
+      );
     QuestJs._w.office_window.smashed = true;
     hint.now('out');
     return QuestJs._world.SUCCESS;
@@ -626,7 +672,7 @@ QuestJs._commands.unshift(
         QuestJs._io.msg('You just need to get the data, not beat anyone up!');
         if (!QuestJs._w.me.killFlag) {
           tmsg(
-            'You will find most games will not let you attack the characters, and those that do will probably have combat as a large part of the QuestJs._game. That said, it is a good idea to try these things, you never know quite what will happen.',
+            'You will find most games will not let you attack the characters, and those that do will probably have combat as a large part of the QuestJs._game. That said, it is a good idea to try these things, you never know quite what will happen.'
           );
           QuestJs._w.me.killFlag = true;
         }
@@ -678,7 +724,7 @@ QuestJs._commands.push(
       if (!QuestJs._w.me.rudeCmdFlag) {
         tmsg('You had to go there...');
         tmsg(
-          'There are games that cater to... well, people like you, but this is NOT one of them.',
+          'There are games that cater to... well, people like you, but this is NOT one of them.'
         );
       }
       return QuestJs._world.FAILED;

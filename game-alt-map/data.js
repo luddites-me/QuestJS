@@ -28,7 +28,10 @@ QuestJs._create.createRoom('market_square', {
   mapY: 535,
   timeStatus: [
     { to: 7, t: 'The market is quiet at this time of night.' },
-    { to: 8, t: 'Market stall owners are setting out their wares for the day.' },
+    {
+      to: 8,
+      t: "Market stall owners are setting out their wares for the day.",
+    },
     {
       to: 13,
       t:
@@ -38,7 +41,8 @@ QuestJs._create.createRoom('market_square', {
     { to: 17, t: 'The market stalls are being packed away.' },
     {
       to: 25,
-      t: 'The market stalls are closed, but a few people are still wondering through the square.',
+      t:
+        'The market stalls are closed, but a few people are still wondering through the square.',
     },
   ],
 });
@@ -57,7 +61,9 @@ QuestJs._create.createRoom('wheat_road', {
   west: new QuestJs._create.Exit('market_square'),
   south: new QuestJs._create.Exit('quayside_east'),
   east: new QuestJs._create.Exit('granite_bridge'),
-  northwest: new QuestJs._create.Exit('madame_rels', { isUnlocked: QuestJs._util.openingTimes }),
+  northwest: new QuestJs._create.Exit('madame_rels', {
+    isUnlocked: QuestJs._util.openingTimes,
+  }),
   mapX: 666,
   mapY: 532,
   mapRegion: 'Halmuth',
@@ -133,12 +139,14 @@ QuestJs._create.createRoom('museum_of_curios', {
 });
 
 QuestJs._create.createRoom('museum_of_curios_upstairs', {
-  desc: 'The upper level of the museum is boring, the author really needs to put stuff in it.',
+  desc:
+    'The upper level of the museum is boring, the author really needs to put stuff in it.',
   down: new QuestJs._create.Exit('museum_of_curios'),
 });
 
 QuestJs._create.createRoom('high_temple', {
-  desc: 'The High Temple is boring, the author really needs to put stuff in it.',
+  desc:
+    'The High Temple is boring, the author really needs to put stuff in it.',
   south: new QuestJs._create.Exit('street_of_the_gods'),
   mapX: 414,
   mapY: 306,

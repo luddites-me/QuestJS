@@ -95,11 +95,15 @@ QuestJs._test.tests = function () {
     'ask ostap about probes',
     "You can't see anything you might call 'ostap' here.",
   );
-  QuestJs._test.assertCmd('s', ['You head starboard.', /^The canteen/, 'You can see Ostap here.']);
+  QuestJs._test.assertCmd('s', [
+    'You head starboard.',
+    /^The canteen/,
+    'You can see Ostap here.',
+  ]);
   QuestJs._test.assertCmd('x chair', ["It's just scenery."]);
   QuestJs._test.assertCmd(
     'x table',
-    'The table is plastic, attached to the wall at one end, and held up by a single leg at the other end. The table is bare.',
+    'The table is plastic, attached to the wall at one end, and held up by a single leg at the other end. The table is bare.'
   );
   QuestJs._test.assertCmd(
     'ask ostap about bio-probes',
@@ -119,7 +123,10 @@ QuestJs._test.tests = function () {
     "'Launch 2 bio-probes,' you say to Ostap.",
     "'Okay captain.'",
   ]);
-  QuestJs._test.assertCmd('z', ['You wait one turn.', 'Ostap leaves the canteen, heading port.']);
+  QuestJs._test.assertCmd('z', [
+    'You wait one turn.',
+    'Ostap leaves the canteen, heading port.',
+  ]);
   QuestJs._test.assertCmd('p', [
     'You head port.',
     'You are stood at the forward end of a narrow corridor, with your cabin to port, and the canteen to starboard. Ahead, is the lounge.',
@@ -146,7 +153,10 @@ QuestJs._test.tests = function () {
   ]);
 
   QuestJs._test.title('Launching');
-  QuestJs._test.assertCmd('z', ['You wait one turn.', 'Ostap prepares the first bio-probe.']);
+  QuestJs._test.assertCmd('z', [
+    'You wait one turn.',
+    'Ostap prepares the first bio-probe.',
+  ]);
   QuestJs._test.assertCmd('ask ostap about lost probes', [
     "'Do we ever lose probes?' you ask Ostap.",
     /^'We are exploring the unknown, we have to expect /,
@@ -162,9 +172,18 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertCmd('topics for ostap', [
     'Some suggestions for what to ask Ostap about: background; expertise; health; planet; probes.',
   ]);
-  QuestJs._test.assertCmd('z', ['You wait one turn.', 'Ostap launches the first bio-probe.']);
-  QuestJs._test.assertCmd('z', ['You wait one turn.', 'Ostap prepares the second bio-probe.']);
-  QuestJs._test.assertCmd('z', ['You wait one turn.', 'Ostap launches the second bio-probe.']);
+  QuestJs._test.assertCmd('z', [
+    'You wait one turn.',
+    'Ostap launches the first bio-probe.',
+  ]);
+  QuestJs._test.assertCmd('z', [
+    'You wait one turn.',
+    'Ostap prepares the second bio-probe.',
+  ]);
+  QuestJs._test.assertCmd('z', [
+    'You wait one turn.',
+    'Ostap launches the second bio-probe.',
+  ]);
   QuestJs._test.assertCmd('z', [
     'You wait one turn.',
     "'Okay, two probes launched,' says Ostap as he stands up.",
@@ -178,7 +197,7 @@ QuestJs._test.tests = function () {
     "'Contact with Bio-probe II has been lost as it attempted to land on the planet.' announces Xsansi.",
   ]);
   QuestJs._test.assertCmd('ask ostap about lost probes', [
-    '\'What does Xsansi mean by "contact lost" with that probe?\' you ask Ostap.',
+    "'What does Xsansi mean by \"contact lost\" with that probe?' you ask Ostap.",
     /^'We are exploring the unknown/,
   ]);
   QuestJs._test.assertCmd('ask ostap about planet', [
@@ -203,7 +222,9 @@ QuestJs._test.tests = function () {
     "'What's your report on HD 154088D?' you ask Ostap.",
     "'So far, we see nothing. No life, no green. Perhaps bacteria living below the surface?'",
   ]);
-  QuestJs._test.assertCmd('ask ostap about jjjj', ['Ostap has no interest in that.']);
+  QuestJs._test.assertCmd('ask ostap about jjjj', [
+    'Ostap has no interest in that.',
+  ]);
 
   QuestJs._test.title('Ostap to stasis');
   QuestJs._test.assertCmd('ostap, go in stasis pod', [
@@ -229,7 +250,10 @@ QuestJs._test.tests = function () {
   QuestJs._test.title('Waiting 2');
   QuestJs._test.assertCmd('z', 'You wait one turn.');
   QuestJs._test.assertCmd('z', 'You wait one turn.');
-  QuestJs._test.assertCmd('l', [/All pods are currently open/, 'You can see Ostap here.']);
+  QuestJs._test.assertCmd('l', [
+    /All pods are currently open/,
+    'You can see Ostap here.',
+  ]);
   QuestJs._test.assertCmd('ostap, go in stasis pod', [
     "'Ostap, you're work here is done; you can go get in your stasis pod.'",
     "'Right, okay then.'",

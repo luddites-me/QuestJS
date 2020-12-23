@@ -16,13 +16,16 @@ QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(), {
 
 QuestJs._create.createItem('soup_can', QuestJs._templates.TAKEABLE(), {
   loc: 'lounge',
-  examine: 'A large can of tomato soup.{if:soup_can:opened: It has been opened.}',
+  examine:
+    'A large can of tomato soup.{if:soup_can:opened: It has been opened.}',
   verbFunction(l) {
     if (!this.opened) l.push('Open');
   },
   open() {
     if (this.state) return QuestJs._io.falsemsg('It has already been opened.');
-    QuestJs._io.msg('You grab the tin opener, and use it to open the can of soup.');
+    QuestJs._io.msg(
+      'You grab the tin opener, and use it to open the can of soup.'
+    );
     this.opened = true;
   },
 });
@@ -42,8 +45,11 @@ QuestJs._create.createItem('bowls', QuestJs._templates.TAKEABLE(), {
   },
   fill() {
     if (this.state === 10)
-      return QuestJs._io.falsemsg('The bowls really need a wash before using them again.');
-    if (this.state) return QuestJs._io.falsemsg('The bowls already have soup in them.');
+      return QuestJs._io.falsemsg(
+        'The bowls really need a wash before using them again.'
+      );
+    if (this.state)
+      return QuestJs._io.falsemsg('The bowls already have soup in them.');
     QuestJs._io.msg('You pour soup into the bowls.');
     this.state = 1;
   },
