@@ -211,7 +211,7 @@ QuestJs._command.findCmd('MetaHint').script = function() {
 
 
 
-tp.addDirective("charger_state", function(){
+QuestJs._tp.addDirective("charger_state", function(){
   if (w.charger_compartment.closed) {
     return "The compartment is closed";
   }

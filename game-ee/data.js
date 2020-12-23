@@ -19,7 +19,7 @@ createItem("all_tool",
 
 
 createItem("consult_brittany",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { 
     loc:"all_tool",
     alias:"Ship: Brittany",
@@ -31,7 +31,7 @@ createItem("consult_brittany",
 );
 
 createItem("consult_accord",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { 
     loc:"all_tool",
     alias:"Organisation: Systems Accord",
@@ -43,7 +43,7 @@ createItem("consult_accord",
 );
 
 createItem("consult_garmr",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { 
     loc:"all_tool",
     alias:"Organisation: GARMR",
@@ -55,7 +55,7 @@ createItem("consult_garmr",
 );
 
 createItem("consult_fastness",
-  QuestJs.npc.TOPIC(false),
+  QuestJs._npc.TOPIC(false),
   { 
     loc:"all_tool",
     alias:"Station: Fastness",
@@ -66,7 +66,7 @@ createItem("consult_fastness",
 );
 
 createItem("consult_fastness_council",
-  QuestJs.npc.TOPIC(false),
+  QuestJs._npc.TOPIC(false),
   { 
     loc:"all_tool",
     alias:"Organisation: Fastness Council",
@@ -228,7 +228,7 @@ createItem("quechua",
 );
 
 createItem("quechua_what_was_wrong",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { 
     loc:"quechua",
     alias:"What was wrong with me?",

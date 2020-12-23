@@ -1,10 +1,10 @@
 "use strict"
 
-tp.addDirective("stasis_pod_status", function(arr, params) {
+QuestJs._tp.addDirective("stasis_pod_status", function(arr, params) {
   return w.stasis_bay.tpStatus()
 })
 
-tp.addDirective("status", function(arr, params) {
+QuestJs._tp.addDirective("status", function(arr, params) {
   if (typeof params.actor.status === "string") {
     return params.actor.status === 'stasis' ? 'In stasis' : 'Deceased'
   }
@@ -13,16 +13,16 @@ tp.addDirective("status", function(arr, params) {
   }
 })
 
-tp.addDirective("table_desc", function(arr, params) {
+QuestJs._tp.addDirective("table_desc", function(arr, params) {
   return w.canteen_table.tpDesc()
 })
 
 
-tp.addDirective("planet", function(arr, params) {
+QuestJs._tp.addDirective("planet", function(arr, params) {
   return PLANETS[w.Xsansi.currentPlanet].starName + PLANETS[w.Xsansi.currentPlanet].planet
 })
 
-tp.addDirective("star", function(arr, params) {
+QuestJs._tp.addDirective("star", function(arr, params) {
   return PLANETS[w.Xsansi.currentPlanet].starName
 })
 

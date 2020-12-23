@@ -802,7 +802,7 @@ createItem("Kyle", QuestJs._npc.NPC(false),
 });
 
 
-createItem("kyle_question", QuestJs.npc.QUESTION(), {
+createItem("kyle_question", QuestJs._npc.QUESTION(), {
   responses:[
     {
       regex:/^(yes)$/,
@@ -832,7 +832,7 @@ createItem("straw_boater",
 );
 
 createItem("Kyle_The_Garden",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { loc:"Kyle", alias:"What's the deal with the garden?", nowShow:["Mary_The_Garden_Again"],
     script:function() {
       QuestJs._io.msg("You ask Kyle about the garden, but he's not talking.");
@@ -841,7 +841,7 @@ createItem("Kyle_The_Garden",
 );
 
 createItem("Kyle_The_Garden_Again",
-  QuestJs.npc.TOPIC(false),
+  QuestJs._npc.TOPIC(false),
   { loc:"Kyle", alias:"Seriously, what's the deal with the garden?",
     script:function() {
       QuestJs._io.msg("You ask Kyle about the garden, but he's STILL not talking.");
@@ -850,7 +850,7 @@ createItem("Kyle_The_Garden_Again",
 );
 
 createItem("Kyle_The_Weather",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { loc:"Kyle", alias:"The weather",
     script:function() {
       QuestJs._io.msg("You talk to Kyle about the weather.");
@@ -935,7 +935,7 @@ createItem("Lara", QuestJs._npc.NPC(true), {
 })
 
 createItem("Lara_garage_key",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { loc:"Lara", alias:"Can I have the garden key?",
     script:function() {
       QuestJs._io.msg("You ask Lara about the garage key; she agrees to give it to you if you give her a ring. Perhaps there is one in the glass cabinet?");
@@ -945,7 +945,7 @@ createItem("Lara_garage_key",
 
 
 createItem("Lara_very_attractive",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { loc:"Lara", alias:"You're very attractive",
     script:function() {
       QuestJs._io.msg("You tell Lara she looks very attractive. 'Why thank you!' she replies, smiling at last.");
@@ -955,7 +955,7 @@ createItem("Lara_very_attractive",
 );
 
 createItem("Lara_carrots",
-  QuestJs.npc.TOPIC(true),
+  QuestJs._npc.TOPIC(true),
   { loc:"Lara", alias:"I hear you like carrots",
     script:function() {
       QuestJs._io.msg("'Need carrots!' she says with feeling. 'Fading away bunny!' She looks mournfully at her ample tummy.");

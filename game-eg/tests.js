@@ -141,84 +141,84 @@ test.tests = function() {
 
 
   test.title("Text processor 1");
-  test.assertEqual("Simple text", processText("Simple text"));
-  test.assertEqual("Simple <i>text</i>", processText("Simple {i:text}"));
-  test.assertEqual("Simple <span style=\"color:red\">text</span>.", processText("Simple {colour:red:text}."));
-  test.assertEqual("Simple <span style=\"color:red\">text with <i>nesting</i></span>.", processText("Simple {colour:red:text with {i:nesting}}."));
-  test.assertEqual("Simple text", processText("Simple {random:text}"));
-  test.assertEqual("Simple text: no", processText("Simple text: {if:player:someOddAtt:yes:no}"));
+  test.assertEqual("Simple text", QuestJs._text.processText("Simple text"));
+  test.assertEqual("Simple <i>text</i>", QuestJs._text.processText("Simple {i:text}"));
+  test.assertEqual("Simple <span style=\"color:red\">text</span>.", QuestJs._text.processText("Simple {colour:red:text}."));
+  test.assertEqual("Simple <span style=\"color:red\">text with <i>nesting</i></span>.", QuestJs._text.processText("Simple {colour:red:text with {i:nesting}}."));
+  test.assertEqual("Simple text", QuestJs._text.processText("Simple {random:text}"));
+  test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {if:player:someOddAtt:yes:no}"));
   game.player.someOddAtt = 67;
-  test.assertEqual("Simple text: 67", processText("Simple text: {show:player:someOddAtt}"));
+  test.assertEqual("Simple text: 67", QuestJs._text.processText("Simple text: {show:player:someOddAtt}"));
 
   test.title("Text processor 2");
-  test.assertEqual("Simple text: no", processText("Simple text: {if:player:someOddAtt:50:yes:no}"));
-  test.assertEqual("Simple text: yes", processText("Simple text: {if:player:someOddAtt:67:yes:no}"));
-  test.assertEqual("Simple text: ", processText("Simple text: {if:player:someOddAtt:50:yes}"));
-  test.assertEqual("Simple text: yes", processText("Simple text: {if:player:someOddAtt:67:yes}"));
+  test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {if:player:someOddAtt:50:yes:no}"));
+  test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {if:player:someOddAtt:67:yes:no}"));
+  test.assertEqual("Simple text: ", QuestJs._text.processText("Simple text: {if:player:someOddAtt:50:yes}"));
+  test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {if:player:someOddAtt:67:yes}"));
   
-  test.assertEqual("Simple text: yes", processText("Simple text: {ifMoreThan:player:someOddAtt:66:yes:no}"));
-  test.assertEqual("Simple text: no", processText("Simple text: {ifMoreThan:player:someOddAtt:67:yes:no}"));
-  test.assertEqual("Simple text: yes", processText("Simple text: {ifMoreThanOrEqual:player:someOddAtt:67:yes:no}"));
-  test.assertEqual("Simple text: no", processText("Simple text: {ifMoreThanOrEqual:player:someOddAtt:68:yes:no}"));
+  test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {ifMoreThan:player:someOddAtt:66:yes:no}"));
+  test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {ifMoreThan:player:someOddAtt:67:yes:no}"));
+  test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {ifMoreThanOrEqual:player:someOddAtt:67:yes:no}"));
+  test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {ifMoreThanOrEqual:player:someOddAtt:68:yes:no}"));
 
 
-  test.assertEqual("Simple text: no", processText("Simple text: {ifLessThan:player:someOddAtt:67:yes:no}"));
-  test.assertEqual("Simple text: yes", processText("Simple text: {ifLessThan:player:someOddAtt:68:yes}"));
-  test.assertEqual("Simple text: no", processText("Simple text: {ifLessThanOrEqual:player:someOddAtt:66:yes:no}"));
-  test.assertEqual("Simple text: yes", processText("Simple text: {ifLessThanOrEqual:player:someOddAtt:67:yes}"));
+  test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {ifLessThan:player:someOddAtt:67:yes:no}"));
+  test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {ifLessThan:player:someOddAtt:68:yes}"));
+  test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {ifLessThanOrEqual:player:someOddAtt:66:yes:no}"));
+  test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {ifLessThanOrEqual:player:someOddAtt:67:yes}"));
 
 
   test.title("Text processor 3");
   game.player.someOddAtt = true;
-  test.assertEqual("Simple text: true", processText("Simple text: {show:player:someOddAtt}"));
-  test.assertEqual("Simple text: yes", processText("Simple text: {if:player:someOddAtt:yes:no}"));
-  test.assertEqual("Simple text: no", processText("Simple text: {ifNot:player:someOddAtt:yes:no}"));
-  test.assertEqual("Simple text: seen first time only", processText("Simple text: {once:seen first time only}{notOnce:other times}"));
+  test.assertEqual("Simple text: true", QuestJs._text.processText("Simple text: {show:player:someOddAtt}"));
+  test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {if:player:someOddAtt:yes:no}"));
+  test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {ifNot:player:someOddAtt:yes:no}"));
+  test.assertEqual("Simple text: seen first time only", QuestJs._text.processText("Simple text: {once:seen first time only}{notOnce:other times}"));
 
 
 
 
   test.title("Text processor 4");
-  test.assertEqual("Simple text: other times", processText("Simple text: {once:seen first time only}{notOnce:other times}"));
-  test.assertEqual("Simple text: other times", processText("Simple text: {once:seen first time only}{notOnce:other times}"));
-  test.assertEqual("Simple text: p2=red", processText("Simple text: p2={param:p2}", {p1:"yellow", p2:"red"}));
+  test.assertEqual("Simple text: other times", QuestJs._text.processText("Simple text: {once:seen first time only}{notOnce:other times}"));
+  test.assertEqual("Simple text: other times", QuestJs._text.processText("Simple text: {once:seen first time only}{notOnce:other times}"));
+  test.assertEqual("Simple text: p2=red", QuestJs._text.processText("Simple text: p2={param:p2}", {p1:"yellow", p2:"red"}));
   w.book.func1 = function() { return "test1" }
   w.book.func2 = function(a, b) { return "test2(" + a + ", " + b + ")" }
   w.book.func3 = function(a) { return "It is " + w[a].alias + " reading the book." }
-  test.assertEqual("Simple text: p2=test1", processText("Simple text: p2={param:item:func1}", {item:"book"}));
-  test.assertEqual("Simple text: p2=test2(one, two)", processText("Simple text: p2={param:item:func2:one:two}", {item:"book"}));
-  test.assertEqual("Simple text: p2=It is Kyle reading the book.", processText("Simple text: p2={param:item:func3:char}", {item:"book", char:"Kyle"}));
+  test.assertEqual("Simple text: p2=test1", QuestJs._text.processText("Simple text: p2={param:item:func1}", {item:"book"}));
+  test.assertEqual("Simple text: p2=test2(one, two)", QuestJs._text.processText("Simple text: p2={param:item:func2:one:two}", {item:"book"}));
+  test.assertEqual("Simple text: p2=It is Kyle reading the book.", QuestJs._text.processText("Simple text: p2={param:item:func3:char}", {item:"book", char:"Kyle"}));
 
 
 
   test.title("Text processor 5");
-  test.assertEqual("Kyle is a bear.", processText("{nv:chr:be} a bear.", {chr:'Kyle'}));
-  test.assertEqual("Kyle is a bear.", processText("{nv:chr:be} a bear.", {chr:w.Kyle}));
-  test.assertEqual("Kyle is your bear.", processText("{nv:Kyle:be} {pa:Buddy} bear."));
-  test.assertEqual("Kyle is her bear.", processText("{nv:Kyle:be} {pa:Lara} bear."));
-  test.assertEqual("There is Kyle.", processText("There is {nm:chr:a}.", {chr:w.Kyle}));
-  test.assertEqual("There is a book.", processText("There is {nm:chr:a}.", {chr:w.book}));
-  test.assertEqual("Kyle is here.", processText("{nm:chr:the:true} is here.", {chr:w.Kyle}));
-  test.assertEqual("The book is here.", processText("{nm:chr:the:true} is here.", {chr:w.book}));
-  test.assertEqual("It is your book.", processText("It is {nms:chr:the} book.", {chr:game.player}));
-  test.assertEqual("It is Kyle's book.", processText("It is {nms:chr:the} book.", {chr:w.Kyle}));
+  test.assertEqual("Kyle is a bear.", QuestJs._text.processText("{nv:chr:be} a bear.", {chr:'Kyle'}));
+  test.assertEqual("Kyle is a bear.", QuestJs._text.processText("{nv:chr:be} a bear.", {chr:w.Kyle}));
+  test.assertEqual("Kyle is your bear.", QuestJs._text.processText("{nv:Kyle:be} {pa:Buddy} bear."));
+  test.assertEqual("Kyle is her bear.", QuestJs._text.processText("{nv:Kyle:be} {pa:Lara} bear."));
+  test.assertEqual("There is Kyle.", QuestJs._text.processText("There is {nm:chr:a}.", {chr:w.Kyle}));
+  test.assertEqual("There is a book.", QuestJs._text.processText("There is {nm:chr:a}.", {chr:w.book}));
+  test.assertEqual("Kyle is here.", QuestJs._text.processText("{nm:chr:the:true} is here.", {chr:w.Kyle}));
+  test.assertEqual("The book is here.", QuestJs._text.processText("{nm:chr:the:true} is here.", {chr:w.book}));
+  test.assertEqual("It is your book.", QuestJs._text.processText("It is {nms:chr:the} book.", {chr:game.player}));
+  test.assertEqual("It is Kyle's book.", QuestJs._text.processText("It is {nms:chr:the} book.", {chr:w.Kyle}));
 
   
   test.title("Text processor 6");
-  test.assertEqual("Kyle is a bear.", processText("{Kyle.alias} is a bear."));
-  test.assertEqual("Kyle is a bear.", processText("{show:Kyle:alias} is a bear."));
-  test.assertEqual("Kyle is a bear.", processText("{Kyle:alias} is a bear."));
-  test.assertEqual("You have $10.", processText("You have ${show:Buddy:money}."));
-  test.assertEqual("You have $10.", processText("You have ${player.money}."));
-  test.assertEqual("You have $10.", processText("You have ${Buddy.money}."));
-  test.assertEqual("You have $10.", processText("You have ${player.money}."));
+  test.assertEqual("Kyle is a bear.", QuestJs._text.processText("{Kyle.alias} is a bear."));
+  test.assertEqual("Kyle is a bear.", QuestJs._text.processText("{show:Kyle:alias} is a bear."));
+  test.assertEqual("Kyle is a bear.", QuestJs._text.processText("{Kyle:alias} is a bear."));
+  test.assertEqual("You have $10.", QuestJs._text.processText("You have ${show:Buddy:money}."));
+  test.assertEqual("You have $10.", QuestJs._text.processText("You have ${player.money}."));
+  test.assertEqual("You have $10.", QuestJs._text.processText("You have ${Buddy.money}."));
+  test.assertEqual("You have $10.", QuestJs._text.processText("You have ${player.money}."));
 
   test.title("Text processor 6");
   w.Kyle.colours = ['red', 'green', 'blue']
   w.Kyle.colour = 1
-  test.assertEqual("Kyle is green.", processText("Kyle is {select:Kyle:colours:colour}."));
+  test.assertEqual("Kyle is green.", QuestJs._text.processText("Kyle is {select:Kyle:colours:colour}."));
   w.Kyle.colour = 0
-  test.assertEqual("Kyle is red.", processText("Kyle is {select:Kyle:colours:colour}."));
+  test.assertEqual("Kyle is red.", QuestJs._text.processText("Kyle is {select:Kyle:colours:colour}."));
 
 
   test.title("Numbers");
@@ -261,8 +261,8 @@ test.tests = function() {
   const dateTimeDict = util.getDateTimeDict()
   test.assertEqual("February", dateTimeDict.month)
   test.assertEqual(9, dateTimeDict.hour)
-  test.assertEqual("It is 14 Feb 2019, 09:43", processText("It is {dateTime}"));
-  test.assertEqual("-Two-Three-", processText("{hour:3:8:One}-{hour:5:10:Two}-{hour:9:10:Three}-{hour:10:99:Four}"));
+  test.assertEqual("It is 14 Feb 2019, 09:43", QuestJs._text.processText("It is {dateTime}"));
+  test.assertEqual("-Two-Three-", QuestJs._text.processText("{hour:3:8:One}-{hour:5:10:Two}-{hour:9:10:Three}-{hour:10:99:Four}"));
   test.assertEqual(9, util.seconds(9))
   test.assertEqual(127, util.seconds(7, 2))
   test.assertEqual(127 + 3 * 3600, util.seconds(7, 2, 3))
@@ -758,10 +758,10 @@ test.tests = function() {
   
   
   test.title("Path finding");
-  test.assertEqual("lounge", formatList(QuestJs.npc.agenda.findPath(w.dining_room, w.lounge)));
-  test.assertEqual("", formatList(QuestJs.npc.agenda.findPath(w.dining_room, w.dining_room)));
-  test.assertEqual(false, QuestJs.npc.agenda.findPath(w.dining_room, w.far_away));
-  test.assertEqual("conservatory, dining room, lounge", formatList(QuestJs.npc.agenda.findPath(w.garden, w.dining_room)));
+  test.assertEqual("lounge", formatList(QuestJs._npc.agenda.findPath(w.dining_room, w.lounge)));
+  test.assertEqual("", formatList(QuestJs._npc.agenda.findPath(w.dining_room, w.dining_room)));
+  test.assertEqual(false, QuestJs._npc.agenda.findPath(w.dining_room, w.far_away));
+  test.assertEqual("conservatory, dining room, lounge", formatList(QuestJs._npc.agenda.findPath(w.garden, w.dining_room)));
   test.assertEqual(null, w.dining_room.findExit(w.far_away));
   test.assertEqual("east", w.dining_room.findExit(w.lounge).dir);
   test.assertCmd("s", ["The kitchen", "A clean room. There is a sink in the corner.", /You can see/, "You can go down, north or west."]);
@@ -928,11 +928,11 @@ test.tests = function() {
 
 
   test.assertCmd("n", ["You head north.", "The shop", "A funny little shop.", "You can go south."]);
-  test.assertEqual("The carrot is $0,02", processText("The carrot is {money:carrot}"))
-  test.assertEqual("The carrot is $0,02", processText("The carrot is {$:carrot}"))
-  test.assertEqual("You see $0,12", processText("You see {$:12}"))
-  test.assertEqual("The carrot is $0,02", processText("{nm:item:the:true} is {$:carrot}", {item:w.carrot}))
-  test.assertEqual("The carrot is $0,02", processText("{nm:item:the:true} is {$:carrot}", {item:'carrot'}))
+  test.assertEqual("The carrot is $0,02", QuestJs._text.processText("The carrot is {money:carrot}"))
+  test.assertEqual("The carrot is $0,02", QuestJs._text.processText("The carrot is {$:carrot}"))
+  test.assertEqual("You see $0,12", QuestJs._text.processText("You see {$:12}"))
+  test.assertEqual("The carrot is $0,02", QuestJs._text.processText("{nm:item:the:true} is {$:carrot}", {item:w.carrot}))
+  test.assertEqual("The carrot is $0,02", QuestJs._text.processText("{nm:item:the:true} is {$:carrot}", {item:'carrot'}))
 
   test.title("shop - buy");
   test.assertEqual(true, QuestJs._parser.isForSale(w.carrot))
@@ -1181,11 +1181,11 @@ test.tests = function() {
     ]
     let countOutstanding = 0
     let countDone = 0
-    console.log(tp.usedStrings.length)
+    console.log(QuestJs._tp.usedStrings.length)
     for (let el in QuestJs._lang) {
       if (typeof el !== 'string') continue
       if (langSkips.find(e => el.match(e))) continue
-      if (tp.usedStrings.includes(QuestJs._lang[el])) {
+      if (QuestJs._tp.usedStrings.includes(QuestJs._lang[el])) {
         countDone++
         continue
       }

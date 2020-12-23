@@ -917,7 +917,7 @@ createItem("winfield_malovich", {
 })
 
 
-createItem("wm_hello", QuestJs.npc.TOPIC(true), {
+createItem("wm_hello", QuestJs._npc.TOPIC(true), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -935,7 +935,7 @@ createItem("wm_hello", QuestJs.npc.TOPIC(true), {
 })
 
 
-createItem("wm_what_happened", QuestJs.npc.TOPIC(false), {
+createItem("wm_what_happened", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -960,7 +960,7 @@ createItem("wm_what_happened", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("wm_no_way_out", QuestJs.npc.TOPIC(false), {
+createItem("wm_no_way_out", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -974,7 +974,7 @@ createItem("wm_no_way_out", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("wm_same_question", QuestJs.npc.TOPIC(false), {
+createItem("wm_same_question", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -989,7 +989,7 @@ createItem("wm_same_question", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("wm_i_dont_know", QuestJs.npc.TOPIC(false), {
+createItem("wm_i_dont_know", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1004,7 +1004,7 @@ createItem("wm_i_dont_know", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("wm_i_will_think", QuestJs.npc.TOPIC(false), {
+createItem("wm_i_will_think", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1019,7 +1019,7 @@ createItem("wm_i_will_think", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("wm_how_long", QuestJs.npc.TOPIC(false), {
+createItem("wm_how_long", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1038,7 +1038,7 @@ createItem("wm_how_long", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("wm_1911", QuestJs.npc.TOPIC(false), {
+createItem("wm_1911", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1057,7 +1057,7 @@ createItem("wm_1911", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("wm_what_happened7", QuestJs.npc.TOPIC(false), {
+createItem("wm_what_happened7", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
 })
 
@@ -1583,7 +1583,7 @@ createItem("tiny_man", QuestJs._npc.NPC(false), {
 })
 
 
-createItem("tinyman_hello", QuestJs.npc.TOPIC(false), {
+createItem("tinyman_hello", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1594,7 +1594,7 @@ createItem("tinyman_hello", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_live_here", QuestJs.npc.TOPIC(false), {
+createItem("tinyman_live_here", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1607,7 +1607,7 @@ createItem("tinyman_live_here", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_what_doing", QuestJs.npc.TOPIC(false), {
+createItem("tinyman_what_doing", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1628,7 +1628,7 @@ createItem("tinyman_what_doing", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_mend_boots_normal", QuestJs.npc.TOPIC(false), {
+createItem("tinyman_mend_boots_normal", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1641,7 +1641,7 @@ createItem("tinyman_mend_boots_normal", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_mend_boots_small", QuestJs.npc.TOPIC(false), {
+createItem("tinyman_mend_boots_small", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1655,7 +1655,7 @@ createItem("tinyman_mend_boots_small", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_where_live", QuestJs.npc.TOPIC(false), {
+createItem("tinyman_where_live", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1670,7 +1670,7 @@ createItem("tinyman_where_live", QuestJs.npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_very_small", QuestJs.npc.TOPIC(false), {
+createItem("tinyman_very_small", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");

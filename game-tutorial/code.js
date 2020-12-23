@@ -198,7 +198,7 @@ const walkthroughs = {
 
 
 
-  tp.addDirective("rope", function(arr, params) {
+  QuestJs._tp.addDirective("rope", function(arr, params) {
     return '<span style="font-family:Montserrat">' + arr.join(":") + "</span>"; 
   });
 

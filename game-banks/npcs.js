@@ -45,7 +45,7 @@ createItem("Xsansi", QuestJs._npc.NPC(true), {
       test:function(p) { return p.text.match(/crew|team/); }, 
       script:function() {
         QuestJs._io.msg("'Tell me about the crew, Xsansi,' you say.");
-        for (let npc of NPCS) QuestJs._io.msg(processText(w.Xsansi.crewStatusTemplate, {actor:npc, room:w[npc.loc]}))
+        for (let npc of NPCS) QuestJs._io.msg(QuestJs._text.processText(w.Xsansi.crewStatusTemplate, {actor:npc, room:w[npc.loc]}))
       },
     },
     
@@ -55,7 +55,7 @@ createItem("Xsansi", QuestJs._npc.NPC(true), {
       script:function() {
         QuestJs._io.msg("'Tell me about Kyle, Xsansi,' you say.");
         if (w.Xsansi.currentPlanet < 3) {
-          QuestJs._io.msg(processText(w.Xsansi.crewStatusTemplate, {actor:w.Kyle, room:w[w.Kyle.loc]}))
+          QuestJs._io.msg(QuestJs._text.processText(w.Xsansi.crewStatusTemplate, {actor:w.Kyle, room:w[w.Kyle.loc]}))
           w.Xsansi.locate = 'Kyle'
         }
         else {
@@ -70,7 +70,7 @@ createItem("Xsansi", QuestJs._npc.NPC(true), {
       script:function() {
         QuestJs._io.msg("'Tell me about Aada, Xsansi,' you say.");
         if (w.Xsansi.currentPlanet < 3) {
-          QuestJs._io.msg(processText(w.Xsansi.crewStatusTemplate, {actor:w.Aada, room:w[w.Aada.loc]}))
+          QuestJs._io.msg(QuestJs._text.processText(w.Xsansi.crewStatusTemplate, {actor:w.Aada, room:w[w.Aada.loc]}))
           w.Xsansi.locate = 'Aada'
         }
         else {
@@ -85,7 +85,7 @@ createItem("Xsansi", QuestJs._npc.NPC(true), {
       script:function() {
         QuestJs._io.msg("'Tell me about Ha-yoon, Xsansi,' you say.");
         if (w.Xsansi.currentPlanet < 3) {
-          QuestJs._io.msg(processText(w.Xsansi.crewStatusTemplate, {actor:w.Ha_yoon, room:w[w.Ha_yoon.loc]}))
+          QuestJs._io.msg(QuestJs._text.processText(w.Xsansi.crewStatusTemplate, {actor:w.Ha_yoon, room:w[w.Ha_yoon.loc]}))
           w.Xsansi.locate = 'Ha_yoon'
         }
         else {
@@ -102,7 +102,7 @@ createItem("Xsansi", QuestJs._npc.NPC(true), {
       script:function() {
         QuestJs._io.msg("'Tell me about Ostap, Xsansi,' you say.");
         if (w.Xsansi.currentPlanet < 3) {
-          QuestJs._io.msg(processText(w.Xsansi.crewStatusTemplate, {actor:w.Ostap, room:w[w.Ostap.loc]}))
+          QuestJs._io.msg(QuestJs._text.processText(w.Xsansi.crewStatusTemplate, {actor:w.Ostap, room:w[w.Ostap.loc]}))
           w.Xsansi.locate = 'Ostap'
         }
         else {

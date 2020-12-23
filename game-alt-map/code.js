@@ -21,7 +21,7 @@ util.openingTimes = function () {
 
 
 
-tp.addDirective("timeOfDayComment", function(arr, params) {
+QuestJs._tp.addDirective("timeOfDayComment", function(arr, params) {
   const time = util.getCustomDateTimeDict({})
   const location = w[game.player.loc]
   if (!location.timeStatus) return ''
@@ -33,7 +33,7 @@ tp.addDirective("timeOfDayComment", function(arr, params) {
   return "NONE"
 })
   
-tp.addDirective("npcStatus", function(arr, params) {
+QuestJs._tp.addDirective("npcStatus", function(arr, params) {
   const result = []
   for (let el of scopeAllNpcHere()) {
     console.log(el.name)

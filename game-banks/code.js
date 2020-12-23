@@ -384,7 +384,7 @@ function arrival() {
 }
 
 // If a topic has an attribute "name2", then using code=2,
-// "name" will be changed to "name2". This means new topics get added to the QuestJs.npc.TOPIC command
+// "name" will be changed to "name2". This means new topics get added to the QuestJs._npc.TOPIC command
 // tested
 function updateTopics(npc, code) {
   for (let opt of npc.askOptions) {
