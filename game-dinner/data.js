@@ -12,7 +12,7 @@ createRoom("lounge", {
 })
 
 
-createItem("Kyle", NPC(), {
+createItem("Kyle", QuestJs._npc.NPC(), {
   loc:"lounge",
   examine: "A slightly larger than normal sized bear in a Flash costume.",
 })

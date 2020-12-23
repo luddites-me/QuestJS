@@ -3,7 +3,7 @@
 
 
 
-createItem("dinner_timetable", AGENDA_FOLLOWER(), {
+createItem("dinner_timetable", QuestJs._npc.AGENDA_FOLLOWER(), {
   //suspended:true,
   agenda:[
     'wait',

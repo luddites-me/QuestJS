@@ -1,7 +1,7 @@
 "use strict";
 
 
-npc_utilities.talkto = function() {
+QuestJs._npc_utilities.talkto = function() {
   if (!game.player.canTalk(this)) return false
   const topics = this.getTopics(this)
   if (topics.length === 0) return QuestJs._io.failedmsg(QuestJs._lang.no_topics, {char:game.player, item:this})
@@ -36,7 +36,7 @@ function showSidePaneOptions(item, options, fn) {
 
 
   
-createItem("Buddy", NPC(false), { 
+createItem("Buddy", QuestJs._npc.NPC(false), { 
   loc:"lounge",
   money:10,
   properName:true,
@@ -675,7 +675,7 @@ createRoom("far_away", {
 
 
 createItem("Arthur",
-  NPC(false),
+  QuestJs._npc.NPC(false),
   { 
     loc:"garden",
     examine:function(isMultiple) {
@@ -730,7 +730,7 @@ createItem("ball", {
 
 
 
-createItem("Kyle", NPC(false),
+createItem("Kyle", QuestJs._npc.NPC(false),
 { 
   loc:"lounge",
   //alias:'Bobby',
@@ -802,7 +802,7 @@ createItem("Kyle", NPC(false),
 });
 
 
-createItem("kyle_question", QUESTION(), {
+createItem("kyle_question", QuestJs.npc.QUESTION(), {
   responses:[
     {
       regex:/^(yes)$/,
@@ -832,7 +832,7 @@ createItem("straw_boater",
 );
 
 createItem("Kyle_The_Garden",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { loc:"Kyle", alias:"What's the deal with the garden?", nowShow:["Mary_The_Garden_Again"],
     script:function() {
       QuestJs._io.msg("You ask Kyle about the garden, but he's not talking.");
@@ -841,7 +841,7 @@ createItem("Kyle_The_Garden",
 );
 
 createItem("Kyle_The_Garden_Again",
-  TOPIC(false),
+  QuestJs.npc.TOPIC(false),
   { loc:"Kyle", alias:"Seriously, what's the deal with the garden?",
     script:function() {
       QuestJs._io.msg("You ask Kyle about the garden, but he's STILL not talking.");
@@ -850,7 +850,7 @@ createItem("Kyle_The_Garden_Again",
 );
 
 createItem("Kyle_The_Weather",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { loc:"Kyle", alias:"The weather",
     script:function() {
       QuestJs._io.msg("You talk to Kyle about the weather.");
@@ -862,7 +862,7 @@ createItem("Kyle_The_Weather",
 
 
 
-createItem("Lara", NPC(true), {
+createItem("Lara", QuestJs._npc.NPC(true), {
   loc:"dining_room", 
   examine:"A normal-sized bunny.",
   properName:true, 
@@ -935,7 +935,7 @@ createItem("Lara", NPC(true), {
 })
 
 createItem("Lara_garage_key",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { loc:"Lara", alias:"Can I have the garden key?",
     script:function() {
       QuestJs._io.msg("You ask Lara about the garage key; she agrees to give it to you if you give her a ring. Perhaps there is one in the glass cabinet?");
@@ -945,7 +945,7 @@ createItem("Lara_garage_key",
 
 
 createItem("Lara_very_attractive",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { loc:"Lara", alias:"You're very attractive",
     script:function() {
       QuestJs._io.msg("You tell Lara she looks very attractive. 'Why thank you!' she replies, smiling at last.");
@@ -955,7 +955,7 @@ createItem("Lara_very_attractive",
 );
 
 createItem("Lara_carrots",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { loc:"Lara", alias:"I hear you like carrots",
     script:function() {
       QuestJs._io.msg("'Need carrots!' she says with feeling. 'Fading away bunny!' She looks mournfully at her ample tummy.");
@@ -1125,7 +1125,7 @@ createRoom("inside_tower", {
 
 
 
-createItem("piggy_suu", NPC(true), { 
+createItem("piggy_suu", QuestJs._npc.NPC(true), { 
   loc:"bridge",
   alias:'Piggy-suu',
   money:10,
@@ -1135,7 +1135,7 @@ createItem("piggy_suu", NPC(true), {
 
 
 
-createItem("timetable", AGENDA_FOLLOWER(), {
+createItem("timetable", QuestJs._npc.AGENDA_FOLLOWER(), {
   counter:0,
   script:function(n) {
     this.counter += (n[0] ? parseInt(n[0]) : 1) 

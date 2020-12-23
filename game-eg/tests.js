@@ -758,10 +758,10 @@ test.tests = function() {
   
   
   test.title("Path finding");
-  test.assertEqual("lounge", formatList(agenda.findPath(w.dining_room, w.lounge)));
-  test.assertEqual("", formatList(agenda.findPath(w.dining_room, w.dining_room)));
-  test.assertEqual(false, agenda.findPath(w.dining_room, w.far_away));
-  test.assertEqual("conservatory, dining room, lounge", formatList(agenda.findPath(w.garden, w.dining_room)));
+  test.assertEqual("lounge", formatList(QuestJs.npc.agenda.findPath(w.dining_room, w.lounge)));
+  test.assertEqual("", formatList(QuestJs.npc.agenda.findPath(w.dining_room, w.dining_room)));
+  test.assertEqual(false, QuestJs.npc.agenda.findPath(w.dining_room, w.far_away));
+  test.assertEqual("conservatory, dining room, lounge", formatList(QuestJs.npc.agenda.findPath(w.garden, w.dining_room)));
   test.assertEqual(null, w.dining_room.findExit(w.far_away));
   test.assertEqual("east", w.dining_room.findExit(w.lounge).dir);
   test.assertCmd("s", ["The kitchen", "A clean room. There is a sink in the corner.", /You can see/, "You can go down, north or west."]);

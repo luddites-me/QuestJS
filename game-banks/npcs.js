@@ -9,7 +9,7 @@
 // If they can die, may need to reflect that in Xsansi's responses.
 // though perjaps it is mourning Kyle that does it for her
 
-createItem("Xsansi", NPC(true), { 
+createItem("Xsansi", QuestJs._npc.NPC(true), { 
   isAtLoc:function(loc, situation) {
     if (typeof loc !== "string") loc = loc.name
     return isOnShip() && (situation === world.PARSER || situation === world.SIDE_PANE);

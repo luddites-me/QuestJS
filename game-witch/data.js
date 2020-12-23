@@ -52,7 +52,7 @@ createItem("painting_mother", {
 })
 
 
-createItem("mother_men_description", TOPIC(false), {
+createItem("mother_men_description", QuestJs.npc.TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
     QuestJs._io.msg("'What can you tell me about the men,' you ask your mother.");
@@ -61,7 +61,7 @@ createItem("mother_men_description", TOPIC(false), {
 })
 
 
-createItem("mother_men_doing", TOPIC(false), {
+createItem("mother_men_doing", QuestJs.npc.TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
     QuestJs._io.msg("'What were the men doing in my rooms?' you ask your mother.");
@@ -71,7 +71,7 @@ createItem("mother_men_doing", TOPIC(false), {
 })
 
 
-createItem("mother_help", TOPIC(false), {
+createItem("mother_help", QuestJs.npc.TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
     QuestJs._io.msg("'Can you help me find out what's happening?' you ask the painting.");
@@ -83,7 +83,7 @@ createItem("mother_help", TOPIC(false), {
 })
 
 
-createItem("mother_scrying1", TOPIC(false), {
+createItem("mother_scrying1", QuestJs.npc.TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
     QuestJs._io.msg("'Have you had any luck scrying?' you ask your mother.");
@@ -92,7 +92,7 @@ createItem("mother_scrying1", TOPIC(false), {
 })
 
 
-createItem("mother_scrying2", TOPIC(false), {
+createItem("mother_scrying2", QuestJs.npc.TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
     QuestJs._io.msg("'Have you had any more luck scrying?' you ask your mother.");
@@ -101,7 +101,7 @@ createItem("mother_scrying2", TOPIC(false), {
 })
 
 
-createItem("mother_scrying3", TOPIC(false), {
+createItem("mother_scrying3", QuestJs.npc.TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
     QuestJs._io.msg("'Have you had any luck scrying?' you ask your mother.");
@@ -112,7 +112,7 @@ createItem("mother_scrying3", TOPIC(false), {
 })
 
 
-createItem("mother_the_plan", TOPIC(true), {
+createItem("mother_the_plan", QuestJs.npc.TOPIC(true), {
   loc:"painting_mother",
   runscript:function() {
     QuestJs._io.msg("'Reminder me of the plan again,' you say, knowing it will annoy your mother.");
@@ -121,7 +121,7 @@ createItem("mother_the_plan", TOPIC(true), {
 })
 
 
-createItem("mother_father", TOPIC(false), {
+createItem("mother_father", QuestJs.npc.TOPIC(false), {
   loc:"painting_mother",
   runscript:function() {
     QuestJs._io.msg("'Who will be the father of my child?' Obviously not the king; no way could that idiot by the father of the chosen one.");
@@ -313,7 +313,7 @@ createRoom("apprenticeroom", {
 })
 
 
-createItem("apprentice", NPC(false), {
+createItem("apprentice", QuestJs._npc.NPC(false), {
   loc:"apprenticeroom",
   examine:"Kendall is nineteen, a short, slim man, with long, rather unkempt hair. Despite the season, he is dressed in a white shirt and dark trousers. He has been an apprentice for nearly five years now, and the vizier regards him well. Like most men his age, he is eager to please any woman who will flash some cleavage at him, which is very convenient.",
 })
@@ -325,7 +325,7 @@ createItem("janthherb", {
 })
 
 
-createItem("appentice_genymedes", TOPIC(true), {
+createItem("appentice_genymedes", QuestJs.npc.TOPIC(true), {
   loc:"apprentice",
 })
 

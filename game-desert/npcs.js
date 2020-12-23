@@ -3,7 +3,7 @@
 
 
 createItem("Lucas",
-  NPC(false),
+  QuestJs._npc.NPC(false),
   { 
     notes:"Black guy, twenties, bi-sexual, good at cooking",
     loc:"bus",
@@ -36,7 +36,7 @@ createItem("Lucas",
 
 
 createItem("Emily",
-  NPC(true),
+  QuestJs._npc.NPC(true),
   { 
     notes:"Redhead, twenties, into spiritualism, plays several instruments",
     loc:"bus",
@@ -78,7 +78,7 @@ createItem("Emily",
 
 
 createItem("Elijah",
-  NPC(false),
+  QuestJs._npc.NPC(false),
   { 
     notes:"forties, conspiracy nut, refusing to fly, quite wealthy",
     loc:"bus",
@@ -110,7 +110,7 @@ createItem("Elijah",
 
 
 createItem("Amy",
-  NPC(true),
+  QuestJs._npc.NPC(true),
   { 
     notes:"Korean parentage, thirties, Christian, into video games",
     loc:"bus",

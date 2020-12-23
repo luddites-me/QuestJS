@@ -11,15 +11,15 @@ createItem("all_tool",
     loc:"me",
     alias:"AllTool",
     examine: "Your AllTool is a high-spec version of the device. You can use it to access numerous databases and IT systems, as well as controlling certain drones and make cyber attacks. For reasons that I am sure are obvious, you would need to go to a terminal to read your e-mails.|[Do USE ALLTOOL to look things up on it.]",
-    getTopics:npc_utilities.getTopics,
-    use:npc_utilities.talkto,
+    getTopics:QuestJs._npc_utilities.getTopics,
+    use:QuestJs._npc_utilities.talkto,
     pause:function() {},
   }
 );
 
 
 createItem("consult_brittany",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { 
     loc:"all_tool",
     alias:"Ship: Brittany",
@@ -31,7 +31,7 @@ createItem("consult_brittany",
 );
 
 createItem("consult_accord",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { 
     loc:"all_tool",
     alias:"Organisation: Systems Accord",
@@ -43,7 +43,7 @@ createItem("consult_accord",
 );
 
 createItem("consult_garmr",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { 
     loc:"all_tool",
     alias:"Organisation: GARMR",
@@ -55,7 +55,7 @@ createItem("consult_garmr",
 );
 
 createItem("consult_fastness",
-  TOPIC(false),
+  QuestJs.npc.TOPIC(false),
   { 
     loc:"all_tool",
     alias:"Station: Fastness",
@@ -66,7 +66,7 @@ createItem("consult_fastness",
 );
 
 createItem("consult_fastness_council",
-  TOPIC(false),
+  QuestJs.npc.TOPIC(false),
   { 
     loc:"all_tool",
     alias:"Organisation: Fastness Council",
@@ -218,7 +218,7 @@ createRoom("sickbay",
 );
 
 createItem("quechua",
-  NPC(true),
+  QuestJs._npc.NPC(true),
   {
     alias:"Dr Quechua",
     regex:/doctor|quechua|dr/,
@@ -228,7 +228,7 @@ createItem("quechua",
 );
 
 createItem("quechua_what_was_wrong",
-  TOPIC(true),
+  QuestJs.npc.TOPIC(true),
   { 
     loc:"quechua",
     alias:"What was wrong with me?",

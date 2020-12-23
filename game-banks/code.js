@@ -34,7 +34,7 @@ Each awakening gets steadily worse, by the fourth you are throwing up.
 
 
 const CREW = function(isFemale) {
-  const res = NPC(isFemale)
+  const res = QuestJs._npc.NPC(isFemale)
   res.status = "okay"
   res.properName = true
   res.crewman = true
@@ -384,7 +384,7 @@ function arrival() {
 }
 
 // If a topic has an attribute "name2", then using code=2,
-// "name" will be changed to "name2". This means new topics get added to the TOPIC command
+// "name" will be changed to "name2". This means new topics get added to the QuestJs.npc.TOPIC command
 // tested
 function updateTopics(npc, code) {
   for (let opt of npc.askOptions) {

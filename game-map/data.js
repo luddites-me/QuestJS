@@ -58,21 +58,21 @@ createRoom("shed", {
   north:new Exit('garden_east', {mapOffsetX:-0.5}),
 })
 
-createItem("Lara", NPC(true), {
+createItem("Lara", QuestJs._npc.NPC(true), {
   loc:'shed',
   properNoun:true,
   agenda:['walkRandom'],
   mapDrawBase:function() { return map.rectangle(w[this.loc], [[-5,-5], [10, 10]], 'fill:red;stroke:black') }
 })
 
-createItem("Kyle", NPC(false), {
+createItem("Kyle", QuestJs._npc.NPC(false), {
   loc:'shed',
   properNoun:true,
   agenda:['walkRandom'],
   mapDrawBase:function() { return map.rectangle(w[this.loc], [[0,0], [10, 10]], 'fill:blue;stroke:black') }
 })
 
-createItem("Robot", NPC(false), {
+createItem("Robot", QuestJs._npc.NPC(false), {
   loc:'street_north',
   agenda:['patrol:street_middle:street_south:street_middle:street_north'],
   mapDrawBase:function() { return map.rectangle(w[this.loc], [[-10,-10], [10, 10]], 'fill:silver;stroke:black') }

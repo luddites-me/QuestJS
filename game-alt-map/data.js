@@ -41,7 +41,7 @@ createRoom("market_square", {
 
 
 
-createItem("street_preacher", NPC(false), {
+createItem("street_preacher", QuestJs._npc.NPC(false), {
   loc:"market_square",
   scenery:true,
   locationStatus:function() {
