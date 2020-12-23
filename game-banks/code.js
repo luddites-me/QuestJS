@@ -48,11 +48,11 @@ const CREW = function(isFemale) {
   }
   res.revive = function(isMultiple, char) {
     const tpParams = {actor:this, char:char}
-    if (char === game.player) {
+    if (char === QuestJs._game.player) {
       QuestJs._io.msg("You wonder how to revive {nm:actor} - probably best to leave that to Xsansi.", tpParams);
       return false;
     }
-    if (char !== w.Xsansi) {
+    if (char !== QuestJs._w.Xsansi) {
       QuestJs._io.msg("'{nm:char}, can you revive {nm:actor}?' you ask.", tpParams);
       QuestJs._io.msg("'Probably best to leave that to Xsansi.'");
       return false;
@@ -165,7 +165,7 @@ const CREW = function(isFemale) {
       this.deployProbeAction--;
     }
 
-    w.probe_prototype.cloneMe(this)
+    QuestJs._w.probe_prototype.cloneMe(this)
   }
   
   return res 
@@ -327,14 +327,14 @@ function createTopics(npc) {
  
 function howAreYouFeeling(response) {
   QuestJs._io.msg("'How are you feeling?' you ask " + QuestJs._lang.getName(response.actor, {article:QuestJs._consts.DEFINITE}) + ".");
-  QuestJs._io.msg(PLANETS[w.Xsansi.currentPlanet][response.actor.name + "_how_are_you"]);
+  QuestJs._io.msg(PLANETS[QuestJs._w.Xsansi.currentPlanet][response.actor.name + "_how_are_you"]);
 }
 
 function planetAnalysis(response) {
-  const arr = response.actor.data[w.Xsansi.currentPlanet]
+  const arr = response.actor.data[QuestJs._w.Xsansi.currentPlanet]
   if (Object.keys(arr).length === 0) return QuestJs._io.falsemsg("You should talk to Aada or Ostap about that stuff.")
 
-  let rank = response.actor["rank" + w.Xsansi.currentPlanet]
+  let rank = response.actor["rank" + QuestJs._w.Xsansi.currentPlanet]
   if (rank === undefined) return QuestJs._io.falsemsg("You should talk to Aada or Ostap about that stuff.")
   rank >>= 1
   if (rank >= arr.length) rank = arr.length - 1
@@ -344,7 +344,7 @@ function planetAnalysis(response) {
   
 function createPlanets() {
   for (let i = 0; i < PLANETS.length; i++) {
-    createItem("planet" + i,
+    QuestJs._create.createItem("planet" + i,
       { 
         starName:PLANETS[i].starName,
         alias:PLANETS[i].starName + " " + PLANETS[i].planet,
@@ -369,17 +369,17 @@ createPlanets();
 
 
 function arrival() {
-  w.Xsansi.currentPlanet++
-  PLANETS[w.Xsansi.currentPlanet].onArrival()
-  game.elapsedTime = 0
-  game.startTime = PLANETS[w.Xsansi.currentPlanet].arrivalTime
-  w.Aada.deployProbeTotal = 0
-  w.Ostap.deployProbeTotal = 0
-  updateTopics(w.Xsansi, w.Xsansi.currentPlanet)
+  QuestJs._w.Xsansi.currentPlanet++
+  PLANETS[QuestJs._w.Xsansi.currentPlanet].onArrival()
+  QuestJs._game.elapsedTime = 0
+  QuestJs._game.startTime = PLANETS[QuestJs._w.Xsansi.currentPlanet].arrivalTime
+  QuestJs._w.Aada.deployProbeTotal = 0
+  QuestJs._w.Ostap.deployProbeTotal = 0
+  updateTopics(QuestJs._w.Xsansi, QuestJs._w.Xsansi.currentPlanet)
   for (let npc of NPCS) {
-    npc.state = w.Xsansi.currentPlanet * 100
+    npc.state = QuestJs._w.Xsansi.currentPlanet * 100
   }
-  w.Kyle.setAgenda(["walkTo:probes_forward", "text:deployProbe:1"])
+  QuestJs._w.Kyle.setAgenda(["walkTo:probes_forward", "text:deployProbe:1"])
   QuestJs._IO.updateStatus() 
 }
 
@@ -417,8 +417,8 @@ function reviveNpc(npc, object) {
 
 function getProbes() {
   const arr = [];
-  for (let key in w) {
-    if (w[key].clonePrototype === w.probe_prototype) arr.push(w[key]);
+  for (let key in QuestJs._w) {
+    if (QuestJs._w[key].clonePrototype === QuestJs._w.probe_prototype) arr.push(QuestJs._w[key]);
   }
   return arr;
 }
@@ -432,12 +432,12 @@ function shipAlert(s) {
 
 
 function isOnShip() {
-  return w[game.player.loc].notOnShip === undefined;
+  return QuestJs._w[QuestJs._game.player.loc].notOnShip === undefined;
 }
 
 
 function currentPlanet() {
-  return w["planet" + w.Xsansi.currentPlanet];
+  return QuestJs._w["planet" + QuestJs._w.Xsansi.currentPlanet];
 }
 
 
@@ -446,9 +446,9 @@ function probeLandsOkay() {
   const flag = (planet.probeLandingSuccess[0] === "y");
   planet.probeLandingSuccess = planet.probeLandingSuccess.substring(1);
   if (!flag) {
-    w.Aada.lostProbe = true;
-    w.Ostap.lostProbe = true;
-    updateTopics(w.Ostap, "Lost")
+    QuestJs._w.Aada.lostProbe = true;
+    QuestJs._w.Ostap.lostProbe = true;
+    updateTopics(QuestJs._w.Ostap, "Lost")
   }
   return flag;
 }
@@ -460,21 +460,21 @@ function updateMap() {
   $('#layer1').hide()
   $('#layer3').hide()
   $('#layer4').hide()
-  const currentDeck = w[game.player.loc].deckName
+  const currentDeck = QuestJs._w[QuestJs._game.player.loc].deckName
   $('#map').attr('title', 'The Joseph Banks, ' + QuestJs._settings.deckNames[currentDeck]);
-  if (!currentDeck) return QuestJs._io.errormsg("No deckName for " + game.player.loc)
+  if (!currentDeck) return QuestJs._io.errormsg("No deckName for " + QuestJs._game.player.loc)
   $('#' + currentDeck).show()
-  for (let key in w) {
-    if (w[key].svgId) $('#' + w[key].svgId).css('fill', isRoomPressured(w[key]) ? '#777' : '#222')
+  for (let key in QuestJs._w) {
+    if (QuestJs._w[key].svgId) $('#' + QuestJs._w[key].svgId).css('fill', isRoomPressured(QuestJs._w[key]) ? '#777' : '#222')
   }
-  const mySvgId = w[game.player.loc].svgId
+  const mySvgId = QuestJs._w[QuestJs._game.player.loc].svgId
   let otherSvgId
-  if (w.Xsansi.locate) otherSvgId = w[w[w.Xsansi.locate].loc].svgId
+  if (QuestJs._w.Xsansi.locate) otherSvgId = QuestJs._w[QuestJs._w[QuestJs._w.Xsansi.locate].loc].svgId
 
   if (!mySvgId && !otherSvgId) return
   if (mySvgId === otherSvgId) {
     $('#' + mySvgId).css('fill', 'green')
-    delete w.Xsansi.locate
+    delete QuestJs._w.Xsansi.locate
   }
   else {
     if (mySvgId) $('#' + mySvgId).css('fill', 'yellow')
@@ -491,7 +491,7 @@ function updateMap() {
 
 
 function isRoomPressured(room) {
-  if (typeof room.vacuum === "string") room = w[room.vacuum];
+  if (typeof room.vacuum === "string") room = QuestJs._w[room.vacuum];
   return !room.vaccum;
 }
 

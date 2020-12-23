@@ -1,7 +1,7 @@
 "use strict";
 
  
-createItem("me",
+QuestJs._create.createItem("me",
   QuestJs._templates.PLAYER(),
   { 
     loc:"lounge",
@@ -13,7 +13,7 @@ createItem("me",
 );
 
 
-createItem("knife",
+QuestJs._create.createItem("knife",
   QuestJs._templates.TAKEABLE(),
   { 
     loc:"me",
@@ -40,10 +40,10 @@ createItem("knife",
 
 
 
-createRoom("lounge", {
+QuestJs._create.createRoom("lounge", {
   desc:'A smelly room with an [old settee:couch:sofa] and a [tv:telly].',
-  east:new Exit('kitchen'),
-  west:new Exit("dining_room"),
-  up:new Exit("bedroom"),
+  east:new QuestJs._create.Exit('kitchen'),
+  west:new QuestJs._create.Exit("dining_room"),
+  up:new QuestJs._create.Exit("bedroom"),
   hint:"There is a lot in this room! The bricks can be picked up by number (try GET 3 BRICKS). The book can be read. The coin is stuck to the floor. There are containers too. Kyle is an NPC; you can tell him to do nearly anything the player character can do (everything except looking and talking).",
 });

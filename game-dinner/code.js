@@ -3,7 +3,7 @@
 
 
 
-createItem("dinner_timetable", QuestJs._npc.AGENDA_FOLLOWER(), {
+QuestJs._create.createItem("dinner_timetable", QuestJs._npc.AGENDA_FOLLOWER(), {
   //suspended:true,
   agenda:[
     'wait',
@@ -11,36 +11,36 @@ createItem("dinner_timetable", QuestJs._npc.AGENDA_FOLLOWER(), {
     'run:stepped:main',
     'run:stepped:desert',
   ],
-  stepped:function(arr) { return !QuestJs._util.respond({course:arr[0], actor:w.Kyle}, this.steps) },
+  stepped:function(arr) { return !QuestJs._util.respond({course:arr[0], actor:QuestJs._w.Kyle}, this.steps) },
   steps:[
     {
       test:function(p) { return p.course === 'starter' },
       responses:[
         {
-          test:function() { return !w.soup_can.opened },
+          test:function() { return !QuestJs._w.soup_can.opened },
           script:function() {
-            w.soup_can.opened = true
+            QuestJs._w.soup_can.opened = true
             QuestJs._io.msg("Kyle opens the soup can.")
           },
         },
         {
-          test:function() { return w.bowls.state === 0 },
+          test:function() { return QuestJs._w.bowls.state === 0 },
           script:function() {
-            w.bowls.state = 1
+            QuestJs._w.bowls.state = 1
             QuestJs._io.msg("Kyle pours soup into the two bowls.")
           },
         },
         {
-          test:function() { return w.bowls.state === 1 },
+          test:function() { return QuestJs._w.bowls.state === 1 },
           script:function() {
-            w.bowls.state = 2
+            QuestJs._w.bowls.state = 2
             QuestJs._io.msg("Kyle microwaves the two bowls.")
           },
         },
         {
-          test:function() { return w.bowls.state === 2 },
+          test:function() { return QuestJs._w.bowls.state === 2 },
           script:function() {
-            w.bowls.state = 3
+            QuestJs._w.bowls.state = 3
             QuestJs._io.msg("Kyle serves the two bowls of delicious soup.")
           },
         },

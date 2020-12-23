@@ -83,17 +83,17 @@ QuestJs._settings.dateTime = {
 
 
 // This function will be called at the start of the game, so can be used
-// to introduce your game.
+// to introduce your QuestJs._game.
 QuestJs._settings.setup = function() {
-  game.player.hitpoints = 20;
-  game.player.status = "You are feeling fine";
-  game.player.skillsLearnt = ["Double attack", "Fireball"]
+  QuestJs._game.player.hitpoints = 20;
+  QuestJs._game.player.status = "You are feeling fine";
+  QuestJs._game.player.skillsLearnt = ["Double attack", "Fireball"]
 
   QuestJs._settings.updateCustomUI()
   
   QuestJs._log.info(skills.findName("Flaming weapon"))
   QuestJs._log.info(skills.findName("Fireball"))
-  w.rabbit.setLeader(game.player)
+  QuestJs._w.rabbit.setLeader(QuestJs._game.player)
   
 }
 
@@ -146,32 +146,32 @@ QuestJs._settings.customUI = function() {
 
 
 QuestJs._settings.updateCustomUI = function() {
-  $('#weaponImage').attr('src', QuestJs._settings.imagesFolder + 'icon-' + game.player.getEquippedWeapon().image + '.png');
-  $('#weapon-td').prop('title', "Weapon: " + game.player.getEquippedWeapon().alias);
+  $('#weaponImage').attr('src', QuestJs._settings.imagesFolder + 'icon-' + QuestJs._game.player.getEquippedWeapon().image + '.png');
+  $('#weapon-td').prop('title', "Weapon: " + QuestJs._game.player.getEquippedWeapon().alias);
   
-  $('#hits-indicator').css('padding-right', 120 * game.player.health / game.player.maxHealth);
-  $('#hits-td').prop('title', "Hits: " + game.player.health + "/" + game.player.maxHealth);
+  $('#hits-indicator').css('padding-right', 120 * QuestJs._game.player.health / QuestJs._game.player.maxHealth);
+  $('#hits-td').prop('title', "Hits: " + QuestJs._game.player.health + "/" + QuestJs._game.player.maxHealth);
 
-  $('#pp-indicator').css('padding-right', 120 * game.player.pp / game.player.maxPP);
-  $('#pp-td').prop('title', "Power points: " + game.player.pp + "/" + game.player.maxPP);
+  $('#pp-indicator').css('padding-right', 120 * QuestJs._game.player.pp / QuestJs._game.player.maxPP);
+  $('#pp-td').prop('title', "Power points: " + QuestJs._game.player.pp + "/" + QuestJs._game.player.maxPP);
 
-  $('#armour-indicator').css('padding-right', 120 * game.player.armour / game.player.maxArmour);
-  $('#armour-td').prop('title', "Armour: " + game.player.armour + "/" + game.player.maxArmour);
+  $('#armour-indicator').css('padding-right', 120 * QuestJs._game.player.armour / QuestJs._game.player.maxArmour);
+  $('#armour-td').prop('title', "Armour: " + QuestJs._game.player.armour + "/" + QuestJs._game.player.maxArmour);
 
   //QuestJs._log.info($('#hits-td').prop('title'));
 
 
-  //QuestJs._log.info(game.player.skillsLearnt)
+  //QuestJs._log.info(QuestJs._game.player.skillsLearnt)
   skillUI.removeAllButtons()
   for (let skill of skills.list) {
     //QuestJs._log.info(skill.name)
-    if (game.player.skillsLearnt.includes(skill.name)) {
+    if (QuestJs._game.player.skillsLearnt.includes(skill.name)) {
       skillUI.setButton(skill)
     }
   }
-  for (let key in w) {
-    if (w[key].health !== undefined && w[key].maxHealth === undefined) {
-      w[key].maxHealth = w[key].health;
+  for (let key in QuestJs._w) {
+    if (QuestJs._w[key].health !== undefined && QuestJs._w[key].maxHealth === undefined) {
+      QuestJs._w[key].maxHealth = QuestJs._w[key].health;
     }
   }
 };
@@ -247,10 +247,10 @@ const skillUI = {
   chooseWeapon:function() {
     QuestJs._log.info("in chooseWeapon");
     const weapons = [];
-    for (let o in w) {
-      if (w[o].isAtLoc(game.player, world.SCOPING) && w[o].weapon) {
+    for (let o in QuestJs._w) {
+      if (QuestJs._w[o].isAtLoc(QuestJs._game.player, QuestJs._world.SCOPING) && QuestJs._w[o].weapon) {
         QuestJs._log.info(o);
-        weapons.push('<option value="'+ o +'">' + w[o].listalias + '</option>');
+        weapons.push('<option value="'+ o +'">' + QuestJs._w[o].listalias + '</option>');
       }
     }
     const s = weapons.join('');
@@ -265,8 +265,8 @@ const skillUI = {
     $("#choose-weapon-div").dialog("close");
     const selected = $("#weapon-select").val();
     QuestJs._log.info("in chosenWeapon: " + selected);
-    w[selected].equip(false, game.player);
-    world.endTurn(world.SUCCESS);
+    QuestJs._w[selected].equip(false, QuestJs._game.player);
+    QuestJs._world.endTurn(QuestJs._world.SUCCESS);
   },
 
 }
@@ -289,7 +289,7 @@ QuestJs._settings.professions = [
 
 $(function() {
   if (QuestJs._settings.startingDialogDisabled) {
-    const p = w.me;
+    const p = QuestJs._w.me;
     p.job = QuestJs._settings.professions[0];
     p.isFemale = true;
     p.fullname = "Shaala"
@@ -322,7 +322,7 @@ $(function() {
         text: "OK",
         click: function() {
           $(this).dialog("close");
-          const p = game.player;
+          const p = QuestJs._game.player;
           const job = $("#job").val();
           p.job = QuestJs._settings.professions.find(function(el) { return el.name === job; });
           p.isFemale = $("#female").is(':checked');
@@ -443,14 +443,14 @@ function scrollPara(element) {
 }    
 
 function setValues() {
-  game.player.alias = $('#name_input').val();
-  game.player.isFemale = !wizardMale;
-  game.player.background = $('#para4').html();
-  game.player.magic = $('#para5').html();
-  game.player.hairColour = $('#para6').html();
-  game.player.eyeColour = $('#para7').html();
-  game.player.spellColour = $('#para8').html();
-  QuestJs._io.msg(game.player.alias);
+  QuestJs._game.player.alias = $('#name_input').val();
+  QuestJs._game.player.isFemale = !wizardMale;
+  QuestJs._game.player.background = $('#para4').html();
+  QuestJs._game.player.magic = $('#para5').html();
+  QuestJs._game.player.hairColour = $('#para6').html();
+  QuestJs._game.player.eyeColour = $('#para7').html();
+  QuestJs._game.player.spellColour = $('#para8').html();
+  QuestJs._io.msg(QuestJs._game.player.alias);
   QuestJs._io.msg($("#diag-inner").text());
 }
 
@@ -467,7 +467,7 @@ $(document).ready(function () {
             "Done": function() { setValues();}
         }
       });
-      $("button[title='Close']")[0].style.world. = 'none';
+      $("button[title='Close']")[0].style.QuestJs._world. = 'none';
 });
 
 function scrollWizard() {

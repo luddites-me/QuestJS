@@ -1,23 +1,23 @@
 "use strict"
 
-createItem("me", QuestJs._templates.PLAYER(), {
+QuestJs._create.createItem("me", QuestJs._templates.PLAYER(), {
   loc:"lounge",
   regex:/^(me|myself|player)$/,
   examine: "Just a regular guy.",
   hitpoints:100,
 })
 
-createRoom("lounge", {
+QuestJs._create.createRoom("lounge", {
   desc:"The lounge is boring, the author really needs to put stuff in it.",
 })
 
 
-createItem("Kyle", QuestJs._npc.NPC(), {
+QuestJs._create.createItem("Kyle", QuestJs._npc.NPC(), {
   loc:"lounge",
   examine: "A slightly larger than normal sized bear in a Flash costume.",
 })
 
-createItem("soup_can", QuestJs._templates.TAKEABLE(), {
+QuestJs._create.createItem("soup_can", QuestJs._templates.TAKEABLE(), {
   loc:"lounge",
   examine: "A large can of tomato soup.{if:soup_can:opened: It has been opened.}",
   verbFunction:function(l) { if (!this.opened) l.push("Open") },
@@ -28,12 +28,12 @@ createItem("soup_can", QuestJs._templates.TAKEABLE(), {
   },
 })
 
-createItem("beer_can", QuestJs._templates.TAKEABLE(), {
+QuestJs._create.createItem("beer_can", QuestJs._templates.TAKEABLE(), {
   loc:"lounge",
   examine: "A large can of beer,",
 })
 
-createItem("bowls", QuestJs._templates.TAKEABLE(), {
+QuestJs._create.createItem("bowls", QuestJs._templates.TAKEABLE(), {
   loc:"lounge",
   state:0,
   examine: "A set of matching bowls.",

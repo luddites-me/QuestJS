@@ -4,7 +4,7 @@ QuestJs._settings.title = "Quest 6 Map Demo"
 QuestJs._settings.author = "The Pixie"
 QuestJs._settings.version = "0.1"
 QuestJs._settings.thanks = []
-QuestJs._settings.warnings = "No warnings applicable to this game."
+QuestJs._settings.warnings = "No warnings applicable to this QuestJs._game."
 QuestJs._settings.playMode = "dev"
 QuestJs._settings.reportAllSvg = true
 
@@ -20,7 +20,7 @@ QuestJs._settings.mapLabelRotate = -20
 QuestJs._settings.mapLabelOffset = -5
 QuestJs._settings.mapStyle = {right:'0', top:'200px', width:'400px', height:'400px', 'background-color':'#ddd', border:'3px black solid', 'background-image':'url(game-map/paper.jpg)' }
 QuestJs._settings.mapClick = function(name) {
-  QuestJs._io.metamsg("You clicked on " + w[name].alias)
+  QuestJs._io.metamsg("You clicked on " + QuestJs._w[name].alias)
 }
 QuestJs._settings.mapAutomapFrom = ['street_middle', 'glade']
 QuestJs._settings.mapMarker = function(loc) {
@@ -30,9 +30,9 @@ QuestJs._settings.mapMarker = function(loc) {
 }
 QuestJs._settings.mapExtras = function() {
   const result = []
-  const room = w[game.player.loc]
-  /*for (let o of [w.Robot, w.Lara, w.Kyle]) {
-    if (w[o.loc].mapZ !== room.mapZ || w[o.loc].mapRegion !== room.mapRegion) continue
+  const room = QuestJs._w[QuestJs._game.player.loc]
+  /*for (let o of [QuestJs._w.Robot, QuestJs._w.Lara, QuestJs._w.Kyle]) {
+    if (QuestJs._w[o.loc].mapZ !== room.mapZ || QuestJs._w[o.loc].mapRegion !== room.mapRegion) continue
     result.push(o.mapDrawBase())
   }*/
   result.push(map.polygon(room, [

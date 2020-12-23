@@ -1,7 +1,7 @@
 "use strict"
 
 QuestJs._tp.addDirective("stasis_pod_status", function(arr, params) {
-  return w.stasis_bay.tpStatus()
+  return QuestJs._w.stasis_bay.tpStatus()
 })
 
 QuestJs._tp.addDirective("status", function(arr, params) {
@@ -14,15 +14,15 @@ QuestJs._tp.addDirective("status", function(arr, params) {
 })
 
 QuestJs._tp.addDirective("table_desc", function(arr, params) {
-  return w.canteen_table.tpDesc()
+  return QuestJs._w.canteen_table.tpDesc()
 })
 
 
 QuestJs._tp.addDirective("planet", function(arr, params) {
-  return PLANETS[w.Xsansi.currentPlanet].starName + PLANETS[w.Xsansi.currentPlanet].planet
+  return PLANETS[QuestJs._w.Xsansi.currentPlanet].starName + PLANETS[QuestJs._w.Xsansi.currentPlanet].planet
 })
 
 QuestJs._tp.addDirective("star", function(arr, params) {
-  return PLANETS[w.Xsansi.currentPlanet].starName
+  return PLANETS[QuestJs._w.Xsansi.currentPlanet].starName
 })
 

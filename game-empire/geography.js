@@ -205,11 +205,11 @@ const riverLeft = function(x, y, count) {
     x++
   }
 }
-const riverSet = function(x, y, w, values) {
+const riverSet = function(x, y, QuestJs._w, values) {
   values = values.split(' ').map(el => parseInt(el))
   let left = true
   for (let k = 0; k < values.length; k++) {
-    const width = w * (values.length - k) / values.length
+    const width = QuestJs._w * (values.length - k) / values.length
     if (left) {
       for (let i = 0; i < values[k]; i++) {
         x--

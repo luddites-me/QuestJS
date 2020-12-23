@@ -31,13 +31,13 @@ QuestJs._settings.roomTemplate = [
 ]
 
 QuestJs._settings.status = [
-  function() { return '<td width="55px" title="You receive a bonus for collecting good data"><b>Bonus:</b></td><td width="20px"></td><td align="right"><b>$' + game.player.bonus + 'k</b></td>' },
-  function() { return QuestJs._settings.statusReport(game.player) },
-  function() { return QuestJs._settings.statusReport(w.Xsansi) },
-  function() { return QuestJs._settings.statusReport(w.Ha_yoon) },
-  function() { return QuestJs._settings.statusReport(w.Kyle) },
-  function() { return QuestJs._settings.statusReport(w.Ostap) },
-  function() { return QuestJs._settings.statusReport(w.Aada) },
+  function() { return '<td width="55px" title="You receive a bonus for collecting good data"><b>Bonus:</b></td><td width="20px"></td><td align="right"><b>$' + QuestJs._game.player.bonus + 'k</b></td>' },
+  function() { return QuestJs._settings.statusReport(QuestJs._game.player) },
+  function() { return QuestJs._settings.statusReport(QuestJs._w.Xsansi) },
+  function() { return QuestJs._settings.statusReport(QuestJs._w.Ha_yoon) },
+  function() { return QuestJs._settings.statusReport(QuestJs._w.Kyle) },
+  function() { return QuestJs._settings.statusReport(QuestJs._w.Ostap) },
+  function() { return QuestJs._settings.statusReport(QuestJs._w.Aada) },
   function() { return '<td colspan="3" style="border:black solid 1px" align="center" title="The current date and time (adjusted for relativistic effects)">' + QuestJs._util.getDateTime() + '</td>' },
   function() { return QuestJs._settings.oxygenReport() },
 ];
@@ -59,7 +59,7 @@ QuestJs._settings.statusReport = function(obj) {
   else {
     s = obj.status.toString() + '%'
     colourCode = QuestJs._util.getByInterval(QuestJs._settings.intervals, obj.status)
-    if (obj.crewman) tooltip += 'in ' + w[obj.loc].alias
+    if (obj.crewman) tooltip += 'in ' + QuestJs._w[obj.loc].alias
   }
   return '<td title="' + tooltip + '"><i>' + obj.alias + ':</i></td>' + QuestJs._settings.warningLight(colourCode) + '<td align="right">' + s + '</td>'
 }
@@ -67,10 +67,10 @@ QuestJs._settings.oxygenReport = function(obj) {
   // 0.84 kg O2  per day
   // https://ntrs.nasa.gov/citations/20040012725
   // so 0.58 g/m
-  QuestJs._log.info(w.ship.oxygen)
-  QuestJs._log.info(QuestJs._util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 50))
-  const colourCode = QuestJs._util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 10)
-  return '<td title="The ship has a limited amount of oxygen; an adult uses about 6 g every minute, but none while in stasis"><b>Oxygen:</b></td>' + QuestJs._settings.warningLight(colourCode) + '<td align="right"><span style="font-size:0.8em">' + (Math.round(w.ship.oxygen) / 1000).toFixed(3) + ' kg</span></td>'
+  QuestJs._log.info(QuestJs._w.ship.oxygen)
+  QuestJs._log.info(QuestJs._util.getByInterval(QuestJs._settings.intervals, QuestJs._w.ship.oxygen / 50))
+  const colourCode = QuestJs._util.getByInterval(QuestJs._settings.intervals, QuestJs._w.ship.oxygen / 10)
+  return '<td title="The ship has a limited amount of oxygen; an adult uses about 6 g every minute, but none while in stasis"><b>Oxygen:</b></td>' + QuestJs._settings.warningLight(colourCode) + '<td align="right"><span style="font-size:0.8em">' + (Math.round(QuestJs._w.ship.oxygen) / 1000).toFixed(3) + ' kg</span></td>'
 }
 
 QuestJs._settings.warningLight = function(colourCode) {
@@ -154,26 +154,26 @@ QuestJs._settings.startingDialogWidth = 555
 QuestJs._settings.startingDialogHeight = 565
 QuestJs._settings.startingDialogHtml = s
 QuestJs._settings.startingDialogOnClick = function() {
-  let p = game.player;
+  let p = QuestJs._game.player;
   const jobName = $("#job").val();
   const job = professions.find(function(el) { return el.name === jobName; });
-  w.me.job = job.name;
-  w.me.jobBonus = job.bonus;
+  QuestJs._w.me.job = job.name;
+  QuestJs._w.me.jobBonus = job.bonus;
   const backgroundName = $("#background").val()
   const background = backgrounds.find(function(el) { return el.name === backgroundName; });
-  w.me.background = background.name;
-  w.me.backgroundBonus = background.bonus;
-  w.me.isFemale = $("#female").is(':checked');
-  w.me.alias = $("#namefield").val();
+  QuestJs._w.me.background = background.name;
+  QuestJs._w.me.backgroundBonus = background.bonus;
+  QuestJs._w.me.isFemale = $("#female").is(':checked');
+  QuestJs._w.me.alias = $("#namefield").val();
 }
 QuestJs._settings.startingDialogInit = function() {
   $('#namefield').focus();
 }
 QuestJs._settings.startingDialogAlt = function() {
-  w.me.job = professions[0].name;
-  w.me.jobBonus = professions[0].bonus;
-  w.me.isFemale = true;
-  w.me.alias = "Shaala";
+  QuestJs._w.me.job = professions[0].name;
+  QuestJs._w.me.jobBonus = professions[0].bonus;
+  QuestJs._w.me.isFemale = true;
+  QuestJs._w.me.alias = "Shaala";
 }
 
 

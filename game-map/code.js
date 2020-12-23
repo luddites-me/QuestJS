@@ -2,6 +2,6 @@
 
 const walkthroughs = {
   a:[
-    "s", "u", "w", "in", 
+    "s", "u", "QuestJs._w", "in", 
   ]
 }

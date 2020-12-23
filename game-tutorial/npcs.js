@@ -1,27 +1,27 @@
 "use strict"
 
-createItem("robot", QuestJs._npc.NPC(false), {
+QuestJs._create.createItem("robot", QuestJs._npc.NPC(false), {
   loc:"laboratory",
   examine:"The robot is approximately man-shaped, if a little squat. It looks a little... clunky, like might have been designed in the fifties.",
   strong:true,
   attachable:true,
-  eventIsActive:function() { w.me.loc === 'laboratory' },
+  eventIsActive:function() { QuestJs._w.me.loc === 'laboratory' },
   eventPeriod:1,
   eventScript:function() {
-    if (w.me.hints < 250 && this.loc === 'reactor_room') {
+    if (QuestJs._w.me.hints < 250 && this.loc === 'reactor_room') {
       QuestJs._io.msg("You noti.")
       tmsg("Of course, there may be other topics you can ask about, so you might want to experiment. But that does NOT mean you should start asking about every rude word you can think of.")
-      w.me.hints = 220
+      QuestJs._w.me.hints = 220
     }
   },
 
   isAtLoc:function(loc, situation) {
-    if (situation === world.PARSER && w.me.loc === 'laboratory') return true
+    if (situation === QuestJs._world.PARSER && QuestJs._w.me.loc === 'laboratory') return true
     return (this.loc === loc)
   },
   
   getAgreementGo:function(dir) {
-    if (w.rope.isAttachedTo(this)) {
+    if (QuestJs._w.rope.isAttachedTo(this)) {
       QuestJs._io.msg("'I cannot move while tied to the rope.'");
       if (!this.ropeMoveFlag) {
         this.ropeMoveFlag = true
@@ -41,10 +41,10 @@ createItem("robot", QuestJs._npc.NPC(false), {
       script:function() {
         QuestJs._io.msg("'What sort of lab is this?' you ask the robot.")
         QuestJs._io.msg("'This is Professor Kleinscope's zeta-particle laboratory,' says the robot grandly.")
-        if (w.me.hints < 220) {
+        if (QuestJs._w.me.hints < 220) {
           tmsg("When you ask about one topic, you might learn about others. If you are stuck, try the TOPICS command. In Quest 6, topics are determined according to the character, so you need to specific that, i.e., TOPICS FOR ROBOT.")
           tmsg("Of course, there may be other topics you can ask about, so you might want to experiment. But that does NOT mean you should start asking about every rude word you can think of.")
-          w.me.hints = 220
+          QuestJs._w.me.hints = 220
         }
       }
     },
@@ -64,38 +64,38 @@ createItem("robot", QuestJs._npc.NPC(false), {
       script:function() {
         QuestJs._io.msg("'What is a zeta-particle?' you ask the robot.")
         QuestJs._io.msg("'Zeta-particles were discovered in Atlantis over 300 years ago, but knowledge of them was lost when that great city disappeared. They offer unlimited power and a cure for all diseases,' says the robot.")
-        if (w.me.hints < 230) {
+        if (QuestJs._w.me.hints < 230) {
           tmsg("Great, you are having a conversation with someone. But it is Professor Kleinscope we want to talk to, so let's take the lift up to him.")
-          w.me.hints = 230
+          QuestJs._w.me.hints = 230
         }
       }
     },
     {
       name:'reactor',
-      test:function(p) { return p.text.match(/\b(reactor)\b/) && w.me.hints >= 250 },
+      test:function(p) { return p.text.match(/\b(reactor)\b/) && QuestJs._w.me.hints >= 250 },
       script:function() {
         QuestJs._io.msg("'How do I turn on the reactor?' you ask the robot. 'And where is it, anyway?'")
         QuestJs._io.msg("'The control rod must be placed in the reactor core,' says the robot. 'The reactor is through the door to the north.'")
-        if (w.me.hints < 270) {
+        if (QuestJs._w.me.hints < 270) {
           tmsg("So we need to head north, but that door is too heavy to open yourself; you need to get the robot to do it. We can tell the robot to do something with TELL ROBOT TO. followed by the usual command, or just ROBOT, (note the comma). Once the door is open, head to the reactor.")
-          w.me.hints = 270
+          QuestJs._w.me.hints = 270
         }
       }
     },
     {
       name:'lift',
-      test:function(p) { return p.text.match(/\b(lift|elevator)\b/) && w.lift.visited > 0 },
+      test:function(p) { return p.text.match(/\b(lift|elevator)\b/) && QuestJs._w.lift.visited > 0 },
       script:function() {
         QuestJs._io.msg("'What's the deal with the lift?' you ask the robot.")
-        if (w.reactor_room.reactorRunning) {
+        if (QuestJs._w.reactor_room.reactorRunning) {
           QuestJs._io.msg("'The zeta-lift - or zeta-elevator - is operating normally,' says the robot.")
         }
         else {
           QuestJs._io.msg("'The zeta-lift - or zeta-elevator - is powered by the zeta-reactor, which is currently not running,' says the robot.")
         }
-        if (w.me.hints < 260) {
+        if (QuestJs._w.me.hints < 260) {
           tmsg("We need to So we need the reactor to be running. Better ask the robot about that.")
-          w.me.hints = 260
+          QuestJs._w.me.hints = 260
         }
       }
     },
@@ -127,7 +127,7 @@ createItem("robot", QuestJs._npc.NPC(false), {
     {
       name:'vomit',
       test:function(p) {
-        return p.text.match(/\b(vomit|puke|sick)\b/) && w.vomit.loc === 'reactor_room'  
+        return p.text.match(/\b(vomit|puke|sick)\b/) && QuestJs._w.vomit.loc === 'reactor_room'  
       },
       script:function() {
         QuestJs._io.msg("'Er, so it looks like there might be some vomit over there,' you say, a little sheepishly.")
@@ -160,7 +160,7 @@ createItem("robot", QuestJs._npc.NPC(false), {
 
 
 
-createItem("Professor_Kleinscope", QuestJs._npc.NPC(false), {
+QuestJs._create.createItem("Professor_Kleinscope", QuestJs._npc.NPC(false), {
   loc:"office",
   examine:"The Professor is a slim tall man, perhaps in his forties, dressed, inevitably in a lab coat. Curiously his hair is neither white nor wild.{ifNot:Professor_Kleinscope:flag: He is sat at he desk, engrossed in his work.}",
   talkto:function() {
@@ -171,7 +171,7 @@ createItem("Professor_Kleinscope", QuestJs._npc.NPC(false), {
       QuestJs._io.msg("'What? Already? Well, I better get downstairs then!' He gets to his feet.")
       tmsg("Maybe now he is not sitting there we can use the computer.")
       this.flag = true
-      w.me.hints = 410
+      QuestJs._w.me.hints = 410
       this.setAgenda([
         "text:The Professor locks his computer.", 
         "text:Professor Kleinscope heads to the lift.", 

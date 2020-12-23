@@ -10,9 +10,9 @@ QuestJs._settings.playMode = "dev"
 QuestJs._settings.symbolsForCompass = true
 
 QuestJs._settings.setup = function() {
-  QuestJs._log.info(w.dinner_timetable.steps)
-  QuestJs._log.info(w.dinner_timetable.steps.length)
-  QuestJs._util.verifyResponses(w.dinner_timetable.steps)
+  QuestJs._log.info(QuestJs._w.dinner_timetable.steps)
+  QuestJs._log.info(QuestJs._w.dinner_timetable.steps.length)
+  QuestJs._util.verifyResponses(QuestJs._w.dinner_timetable.steps)
 }
 
 QuestJs._settings.libraries.push('item_links')

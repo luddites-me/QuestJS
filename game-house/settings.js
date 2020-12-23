@@ -18,8 +18,8 @@ QuestJs._settings.imagesFolder = 'images/'
 QuestJs._settings.status = [
   "hitpoints",
   function() { return "<td>Spell points:</td><td>3</td>"; },
-  function() { return "<td>Health points:</td><td>" + game.player.hitpoints + "</td>"; },
-  function() { return '<td colspan="2">' + game.player.status + "</td>"; },
+  function() { return "<td>Health points:</td><td>" + QuestJs._game.player.hitpoints + "</td>"; },
+  function() { return '<td colspan="2">' + QuestJs._game.player.status + "</td>"; },
 ]
 
 QuestJs._settings.intro = "."
@@ -27,10 +27,10 @@ QuestJs._settings.intro = "."
 
 
 // This function will be called at the start of the game, so can be used
-// to introduce your game.
+// to introduce your QuestJs._game.
 QuestJs._settings.setup = function() {
-  game.player.hitpoints = 20;
-  game.player.status = "You are feeling fine";
+  QuestJs._game.player.hitpoints = 20;
+  QuestJs._game.player.status = "You are feeling fine";
   QuestJs._IO.updateStatus()
 }
 

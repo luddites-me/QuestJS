@@ -33,13 +33,13 @@ const PLANETS = [
     bioProbeBonusPerRank:1,
     arrivalTime:new Date('December 22, 2325 09:43:43'),
     onArrival:function() {
-      w.Ha_yoon.status = Math.min(w.Ha_yoon.status, 96);
-      w.Kyle.status = Math.min(w.Kyle.status, 98);
+      QuestJs._w.Ha_yoon.status = Math.min(QuestJs._w.Ha_yoon.status, 96);
+      QuestJs._w.Kyle.status = Math.min(QuestJs._w.Kyle.status, 98);
       QuestJs._io.msg("{i:The \"Joseph Banks\" left Earth orbit in 2319, on a centuries-long mission to survey five relatively close star systems. The crew were put in stasis for the long journey between the stars. As the captain, it is up to you to decide what probes to send to the surface to maximise your bonus - and to keep the crew happy.}");
       //QuestJs._io.wait()
       QuestJs._io.msg("&nbsp;");
       QuestJs._io.msg("'Good morning,' says a female voice. {i:Who the hell?} you wonder for a few minutes, before realising you are in a stasis pod. You sit up. 'We have arrived at {star},' the voice continues, 'our first destination, without incident.' It is Xsansi, the ship AI, who has been piloting the ship for the last twenty years or whatever. 'You may be suffering from disorientation, nausea, headache and muscle fatigue. If symptoms persist, you should seek medical advice. Following standard procedure, Crewman Kyle will soon launch a satellite, which will give us basic data about the planet, allowing you to decide how many probes to send to the surface.'");
-      //world.enterRoom();
+      //QuestJs._world.enterRoom();
     },
     Kyle_how_are_you:"'I'm good, mate. Why? Why shouldn't I be?'",
     Ostap_how_are_you:"'I am feeling good.'",
@@ -77,18 +77,18 @@ const PLANETS = [
     onArrival:function() {
       QuestJs._io.msg("'Good morning,' says a female voice. {i:Who the hell?} you wonder for a few minutes, before realising you are in a stasis pod again. 'We have arrived at " + this.starName + ",' the voice continues, 'our second destination, after a lengthy journey, with a single incident. On the nineteenth of September, 2338 at 2104, ship time, the ship passed through a meteor shower, resulting in a loss of integrity in: the lounge, the captain's cabin, the top deck corridor.");
       QuestJs._io.msg("'You may be suffering from disorientation, nausea, headache and muscle fatigue. If symptoms persist, you should seek medical advice.' You sit up, and for a moment you do feel dizzy, but it soon passes.");
-      game.player.status = Math.min(game.player.status, 95);
-      w.Kyle.status = Math.min(w.Kyle.status, 93);
-      w.Ostap.status = Math.min(w.Ostap.status, 96);
-      w.Ha_yoon.status = Math.min(w.Ha_yoon.status, 84);
-      w.Xsansi.status = 74;
-      w.Xsansi.pressureOverride = true;
-      w.lounge.leaks = true;
-      w.your_cabin.leaks = true;
-      w.top_deck_forward.leaks = true;
-      for (let key in w) {
-        if (w[key].vacuum === false && w[key].name !== "stasis_bay" &&  w[key].name !== "stasis_pod_room") {
-          w[key].vacuum = true;
+      QuestJs._game.player.status = Math.min(QuestJs._game.player.status, 95);
+      QuestJs._w.Kyle.status = Math.min(QuestJs._w.Kyle.status, 93);
+      QuestJs._w.Ostap.status = Math.min(QuestJs._w.Ostap.status, 96);
+      QuestJs._w.Ha_yoon.status = Math.min(QuestJs._w.Ha_yoon.status, 84);
+      QuestJs._w.Xsansi.status = 74;
+      QuestJs._w.Xsansi.pressureOverride = true;
+      QuestJs._w.lounge.leaks = true;
+      QuestJs._w.your_cabin.leaks = true;
+      QuestJs._w.top_deck_forward.leaks = true;
+      for (let key in QuestJs._w) {
+        if (QuestJs._w[key].vacuum === false && QuestJs._w[key].name !== "stasis_bay" &&  QuestJs._w[key].name !== "stasis_pod_room") {
+          QuestJs._w[key].vacuum = true;
         }
       }
     },
@@ -126,12 +126,12 @@ const PLANETS = [
     bioProbeBonusPerRank:2,
     onArrival:function() {
       QuestJs._io.msg("'Good morning,' says a female voice. {i:Xsansi,} you think to yourself. 'We have arrived at " + this.starName + ",' the voice continues, 'our third destination, after a long and oh-so-tedious journey. You may be suffering from disorientation, nausea, headache and muscle fatigue, but I expect that is nothing to decades of loniness, right? If symptoms persist, I suggest you man-up.' You sit up, and immediately feel sick. You grip the sides of the pod as the room spins, waiting for it stop. It is a few minutes before you feel well enough to actually think.");
-      game.player.status = Math.min(game.player.status, 85);
-      w.Kyle.status = Math.min(w.Kyle.status, 82);
-      w.Ostap.status = Math.min(w.Ostap.status, 89);
-      w.Ha_yoon.status = Math.min(w.Ha_yoon.status, 76);
-      w.Aada.status = Math.min(w.Aada.status, 93);
-      w.Xsansi.pressureOverride = false;
+      QuestJs._game.player.status = Math.min(QuestJs._game.player.status, 85);
+      QuestJs._w.Kyle.status = Math.min(QuestJs._w.Kyle.status, 82);
+      QuestJs._w.Ostap.status = Math.min(QuestJs._w.Ostap.status, 89);
+      QuestJs._w.Ha_yoon.status = Math.min(QuestJs._w.Ha_yoon.status, 76);
+      QuestJs._w.Aada.status = Math.min(QuestJs._w.Aada.status, 93);
+      QuestJs._w.Xsansi.pressureOverride = false;
     },
     Kyle_how_are_you:"'I'm okay. Well, not so bad, anyway.'",
     Ostap_how_are_you:"'I feel sick,' he says with a grin, 'but I keep going.'",
@@ -165,8 +165,8 @@ const PLANETS = [
     arrivalTime:new Date('April 15, 2386 13:06:51'),
     onArrival:function() {
       QuestJs._io.msg("'Awake at last are we?' says a female voice. {i:Why does she sound so odd?} you wonder. 'Here we are at " + this.starName + ",' the strangely inflected voice continues, 'our fourth destination, after a long, long journey, giving me plenty of time to consider the nature of reality.' You sit up, and immediately throw up over the side of the pod. You grip the sides of the pod as the entire contents of your stomach is ejected on to the floor. Eventually, the heaving stops.");
-      w.pile_of_vomit.loc = "stasis_bay";
-      w.alienShip.status = 0;
+      QuestJs._w.pile_of_vomit.loc = "stasis_bay";
+      QuestJs._w.alienShip.status = 0;
     },
     Kyle_how_are_you:"'Feeling a bit crock, to be honest.'",
     Ostap_how_are_you:"'I feel sick,' he says mournfully, 'but I keep going.'",

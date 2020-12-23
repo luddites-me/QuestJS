@@ -116,7 +116,7 @@ QuestJs._settings.setup = function() {
   // mountain area filling 0,size corner
   // four towns and one city, some on rivers
   
-  board.setup(boardSettings)
+  QuestJs._board.setup(boardSettings)
   
   QuestJs._io.msg('So here you are in your own throne room...')
   QuestJs._io.msg('Becoming the ruler was quite a surprise, but after the goblin hoard wiped out the entire royal family, you were next in line. Your realm is one of the smallest kingdoms on the continent, and it is still reeling from a goblin invasion, so it will be no easy task. Oh, and some of your subjects are demanding a republic...')

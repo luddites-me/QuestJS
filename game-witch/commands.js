@@ -10,7 +10,7 @@ comands.unshift(new QuestJs._command.Cmd('wait3', {
     {scope:QuestJs._parser.isHere},
   ],
   script:
-          if (game.invaded) {
+          if (QuestJs._game.invaded) {
             QuestJs._io.msg ("'Well, get going, Jenina,' says the painting. 'You're not going to sort this out just standing their like a bewildered sheep.'")
           }
           else {
@@ -25,7 +25,7 @@ comands.unshift(new QuestJs._command.Cmd('wait2', {
     {scope:QuestJs._parser.isHere},
   ],
   script:
-      if (game.invaded) {
+      if (QuestJs._game.invaded) {
         QuestJs._io.msg ("No time for hanging around...")
       }
       else {

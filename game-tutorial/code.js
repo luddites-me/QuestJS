@@ -25,8 +25,8 @@ hint.data = [
   { name:'getAll', hint:'Try GET ALL to pick up everything.', tutorial:"So we have managed to turn on a light!|A lot of adventure games are like this in that you need to do A, but to do that you need to do B, but you cannot do B without doing C first, and so on. And often - as here - you do not know what A even is.|There are a few things down here that we might want to grab. Most adventure games understand the word ALL, so we can just do GET ALL to pick up the lot."},
   { name:'moveCrates', hint:'You cannot take the crates, but you might be able to MOVE CRATES.', tutorial:"Great, you used ALL!|Note that ALL will not include items that are scenery, so not the cobwebs (which are actual objects now, honest - try TAKE COBWEBS), and there are some objected we could not pick up.|You also DROP ALL, WEAR ALL, etc. though some commands will not like it. You could also try DROP ALL BUT QuestJs._templates.ROPE.|You might also want to try eating the apple or reading the newspaper.|When you are done, on with the plot! We cannot take the crates with us, but trying to do so was useful because the response gave us a clue as to what we can do - we can move them."},
   { name:'enterPassage', hint:'Head WEST.', tutorial:"Now we are getting somewhere!"},
-  { name:'save', hint:'Type SAVE.', tutorial:"Not much in this room, so let's pause for a moment. It is a good idea to save occasionally whilst playing, just in case you die (not possible in this game) or lose the connection to the server (not an issue for Quest 6) or your PC crashes or you just have some else to do and want to return later. You really do not want to have to start from the beginning, so save your game.|Different systems have different ways to handle saving and loading (and some games may not support it at all), but a good start is to type SAVE."},
-  { name:'saveGame', hint:'Type SAVE TUTORIAL (or some other name).', tutorial:"So in Quest 6 SAVE just tells you how to save your game. You need to add a file name to actually save. Do that now! You can call it whatever you want; how about \"tutorial\"?"},
+  { name:'save', hint:'Type SAVE.', tutorial:"Not much in this room, so let's pause for a moment. It is a good idea to save occasionally whilst playing, just in case you die (not possible in this game) or lose the connection to the server (not an issue for Quest 6) or your PC crashes or you just have some else to do and want to return later. You really do not want to have to start from the beginning, so save your QuestJs._game.|Different systems have different ways to handle saving and loading (and some games may not support it at all), but a good start is to type SAVE."},
+  { name:'saveGame', hint:'Type SAVE TUTORIAL (or some other name).', tutorial:"So in Quest 6 SAVE just tells you how to save your QuestJs._game. You need to add a file name to actually save. Do that now! You can call it whatever you want; how about \"tutorial\"?"},
   { name:'westRobot', hint:'Head WEST.', tutorial:"The robot in the next room is a non-player character, or NPC. NPCs are common in adventure games, and may be implemented in various ways. At the simplest, the NPC will be part of the background, perhaps saying a few words to you, but not really interacting. But we can interact with the robot. We will start by talking to it.|There are two approaches to conversations. We will try TALK TO with another character. Here we will do ASK and TELL. Start by asking the robot about the laboratory."},
   { name:'', hint:'ASK THE ROBOT ABOUT THE LABORATORY.', tutorial:""},
   { name:'', hint:'ASK ROBOT ABOUT ZETA-PARTICLES.', tutorial:""},
@@ -44,13 +44,13 @@ hint.data = [
   { name:'', hint:'Tell the robot to get the rod (ROBOT,GET ROD).', tutorial:""},
   { name:'', hint:'Tell the robot to put the rod in the reactor (ROBOT,PUT ROD IN REACTOR).', tutorial:""},
   { name:'useLift', hint:function() {
-      if (w.me.loc === 'reactor_room') {
+      if (QuestJs._w.me.loc === 'reactor_room') {
         QuestJs._io.metamsg("Head SOUTH, then WEST, then once in the lift, PRESS 3.")
       }
-      else if (w.me.loc === 'laboratory' || w.me.loc === 'lounge') {
+      else if (QuestJs._w.me.loc === 'laboratory' || QuestJs._w.me.loc === 'lounge') {
         QuestJs._io.metamsg("Head WEST, then once in the lift, PRESS 3.")
       }
-      else if (w.me.loc === 'lift') {
+      else if (QuestJs._w.me.loc === 'lift') {
         QuestJs._io.metamsg("PRESS 3.")
       }
       else {
@@ -73,8 +73,8 @@ hint.data = [
 hint.now = function(name) {
   const n = hint.data.findIndex(el => el.name === name)
   if (n === -1) throw "No hint found called " + name
-  if (n > game.player.hintCounter) {
-    game.player.hintCounter = n
+  if (n > QuestJs._game.player.hintCounter) {
+    QuestJs._game.player.hintCounter = n
     if (hint.data[n].tutorial) {
       for (let s of hint.data[n].tutorial.split('|')) tmsg(s)
     }
@@ -84,24 +84,24 @@ hint.now = function(name) {
 hint.before = function(name) {
   const n = hint.data.findIndex(el => el.name === name)
   if (n === -1) throw "No hint found called " + name
-  return (n > game.player.hintCounter) 
+  return (n > QuestJs._game.player.hintCounter) 
 }
 
 
   
 
 QuestJs._command.findCmd('MetaHint').script = function() {
-  if (typeof hint.data[game.player.hintCounter].hint === 'string') {
-    QuestJs._io.metamsg(hint.data[game.player.hintCounter].hint)
+  if (typeof hint.data[QuestJs._game.player.hintCounter].hint === 'string') {
+    QuestJs._io.metamsg(hint.data[QuestJs._game.player.hintCounter].hint)
   }
-  else if (typeof hint.data[game.player.hintCounter].hint === 'function') {
-    hint.data[game.player.hintCounter].hint()
+  else if (typeof hint.data[QuestJs._game.player.hintCounter].hint === 'function') {
+    hint.data[QuestJs._game.player.hintCounter].hint()
   }
   else {
-    QuestJs._log.info(hint.data[game.player.hintCounter].name)
-    QuestJs._log.info("hint.data[game.player.hintCounter].hint is a " + (typeof hint.data[game.player.hintCounter].hint))
+    QuestJs._log.info(hint.data[QuestJs._game.player.hintCounter].name)
+    QuestJs._log.info("hint.data[QuestJs._game.player.hintCounter].hint is a " + (typeof hint.data[QuestJs._game.player.hintCounter].hint))
   }
-  return world.SUCCESS_NO_TURNSCRIPTS;
+  return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
 }
 
 
@@ -138,14 +138,14 @@ const walkthroughs = {
     "turn off torch", "hint",
     "get all", "hint",
     "move crates", "hint",
-    "w", "hint",
+    "QuestJs._w", "hint",
     "save", "hint",
     "save Tutorial", "hint",
-    "w", "hint",
+    "QuestJs._w", "hint",
     "ask robot about the laboratory", "hint",
     "topics for robot",
     "ask robot about zeta-particles", "hint",
-    "w", "hint",
+    "QuestJs._w", "hint",
     "press 3", "hint",
     "e", "hint",
     "ask robot about lift", "hint",
@@ -159,7 +159,7 @@ const walkthroughs = {
     "r,get r", "hint",
     "r,put r in r", "hint",
     "s", "hint",
-    "w", "hint",
+    "QuestJs._w", "hint",
     "press 3", "hint",/*
     "e", "hint",
     "sit on chair", "hint",
@@ -173,7 +173,7 @@ const walkthroughs = {
     "look behind painting", "hint",
     "x post-it", "hint",
     "use computer",
-    w.computer.code, "hint",
+    QuestJs._w.computer.code, "hint",
     "smash window", "hint",
     "wrap fist in newspaper",
     "wrap newspaper round hand",
@@ -207,10 +207,10 @@ const walkthroughs = {
 QuestJs._command.findCmd('MetaSave').script = function() {
   script:QuestJs._lang.saveLoadScript()
   if (hint.before('saveGame')) {
-    tmsg("So in Quest 6 SAVE just tells you how to save your game. You need to add a file name to actually save. Do that now! You can call it whatever you want; how about \"tutorial\"?")
+    tmsg("So in Quest 6 SAVE just tells you how to save your QuestJs._game. You need to add a file name to actually save. Do that now! You can call it whatever you want; how about \"tutorial\"?")
     hint.now('saveGame')
   }
-  return world.SUCCESS_NO_TURNSCRIPTS;
+  return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
 }
 
 
@@ -223,7 +223,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Crowbar', {
   ],
   default:function(item) {
     QuestJs._io.msg("That's not something you can crowbar open.")
-    return world.FAILED
+    return QuestJs._world.FAILED
   },
 }));
 
@@ -250,28 +250,28 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Tutorial', {
   script:function() {
     $('body').toggleClass("hidden")
     QuestJs._io.msg(QuestJs._lang.done_msg)
-    return world.SUCCESS_NO_TURNSCRIPTS
+    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS
   },
 }));
 
 
 const wrapScript = function(obj1, obj2) {
-  if (obj2 !== w.old_newspaper) return QuestJs._io.failedmsg("You cannot wrap that round anything.")
-  if (obj1 !== w.fist) return QuestJs._io.failedmsg("You don't think that will achieve anything.")
+  if (obj2 !== QuestJs._w.old_newspaper) return QuestJs._io.failedmsg("You cannot wrap that round anything.")
+  if (obj1 !== QuestJs._w.fist) return QuestJs._io.failedmsg("You don't think that will achieve anything.")
   if (obj2.fist_wrapped) return QuestJs._io.failedmsg("It already is.")
   obj2.fist_wrapped = true
   QuestJs._io.msg("You carefully wrap the old newspaper around your fist.")
   hint.now('smashWindow2')
-  return world.SUCCESS
+  return QuestJs._world.SUCCESS
 }
 
 const unwrapScript = function(obj1, obj2) {
-  if (obj2 !== w.old_newspaper) return QuestJs._io.failedmsg("They are not wrapped together.")
-  if (obj1 !== w.fist) return QuestJs._io.failedmsg("They are not wrapped together.")
+  if (obj2 !== QuestJs._w.old_newspaper) return QuestJs._io.failedmsg("They are not wrapped together.")
+  if (obj1 !== QuestJs._w.fist) return QuestJs._io.failedmsg("They are not wrapped together.")
   if (!obj2.fist_wrapped) return QuestJs._io.failedmsg("They are not wrapped together.")
   obj2.fist_wrapped = false
   QuestJs._io.msg("You carefully unwrap the old newspaper from around your fist.")
-  return world.SUCCESS
+  return QuestJs._world.SUCCESS
 }
 
 
@@ -302,7 +302,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Unwrap1', {
     {scope:QuestJs._parser.isHeld},
     {scope:QuestJs._parser.isHeld},
   ],
-  script:function(objects) { unwrapScript(objects[0][0], w.old_newspaper) },
+  script:function(objects) { unwrapScript(objects[0][0], QuestJs._w.old_newspaper) },
 }));
 
 QuestJs._commands.unshift(new QuestJs._command.Cmd('Unwrap2', {
@@ -328,29 +328,29 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('ThrowThrough', {
     const item = objects[0][0]
     const dest = objects[1][0]
     if (!dest.isThrowThroughable) return QuestJs._io.failedmsg("You can't chuck stuff through {nm:dest:the}.", {dest:dest})
-    if (!dest.isThrowThroughable(item)) return world.FAILED
+    if (!dest.isThrowThroughable(item)) return QuestJs._world.FAILED
     if (!item.isAtLoc("me")) return QuestJs._io.failedmsg("You are not holding {nm:item:the}.", {item:item})
     dest.throwThrough(item)
-    return world.SUCCESS
+    return QuestJs._world.SUCCESS
   },
 }));
 
 
 const smashWithScript = function(item, dest) {
-  if (dest !== w.office_window) return QuestJs._io.failedmsg("That's not something you can smash.")
+  if (dest !== QuestJs._w.office_window) return QuestJs._io.failedmsg("That's not something you can smash.")
   if (!item.isAtLoc("me")) return QuestJs._io.failedmsg("You are not holding {nm:item:the}.", {item:item})
-  if (w.office_window.smashed) return QuestJs._io.falsemsg("The window is already smashed.")
+  if (QuestJs._w.office_window.smashed) return QuestJs._io.falsemsg("The window is already smashed.")
 
-  if (item === w.crowbar) {
+  if (item === QuestJs._w.crowbar) {
     QuestJs._io.msg("You strike the window with the crowbar, breaking the glass. You take a moment to knock away the remaining jagged shards in the frame.")
-    if (w.Professor_Kleinscope.isHere()) QuestJs._io.msg("Strangely, Professor Kleinscope does not seem to notice.")
-    w.office_window.smashed = true
+    if (QuestJs._w.Professor_Kleinscope.isHere()) QuestJs._io.msg("Strangely, Professor Kleinscope does not seem to notice.")
+    QuestJs._w.office_window.smashed = true
     hint.now('out')
-    return world.SUCCESS
+    return QuestJs._world.SUCCESS
   }
   else {
     QuestJs._io.msg("You can't smash the window using {nm:item:the}.", {item:item})
-    return world.FAILED
+    return QuestJs._world.FAILED
   }
 }
 
@@ -391,15 +391,15 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Attack', {
   script:function(objects) {
     if (objects[0][0].npc) {
       QuestJs._io.msg("You just need to get the data, not beat anyone up!")
-      if (!w.me.killFlag) {
-        tmsg('You will find most games will not let you attack the characters, and those that do will probably have combat as a large part of the game. That said, it is a good idea to try these things, you never know quite what will happen.')
-        w.me.killFlag = true
+      if (!QuestJs._w.me.killFlag) {
+        tmsg('You will find most games will not let you attack the characters, and those that do will probably have combat as a large part of the QuestJs._game. That said, it is a good idea to try these things, you never know quite what will happen.')
+        QuestJs._w.me.killFlag = true
       }
     }
     else {
       QuestJs._io.msg("That's not going to achieve anything.")
     }
-    return world.FAILED
+    return QuestJs._world.FAILED
   },
 }));
 
@@ -414,20 +414,20 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('TieUp', {
   ],
   script:function(objects) {
     const tpParams = {item:objects[0][0]}
-    if (!w.rope.isAtLoc(game.player)) {
+    if (!QuestJs._w.rope.isAtLoc(QuestJs._game.player)) {
       return QuestJs._io.failedmsg("What were you thinking you could tie {ob:item} up with it exactly?", tpParams)
     }
     
-    if (objects[0][0] === w.robot) {
+    if (objects[0][0] === QuestJs._w.robot) {
       QuestJs._io.msg("'I am not into the kinky stuff,' says the robot. Despite its metallic face, you still feel it is looking at you with disapproval.")
     }
-    else if (objects[0][0] === w.Professor_Kleinscope) {
+    else if (objects[0][0] === QuestJs._w.Professor_Kleinscope) {
       QuestJs._io.msg("'I don;t have time for that sort of thing now,' says the Professor irritably. He looks at yoi thoughtfully. 'Though maybe later...'")
     }
     else {
       QuestJs._io.msg("That's not going to achieve anything.")
     }
-    return world.FAILED
+    return QuestJs._world.FAILED
   },
 }));
 
@@ -443,11 +443,11 @@ QuestJs._commands.push(new QuestJs._command.Cmd('RudeCommand', {
   ],
   script:function(objects) {
     QuestJs._io.parsermsg(QuestJs._lang.not_known_msg)
-    if (!w.me.rudeCmdFlag) {
+    if (!QuestJs._w.me.rudeCmdFlag) {
       tmsg('You had to go there...')
       tmsg('There are games that cater to... well, people like you, but this is NOT one of them.')
     }
-    return world.FAILED
+    return QuestJs._world.FAILED
   },
 }));
 

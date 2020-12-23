@@ -4,7 +4,7 @@ QuestJs._settings.title = "The City of Halmuth"
 QuestJs._settings.author = "The Pixie"
 QuestJs._settings.version = "0.1"
 QuestJs._settings.thanks = []
-QuestJs._settings.warnings = "No warnings have been set for this game."
+QuestJs._settings.warnings = "No warnings have been set for this QuestJs._game."
 QuestJs._settings.playMode = "dev"
 //QuestJs._settings.reportAllSvg = true
 QuestJs._settings.symbolsForCompass = true
@@ -14,7 +14,7 @@ QuestJs._settings.libraries.push('quest')
 QuestJs._settings.tests = true
 
 QuestJs._settings.status = [
-  function() { return '<td>Health points:</td><td>' + game.player.hitpoints + '</td>' },
+  function() { return '<td>Health points:</td><td>' + QuestJs._game.player.hitpoints + '</td>' },
   function() { return '<td colspan="2">' + QuestJs._util.getDateTime() + '</td>' },
 ]
 

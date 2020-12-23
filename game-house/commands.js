@@ -95,7 +95,7 @@ comands.unshift(new QuestJs._command.Cmd('bootcheat', {
     {scope:QuestJs._parser.isHere},
   ],
   script:
-      if (EndsWith(game.version, "beta")) {
+      if (EndsWith(QuestJs._game.version, "beta")) {
         boots.parent = player
         player.parent = upper_steam_hall
       }
@@ -111,7 +111,7 @@ comands.unshift(new QuestJs._command.Cmd('bootshrink', {
     {scope:QuestJs._parser.isHere},
   ],
   script:
-      if (EndsWith(game.version, "beta")) {
+      if (EndsWith(QuestJs._game.version, "beta")) {
         boots.size = -1
       }
       else {

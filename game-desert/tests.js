@@ -3,28 +3,28 @@
 QuestJs._test.tests = function() {
   
   QuestJs._test.title("QuestJs._parser.scoreObjectMatch");
-  QuestJs._test.assertEqual(70, QuestJs._parser.scoreObjectMatch("me", w.me, ""));
-  QuestJs._test.assertEqual(-1, QuestJs._parser.scoreObjectMatch("me fkh", w.me, ""));
-  QuestJs._test.assertEqual(-1, QuestJs._parser.scoreObjectMatch("xme", w.me, ""));
-  QuestJs._test.assertEqual(70, QuestJs._parser.scoreObjectMatch("flashlight", w.flashlight, ""));
-  QuestJs._test.assertEqual(16, QuestJs._parser.scoreObjectMatch("f", w.flashlight, ""));
-  QuestJs._test.assertEqual(18, QuestJs._parser.scoreObjectMatch("fla", w.flashlight, ""));
-  QuestJs._test.assertEqual(60, QuestJs._parser.scoreObjectMatch("torch", w.flashlight, ""));
-  QuestJs._test.assertEqual(70, QuestJs._parser.scoreObjectMatch("glass cabinet", w.glass_cabinet, ""));
-  QuestJs._test.assertEqual(50, QuestJs._parser.scoreObjectMatch("glass", w.glass_cabinet, ""));
-  QuestJs._test.assertEqual(50, QuestJs._parser.scoreObjectMatch("cabinet", w.glass_cabinet, ""));
-  QuestJs._test.assertEqual(3, QuestJs._parser.scoreObjectMatch("cab", w.glass_cabinet, ""));
+  QuestJs._test.assertEqual(70, QuestJs._parser.scoreObjectMatch("me", QuestJs._w.me, ""));
+  QuestJs._test.assertEqual(-1, QuestJs._parser.scoreObjectMatch("me fkh", QuestJs._w.me, ""));
+  QuestJs._test.assertEqual(-1, QuestJs._parser.scoreObjectMatch("xme", QuestJs._w.me, ""));
+  QuestJs._test.assertEqual(70, QuestJs._parser.scoreObjectMatch("flashlight", QuestJs._w.flashlight, ""));
+  QuestJs._test.assertEqual(16, QuestJs._parser.scoreObjectMatch("f", QuestJs._w.flashlight, ""));
+  QuestJs._test.assertEqual(18, QuestJs._parser.scoreObjectMatch("fla", QuestJs._w.flashlight, ""));
+  QuestJs._test.assertEqual(60, QuestJs._parser.scoreObjectMatch("torch", QuestJs._w.flashlight, ""));
+  QuestJs._test.assertEqual(70, QuestJs._parser.scoreObjectMatch("glass cabinet", QuestJs._w.glass_cabinet, ""));
+  QuestJs._test.assertEqual(50, QuestJs._parser.scoreObjectMatch("glass", QuestJs._w.glass_cabinet, ""));
+  QuestJs._test.assertEqual(50, QuestJs._parser.scoreObjectMatch("cabinet", QuestJs._w.glass_cabinet, ""));
+  QuestJs._test.assertEqual(3, QuestJs._parser.scoreObjectMatch("cab", QuestJs._w.glass_cabinet, ""));
   
   
   QuestJs._test.title("QuestJs._tools.sentenceCase");
   QuestJs._test.assertEqual("Simple text", QuestJs._tools.sentenceCase("simple text"));
   
   QuestJs._test.title("QuestJs._lang.getName");
-  QuestJs._test.assertEqual("book", QuestJs._lang.getName(w.book));
-  QuestJs._test.assertEqual("the book", QuestJs._lang.getName(w.book, {article:QuestJs._consts.DEFINITE}));
-  QuestJs._test.assertEqual("A book", QuestJs._lang.getName(w.book, {article:QuestJs._consts.INDEFINITE, capital:true}));
-  QuestJs._test.assertEqual("you", QuestJs._lang.getName(w.me));
-  QuestJs._test.assertEqual("You", QuestJs._lang.getName(w.me, {article:QuestJs._consts.INDEFINITE, capital:true}));
+  QuestJs._test.assertEqual("book", QuestJs._lang.getName(QuestJs._w.book));
+  QuestJs._test.assertEqual("the book", QuestJs._lang.getName(QuestJs._w.book, {article:QuestJs._consts.DEFINITE}));
+  QuestJs._test.assertEqual("A book", QuestJs._lang.getName(QuestJs._w.book, {article:QuestJs._consts.INDEFINITE, capital:true}));
+  QuestJs._test.assertEqual("you", QuestJs._lang.getName(QuestJs._w.me));
+  QuestJs._test.assertEqual("You", QuestJs._lang.getName(QuestJs._w.me, {article:QuestJs._consts.INDEFINITE, capital:true}));
   
   
   QuestJs._test.title("QuestJs._random.fromArray");
@@ -42,14 +42,14 @@ QuestJs._test.tests = function() {
   QuestJs._test.title("QuestJs._array.compare");
   QuestJs._test.assertEqual(false, QuestJs._array.compare([1, 2, 4, 6, 7], [1, 2, 3]));
   QuestJs._test.assertEqual(true, QuestJs._array.compare([1, 2, 4], [1, 2, 4]));
-  QuestJs._test.assertEqual(false, QuestJs._array.compare([w.coin, w.boots, w.ring], [w.boots, w.ring]));
-  QuestJs._test.assertEqual(true, QuestJs._array.compare([w.boots, w.ring], [w.boots, w.ring]));
+  QuestJs._test.assertEqual(false, QuestJs._array.compare([QuestJs._w.coin, QuestJs._w.boots, QuestJs._w.ring], [QuestJs._w.boots, QuestJs._w.ring]));
+  QuestJs._test.assertEqual(true, QuestJs._array.compare([QuestJs._w.boots, QuestJs._w.ring], [QuestJs._w.boots, QuestJs._w.ring]));
 
   
   QuestJs._test.title("QuestJs._array.subtract");
   QuestJs._test.assertEqual([4, 6, 7], QuestJs._array.subtract([1, 2, 4, 6, 7], [1, 2, 3]));
   QuestJs._test.assertEqual(['4', '6', '7'], QuestJs._array.subtract(['1', '2', '4', '6', '7'], ['1', '2', '3']));
-  QuestJs._test.assertEqual([w.coin, w.boots], QuestJs._array.subtract([w.coin, w.boots, w.ring], [w.ring]));
+  QuestJs._test.assertEqual([QuestJs._w.coin, QuestJs._w.boots], QuestJs._array.subtract([QuestJs._w.coin, QuestJs._w.boots, QuestJs._w.ring], [QuestJs._w.ring]));
   
 
   QuestJs._test.title("Text processor 1");
@@ -59,7 +59,7 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertEqual("Simple <span style=\"color:red\">text with <i>nesting</i></span>.", QuestJs._text.processText("Simple {colour:red:text with {i:nesting}}."));
   QuestJs._test.assertEqual("Simple text", QuestJs._text.processText("Simple {random:text}"));
   QuestJs._test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {if:player:someOddAtt:yes:no}"));
-  game.player.someOddAtt = 67;
+  QuestJs._game.player.someOddAtt = 67;
   QuestJs._test.assertEqual("Simple text: 67", QuestJs._text.processText("Simple text: {show:player:someOddAtt}"));
 
   QuestJs._test.title("Text processor 2");
@@ -70,7 +70,7 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {ifMoreThan:player:someOddAtt:50:yes:no}"));
   QuestJs._test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {ifLessThan:player:someOddAtt:50:yes:no}"));
   QuestJs._test.assertEqual("Simple text: ", QuestJs._text.processText("Simple text: {ifLessThan:player:someOddAtt:50:yes}"));
-  game.player.someOddAtt = true;
+  QuestJs._game.player.someOddAtt = true;
   QuestJs._test.assertEqual("Simple text: true", QuestJs._text.processText("Simple text: {show:player:someOddAtt}"));
   QuestJs._test.assertEqual("Simple text: yes", QuestJs._text.processText("Simple text: {if:player:someOddAtt:yes:no}"));
   QuestJs._test.assertEqual("Simple text: no", QuestJs._text.processText("Simple text: {ifNot:player:someOddAtt:yes:no}"));
@@ -80,9 +80,9 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertEqual("Simple text: other times", QuestJs._text.processText("Simple text: {once:seen first time only}{notOnce:other times}"));
   QuestJs._test.assertEqual("Simple text: other times", QuestJs._text.processText("Simple text: {once:seen first time only}{notOnce:other times}"));
   QuestJs._test.assertEqual("Simple text: p2=red", QuestJs._text.processText("Simple text: p2={param:p2}", {p1:"yellow", p2:"red"}));
-  w.book.func1 = function() { return "test1" }
-  w.book.func2 = function(a, b) { return "test2(" + a + ", " + b + ")" }
-  w.book.func3 = function(a) { return "It is " + w[a].alias + " reading the book." }
+  QuestJs._w.book.func1 = function() { return "test1" }
+  QuestJs._w.book.func2 = function(a, b) { return "test2(" + a + ", " + b + ")" }
+  QuestJs._w.book.func3 = function(a) { return "It is " + QuestJs._w[a].alias + " reading the book." }
   QuestJs._test.assertEqual("Simple text: p2=test1", QuestJs._text.processText("Simple text: p2={param:item:func1}", {item:"book"}));
   QuestJs._test.assertEqual("Simple text: p2=test2(one, two)", QuestJs._text.processText("Simple text: p2={param:item:func2:one:two}", {item:"book"}));
   QuestJs._test.assertEqual("Simple text: p2=It is Kyle reading the book.", QuestJs._text.processText("Simple text: p2={param:item:func3:char}", {item:"book", char:"Kyle"}));
@@ -91,15 +91,15 @@ QuestJs._test.tests = function() {
 
   QuestJs._test.title("Text processor 4");
   QuestJs._test.assertEqual("Kyle is a bear.", QuestJs._text.processText("{nv:chr:be} a bear.", {chr:'Kyle'}));
-  QuestJs._test.assertEqual("Kyle is a bear.", QuestJs._text.processText("{nv:chr:be} a bear.", {chr:w.Kyle}));
+  QuestJs._test.assertEqual("Kyle is a bear.", QuestJs._text.processText("{nv:chr:be} a bear.", {chr:QuestJs._w.Kyle}));
   QuestJs._test.assertEqual("Kyle is your bear.", QuestJs._text.processText("{nv:Kyle:be} {pa:me} bear."));
   QuestJs._test.assertEqual("Kyle is her bear.", QuestJs._text.processText("{nv:Kyle:be} {pa:Lara} bear."));
-  QuestJs._test.assertEqual("There is Kyle.", QuestJs._text.processText("There is {nm:chr:a}.", {chr:w.Kyle}));
-  QuestJs._test.assertEqual("There is a book.", QuestJs._text.processText("There is {nm:chr:a}.", {chr:w.book}));
-  QuestJs._test.assertEqual("Kyle is here.", QuestJs._text.processText("{nm:chr:the:true} is here.", {chr:w.Kyle}));
-  QuestJs._test.assertEqual("The book is here.", QuestJs._text.processText("{nm:chr:the:true} is here.", {chr:w.book}));
-  QuestJs._test.assertEqual("It is your book.", QuestJs._text.processText("It is {nms:chr:the} book.", {chr:game.player}));
-  QuestJs._test.assertEqual("It is Kyle's book.", QuestJs._text.processText("It is {nms:chr:the} book.", {chr:w.Kyle}));
+  QuestJs._test.assertEqual("There is Kyle.", QuestJs._text.processText("There is {nm:chr:a}.", {chr:QuestJs._w.Kyle}));
+  QuestJs._test.assertEqual("There is a book.", QuestJs._text.processText("There is {nm:chr:a}.", {chr:QuestJs._w.book}));
+  QuestJs._test.assertEqual("Kyle is here.", QuestJs._text.processText("{nm:chr:the:true} is here.", {chr:QuestJs._w.Kyle}));
+  QuestJs._test.assertEqual("The book is here.", QuestJs._text.processText("{nm:chr:the:true} is here.", {chr:QuestJs._w.book}));
+  QuestJs._test.assertEqual("It is your book.", QuestJs._text.processText("It is {nms:chr:the} book.", {chr:QuestJs._game.player}));
+  QuestJs._test.assertEqual("It is Kyle's book.", QuestJs._text.processText("It is {nms:chr:the} book.", {chr:QuestJs._w.Kyle}));
 
   
   QuestJs._test.title("Text processor 5");
@@ -136,7 +136,7 @@ QuestJs._test.tests = function() {
   QuestJs._settings.moneyFormat = "!+3.2! credits"
   QuestJs._test.assertEqual("+012.34 credits", QuestJs._tools.displayMoney(1234));
   QuestJs._test.assertEqual("-012.34 credits", QuestJs._tools.displayMoney(-1234));
-  QuestJs._settings.moneyFormat = game.moneyformat = "!$1,2!($1,2)!"
+  QuestJs._settings.moneyFormat = QuestJs._game.moneyformat = "!$1,2!($1,2)!"
   QuestJs._test.assertEqual("$12,34", QuestJs._tools.displayMoney(1234));
   QuestJs._test.assertEqual("($12,34)", QuestJs._tools.displayMoney(-1234));
   
@@ -214,23 +214,23 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertCmd("look", ["The kitchen", "A clean room. There is a sink in the corner.", "You can see a big kitchen table (with a jug on it), a camera, a garage door and a trapdoor here.", "You can go north or west."]);
   QuestJs._test.assertCmd("drop clock", "You drop the clock.");
   QuestJs._test.assertCmd("look", ["The kitchen", "A clean room. There is a sink in the corner.", "You can see a big kitchen table (with a jug on it), a camera, a clock, a garage door and a trapdoor here.", "You can go north or west."]);
-  QuestJs._test.assertCmd("w", ["You head west.", "The lounge", "A smelly room with an old settee and a tv.", "You can see a book, some boots, a cardboard box, a coin, a flashlight, a garage key, a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll), Kyle (wearing a straw boater), a small key and a waterskin here.", "You can go east, south, up or west."]);
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The lounge", "A smelly room with an old settee and a tv.", "You can see a book, some boots, a cardboard box, a coin, a flashlight, a garage key, a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll), Kyle (wearing a straw boater), a small key and a waterskin here.", "You can go east, south, up or west."]);
   
 
   QuestJs._test.title("Simple object commands (bricks and a box)");
-  QuestJs._test.assertEqual(false, QuestJs._parser.isContained(w.brick));
+  QuestJs._test.assertEqual(false, QuestJs._parser.isContained(QuestJs._w.brick));
   QuestJs._test.assertCmd("drop bricks in box", "Done.");
-  QuestJs._test.assertEqual(true, QuestJs._parser.isContained(w.brick));
+  QuestJs._test.assertEqual(true, QuestJs._parser.isContained(QuestJs._w.brick));
   QuestJs._test.assertCmd("get bricks", "You take seven bricks.");
-  QuestJs._test.assertEqual(false, QuestJs._parser.isContained(w.brick));  
+  QuestJs._test.assertEqual(false, QuestJs._parser.isContained(QuestJs._w.brick));  
   QuestJs._test.assertCmd("drop three bricks in box", "Done.");
-  QuestJs._test.assertEqual(true, QuestJs._parser.isContained(w.brick));
+  QuestJs._test.assertEqual(true, QuestJs._parser.isContained(QuestJs._w.brick));
   QuestJs._test.assertCmd("drop bricks", "You drop four bricks.");
-  QuestJs._test.assertEqual(true, QuestJs._parser.isContained(w.brick));
+  QuestJs._test.assertEqual(true, QuestJs._parser.isContained(QuestJs._w.brick));
   QuestJs._test.assertCmd("get bricks", "You take four bricks.");
-  QuestJs._test.assertEqual(true, QuestJs._parser.isContained(w.brick));
+  QuestJs._test.assertEqual(true, QuestJs._parser.isContained(QuestJs._w.brick));
   QuestJs._test.assertCmd("get bricks", "You take three bricks.");
-  QuestJs._test.assertEqual(false, QuestJs._parser.isContained(w.brick));
+  QuestJs._test.assertEqual(false, QuestJs._parser.isContained(QuestJs._w.brick));
   
   
   QuestJs._test.title("Simple object commands (bricks and a held box)");
@@ -245,12 +245,12 @@ QuestJs._test.tests = function() {
   
 
   QuestJs._test.title("Restricting");
-  game.player.canTalk = function() { QuestJs._io.msg("You are gagged."); return false; }
+  QuestJs._game.player.canTalk = function() { QuestJs._io.msg("You are gagged."); return false; }
   QuestJs._test.assertCmd("talk to kyle", "You are gagged.");
-  game.player.canTalk = function() { return true; }
-  game.player.canManipulate = function() { QuestJs._io.msg("You are handcuffed."); return false; }
+  QuestJs._game.player.canTalk = function() { return true; }
+  QuestJs._game.player.canManipulate = function() { QuestJs._io.msg("You are handcuffed."); return false; }
   QuestJs._test.assertCmd("drop bricks", "You are handcuffed.");
-  game.player.canManipulate = function() { return true; }
+  QuestJs._game.player.canManipulate = function() { return true; }
   QuestJs._test.assertCmd("drop bricks", "You drop seven bricks.");  
   
   
@@ -278,8 +278,8 @@ QuestJs._test.tests = function() {
   
   QuestJs._test.title("say");
   QuestJs._test.assertCmd("say hello", ["You say, 'Hello.'", "No one seemed interested in what you say."]);
-  w.Kyle.loc = "dining_room"
-  QuestJs._test.assertCmd("w", ["You head west.", "The dining room", "An old-fashioned room.", "You can see a brick, a chair, a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll), Kyle (wearing a straw boater) and Lara here.", "You can go east, up or west.",]);
+  QuestJs._w.Kyle.loc = "dining_room"
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The dining room", "An old-fashioned room.", "You can see a brick, a chair, a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll), Kyle (wearing a straw boater) and Lara here.", "You can go east, up or west.",]);
 
   QuestJs._test.assertCmd("say hello", ["You say, 'Hello.'", "'Oh, hello there,' replies Lara.", "'Have you two met before?' asks Kyle."]);
   QuestJs._test.assertCmd("say nothing", ["You say, 'Nothing.'", "'I don't know what that means,' says Kyle. 'It's a simple yes-no question.'"]);
@@ -295,36 +295,36 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertCmd("ask kyle about garden", ["You ask Kyle about garden.", "'Needs some work,' Kyle says with a sign."]);
   QuestJs._test.assertCmd("ask kyle about garden", ["You ask Kyle about garden.", "'I'm giving up hope of it ever getting sorted,' Kyle says."]);
   QuestJs._test.assertCmd("ask kyle about garden", ["You ask Kyle about garden.", "'I'm giving up hope of it ever getting sorted,' Kyle says."]);
-  w.garden.fixed = true
+  QuestJs._w.garden.fixed = true
   QuestJs._test.assertCmd("ask kyle about garden", ["You ask Kyle about garden.", "'Looks much better now,' Kyle says with a grin."]);
   QuestJs._test.assertCmd("topics", [/^Use TOPICS FOR/])
   QuestJs._test.assertCmd("topics kyle", ["Some suggestions for what to ask Kyle about: Garden; House; Park."])
-  w.Kyle.specialFlag = true
+  QuestJs._w.Kyle.specialFlag = true
   QuestJs._test.assertCmd("topics kyle", ["Some suggestions for what to ask Kyle about: Fountain; Garden; House; Park."])
   QuestJs._test.assertCmd("ask kyle about park", ["You ask Kyle about park.", "'Going to the park sounds like fun,' Kyle says with a grin. 'We can go on the swings!'"]);
   QuestJs._test.assertCmd("topics kyle", ["Some suggestions for what to ask Kyle about: Fountain; Garden; House; Park; Swings."])
 
 
   
-  w.Kyle.loc = "lounge"
+  QuestJs._w.Kyle.loc = "lounge"
 
   
   QuestJs._test.title("NPC commands 1");
   QuestJs._test.assertCmd("lara,get brick", "'I'm not picking up any bricks,' says Lara indignantly.");
   QuestJs._test.assertCmd("lara,e", "'I'm not going east,' says Lara indignantly. 'I don't like that room.'");
   QuestJs._test.menuResponseNumber = 1;
-  QuestJs._test.assertEqual(2, w.Lara.getTopics().length);
+  QuestJs._test.assertEqual(2, QuestJs._w.Lara.getTopics().length);
   QuestJs._test.assertCmd("speak to lara", "You tell Lara she looks very attractive. 'Why thank you!' she replies, smiling at last.");
-  QuestJs._test.assertEqual(1, w.Lara.getTopics().length);
+  QuestJs._test.assertEqual(1, QuestJs._w.Lara.getTopics().length);
   QuestJs._test.assertCmd("lara,sit on chair", ["Lara sits on the chair.", "The chair makes a strange noise when Lara sits on it."]);
   QuestJs._test.assertCmd("lara,stand up", "Lara gets off the chair.");
   QuestJs._test.assertCmd("lara,sit on chair", ["Lara sits on the chair.", "The chair makes a strange noise when Lara sits on it."]);
   
   QuestJs._test.assertCmd("l", ["The dining room", "An old-fashioned room.", "You can see a brick, a chair, a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll) and Lara (sitting on the chair) here.", "You can go east, up or west.",]);  
   
-  w.Lara.canPosture = function() { QuestJs._io.msg("She is turned to stone."); return false; }
+  QuestJs._w.Lara.canPosture = function() { QuestJs._io.msg("She is turned to stone."); return false; }
   QuestJs._test.assertCmd("lara, get off chair", "She is turned to stone.");
-  w.Lara.canPosture = function() { return true; }
+  QuestJs._w.Lara.canPosture = function() { return true; }
   QuestJs._test.assertCmd("lara, get off chair", "Lara gets off the chair.");
   QuestJs._test.assertCmd("lara,sit on chair", ["Lara sits on the chair.", "The chair makes a strange noise when Lara sits on it."]);
   QuestJs._test.assertCmd("lara,e", ["Lara gets off the chair.", "Lara heads east."]);
@@ -332,7 +332,7 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertCmd("lara,get boots", "Lara takes the boots.");
   QuestJs._test.assertCmd("lara,wear boots", "'I'm not doing that!' says Lara indignantly.");
   QuestJs._test.assertCmd("lara,drop boots", "Lara drops the boots.");
-  QuestJs._test.assertCmd("lara,w", "Lara heads west.");
+  QuestJs._test.assertCmd("lara,QuestJs._w", "Lara heads west.");
   
   
   QuestJs._test.title("NPC commands 2");
@@ -364,11 +364,11 @@ QuestJs._test.tests = function() {
 
   QuestJs._test.title("NPC commands (torch)");
   QuestJs._test.assertCmd("kyle, get torch", "Kyle takes the flashlight.");
-  QuestJs._test.assertEqual(false, w.flashlight.switchedon);
+  QuestJs._test.assertEqual(false, QuestJs._w.flashlight.switchedon);
   QuestJs._test.assertCmd("kyle, turn on the torch", "Kyle switches the flashlight on.");
-  QuestJs._test.assertEqual(true, w.flashlight.switchedon);
+  QuestJs._test.assertEqual(true, QuestJs._w.flashlight.switchedon);
   QuestJs._test.assertCmd("kyle, turn the torch off", "Kyle switches the flashlight off.");
-  QuestJs._test.assertEqual(false, w.flashlight.switchedon);
+  QuestJs._test.assertEqual(false, QuestJs._w.flashlight.switchedon);
   QuestJs._test.assertCmd("kyle, drop torch", "Kyle drops the flashlight.");
 
 
@@ -414,15 +414,15 @@ QuestJs._test.tests = function() {
   
 
   QuestJs._test.title("Clone");
-  const count = Object.keys(w).length
-  const clone = cloneObject(w.book)
-  QuestJs._test.assertEqual(count + 1, Object.keys(w).length)
-  QuestJs._test.assertEqual(w.book, clone.clonePrototype)
-  QuestJs._test.assertEqual(w.book.examine, clone.examine)
-  const clone2 = cloneObject(clone)
-  QuestJs._test.assertEqual(count + 2, Object.keys(w).length)
-  QuestJs._test.assertEqual(w.book, clone2.clonePrototype)
-  QuestJs._test.assertEqual(w.book.examine, clone2.examine)
+  const count = Object.keys(QuestJs._w).length
+  const clone = QuestJs._create.cloneObject(QuestJs._w.book)
+  QuestJs._test.assertEqual(count + 1, Object.keys(QuestJs._w).length)
+  QuestJs._test.assertEqual(QuestJs._w.book, clone.clonePrototype)
+  QuestJs._test.assertEqual(QuestJs._w.book.examine, clone.examine)
+  const clone2 = QuestJs._create.cloneObject(clone)
+  QuestJs._test.assertEqual(count + 2, Object.keys(QuestJs._w).length)
+  QuestJs._test.assertEqual(QuestJs._w.book, clone2.clonePrototype)
+  QuestJs._test.assertEqual(QuestJs._w.book.examine, clone2.examine)
 
   
   QuestJs._test.title("Save/Load 1");
@@ -439,66 +439,66 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertEqual("", QuestJs._saveLoad.encode("tst", false))
   QuestJs._test.assertEqual("tst:boolean:true;", QuestJs._saveLoad.encode("tst", true))
   QuestJs._test.assertEqual("tst:string:14;", QuestJs._saveLoad.encode("tst", '14'))
-  QuestJs._test.assertEqual("tst:qobject:book;", QuestJs._saveLoad.encode("tst", w.book))
+  QuestJs._test.assertEqual("tst:qobject:book;", QuestJs._saveLoad.encode("tst", QuestJs._w.book))
   QuestJs._test.assertEqual("tst:array:14~12;", QuestJs._saveLoad.encode("tst", ['14', '12']))
 
-  QuestJs._saveLoad.decode(w.far_away, "one:number:14")
-  QuestJs._test.assertEqual(14, w.far_away.one)
-  QuestJs._saveLoad.decode(w.far_away, "two:string:14")
-  QuestJs._test.assertEqual('14', w.far_away.two)
-  QuestJs._saveLoad.decode(w.far_away, "three:boolean:true")
-  QuestJs._test.assertEqual(true, w.far_away.three)
-  QuestJs._saveLoad.decode(w.far_away, "four:qobject:book")
-  QuestJs._test.assertEqual(w.book, w.far_away.four)
-  QuestJs._saveLoad.decode(w.far_away, "five:array:14~12")
-  QuestJs._test.assertEqual('14', w.far_away.five[0])
-  //QuestJs._log.info(w.far_away.north)
-  QuestJs._saveLoad.decode(w.far_away, "north:exit:lounge:l:h")
-  QuestJs._test.assertEqual(true, w.far_away.north.hidden)
+  QuestJs._saveLoad.decode(QuestJs._w.far_away, "one:number:14")
+  QuestJs._test.assertEqual(14, QuestJs._w.far_away.one)
+  QuestJs._saveLoad.decode(QuestJs._w.far_away, "two:string:14")
+  QuestJs._test.assertEqual('14', QuestJs._w.far_away.two)
+  QuestJs._saveLoad.decode(QuestJs._w.far_away, "three:boolean:true")
+  QuestJs._test.assertEqual(true, QuestJs._w.far_away.three)
+  QuestJs._saveLoad.decode(QuestJs._w.far_away, "four:qobject:book")
+  QuestJs._test.assertEqual(QuestJs._w.book, QuestJs._w.far_away.four)
+  QuestJs._saveLoad.decode(QuestJs._w.far_away, "five:array:14~12")
+  QuestJs._test.assertEqual('14', QuestJs._w.far_away.five[0])
+  //QuestJs._log.info(QuestJs._w.far_away.north)
+  QuestJs._saveLoad.decode(QuestJs._w.far_away, "north:exit:lounge:l:h")
+  QuestJs._test.assertEqual(true, QuestJs._w.far_away.north.hidden)
 
   QuestJs._test.title("Save/Load 2");
   // Set up some changes to be saved
-  w.boots.counter = 17;
-  w.boots.unusualString = "Some interesting text";
-  w.boots.notableFlag = true;
-  w.boots.examine = "This will get saved";
+  QuestJs._w.boots.counter = 17;
+  QuestJs._w.boots.unusualString = "Some interesting text";
+  QuestJs._w.boots.notableFlag = true;
+  QuestJs._w.boots.examine = "This will get saved";
   clone.cloneCounter = 29;
-  w.far_away.north.hidden = false
-  w.far_away.north.locked = false
-  const agendaCount = w.Arthur.agenda.length;
-  QuestJs._test.assertEqual(0, w.Arthur.followers.length);
+  QuestJs._w.far_away.north.hidden = false
+  QuestJs._w.far_away.north.locked = false
+  const agendaCount = QuestJs._w.Arthur.agenda.length;
+  QuestJs._test.assertEqual(0, QuestJs._w.Arthur.followers.length);
   const s = QuestJs._saveLoad.saveTheWorld("Comment!!!");
   // Now change them again, these changes should get over-written
-  w.boots.counter = 42;
-  w.boots.unusualString = "Some boring text";
-  w.boots.notableFlag = false;
-  w.boots.examine = "This will not remain";
-  const clone3 = cloneObject(clone);  // should not be there later
-  w.far_away.north.locked = true
+  QuestJs._w.boots.counter = 42;
+  QuestJs._w.boots.unusualString = "Some boring text";
+  QuestJs._w.boots.notableFlag = false;
+  QuestJs._w.boots.examine = "This will not remain";
+  const clone3 = QuestJs._create.cloneObject(clone);  // should not be there later
+  QuestJs._w.far_away.north.locked = true
   QuestJs._saveLoad.loadTheWorld(s, 4);
-  QuestJs._test.assertEqual(count + 2, Object.keys(w).length);
-  QuestJs._test.assertEqual(17, w.boots.counter);
-  QuestJs._test.assertEqual("Some interesting text", w.boots.unusualString);
-  QuestJs._test.assertEqual(true, w.boots.notableFlag);
-  QuestJs._test.assertEqual("This will get saved", w.boots.examine);
-  QuestJs._test.assertEqual(agendaCount, w.Arthur.agenda.length);
-  QuestJs._test.assertEqual(0, w.Arthur.followers.length);
-  QuestJs._test.assertEqual(29, w[clone.name].cloneCounter);
-  QuestJs._test.assertEqual(false, w.far_away.north.locked);
-  QuestJs._test.assertEqual(false, w.far_away.north.hidden);
+  QuestJs._test.assertEqual(count + 2, Object.keys(QuestJs._w).length);
+  QuestJs._test.assertEqual(17, QuestJs._w.boots.counter);
+  QuestJs._test.assertEqual("Some interesting text", QuestJs._w.boots.unusualString);
+  QuestJs._test.assertEqual(true, QuestJs._w.boots.notableFlag);
+  QuestJs._test.assertEqual("This will get saved", QuestJs._w.boots.examine);
+  QuestJs._test.assertEqual(agendaCount, QuestJs._w.Arthur.agenda.length);
+  QuestJs._test.assertEqual(0, QuestJs._w.Arthur.followers.length);
+  QuestJs._test.assertEqual(29, QuestJs._w[clone.name].cloneCounter);
+  QuestJs._test.assertEqual(false, QuestJs._w.far_away.north.locked);
+  QuestJs._test.assertEqual(false, QuestJs._w.far_away.north.hidden);
   
   
   QuestJs._test.title("Path finding");
-  QuestJs._test.assertEqual("lounge", QuestJs._tools.formatList(QuestJs._npc.agenda.findPath(w.dining_room, w.lounge)));
-  QuestJs._test.assertEqual("", QuestJs._tools.formatList(QuestJs._npc.agenda.findPath(w.dining_room, w.dining_room)));
-  QuestJs._test.assertEqual(false, QuestJs._npc.agenda.findPath(w.dining_room, w.far_away));
-  QuestJs._test.assertEqual("conservatory, dining room, lounge", QuestJs._tools.formatList(QuestJs._npc.agenda.findPath(w.garden, w.dining_room)));
-  QuestJs._test.assertEqual(null, w.dining_room.findExit(w.far_away));
-  QuestJs._test.assertEqual("east", w.dining_room.findExit(w.lounge).dir);
+  QuestJs._test.assertEqual("lounge", QuestJs._tools.formatList(QuestJs._npc.agenda.findPath(QuestJs._w.dining_room, QuestJs._w.lounge)));
+  QuestJs._test.assertEqual("", QuestJs._tools.formatList(QuestJs._npc.agenda.findPath(QuestJs._w.dining_room, QuestJs._w.dining_room)));
+  QuestJs._test.assertEqual(false, QuestJs._npc.agenda.findPath(QuestJs._w.dining_room, QuestJs._w.far_away));
+  QuestJs._test.assertEqual("conservatory, dining room, lounge", QuestJs._tools.formatList(QuestJs._npc.agenda.findPath(QuestJs._w.garden, QuestJs._w.dining_room)));
+  QuestJs._test.assertEqual(null, QuestJs._w.dining_room.findExit(QuestJs._w.far_away));
+  QuestJs._test.assertEqual("east", QuestJs._w.dining_room.findExit(QuestJs._w.lounge).dir);
   QuestJs._test.assertCmd("s", ["The kitchen", "A clean room. There is a sink in the corner.", /You can see/, "You can go down, north or west."]);
-  QuestJs._test.assertCmd("w", ["You head west.", "The lounge", "A smelly room with an old settee and a tv.", /^You can see/, "You can go east, south, up or west."]);
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The lounge", "A smelly room with an old settee and a tv.", /^You can see/, "You can go east, south, up or west."]);
   QuestJs._test.assertCmd("s", ["You head south.", "The conservatory", "A light airy room.", /You can see/, "You can go north or west."]);
-  QuestJs._test.assertCmd("w", ["You head west.", "The garden", "Very overgrown. The garden backs onto a shop to the west, whilst the conservatory is east.", "You can see Arthur here.", "You can go east or west."]);
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The garden", "Very overgrown. The garden backs onto a shop to the west, whilst the conservatory is east.", "You can see Arthur here.", "You can go east or west."]);
   
   
   QuestJs._test.title("Agendas");
@@ -507,39 +507,39 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertCmd("talk to arthur", ["'Hey, wake up,' you say to Arthur."]);
   QuestJs._test.assertCmd("talk to arthur", ["'Hey, wake up,' you say to Arthur.", "'Stop it!'"]);
   QuestJs._test.assertCmd("talk to arthur", ["'Hey, wake up,' you say to Arthur.", "'Stop it!'"]);
-  QuestJs._test.assertEqual(0, w.Arthur.followers.length);
+  QuestJs._test.assertEqual(0, QuestJs._w.Arthur.followers.length);
   QuestJs._test.assertCmd("z", ["You wait one turn.", "Arthur stands up and stretches."]);
   QuestJs._test.assertCmd("e", ["You head east.", "The conservatory", "A light airy room.", /You can see/, "You can go north or west."]);
-  QuestJs._test.assertEqual(0, w.Arthur.followers.length);
+  QuestJs._test.assertEqual(0, QuestJs._w.Arthur.followers.length);
   QuestJs._test.assertCmd("z", ["You wait one turn.", "Arthur enters the conservatory from the west."]);
   QuestJs._test.assertCmd("n", ["You head north.", "The lounge", "A smelly room with an old settee and a tv.", /^You can see/, "You can go east, south, up or west.", "Arthur enters the lounge from the south."]);
-  QuestJs._test.assertCmd("w", ["You head west.", "The dining room", "An old-fashioned room.", /^You can see/, "You can go east, up or west.", "Arthur enters the dining room from the east.", "'Hi, Lara,' says Arthur. 'Come look at the garden.'"]);  
-  QuestJs._test.assertEqual(0, w.Arthur.followers.length);
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The dining room", "An old-fashioned room.", /^You can see/, "You can go east, up or west.", "Arthur enters the dining room from the east.", "'Hi, Lara,' says Arthur. 'Come look at the garden.'"]);  
+  QuestJs._test.assertEqual(0, QuestJs._w.Arthur.followers.length);
   QuestJs._test.assertCmd("z", ["You wait one turn.", "'Sure,' says Lara."]);
-  QuestJs._test.assertEqual(1, w.Arthur.followers.length);
+  QuestJs._test.assertEqual(1, QuestJs._w.Arthur.followers.length);
   QuestJs._test.assertCmd("z", ["You wait one turn.", "Arthur and Lara leave the dining room, heading east."]);
   QuestJs._test.assertCmd("z", ["You wait one turn."]);
   QuestJs._test.assertCmd("z", ["You wait one turn.", "Through the window you can see Arthur and Lara enter the garden from the east.", "Through the window you see Arthur say something to Lara."]);
   
   
   QuestJs._test.title("Transit");
-  QuestJs._test.assertCmd("w", ["You head west.", "The lift", "A curious lift.", "You can see a Button: G, a Button: 1 and a Button: 2 here.", "You can go east."]);
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The lift", "A curious lift.", "You can see a Button: G, a Button: 1 and a Button: 2 here.", "You can go east."]);
   QuestJs._test.assertCmd("push button: g", ["You're already there mate!"]);
   QuestJs._test.assertCmd("push 1", ["You press the button; the door closes and the lift heads to the first floor. The door opens again."]);
   QuestJs._test.assertCmd("e", ["You head east.", "The bedroom", "A large room, with a big bed and a wardrobe.", "You can see a coat, some jeans, a jumpsuit, a shirt, underwear and a wardrobe here.", "You can go down, in or west."]);
-  QuestJs._test.assertCmd("w", ["You head west.", "The lift", "A curious lift.", "You can see a Button: G, a Button: 1 and a Button: 2 here.", "You can go east."]);
-  w.lift.onTransitMove = function(toLoc, fromLoc) { QuestJs._io.msg("MOVING to " + toLoc + " from " + fromLoc); };
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The lift", "A curious lift.", "You can see a Button: G, a Button: 1 and a Button: 2 here.", "You can go east."]);
+  QuestJs._w.lift.onTransitMove = function(toLoc, fromLoc) { QuestJs._io.msg("MOVING to " + toLoc + " from " + fromLoc); };
   QuestJs._test.assertCmd("push 1", ["You press the button; nothing happens."]);
   QuestJs._test.assertCmd("push 2", ["That does nothing, the button does not work."]);
   QuestJs._test.assertCmd("push g", ["The old man presses the button....", "MOVING to dining_room from bedroom"]);
   QuestJs._test.assertCmd("e", ["You head east.", "The dining room", "An old-fashioned room.", /^You can see/, "You can go east, up or west."]);  
-  w.lift.transitCheck = function() {
+  QuestJs._w.lift.transitCheck = function() {
     QuestJs._io.msg("The lift is out of order");
     return false;
   };
-  w.lift.transitAutoMove = true;
-  w.lift.afterEnter = w.lift.transitOfferMenu;
-  QuestJs._test.assertCmd("w", ["You head west.", "The lift", "A curious lift.", "You can see a Button: G, a Button: 1 and a Button: 2 here.", "You can go east.", "The lift is out of order", "The dining room", "An old-fashioned room.", "You can see a brick, a chair and a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll) here.", "You can go east, up or west."]);
+  QuestJs._w.lift.transitAutoMove = true;
+  QuestJs._w.lift.afterEnter = QuestJs._w.lift.transitOfferMenu;
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The lift", "A curious lift.", "You can see a Button: G, a Button: 1 and a Button: 2 here.", "You can go east.", "The lift is out of order", "The dining room", "An old-fashioned room.", "You can see a brick, a chair and a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll) here.", "You can go east, up or west."]);
   
   
   QuestJs._test.title("Push");
@@ -547,15 +547,15 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertCmd("s", ["You head south.", "The conservatory", "A light airy room.", "You can see a broken chair and a crate here.", "You can go north or west."]);
   QuestJs._test.assertCmd("push crate", "That's not going to do anything useful.");
   QuestJs._test.assertCmd("push chair s", "It's not something you can move around like that.");
-  w.broken_chair.shift = function() { QuestJs._io.msg("You try to push chair, but it just breaks even more."); return false; }
-  w.broken_chair.shiftable = true;
-  QuestJs._test.assertCmd("push chair w", "You try to push chair, but it just breaks even more.");
+  QuestJs._w.broken_chair.shift = function() { QuestJs._io.msg("You try to push chair, but it just breaks even more."); return false; }
+  QuestJs._w.broken_chair.shiftable = true;
+  QuestJs._test.assertCmd("push chair QuestJs._w", "You try to push chair, but it just breaks even more.");
   QuestJs._test.assertCmd("push crate s", "You can't go south.");
-  QuestJs._test.assertCmd("push crate w", "You push the crate west.");
+  QuestJs._test.assertCmd("push crate QuestJs._w", "You push the crate west.");
   
   
   QuestJs._test.title("ensemble");
-  world.setRoom(game.player, "wardrobe", "suppress");
+  QuestJs._world.setRoom(QuestJs._game.player, "wardrobe", "suppress");
   QuestJs._test.assertCmd("l", ["The wardrobe", "Oddly empty of fantasy worlds.", "You can see a suit here.", "You can go out."]);
   QuestJs._test.assertCmd("get trousers", ["You take the suit trousers."]);
   QuestJs._test.assertCmd("l", ["The wardrobe", "Oddly empty of fantasy worlds.", "You can see a jacket and a waistcoat here.", "You can go out."]);
@@ -579,61 +579,61 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertCmd("o", ["You head out.", "The bedroom", "A large room, with a big bed and a wardrobe.", "You can see a coat, some jeans, a jumpsuit, a shirt, underwear and a wardrobe here.", "You can go down, in or west."]);
   QuestJs._test.assertCmd("d", ["You head down.", "The lounge", "A smelly room with an old settee and a tv.", "You can see a book, a book, a book, seven bricks, a cardboard box (containing some boots), a coin, a glass cabinet (containing a jewellery box (containing a ring) and an ornate doll), a small key and a waterskin here.", "You can go east, south, up or west."]);
   QuestJs._test.assertCmd("s", ["You head south.", "The conservatory", "A light airy room.", "You can see a broken chair here.", "You can go north or west."]);
-  QuestJs._test.assertCmd("w", ["You head west.", "The garden", "Very overgrown. The garden backs onto a shop to the west, whilst the conservatory is east.", "You can see Arthur, a crate and Lara here.", "You can go east or west."]);
-  QuestJs._test.assertCmd("w", ["You head west.", "The shop", "A funny little shop.", "You can go east."]);
-  w.me.money = 20
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The garden", "Very overgrown. The garden backs onto a shop to the west, whilst the conservatory is east.", "You can see Arthur, a crate and Lara here.", "You can go east or west."]);
+  QuestJs._test.assertCmd("QuestJs._w", ["You head west.", "The shop", "A funny little shop.", "You can go east."]);
+  QuestJs._w.me.money = 20
 
   QuestJs._test.title("shop - text processor");
   QuestJs._test.assertEqual("The carrot is $0,02", QuestJs._text.processText("The carrot is {money:carrot}"))
   QuestJs._test.assertEqual("The carrot is $0,02", QuestJs._text.processText("The carrot is {$:carrot}"))
   QuestJs._test.assertEqual("You see $0,12", QuestJs._text.processText("You see {$:12}"))
-  QuestJs._test.assertEqual("The carrot is $0,02", QuestJs._text.processText("{nm:item:the:true} is {$:carrot}", {item:w.carrot}))
+  QuestJs._test.assertEqual("The carrot is $0,02", QuestJs._text.processText("{nm:item:the:true} is {$:carrot}", {item:QuestJs._w.carrot}))
   QuestJs._test.assertEqual("The carrot is $0,02", QuestJs._text.processText("{nm:item:the:true} is {$:carrot}", {item:'carrot'}))
 
   QuestJs._test.title("shop - buy");
-  QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(w.carrot))
-  QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(w.trophy))
-  QuestJs._test.assertEqual(undefined, QuestJs._parser.isForSale(w.flashlight))
+  QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(QuestJs._w.carrot))
+  QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(QuestJs._w.trophy))
+  QuestJs._test.assertEqual(undefined, QuestJs._parser.isForSale(QuestJs._w.flashlight))
   QuestJs._test.assertCmd("buy carrot", ["You buy the carrot for $0,02."]);
   
-  QuestJs._test.assertEqual(false, QuestJs._parser.isForSale(w.carrot0))
-  QuestJs._test.assertEqual(false, w.carrot0.isForSale(game.player.loc))
+  QuestJs._test.assertEqual(false, QuestJs._parser.isForSale(QuestJs._w.carrot0))
+  QuestJs._test.assertEqual(false, QuestJs._w.carrot0.isForSale(QuestJs._game.player.loc))
   QuestJs._test.assertCmd("buy carrot", ["You buy the carrot for $0,02."]);
-  QuestJs._test.assertEqual(16, w.me.money)
+  QuestJs._test.assertEqual(16, QuestJs._w.me.money)
   QuestJs._test.assertCmd("buy flashlight", ["You can't buy it."]);
   QuestJs._test.assertCmd("buy trophy", ["You buy the trophy for $0,15."]);
-  QuestJs._test.assertEqual(1, w.me.money)
-  QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(w.carrot))
+  QuestJs._test.assertEqual(1, QuestJs._w.me.money)
+  QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(QuestJs._w.carrot))
   //QuestJs._log.info("----------------------");
-  QuestJs._test.assertEqual(false, QuestJs._parser.isForSale(w.trophy))
+  QuestJs._test.assertEqual(false, QuestJs._parser.isForSale(QuestJs._w.trophy))
   QuestJs._test.assertCmd("buy trophy", ["You can't buy the trophy here - probably because you are already holding it."]);
   QuestJs._test.assertCmd("buy carrot", ["You can't afford the carrot (need $0,02)."]);
-  QuestJs._test.assertEqual(1, w.me.money)
+  QuestJs._test.assertEqual(1, QuestJs._w.me.money)
   
-  delete w.carrot0.loc
+  delete QuestJs._w.carrot0.loc
   
   QuestJs._test.title("shop - sell");
   QuestJs._test.assertCmd("sell carrot", ["You can't sell the carrot here."]);
-  QuestJs._test.assertEqual(1, w.me.money)
+  QuestJs._test.assertEqual(1, QuestJs._w.me.money)
   QuestJs._test.assertCmd("sell trophy", ["You sell the trophy for $0,08."]);
-  QuestJs._test.assertEqual(9, w.me.money)
+  QuestJs._test.assertEqual(9, QuestJs._w.me.money)
 
   QuestJs._test.assertCmd("sell trophy", ["You don't have it."]);
-  QuestJs._test.assertEqual(9, w.me.money)
-  w.me.money = 20
-  w.shop.sellingDiscount = 20
-  QuestJs._test.assertEqual(12, w.trophy.getBuyingPrice(w.me))
+  QuestJs._test.assertEqual(9, QuestJs._w.me.money)
+  QuestJs._w.me.money = 20
+  QuestJs._w.shop.sellingDiscount = 20
+  QuestJs._test.assertEqual(12, QuestJs._w.trophy.getBuyingPrice(QuestJs._w.me))
   
   QuestJs._test.assertCmd("buy trophy", ["You buy the trophy for $0,12."]);
-  QuestJs._test.assertEqual(8, w.me.money)
-  w.shop.buyingValue = 80
+  QuestJs._test.assertEqual(8, QuestJs._w.me.money)
+  QuestJs._w.shop.buyingValue = 80
   QuestJs._test.assertCmd("sell trophy", ["You sell the trophy for $0,12."]);
-  QuestJs._test.assertEqual(20, w.me.money)
+  QuestJs._test.assertEqual(20, QuestJs._w.me.money)
   
   QuestJs._test.title("vessels and liquids");
-  game.player.loc = "kitchen"
-  w.jug.loc = "big_kitchen_table"
-  game.update();
+  QuestJs._game.player.loc = "kitchen"
+  QuestJs._w.jug.loc = "big_kitchen_table"
+  QuestJs._game.update();
   QuestJs._test.assertCmd("get jug", ["You take the jug."]);
   QuestJs._test.assertCmd("fill jug with tears", ["You can't see anything you might call 'tears' here."]);
   QuestJs._test.assertCmd("fill jug with honey", ["There's no honey here."]);

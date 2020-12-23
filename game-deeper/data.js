@@ -1,12 +1,12 @@
 "use strict"
 
-createItem("me", QuestJs._templates.PLAYER(), {
+QuestJs._create.createItem("me", QuestJs._templates.PLAYER(), {
   loc:"entrance",
   regex:/^(me|myself|player)$/,
   examine: "Just a regular guy.",
   hitpoints:100,
 })
 
-createRoom("lounge", {
+QuestJs._create.createRoom("lounge", {
   desc:"The lounge is boring, the author really needs to put stuff in it.",
 })

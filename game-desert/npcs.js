@@ -2,7 +2,7 @@
 
 
 
-createItem("Lucas",
+QuestJs._create.createItem("Lucas",
   QuestJs._npc.NPC(false),
   { 
     notes:"Black guy, twenties, bi-sexual, good at cooking",
@@ -21,7 +21,7 @@ createItem("Lucas",
         response:function() {
           QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
           QuestJs._io.msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
-          trackRelationship(w.Kyle, 1, "background2");
+          trackRelationship(QuestJs._w.Kyle, 1, "background2");
         }},
       
       
@@ -35,7 +35,7 @@ createItem("Lucas",
 
 
 
-createItem("Emily",
+QuestJs._create.createItem("Emily",
   QuestJs._npc.NPC(true),
   { 
     notes:"Redhead, twenties, into spiritualism, plays several instruments",
@@ -54,7 +54,7 @@ createItem("Emily",
         response:function() {
           QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
           QuestJs._io.msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
-          trackRelationship(w.Kyle, 1, "background2");
+          trackRelationship(QuestJs._w.Kyle, 1, "background2");
         }},
       
       
@@ -77,7 +77,7 @@ createItem("Emily",
 
 
 
-createItem("Elijah",
+QuestJs._create.createItem("Elijah",
   QuestJs._npc.NPC(false),
   { 
     notes:"forties, conspiracy nut, refusing to fly, quite wealthy",
@@ -96,7 +96,7 @@ createItem("Elijah",
         response:function() {
           QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
           QuestJs._io.msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
-          trackRelationship(w.Kyle, 1, "background2");
+          trackRelationship(QuestJs._w.Kyle, 1, "background2");
         }},
       
       
@@ -109,7 +109,7 @@ createItem("Elijah",
 
 
 
-createItem("Amy",
+QuestJs._create.createItem("Amy",
   QuestJs._npc.NPC(true),
   { 
     notes:"Korean parentage, thirties, Christian, into video games",
@@ -128,7 +128,7 @@ createItem("Amy",
         response:function() {
           QuestJs._io.msg("'What's Newcastle like?' you ask Kyle.");
           QuestJs._io.msg("'It's... okay. But no better than that. I guess it's too close to Sydney, and anything interesting goes there, so its kinda dull.'");
-          trackRelationship(w.Kyle, 1, "background2");
+          trackRelationship(QuestJs._w.Kyle, 1, "background2");
         }},
       
       

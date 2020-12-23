@@ -49,7 +49,7 @@ QuestJs._settings.professions = [
 
 $(function() {
   if (QuestJs._settings.startingDialogDisabled) {
-    const p = game.player;
+    const p = QuestJs._game.player;
     p.job = "Merchant";
     p.isFemale = true;
     p.alias = "Shaala";
@@ -78,7 +78,7 @@ $(function() {
         text: "OK",
         click: function() {
           $(this).dialog("close");
-          const p = game.player;
+          const p = QuestJs._game.player;
           p.job = $("#job").val();
           p.isFemale = $("#female").is(':checked');
           p.alias = $("#namefield").val();
@@ -96,13 +96,13 @@ $(function() {
 QuestJs._commands.push(new QuestJs._command.Cmd('Sleep', {
   regex:/^sleep$/,
   script:function() {
-    if (game.player.loc === 'royal_bedroom') {
+    if (QuestJs._game.player.loc === 'royal_bedroom') {
       takeATurn()
-      return world.SUCCESS
+      return QuestJs._world.SUCCESS
     }
     else {
       QuestJs._io.metamsg("You can only sleep in the bedroom");
-      return world.FAILED
+      return QuestJs._world.FAILED
     }
   },
 }));

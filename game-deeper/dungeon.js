@@ -193,26 +193,26 @@ dungeon.generateBasicRoom = function(level, x, y, theme) {
   //QuestJs._log.info(name)
   const name_west = dungeon.getRoomName(x - 1, y, level)
   const name_south = dungeon.getRoomName(x, y - 1, level)
-  const room = cloneObject("dungeon_cell_prototype", undefined, name)
+  const room = QuestJs._create.cloneObject("dungeon_cell_prototype", undefined, name)
   //QuestJs._log.info(room)
   room.accessible = false
   room.alias = "Lost in a dungeon"
   room.level = level
   room.x = x
   room.y = y
-  const room_west = w[name_west]
+  const room_west = QuestJs._w[name_west]
   if (room_west !== undefined && QuestJs._random.chance(dungeon.exitpercentage)) {
     room.exit_west = true
     room_west.exit_east = true
     room_west.exit_east_type = room.exit_west_type = QuestJs._random.int(dungeon.themescount)
   }
-  const room_south = w[name_south]
+  const room_south = QuestJs._w[name_south]
   if (room_south !== undefined && QuestJs._random.chance(dungeon.exitpercentage)) {
     room.exit_south = true
     room_south.exit_north = true
     room_south.exit_north_type = room.exit_south_type = QuestJs._random.int(dungeon.themescount)
   }
-  w[name] = room
+  QuestJs._w[name] = room
 }
 
 
@@ -221,14 +221,14 @@ dungeon.generateBasicRoom = function(level, x, y, theme) {
 dungeon.checkConnectivity = function(level) {
   // loop through each room, flagging those that are connected
   // keep going until no new ones are flagged
-  w[dungeon.getRoomName(0, 0, level)].accessible = true
+  QuestJs._w[dungeon.getRoomName(0, 0, level)].accessible = true
   let flag = true
   while (flag) {
     QuestJs._log.info("LOOP")
     flag = false
     for (let x = -dungeon.size; x <= dungeon.size; x++) {
       for (let y = -dungeon.size; y <= dungeon.size; y++) {
-        const room = w[dungeon.getRoomName(x, y, level)]
+        const room = QuestJs._w[dungeon.getRoomName(x, y, level)]
         if (room !== undefined && room.accessible) {
           flag = flag || dungeon.flagAllAdjacent(room)
         }
@@ -241,10 +241,10 @@ dungeon.checkConnectivity = function(level) {
   const levellist = []
   for (let x = -dungeon.size; x <= dungeon.size; x++) {
     for (let y = -dungeon.size; y <= dungeon.size; y++) {
-      const room = w[dungeon.getRoomName(x, y, level)]
+      const room = QuestJs._w[dungeon.getRoomName(x, y, level)]
       if (room !== undefined) {
         if (!room.accessible) {
-          delete w[room.name]
+          delete QuestJs._w[room.name]
         }
         else {
           levellist.push(room)
@@ -304,7 +304,7 @@ dungeon.flagAllAdjacent = function(room) {
 // Expects dir to be a dictionary from QuestJs._lang.exit_list
 dungeon.findAdjacent = function(room, dir) {
   if (!room['exit_' + dir.name]) return (false)
-  return w[dungeon.getRoomName(room.x + dir.x, room.y + dir.y, room.level)]
+  return QuestJs._w[dungeon.getRoomName(room.x + dir.x, room.y + dir.y, room.level)]
 }
 
 
@@ -323,7 +323,7 @@ dungeon.flagAdjacent = function(room, dir) {
 
 //Mostly just creates an exit from the centre to the from_room.
 dungeon.setUpCentreRoom = function(level, from_room) {
-  const centreroom = w[dungeon.getRoomName(0, 0, level)]
+  const centreroom = QuestJs._w[dungeon.getRoomName(0, 0, level)]
   centreroom.exit_up = true
   from_room.exit_down = true
 }
@@ -337,14 +337,14 @@ dungeon.drawMap = function() {
     return
   }
     
-  const room = w[game.player.loc]
+  const room = QuestJs._w[QuestJs._game.player.loc]
   QuestJs._log.info(room)
   if (!room.level) {
     QuestJs._io.metamsg('No map available here.')
     return
   }
   
-  //if (w[this.getRoomName(0, 0, room.level)] === undefined) return false
+  //if (QuestJs._w[this.getRoomName(0, 0, room.level)] === undefined) return false
   
   const map = []
   map.push('<defs><marker id="head" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="black" /></marker></defs>')
@@ -353,7 +353,7 @@ dungeon.drawMap = function() {
   map.push('<rect x="0" y="0" width="' + dungeon.mapSize + '" height="' + dungeon.mapSize + '" stroke="black" fill="none"/>')
   for (let x = -this.size; x <= this.size; x++) {
     for (let y = -this.size; y <= this.size; y++) {
-      const r = w[this.getRoomName(x, y, room.level)]
+      const r = QuestJs._w[this.getRoomName(x, y, room.level)]
       if (r === undefined) continue
       map.push(r.getSvg((x + this.size) * this.cellSize - dungeon.mapOffset, (this.size - y) * this.cellSize - dungeon.mapOffset))
     }
@@ -377,11 +377,11 @@ const showMap = function() {
 }
 
 
-createRoom('entrance', {
+QuestJs._create.createRoom('entrance', {
   level:0,
   theme:0,
   desc:'The stairs go down...',
-  down:new Exit(dungeon.getRoomName(0, 0, 1)),
+  down:new QuestJs._create.Exit(dungeon.getRoomName(0, 0, 1)),
   afterFirstEnter:function() {
     dungeon.generateLevel(this)
   },
@@ -389,7 +389,7 @@ createRoom('entrance', {
 
 
 dungeon.exitScript = function(char, dirName) {
-  const origin = w[char.loc]
+  const origin = QuestJs._w[char.loc]
   if (!origin.hasExit(dirName)) {
     QuestJs._io.msg('You can\'t go ' + dirName)
     return false
@@ -398,25 +398,25 @@ dungeon.exitScript = function(char, dirName) {
   const dir = QuestJs._lang.exit_list.find(el => el.name === dirName)
   
   // up and down are different!!!
-  const dest = w[dungeon.getRoomName(origin.x + dir.x, origin.y + dir.y, origin.level)]
+  const dest = QuestJs._w[dungeon.getRoomName(origin.x + dir.x, origin.y + dir.y, origin.level)]
     
   QuestJs._io.msg(QuestJs._lang.stop_posture(char))
   QuestJs._io.msg(QuestJs._lang.go_successful, {char:char, dir:dirName})
-  world.setRoom(char, dest)
+  QuestJs._world.setRoom(char, dest)
   return true
 }
 
 
-createRoom('dungeon_cell_prototype', {
+QuestJs._create.createRoom('dungeon_cell_prototype', {
   level:0,
   theme:0,
   desc:'The stairs go down...',
-  down:new Exit('entrance', {use:dungeon.exitScript}),
-  up:new Exit('entrance', {use:dungeon.exitScript}),
-  north:new Exit('entrance', {use:dungeon.exitScript}),
-  south:new Exit('entrance', {use:dungeon.exitScript}),
-  east:new Exit('entrance', {use:dungeon.exitScript}),
-  west:new Exit('entrance', {use:dungeon.exitScript}),
+  down:new QuestJs._create.Exit('entrance', {use:dungeon.exitScript}),
+  up:new QuestJs._create.Exit('entrance', {use:dungeon.exitScript}),
+  north:new QuestJs._create.Exit('entrance', {use:dungeon.exitScript}),
+  south:new QuestJs._create.Exit('entrance', {use:dungeon.exitScript}),
+  east:new QuestJs._create.Exit('entrance', {use:dungeon.exitScript}),
+  west:new QuestJs._create.Exit('entrance', {use:dungeon.exitScript}),
   afterFirstEnter:function() {
     if (this.exit_down) {
       dungeon.generateLevel(this)

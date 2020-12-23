@@ -3,7 +3,7 @@
 
 
   
-createItem("me", QuestJs._templates.PLAYER(), { 
+QuestJs._create.createItem("me", QuestJs._templates.PLAYER(), { 
   loc:"bus_seat",
   regex:/^(me|myself|player)$/,
   money:10,
@@ -16,7 +16,7 @@ createItem("me", QuestJs._templates.PLAYER(), {
 
 
 
-createItem("knife",
+QuestJs._create.createItem("knife",
   QuestJs._templates.TAKEABLE(),
   { loc:"me", sharp:false,
     examine:function(isMultiple) {
@@ -34,48 +34,48 @@ createItem("knife",
 
 
 
-createRoom("bus_seat", {
+QuestJs._create.createRoom("bus_seat", {
   desc:'You are sat on a bus somewhere in Nevada. Out of the window you can see desert, and not a lot else.{once: You have not arrived at Salt Lake City, that is for sure! Has the bus stopped for gas or something? You wonder if you have time to buy a snack.}',
-  up:new Exit("bus", {alsoDir:['out'], QuestJs._io.msg:'You get up, out of your seat.'}),
+  up:new QuestJs._create.Exit("bus", {alsoDir:['out'], QuestJs._io.msg:'You get up, out of your seat.'}),
   alias:"Sat on the Bus",
   backgroundNames:['seat', 'window', 'bus'],
 });
 
-createItem("window", {
+QuestJs._create.createItem("window", {
   scenery:true,
   examine:'The window could do with a clean, but nevertheless it gives a good view out of the right side of the bus. It had not crossed you mind that you would have the sun on you pretty much all the way when you left Fresno; the bus had been facing the other way when you got on it!.',
 });
 
 
 
-createRoom("bus", {
+QuestJs._create.createRoom("bus", {
   desc:'You are stood up in the aisle of the bus, beside your seat. Ahead of you you can see out the windscreen, and the road, stretching eastwards through the desert.{once: There are four other passengers on the bus; two men and two women.}',
-  east:new Exit('bus_front'),
-  down:new Exit("bus_seat"),
+  east:new QuestJs._create.Exit('bus_front'),
+  down:new QuestJs._create.Exit("bus_seat"),
   alias:"aisle of the bus",
   visibleFrom:['bus_front', 'bus_seat'],
   backgroundNames:['seat', 'window', 'bus', 'windscreen']
 });
 
-createItem("passengers", {
+QuestJs._create.createItem("passengers", {
   scenery:true,
   loc:'bus',
   examine:function() {
     let count = 0
     let s = ''
-    if (w.Lucas.isHere()) {
+    if (QuestJs._w.Lucas.isHere()) {
       count++
       s += ' A black guy with spike blonde hair.'
     }
-    if (w.Emily.isHere()) {
+    if (QuestJs._w.Emily.isHere()) {
       count++
       s += ' A redhead in tiny denim shorts.'
     }
-    if (w.Amy.isHere()) {
+    if (QuestJs._w.Amy.isHere()) {
       count++
       s += ' An oriental woman in her thirties.'
     }
-    if (w.Elijah.isHere()) {
+    if (QuestJs._w.Elijah.isHere()) {
       count++
       s += ' An older guy in a "Ramones" tee-shirt.'
     }
@@ -85,15 +85,15 @@ createItem("passengers", {
 
 
 
-createRoom("bus_front", {
+QuestJs._create.createRoom("bus_front", {
   desc:"From the front of the bus, you can see the road ahead, heading east for many, many miles of straight road, featureless other than a gas station not far away, on the left of the road. {once: There is no sign of the driver.|'What's going on?' one of the other passengers shouts down at you - a guy in his forties.|You shrug. 'Don't know; driver's not here. There's a gas station. I guess he went there.'}",
-  west:new Exit('bus'),
-  south:new Exit('desert'),
-  out:new Exit('desert'),
+  west:new QuestJs._create.Exit('bus'),
+  south:new QuestJs._create.Exit('desert'),
+  out:new QuestJs._create.Exit('desert'),
   alias:"front of the bus",
   visibleFrom:['bus'],
   afterFirstEnter:function() {
-    w.Emily.suspended = false
+    QuestJs._w.Emily.suspended = false
   }
 });
 
@@ -104,14 +104,14 @@ createRoom("bus_front", {
 
 
 // isAtLoc looks suspect, makes assumptions!
-createItem("huge_rock", ZONE_FEATURE('desert', 2, -5, 3, true), {
+QuestJs._create.createItem("huge_rock", ZONE_FEATURE('desert', 2, -5, 3, true), {
   featureNoExit:"There is a big rock stopping you going #.",
   featureLook:"To the #, you can see a huge rock.",
   examine:"An outcropping of sandstone; it does not look like you could climb it.",
   zoneMapName:'Huge rock',
 });
 
-createItem("cactus", ZONE_FEATURE('desert', -1, 3, 2), {
+QuestJs._create.createItem("cactus", ZONE_FEATURE('desert', -1, 3, 2), {
   featureLook:"There is a big cactus to the #.",
   zoneColour:'green',
   zoneMapName:'Strange cactus',
@@ -119,11 +119,11 @@ createItem("cactus", ZONE_FEATURE('desert', -1, 3, 2), {
   examine:"The only thing to thrive in the desert is this solitary cactus. It looks to be a saguaro, one of the bigger species of cacti. It is strange to see one this far north.",
 });
 
-createItem("gas_station", ZONE_FEATURE('desert', 1, 0, 6), {
+QuestJs._create.createItem("gas_station", ZONE_FEATURE('desert', 1, 0, 6), {
   featureLook:"The gas station is # of you.",
   zoneColour:'transparent',
   zoneMapName:'Gas station',
-  north:new Exit('desert'),
+  north:new QuestJs._create.Exit('desert'),
 });
 
 
@@ -132,7 +132,7 @@ createItem("gas_station", ZONE_FEATURE('desert', 1, 0, 6), {
 
 
 
-createItem("barrier", ZONE_BORDER('desert'), {
+QuestJs._create.createItem("barrier", ZONE_BORDER('desert'), {
   examine:"It is invisible!",
   scenery:true,
   border:function(x, y) {
@@ -142,7 +142,7 @@ createItem("barrier", ZONE_BORDER('desert'), {
   borderDesc:"The air seems to kind of shimmer.",
 });
 
-createItem("barrier2", ZONE_BORDER('desert'), {
+QuestJs._create.createItem("barrier2", ZONE_BORDER('desert'), {
   examine:"It is a gas station",
   scenery:true,
   border:function(x, y) {
@@ -154,32 +154,32 @@ createItem("barrier2", ZONE_BORDER('desert'), {
 
 
 
-createRoom("gas_station_interior", {
+QuestJs._create.createRoom("gas_station_interior", {
   desc:'You are stood up inside the gas station.',
-  east:new Exit('kitchen'),
-  south:new Exit("desert"),
+  east:new QuestJs._create.Exit('kitchen'),
+  south:new QuestJs._create.Exit("desert"),
   alias:"Inside the gas station",
   beforeEnter:function() {
-    game.player.positionX = 0
-    game.player.positionY = -1
+    QuestJs._game.player.positionX = 0
+    QuestJs._game.player.positionY = -1
   },
 });
 
-createRoom("kitchen", {
+QuestJs._create.createRoom("kitchen", {
   desc:'You are stood up in the kitchen.',
-  east:new Exit('gas_station_interior'),
-  north:new Exit("desert"),
+  east:new QuestJs._create.Exit('gas_station_interior'),
+  north:new QuestJs._create.Exit("desert"),
   alias:"Kitchen",
   beforeEnter:function() {
-    game.player.positionX = 1
-    game.player.positionY = 1
+    QuestJs._game.player.positionX = 1
+    QuestJs._game.player.positionY = 1
   },
 });
 
 
 
 
-createRoom("desert", ZONE(), {
+QuestJs._create.createRoom("desert", ZONE(), {
   exits:[
     {x:-1, y:-2, dir:'in', dest:'bus_front', QuestJs._io.msg:'You climb up into the bus.'},
     {x:0, y:-1, dir:'north', dest:'gas_station_interior', QuestJs._io.msg:'You walk inside the gas station office.'},
@@ -247,12 +247,12 @@ createRoom("desert", ZONE(), {
 
 
 
-createItem("silver_coin", QuestJs._templates.TAKEABLE(), ZONE_ITEM('desert', -2, 4), {
+QuestJs._create.createItem("silver_coin", QuestJs._templates.TAKEABLE(), ZONE_ITEM('desert', -2, 4), {
   examine:"A curious silver coin; you do not recognise it. It says it is worth two dollars.",
 });
 
 
-createItem("gas_pump", QuestJs._templates.TAKEABLE(), ZONE_ITEM('desert', 0, -1), {
+QuestJs._create.createItem("gas_pump", QuestJs._templates.TAKEABLE(), ZONE_ITEM('desert', 0, -1), {
   scenery:true,
   examine:"There are two gas pumps, white and slim. They are labelled \"SkyChief\", by Texaco, and look ancient - so old the displays are rotating drums rather than digital. The price is $1.49; surely gas has not been that cheap since the nineties?",
 });

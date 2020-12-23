@@ -1,12 +1,12 @@
 "use strict";
 
 
-createItem("me",
+QuestJs._create.createItem("me",
   QuestJs._templates.PLAYER(),
   { loc:"sickbay", regex:/^(me|myself|player)$/, examine: "Just a regular guy.", }
 );
 
-createItem("all_tool",
+QuestJs._create.createItem("all_tool",
   { 
     loc:"me",
     alias:"AllTool",
@@ -18,7 +18,7 @@ createItem("all_tool",
 );
 
 
-createItem("consult_brittany",
+QuestJs._create.createItem("consult_brittany",
   QuestJs._npc.TOPIC(true),
   { 
     loc:"all_tool",
@@ -30,7 +30,7 @@ createItem("consult_brittany",
   }
 );
 
-createItem("consult_accord",
+QuestJs._create.createItem("consult_accord",
   QuestJs._npc.TOPIC(true),
   { 
     loc:"all_tool",
@@ -42,7 +42,7 @@ createItem("consult_accord",
   }
 );
 
-createItem("consult_garmr",
+QuestJs._create.createItem("consult_garmr",
   QuestJs._npc.TOPIC(true),
   { 
     loc:"all_tool",
@@ -54,7 +54,7 @@ createItem("consult_garmr",
   }
 );
 
-createItem("consult_fastness",
+QuestJs._create.createItem("consult_fastness",
   QuestJs._npc.TOPIC(false),
   { 
     loc:"all_tool",
@@ -65,7 +65,7 @@ createItem("consult_fastness",
   }
 );
 
-createItem("consult_fastness_council",
+QuestJs._create.createItem("consult_fastness_council",
   QuestJs._npc.TOPIC(false),
   { 
     loc:"all_tool",
@@ -84,14 +84,14 @@ createItem("consult_fastness_council",
 
 
 
-createRoom("brittany_lift",
+QuestJs._create.createRoom("brittany_lift",
   QuestJs._templates.TRANSIT("north"),
   {
     desc: "The lift is large and well l;it, with a set of buttons at the back.",
-    north:new Exit('flight_deck'),
+    north:new QuestJs._create.Exit('flight_deck'),
   }
 );
-createItem("button_1",
+QuestJs._create.createItem("button_1",
   QuestJs._templates.TRANSIT_BUTTON("brittany_lift"),
   {
     alias:"Button: 1",
@@ -101,7 +101,7 @@ createItem("button_1",
     transitGoToDest:"You press the button; the door closes  and the lift goes to level 1.",
   }
 );
-createItem("button_2",
+QuestJs._create.createItem("button_2",
   QuestJs._templates.TRANSIT_BUTTON("brittany_lift"),
   {
     alias:"Button: 2",
@@ -111,7 +111,7 @@ createItem("button_2",
     transitGoToDest:"You press the button; the door closes  and the lift goes to level 2.",
   }
 );
-createItem("button_3",
+QuestJs._create.createItem("button_3",
   QuestJs._templates.TRANSIT_BUTTON("brittany_lift"),
   {
     alias:"Button: 3",
@@ -132,10 +132,10 @@ createItem("button_3",
 
 
 
-createRoom("captains_room",
+QuestJs._create.createRoom("captains_room",
   {
     desc: ".",
-    south:new Exit('brittany_lift'),
+    south:new QuestJs._create.Exit('brittany_lift'),
   }
 );
 
@@ -143,34 +143,34 @@ createRoom("captains_room",
 
 
 
-createRoom("flight_deck",
+QuestJs._create.createRoom("flight_deck",
   {
-    desc: "From here, you cmmand the ship. Forward is the galaxy map, a huge holographic world. you can use to plot a destination. Beyond, is the cockpit, where the pilot sits.",
-    south:new Exit('brittany_lift'),
-    north:new Exit('cockpit'),
-    west:new Exit('armoury'),
-    east:new Exit('laboratory'),
+    desc: "From here, you cmmand the ship. Forward is the galaxy map, a huge holographic QuestJs._world. you can use to plot a destination. Beyond, is the cockpit, where the pilot sits.",
+    south:new QuestJs._create.Exit('brittany_lift'),
+    north:new QuestJs._create.Exit('cockpit'),
+    west:new QuestJs._create.Exit('armoury'),
+    east:new QuestJs._create.Exit('laboratory'),
   }
 );
 
-createRoom("cockpit",
+QuestJs._create.createRoom("cockpit",
   { 
     desc: "This is where Jester sits... {once:All the time. Seriously, it is like he eats and sleeps here. Does he never go to the bathroom? Jester is sat in a contour chair, and is surrounded by screens, giving an all arouund view of outside of the ship. {once:About half of the are filled with Lambda Station.}",
-    south:new Exit('flight_deck'),
+    south:new QuestJs._create.Exit('flight_deck'),
   }
 );
 
-createRoom("armoury",
+QuestJs._create.createRoom("armoury",
   {
     desc: ".",
-    east:new Exit('flight_deck'),
+    east:new QuestJs._create.Exit('flight_deck'),
   }
 );
 
-createRoom("laboratory",
+QuestJs._create.createRoom("laboratory",
   {
     desc: ".",
-    west:new Exit('flight_deck'),
+    west:new QuestJs._create.Exit('flight_deck'),
   }
 );
 
@@ -188,13 +188,13 @@ createRoom("laboratory",
 
 
 
-createRoom("mess",
+QuestJs._create.createRoom("mess",
   {
     desc: ".",
-    south:new Exit('britanny_lift'),
-    north:new Exit('guns_battery'),
-    east:new Exit('sickbay'),
-    west:new Exit('malinda_office'),
+    south:new QuestJs._create.Exit('britanny_lift'),
+    north:new QuestJs._create.Exit('guns_battery'),
+    east:new QuestJs._create.Exit('sickbay'),
+    west:new QuestJs._create.Exit('malinda_office'),
     afterFirstEnter:function() {
       QuestJs._io.msg("A man steps up to you. 'Commander Herdsman, it's an honour to finally meet you.' He is dressed in a military uniform - the insignia is GARMR. 'I'm James Couturier. I'm the weapons specialist assigned to the Brittany. You can usually find me in the armoury, but when I heard you were awake, I just had to come and talk to the greatesrt man ever.'");
     }
@@ -203,21 +203,21 @@ createRoom("mess",
 
 
 
-createRoom("guns_battery",
+QuestJs._create.createRoom("guns_battery",
   {
     desc: ".",
-    south:new Exit('mess'),
+    south:new QuestJs._create.Exit('mess'),
   }
 );
 
-createRoom("sickbay",
+QuestJs._create.createRoom("sickbay",
   {
     desc: "The sickbay is small, with just two beds on one side, and a desk on the other. Nevertheless, it looks very well equipped, with various monitors and devices surrounding each bed.",
-    west:new Exit('mess'),
+    west:new QuestJs._create.Exit('mess'),
   }
 );
 
-createItem("quechua",
+QuestJs._create.createItem("quechua",
   QuestJs._npc.NPC(true),
   {
     alias:"Dr Quechua",
@@ -227,7 +227,7 @@ createItem("quechua",
   }
 );
 
-createItem("quechua_what_was_wrong",
+QuestJs._create.createItem("quechua_what_was_wrong",
   QuestJs._npc.TOPIC(true),
   { 
     loc:"quechua",
@@ -243,10 +243,10 @@ createItem("quechua_what_was_wrong",
 
 
 
-createRoom("malinda_office",
+QuestJs._create.createRoom("malinda_office",
   {
     desc: ".",
-    east:new Exit('mess'),
+    east:new QuestJs._create.Exit('mess'),
   }
 );
 

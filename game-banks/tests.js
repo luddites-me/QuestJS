@@ -5,24 +5,24 @@
 QuestJs._test.tests = function() {
   
   QuestJs._test.title("Planet Analysis")
-  w.Xsansi.currentPlanet = 2
-  const response = {actor:w.Ostap}
+  QuestJs._w.Xsansi.currentPlanet = 2
+  const response = {actor:QuestJs._w.Ostap}
   QuestJs._test.assertEqual("'Not as interesting as the last one, I think.'", planetAnalysis(response))
-  w.Ostap.rank2 = 4
+  QuestJs._w.Ostap.rank2 = 4
   QuestJs._test.assertEqual("'There are things a live here, but buried. There's bacteria in the soil. But it is not primitive bacteria. I cannot say for sure - I know only Earth bacteria - but I think this is highly evolved. I think some disaster, an extinction event, has wiped out virtually all life. This is all that survives.'", planetAnalysis(response))
-  w.Ostap.rank2 = 8
+  QuestJs._w.Ostap.rank2 = 8
   QuestJs._test.assertEqual("'It is sad; a whole planet dead - or virtually dead. Sad that we missed them, sad they all died. This is why this mission is so important, so mankind can spread to the stars before something like this happens on Earth.'", planetAnalysis(response))
-  w.Ostap.rank2 = 0
+  QuestJs._w.Ostap.rank2 = 0
 
 
   QuestJs._test.title("Probe events 1")
   QuestJs._test.testing = true;
   QuestJs._test.testOutput = [];
 
-  w.Xsansi.currentPlanet = 2
-  w.Ostap.deployProbeOverallTotal = 1
-  w.Ostap.deployProbeTotal = 1
-  const probe = w.probe_prototype.cloneMe(w.Ostap)
+  QuestJs._w.Xsansi.currentPlanet = 2
+  QuestJs._w.Ostap.deployProbeOverallTotal = 1
+  QuestJs._w.Ostap.deployProbeTotal = 1
+  const probe = QuestJs._w.probe_prototype.cloneMe(QuestJs._w.Ostap)
   QuestJs._test.assertEqual("Ostap", probe.owner)
   QuestJs._test.assertEqual("Bio-probe I", probe.alias)
   QuestJs._test.assertEqual("In flight", probe.status)
@@ -31,8 +31,8 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertEqual("In flight", probe.status)
   QuestJs._test.assertEqual(1, probe.launchCounter)
   for (let i = 0; i < TURNS_TO_LANDING - 1; i++) probe.eventScript()
-  QuestJs._test.assertEqual(0, w.Ostap.rank2)
-  QuestJs._test.assertEqual(0, w.me.bonus)
+  QuestJs._test.assertEqual(0, QuestJs._w.Ostap.rank2)
+  QuestJs._test.assertEqual(0, QuestJs._w.me.bonus)
   QuestJs._test.assertEqual("Landing", probe.status)
   QuestJs._test.assertEqual(TURNS_TO_LANDING, probe.launchCounter)
   probe.eventScript()
@@ -42,20 +42,20 @@ QuestJs._test.tests = function() {
 
   QuestJs._test.title("Probe events 2")
   for (let i = 0; i < 4; i++) probe.eventScript()
-  QuestJs._test.assertEqual(1, w.Ostap.rank2)
-  QuestJs._test.assertEqual(2, w.me.bonus)
+  QuestJs._test.assertEqual(1, QuestJs._w.Ostap.rank2)
+  QuestJs._test.assertEqual(2, QuestJs._w.me.bonus)
   for (let i = 0; i < 4; i++) probe.eventScript()
-  QuestJs._test.assertEqual(2, w.Ostap.rank2)
-  QuestJs._test.assertEqual(4, w.me.bonus)
+  QuestJs._test.assertEqual(2, QuestJs._w.Ostap.rank2)
+  QuestJs._test.assertEqual(4, QuestJs._w.me.bonus)
   for (let i = 0; i < 8; i++) probe.eventScript()
-  QuestJs._test.assertEqual(3, w.Ostap.rank2)
-  QuestJs._test.assertEqual(6, w.me.bonus)
+  QuestJs._test.assertEqual(3, QuestJs._w.Ostap.rank2)
+  QuestJs._test.assertEqual(6, QuestJs._w.me.bonus)
   for (let i = 0; i < 4; i++) probe.eventScript()
-  QuestJs._test.assertEqual(3, w.Ostap.rank2)
-  QuestJs._test.assertEqual(6, w.me.bonus)
-  w.Ostap.rank2 = 0
-  w.Ostap.deployProbeOverallTotal = 0
-  w.Xsansi.currentPlanet = 0
+  QuestJs._test.assertEqual(3, QuestJs._w.Ostap.rank2)
+  QuestJs._test.assertEqual(6, QuestJs._w.me.bonus)
+  QuestJs._w.Ostap.rank2 = 0
+  QuestJs._w.Ostap.deployProbeOverallTotal = 0
+  QuestJs._w.Xsansi.currentPlanet = 0
   QuestJs._test.testing = false;
   QuestJs._test.assertEqual("'Bio-probe I has successfully landed on the planet.' announces Xsansi.", QuestJs._test.testOutput[0])
   
@@ -107,11 +107,11 @@ QuestJs._test.tests = function() {
   QuestJs._test.assertCmd("ask ostap about lost probes", ["'What does Xsansi mean by \"contact lost\" with that probe?' you ask Ostap.", /^'We are exploring the unknown/]);
   QuestJs._test.assertCmd("ask ostap about planet", ["'What's your report on HD 154088D?' you ask Ostap.", "'So, this one does not look so interesting,' he replies. 'I think we see nothing more than bacteria here - maybe not even that.'"]);
   QuestJs._test.assertCmd("topics ostap", ["Some suggestions for what to ask Ostap about: background; expertise; health; lost probe; planet; probes."]);
-  QuestJs._test.assertEqual(0, w.Ostap.relationship);
+  QuestJs._test.assertEqual(0, QuestJs._w.Ostap.relationship);
   QuestJs._test.assertCmd("ask ostap about himself", ["'Tell me about yourself,' you say to Ostap.", /^'I'm from Nastasiv, near Ternopil.'/]);
-  QuestJs._test.assertEqual(1, w.Ostap.relationship);
+  QuestJs._test.assertEqual(1, QuestJs._w.Ostap.relationship);
   QuestJs._test.assertCmd("ask ostap about himself", ["'Tell me about yourself,' you say to Ostap.", /^'I'm from Nastasiv, near Ternopil.'/]);
-  QuestJs._test.assertEqual(1, w.Ostap.relationship);
+  QuestJs._test.assertEqual(1, QuestJs._w.Ostap.relationship);
   QuestJs._test.assertCmd("ask ostap about planet", ["'What's your report on HD 154088D?' you ask Ostap.", "'So far, we see nothing. No life, no green. Perhaps bacteria living below the surface?'"]);
   QuestJs._test.assertCmd("ask ostap about jjjj", ["Ostap has no interest in that."]);
   

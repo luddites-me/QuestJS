@@ -7,12 +7,12 @@
 
 
 // This function will be called at the start of the game, so can be used
-// to introduce your game.
+// to introduce your QuestJs._game.
 QuestJs._settings.setup = function() {
 
 
-  game.player.hitpoints = 20;
-  game.player.status = "You are feeling fine";
+  QuestJs._game.player.hitpoints = 20;
+  QuestJs._game.player.status = "You are feeling fine";
   QuestJs._IO.updateStatus()
 }
 
@@ -45,7 +45,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Test input', {
   regex:/^inp/,
   script:function() {
     QuestJs._io.msg("First some preamble...")
-    QuestJs._io.showMenu("What colour?", [w.book, w.coin, w.Kyle, 'None of them'], function(result) {
+    QuestJs._io.showMenu("What colour?", [QuestJs._w.book, QuestJs._w.coin, QuestJs._w.Kyle, 'None of them'], function(result) {
       if (typeof result === 'string') {
         QuestJs._io.msg("You picked " + result + ".");
       }
@@ -167,8 +167,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('EgMove', {
 QuestJs._commands.unshift(  new QuestJs._command.Cmd('EgHint', {
     regex:/^hint$|^hints$/,
     script:function() {
-      if (w[game.player.loc].hint) {
-        QuestJs._io.metamsg(w[game.player.loc].hint);
+      if (QuestJs._w[QuestJs._game.player.loc].hint) {
+        QuestJs._io.metamsg(QuestJs._w[QuestJs._game.player.loc].hint);
       }
       else {
         QuestJs._io.metamsg("Sorry, no hints here.");
@@ -183,7 +183,7 @@ QuestJs._commands.unshift(  new QuestJs._command.Cmd('EgHint', {
 QuestJs._commands.unshift(new QuestJs._command.Cmd('Test', {
   regex:/^t$/,
   script:function() {
-    QuestJs._log.info(w.Emily)
+    QuestJs._log.info(QuestJs._w.Emily)
   },
 }));
 

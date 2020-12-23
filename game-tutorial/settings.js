@@ -5,7 +5,7 @@ QuestJs._settings.title = "Professor Kleinscope";
 QuestJs._settings.author = "The Pixie"
 QuestJs._settings.version = "1.3";
 QuestJs._settings.additionalAbout = ['Thanks to Pertex and R2T1 for beta-testing.']
-QuestJs._settings.warnings = 'No warning relevant for this game.'
+QuestJs._settings.warnings = 'No warning relevant for this QuestJs._game.'
 QuestJs._settings.files = ["data", "code", "npcs"];
 QuestJs._settings.playMode = 'play'
 QuestJs._settings.noTalkTo = false
@@ -20,7 +20,7 @@ QuestJs._settings.soundFiles = ['Bells4', 'Coins3', 'SynthChime6', 'Laser-Shot-1
 QuestJs._settings.afterSave = function(filename) {
   if (hint.before('save')) {
     tmsg("Okay, we were not going to do saving until later, but whatever...")
-    w.me.alreadySaved = true
+    QuestJs._w.me.alreadySaved = true
   }
   else if (hint.before('westRobot')) {
     if (filename.toLowerCase() === 'tutorial') {

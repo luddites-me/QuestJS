@@ -1,23 +1,23 @@
 "use strict";
 
 
-createRoom("hints", {
+QuestJs._create.createRoom("hints", {
 })
 
 
-createItem("h_gettheletter", {
+QuestJs._create.createItem("h_gettheletter", {
   loc:"hints",
   examine:"Pick up something and the house will allow you in...",
 })
 
 
-createItem("h_find_animate_corpse", {
+QuestJs._create.createItem("h_find_animate_corpse", {
   loc:"hints",
   examine:"You are going to need some muscle later on. Can you find anyone suitable? Or animate someone suitable...<br/>There are other things you can do too, so explore a bit.",
 })
 
 
-createItem("h_animate_corpse1", {
+QuestJs._create.createItem("h_animate_corpse1", {
   loc:"hints",
   examine:function() {
     QuestJs._io.msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is..?")
@@ -26,7 +26,7 @@ createItem("h_animate_corpse1", {
 })
 
 
-createItem("h_animate_corpse2", {
+QuestJs._create.createItem("h_animate_corpse2", {
   loc:"hints",
   examine:function() {
     QuestJs._io.msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning.")
@@ -35,7 +35,7 @@ createItem("h_animate_corpse2", {
 })
 
 
-createItem("h_animate_corpse3", {
+QuestJs._create.createItem("h_animate_corpse3", {
   loc:"hints",
   examine:function() {
     QuestJs._io.msg ("So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning. There is a reel of wire, just apply lightning to the other end.")
@@ -44,19 +44,19 @@ createItem("h_animate_corpse3", {
 })
 
 
-createItem("h_animate_corpse4", {
+QuestJs._create.createItem("h_animate_corpse4", {
   loc:"hints",
   examine:"So you have found a corpse, all ready to be brought to life by some mad scientist. All you need is a spark of electricity, or more specifically a bolt of lightning. There is a reel of wire, just apply lightning to the other end. To do that, head up, and then up again. And attach it...",
 })
 
 
-createItem("h_animate_corpse5", {
+QuestJs._create.createItem("h_animate_corpse5", {
   loc:"hints",
   examine:"Now you have some muscle, you just need to get it to follow you.",
 })
 
 
-createItem("h_animate_corpse6", {
+QuestJs._create.createItem("h_animate_corpse6", {
   loc:"hints",
   examine:function() {
     QuestJs._io.msg ("Patch wants to follow you, but won't. Why not?")
@@ -65,40 +65,40 @@ createItem("h_animate_corpse6", {
 })
 
 
-createItem("h_animate_corpse7", {
+QuestJs._create.createItem("h_animate_corpse7", {
   loc:"hints",
   examine:"Patch needs something on his feet. Better search around for some footwear. Big footwear.",
 })
 
 
-createItem("h_animate_corpse8", {
+QuestJs._create.createItem("h_animate_corpse8", {
   loc:"hints",
   examine:"You need to get those boots repaired before Patch will put them on.",
 })
 
 
-createRoom("environment", {
+QuestJs._create.createRoom("environment", {
 })
 
 
-createItem("e_room", {
+QuestJs._create.createItem("e_room", {
   loc:"environment",
   scenery:true,
 })
 
 
-createItem("generic_window", {
+QuestJs._create.createItem("generic_window", {
   loc:"e_room",
   scenery:true,
   examine:function() {
-      if (!typeof w.player.parent.windowsface === "string") {
+      if (!typeof QuestJs._w.player.parent.windowsface === "string") {
         error ("ERROR: Room has no windowsface set")
       }
-      if (w.player.parent.windowsface === "none") {
+      if (QuestJs._w.player.parent.windowsface === "none") {
         Print ("The room felt rather claustrophic with no windows in it.")
       }
-      else if (w.generic_window.bricked_up) {
-        if (w.player.parent === this.roomsmashed || this.noted) {
+      else if (QuestJs._w.generic_window.bricked_up) {
+        if (QuestJs._w.player.parent === this.roomsmashed || this.noted) {
           Print ("Mandy looked at the bricked up window. No way was she getting out that way.")
         }
         else {
@@ -106,28 +106,28 @@ createItem("generic_window", {
           this.noted = true
         }
       }
-      else if (w.player.parent.windowsface === "north") {
+      else if (QuestJs._w.player.parent.windowsface === "north") {
         Print ("Mandy looked out the window at the countryside; fields, trees, and there was her home, a barn converstion her parents had purchased three years ago. But how could that be? No way was her home visible from this house; Highfield Lane twisted around far too much for that.")
       }
       else {
-        Print ("Mandy looked out the window at the countryside; fields, trees, and there was her home, a barn converstion her parents had purchased three years ago. But how could that be? This window faced " + w.player.parent.windowsface + " and her home was to the north.")
+        Print ("Mandy looked out the window at the countryside; fields, trees, and there was her home, a barn converstion her parents had purchased three years ago. But how could that be? This window faced " + QuestJs._w.player.parent.windowsface + " and her home was to the north.")
       }
   },
 })
 
 
-createItem("e_outside", {
+QuestJs._create.createItem("e_outside", {
   loc:"environment",
   scenery:true,
 })
 
 
-createRoom("nowhere", {
-  down:new Exit(""),
+QuestJs._create.createRoom("nowhere", {
+  down:new QuestJs._create.Exit(""),
 })
 
 
-createItem("glass_shards", {
+QuestJs._create.createItem("glass_shards", {
   loc:"nowhere",
   pronouns:QuestJs._lang.pronouns.plural,
   examine:function() {
@@ -136,7 +136,7 @@ createItem("glass_shards", {
 })
 
 
-createItem("glass_shard", {
+QuestJs._create.createItem("glass_shard", {
   loc:"nowhere",
   scenery:true,
   examine:function() {
@@ -145,14 +145,14 @@ createItem("glass_shard", {
 })
 
 
-createItem("yellow_balloon_remains", {
+QuestJs._create.createItem("yellow_balloon_remains", {
   loc:"nowhere",
   pronouns:QuestJs._lang.pronouns.plural,
   examine:"A ragged piece of yellow rubber.",
 })
 
 
-createItem("patch", QuestJs._npc.NPC(false), {
+QuestJs._create.createItem("patch", QuestJs._npc.NPC(false), {
   loc:"nowhere",
   scenery:true,
   examine:function() {
@@ -162,8 +162,8 @@ createItem("patch", QuestJs._npc.NPC(false), {
     else {
       s = "Mandy looked at Patch, the creature she had bought to life. He was about two and a half meters tall, and very solidly built. Patches of him were hairy, other patches were dark skined, some light skinned. His face was not attractive, it too was a mishmash of parts. Mandy really did not want to know where all the parts came from."
     }
-    if (w.boots.isAtLoc("w.patch")) {
-      if (w.boots.lacedup) {
+    if (QuestJs._w.boots.isAtLoc("QuestJs._w.patch")) {
+      if (QuestJs._w.boots.lacedup) {
         s += " He was wearing a pair of boots, neatly laced up.")
       }
       else {
@@ -174,52 +174,52 @@ createItem("patch", QuestJs._npc.NPC(false), {
 })
 
 
-createRoom("zone_external", {
+QuestJs._create.createRoom("zone_external", {
 })
 
 
-createRoom("highfield_lane", {
+QuestJs._create.createRoom("highfield_lane", {
   loc:"zone_external",
   desc:function() {
     Print ("Mandy was standing, feeling a little anxious, on the pavement outside The House, which stood in a neatly kept garden to the east. The road continued north, through the countryside, towards her home, and then onwards to Hedlington, while southward, Highfield Lane made its way back into town.")
-    if ((w.letter.parent === this) && letter.scenery) {
+    if ((QuestJs._w.letter.parent === this) && letter.scenery) {
       QuestJs._io.msg (" ")
       Print ("She could see a letter lying on the ground.")
     }
   },
   beforeFirstEnter:function() {
   },
-  east:new Exit("garden_location"),
-  south:new Exit("nowhere"),
-  north:new Exit("nowhere"),
-  west:new Exit("mine"),
+  east:new QuestJs._create.Exit("garden_location"),
+  south:new QuestJs._create.Exit("nowhere"),
+  north:new QuestJs._create.Exit("nowhere"),
+  west:new QuestJs._create.Exit("mine"),
 })
 
 
-createItem("player", {
+QuestJs._create.createItem("player", {
   loc:"highfield_lane",
   examine:"Mandy was just an ordinary 15 year old girl, with dark shoulder-length hair and a nose she felt was too big.",
 })
 
 
-createItem("school_bag", {
+QuestJs._create.createItem("school_bag", {
   loc:"player",
   examine:"Once more Mandy looked at her bag with disgust. She had had it since she was thirteen, when she had really been into One Direction. God, what had she been thinking? She had been asking her dad to get her a new one for like six months. It still had Zayn on it!",
 })
 
 
-createItem("mobile_phone", {
+QuestJs._create.createItem("mobile_phone", {
   loc:"school_bag",
   scenery:true,
 })
 
 
-createItem("pen", {
+QuestJs._create.createItem("pen", {
   loc:"school_bag",
 })
 
 
-createItem("shakespeare_book", {
+QuestJs._create.createItem("shakespeare_book", {
   loc:"school_bag",
   examine:function() {
           if (this.state === 0 && QuestJs._lang.getName(this, {}) = "\"Antony and Cleopatra\"") {
@@ -233,36 +233,36 @@ createItem("shakespeare_book", {
             else {
               Print ("Mandy looked at the book she now had. " + QuestJs._lang.getName(this, {}) + ". She wondered if it would be any less boring than \"Antony and Cleopatra\". Probably not worth risking finding out.")
             }
-            if (w.clockwork_thespian.state > 1 && QuestJs._lang.getName(this, {}) === "\"Hamlet\"") {
+            if (QuestJs._w.clockwork_thespian.state > 1 && QuestJs._lang.getName(this, {}) === "\"Hamlet\"") {
               Print ("Then she remembered the Clockwork Thespian. The soul of wit. Hamlet, act 2, scene 2. Quickly she thumbed through. Brevity! Brevity is the soul of wit.")
               this.state = 2
-              w.clockwork_thespian.state = 101
+              QuestJs._w.clockwork_thespian.state = 101
             }
           }
   },
 })
 
 
-createItem("folder", {
+QuestJs._create.createItem("folder", {
   loc:"school_bag",
   scenery:true,
 })
 
 
-createItem("uniform", {
+QuestJs._create.createItem("uniform", {
   loc:"player",
   scenery:true,
   examine:function() {
-        Print ("Mandy was wearing " + w.player.parent.parent.w.uniform + ".")
-        if (!w.player.parent.parent === w.zone_external && not player.uniformnoted) {
-          w.player.uniformnoted = true
+        Print ("Mandy was wearing " + QuestJs._w.player.parent.parent.QuestJs._w.uniform + ".")
+        if (!QuestJs._w.player.parent.parent === QuestJs._w.zone_external && not player.uniformnoted) {
+          QuestJs._w.player.uniformnoted = true
           Print ("That was definitely not the uniform of Kyderbrook High School that she had been wearing when she had entered the house!")
         }
   },
 })
 
 
-createItem("letter", {
+QuestJs._create.createItem("letter", {
   loc:"highfield_lane",
   scenery:true,
   examine:function() {
@@ -272,25 +272,25 @@ createItem("letter", {
 })
 
 
-createItem("house", {
+QuestJs._create.createItem("house", {
   loc:"highfield_lane",
   scenery:true,
   examine:"Mandy could never decide what was so sinister about the house. It was two stories high, a door in the centre of the lower floor, with bay windows either side, typical of many middle-class houses built aroud the turn of the century.",
 })
 
 
-createItem("other_houses", {
+QuestJs._create.createItem("other_houses", {
   loc:"highfield_lane",
   scenery:true,
   examine:"The other houses on the steet looked just like number 23. Just... not evil.",
 })
 
 
-createRoom("garden_location", {
+QuestJs._create.createRoom("garden_location", {
   loc:"zone_external",
   desc:function() {
     Print ("The garden was simple, but well maintained. A gravel path curved from the road, to the west, to The House, to the east. On either side, the lawn was lush and well-trimmed. The garden was bordered by a hedge to north and south. To the west there were rose bushes, though Mandy had never seen them have flowers.")
-    if (w.door.isopen) {
+    if (QuestJs._w.door.isopen) {
       if (exit_to_house.knocked) {
         let s = "Mandy was sure it had been closed when she had knocked on it."
       }
@@ -301,17 +301,17 @@ createRoom("garden_location", {
       this.flag = true
     }
   },
-  west:new Exit("highfield_lane"),
-  east:new Exit("front_hall"),
+  west:new QuestJs._create.Exit("highfield_lane"),
+  east:new QuestJs._create.Exit("front_hall"),
 })
 
 
-createItem("door", {
+QuestJs._create.createItem("door", {
   loc:"garden_location",
   scenery:true,
   examine:function() {
       let s = "The door was tall, and made of panelled wood painted black, set into a white doorframe with a transom above."
-      if (w.door.isopen) {
+      if (QuestJs._w.door.isopen) {
         s += " It stood open, inviting..."
       }
       P (s)
@@ -319,53 +319,53 @@ createItem("door", {
 })
 
 
-createItem("s_roses", {
+QuestJs._create.createItem("s_roses", {
   loc:"zone_external",
   scenery:true,
   examine:"The only reason Mandy knew they were roses was that they were prickly. Her grandmother had some, and they had the same prickles - a bit like a sharkfin. Unlike these, her grandmother's rose blossomed every year.",
 })
 
 
-createItem("s_path", {
+QuestJs._create.createItem("s_path", {
   loc:"zone_external",
   scenery:true,
   examine:"The gravel path curved gently to the right, then back to the left up to the front door.",
 })
 
 
-createItem("s_road", {
+QuestJs._create.createItem("s_road", {
   loc:"zone_external",
   scenery:true,
   examine:"The road was tarmacked with pavements either side - like pretty much every road in Westleigh.",
 })
 
 
-createItem("s_pavement", {
+QuestJs._create.createItem("s_pavement", {
   loc:"zone_external",
   scenery:true,
   examine:"The pavement was set with flagstones. At one time - not so many years ago - Mandy would would studiously avoid the cracks between the flags. She was too old for that now, of course.",
 })
 
 
-createItem("s_grass", {
+QuestJs._create.createItem("s_grass", {
   loc:"zone_external",
   scenery:true,
   examine:"The grass was green, and proverbially boring to watch grow.",
 })
 
 
-createItem("transom", {
+QuestJs._create.createItem("transom", {
   loc:"zone_external",
   scenery:true,
   examine:"The transom was a low, but wide window is a half-oval shape, above the door. The glass was dirty, but it was too high up to see though anyway.",
 })
 
 
-createRoom("zone_victorian", {
+QuestJs._create.createRoom("zone_victorian", {
 })
 
 
-createRoom("front_hall", {
+QuestJs._create.createRoom("front_hall", {
   loc:"zone_victorian",
   scenery:true,
   desc:function() {
@@ -374,15 +374,15 @@ createRoom("front_hall", {
   afterFirstEnter:function() {
     QuestJs._io.msg (" ")
     Print ("The door slammed shut, making Mandy jump.")
-    w.h_gettheletter.passed = true
+    QuestJs._w.h_gettheletter.passed = true
   },
-  west:new Exit("garden_location"),
-  north:new Exit("brass_dining_room"),
-  south:new Exit("gallery"),
+  west:new QuestJs._create.Exit("garden_location"),
+  north:new QuestJs._create.Exit("brass_dining_room"),
+  south:new QuestJs._create.Exit("gallery"),
 })
 
 
-createItem("front_hall_floor", {
+QuestJs._create.createItem("front_hall_floor", {
   loc:"front_hall",
   scenery:true,
   examine:function() {
@@ -391,14 +391,14 @@ createItem("front_hall_floor", {
 })
 
 
-createItem("inside_door", {
+QuestJs._create.createItem("inside_door", {
   loc:"front_hall",
   scenery:true,
   examine:"Mandy tried the door; it was definitely locked shut.",
 })
 
 
-createItem("paintings", {
+QuestJs._create.createItem("paintings", {
   loc:"front_hall",
   scenery:true,
   pronouns:QuestJs._lang.pronouns.plural,
@@ -406,7 +406,7 @@ createItem("paintings", {
 })
 
 
-createRoom("brass_dining_room", {
+QuestJs._create.createRoom("brass_dining_room", {
   loc:"zone_victorian",
   scenery:true,
   desc:function() {
@@ -430,32 +430,32 @@ createRoom("brass_dining_room", {
   afterEnter:function() {
   },
   afterFirstEnter:function() {
-    if (!w.front_hall.notedasweird) {
+    if (!QuestJs._w.front_hall.notedasweird) {
       Print ("That's weird, thought Mandy, there should be a window in the west wall, looking towards the street. Where could the door possibly go?")
-      w.front_hall.notedasweird = true
+      QuestJs._w.front_hall.notedasweird = true
     }
   },
-  south:new Exit("gallery"),
-  west:new Exit("great_hall"),
-  east:new Exit("steam_corridor"),
-  north:new Exit("some_gothic_room"),
+  south:new QuestJs._create.Exit("gallery"),
+  west:new QuestJs._create.Exit("great_hall"),
+  east:new QuestJs._create.Exit("steam_corridor"),
+  north:new QuestJs._create.Exit("some_gothic_room"),
 })
 
 
-createItem("mannequins", {
+QuestJs._create.createItem("mannequins", {
   loc:"brass_dining_room",
   scenery:true,
   examine:"Mandy looked closer at the mannequins. Their skin was a speckled grey, that felt cool to the touch, and sounded like wood when knocked. Their faces were only half formed; slight depressed to suggest eyes, a vague nose, but no mouth.",
 })
 
 
-createItem("clock", QuestJs._templates.SURFACE(open), {
+QuestJs._create.createItem("clock", QuestJs._templates.SURFACE(open), {
   loc:"brass_dining_room",
   scenery:true,
   examine:function() {
           s = "This was a large, old-fashioned clock. A dark wood case housed the ticking mechanism. Roman numerals ran round the clock face, "
       if (typeof this.lookturn === "number") {
-        if (this.lookturn > (game.turn - 10)) {
+        if (this.lookturn > (QuestJs._game.turn - 10)) {
           s += "which indicated the time was now twenty past nine."
           break
         else {
@@ -464,9 +464,9 @@ createItem("clock", QuestJs._templates.SURFACE(open), {
       }
       else {
         s += "which indicated the time was now twenty past nine. That was so wrong, Mandy could not decide if it was slow or fast."
-        this.lookturn = game.turn
+        this.lookturn = QuestJs._game.turn
       }
-      if (w.large_key.isAtLoc("this")) {
+      if (QuestJs._w.large_key.isAtLoc("this")) {
         s += " Mandy could see the key for winding the clock up was in the side of the clock."
       }
       Print (s)
@@ -474,37 +474,37 @@ createItem("clock", QuestJs._templates.SURFACE(open), {
 })
 
 
-createItem("large_key", {
+QuestJs._create.createItem("large_key", {
   loc:"clock",
   scenery:true,
 })
 
 
-createItem("vic_chair", {
+QuestJs._create.createItem("vic_chair", {
   loc:"brass_dining_room",
   scenery:true,
   examine:"The chair was made of dark wood, with a high back and a padded seat.",
 })
 
 
-createItem("vic_table", {
+QuestJs._create.createItem("vic_table", {
   loc:"brass_dining_room",
   examine:"The table was made of the same dark wood as the chairs.",
 })
 
 
-createRoom("theatre", {
+QuestJs._create.createRoom("theatre", {
   loc:"zone_victorian",
   scenery:true,
   desc:"This was a large room, with perhaps two dozen chairs arranged facing a pair of curtains - presumably hiding a stage - to the west. The lower half of the walls were wood panelled, while the upper walls were painted a yellow-brown.",
   afterEnter:function() {
   },
-  west:new Exit("theatre_stage"),
-  east:new Exit("gallery"),
+  west:new QuestJs._create.Exit("theatre_stage"),
+  east:new QuestJs._create.Exit("gallery"),
 })
 
 
-createRoom("theatre_stage", {
+QuestJs._create.createRoom("theatre_stage", {
   loc:"zone_victorian",
   scenery:true,
   desc:function() {
@@ -514,14 +514,14 @@ createRoom("theatre_stage", {
     Print ("Mandy pushed the curtain aside and looked beyond. She was startled for a moment to see a figure there, but it was quite inanimate.")
     QuestJs._io.msg (" ")
   },
-  east:new Exit("theatre"),
+  east:new QuestJs._create.Exit("theatre"),
 })
 
 
-createItem("clockwork_thespian", {
+QuestJs._create.createItem("clockwork_thespian", {
   loc:"theatre_stage",
   examine:function() {
-      if (w.clockwork_thespian.state === 0) {
+      if (QuestJs._w.clockwork_thespian.state === 0) {
         Print ("The figure seemed to have been manufactured to resemble a man of impressive proportions, in height, but also in the girth of his chest. And its groin too, Mandy noticed with a wry smile. It, or he, was constructed of brass, and looked to be jointed. He was clothed in a frilly off-white shirt, and dark baggy trousers, as well as a floppy hat. Mandy noticed there was a hole in the back of his shirt, and a corresponding hole in his back, where a simple, if large, key might fit.")
       }
       else {
@@ -531,46 +531,46 @@ createItem("clockwork_thespian", {
 })
 
 
-createRoom("gallery", {
+QuestJs._create.createRoom("gallery", {
   loc:"zone_victorian",
   scenery:true,
   desc:"Mandy was stood at the end of a long gallery running south. There were doors west, east and north. A small table had a chessboard on it, and there were painting down the two long walls.",
   afterFirstEnter:function() {
-    if (!w.front_hall.notedasweird) {
+    if (!QuestJs._w.front_hall.notedasweird) {
       QuestJs._io.msg (" ")
       Print ("That's weird, thought Mandy, surely the door to the west would go back into the garden? And this room was so long, surely the house was not this wide...")
-      w.front_hall.notedasweird = true
+      QuestJs._w.front_hall.notedasweird = true
     }
   },
-  north:new Exit("brass_dining_room"),
-  west:new Exit("theatre"),
-  south:new Exit("gallery_south"),
-  east:new Exit("room_big"),
+  north:new QuestJs._create.Exit("brass_dining_room"),
+  west:new QuestJs._create.Exit("theatre"),
+  south:new QuestJs._create.Exit("gallery_south"),
+  east:new QuestJs._create.Exit("room_big"),
 })
 
 
-createItem("gallery_n_paintings", {
+QuestJs._create.createItem("gallery_n_paintings", {
   loc:"gallery",
   scenery:true,
   examine:"The paintings were all oil on canvas, and to Mandy's inexpert eye the same style, though they varied in subject matter. Several were portraits, but there was a Greek temple, a huge painting of a sea battle and beautiful sunset.",
 })
 
 
-createItem("chessset", {
+QuestJs._create.createItem("chessset", {
   loc:"gallery",
   scenery:true,
   examine:"The chess board was set into the small table, sixty four squares of ivory and mahogany, in a circular top. The board was in mid-game, and half a dozen pieces had already been taken, mostly white's. Mandy tried to pick up one of taken pawns, and found she could not - it seemed to be glued to the table. She tried a couple more pieces - they all seemed very solidly in place.",
 })
 
 
-createItem("chess_pieces", {
+QuestJs._create.createItem("chess_pieces", {
   loc:"gallery",
   scenery:true,
   examine:"The chess pieces were all wooden and exquisitely carved. The queen looked like a warrior woman in armour, the pawns held pikes. White pieces seemed to be carved from ivory, whilst black were wooden, but they were otherwise identical.",
 })
 
 
-createItem("white_knight", {
+QuestJs._create.createItem("white_knight", {
   loc:"gallery",
   scenery:true,
   examine:function() {
@@ -584,29 +584,29 @@ createItem("white_knight", {
 })
 
 
-createRoom("gallery_south", {
+QuestJs._create.createRoom("gallery_south", {
   loc:"zone_victorian",
   scenery:true,
   desc:"The south end of the gallery was much like the north, with more paintings on the long walls. There was a door at the south end, and also a door to the east.",
-  north:new Exit("gallery"),
-  east:new Exit("room_small"),
-  south:new Exit("some_gothic_room"),
+  north:new QuestJs._create.Exit("gallery"),
+  east:new QuestJs._create.Exit("room_small"),
+  south:new QuestJs._create.Exit("some_gothic_room"),
 })
 
 
-createItem("gallery_s_paintings", {
+QuestJs._create.createItem("gallery_s_paintings", {
   loc:"gallery_south",
   scenery:true,
   examine:"The most striking of the paintings was a family portrait, which must have been about life size, despite the subjects being painted full length. Mandy could see a father, in suit and top hat, and a mother, together with three young children.",
 })
 
 
-createRoom("room_big", {
+QuestJs._create.createRoom("room_big", {
   loc:"zone_victorian",
   scenery:true,
   desc:function() {
     let s = "The drawing room was rather well appointed with wood paneling on the walls, and an ornate ceiling. A window to the east had portraits on either side, whilst the fireplace to the south had a painting of a battle above the mantleplace."
-    if (w.mahogany_cabinet.moved) {
+    if (QuestJs._w.mahogany_cabinet.moved) {
       s += " The mahogany cabinet had been pulled out from the north wall."
     }
     else {
@@ -615,36 +615,36 @@ createRoom("room_big", {
     Print (s)
   },
   beforeEnter:function() {
-    foreach (itm, GetDirectChildren(w.room_small)) {
+    foreach (itm, GetDirectChildren(QuestJs._w.room_small)) {
       if (DoesInherit(itm, "sizechangeobject")) {
         itm.shrink()
         itm.parent = this
       }
     }
-    foreach (itm, GetDirectChildren(w.drawing_room_south)) {
+    foreach (itm, GetDirectChildren(QuestJs._w.drawing_room_south)) {
       if (DoesInherit(itm, "sizechangeobject")) {
         itm.shrink()
         itm.parent = this
       }
     }
-    foreach (itm, GetDirectChildren(w.drawing_room_north)) {
+    foreach (itm, GetDirectChildren(QuestJs._w.drawing_room_north)) {
       if (DoesInherit(itm, "sizechangeobject")) {
         itm.shrink()
         itm.parent = this
       }
     }
   },
-  west:new Exit("gallery"),
-  north:new Exit("nowhere"),
+  west:new QuestJs._create.Exit("gallery"),
+  north:new QuestJs._create.Exit("nowhere"),
 })
 
 
-createItem("mahogany_cabinet", {
+QuestJs._create.createItem("mahogany_cabinet", {
   loc:"room_big",
   scenery:true,
   examine:function() {
       let s = "The mahogany cabinet looked like it came straight out of \"Antiques Roadshow\". Two doors at the front, a curious section on top at the back with four small draws that looks suggestive of a castle wall, with towers at each end."
-      if (w.mahogany_cabinet.moved) {
+      if (QuestJs._w.mahogany_cabinet.moved) {
         s += " It was standing a little way from the wall and Mandy could just see a hole in the wall behind it a few inches across."
       }
       P (s)
@@ -652,26 +652,26 @@ createItem("mahogany_cabinet", {
 })
 
 
-createItem("small_rug", {
+QuestJs._create.createItem("small_rug", {
   loc:"room_big",
   scenery:true,
   examine:"The rug had a depiction of two overs kissing, with a geometric pattern around the edge.",
 })
 
 
-createRoom("room_small", {
+QuestJs._create.createRoom("room_small", {
   loc:"zone_victorian",
   scenery:true,
   desc:"This was a drawing room of immense size. Perhaps a hundred meters above her, Mandy could see the ornate ceiling. The walls, panelled in wood, stretched an even greater distance. Huge painting, way about Mandy's head, hung from the walls. In the centre of the room was a thick rug, about the size of a football pitch. The pile was so great, it would stop Mandy going across it. She could, however go round the sides, to the northeast or southeast. The door to the west looked very much out of place, being normal height in such a huge wall.",
   beforeEnter:function() {
-    foreach (itm, GetDirectChildren(w.room_big)) {
+    foreach (itm, GetDirectChildren(QuestJs._w.room_big)) {
       if (DoesInherit(itm, "sizechangeobject")) {
         itm.grow()
         if (itm.dest === "north") {
-          itm.parent = w.drawing_room_north
+          itm.parent = QuestJs._w.drawing_room_north
         }
         else if (itm.dest === "south") {
-          itm.parent = w.drawing_room_south
+          itm.parent = QuestJs._w.drawing_room_south
         }
         else {
           itm.parent = this
@@ -679,34 +679,34 @@ createRoom("room_small", {
       }
     }
   },
-  west:new Exit("gallery_south"),
-  northeast:new Exit("drawing_room_north"),
-  southeast:new Exit("drawing_room_south"),
+  west:new QuestJs._create.Exit("gallery_south"),
+  northeast:new QuestJs._create.Exit("drawing_room_north"),
+  southeast:new QuestJs._create.Exit("drawing_room_south"),
 })
 
 
-createRoom("drawing_room_south", {
+QuestJs._create.createRoom("drawing_room_south", {
   loc:"zone_victorian",
   scenery:true,
   beforeEnter:function() {
-    if (w.boots.parent === this && boots.size = 1) {
+    if (QuestJs._w.boots.parent === this && boots.size = 1) {
       exit_in_to_boots.visible = true
     }
     else {
       exit_in_to_boots.visible = false
     }
   },
-  northwest:new Exit("room_small"),
-  in:new Exit("boots"),
+  northwest:new QuestJs._create.Exit("room_small"),
+  in:new QuestJs._create.Exit("boots"),
 })
 
 
-createRoom("drawing_room_north", {
+QuestJs._create.createRoom("drawing_room_north", {
   loc:"zone_victorian",
   scenery:true,
   desc:function() {
     let s = "Mandy was stood on a narrow strip of wooden floor, between the colossal wall to the north, and the forest-like carpet to the south. To the east, the rug was flush against the wall, so that was not an option, but she could head south west, back to the door."
-    if (w.mahogany_cabinet.moved) {
+    if (QuestJs._w.mahogany_cabinet.moved) {
       s += " Above her towered a huge mahogany cabinet, standing proud of the wall. Behind it, to the north, was a large hole in the otherwise perfect wall."
     }
     else {
@@ -714,17 +714,17 @@ createRoom("drawing_room_north", {
     }
     Print (s)
   },
-  southwest:new Exit("room_small"),
-  north:new Exit("secret_room"),
+  southwest:new QuestJs._create.Exit("room_small"),
+  north:new QuestJs._create.Exit("secret_room"),
 })
 
 
-createItem("huge_cabinet", {
+QuestJs._create.createItem("huge_cabinet", {
   loc:"drawing_room_north",
   scenery:true,
   examine:function() {
       let s = "The mahogany cabinet towered over Mandy; it had to be higher than the science block at Kyderbrook High."
-      if (w.mahogany_cabinet.moved) {
+      if (QuestJs._w.mahogany_cabinet.moved) {
         s += " It was standing a little way from the wall - like about 10 foot - and Mandy could see a hole in the wall behind it."
       }
       else {
@@ -735,21 +735,21 @@ createItem("huge_cabinet", {
 })
 
 
-createRoom("secret_room", {
+QuestJs._create.createRoom("secret_room", {
   loc:"zone_victorian",
   scenery:true,
   desc:function() {
     let s = "After the opulence of the other roooms, this one was decidedly bare - but at least it of reasonable proportions. More or less square, the walls were white, or had been  at one time. The floor and ceiling were wood."
-    if (!w.boots.pickedup) {
+    if (!QuestJs._w.boots.pickedup) {
       s += " The only feature of note was a large pair of boots in one corner."
     }
     P (s)
   },
-  south:new Exit("drawing_room_north"),
+  south:new QuestJs._create.Exit("drawing_room_north"),
 })
 
 
-createItem("boots", {
+QuestJs._create.createItem("boots", {
   loc:"secret_room",
   scenery:true,
   examine:function() {
@@ -786,138 +786,138 @@ createItem("boots", {
       }
       P (s)
   },
-  out:new Exit("drawing_room_south"),
+  out:new QuestJs._create.Exit("drawing_room_south"),
 })
 
 
-createItem("victorian_floor", {
+QuestJs._create.createItem("victorian_floor", {
   loc:"zone_victorian",
   scenery:true,
   examine:"The floor was wooden, and well-polished.",
 })
 
 
-createItem("victorian_walls", {
+QuestJs._create.createItem("victorian_walls", {
   loc:"zone_victorian",
   scenery:true,
   examine:"The walls were all panelled in wood.",
 })
 
 
-createItem("victorian_ceiling", {
+QuestJs._create.createItem("victorian_ceiling", {
   loc:"zone_victorian",
   scenery:true,
   examine:function() {
-    if (w.player.stoodon === null) {
+    if (QuestJs._w.player.stoodon === null) {
       Print ("The ceiling was white, with simple decorations along each side.")
     }
     else {
-      Print ("The ceiling turned out to be no more interesting from up here. Mandy wondered why she had bothered stabding on the " + w.player.lang.getName(stoodon, {}) + ".")
+      Print ("The ceiling turned out to be no more interesting from up here. Mandy wondered why she had bothered stabding on the " + QuestJs._w.player.lang.getName(stoodon, {}) + ".")
     }
   },
 })
 
 
-createItem("floor", {
+QuestJs._create.createItem("floor", {
   loc:"zone_victorian",
   scenery:true,
   examine:"Mandy was not quite sure what it was about the tiles. They did not depict a demon or murder or anything really; they just had a strange effect on her eyes that was... disturbing.",
 })
 
 
-createRoom("zone_flora", {
+QuestJs._create.createRoom("zone_flora", {
 })
 
 
-createItem("flora_floor", {
+QuestJs._create.createItem("flora_floor", {
   loc:"zone_flora",
   scenery:true,
   examine:"The floor was a lattice of wrought iron, painted white, and flaking in a few places.",
 })
 
 
-createItem("flora_walls", {
+QuestJs._create.createItem("flora_walls", {
   loc:"zone_flora",
   examine:"The walls were windows, in white frames.",
 })
 
 
-createItem("flora_ceiling", {
+QuestJs._create.createItem("flora_ceiling", {
   loc:"zone_flora",
   scenery:true,
   examine:"The walls arched over to form the ceiling.",
 })
 
 
-createRoom("greenhouse_west", {
+QuestJs._create.createRoom("greenhouse_west", {
   loc:"zone_flora",
   scenery:true,
-  west:new Exit("steam_hall"),
-  east:new Exit("greenhouse_east"),
+  west:new QuestJs._create.Exit("steam_hall"),
+  east:new QuestJs._create.Exit("greenhouse_east"),
 })
 
 
-createRoom("greenhouse_east", {
+QuestJs._create.createRoom("greenhouse_east", {
   loc:"zone_flora",
   scenery:true,
-  west:new Exit("greenhouse_west"),
-  east:new Exit("great_hall"),
+  west:new QuestJs._create.Exit("greenhouse_west"),
+  east:new QuestJs._create.Exit("great_hall"),
 })
 
 
-createRoom("greenhouse_catwalk_west", {
+QuestJs._create.createRoom("greenhouse_catwalk_west", {
   loc:"zone_flora",
   scenery:true,
-  west:new Exit("upper_steam_hall"),
-  east:new Exit("greenhouse_catwalk_east"),
+  west:new QuestJs._create.Exit("upper_steam_hall"),
+  east:new QuestJs._create.Exit("greenhouse_catwalk_east"),
 })
 
 
-createRoom("greenhouse_catwalk_east", {
+QuestJs._create.createRoom("greenhouse_catwalk_east", {
   loc:"zone_flora",
   scenery:true,
-  west:new Exit("greenhouse_catwalk_west"),
-  east:new Exit("great_gallery"),
+  west:new QuestJs._create.Exit("greenhouse_catwalk_west"),
+  east:new QuestJs._create.Exit("great_gallery"),
 })
 
 
-createRoom("zone_central", {
+QuestJs._create.createRoom("zone_central", {
 })
 
 
-createItem("central_floor", {
+QuestJs._create.createItem("central_floor", {
   loc:"zone_central",
   scenery:true,
   examine:"The floor was wooden, and well-polished.",
 })
 
 
-createItem("central_walls", {
+QuestJs._create.createItem("central_walls", {
   loc:"zone_central",
   scenery:true,
   examine:"The walls were all panelled in wood.",
 })
 
 
-createItem("central_ceiling", {
+QuestJs._create.createItem("central_ceiling", {
   loc:"zone_central",
   examine:"The ceiling was white, with simple decorations along each side.",
 })
 
 
-createRoom("central_control", {
+QuestJs._create.createRoom("central_control", {
   loc:"zone_central",
   scenery:true,
-  west:new Exit("some_gothic_room"),
+  west:new QuestJs._create.Exit("some_gothic_room"),
 })
 
 
-createItem("winfield_malovich", {
+QuestJs._create.createItem("winfield_malovich", {
   loc:"central_control",
 })
 
 
-createItem("wm_hello", QuestJs._npc.TOPIC(true), {
+QuestJs._create.createItem("wm_hello", QuestJs._npc.TOPIC(true), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -935,7 +935,7 @@ createItem("wm_hello", QuestJs._npc.TOPIC(true), {
 })
 
 
-createItem("wm_what_happened", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("wm_what_happened", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -960,7 +960,7 @@ createItem("wm_what_happened", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("wm_no_way_out", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("wm_no_way_out", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -974,7 +974,7 @@ createItem("wm_no_way_out", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("wm_same_question", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("wm_same_question", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -989,7 +989,7 @@ createItem("wm_same_question", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("wm_i_dont_know", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("wm_i_dont_know", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1004,7 +1004,7 @@ createItem("wm_i_dont_know", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("wm_i_will_think", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("wm_i_will_think", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1019,7 +1019,7 @@ createItem("wm_i_will_think", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("wm_how_long", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("wm_how_long", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1038,7 +1038,7 @@ createItem("wm_how_long", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("wm_1911", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("wm_1911", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1057,71 +1057,71 @@ createItem("wm_1911", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("wm_what_happened7", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("wm_what_happened7", QuestJs._npc.TOPIC(false), {
   loc:"winfield_malovich",
 })
 
 
-createItem("analytical_engine", {
+QuestJs._create.createItem("analytical_engine", {
   loc:"central_control",
 })
 
 
-createRoom("zone_medieval", {
+QuestJs._create.createRoom("zone_medieval", {
 })
 
 
-createItem("medieval_floor", {
+QuestJs._create.createItem("medieval_floor", {
   loc:"zone_medieval",
   scenery:true,
   examine:"The floor was rough wood.",
 })
 
 
-createItem("medieval_walls", {
+QuestJs._create.createItem("medieval_walls", {
   loc:"zone_medieval",
   scenery:true,
   examine:"The walls were all rough-cut stone.",
 })
 
 
-createItem("medieval_ceiling", {
+QuestJs._create.createItem("medieval_ceiling", {
   loc:"zone_medieval",
   scenery:true,
   examine:"The ceiling was wood, like the floor, supported by thick beams.",
 })
 
 
-createRoom("great_gallery", {
+QuestJs._create.createRoom("great_gallery", {
   loc:"zone_medieval",
   scenery:true,
   desc:"The great gallery was a wooden platform that overlooked the great hall. A flight of wooden stairs led back down to the hall, while a narrow spiral staircase led further upwards. The walls were of rough cut stone, and the window to the east was small and arched. Doorways led south and west.",
-  down:new Exit("great_hall"),
-  south:new Exit("solar"),
-  up:new Exit("observatory"),
-  west:new Exit("greenhouse_catwalk_east"),
+  down:new QuestJs._create.Exit("great_hall"),
+  south:new QuestJs._create.Exit("solar"),
+  up:new QuestJs._create.Exit("observatory"),
+  west:new QuestJs._create.Exit("greenhouse_catwalk_east"),
 })
 
 
-createRoom("great_hall", {
+QuestJs._create.createRoom("great_hall", {
   loc:"zone_medieval",
   scenery:true,
   desc:"The great hall was an impressive size. It looked older than the rest of the house, a lot older, being built of rough cut stone. There were doors to east and west, and a wooden staircase led up to a wooden gallery that ran along the west side of the hall. To the south, a doorway led to a flight of steps heading downwards.",
-  east:new Exit("brass_dining_room"),
-  up:new Exit("great_gallery"),
-  down:new Exit("alchemy_lab"),
-  south:new Exit("alchemy_lab"),
-  west:new Exit("greenhouse_east"),
+  east:new QuestJs._create.Exit("brass_dining_room"),
+  up:new QuestJs._create.Exit("great_gallery"),
+  down:new QuestJs._create.Exit("alchemy_lab"),
+  south:new QuestJs._create.Exit("alchemy_lab"),
+  west:new QuestJs._create.Exit("greenhouse_east"),
 })
 
 
-createRoom("alchemy_lab", {
+QuestJs._create.createRoom("alchemy_lab", {
   loc:"zone_medieval",
   scenery:true,
   desc:function() {
     let s = "This appeared to be some kind of laboratory, though nothing like the ones at school. While they had their own distinctive smell, this room was altogether worse,with an almost over-powering smell of rotten eggs. Visually, the room was dominated by a very solid wooden bench"
-    if (w.patchwork_body.isAtLoc("this")) {
-      if (w.patchwork_body.state === 0) {
+    if (QuestJs._w.patchwork_body.isAtLoc("this")) {
+      if (QuestJs._w.patchwork_body.state === 0) {
         s += ", with a corpse on it; was it there to be dissected?"
       }
       else {
@@ -1132,21 +1132,21 @@ createRoom("alchemy_lab", {
     else {
       s += ". At one end of the bench a strange device stood with wires dangling from it."
     }
-    if ((w.reel.parent === this) && reel.scenery) {
+    if ((QuestJs._w.reel.parent === this) && reel.scenery) {
       s += " A reel of wire sat on the floor, one end attached to the device")
     }
     s += " A shelf held a bizarre hotch-potch of glassware on it. A layer of dust suggested it had not been used for some time. Above the table, a crocodile was suspended."
     Print (s)
   },
   afterFirstEnter:function() {
-    w.h_find_animate_corpse.passed = true
+    QuestJs._w.h_find_animate_corpse.passed = true
   },
-  up:new Exit("great_hall"),
-  north:new Exit("great_hall"),
+  up:new QuestJs._create.Exit("great_hall"),
+  north:new QuestJs._create.Exit("great_hall"),
 })
 
 
-createItem("reel", {
+QuestJs._create.createItem("reel", {
   loc:"alchemy_lab",
   examine:function() {
       let s = "The wire was about a millimeter thick, and "
@@ -1156,7 +1156,7 @@ createItem("reel", {
       else if (this.count === 1) {
         s += "she guessed there was about twenty meters of wire on the spindle (which was also metal), and more heading down the stairs to the laboratory."
       }
-      else if (this.count === 1 && w.player.parent = w.great_gallery) {
+      else if (this.count === 1 && QuestJs._w.player.parent = QuestJs._w.great_gallery) {
         s += "she guessed there was about fifteen meters of wire on the spindle (which was also metal), and more dropping down to the hall below and heading down the stairs to the laboratory."
       }
       else if (this.count === 5) {
@@ -1171,34 +1171,34 @@ createItem("reel", {
 })
 
 
-createItem("stuffed_crocodile", {
+QuestJs._create.createItem("stuffed_crocodile", {
   loc:"alchemy_lab",
   scenery:true,
   examine:"The crocodile was a little over a meter long, and hanging from the ceiling on four wires. It looked like it was stuffed, and it was kind of creeping imagining that once it had been alive.",
 })
 
 
-createItem("alchemy_bench", {
+QuestJs._create.createItem("alchemy_bench", {
   loc:"alchemy_lab",
   examine:"The wood of the bench had black rings and circles scorched into it, testament to years of use. Or perhaps week of use by an inept experimenter, Mandy mused.",
 })
 
 
-createItem("scorch_marks", {
+QuestJs._create.createItem("scorch_marks", {
   loc:"alchemy_lab",
   scenery:true,
   examine:"Mandy could not tell if the scorch marks were caused by heat or acid.",
 })
 
 
-createItem("glass_apparatus", {
+QuestJs._create.createItem("glass_apparatus", {
   loc:"alchemy_lab",
   scenery:true,
   examine:"Mandy took a better look at the glass apparatus. Mr Turnbill had once set up a distillation in chemistry, and she tried to remember what it had looked like it. She had a feeling nothing like this, but she seemed to remember spending the lesson passing notes to Finley O'Donnell, trying to convince him that Claire Grossman fancied him.",
 })
 
 
-createItem("patchwork_body", {
+QuestJs._create.createItem("patchwork_body", {
   loc:"alchemy_lab",
   examine:function() {
       this.state = 1
@@ -1207,11 +1207,11 @@ createItem("patchwork_body", {
 })
 
 
-createItem("alchemy_device", {
+QuestJs._create.createItem("alchemy_device", {
   loc:"alchemy_lab",
   examine:function() {
       let s = "The machine at the head of the table was about a meter and a half tall, a wooden cabinet, with  brass fittings. On the front were a series of dials and knobs. "
-      if (w.patchwork_body.isAtLoc("w.alchemy_lab")) {
+      if (QuestJs._w.patchwork_body.isAtLoc("QuestJs._w.alchemy_lab")) {
         s += "About a dozen wires ran from the machine to the body, each attached to its own brass bolt on the machine, and to a clip on the body."
       }
       else {
@@ -1222,22 +1222,22 @@ createItem("alchemy_device", {
 })
 
 
-createRoom("observatory", {
+QuestJs._create.createRoom("observatory", {
   loc:"zone_medieval",
   scenery:true,
   desc:"The room was dominated, filled even, by a telescope and its supporting mechanism, which was not difficult, as the room was not big. There were some controls on the wall, and the only exit was the stairs she had just come up.{if telescope.roofopen: A section of roof was open on the west side of the dome.}",
-  down:new Exit("great_gallery"),
-  up:new Exit("observatory_up"),
-  climb:new Exit("observatory_up"),
+  down:new QuestJs._create.Exit("great_gallery"),
+  up:new QuestJs._create.Exit("observatory_up"),
+  climb:new QuestJs._create.Exit("observatory_up"),
 })
 
 
-createItem("telescope", {
+QuestJs._create.createItem("telescope", {
   loc:"observatory",
   scenery:true,
   examine:function() {
       let s = "The telescope itself was about two meters long. It was held in place by a complicated mechanism, involving cogs and gears, and the whole thing was made of brass, giving it a strange beauty."
-      switch (w.left_wheel.state) {
+      switch (QuestJs._w.left_wheel.state) {
         case 1:
           s += " It was currently almost vertically,"
           break
@@ -1248,7 +1248,7 @@ createItem("telescope", {
           s += " It was currently angled about sixty degrees above the horizontal,"
           break
       }
-      switch (w.middle_wheel.state) {
+      switch (QuestJs._w.middle_wheel.state) {
         case 0:
           s += " and pointing to the east."
           break
@@ -1270,62 +1270,62 @@ createItem("telescope", {
 })
 
 
-createItem("left_wheel", {
+QuestJs._create.createItem("left_wheel", {
   loc:"observatory",
   scenery:true,
   examine:"The left wheel was about seven centimeters across, and made of brass.",
 })
 
 
-createItem("middle_wheel", {
+QuestJs._create.createItem("middle_wheel", {
   loc:"observatory",
   scenery:true,
   examine:"The midde wheel was about seven centimeters across, and made of brass.",
 })
 
 
-createItem("right_wheel", {
+QuestJs._create.createItem("right_wheel", {
   loc:"observatory",
   scenery:true,
   examine:"The right wheel was about seven centimeters across, and made of brass.",
 })
 
 
-createItem("controls", {
+QuestJs._create.createItem("controls", {
   loc:"observatory",
   scenery:true,
   examine:"The controls comsisted of three wheels, one on the left, one in the middle, one on the right, set into a panel, all in brass.",
 })
 
 
-createRoom("solar", {
+QuestJs._create.createRoom("solar", {
   loc:"zone_medieval",
   scenery:true,
   desc:"The solar. Mandy knew the name from history class; this is where the lord of the castle would sleep. None to comfoortable to Mandy's eyes, but possibly the height of luxury a thousand years ago. A large bed, crudely built of wood, a tapestry hung from one wall, a chamber pot under the bed.",
-  north:new Exit("great_gallery"),
+  north:new QuestJs._create.Exit("great_gallery"),
 })
 
 
-createItem("solar_bed", {
+QuestJs._create.createItem("solar_bed", {
   loc:"solar",
 })
 
 
-createItem("solar_tapestry", {
+QuestJs._create.createItem("solar_tapestry", {
   loc:"solar",
 })
 
 
-createItem("chamber_pot", {
+QuestJs._create.createItem("chamber_pot", {
   loc:"solar",
 })
 
 
-createRoom("observatory_up", {
+QuestJs._create.createRoom("observatory_up", {
   loc:"zone_medieval",
   desc:function() {
     let s = "Mandy was stood on the top of the mechanism that supported the telescope. "
-    if (w.telescope.roofopen) {
+    if (QuestJs._w.telescope.roofopen) {
       s += "If she reached, she could probably pull herself up onto the roof from her, she thought."
     }
     else {
@@ -1333,26 +1333,26 @@ createRoom("observatory_up", {
     }
     Print (s)
   },
-  up:new Exit("roof_location"),
-  down:new Exit("observatory"),
-  climb:new Exit("roof_location"),
+  up:new QuestJs._create.Exit("roof_location"),
+  down:new QuestJs._create.Exit("observatory"),
+  climb:new QuestJs._create.Exit("roof_location"),
 })
 
 
-createItem("ceiling", {
+QuestJs._create.createItem("ceiling", {
   loc:"observatory_up",
   scenery:true,
 })
 
 
-createItem("telescope_up", {
+QuestJs._create.createItem("telescope_up", {
   loc:"observatory_up",
   scenery:true,
   examine:"From here, with her arms and legs wrapped around it, the telescope was a brass cylinder of security to cling to.",
 })
 
 
-createRoom("roof_location", {
+QuestJs._create.createRoom("roof_location", {
   loc:"zone_medieval",
   scenery:true,
   desc:"The roof was a metal dome, made of eight sections, about three meters of each side, and did not offer as much grip as Mandy would have liked. The only way down was back through the opening. At the apex there was a black metal spike, pointing skywards. Below her, Mandy could see the house, but it was hard to properly make out, kind of like it was misty, but not quite. It looked a long way down - how could she be so high up, it was only a two story house! Further a field she could see the town of Westleigh to the south.",
@@ -1364,18 +1364,18 @@ createRoom("roof_location", {
   afterFirstEnter:function() {
     Print ("As she looked harder, she realised she could not see the Ash Tree Estate, instead there were only fields. Perhaps no bad thing, she thought, but then she noticed that there was no modern housing at all. This was what the town had looked like before the war.")
   },
-  down:new Exit("observatory_up"),
+  down:new QuestJs._create.Exit("observatory_up"),
 })
 
 
-createItem("roof", {
+QuestJs._create.createItem("roof", {
   loc:"roof_location",
   scenery:true,
   examine:"The roof was an octagonal pyramid, covered in slates, which made no sense giving the inside was a metal dome, but Mandy was getting used to that. The opening in the dome was an oddly-shaped skylight from this side. At the apex of the roof was a metal spike.",
 })
 
 
-createItem("spike", {
+QuestJs._create.createItem("spike", {
   loc:"roof_location",
   scenery:true,
   examine:function() {
@@ -1389,7 +1389,7 @@ createItem("spike", {
 })
 
 
-createItem("sky", {
+QuestJs._create.createItem("sky", {
   loc:"roof_location",
   scenery:true,
   examine:function() {
@@ -1420,95 +1420,95 @@ createItem("sky", {
 })
 
 
-createRoom("zone_steampunk", {
+QuestJs._create.createRoom("zone_steampunk", {
 })
 
 
-createItem("steampunk_floor", {
+QuestJs._create.createItem("steampunk_floor", {
   loc:"zone_steampunk",
   scenery:true,
   examine:"The floor was wooden, and well-polished.",
 })
 
 
-createItem("steampunk_walls", {
+QuestJs._create.createItem("steampunk_walls", {
   loc:"zone_steampunk",
   scenery:true,
   examine:"The walls were all panelled in wood.",
 })
 
 
-createItem("steampunk_ceiling", {
+QuestJs._create.createItem("steampunk_ceiling", {
   loc:"zone_steampunk",
   scenery:true,
   examine:"The ceiling was white, with simple decorations along each edge.",
 })
 
 
-createRoom("steam_hall", {
+QuestJs._create.createRoom("steam_hall", {
   loc:"zone_steampunk",
   scenery:true,
-  south:new Exit("lift"),
-  west:new Exit("steam_corridor"),
-  east:new Exit("greenhouse_west"),
+  south:new QuestJs._create.Exit("lift"),
+  west:new QuestJs._create.Exit("steam_corridor"),
+  east:new QuestJs._create.Exit("greenhouse_west"),
 })
 
 
-createRoom("lower_steam_hall", {
+QuestJs._create.createRoom("lower_steam_hall", {
   loc:"zone_steampunk",
   scenery:true,
-  south:new Exit("lift"),
-  east:new Exit("mine"),
+  south:new QuestJs._create.Exit("lift"),
+  east:new QuestJs._create.Exit("mine"),
 })
 
 
-createItem("giant_spider", {
+QuestJs._create.createItem("giant_spider", {
   loc:"lower_steam_hall",
   examine:"The giant spider was big, black and hairy. It was a couple of meters across, and each of it five eyes were staring at Mandy. And it was holding a shovel.",
 })
 
 
-createRoom("steam_corridor", {
+QuestJs._create.createRoom("steam_corridor", {
   loc:"zone_steampunk",
   scenery:true,
-  east:new Exit("steam_hall"),
-  west:new Exit("brass_dining_room"),
+  east:new QuestJs._create.Exit("steam_hall"),
+  west:new QuestJs._create.Exit("brass_dining_room"),
 })
 
 
-createRoom("upper_steam_hall", {
+QuestJs._create.createRoom("upper_steam_hall", {
   loc:"zone_steampunk",
   scenery:true,
-  south:new Exit("lift"),
-  west:new Exit("nursery"),
-  east:new Exit("greenhouse_catwalk_west"),
+  south:new QuestJs._create.Exit("lift"),
+  west:new QuestJs._create.Exit("nursery"),
+  east:new QuestJs._create.Exit("greenhouse_catwalk_west"),
 })
 
 
-createRoom("lift", {
+QuestJs._create.createRoom("lift", {
   loc:"zone_steampunk",
   scenery:true,
-  north:new Exit("steam_hall"),
+  north:new QuestJs._create.Exit("steam_hall"),
 })
 
 
-createItem("top_lift_button", {
+QuestJs._create.createItem("top_lift_button", {
   loc:"lift",
   scenery:true,
 })
 
 
-createItem("middle_lift_button", {
+QuestJs._create.createItem("middle_lift_button", {
   loc:"lift",
 })
 
 
-createItem("bottom_lift_button", {
+QuestJs._create.createItem("bottom_lift_button", {
   loc:"lift",
 })
 
 
-createRoom("nursery", {
+QuestJs._create.createRoom("nursery", {
   loc:"zone_steampunk",
   scenery:true,
   desc:"This seemed to be a nursery, or at least what a nursery might have looked like a century ago. Two china dolls were stood on a chair, and there was a dolls house near them. A cream-painted cot stood near the window.",
@@ -1516,39 +1516,39 @@ createRoom("nursery", {
   },
   afterEnter:function() {
     // If the balloon is here
-    if (w.yellow_balloon.isAtLoc("w.nursery")) {
+    if (QuestJs._w.yellow_balloon.isAtLoc("QuestJs._w.nursery")) {
       // each toime she goes in the room is apparently the first
       // reset the count
       // record every item she is holding, && every item in her bag, and every item in the room
       Print ("Mandy noticed a yellow balloon gently floating down from the ceiling, near the centre of the room.")
-      w.nursery.count = 0
-      const game.nurseryheld = []()
-      foreach (itm, GetDirectChildren(w.player)) {
-        game.nurseryheld.push(itm)
+      QuestJs._w.nursery.count = 0
+      const QuestJs._game.nurseryheld = []()
+      foreach (itm, GetDirectChildren(QuestJs._w.player)) {
+        QuestJs._game.nurseryheld.push(itm)
       }
-      const game.nurserybag = []()
-      foreach (itm, GetDirectChildren(w.school_bag)) {
-        game.nurserybag.push(itm)
+      const QuestJs._game.nurserybag = []()
+      foreach (itm, GetDirectChildren(QuestJs._w.school_bag)) {
+        QuestJs._game.nurserybag.push(itm)
       }
-      const game.nurseryfloor = []()
-      foreach (itm, GetDirectChildren(w.nursery)) {
-        game.nurseryfloor.push(itm)
+      const QuestJs._game.nurseryfloor = []()
+      foreach (itm, GetDirectChildren(QuestJs._w.nursery)) {
+        QuestJs._game.nurseryfloor.push(itm)
       }
       ConvReset
     }
   },
-  east:new Exit("upper_steam_hall"),
+  east:new QuestJs._create.Exit("upper_steam_hall"),
 })
 
 
-createItem("yellow_balloon", {
+QuestJs._create.createItem("yellow_balloon", {
   loc:"nursery",
   scenery:true,
   examine:"The balloon was bright yellow, and pretty much spherical, except for the bit where it was blown up.",
 })
 
 
-createItem("dollshouse", {
+QuestJs._create.createItem("dollshouse", {
   loc:"nursery",
   scenery:true,
   examine:function() {
@@ -1564,7 +1564,7 @@ createItem("dollshouse", {
 })
 
 
-createItem("tiny_man", QuestJs._npc.NPC(false), {
+QuestJs._create.createItem("tiny_man", QuestJs._npc.NPC(false), {
   loc:"dollshouse",
   scenery:true,
   examine:function() {
@@ -1583,7 +1583,7 @@ createItem("tiny_man", QuestJs._npc.NPC(false), {
 })
 
 
-createItem("tinyman_hello", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("tinyman_hello", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1594,7 +1594,7 @@ createItem("tinyman_hello", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_live_here", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("tinyman_live_here", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1607,7 +1607,7 @@ createItem("tinyman_live_here", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_what_doing", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("tinyman_what_doing", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1628,7 +1628,7 @@ createItem("tinyman_what_doing", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_mend_boots_normal", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("tinyman_mend_boots_normal", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1641,7 +1641,7 @@ createItem("tinyman_mend_boots_normal", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_mend_boots_small", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("tinyman_mend_boots_small", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1655,7 +1655,7 @@ createItem("tinyman_mend_boots_small", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_where_live", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("tinyman_where_live", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1670,7 +1670,7 @@ createItem("tinyman_where_live", QuestJs._npc.TOPIC(false), {
 })
 
 
-createItem("tinyman_very_small", QuestJs._npc.TOPIC(false), {
+QuestJs._create.createItem("tinyman_very_small", QuestJs._npc.TOPIC(false), {
   loc:"tiny_man",
   runscript:function() {
     QuestJs._io.msg("");
@@ -1685,80 +1685,80 @@ createItem("tinyman_very_small", QuestJs._npc.TOPIC(false), {
 })
 
 
-createRoom("zone_gothic", {
+QuestJs._create.createRoom("zone_gothic", {
 })
 
 
-createItem("gothic_floor", {
+QuestJs._create.createItem("gothic_floor", {
   loc:"zone_gothic",
   scenery:true,
   examine:"The floor was wooden, and well-polished.",
 })
 
 
-createItem("gothic_walls", {
+QuestJs._create.createItem("gothic_walls", {
   loc:"zone_gothic",
   examine:"The walls were all panelled in wood.",
 })
 
 
-createItem("gothic_ceiling", {
+QuestJs._create.createItem("gothic_ceiling", {
   loc:"zone_gothic",
   examine:"The ceiling was white, with simple decorations along each side.",
 })
 
 
-createRoom("some_gothic_room", {
+QuestJs._create.createRoom("some_gothic_room", {
   loc:"zone_gothic",
   scenery:true,
-  south:new Exit("brass_dining_room"),
-  north:new Exit("gallery_south"),
-  east:new Exit("central_control"),
-  west:new Exit("library"),
+  south:new QuestJs._create.Exit("brass_dining_room"),
+  north:new QuestJs._create.Exit("gallery_south"),
+  east:new QuestJs._create.Exit("central_control"),
+  west:new QuestJs._create.Exit("library"),
 })
 
 
-createItem("library", {
+QuestJs._create.createItem("library", {
   loc:"zone_gothic",
   scenery:true,
-  east:new Exit("some_gothic_room"),
+  east:new QuestJs._create.Exit("some_gothic_room"),
 })
 
 
-createRoom("zone_subterrenea", {
+QuestJs._create.createRoom("zone_subterrenea", {
 })
 
 
-createItem("subterrenea_floor", {
+QuestJs._create.createItem("subterrenea_floor", {
   loc:"zone_subterrenea",
   scenery:true,
   examine:"The floor was rock, strewn with loose stones and pebbles.",
 })
 
 
-createItem("subterrenea_walls", {
+QuestJs._create.createItem("subterrenea_walls", {
   loc:"zone_subterrenea",
   scenery:true,
   examine:"The walls were rock, some looked like it was coal.",
 })
 
 
-createItem("subterrenea_ceiling", {
+QuestJs._create.createItem("subterrenea_ceiling", {
   loc:"zone_subterrenea",
   scenery:true,
   examine:"The ceiling, like the walls, was rock.",
 })
 
 
-createRoom("mine", {
+QuestJs._create.createRoom("mine", {
   loc:"zone_subterrenea",
   scenery:true,
-  west:new Exit("lower_steam_hall"),
-  southeast:new Exit("deeper_mine"),
+  west:new QuestJs._create.Exit("lower_steam_hall"),
+  southeast:new QuestJs._create.Exit("deeper_mine"),
 })
 
 
-createRoom("deeper_mine", {
+QuestJs._create.createRoom("deeper_mine", {
   loc:"zone_subterrenea",
   scenery:true,
   desc:function() {
@@ -1785,21 +1785,21 @@ createRoom("deeper_mine", {
     }
     else if (this.state === 5) {
       exit_to_even_deeper_mine.visible = true
-      w.patch.parent = w.even_deeper_mine
+      QuestJs._w.patch.parent = QuestJs._w.even_deeper_mine
     }
   },
-  northwest:new Exit("mine"),
-  southeast:new Exit("even_deeper_mine"),
+  northwest:new QuestJs._create.Exit("mine"),
+  southeast:new QuestJs._create.Exit("even_deeper_mine"),
 })
 
 
-createItem("pickaxe", {
+QuestJs._create.createItem("pickaxe", {
   loc:"deeper_mine",
   examine:"The pickaxe was like every other pickaxe Mandy had seen; a wooden handle, a metal head.",
 })
 
 
-createItem("coal", {
+QuestJs._create.createItem("coal", {
   loc:"deeper_mine",
   scenery:true,
   pronouns:QuestJs._lang.pronouns.plural,
@@ -1807,14 +1807,14 @@ createItem("coal", {
 })
 
 
-createItem("sack", {
+QuestJs._create.createItem("sack", {
   loc:"deeper_mine",
 })
 
 
-createRoom("even_deeper_mine", {
+QuestJs._create.createRoom("even_deeper_mine", {
   loc:"zone_subterrenea",
-  northwest:new Exit("deeper_mine"),
+  northwest:new QuestJs._create.Exit("deeper_mine"),
 })
 
 

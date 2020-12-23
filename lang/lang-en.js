@@ -1,4 +1,4 @@
-
+const { _w, _world, _game } = QuestJs;
 
 QuestJs._lang = {
 
@@ -331,7 +331,7 @@ QuestJs._lang = {
 
   // Used deep in the parser, so prefer to use function, rather than string
   object_unknown_msg:function(name) {
-    return QuestJs._lang.nounVerb(game.player, "can't", true) + " see anything you might call '" + name + "' here.";
+    return QuestJs._lang.nounVerb(QuestJs._game.player, "can't", true) + " see anything you might call '" + name + "' here.";
   },
 
 
@@ -341,7 +341,7 @@ QuestJs._lang = {
     let s;
     // You could split up sitting, standing and lying
     if (char.postureFurniture) {
-      s = QuestJs._lang.nounVerb(char, "get", true) + " off " + QuestJs._lang.getName(w[char.postureFurniture], {article:QuestJs._consts.DEFINITE}) + ".";
+      s = QuestJs._lang.nounVerb(char, "get", true) + " off " + QuestJs._lang.getName(QuestJs._w[char.postureFurniture], {article:QuestJs._consts.DEFINITE}) + ".";
     }
     else {
       s = QuestJs._lang.nounVerb(char, "stand", true) + " up.";
@@ -381,13 +381,13 @@ QuestJs._lang = {
   npc_leaving_msg:function(npc, dest) {
     let s = "";
     let flag = false;
-    if (w[game.player.loc].canViewLocs && w[game.player.loc].canViewLocs.includes(npc.loc)) {
-      s = w[game.player.loc].canViewPrefix;
+    if (QuestJs._w[QuestJs._game.player.loc].canViewLocs && QuestJs._w[QuestJs._game.player.loc].canViewLocs.includes(npc.loc)) {
+      s = QuestJs._w[QuestJs._game.player.loc].canViewPrefix;
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s += QuestJs._lang.nounVerb(npc, "leave", !flag) + " " + QuestJs._lang.getName(w[npc.loc], {article:QuestJs._consts.DEFINITE});
-      const exit = w[npc.loc].findExit(dest);
+      s += QuestJs._lang.nounVerb(npc, "leave", !flag) + " " + QuestJs._lang.getName(QuestJs._w[npc.loc], {article:QuestJs._consts.DEFINITE});
+      const exit = QuestJs._w[npc.loc].findExit(dest);
       if (exit) s += ", heading " + exit.dir;
       s += ".";
       QuestJs._io.msg(s);
@@ -398,14 +398,14 @@ QuestJs._lang = {
   npc_entering_msg:function(npc, origin) {
     let s = "";
     let flag = false;
-    if (w[game.player.loc].canViewLocs && w[game.player.loc].canViewLocs.includes(npc.loc)) {
+    if (QuestJs._w[QuestJs._game.player.loc].canViewLocs && QuestJs._w[QuestJs._game.player.loc].canViewLocs.includes(npc.loc)) {
       // Can the player see the location the NPC enters, from another location?
-      s = w[game.player.loc].canViewPrefix;
+      s = QuestJs._w[QuestJs._game.player.loc].canViewPrefix;
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s += QuestJs._lang.nounVerb(npc, "enter", !flag) + " " + QuestJs._lang.getName(w[npc.loc], {article:QuestJs._consts.DEFINITE});
-      const exit = w[npc.loc].findExit(origin);
+      s += QuestJs._lang.nounVerb(npc, "enter", !flag) + " " + QuestJs._lang.getName(QuestJs._w[npc.loc], {article:QuestJs._consts.DEFINITE});
+      const exit = QuestJs._w[npc.loc].findExit(origin);
       if (exit) s += " from " + QuestJs._util.niceDirection(exit.dir);
       s += ".";
       QuestJs._io.msg(s);
@@ -475,12 +475,12 @@ QuestJs._lang = {
     if (QuestJs._settings.additionalHelp !== undefined) {
       for (let s of QuestJs._settings.additionalHelp) QuestJs._io.metamsg(s)
     }
-    return world.SUCCESS_NO_TURNSCRIPTS;
+    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   hintScript:function() {
     QuestJs._io.metamsg("Sorry, no hints available.")
-    return world.SUCCESS_NO_TURNSCRIPTS;
+    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   aboutScript:function() {
@@ -492,7 +492,7 @@ QuestJs._lang = {
     if (QuestJs._settings.additionalAbout !== undefined) {
       for (let s of QuestJs._settings.additionalAbout) QuestJs._io.metamsg(s)
     }
-    return world.SUCCESS_NO_TURNSCRIPTS
+    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS
   },
 
   warningsScript:function() {
@@ -501,14 +501,14 @@ QuestJs._lang = {
       case 'string' : QuestJs._io.metamsg(QuestJs._settings.warnings); break;
       default: for (let el of QuestJs._settings.warnings) QuestJs._io.metamsg(el)
     }
-    return world.SUCCESS_NO_TURNSCRIPTS;
+    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   saveLoadScript:function() {
     QuestJs._io.metamsg("To save your progress, type SAVE followed by the name to save with.");
     QuestJs._io.metamsg("To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.");
     QuestJs._io.metamsg("To see a list of save games, type DIR.");
-    return world.SUCCESS_NO_TURNSCRIPTS;
+    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   transcriptScript:function() {
@@ -519,12 +519,12 @@ QuestJs._lang = {
     QuestJs._io.metamsg("You can do TRANSCRIPT WALKTHROUGH or just SCRIPT W to copy the transcript to the clipboard formatted for a walk-through. You can then paste it straight into the code.")
     QuestJs._io.metamsg("Everything gets saved to memory, and will be lost if you go to another web page or close your browser. The transcript is not saved when you save your game (but will not be lost when you load a game). If you complete the game the text input will disappear, however if you have a transcript a link will be available to access it.");
     QuestJs._io.metamsg("Transcript is currently: " + (QuestJs._IO.transcript ? 'on' : 'off'))
-    return world.SUCCESS_NO_TURNSCRIPTS;
+    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   topicsScript:function() {
     QuestJs._io.metamsg("Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).");
-    return world.SUCCESS_NO_TURNSCRIPTS;
+    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
   
   betaTestIntro:function() {
@@ -952,7 +952,7 @@ QuestJs._lang = {
   // would return the pronoun "you go".
   // The first letter is capitalised if 'capitalise' is true.
   nounVerb:function(item, verb, capitalise) {
-    if (item === game.player && !game.player.useProperName) {
+    if (item === QuestJs._game.player && !QuestJs._game.player.useProperName) {
       return QuestJs._lang.pronounVerb(item, verb, capitalise);
     }
     let s = QuestJs._lang.getName(item, {article:QuestJs._consts.DEFINITE}) + " " + QuestJs._lang.conjugate (item, verb);
@@ -961,7 +961,7 @@ QuestJs._lang = {
   },
 
   verbNoun:function(item, verb, capitalise) {
-    if (item === game.player) {
+    if (item === QuestJs._game.player) {
       return QuestJs._lang.pronounVerb(item, verb, capitalise);
     }
     let s = QuestJs._lang.conjugate (item, verb) + " " + QuestJs._lang.getName(item, {article:QuestJs._consts.DEFINITE});

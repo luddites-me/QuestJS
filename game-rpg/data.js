@@ -3,7 +3,7 @@
 
 
   
-createItem("me", RPG_PLAYER(), {
+QuestJs._create.createItem("me", RPG_PLAYER(), {
   loc:"practice_room",
   regex:/^(me|myself|player)$/,
   health:100,
@@ -21,25 +21,25 @@ createItem("me", RPG_PLAYER(), {
 
 
 
-createItem("knife", WEAPON("d4+2"), {
+QuestJs._create.createItem("knife", WEAPON("d4+2"), {
   loc:"me",
   image:"knife",
   offensiveBonus:-2,
 });
 
-createItem("flail", WEAPON("2d10+4"), {
+QuestJs._create.createItem("flail", WEAPON("2d10+4"), {
   loc:"me",
   image:"flail",
 });
 
-createItem("flaming_sword", WEAPON("3d6+2"), {
+QuestJs._create.createItem("flaming_sword", WEAPON("3d6+2"), {
   loc:"me",
   image:"sword",
   activeEffects:["Flaming weapon"],
 });
 
 
-createItem("ice_amulet", QuestJs._templates.WEARABLE(4, ['neck']), {
+QuestJs._create.createItem("ice_amulet", QuestJs._templates.WEARABLE(4, ['neck']), {
   loc:"me",
   modifyIncomingAttack:function(attack) {
     if (this.worn && attack.element === 'frost') {
@@ -53,10 +53,10 @@ createItem("ice_amulet", QuestJs._templates.WEARABLE(4, ['neck']), {
 
 
 
-createRoom("practice_room", {
+QuestJs._create.createRoom("practice_room", {
   desc:'A large room with straw scattered across the floor. The only exit is west',
-  west:new Exit('great_hall'),
-  south:new Exit('cupboard', {
+  west:new QuestJs._create.Exit('great_hall'),
+  south:new QuestJs._create.Exit('cupboard', {
     locked:true,
     lockedmsg:"It seems to be locked."
   }),
@@ -65,21 +65,21 @@ createRoom("practice_room", {
 
 
 
-createRoom("great_hall", {
+QuestJs._create.createRoom("great_hall", {
   desc:'An imposing - and rather cold - room with a high, vaulted roof, and tapestries hanging from the walls.',
-  east:new Exit('practice_room'),
+  east:new QuestJs._create.Exit('practice_room'),
 });
 
-createItem("practice_room_door", QuestJs._templates.LOCKED_DOOR("small_key", "great_hall", "practice_room"), {
+QuestJs._create.createItem("practice_room_door", QuestJs._templates.LOCKED_DOOR("small_key", "great_hall", "practice_room"), {
   examine:'A very solid, wooden door.',
 });
 
-createRoom("cupboard", {
+QuestJs._create.createRoom("cupboard", {
   desc:'A small cupboard.',
-  north:new Exit('practice_room'),
+  north:new QuestJs._create.Exit('practice_room'),
 });
 
-createItem("small_key", QuestJs._templates.KEY(), {
+QuestJs._create.createItem("small_key", QuestJs._templates.KEY(), {
   examine:'A small key.',
   loc:"practice_room",
 });
@@ -87,29 +87,29 @@ createItem("small_key", QuestJs._templates.KEY(), {
 
 
 
-createItem("goblin", RPG_NPC(false), {
+QuestJs._create.createItem("goblin", RPG_NPC(false), {
   loc:"practice_room",
   damage:"d8",
   health:40,
 });
 
-createItem("orc", RPG_NPC(false), {
+QuestJs._create.createItem("orc", RPG_NPC(false), {
   loc:"practice_room",
   damage:"2d10+4",
   health:60,
 });
 
-createItem("huge_shield", SHIELD(10), {
+QuestJs._create.createItem("huge_shield", SHIELD(10), {
   loc:"orc",
 });
 
-createItem("snotling", RPG_NPC(false), {
+QuestJs._create.createItem("snotling", RPG_NPC(false), {
   loc:"practice_room",
   damage:"2d4",
   health:20,
 });
 
-createItem("rabbit", RPG_NPC(false), {
+QuestJs._create.createItem("rabbit", RPG_NPC(false), {
   loc:"practice_room",
   damage:"2d4",
   health:20,
@@ -130,30 +130,30 @@ createItem("rabbit", RPG_NPC(false), {
   },  
 });
 
-createItem("chest", QuestJs._templates.CONTAINER(true), {
+QuestJs._create.createItem("chest", QuestJs._templates.CONTAINER(true), {
   loc:"practice_room",
 });
 
-createItem("spellbook", SPELLBOOK(["Fireball", "Stoneskin", "Steelskin", "Lightning bolt", "Ice shard"]), {
+QuestJs._create.createItem("spellbook", SPELLBOOK(["Fireball", "Stoneskin", "Steelskin", "Lightning bolt", "Ice shard"]), {
   loc:"practice_room",
 });
 
-createItem("helmet", QuestJs._templates.WEARABLE(2, ['head']), {
+QuestJs._create.createItem("helmet", QuestJs._templates.WEARABLE(2, ['head']), {
   loc:"practice_room",
   armour:10,
 });
 
-createItem("chestplate", QuestJs._templates.WEARABLE(2, ['chest']), {
+QuestJs._create.createItem("chestplate", QuestJs._templates.WEARABLE(2, ['chest']), {
   loc:"practice_room",
   armour:20,
 });
 
-createItem("boots", QuestJs._templates.WEARABLE(2, ['feet']), {
+QuestJs._create.createItem("boots", QuestJs._templates.WEARABLE(2, ['feet']), {
   loc:"practice_room",
   pronouns:QuestJs._lang.pronouns.plural,
 });
 
-createItem("shotgun", LIMITED_USE_WEAPON("2d10+4", 1), {
+QuestJs._create.createItem("shotgun", LIMITED_USE_WEAPON("2d10+4", 1), {
   loc:"practice_room",
   image:"flail",
 });
@@ -298,7 +298,7 @@ skills.add(new SpellSelf("Steelskin", {
 
 skills.add(new SpellSelf("Unlock", {
   targetEffect:function(attack) {
-    const room = w[attack.attacker.loc]
+    const room = QuestJs._w[attack.attacker.loc]
     let flag = false
     for (let el of QuestJs._util.exitList(attack.attacker)) {
       if (room[el].locked) {

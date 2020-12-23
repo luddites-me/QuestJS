@@ -41,7 +41,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Test input', {
   regex:/^inp/,
   script:function() {
     QuestJs._io.msg("First some preamble...")
-    QuestJs._io.showMenu("What colour?", [w.book, w.coin, w.Kyle, 'None of them'], function(result) {
+    QuestJs._io.showMenu("What colour?", [QuestJs._w.book, QuestJs._w.coin, QuestJs._w.Kyle, 'None of them'], function(result) {
       if (typeof result === 'string') {
         QuestJs._io.msg("You picked " + result + ".");
       }
@@ -160,8 +160,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('EgMove', {
 }));
 
 QuestJs._command.findCmd('MetaHint').script = function() {
-  if (w[game.player.loc].hint) {
-    QuestJs._io.metamsg(w[game.player.loc].hint);
+  if (QuestJs._w[QuestJs._game.player.loc].hint) {
+    QuestJs._io.metamsg(QuestJs._w[QuestJs._game.player.loc].hint);
   }
   else {
     return QuestJs._lang.hintScript()
@@ -212,10 +212,10 @@ QuestJs._command.findCmd('MetaHint').script = function() {
 
 
 QuestJs._tp.addDirective("charger_state", function(){
-  if (w.charger_compartment.closed) {
+  if (QuestJs._w.charger_compartment.closed) {
     return "The compartment is closed";
   }
-  const contents = w.charger_compartment.getContents(world.LOOK);
+  const contents = QuestJs._w.charger_compartment.getContents(QuestJs._world.LOOK);
   if (contents.length === 0) {
     return "The compartment is empty";
   }
