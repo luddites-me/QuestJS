@@ -361,7 +361,7 @@ QuestJs._create.createItem('Xsansi', QuestJs._npc.NPC(true), {
       script: function () {
         QuestJs._io.msg("'Remind me of the itinerary, Xsansi,' you say.");
         if (QuestJs._w.Xsansi.currentPlanet < 3) {
-          for (let i = QuestJs._w.Xsansi.currentPlanet; i < PLANETS.length; i++) {
+          for (let i = QuestJs._w.Xsansi.currentPlanet; i < PLANETS.length; i += 1) {
             let s = "'Item " + (i + 1) + ': ' + PLANETS[i].starDesc;
             if (i + 2 === PLANETS.length) s += "'";
             QuestJs._io.msg(s);
@@ -1156,5 +1156,5 @@ const NPCS = [QuestJs._w.Ostap, QuestJs._w.Aada, QuestJs._w.Kyle, QuestJs._w.Ha_
 for (let npc of NPCS) {
   createTopics(npc);
   npc.status = 100;
-  for (let i = 0; i < 4; i++) npc['rank' + i] = 0;
+  for (let i = 0; i < 4; i += 1) npc['rank' + i] = 0;
 }

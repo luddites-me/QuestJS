@@ -145,7 +145,7 @@ QuestJs._create.createItem('message', {
     return QuestJs._game.player.isAtLoc('bar') && !this.finished;
   },
   eventScript: function () {
-    this.count++;
+    this.count += 1;
     if (this.count > 1) {
       if (this.disturbed === 0) {
         QuestJs._io.msg('You think it might be a bad idea to disturb things in the dark.');
@@ -156,7 +156,7 @@ QuestJs._create.createItem('message', {
           );
         }
       }
-      this.disturbed++;
+      this.disturbed += 1;
     }
   },
 });

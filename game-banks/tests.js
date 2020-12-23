@@ -35,7 +35,7 @@ QuestJs._test.tests = function () {
   probe.eventScript();
   QuestJs._test.assertEqual('In flight', probe.status);
   QuestJs._test.assertEqual(1, probe.launchCounter);
-  for (let i = 0; i < TURNS_TO_LANDING - 1; i++) probe.eventScript();
+  for (let i = 0; i < TURNS_TO_LANDING - 1; i += 1) probe.eventScript();
   QuestJs._test.assertEqual(0, QuestJs._w.Ostap.rank2);
   QuestJs._test.assertEqual(0, QuestJs._w.me.bonus);
   QuestJs._test.assertEqual('Landing', probe.status);
@@ -45,16 +45,16 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertEqual(1 + TURNS_TO_LANDING, probe.launchCounter);
 
   QuestJs._test.title('Probe events 2');
-  for (let i = 0; i < 4; i++) probe.eventScript();
+  for (let i = 0; i < 4; i += 1) probe.eventScript();
   QuestJs._test.assertEqual(1, QuestJs._w.Ostap.rank2);
   QuestJs._test.assertEqual(2, QuestJs._w.me.bonus);
-  for (let i = 0; i < 4; i++) probe.eventScript();
+  for (let i = 0; i < 4; i += 1) probe.eventScript();
   QuestJs._test.assertEqual(2, QuestJs._w.Ostap.rank2);
   QuestJs._test.assertEqual(4, QuestJs._w.me.bonus);
-  for (let i = 0; i < 8; i++) probe.eventScript();
+  for (let i = 0; i < 8; i += 1) probe.eventScript();
   QuestJs._test.assertEqual(3, QuestJs._w.Ostap.rank2);
   QuestJs._test.assertEqual(6, QuestJs._w.me.bonus);
-  for (let i = 0; i < 4; i++) probe.eventScript();
+  for (let i = 0; i < 4; i += 1) probe.eventScript();
   QuestJs._test.assertEqual(3, QuestJs._w.Ostap.rank2);
   QuestJs._test.assertEqual(6, QuestJs._w.me.bonus);
   QuestJs._w.Ostap.rank2 = 0;

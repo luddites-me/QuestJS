@@ -54,7 +54,7 @@ QuestJs._create.createItem('your_underwear', QuestJs._templates.WEARABLE(1, ['bo
   examine: 'Your underwear is standard issue; white and functional.',
 });
 
-//-----------------------------------------------------
+// -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // STARBOARD POD
 
 QuestJs._create.createRoom('stasis_bay', {
@@ -234,7 +234,7 @@ QuestJs._create.createRoom('airlock', {
   starboard: new QuestJs._create.Exit('space', { locked: true }),
 });
 
-//-----------------------------------------------------
+// -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // CENTRAL AXIS
 
 QuestJs._create.createRoom('hallway', {
@@ -283,7 +283,7 @@ QuestJs._create.createRoom('flightdeck', {
   aft: new QuestJs._create.Exit('hallway'),
 });
 
-//-----------------------------------------------------
+// -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // LABS
 
 QuestJs._create.createRoom('biolab', {
@@ -312,7 +312,7 @@ QuestJs._create.createRoom('geolab', {
   aft: new QuestJs._create.Exit('engineering1'),
 });
 
-//-----------------------------------------------------
+// -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // ENGINEERING
 
 QuestJs._create.createRoom('engineering1', {
@@ -356,7 +356,7 @@ QuestJs._create.createRoom('engineering3', {
   forward: new QuestJs._create.Exit('cargo_bay'),
 });
 
-//-----------------------------------------------------
+// -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // LOWER DECK
 
 QuestJs._create.createRoom('probes_forward', {
@@ -394,7 +394,7 @@ QuestJs._create.createRoom('server_room', {
   aft: new QuestJs._create.Exit('probes_forward'),
 });
 
-//-----------------------------------------------------
+// -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // UPPER DECK
 
 QuestJs._create.createRoom('lounge', {
@@ -499,7 +499,7 @@ QuestJs._create.createRoom('girls_cabin', {
   forward: new QuestJs._create.Exit('top_deck_aft'),
 });
 
-//-----------------------------------------------------
+// -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // EXTERIOR
 
 QuestJs._create.createRoom('space', {
@@ -541,7 +541,7 @@ QuestJs._create.createItem('ship', {
   },
 });
 
-//-----------------------------------------------------
+// -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
 // SPECIAL ITEMS
 
 // Probes are cloned from this
@@ -639,7 +639,7 @@ QuestJs._create.createItem('probe_prototype', QuestJs._templates.COUNTABLE([]), 
   },
 
   probeEventScript() {
-    this.launchCounter++;
+    this.launchCounter += 1;
     if (this.launchCounter === TURNS_TO_LANDING) {
       if (probeLandsOkay()) {
         this.status = 'Landing';
@@ -660,14 +660,14 @@ QuestJs._create.createItem('probe_prototype', QuestJs._templates.COUNTABLE([]), 
         this.probeNumber - 1
       ];
     if (arr !== undefined && arr.includes(this.launchCounter - TURNS_TO_LANDING)) {
-      QuestJs._w[this.owner][`rank${this.planetNumber}`]++;
+      QuestJs._w[this.owner][`rank${this.planetNumber}`] += 1;
       QuestJs._game.player.bonus +=
         PLANETS[this.planetNumber][`${this.probeType.substring(0, 3)}ProbeBonusPerRank`];
     }
   },
 
   satelliteEventScript() {
-    this.launchCounter++;
+    this.launchCounter += 1;
     if (this.launchCounter === TURNS_TO_ORBIT) {
       this.status = 'In orbit';
       shipAlert(`${this.alias} has successfully entered orbit around the planet.`);
@@ -677,7 +677,7 @@ QuestJs._create.createItem('probe_prototype', QuestJs._templates.COUNTABLE([]), 
     }
     if (this.launchCounter > TURNS_TO_ORBIT + 1 && this.launchCounter % 4 === 0) {
       QuestJs._game.player.bonus += 1;
-      QuestJs._w[this.owner].rank++;
+      QuestJs._w[this.owner].rank += 1;
     }
   },
 });

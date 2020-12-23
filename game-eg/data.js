@@ -27,7 +27,7 @@ function showSidePaneOptions(item, options, fn) {
       '<div id="sidepane-menu"><p class="sidepane-menu-title">Talk to ' +
       QuestJs._lang.getName(item, { article: QuestJs._consts.DEFINITE }) +
       ':</p>';
-    for (let i = 0; i < options.length; i++) {
+    for (let i = 0; i < options.length; i += 1) {
       s +=
         '<p value="' +
         i +
@@ -264,7 +264,7 @@ QuestJs._create.createItem(
       return this.switchedon;
     },
     eventScript: function () {
-      this.power--;
+      this.power -= 1;
       if (this.power === 2) {
         QuestJs._io.msg('The torch flickers.');
       }
@@ -746,7 +746,7 @@ QuestJs._create.createItem('Kyle', QuestJs._npc.NPC(false), {
           },
           msg: "'Needs some work,' Kyle says with a sign.",
           script: function (p) {
-            QuestJs._w.Kyle.needsWorkCount++;
+            QuestJs._w.Kyle.needsWorkCount += 1;
           },
         },
         {

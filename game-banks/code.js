@@ -145,14 +145,14 @@ const CREW = function (isFemale) {
     switch (this.deployProbeAction) {
       case 0:
         this.probeAction0(count);
-        this.deployProbeAction++;
+        this.deployProbeAction += 1;
         break;
       case 1:
         QuestJs._io.msg(
           '{nv:actor:prepare:true} the {ordinal:count} {param:actor:probeType}.',
           tpParams,
         );
-        this.deployProbeAction++;
+        this.deployProbeAction += 1;
         break;
       case 2:
         QuestJs._io.msg(
@@ -163,7 +163,7 @@ const CREW = function (isFemale) {
         break;
       case 3:
         this.probeAction3(count);
-        this.deployProbeAction++;
+        this.deployProbeAction += 1;
         break;
     }
     return this.deployProbeAction === 4;
@@ -172,16 +172,16 @@ const CREW = function (isFemale) {
   res.actuallyDeployProbe = function (count) {
     // the details of leaunching a probe are done here
     // housekeeping
-    this.probesRemaining--;
-    this.deployProbeCount++;
-    this.deployProbeTotal++;
-    this.deployProbeOverallTotal++;
+    this.probesRemaining -= 1;
+    this.deployProbeCount += 1;
+    this.deployProbeTotal += 1;
+    this.deployProbeOverallTotal += 1;
     if (this.deployProbeCount === count) {
       // last of the batch
-      this.deployProbeAction++;
+      this.deployProbeAction += 1;
     } else {
       // some left to deploy
-      this.deployProbeAction--;
+      this.deployProbeAction -= 1;
     }
 
     QuestJs._w.probe_prototype.cloneMe(this);
@@ -368,7 +368,7 @@ function planetAnalysis(response) {
 }
 
 function createPlanets() {
-  for (let i = 0; i < PLANETS.length; i++) {
+  for (let i = 0; i < PLANETS.length; i += 1) {
     QuestJs._create.createItem(`planet${i}`, {
       starName: PLANETS[i].starName,
       alias: `${PLANETS[i].starName} ${PLANETS[i].planet}`,
@@ -383,7 +383,7 @@ function createPlanets() {
       },
       eventPeriod: 5,
       eventScript() {
-        this.coms++;
+        this.coms += 1;
       },
     });
   }
@@ -392,7 +392,7 @@ function createPlanets() {
 createPlanets();
 
 function arrival() {
-  QuestJs._w.Xsansi.currentPlanet++;
+  QuestJs._w.Xsansi.currentPlanet += 1;
   PLANETS[QuestJs._w.Xsansi.currentPlanet].onArrival();
   QuestJs._game.elapsedTime = 0;
   QuestJs._game.startTime = PLANETS[QuestJs._w.Xsansi.currentPlanet].arrivalTime;

@@ -246,7 +246,7 @@ QuestJs._command.findCmd('MetaHint').script = function () {
   for (let clue of clues) {
     if (clue.count === undefined) clue.count = 0;
     QuestJs._io.metamsg(clue.question);
-    for (let i = 0; i < clue.clues.length; i++) {
+    for (let i = 0; i < clue.clues.length; i += 1) {
       if (i < clue.count) {
         QuestJs._io.metamsg(clue.clues[i]);
       } else {

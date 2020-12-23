@@ -126,9 +126,9 @@ QuestJs._settings.customUI = function () {
   );
 
   document.writeln('<table align="center">');
-  for (let row = 0; row < 8; row++) {
+  for (let row = 0; row < 8; row += 1) {
     document.writeln('  <tr>');
-    for (let col = 0; col < 3; col++) {
+    for (let col = 0; col < 3; col += 1) {
       document.write(`    <td id="cell${row * 3 + col}" width="40"></td>`);
     }
     document.writeln('  </tr>');
@@ -232,7 +232,7 @@ const skillUI = {
 
   resetButtons: function () {
     //QuestJs._log.info('reset')
-    for (let i = 0; i < skillUI.skills.length; i++) {
+    for (let i = 0; i < skillUI.skills.length; i += 1) {
       $('#cell' + i).css('background-color', 'black');
     }
     $('#castButton').prop('disabled', true);
@@ -240,7 +240,7 @@ const skillUI = {
   },
 
   removeAllButtons: function () {
-    for (let i = 0; i < skillUI.skills.length; i++) {
+    for (let i = 0; i < skillUI.skills.length; i += 1) {
       $('#cell' + i).html('');
     }
     skillUI.skills = [];
@@ -462,12 +462,12 @@ function scrollPara(element) {
     paraOpts[paraNumber] = list;
     paraPositions[paraNumber] = QuestJs._random.int(list.length - 1);
   }
-  paraPositions[paraNumber]++;
+  paraPositions[paraNumber] += 1;
   if (paraPositions[paraNumber] >= paraOpts[paraNumber].length) {
     paraPositions[paraNumber] = 0;
   }
   para.html(paraOpts[paraNumber][paraPositions[paraNumber]]);
-}    
+}
 
 function setValues() {
   QuestJs._game.player.alias = $('#name_input').val();

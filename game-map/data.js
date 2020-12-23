@@ -253,7 +253,7 @@ QuestJs._create.createRoom('street_north', {
     return '';
   },
   afterFirstEnter: function () {
-    QuestJs._w.street_middle.visited++;
+    QuestJs._w.street_middle.visited += 1;
   },
 });
 

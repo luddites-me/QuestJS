@@ -56,19 +56,19 @@ QuestJs._create.createItem('passengers', {
     let count = 0;
     let s = '';
     if (QuestJs._w.Lucas.isHere()) {
-      count++;
+      count += 1;
       s += ' A black guy with spike blonde hair.';
     }
     if (QuestJs._w.Emily.isHere()) {
-      count++;
+      count += 1;
       s += ' A redhead in tiny denim shorts.';
     }
     if (QuestJs._w.Amy.isHere()) {
-      count++;
+      count += 1;
       s += ' An oriental woman in her thirties.';
     }
     if (QuestJs._w.Elijah.isHere()) {
-      count++;
+      count += 1;
       s += ' An older guy in a "Ramones" tee-shirt.';
     }
     QuestJs._io.msg(`You can see ${count} passenger${count === 1 ? '' : 's'} here.${s}`);

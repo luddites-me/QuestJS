@@ -26,7 +26,7 @@ QuestJs._tp.addDirective('timeOfDayComment', function (arr, params) {
   const location = QuestJs._w[QuestJs._game.player.loc];
   if (!location.timeStatus) return '';
   let hour = time.hour;
-  for (let i = 0; i < location.timeStatus.length; i++) {
+  for (let i = 0; i < location.timeStatus.length; i += 1) {
     if (hour < location.timeStatus[i].to) return location.timeStatus[i].t;
     hour -= location.timeStatus[i].to;
   }

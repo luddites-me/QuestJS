@@ -49,7 +49,7 @@ QuestJs._create.createRoom('lounge', {
   eventActive: true,
   eventCount: 0,
   eventScript: function () {
-    this.eventCount++;
+    this.eventCount += 1;
     switch (this.eventCount) {
       case 1:
         tmsg(
@@ -515,7 +515,7 @@ QuestJs._create.createRoom('reactor_room', {
   },
   countdown: 6,
   eventScript: function () {
-    this.countdown--;
+    this.countdown -= 1;
     QuestJs._io.msg(
       "A recorded voice echoes round the room: 'Warning: Zeta-particle levels above recommended safe threshold. Death expected after approximately {reactor_room.countdown} minutes of exposure.'",
     );

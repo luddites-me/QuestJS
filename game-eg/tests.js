@@ -54,7 +54,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.title('QuestJs._random.fromArray');
   const ary = ['one', 'two', 'three'];
   const ary2 = [];
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i += 1) {
     const res = QuestJs._random.fromArray(ary, true);
     if (ary2.includes(res)) QuestJs._test.fail('ary2 already has that value');
     ary2.push(res);
@@ -62,13 +62,13 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertEqual(0, ary.length);
 
   QuestJs._test.title('QuestJs._random.int');
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 100; i += 1) {
     const res = QuestJs._random.int(10);
     QuestJs._test.assertEqual(true, res >= 0 && res <= 10);
   }
 
   QuestJs._test.title('QuestJs._random.chance');
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 100; i += 1) {
     QuestJs._test.assertEqual(true, QuestJs._random.chance(100));
     QuestJs._test.assertEqual(false, QuestJs._random.chance(0));
   }
@@ -1592,7 +1592,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertCmd('buy trophy', ['You buy the trophy for $0,15.']);
   QuestJs._test.assertEqual(1, QuestJs._w.Buddy.money);
   QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(QuestJs._w.carrot));
-  //QuestJs._log.info("----------------------");
+  //QuestJs._log.info(" -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1");
   QuestJs._test.assertEqual(false, QuestJs._parser.isForSale(QuestJs._w.trophy));
   QuestJs._test.assertCmd('buy trophy', [
     "You can't buy the trophy here - probably because you are already holding it.",
@@ -1936,14 +1936,14 @@ QuestJs._test.tests = function () {
   let res = quest.getState('A carrot for Buddy', QuestJs._w.Buddy)
   QuestJs._test.assertEqual(0, res.progress)
   QuestJs._test.assertEqual(quest.ACTIVE, res.state)
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   /*
-  
+
   QuestJs._test.title("vessels and liquids");
   QuestJs._game.player.loc = "kitchen"
   QuestJs._w.jug.loc = "big_kitchen_table"
@@ -1954,11 +1954,11 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertCmd("fill jug with water", ["You fill the jug."]);
   QuestJs._test.assertCmd("fill jug with water", ["It already is."]);
   QuestJs._test.assertCmd("fill jug with lemonade", ["It's not something you can mix liquids in."]);
-  
-  
-  
-  
-  
+
+
+
+
+
   /* */
   this.check_lang = true;
   if (this.check_lang) {
@@ -2025,11 +2025,11 @@ QuestJs._test.tests = function () {
       if (typeof el !== 'string') continue;
       if (langSkips.find((e) => el.match(e))) continue;
       if (QuestJs._tp.usedStrings.includes(QuestJs._lang[el])) {
-        countDone++;
+        countDone += 1;
         continue;
       }
       QuestJs._log.info(el);
-      countOutstanding++;
+      countOutstanding += 1;
     }
     QuestJs._log.info(countOutstanding + '/' + (countOutstanding + countDone));
   }

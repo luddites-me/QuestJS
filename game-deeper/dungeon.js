@@ -223,8 +223,8 @@ dungeon.decorateRoom = function (room, level, theme) {
 // Rooms are created in a grid, with a random chance of being there depending
 // on the distance from the centre.
 dungeon.generateBasicRooms = function (level, theme) {
-  for (let x = -dungeon.size; x <= dungeon.size; x++) {
-    for (let y = -dungeon.size; y <= dungeon.size; y++) {
+  for (let x = -dungeon.size; x <= dungeon.size; x += 1) {
+    for (let y = -dungeon.size; y <= dungeon.size; y += 1) {
       //QuestJs._log.info('x=' + x + ' y=' + y + ' p=' + (100 - dungeon.cellpercentage * dungeon.fromCentre(x, y) / dungeon.size))
       if (
         QuestJs._random.chance(
@@ -275,8 +275,8 @@ dungeon.checkConnectivity = function (level) {
   while (flag) {
     QuestJs._log.info('LOOP');
     flag = false;
-    for (let x = -dungeon.size; x <= dungeon.size; x++) {
-      for (let y = -dungeon.size; y <= dungeon.size; y++) {
+    for (let x = -dungeon.size; x <= dungeon.size; x += 1) {
+      for (let y = -dungeon.size; y <= dungeon.size; y += 1) {
         const room = QuestJs._w[dungeon.getRoomName(x, y, level)];
         if (room !== undefined && room.accessible) {
           flag = flag || dungeon.flagAllAdjacent(room);
@@ -288,8 +288,8 @@ dungeon.checkConnectivity = function (level) {
   // now delete rooms that are not accessible
   // and pick the way to next level
   const levellist = [];
-  for (let x = -dungeon.size; x <= dungeon.size; x++) {
-    for (let y = -dungeon.size; y <= dungeon.size; y++) {
+  for (let x = -dungeon.size; x <= dungeon.size; x += 1) {
+    for (let y = -dungeon.size; y <= dungeon.size; y += 1) {
       const room = QuestJs._w[dungeon.getRoomName(x, y, level)];
       if (room !== undefined) {
         if (!room.accessible) {
@@ -311,7 +311,7 @@ dungeon.setWayDown = function (levellist) {
     for (let o of levellist) {
       if (dungeon.fromCentre(o.x, o.y) > dist) sublist.push(o);
     }
-    dist--;
+    dist -= 1;
     //QuestJs._io.msg(dist)
   }
   const waydown = QuestJs._random.fromArray(sublist);
@@ -330,7 +330,7 @@ dungeon.getRoomName = function (x, y, level) {
 dungeon.exitCount = function (room) {
   let count = 0;
   for (let dir of dungeon.dirs) {
-    if (room['exit_' + dir.name]) count++;
+    if (room['exit_' + dir.name]) count += 1;
   }
   return count;
 };
@@ -393,8 +393,8 @@ dungeon.drawMap = function () {
       dungeon.mapSize +
       '" stroke="black" fill="none"/>',
   );
-  for (let x = -this.size; x <= this.size; x++) {
-    for (let y = -this.size; y <= this.size; y++) {
+  for (let x = -this.size; x <= this.size; x += 1) {
+    for (let y = -this.size; y <= this.size; y += 1) {
       const r = QuestJs._w[this.getRoomName(x, y, room.level)];
       if (r === undefined) continue;
       map.push(

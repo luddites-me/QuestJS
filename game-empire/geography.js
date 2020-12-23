@@ -21,7 +21,7 @@ class Region {
       this.froms.push(from);
       this.tos.push(to);
       this.count += to - from + 1;
-      this.maxX++;
+      this.maxX += 1;
       if (this.minY === undefined) {
         this.minY = from;
         this.maxY = to;
@@ -45,8 +45,8 @@ class Region {
     if (this.minX > reg.maxX) return false;
     if (this.maxY < reg.minY) return false;
     if (this.minY > reg.maxY) return false;
-    for (let x = this.minX; x <= this.maxX; x++) {
-      for (let y = this.minY; y <= this.maxY; y++) {
+    for (let x = this.minX; x <= this.maxX; x += 1) {
+      for (let y = this.minY; y <= this.maxY; y += 1) {
         if (this.contains(x, y) && reg.contains(x, y)) return true;
       }
     }
@@ -183,9 +183,9 @@ high x and low y is sea
 want three rivers, one or two branching
 with five cities along them, including a port and a capital
 */
-for (let x = 0; x < nation.size; x++) {
+for (let x = 0; x < nation.size; x += 1) {
   const row = [];
-  for (let y = 0; y < nation.size; y++) {
+  for (let y = 0; y < nation.size; y += 1) {
     row.push({ colour: x - y > 14 ? 'blue' : 'green' });
   }
   nation.map.push(row);
@@ -198,58 +198,58 @@ const setRiver = function (x, y, side, n) {
 };
 
 const riverRight = function (x, y, count) {
-  x--;
-  for (let j = count; j > 0; j--) {
-    for (let i = 0; i < QuestJs._random.int(4) + 2; i++) {
-      y++;
+  x -= 1;
+  for (let j = count; j > 0; j -= 1) {
+    for (let i = 0; i < QuestJs._random.int(4) + 2; i += 1) {
+      y += 1;
       setRiver(x, y, 'right', j);
     }
-    y++;
-    x++;
-    for (let i = 0; i < QuestJs._random.int(4) + 1; i++) {
-      x--;
+    y += 1;
+    x += 1;
+    for (let i = 0; i < QuestJs._random.int(4) + 1; i += 1) {
+      x -= 1;
       setRiver(x, y, 'left', j);
     }
-    x--;
-    y--;
+    x -= 1;
+    y -= 1;
   }
 };
 const riverLeft = function (x, y, count) {
-  y++;
-  for (let j = count; j > 0; j--) {
-    for (let i = 0; i < QuestJs._random.int(4) + 2; i++) {
-      x--;
+  y += 1;
+  for (let j = count; j > 0; j -= 1) {
+    for (let i = 0; i < QuestJs._random.int(4) + 2; i += 1) {
+      x -= 1;
       setRiver(x, y, 'left', j);
     }
-    x--;
-    y--;
-    for (let i = 0; i < QuestJs._random.int(4) + 1; i++) {
-      y++;
+    x -= 1;
+    y -= 1;
+    for (let i = 0; i < QuestJs._random.int(4) + 1; i += 1) {
+      y += 1;
       setRiver(x, y, 'right', j);
     }
-    y++;
-    x++;
+    y += 1;
+    x += 1;
   }
 };
 const riverSet = function (x, y, w, values) {
   values = values.split(' ').map((el) => parseInt(el));
   let left = true;
-  for (let k = 0; k < values.length; k++) {
+  for (let k = 0; k < values.length; k += 1) {
     const width = (w * (values.length - k)) / values.length;
     if (left) {
-      for (let i = 0; i < values[k]; i++) {
-        x--;
+      for (let i = 0; i < values[k]; i += 1) {
+        x -= 1;
         setRiver(x, y, 'left', width);
       }
-      x--;
-      y--;
+      x -= 1;
+      y -= 1;
     } else {
-      for (let i = 0; i < values[k]; i++) {
-        y++;
+      for (let i = 0; i < values[k]; i += 1) {
+        y += 1;
         setRiver(x, y, 'right', width);
       }
-      y++;
-      x++;
+      y += 1;
+      x += 1;
     }
     left = !left;
   }

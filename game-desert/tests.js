@@ -54,7 +54,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.title('QuestJs._random.fromArray');
   const ary = ['one', 'two', 'three'];
   const ary2 = [];
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i += 1) {
     const res = QuestJs._random.fromArray(ary, true);
     if (ary2.includes(res)) QuestJs._test.fail('ary2 already has that value');
     ary2.push(res);
@@ -1139,7 +1139,7 @@ QuestJs._test.tests = function () {
   QuestJs._test.assertCmd('buy trophy', ['You buy the trophy for $0,15.']);
   QuestJs._test.assertEqual(1, QuestJs._w.me.money);
   QuestJs._test.assertEqual(true, QuestJs._parser.isForSale(QuestJs._w.carrot));
-  //QuestJs._log.info("----------------------");
+  //QuestJs._log.info(" -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1");
   QuestJs._test.assertEqual(false, QuestJs._parser.isForSale(QuestJs._w.trophy));
   QuestJs._test.assertCmd('buy trophy', [
     "You can't buy the trophy here - probably because you are already holding it.",

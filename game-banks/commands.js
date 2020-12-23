@@ -120,7 +120,7 @@ QuestJs._commands.push(
     npc.actedThisTurn = true;
     if (!npc.npc) {
       QuestJs._io.msg(CMD_not_npc(npc));
-      return QuestJs._world.FAILED; 
+      return QuestJs._world.FAILED;
     }
     objects.shift();
     return handlePressurise(npc, objects, true);
@@ -137,7 +137,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('NpcPressurise2', {
     npc.actedThisTurn = true;
     if (!npc.npc) {
       QuestJs._io.msg(CMD_not_npc(npc));
-      return QuestJs._world.FAILED; 
+      return QuestJs._world.FAILED;
     }
     objects.shift();
     return handlePressurise(npc, objects, true);
@@ -155,7 +155,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('NpcDepressurise1', {
     npc.actedThisTurn = true;
     if (!npc.npc) {
       QuestJs._io.msg(CMD_not_npc(npc));
-      return QuestJs._world.FAILED; 
+      return QuestJs._world.FAILED;
     }
     objects.shift();
     return handlePressurise(npc, objects, false);
@@ -173,7 +173,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('NpcDepressurise2', {
     npc.actedThisTurn = true;
     if (!npc.npc) {
       QuestJs._io.msg(CMD_not_npc(npc));
-      return QuestJs._world.FAILED; 
+      return QuestJs._world.FAILED;
     }
     objects.shift();
     return handlePressurise(npc, objects, false);
@@ -337,14 +337,14 @@ QuestJs._commands.push(
       const arr = getProbes();
       QuestJs._io.metamsg('Found ' + arr.length + ' probes');
       for (let probe of arr) {
-        QuestJs._io.metamsg('------------------');
+        QuestJs._io.metamsg(' -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1');
         QuestJs._io.metamsg('Probe:' + probe.alias);
         QuestJs._io.metamsg('Status:' + probe.status);
         QuestJs._io.metamsg('launchCounter:' + probe.launchCounter);
         QuestJs._io.metamsg('probeType:' + probe.probeType);
         QuestJs._io.metamsg('planetNumber:' + probe.planetNumber);
       }
-      QuestJs._io.metamsg('------------------');
+      QuestJs._io.metamsg(' -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1');
       QuestJs._io.metamsg('Geology:' + currentPlanet().geology);
       QuestJs._io.metamsg('Biology:' + currentPlanet().biology);
       QuestJs._io.metamsg('Radio:' + currentPlanet().coms);

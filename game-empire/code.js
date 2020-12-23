@@ -12,10 +12,10 @@ word.end = ['', '', 'b', 'mb', 'ck', 'ch', 'rk', 'd', 'nd', 'rd', 'gg', 'ng', 'g
 word.syllable = function() { return QuestJs._random.fromArray(this.start) + QuestJs._random.fromArray(this.middle) + QuestJs._random.fromArray(this.end) }
 word.word = function() {
   let s = ''
-  for (let i = QuestJs._random.int(2,4); i > 0; i--) s += this.syllable()
+  for (let i = QuestJs._random.int(2,4); i > 0; i -= 1) s += this.syllable()
   return s
 }
-for (let i = 0; i < 20; i++) QuestJs._log.info(word.word())
+for (let i = 0; i < 20; i += 1) QuestJs._log.info(word.word())
 */
 
 QuestJs._settings.startingDialogDisabled = true;
