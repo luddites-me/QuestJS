@@ -1,254 +1,256 @@
+const { QuestJs } = window;
+
 QuestJs._lang = {
   regex: {
     // Regular Expressions for Commands
 
     // Meta commands
-    MetaHelp: /^help$|^\?$/,
-    MetaHint: /^(?:hint|clue)s?$/,
-    MetaCredits: /^(?:about|credits|version|info)$/,
-    MetaDarkMode: /^(?:dark|dark mode|toggle dark|toggle dark mode)$/,
-    MetaWarnings: /^warn(?:ing|ings|)$/,
-    MetaImages: /^images$/,
-    MetaSilent: /^(?:sh|silent)$/,
-    MetaSpoken: /^spoken$/,
-    MetaIntro: /^intro$/,
-    MetaBrief: /^brief$/,
-    MetaTerse: /^terse$/,
-    MetaVerbose: /^verbose$/,
-    MetaTranscript: /^transcript$|^script$/,
-    MetaTranscriptOn: /^transcript on$|^script on$/,
-    MetaTranscriptOff: /^transcript off$|^script off$/,
-    MetaTranscriptClear: /^transcript clear$|^script clear$|^transcript delete$|^script delete$/,
-    MetaTranscriptShow: /^transcript show$|^script show$/,
-    MetaTranscriptShowWithOptions: /^(?:transcript|script) show (\w+)$/,
-    MetaTranscriptToWalkthrough: /^(?:transcript|script) (?:w|wt|walk|walkthrough)$/,
-    MetaPlayerComment: /^\*(.+)$/,
-    MetaSave: /^save$/,
-    MetaSaveGame: /^(?:save) (.+)$/,
-    MetaLoad: /^reload$|^load$/,
-    MetaLoadGame: /^(?:load|reload) (.+)$/,
-    MetaDir: /^dir$|^directory$/,
-    MetaDeleteGame: /^(?:delete|del) (.+)$/,
-    MetaUndo: /^undo$/,
-    MetaAgain: /^(?:again|g)$/,
-    MetaOops: /^(?:oops)$/,
-    MetaRestart: /^restart$/,
-    MetaScore: /^score$/,
-    MetaPronouns: /^pronouns$/,
+    MetaHelp                      : /^help$|^\?$/,
+    MetaHint                      : /^(?:hint|clue)s?$/,
+    MetaCredits                   : /^(?:about|credits|version|info)$/,
+    MetaDarkMode                  : /^(?:dark|dark mode|toggle dark|toggle dark mode)$/,
+    MetaWarnings                  : /^warn(?:ing|ings|)$/,
+    MetaImages                    : /^images$/,
+    MetaSilent                    : /^(?:sh|silent)$/,
+    MetaSpoken                    : /^spoken$/,
+    MetaIntro                     : /^intro$/,
+    MetaBrief                     : /^brief$/,
+    MetaTerse                     : /^terse$/,
+    MetaVerbose                   : /^verbose$/,
+    MetaTranscript                : /^transcript$|^script$/,
+    MetaTranscriptOn              : /^transcript on$|^script on$/,
+    MetaTranscriptOff             : /^transcript off$|^script off$/,
+    MetaTranscriptClear           : /^transcript clear$|^script clear$|^transcript delete$|^script delete$/,
+    MetaTranscriptShow            : /^transcript show$|^script show$/,
+    MetaTranscriptShowWithOptions : /^(?:transcript|script) show (\w+)$/,
+    MetaTranscriptToWalkthrough   : /^(?:transcript|script) (?:w|wt|walk|walkthrough)$/,
+    MetaPlayerComment             : /^\*(.+)$/,
+    MetaSave                      : /^save$/,
+    MetaSaveGame                  : /^(?:save) (.+)$/,
+    MetaLoad                      : /^reload$|^load$/,
+    MetaLoadGame                  : /^(?:load|reload) (.+)$/,
+    MetaDir                       : /^dir$|^directory$/,
+    MetaDeleteGame                : /^(?:delete|del) (.+)$/,
+    MetaUndo                      : /^undo$/,
+    MetaAgain                     : /^(?:again|g)$/,
+    MetaOops                      : /^(?:oops)$/,
+    MetaRestart                   : /^restart$/,
+    MetaScore                     : /^score$/,
+    MetaPronouns                  : /^pronouns$/,
 
     // Misc
-    Look: /^l$|^look$/,
-    Exits: /^exits$/,
-    Wait: /^wait$|^z$/,
-    TopicsNote: /^topics?$/,
-    Inv: /^inventory$|^inv$|^i$/,
-    Map: /^map$/,
-    Smell: /^smell$|^sniff$/,
-    Listen: /^listen$/,
-    PurchaseFromList: /^buy$|^purchase$/,
+    Look             : /^l$|^look$/,
+    Exits            : /^exits$/,
+    Wait             : /^wait$|^z$/,
+    TopicsNote       : /^topics?$/,
+    Inv              : /^inventory$|^inv$|^i$/,
+    Map              : /^map$/,
+    Smell            : /^smell$|^sniff$/,
+    Listen           : /^listen$/,
+    PurchaseFromList : /^buy$|^purchase$/,
 
     // Use item
-    Examine: /^(?:examine|exam|ex|x) (.+)$/,
-    LookAt: /^(?:look at|look|l) (.+)$/,
-    LookOut: /^(?:look out of|look out) (.+)$/,
-    LookBehind: /^(?:look behind|check behind) (.+)$/,
-    LookUnder: /^(?:look under|check under) (.+)$/,
-    LookInside: /^(?:look inside) (.+)$/,
-    Search: /^(?:search) (.+)$/,
-    Take: /^(?:take|get|pick up|t) (.+)$/,
-    Drop: /^(?:drop|d) (.+)$/,
-    Wear2: /^put (?:my |your |his |her |)(.+) on$/,
-    Wear: /^(?:wear|don|put on) (?:my |your |his |her |)(.+)$/,
-    Remove: /^(?:remove|doff|take off) (?:my |your |his |her |)(.+)$/,
-    Remove2: /^take (?:my |your |his |her |)(.+) off$/,
-    Read: /^(?:read|r) (.+)$/,
-    SmellItem: /^(?:smell|sniff) (.+)$/,
-    ListenToItem: /^(?:listen to|listen) (.+)$/,
-    Purchase: /^(?:purchase|buy) (.+)$/,
-    Sell: /^(?:sell) (.+)$/,
-    Smash: /^(?:smash|break|destroy) (.+)$/,
-    SwitchOn: /^(?:turn on|switch on) (.+)$/,
-    SwitchOn2: /^(?:turn|switch) (.+) on$/,
-    SwitchOff2: /^(?:turn|switch) (.+) off$/,
-    SwitchOff: /^(?:turn off|switch off) (.+)$/,
-    Open: /^(?:open) (.+)$/,
-    Close: /^(?:close) (.+)$/,
-    Lock: /^(?:lock) (.+)$/,
-    Unlock: /^(?:unlock) (.+)$/,
-    Push: /^(?:push|press) (.+)$/,
-    Pull: /^(?:pull) (.+)$/,
-    Fill: /^(?:fill) (.+)$/,
-    Empty: /^(?:empty) (.+)$/,
-    Eat: /^(eat|feed on|feed|partake of|partake|dine on|dine) (.+)$/,
-    Drink: /^(drink|imbibe|quaff|guzzle|knock back|swig|swill|sip|down|chug) (.+)$/,
-    Ingest: /^(consume|swallow|ingest) (.+)$/,
-    SitOn: /^(?:sit on|sit upon|sit) (.+)$/,
-    StandOn: /^(?:stand on|stand upon|stand) (.+)$/,
-    ReclineOn: /^(?:recline on|recline upon|recline|lie on|lie upon|lie) (.+)$/,
-    GetOff: /^(?:get off|off) (.+)$/,
-    Use: /^(?:use) (.+)$/,
-    TalkTo: /^(?:talk to|talk|speak to|speak|converse with|converse) (.+)$/,
-    Topics: /^topics? (?:for )?(.+)$/,
+    Examine      : /^(?:examine|exam|ex|x) (.+)$/,
+    LookAt       : /^(?:look at|look|l) (.+)$/,
+    LookOut      : /^(?:look out of|look out) (.+)$/,
+    LookBehind   : /^(?:look behind|check behind) (.+)$/,
+    LookUnder    : /^(?:look under|check under) (.+)$/,
+    LookInside   : /^(?:look inside) (.+)$/,
+    Search       : /^(?:search) (.+)$/,
+    Take         : /^(?:take|get|pick up|t) (.+)$/,
+    Drop         : /^(?:drop|d) (.+)$/,
+    Wear2        : /^put (?:my |your |his |her |)(.+) on$/,
+    Wear         : /^(?:wear|don|put on) (?:my |your |his |her |)(.+)$/,
+    Remove       : /^(?:remove|doff|take off) (?:my |your |his |her |)(.+)$/,
+    Remove2      : /^take (?:my |your |his |her |)(.+) off$/,
+    Read         : /^(?:read|r) (.+)$/,
+    SmellItem    : /^(?:smell|sniff) (.+)$/,
+    ListenToItem : /^(?:listen to|listen) (.+)$/,
+    Purchase     : /^(?:purchase|buy) (.+)$/,
+    Sell         : /^(?:sell) (.+)$/,
+    Smash        : /^(?:smash|break|destroy) (.+)$/,
+    SwitchOn     : /^(?:turn on|switch on) (.+)$/,
+    SwitchOn2    : /^(?:turn|switch) (.+) on$/,
+    SwitchOff2   : /^(?:turn|switch) (.+) off$/,
+    SwitchOff    : /^(?:turn off|switch off) (.+)$/,
+    Open         : /^(?:open) (.+)$/,
+    Close        : /^(?:close) (.+)$/,
+    Lock         : /^(?:lock) (.+)$/,
+    Unlock       : /^(?:unlock) (.+)$/,
+    Push         : /^(?:push|press) (.+)$/,
+    Pull         : /^(?:pull) (.+)$/,
+    Fill         : /^(?:fill) (.+)$/,
+    Empty        : /^(?:empty) (.+)$/,
+    Eat          : /^(eat|feed on|feed|partake of|partake|dine on|dine) (.+)$/,
+    Drink        : /^(drink|imbibe|quaff|guzzle|knock back|swig|swill|sip|down|chug) (.+)$/,
+    Ingest       : /^(consume|swallow|ingest) (.+)$/,
+    SitOn        : /^(?:sit on|sit upon|sit) (.+)$/,
+    StandOn      : /^(?:stand on|stand upon|stand) (.+)$/,
+    ReclineOn    : /^(?:recline on|recline upon|recline|lie on|lie upon|lie) (.+)$/,
+    GetOff       : /^(?:get off|off) (.+)$/,
+    Use          : /^(?:use) (.+)$/,
+    TalkTo       : /^(?:talk to|talk|speak to|speak|converse with|converse) (.+)$/,
+    Topics       : /^topics? (?:for )?(.+)$/,
 
     // Misc again
-    Say: /^(say|shout|whisper) (.+)$/,
-    Stand: /^stand$|^stand up$|^get up$/,
-    NpcStand: [
+    Say      : /^(say|shout|whisper) (.+)$/,
+    Stand    : /^stand$|^stand up$|^get up$/,
+    NpcStand : [
       /^(.+), ?(?:stand|stand up|get up)$/,
       /^tell (.+) to (?:stand|stand up|get up)$/,
     ],
-    FillWith: /^(?:fill) (.+) (?:with) (.+)$/,
-    NpcFillWith: [
+    FillWith    : /^(?:fill) (.+) (?:with) (.+)$/,
+    NpcFillWith : [
       /^(.+), ?(?:fill) (.+) (?:with) (.+)$/,
       /^tell (.+) to (?:fill) (.+) (?:with) (.+)$/,
     ],
-    PutIn: /^(?:put|place|drop) (.+) (?:in to|into|in|on to|onto|on) (.+)$/,
-    NpcPutIn: [
+    PutIn    : /^(?:put|place|drop) (.+) (?:in to|into|in|on to|onto|on) (.+)$/,
+    NpcPutIn : [
       /^(.+), ?(?:put|place|drop) (.+) (?:in to|into|in|on to|onto|on) (.+)$/,
       /^tell (.+) to (?:put|place|drop) (.+) (?:in to|into|in|on to|onto|on) (.+)$/,
     ],
-    TakeOut: /^(?:take|get|remove) (.+) (?:from|out of|out|off of|off) (.+)$/,
-    NpcTakeOut: [
+    TakeOut    : /^(?:take|get|remove) (.+) (?:from|out of|out|off of|off) (.+)$/,
+    NpcTakeOut : [
       /^(.+), ?(?:take|get|remove) (.+) (?:from|out of|out|off of|off) (.+)$/,
       /^tell (.+) to (?:take|get|remove) (.+) (?:from|out of|out|off of|off) (.+)$/,
     ],
-    GiveTo: /^(?:give) (.+) (?:to) (.+)$/,
-    NpcGiveTo: [
+    GiveTo    : /^(?:give) (.+) (?:to) (.+)$/,
+    NpcGiveTo : [
       /^(.+), ?(?:give) (.+) (?:to) (.+)$/,
       /^tell (.+) to ?(?:give) (.+) (?:to) (.+)$/,
     ],
 
-    TieTo: /^(?:tie|fasten|attach) (.+) (?:to) (.+)$/,
-    NpcTieTo: [
+    TieTo    : /^(?:tie|fasten|attach) (.+) (?:to) (.+)$/,
+    NpcTieTo : [
       /^(.+), ?(?:tie|fasten|attach) (.+) (?:to) (.+)$/,
       /^tell (.+) to ?(?:tie|fasten|attach) (.+) (?:to) (.+)$/,
     ],
-    Untie: /^(?:untie|unfasten|detach) (.+)$/,
-    NpcUntie: [
+    Untie    : /^(?:untie|unfasten|detach) (.+)$/,
+    NpcUntie : [
       /^(.+), ?(?:untie|unfasten|detach) (.+)$/,
       /^tell (.+) to ?(?:untie|unfasten|detach) (.+)$/,
     ],
-    UntieFrom: /^(?:untie|unfasten|detach) (.+) (?:from) (.+)$/,
-    NpcUntieFrom: [
+    UntieFrom    : /^(?:untie|unfasten|detach) (.+) (?:from) (.+)$/,
+    NpcUntieFrom : [
       /^(.+), ?(?:untie|unfasten|detach) (.+) (?:frm) (.+)$/,
       /^tell (.+) to ?(?:untie|unfasten|detach) (.+) (?:from) (.+)$/,
     ],
     UseWith: /^(?:use) (.+) (?:with|on) (.+)$/,
 
-    PushExit: /^(push|pull|move|shift) (.+) (northwest|nw|north|n|northeast|ne|in|in|enter|i|up|u|west|w|east|e|out|out|exit|o|down|dn|d|southwest|sw|south|s|southeast|se)$/,
-    NpcPushExit: [
+    PushExit    : /^(push|pull|move|shift) (.+) (northwest|nw|north|n|northeast|ne|in|in|enter|i|up|u|west|w|east|e|out|out|exit|o|down|dn|d|southwest|sw|south|s|southeast|se)$/,
+    NpcPushExit : [
       /^(.+), ?(push|pull|move|shift) (.+) (northwest|nw|north|n|northeast|ne|in|in|enter|i|up|u|west|w|east|e|out|out|exit|o|down|dn|d|southwest|sw|south|s|southeast|se)$/,
       /^tell (.+) to (push|pull|move|shift) (.+) (northwest|nw|north|n|northeast|ne|in|in|enter|i|up|u|west|w|east|e|out|out|exit|o|down|dn|d|southwest|sw|south|s|southeast|se)$/,
     ],
-    AskAbout: /^(?:ask) (.+) (about|what|who|how|why|where|when) (.+)$/,
-    TellAbout: /^(?:tell) (.+) (about|what|who|how|why|where|when) (.+)$/,
+    AskAbout  : /^(?:ask) (.+) (about|what|who|how|why|where|when) (.+)$/,
+    TellAbout : /^(?:tell) (.+) (about|what|who|how|why|where|when) (.+)$/,
 
     // Debug
-    DebugWalkThrough: /^wt (.+)$/,
-    DebugInspect: /^inspect (.+)$/,
-    DebugInspectByName: /^inspect2 (.+)$/,
-    DebugTest: /^test$/,
-    DebugInspectCommand: /^(?:cmd) (.+)$/,
-    DebugListCommands: /^cmds$/,
-    DebugListCommands2: /^cmds2$/,
-    DebugParserToggle: /^parser$/,
+    DebugWalkThrough    : /^wt (.+)$/,
+    DebugInspect        : /^inspect (.+)$/,
+    DebugInspectByName  : /^inspect2 (.+)$/,
+    DebugTest           : /^test$/,
+    DebugInspectCommand : /^(?:cmd) (.+)$/,
+    DebugListCommands   : /^cmds$/,
+    DebugListCommands2  : /^cmds2$/,
+    DebugParserToggle   : /^parser$/,
   },
 
   // This will be added to the start of the regex of a command to make an NPC command
   // The saved capture group is the NPC's name
   tell_to_prefixes: {
-    1: '(?:tell|ask) (.+) to ', // TELL KYLE TO GET SPOON
-    2: '(.+), ?', // KYLE, GET SPOON
+    1 : '(?:tell|ask) (.+) to ', // TELL KYLE TO GET SPOON
+    2 : '(.+), ?', // KYLE, GET SPOON
   },
 
   //----------------------------------------------------------------------------------------------
   // Standard Responses
 
   // QuestJs._templates.TAKEABLE
-  take_successful: '{nv:char:take:true} {nm:item:the}.',
+  take_successful       : '{nv:char:take:true} {nm:item:the}.',
   // take_successful_counted:"{nv:char:take:true} {number:count} {nm:item}.",
   // take_successful_counted_plural:"{nv:char:take:true} {number:count} {nm:item}.",
-  drop_successful: '{nv:char:drop:true} {nm:item:the}.',
+  drop_successful       : '{nv:char:drop:true} {nm:item:the}.',
   // drop_successful_counted:"{nv:char:drop:true} {number:count} {nm:item}.",
-  cannot_take: "{pv:char:can't:true} take {ob:item}.",
-  cannot_drop: "{pv:char:can't:true} drop {ob:item}.",
-  not_carrying: "{pv:char:don't:true} have {ob:item}.",
-  already_have: "{pv:char:'ve:true} got {ob:item} already.",
-  cannot_take_component:
+  cannot_take           : "{pv:char:can't:true} take {ob:item}.",
+  cannot_drop           : "{pv:char:can't:true} drop {ob:item}.",
+  not_carrying          : "{pv:char:don't:true} have {ob:item}.",
+  already_have          : "{pv:char:'ve:true} got {ob:item} already.",
+  cannot_take_component :
     "{pv:char:can't:true} take {ob:item}; {pv:item:'be} part of {nm:whole:the}.",
 
   // QuestJs._templates.EDIBLE
-  eat_successful: '{nv:char:eat:true} {nm:item:the}.',
-  drink_successful: '{nv:char:drink:true} {nm:item:the}.',
-  cannot_eat: "{nv:item:'be:true} not something you can eat.",
-  cannot_drink: "{nv:item:'be:true} not something you can drink.",
+  eat_successful   : '{nv:char:eat:true} {nm:item:the}.',
+  drink_successful : '{nv:char:drink:true} {nm:item:the}.',
+  cannot_eat       : "{nv:item:'be:true} not something you can eat.",
+  cannot_drink     : "{nv:item:'be:true} not something you can drink.",
   // cannot_ingest:"{nv:item:'be:true} not something you can ingest.",
 
   // QuestJs._templates.WEARABLE
-  wear_successful: '{nv:char:put:true} on {nm:garment:the}.',
-  remove_successful: '{nv:char:take:true} {nm:garment:the} off.',
-  cannot_wear: "{nv:char:can't:true} wear {ob:item}.",
-  cannot_wear_ensemble:
+  wear_successful      : '{nv:char:put:true} on {nm:garment:the}.',
+  remove_successful    : '{nv:char:take:true} {nm:garment:the} off.',
+  cannot_wear          : "{nv:char:can't:true} wear {ob:item}.",
+  cannot_wear_ensemble :
     'Individual parts of an ensemble must be worn and removed separately.',
   // wearing:"{nv:char:'be:true} wearing {ob:garment}.",  // I do not think this is used at all
-  not_wearing: "{nv:char:'be:true} not wearing {ob:item}.",
-  cannot_wear_over:
+  not_wearing      : "{nv:char:'be:true} not wearing {ob:item}.",
+  cannot_wear_over :
     "{nv:char:can't:true} put {nm:garment:the} on over {pa:char} {nm:outer}.",
   cannot_remove_under:
     "{nv:char:can't:true} take off {pa:char} {nm:garment} whilst wearing {pa:char} {nm:outer}.",
-  already_wearing: "{nv:char:'be:true} already wearing {ob:garment}.",
-  invWearingPrefix: 'wearing',
-  invHoldingPrefix: 'holding',
+  already_wearing  : "{nv:char:'be:true} already wearing {ob:garment}.",
+  invWearingPrefix : 'wearing',
+  invHoldingPrefix : 'holding',
 
   // QuestJs._templates.CONTAINER, etc.
-  open_successful: '{nv:char:open:true} {nm:container:the}.',
-  close_successful: '{nv:char:close:true} {nm:container:the}.',
-  lock_successful: '{nv:char:lock:true} {nm:container:the}.',
-  unlock_successful: '{nv:char:unlock:true} {nm:container:the}.',
-  close_and_lock_successful:
+  open_successful           : '{nv:char:open:true} {nm:container:the}.',
+  close_successful          : '{nv:char:close:true} {nm:container:the}.',
+  lock_successful           : '{nv:char:lock:true} {nm:container:the}.',
+  unlock_successful         : '{nv:char:unlock:true} {nm:container:the}.',
+  close_and_lock_successful :
     '{nv:char:close:true} {nm:container:the} and {cj:char:lock} {sb:container}.',
-  cannot_open: "{nv:item:can't:true} be opened.",
-  cannot_close: "{nv:item:can't:true} be closed.",
-  cannot_lock: "{nv:char:can't:true} lock {ob:item}.",
-  cannot_unlock: "{nv:char:can't:true} unlock {ob:item}.",
-  not_container: '{nv:container:be:true} not a container.',
-  container_recursion:
+  cannot_open         : "{nv:item:can't:true} be opened.",
+  cannot_close        : "{nv:item:can't:true} be closed.",
+  cannot_lock         : "{nv:char:can't:true} lock {ob:item}.",
+  cannot_unlock       : "{nv:char:can't:true} unlock {ob:item}.",
+  not_container       : '{nv:container:be:true} not a container.',
+  container_recursion :
     "What? You want to put {nm:item:the} in {nm:container:the} when {nm:container:the} is already in {nm:item:the}? That's just too freaky for me.",
-  not_inside: "{nv:item:'be:true} not inside that.",
-  locked: '{nv:container:be:true} locked.',
-  no_key: '{nv:char:do:true} have the right key.',
-  locked_exit: 'That way is locked.',
-  open_and_enter: '{nv:char:open:true} the {param:doorName} and walk through.',
-  unlock_and_enter:
+  not_inside       : "{nv:item:'be:true} not inside that.",
+  locked           : '{nv:container:be:true} locked.',
+  no_key           : '{nv:char:do:true} have the right key.',
+  locked_exit      : 'That way is locked.',
+  open_and_enter   : '{nv:char:open:true} the {param:doorName} and walk through.',
+  unlock_and_enter :
     '{nv:char:unlock:true} the {param:doorName}, open it and walk through.',
-  try_but_locked: '{nv:char:try:true} the {param:doorName}, but it is locked.',
-  container_closed: '{nv:container:be:true} closed.',
-  inside_container: '{nv:item:be:true} inside {nm:container:the}.',
-  look_inside: 'Inside {nm:container:the} {nv:char:can} see {param:list}.',
+  try_but_locked   : '{nv:char:try:true} the {param:doorName}, but it is locked.',
+  container_closed : '{nv:container:be:true} closed.',
+  inside_container : '{nv:item:be:true} inside {nm:container:the}.',
+  look_inside      : 'Inside {nm:container:the} {nv:char:can} see {param:list}.',
 
   // MECHANDISE
-  purchase_successful: '{nv:char:buy:true} {nm:item:the} for {money:money}.',
-  sell_successful: '{nv:char:sell:true} {nm:item:the} for {money:money}.',
-  cannot_purchase_again:
+  purchase_successful   : '{nv:char:buy:true} {nm:item:the} for {money:money}.',
+  sell_successful       : '{nv:char:sell:true} {nm:item:the} for {money:money}.',
+  cannot_purchase_again :
     "{nv:char:can't:true} buy {nm:item:the} here - probably because {pv:char:be} already holding {ob:item}.",
-  cannot_purchase_here: "{nv:char:can't:true} buy {nm:item:the} here.",
-  cannot_afford:
+  cannot_purchase_here : "{nv:char:can't:true} buy {nm:item:the} here.",
+  cannot_afford        :
     "{nv:char:can't:true} afford {nm:item:the} (need {money:money}).",
   cannot_sell_here: "{nv:char:can't:true} sell {nm:item:the} here.",
 
   // QuestJs._templates.FURNITURE
-  sit_on_successful: '{nv:char:sit:true} on {nm:item:the}.',
-  stand_on_successful: '{nv:char:stand:true} on {nm:item:the}.',
-  recline_on_successful: '{nv:char:lie:true} down on {nm:item:the}.',
-  cannot_stand_on: "{nv:item:'be:true} not something you can stand on.",
-  cannot_sit_on: "{nv:item:'be:true} not something you can sit on.",
-  cannot_recline_on: "{nv:item:'be:true} not something you can lie on.",
+  sit_on_successful     : '{nv:char:sit:true} on {nm:item:the}.',
+  stand_on_successful   : '{nv:char:stand:true} on {nm:item:the}.',
+  recline_on_successful : '{nv:char:lie:true} down on {nm:item:the}.',
+  cannot_stand_on       : "{nv:item:'be:true} not something you can stand on.",
+  cannot_sit_on         : "{nv:item:'be:true} not something you can sit on.",
+  cannot_recline_on     : "{nv:item:'be:true} not something you can lie on.",
 
   // QuestJs._templates.SWITCHABLE
-  turn_on_successful: '{nv:char:switch:true} {nm:item:the} on.',
-  turn_off_successful: '{nv:char:switch:true} {nm:item:the} off.',
-  cannot_switch_on: "{nv:char:can't:true} turn {ob:item} on.",
-  cannot_switch_off: "{nv:char:can't:true} turn {ob:item} off.",
+  turn_on_successful  : '{nv:char:switch:true} {nm:item:the} on.',
+  turn_off_successful : '{nv:char:switch:true} {nm:item:the} off.',
+  cannot_switch_on    : "{nv:char:can't:true} turn {ob:item} on.",
+  cannot_switch_off   : "{nv:char:can't:true} turn {ob:item} off.",
 
   /*
   // QuestJs._templates.VESSEL
@@ -280,8 +282,8 @@ QuestJs._lang = {
     'Some suggestions for what to tell {nm:item:the} about: {param:list}.',
   cannot_talk_to:
     "You chat to {nm:item:the} for a few moments, before releasing that {pv:item:'be} not about to reply.",
-  no_topics: "{nv:char:have:true} nothing to talk to {nm:item:the} about.",
-  not_able_to_hear:
+  no_topics        : '{nv:char:have:true} nothing to talk to {nm:item:the} about.',
+  not_able_to_hear :
     'Doubtful {nv:item:will} be interested in anything {sb:char} has to say.',
   npc_no_interest_in: '{nv:actor:have:true} no interest in that subject.',
 
@@ -289,64 +291,64 @@ QuestJs._lang = {
   push_button_successful: '{nv:char:push:true} {nm:item:the}.',
 
   // SHIFTABLE
-  push_exit_successful: '{nv:char:push:true} {nm:item:the} {param:dir}.',
-  cannot_push:
+  push_exit_successful : '{nv:char:push:true} {nm:item:the} {param:dir}.',
+  cannot_push          :
     "{pv:item:'be:true} not something you can move around like that.",
-  cannot_push_up: "{pv:char:'be:true} not getting {nm:item:the} up there!",
-  take_not_push: "Just pick the thing up already!",
+  cannot_push_up : "{pv:char:'be:true} not getting {nm:item:the} up there!",
+  take_not_push  : 'Just pick the thing up already!',
 
   // QuestJs._templates.ROPE
   rope_examine_attached_both_ends:
     ' It is {rope.attachedVerb} to both {nm:obj1:the} and {nm:obj2:the}.',
-  rope_examine_attached_one_end: ' It is {rope.attachedVerb} to {nm:obj1:the}.',
-  rope_attach_verb: 'tie',
-  rope_attached_verb: 'tied',
-  rope_detach_verb: 'untie',
-  rope_one_end: 'One end',
-  rope_other_end: 'The other end',
-  rope_examine_end_attached: 'is {rope.attachedVerb} to {nm:obj:the}.',
-  rope_examine_end_held: 'is held by {nm:holder:the}.',
-  rope_examine_end_headed: 'heads into {nm:loc:the}.',
+  rope_examine_attached_one_end : ' It is {rope.attachedVerb} to {nm:obj1:the}.',
+  rope_attach_verb              : 'tie',
+  rope_attached_verb            : 'tied',
+  rope_detach_verb              : 'untie',
+  rope_one_end                  : 'One end',
+  rope_other_end                : 'The other end',
+  rope_examine_end_attached     : 'is {rope.attachedVerb} to {nm:obj:the}.',
+  rope_examine_end_held         : 'is held by {nm:holder:the}.',
+  rope_examine_end_headed       : 'heads into {nm:loc:the}.',
 
   // Movement
-  go_successful: '{nv:char:head:true} {param:dir}.',
-  not_that_way: "{nv:char:can't:true} go {param:dir}.",
-  can_go: 'You think you can go {exits}.',
+  go_successful : '{nv:char:head:true} {param:dir}.',
+  not_that_way  : "{nv:char:can't:true} go {param:dir}.",
+  can_go        : 'You think you can go {exits}.',
 
   // General cannot Messages
-  cannot_read: 'Nothing worth reading there.',
-  cannot_use: 'No obvious way to use {ob:item}.',
-  cannot_smash: "{nv:item:'be:true} not something you can break.",
-  cannot_look_out: 'Not something you can look out of.',
-  cannot_smell: '{nv:item:have:true} no smell.',
-  cannot_listen: '{nv:item:be:true} not making any noise.',
+  cannot_read     : 'Nothing worth reading there.',
+  cannot_use      : 'No obvious way to use {ob:item}.',
+  cannot_smash    : "{nv:item:'be:true} not something you can break.",
+  cannot_look_out : 'Not something you can look out of.',
+  cannot_smell    : '{nv:item:have:true} no smell.',
+  cannot_listen   : '{nv:item:be:true} not making any noise.',
 
   // General command messages
-  not_known_msg: "I don't even know where to begin with that.",
-  disambig_msg: 'Which do you mean?',
-  no_multiples_msg: 'You cannot use multiple objects with that command.',
-  nothing_msg: 'Nothing there to do that with.',
-  general_obj_error:
+  not_known_msg     : "I don't even know where to begin with that.",
+  disambig_msg      : 'Which do you mean?',
+  no_multiples_msg  : 'You cannot use multiple objects with that command.',
+  nothing_msg       : 'Nothing there to do that with.',
+  general_obj_error :
     'So I kind of get what you want to do, but not what you want to do it with.',
-  done_msg: "Done.",
-  nothing_for_sale: 'Nothing for sale here.',
-  wait_msg: "You wait one turn.",
-  no_map: "Sorry, no map available.",
-  inventory_prefix: 'You are carrying',
+  done_msg         : 'Done.',
+  nothing_for_sale : 'Nothing for sale here.',
+  wait_msg         : 'You wait one turn.',
+  no_map           : 'Sorry, no map available.',
+  inventory_prefix : 'You are carrying',
 
   // General command fails
-  no_smell: "{pv:char:can't:true} smell anything here.",
-  no_listen: "{pv:char:can't:true} hear anything of note here.",
-  nothing_there: "{nv:char:be:true} sure there's nothing there.",
-  nothing_inside: "There's nothing to see inside.",
-  it_is_empty: '{pv:container:be:true} empty.',
-  not_here: "{pv:item:'be:true} not here.",
-  char_has_it: '{nv:holder:have:true} {ob:item}.',
-  none_here: "There's no {nm:item} here.",
-  none_held: '{nv:char:have:true} no {nm:item}.',
-  nothing_useful: "That's not going to do anything useful.",
-  already: '{sb:item:true} already {cj:item:be}.',
-  default_examine: "{pv:item:'be:true} just your typical, every day {nm:item}.",
+  no_smell        : "{pv:char:can't:true} smell anything here.",
+  no_listen       : "{pv:char:can't:true} hear anything of note here.",
+  nothing_there   : "{nv:char:be:true} sure there's nothing there.",
+  nothing_inside  : "There's nothing to see inside.",
+  it_is_empty     : '{pv:container:be:true} empty.',
+  not_here        : "{pv:item:'be:true} not here.",
+  char_has_it     : '{nv:holder:have:true} {ob:item}.',
+  none_here       : "There's no {nm:item} here.",
+  none_held       : '{nv:char:have:true} no {nm:item}.',
+  nothing_useful  : "That's not going to do anything useful.",
+  already         : '{sb:item:true} already {cj:item:be}.',
+  default_examine : "{pv:item:'be:true} just your typical, every day {nm:item}.",
 
   error:
     'Oh dear, I seem to have hit an error trying to handle that (F12 for more details).',
@@ -429,8 +431,8 @@ QuestJs._lang = {
     let s = '';
     let flag = false;
     if (
-      QuestJs._w[QuestJs._game.player.loc].canViewLocs &&
-      QuestJs._w[QuestJs._game.player.loc].canViewLocs.includes(npc.loc)
+      QuestJs._w[QuestJs._game.player.loc].canViewLocs
+      && QuestJs._w[QuestJs._game.player.loc].canViewLocs.includes(npc.loc)
     ) {
       s = QuestJs._w[QuestJs._game.player.loc].canViewPrefix;
       flag = true;
@@ -455,8 +457,8 @@ QuestJs._lang = {
     let s = '';
     let flag = false;
     if (
-      QuestJs._w[QuestJs._game.player.loc].canViewLocs &&
-      QuestJs._w[QuestJs._game.player.loc].canViewLocs.includes(npc.loc)
+      QuestJs._w[QuestJs._game.player.loc].canViewLocs
+      && QuestJs._w[QuestJs._game.player.loc].canViewLocs.includes(npc.loc)
     ) {
       // Can the player see the location the NPC enters, from another location?
       s = QuestJs._w[QuestJs._game.player.loc].canViewPrefix;
@@ -490,67 +492,65 @@ QuestJs._lang = {
 
   spoken_on:
     "Game mode is now 'spoken'. Type INTRO to hear the introductory text.",
-  spoken_off: "Game mode is now 'unspoken'.",
-  mode_brief:
+  spoken_off : "Game mode is now 'unspoken'.",
+  mode_brief :
     "Game mode is now 'brief'; no room descriptions (except with LOOK).",
   mode_terse:
     "Game mode is now 'terse'; room descriptions only shown on first entering and with LOOK.",
   mode_verbose:
     "Game mode is now 'verbose'; room descriptions shown every time you enter a room.",
-  mode_silent_on: 'Game is now in silent mode.',
-  mode_silent_off: 'Silent mode off.',
-  transcript_already_on: 'Transcript is already turned on.',
-  transcript_already_off: 'Transcript is already turned off.',
-  undo_disabled: 'Sorry, UNDO is not enabled in this game.',
-  undo_not_available: 'There are no saved game-states to UNDO back to.',
-  undo_done: 'Undoing...',
-  again_not_available: 'There are no previous commands to repeat.',
-  scores_not_implemented: 'Scores are not a part of this game.',
-  restart_are_you_sure: 'Do you really want to restart the game? {b:[Y/N]}',
-  restart_no: 'Restart cancelled',
-  yes_regex: /^(y|yes)$/i,
+  mode_silent_on         : 'Game is now in silent mode.',
+  mode_silent_off        : 'Silent mode off.',
+  transcript_already_on  : 'Transcript is already turned on.',
+  transcript_already_off : 'Transcript is already turned off.',
+  undo_disabled          : 'Sorry, UNDO is not enabled in this game.',
+  undo_not_available     : 'There are no saved game-states to UNDO back to.',
+  undo_done              : 'Undoing...',
+  again_not_available    : 'There are no previous commands to repeat.',
+  scores_not_implemented : 'Scores are not a part of this game.',
+  restart_are_you_sure   : 'Do you really want to restart the game? {b:[Y/N]}',
+  restart_no             : 'Restart cancelled',
+  yes_regex              : /^(y|yes)$/i,
 
   helpScript() {
     if (QuestJs._settings.textInput) {
       QuestJs._io.metamsg(
-        'Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.'
+        'Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.',
       );
       QuestJs._io.metamsg(
         '{b:Movement:} To move, use the eight compass directions (or just N, NE, etc.). Up/down and in/out may be options too. When "Num Lock" is on, you can use the number pad for all eight compass directions, - and + for UP and DOWN, / and * for IN and OUT.',
       );
       QuestJs._io.metamsg(
-        '{b:Other commands:} You can also LOOK (or just L or 5 on the number pad), HELP (or ?) or WAIT (or Z or the dot on the number pad). Other commands are generally of the form GET HAT or PUT THE BLUE TEAPOT IN THE ANCIENT CHEST. Experiment and see what you can do!'
+        '{b:Other commands:} You can also LOOK (or just L or 5 on the number pad), HELP (or ?) or WAIT (or Z or the dot on the number pad). Other commands are generally of the form GET HAT or PUT THE BLUE TEAPOT IN THE ANCIENT CHEST. Experiment and see what you can do!',
       );
       QuestJs._io.metamsg(
         "{b:Using items: }You can use ALL and ALL BUT with some commands, for example TAKE ALL, and PUT ALL BUT SWORD IN SACK. You can also use pronouns, so LOOK AT MARY, then TALK TO HER. The pronoun will refer to the last subject in the last successful command, so after PUT HAT AND FUNNY STICK IN THE DRAWER, 'IT' will refer to the funny stick (the hat and the stick are subjects of the sentence, the drawer was the object).",
       );
       QuestJs._io.metamsg(
-        '{b:Characters: }If you come across another character, you can ask him or her to do something. Try things like MARY,PUT THE HAT IN THE BOX, or TELL MARY TO GET ALL BUT THE KNIFE. Depending on the game you may be able to TALK TO a character, to ASK or TELL a character ABOUT a topic, or just SAY something and they will respond..'
+        '{b:Characters: }If you come across another character, you can ask him or her to do something. Try things like MARY,PUT THE HAT IN THE BOX, or TELL MARY TO GET ALL BUT THE KNIFE. Depending on the game you may be able to TALK TO a character, to ASK or TELL a character ABOUT a topic, or just SAY something and they will respond..',
       );
       QuestJs._io.metamsg(
-        '{b:Meta-commands:} Type ABOUT to find out about the author, SCRIPT to learn about transcripts or SAVE to learn about saving games. Use WARNINGS to see any applicable sex, violence or trigger warnings.'
+        '{b:Meta-commands:} Type ABOUT to find out about the author, SCRIPT to learn about transcripts or SAVE to learn about saving games. Use WARNINGS to see any applicable sex, violence or trigger warnings.',
       );
-      let s =
-        'You can also use BRIEF/TERSE/VERBOSE to control room descriptions. Type DARK to toggle dark mode or SILENT to toggle sounds and music (if implemented).';
+      let s = 'You can also use BRIEF/TERSE/VERBOSE to control room descriptions. Type DARK to toggle dark mode or SILENT to toggle sounds and music (if implemented).';
       if (typeof map !== 'undefined') s += ' Use MAP to toggle/show the map.';
-      if (typeof imagePane !== 'undefined')
-        s += ' Use IMAGES to toggle/show the iage pane.';
+      if (typeof imagePane !== 'undefined') s += ' Use IMAGES to toggle/show the iage pane.';
       QuestJs._io.metamsg(s);
       QuestJs._io.metamsg(
         "{b:Shortcuts:}You can often just type the first few characters of an item's name and Quest will guess what you mean.  If fact, if you are in a room with Brian, who is holding a ball, and a box, Quest should be able to work out that B,PUT B IN B mean you want Brian to put the ball in the box.",
       );
       QuestJs._io.metamsg(
-        'You can use the up and down arrows to scroll back though your previous typed commands - especially useful if you realise you spelled something wrong. If you do not have arrow keys, use OOPS to retrieve the last typed command so you can edit it. Use AGAIN or just G to repeat the last typed command.'
+        'You can use the up and down arrows to scroll back though your previous typed commands - especially useful if you realise you spelled something wrong. If you do not have arrow keys, use OOPS to retrieve the last typed command so you can edit it. Use AGAIN or just G to repeat the last typed command.',
       );
     }
     if (QuestJs._settings.panes !== 'none') {
       QuestJs._io.metamsg(
-        '{b:User Interface:} To interact with an object, click on its name in the side pane, and a set of possible actions will appear under it. Click on the appropriate action.'
+        '{b:User Interface:} To interact with an object, click on its name in the side pane, and a set of possible actions will appear under it. Click on the appropriate action.',
       );
       if (QuestJs._settings.compassPane) {
         if (QuestJs._settings.symbolsForCompass) {
           QuestJs._io.metamsg(
-            'You can also use the compass rose at the top to move around. Click the eye symbol, &#128065;, to look at you current location, the pause symbol, &#9208;, to wait or &#128712; for help.'
+            'You can also use the compass rose at the top to move around. Click the eye symbol, &#128065;, to look at you current location, the pause symbol, &#9208;, to wait or &#128712; for help.',
           );
         } else {
           QuestJs._io.metamsg(
@@ -575,8 +575,7 @@ QuestJs._lang = {
       '{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.',
       { settings },
     );
-    if (QuestJs._settings.ifdb)
-      QuestJs._io.metamsg(`IFDB number: ${QuestJs._settings.ifdb}`);
+    if (QuestJs._settings.ifdb) QuestJs._io.metamsg(`IFDB number: ${QuestJs._settings.ifdb}`);
     if (QuestJs._settings.thanks && QuestJs._settings.thanks.length > 0) {
       QuestJs._io.metamsg(
         `Thanks to ${QuestJs._tools.formatList(QuestJs._settings.thanks, {
@@ -592,24 +591,24 @@ QuestJs._lang = {
 
   warningsScript() {
     switch (typeof QuestJs._settings.warnings) {
-      case 'undefined':
-        QuestJs._io.metamsg('No warning have been set for this game.');
-        break;
-      case 'string':
-        QuestJs._io.metamsg(QuestJs._settings.warnings);
-        break;
-      default:
-        for (const el of QuestJs._settings.warnings) QuestJs._io.metamsg(el);
+    case 'undefined':
+      QuestJs._io.metamsg('No warning have been set for this game.');
+      break;
+    case 'string':
+      QuestJs._io.metamsg(QuestJs._settings.warnings);
+      break;
+    default:
+      for (const el of QuestJs._settings.warnings) QuestJs._io.metamsg(el);
     }
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
 
   saveLoadScript() {
     QuestJs._io.metamsg(
-      'To save your progress, type SAVE followed by the name to save with.'
+      'To save your progress, type SAVE followed by the name to save with.',
     );
     QuestJs._io.metamsg(
-      'To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.'
+      'To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.',
     );
     QuestJs._io.metamsg('To see a list of save games, type DIR.');
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
@@ -617,22 +616,22 @@ QuestJs._lang = {
 
   transcriptScript() {
     QuestJs._io.metamsg(
-      'The TRANSCRIPT or SCRIPT command can be used to handle saving the input and output. This can be very useful when testing a game, as the author can go back through it and see exactly what happened, and how the player got there.'
+      'The TRANSCRIPT or SCRIPT command can be used to handle saving the input and output. This can be very useful when testing a game, as the author can go back through it and see exactly what happened, and how the player got there.',
     );
     QuestJs._io.metamsg(
-      'Use SCRIPT ON to turn on recording and SCRIPT OFF to turn it off. Use SCRIPT SHOW to display it (it will appear in a new tab; you will not lose your place inthe game). To empty the file, use SCRIPT CLEAR.'
+      'Use SCRIPT ON to turn on recording and SCRIPT OFF to turn it off. Use SCRIPT SHOW to display it (it will appear in a new tab; you will not lose your place inthe game). To empty the file, use SCRIPT CLEAR.',
     );
     QuestJs._io.metamsg(
-      'You can add options to the SCRIPT SHOW to hide various types of text. Use M to hide meta-information (like this), I to hide your input, P to hide parser errors (when the parser says it has no clue what you mean), E to hide programming errors and D to hide debugging messages. These can be combined, so SCRIPT SHOW ED will hide programming errors and debugging messages, and SCRIPT SHOW EDPID will show only the output game text.'
+      'You can add options to the SCRIPT SHOW to hide various types of text. Use M to hide meta-information (like this), I to hide your input, P to hide parser errors (when the parser says it has no clue what you mean), E to hide programming errors and D to hide debugging messages. These can be combined, so SCRIPT SHOW ED will hide programming errors and debugging messages, and SCRIPT SHOW EDPID will show only the output game text.',
     );
     QuestJs._io.metamsg(
-      'You can add a comment to the transcript by starting your text with an asterisk (*).'
+      'You can add a comment to the transcript by starting your text with an asterisk (*).',
     );
     QuestJs._io.metamsg(
-      'You can do TRANSCRIPT WALKTHROUGH or just SCRIPT W to copy the transcript to the clipboard formatted for a walk-through. You can then paste it straight into the code.'
+      'You can do TRANSCRIPT WALKTHROUGH or just SCRIPT W to copy the transcript to the clipboard formatted for a walk-through. You can then paste it straight into the code.',
     );
     QuestJs._io.metamsg(
-      'Everything gets saved to memory, and will be lost if you go to another web page or close your browser. The transcript is not saved when you save your game (but will not be lost when you load a game). If you complete the game the text input will disappear, however if you have a transcript a link will be available to access it.'
+      'Everything gets saved to memory, and will be lost if you go to another web page or close your browser. The transcript is not saved when you save your game (but will not be lost when you load a game). If you complete the game the text input will disappear, however if you have a transcript a link will be available to access it.',
     );
     QuestJs._io.metamsg(
       `Transcript is currently: ${QuestJs._IO.transcript ? 'on' : 'off'}`,
@@ -642,7 +641,7 @@ QuestJs._lang = {
 
   topicsScript() {
     QuestJs._io.metamsg(
-      'Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).'
+      'Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).',
     );
     return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
   },
@@ -651,10 +650,11 @@ QuestJs._lang = {
     QuestJs._io.metamsg(
       `This version is for beta-testing (${QuestJs._settings.version}). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.`,
     );
-    if (QuestJs._settings.textInput)
+    if (QuestJs._settings.textInput) {
       QuestJs._io.metamsg(
-        'You can add your own comments to the transcript by starting a command with *.'
+        'You can add your own comments to the transcript by starting a command with *.',
       );
+    }
     QuestJs._IO.scriptStart();
   },
 
@@ -665,22 +665,22 @@ QuestJs._lang = {
 
   // Misc
 
-  list_and: 'and',
-  list_nothing: 'nothing',
-  list_or: 'or',
-  list_nowhere: 'nowhere',
-  never_mind: 'Never mind.',
-  default_description: "It's just scenery.",
-  click_to_continue: 'Click to continue...',
-  buy: 'Buy', // used in the command link in the purchase table
-  buy_headings: ['Item', 'Cost', ''],
-  current_money: 'Current money',
+  list_and            : 'and',
+  list_nothing        : 'nothing',
+  list_or             : 'or',
+  list_nowhere        : 'nowhere',
+  never_mind          : 'Never mind.',
+  default_description : "It's just scenery.",
+  click_to_continue   : 'Click to continue...',
+  buy                 : 'Buy', // used in the command link in the purchase table
+  buy_headings        : ['Item', 'Cost', ''],
+  current_money       : 'Current money',
 
-  article_filter_regex: /^(?:the |an |a )?(.+)$/,
-  joiner_regex: /\band\b|\, ?and\b|\,/,
-  all_regex: /^(all|everything)$/,
-  all_exclude_regex: /^((all|everything) (but|bar|except)\b)/,
-  go_pre_regex: 'go to |goto |go |head |',
+  article_filter_regex : /^(?:the |an |a )?(.+)$/,
+  joiner_regex         : /\band\b|\, ?and\b|\,/,
+  all_regex            : /^(all|everything)$/,
+  all_exclude_regex    : /^((all|everything) (but|bar|except)\b)/,
+  go_pre_regex         : 'go to |goto |go |head |',
 
   yesNo: ['Yes', 'No'],
 
@@ -689,253 +689,259 @@ QuestJs._lang = {
 
   pronouns: {
     thirdperson: {
-      subjective: 'it',
-      objective: 'it',
-      possessive: 'its',
-      poss_adj: 'its',
-      reflexive: 'itself',
+      subjective : 'it',
+      objective  : 'it',
+      possessive : 'its',
+      poss_adj   : 'its',
+      reflexive  : 'itself',
     },
     massnoun: {
-      subjective: 'it',
-      objective: 'it',
-      possessive: 'its',
-      poss_adj: 'its',
-      reflexive: 'itself',
+      subjective : 'it',
+      objective  : 'it',
+      possessive : 'its',
+      poss_adj   : 'its',
+      reflexive  : 'itself',
     },
     male: {
-      subjective: 'he',
-      objective: 'him',
-      possessive: 'his',
-      poss_adj: 'his',
-      reflexive: 'himself',
+      subjective : 'he',
+      objective  : 'him',
+      possessive : 'his',
+      poss_adj   : 'his',
+      reflexive  : 'himself',
     },
     female: {
-      subjective: 'she',
-      objective: 'her',
-      possessive: 'hers',
-      poss_adj: 'her',
-      reflexive: 'herself',
+      subjective : 'she',
+      objective  : 'her',
+      possessive : 'hers',
+      poss_adj   : 'her',
+      reflexive  : 'herself',
     },
     plural: {
-      subjective: 'they',
-      objective: 'them',
-      possessive: 'theirs',
-      poss_adj: 'their',
-      reflexive: 'themselves',
+      subjective : 'they',
+      objective  : 'them',
+      possessive : 'theirs',
+      poss_adj   : 'their',
+      reflexive  : 'themselves',
     },
     firstperson: {
-      subjective: 'I',
-      objective: 'me',
-      possessive: 'mine',
-      poss_adj: 'my',
-      reflexive: 'myself',
-      possessive_name: 'my',
+      subjective      : 'I',
+      objective       : 'me',
+      possessive      : 'mine',
+      poss_adj        : 'my',
+      reflexive       : 'myself',
+      possessive_name : 'my',
     },
     secondperson: {
-      subjective: 'you',
-      objective: 'you',
-      possessive: 'yours',
-      poss_adj: 'your',
-      reflexive: 'yourself',
-      possessive_name: 'your',
+      subjective      : 'you',
+      objective       : 'you',
+      possessive      : 'yours',
+      poss_adj        : 'your',
+      reflexive       : 'yourself',
+      possessive_name : 'your',
     },
   },
 
   // Display verbs used in the side panel
   verbs: {
-    examine: 'Examine',
-    use: 'Use',
-    take: 'Take',
-    drop: 'Drop',
-    open: 'Open',
-    close: 'Close',
-    switchon: 'Switch on',
-    switchoff: 'Switch off',
-    wear: 'Wear',
-    remove: 'Remove',
-    lookat: 'Look at',
-    talkto: 'Talk to',
-    eat: 'Eat',
-    drink: 'Drink',
-    read: 'Read',
-    push: 'Push',
-    equip: 'Equip',
-    unequip: 'Unequip',
-    attack: 'Attack',
-    sitOn: 'Sit on',
-    standOn: 'Stand on',
-    reclineOn: 'Lie on',
-    getOff: 'Get off',
+    examine   : 'Examine',
+    use       : 'Use',
+    take      : 'Take',
+    drop      : 'Drop',
+    open      : 'Open',
+    close     : 'Close',
+    switchon  : 'Switch on',
+    switchoff : 'Switch off',
+    wear      : 'Wear',
+    remove    : 'Remove',
+    lookat    : 'Look at',
+    talkto    : 'Talk to',
+    eat       : 'Eat',
+    drink     : 'Drink',
+    read      : 'Read',
+    push      : 'Push',
+    equip     : 'Equip',
+    unequip   : 'Unequip',
+    attack    : 'Attack',
+    sitOn     : 'Sit on',
+    standOn   : 'Stand on',
+    reclineOn : 'Lie on',
+    getOff    : 'Get off',
   },
 
   // Flag the state of an item in a list
   invModifiers: {
-    worn: 'worn',
-    open: 'open',
-    equipped: 'equipped',
-    dead: 'dead',
+    worn     : 'worn',
+    open     : 'open',
+    equipped : 'equipped',
+    dead     : 'dead',
   },
 
   // Change the abbrev values to suit your game (or language)
   // You may want to do that in settings, which is loaded first
   exit_list: [
     {
-      name: 'northwest',
-      abbrev: 'NW',
-      niceDir: 'the northwest',
-      type: 'compass',
-      key: 103,
-      x: -1,
-      y: 1,
-      z: 0,
-      opp: 'southeast',
-      symbol: 'fa-arrow-left',
-      rotate: 45,
+      name    : 'northwest',
+      abbrev  : 'NW',
+      niceDir : 'the northwest',
+      type    : 'compass',
+      key     : 103,
+      x       : -1,
+      y       : 1,
+      z       : 0,
+      opp     : 'southeast',
+      symbol  : 'fa-arrow-left',
+      rotate  : 45,
     },
     {
-      name: 'north',
-      abbrev: 'N',
-      niceDir: 'the north',
-      type: 'compass',
-      key: 104,
-      x: 0,
-      y: 1,
-      z: 0,
-      opp: 'south',
-      symbol: 'fa-arrow-up',
+      name    : 'north',
+      abbrev  : 'N',
+      niceDir : 'the north',
+      type    : 'compass',
+      key     : 104,
+      x       : 0,
+      y       : 1,
+      z       : 0,
+      opp     : 'south',
+      symbol  : 'fa-arrow-up',
     },
     {
-      name: 'northeast',
-      abbrev: 'NE',
-      niceDir: 'the northeast',
-      type: 'compass',
-      key: 105,
-      x: 1,
-      y: 1,
-      z: 0,
-      opp: 'southwest',
-      symbol: 'fa-arrow-up',
-      rotate: 45,
+      name    : 'northeast',
+      abbrev  : 'NE',
+      niceDir : 'the northeast',
+      type    : 'compass',
+      key     : 105,
+      x       : 1,
+      y       : 1,
+      z       : 0,
+      opp     : 'southwest',
+      symbol  : 'fa-arrow-up',
+      rotate  : 45,
     },
     {
-      name: 'in',
-      abbrev: 'In',
-      alt: 'enter|i',
-      niceDir: 'inside',
-      type: 'inout',
-      key: 111,
-      opp: 'out',
-      symbol: 'fa-sign-in-alt',
+      name    : 'in',
+      abbrev  : 'In',
+      alt     : 'enter|i',
+      niceDir : 'inside',
+      type    : 'inout',
+      key     : 111,
+      opp     : 'out',
+      symbol  : 'fa-sign-in-alt',
     },
     {
-      name: 'up',
-      abbrev: 'U',
-      niceDir: 'above',
-      type: 'vertical',
-      key: 109,
-      x: 0,
-      y: 0,
-      z: 1,
-      opp: 'down',
-      symbol: 'fa-arrow-up',
+      name    : 'up',
+      abbrev  : 'U',
+      niceDir : 'above',
+      type    : 'vertical',
+      key     : 109,
+      x       : 0,
+      y       : 0,
+      z       : 1,
+      opp     : 'down',
+      symbol  : 'fa-arrow-up',
     },
 
     {
-      name: 'west',
-      abbrev: 'W',
-      niceDir: 'the west',
-      type: 'compass',
-      key: 100,
-      x: -1,
-      y: 0,
-      z: 0,
-      opp: 'east',
-      symbol: 'fa-arrow-left',
-    },
-    { name: 'Look', abbrev: 'L', type: 'nocmd', key: 101, symbol: 'fa-eye' },
-    {
-      name: 'east',
-      abbrev: 'E',
-      niceDir: 'the east',
-      type: 'compass',
-      key: 102,
-      x: 1,
-      y: 0,
-      z: 0,
-      opp: 'west',
-      symbol: 'fa-arrow-right',
+      name    : 'west',
+      abbrev  : 'W',
+      niceDir : 'the west',
+      type    : 'compass',
+      key     : 100,
+      x       : -1,
+      y       : 0,
+      z       : 0,
+      opp     : 'east',
+      symbol  : 'fa-arrow-left',
     },
     {
-      name: 'out',
-      abbrev: 'Out',
-      alt: 'exit|o',
-      niceDir: 'outside',
-      type: 'inout',
-      key: 106,
-      opp: 'in',
-      symbol: 'fa-sign-out-alt',
+      name: 'Look', abbrev: 'L', type: 'nocmd', key: 101, symbol: 'fa-eye',
     },
     {
-      name: 'down',
-      abbrev: 'Dn',
-      alt: 'd',
-      niceDir: 'below',
-      type: 'vertical',
-      key: 107,
-      x: 0,
-      y: 0,
-      z: -1,
-      opp: 'up',
-      symbol: 'fa-arrow-down',
+      name    : 'east',
+      abbrev  : 'E',
+      niceDir : 'the east',
+      type    : 'compass',
+      key     : 102,
+      x       : 1,
+      y       : 0,
+      z       : 0,
+      opp     : 'west',
+      symbol  : 'fa-arrow-right',
+    },
+    {
+      name    : 'out',
+      abbrev  : 'Out',
+      alt     : 'exit|o',
+      niceDir : 'outside',
+      type    : 'inout',
+      key     : 106,
+      opp     : 'in',
+      symbol  : 'fa-sign-out-alt',
+    },
+    {
+      name    : 'down',
+      abbrev  : 'Dn',
+      alt     : 'd',
+      niceDir : 'below',
+      type    : 'vertical',
+      key     : 107,
+      x       : 0,
+      y       : 0,
+      z       : -1,
+      opp     : 'up',
+      symbol  : 'fa-arrow-down',
     },
 
     {
-      name: 'southwest',
-      abbrev: 'SW',
-      niceDir: 'the southwest',
-      type: 'compass',
-      key: 97,
-      x: -1,
-      y: -1,
-      z: 0,
-      opp: 'northeast',
-      symbol: 'fa-arrow-down',
-      rotate: 45,
+      name    : 'southwest',
+      abbrev  : 'SW',
+      niceDir : 'the southwest',
+      type    : 'compass',
+      key     : 97,
+      x       : -1,
+      y       : -1,
+      z       : 0,
+      opp     : 'northeast',
+      symbol  : 'fa-arrow-down',
+      rotate  : 45,
     },
     {
-      name: 'south',
-      abbrev: 'S',
-      niceDir: 'the south',
-      type: 'compass',
-      key: 98,
-      x: 0,
-      y: -1,
-      z: 0,
-      opp: 'north',
-      symbol: 'fa-arrow-down',
+      name    : 'south',
+      abbrev  : 'S',
+      niceDir : 'the south',
+      type    : 'compass',
+      key     : 98,
+      x       : 0,
+      y       : -1,
+      z       : 0,
+      opp     : 'north',
+      symbol  : 'fa-arrow-down',
     },
     {
-      name: 'southeast',
-      abbrev: 'SE',
-      niceDir: 'the southeast',
-      type: 'compass',
-      key: 99,
-      x: 1,
-      y: -1,
-      z: 0,
-      opp: 'northwest',
-      symbol: 'fa-arrow-right',
-      rotate: 45,
+      name    : 'southeast',
+      abbrev  : 'SE',
+      niceDir : 'the southeast',
+      type    : 'compass',
+      key     : 99,
+      x       : 1,
+      y       : -1,
+      z       : 0,
+      opp     : 'northwest',
+      symbol  : 'fa-arrow-right',
+      rotate  : 45,
     },
-    { name: 'Wait', abbrev: 'Z', type: 'nocmd', key: 110, symbol: 'fa-pause' },
-    { name: 'Help', abbrev: '?', type: 'nocmd', symbol: 'fa-info' },
+    {
+      name: 'Wait', abbrev: 'Z', type: 'nocmd', key: 110, symbol: 'fa-pause',
+    },
+    {
+      name: 'Help', abbrev: '?', type: 'nocmd', symbol: 'fa-info',
+    },
   ],
 
   numberUnits: 'zero;one;two;three;four;five;six;seven;eight;nine;ten;eleven;twelve;thirteen;fourteen;fifteen;sixteen;seventeen;eighteen;nineteen;twenty'.split(
-    ';'
+    ';',
   ),
   numberTens: 'twenty;thirty;forty;fifty;sixty;seventy;eighty;ninety'.split(
-    ';'
+    ';',
   ),
 
   ordinalReplacements: [
@@ -997,8 +1003,8 @@ QuestJs._lang = {
   },
 
   contentsForData: {
-    surface: { prefix: 'with ', suffix: ' on it' },
-    container: { prefix: 'containing ', suffix: '' },
+    surface   : { prefix: 'with ', suffix: ' on it' },
+    container : { prefix: 'containing ', suffix: '' },
   },
 
   //----------------------------------------------------------------------------------------------
@@ -1048,12 +1054,11 @@ QuestJs._lang = {
     let count = options[`${item.name}_count`]
       ? options[`${item.name}_count`]
       : false;
-    if (!count && options.loc && item.countable)
-      count = item.countAtLoc(options.loc);
+    if (!count && options.loc && item.countable) count = item.countAtLoc(options.loc);
 
     if (
-      item.pronouns === QuestJs._lang.pronouns.firstperson ||
-      item.pronouns === QuestJs._lang.pronouns.secondperson
+      item.pronouns === QuestJs._lang.pronouns.firstperson
+      || item.pronouns === QuestJs._lang.pronouns.secondperson
     ) {
       s = options.possessive
         ? item.pronouns.poss_adj

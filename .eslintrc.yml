@@ -4,9 +4,7 @@ extends:
   - plugin:import/typescript
   - plugin:import/warnings
   - plugin:json/recommended
-  - plugin:prettier/recommended
   - plugin:yaml/recommended
-  - prettier
 plugins:
   - import
   - json
@@ -54,7 +52,7 @@ rules:
     - error
     - always
   camelcase:
-    - 1
+    - 0
     - ignoreImports: true
   eol-last:
     - error

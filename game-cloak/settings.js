@@ -1,3 +1,5 @@
+const { QuestJs } = window;
+
 // About your game
 QuestJs._settings.title = 'Cloak of Darkness';
 QuestJs._settings.author = 'The Pixie';

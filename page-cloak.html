@@ -13,17 +13,24 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  
-  <script src="lib/init.js"></script>
-  <script src="lib/_util.js"></script>
-  <script src="lib/_settings.js"></script>
+
   <script>
-    const FOLDER = "game-cloak";
-    document.writeln('<script src="' + FOLDER + '/settings.js"></scr' + "ipt>"); 
+    window.QuestJs = {};
   </script>
-  <script>
-    QuestJs._settings.writeScript(FOLDER)
-  </script>
+  <script src="lib/init.js" type="module"></script>
+  <script src="lang/lang-en.js" type="module"></script>
+  <script src="lib/_command.js" type="module"></script>
+  <script src="lib/_commands.js" type="module"></script>
+  <script src="lib/_defaults.js" type="module"></script>
+  <script src="lib/_io.js" type="module"></script>
+  <script src="lib/_npc.js" type="module"></script>
+  <script src="lib/_parser.js" type="module"></script>
+  <script src="lib/_saveload.js" type="module"></script>
+  <script src="lib/_templates.js" type="module"></script>
+  <script src="lib/_text.js" type="module"></script>
+  <script src="lib/_world.js" type="module"></script>
+  <script src="game-cloak/code.js" type="module"></script>
+  <script src="game-cloak/data.js" type="module"></script>
 </head>
 
 
@@ -39,7 +46,9 @@
 
 
 <script>
-  QuestJs._IO.createPanes();
+  setTimeout(() => {
+    window.QuestJs._IO.createPanes();
+  }, 5000);
 </script>
 
 <div id="dialog"></div>
