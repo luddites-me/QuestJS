@@ -22,10 +22,10 @@ npc_utilities.talkto = function() {
 
 function showSidePaneOptions(item, options, fn) {
   const opts = {article:DEFINITE, capital:true}
-  io.input('', options, false, fn, function(options) {
+  QuestJs._IO.input('', options, false, fn, function(options) {
     let s = '<div id="sidepane-menu"><p class="sidepane-menu-title">Talk to ' + QuestJs._lang.getName(item, {article:DEFINITE}) + ':</p>'
     for (let i = 0; i < options.length; i++) {
-      s += '<p value="' + i + '" onclick="io.menuResponse(' + i + ')" class="sidepane-menu-option">';
+      s += '<p value="' + i + '" onclick="QuestJs._IO.menuResponse(' + i + ')" class="sidepane-menu-option">';
       s += (typeof options[i] === 'string' ? options[i] : QuestJs._lang.getName(options[i], opts))
       s += '</p>';
     }
@@ -819,7 +819,7 @@ createItem("kyle_question", QUESTION(), {
     {
       response:function() {
         QuestJs._io.msg("'I don't know what that means,' says Kyle. 'It's a simple yes-no question.'");
-        w.Kyle.QuestJs._io.askQuestion("kyle_question");
+        w.Kyle.askQuestion("kyle_question");
       }
     },
   ],
@@ -927,7 +927,7 @@ createItem("Lara", NPC(true), {
         QuestJs._io.msg("'Oh, hello there,' replies Lara.")
         if (w.Kyle.isHere()) {
           QuestJs._io.msg("'Have you two met before?' asks Kyle.")
-          w.Kyle.QuestJs._io.askQuestion("kyle_question")
+          w.Kyle.askQuestion("kyle_question")
         }
       },
     }

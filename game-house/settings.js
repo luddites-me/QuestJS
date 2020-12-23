@@ -31,7 +31,7 @@ settings.intro = "."
 settings.setup = function() {
   game.player.hitpoints = 20;
   game.player.status = "You are feeling fine";
-  io.updateStatus()
+  QuestJs._IO.updateStatus()
 }
 
 

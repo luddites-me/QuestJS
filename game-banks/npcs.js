@@ -535,10 +535,10 @@ createItem("Kyle", CREW(false), {
   // Satellite deployment
   probeType:'satellite',
   probesRemaining:6,
-  probeAction0:function() { this.QuestJs._io.msg("Kyle sits at the console, and logs in.") },
-  probeAction3:function() { this.QuestJs._io.msg("Kyle watches the satellite as it goes into its prescribed orbit.") },
+  probeAction0:function() { QuestJs._io.msg("Kyle sits at the console, and logs in.") },
+  probeAction3:function() { QuestJs._io.msg("Kyle watches the satellite as it goes into its prescribed orbit.") },
   probeInPlace:function() {
-    this.QuestJs._io.msg("'Ripper!' said Kyle.");
+    QuestJs._io.msg("'Ripper!' said Kyle.");
     shipAlert("The satellite is in orbit,");
     currentPlanet().satellite = true;
   },
@@ -656,8 +656,8 @@ createItem("Ostap", CREW(false), {
   // Probe deployment
   probeType:'bio-probe',
   probesRemaining:16,
-  probeAction0:function(count) { this.QuestJs._io.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " to deploy...' mutters Ostap as he types at the console.") },
-  probeAction3:function(count) { this.QuestJs._io.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " launched,' says Ostap as he stands up.") },
+  probeAction0:function(count) { QuestJs._io.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " to deploy...' mutters Ostap as he types at the console.") },
+  probeAction3:function(count) { QuestJs._io.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " launched,' says Ostap as he stands up.") },
   data:[
     [
       // planet 0
@@ -799,18 +799,18 @@ createItem("Aada", CREW(true), {
   probesRemaining:16,
   probeAction0:function(count) {
     if (w.Xsansi.currentPlanet === 0 && this.deployProbeTotal === 0) {
-      this.QuestJs._io.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + "...' says Aada, looking blankly at the console for a moment. 'How hard can it be?' She starts tapping at the key board.");
+      QuestJs._io.msg("'Okay, " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + "...' says Aada, looking blankly at the console for a moment. 'How hard can it be?' She starts tapping at the key board.");
     }
     else {
-      this.QuestJs._io.msg("'Another " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + "...' says Aada. 'Easy enough.'");
+      QuestJs._io.msg("'Another " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + "...' says Aada. 'Easy enough.'");
     }
   },
   probeAction3:function(count) { 
     if (w.Xsansi.currentPlanet === 0 && this.deployProbeTotal === count) {
-      this.QuestJs._io.msg("'There!' says Aada, triumphantly. '" + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " deployed. I knew it couldn't be {i:that} tricky.'");
+      QuestJs._io.msg("'There!' says Aada, triumphantly. '" + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " deployed. I knew it couldn't be {i:that} tricky.'");
     }
     else {
-      this.QuestJs._io.msg("'That's another " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " deployed,' says Aada.");
+      QuestJs._io.msg("'That's another " + QuestJs._lang.toWords(count) + " probe" + (count === 1 ? "" : "s") + " deployed,' says Aada.");
     }
   },
   data:[

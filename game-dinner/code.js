@@ -72,7 +72,7 @@ createItem("dinner_timetable", AGENDA_FOLLOWER(), {
 QuestJs._commands.unshift(  new QuestJs._command.Cmd('Audio', {
   regex:/^q$/,
   script:function() {
-    showMenuWithNumbers('What is your favourite color?', ['Blue', 'Red', 'Yellow', 'Pink'], function(result) {
+    QuestJs._io.showMenuWithNumbers('What is your favourite color?', ['Blue', 'Red', 'Yellow', 'Pink'], function(result) {
       QuestJs._io.msg("You picked " + result + ".");
     });
   },

@@ -97,16 +97,16 @@ const CREW = function(isFemale) {
   res.stasisPod = function() {
     const tpParams = {actor:this}
     if (this.clothing === 2) {
-      this.QuestJs._io.msg("{nv:actor:pull:true} off {pa:actor} jumpsuit, and puts it in the drawer under {pa:actor} stasis pod.", tpParams);
+      QuestJs._io.msg("{nv:actor:pull:true} off {pa:actor} jumpsuit, and puts it in the drawer under {pa:actor} stasis pod.", tpParams);
       this.clothing = 1;
       return false;
     }
     if (this.posture !== "reclining") {
-      this.QuestJs._io.msg("Just in {pa:actor} underwear, {nv:actor:climb} into {pa:actor} stasis pod.", tpParams);
+      QuestJs._io.msg("Just in {pa:actor} underwear, {nv:actor:climb} into {pa:actor} stasis pod.", tpParams);
       this.posture = "reclining";
       return false;
     }
-    this.QuestJs._io.msg("'Close the pod, Xsansi,' {nv:actor:say}. The stasis pod lid smoothly lowers, and Xsansi operates the stasis field.", tpParams);
+    QuestJs._io.msg("'Close the pod, Xsansi,' {nv:actor:say}. The stasis pod lid smoothly lowers, and Xsansi operates the stasis field.", tpParams);
     this.status = "stasis";
     this.loc = "nowhere";
     return true;
@@ -134,11 +134,11 @@ const CREW = function(isFemale) {
         this.deployProbeAction++
         break
       case 1:
-        this.QuestJs._io.msg("{nv:actor:prepare:true} the {ordinal:count} {param:actor:probeType}.", tpParams)
+        QuestJs._io.msg("{nv:actor:prepare:true} the {ordinal:count} {param:actor:probeType}.", tpParams)
         this.deployProbeAction++
         break
       case 2:
-        this.QuestJs._io.msg("{nv:actor:launch:true} the {ordinal:count} {param:actor:probeType}.", tpParams)
+        QuestJs._io.msg("{nv:actor:launch:true} the {ordinal:count} {param:actor:probeType}.", tpParams)
         this.actuallyDeployProbe(count)
         break
       case 3:
@@ -380,7 +380,7 @@ function arrival() {
     npc.state = w.Xsansi.currentPlanet * 100
   }
   w.Kyle.setAgenda(["walkTo:probes_forward", "text:deployProbe:1"])
-  io.updateStatus() 
+  QuestJs._IO.updateStatus() 
 }
 
 // If a topic has an attribute "name2", then using code=2,

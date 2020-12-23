@@ -39,8 +39,8 @@ settings.mapDrawLabels=true
 settings.setup = function() {
   game.player.hitpoints = 20;
   game.player.status = "You are feeling fine";
-  io.updateStatus()
-  createPaneBox(2, "Extra options", '<button onclick="alert(\'Here!\')">Alert</button>')
+  QuestJs._IO.updateStatus()
+  QuestJs._io.createPaneBox(2, "Extra options", '<button onclick="alert(\'Here!\')">Alert</button>')
   
 }
 

@@ -41,7 +41,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Test input', {
   regex:/^inp/,
   script:function() {
     QuestJs._io.msg("First some preamble...")
-    showMenu("What colour?", [w.book, w.coin, w.Kyle, 'None of them'], function(result) {
+    QuestJs._io.showMenu("What colour?", [w.book, w.coin, w.Kyle, 'None of them'], function(result) {
       if (typeof result === 'string') {
         QuestJs._io.msg("You picked " + result + ".");
       }
@@ -51,7 +51,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Test input', {
     })
 /*    QuestJs._io.askQuestion("What colour?", function(result) {
       QuestJs._io.msg("You picked " + result + ".");
-      showYesNoMenu("Are you sure?", function(result) {
+      QuestJs._io.showYesNoMenu("Are you sure?", function(result) {
         QuestJs._io.msg("You said " + result + ".")
       })
     })*/
@@ -65,10 +65,10 @@ QuestJs._commands.unshift(  new QuestJs._command.Cmd('TextReveal', {
   script:function() {
     QuestJs._io.msg("Some text")
     QuestJs._io.msg("More")
-    QuestJs._io._msg("The characters will appear randomly from dots.", {}, {action:'effect', tag:'p', effect:io.unscrambleEffect, randomPlacing:true, pick:function() {return '.' }})
+    QuestJs._io._msg("The characters will appear randomly from dots.", {}, {action:'effect', tag:'p', effect:QuestJs._IO.unscrambleEffect, randomPlacing:true, pick:function() {return '.' }})
     QuestJs._io.wait()
-    QuestJs._io._msg("Or appears as though typed.", {}, {action:'effect', tag:'p', effect:io.typewriterEffect})
-    QuestJs._io._msg("The real message is revealed!!", {}, {action:'effect', tag:'pre', effect:io.unscrambleEffect, randomPlacing:true, incSpaces:true, pick:function(i) {return 'At first this message is shown'.charAt(i) }})
+    QuestJs._io._msg("Or appears as though typed.", {}, {action:'effect', tag:'p', effect:QuestJs._IO.typewriterEffect})
+    QuestJs._io._msg("The real message is revealed!!", {}, {action:'effect', tag:'pre', effect:QuestJs._IO.unscrambleEffect, randomPlacing:true, incSpaces:true, pick:function(i) {return 'At first this message is shown'.charAt(i) }})
     QuestJs._io.wait()
     QuestJs._io.clearScreen()
     QuestJs._io.msg("Some more text.")

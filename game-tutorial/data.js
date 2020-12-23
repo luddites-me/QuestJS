@@ -576,7 +576,7 @@ createRoom("office", {
       QuestJs._io.msg("Congratulations, you have won!")
       QuestJs._io.msg(" ")
       tmsg("So this is where we say good bye; you have completed the game, and hopefully now have a pretty good idea of how to play parser-based adventure games (and perhaps even write some too).")
-      io.finish()
+      QuestJs._IO.finish()
       return true
     },
     isHidden:function() { return !w.office_window.smashed },

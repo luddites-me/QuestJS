@@ -153,7 +153,7 @@ createItem('message', {
     else {
       QuestJs._io.msg ("The message in the dust says 'You have lost!'")
     }
-    io.finish()
+    QuestJs._IO.finish()
   },
   read:function() { this.examine() },
   eventPeriod:1,

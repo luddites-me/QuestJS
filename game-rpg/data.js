@@ -219,7 +219,7 @@ skills.add(new Spell("Fireball", {
   getPrimaryTargets:rpg.getAll,
   modifyOutgoingAttack:function(attack) {
     attack.element = "fire";
-    attack.QuestJs._io.msg("The room is momentarily filled with fire.", 1)
+    attack.msg("The room is momentarily filled with fire.", 1)
   },
 }))
 
@@ -264,7 +264,7 @@ skills.add(new Spell("Lightning bolt", {
 
 skills.add(new Spell("Cursed armour", {
   targetEffect:function(attack) {
-    attack.QuestJs._io.msg("{nms:target:the:true} armour is reduced.", 1)
+    attack.msg("{nms:target:the:true} armour is reduced.", 1)
   },
   icon:'unarmour',
   tooltip:"A lightning bolt jumps from your out-reached hand to you foe!", 
@@ -275,7 +275,7 @@ skills.add(new Spell("Cursed armour", {
 
 skills.add(new SpellSelf("Stoneskin", {
   targetEffect:function(attack) {
-    attack.QuestJs._io.msg("Your skin becomes as hard as stone - and yet still just as flexible.", 1)
+    attack.msg("Your skin becomes as hard as stone - and yet still just as flexible.", 1)
   },
   ongoing:true,
   incompatible:[/skin$/],
@@ -286,7 +286,7 @@ skills.add(new SpellSelf("Stoneskin", {
 
 skills.add(new SpellSelf("Steelskin", {
   targetEffect:function(attack) {
-    attack.QuestJs._io.msg("Your skin becomes as hard as steel - and yet still just as flexible.", 1)
+    attack.msg("Your skin becomes as hard as steel - and yet still just as flexible.", 1)
   },
   ongoing:true,
   duration:3,
@@ -302,12 +302,12 @@ skills.add(new SpellSelf("Unlock", {
     let flag = false
     for (let el of util.exitList(attack.attacker)) {
       if (room[el].locked) {
-        attack.QuestJs._io.msg("The door to " + util.niceDirection(el) + " unlocks.", 1)
+        attack.msg("The door to " + util.niceDirection(el) + " unlocks.", 1)
         room[el].locked = false
         flag = true
       }
     }
-    if (!flag) attack.QuestJs._io.msg("There are no locked doors.", 1)
+    if (!flag) attack.msg("There are no locked doors.", 1)
   },
 }))
 
@@ -315,12 +315,12 @@ skills.add(new Spell("Commune with animal", {
   icon:'commune',
   targetEffect:function(attack) {
     if (attack.target.canTalkFlag) {
-      attack.QuestJs._io.msg("{nv:attacker:can:true} talk to {nm:target:the} for a short time (like before the spell...).", 1)
+      attack.msg("{nv:attacker:can:true} talk to {nm:target:the} for a short time (like before the spell...).", 1)
     }
     else {
       attack.target.canTalkFlag = true
       attack.target.canTalkFlagIsTemporary = true
-      attack.QuestJs._io.msg("{nv:attacker:can:true} now talk to {nm:target:the} for a short time.", 1)
+      attack.msg("{nv:attacker:can:true} now talk to {nm:target:the} for a short time.", 1)
     }
   },
   regex:/commune/,
