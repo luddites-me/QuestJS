@@ -2,7 +2,7 @@
 
  
 createItem("me",
-  PLAYER(),
+  QuestJs._templates.PLAYER(),
   { 
     loc:"lounge",
     regex:/^(me|myself|player)$/,
@@ -14,7 +14,7 @@ createItem("me",
 
 
 createItem("knife",
-  TAKEABLE(),
+  QuestJs._templates.TAKEABLE(),
   { 
     loc:"me",
     sharp:false,

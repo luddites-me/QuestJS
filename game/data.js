@@ -1,6 +1,6 @@
 "use strict"
 
-createItem("me", PLAYER(), {
+createItem("me", QuestJs._templates.PLAYER(), {
   loc:"lounge",
   regex:/^(me|myself|player)$/,
   examine: "Just a regular guy.",

@@ -30,14 +30,14 @@ QuestJs._command.findCmd('MetaHelp').script = function() {
 
 
 
-createItem("me", PLAYER(), {
+createItem("me", QuestJs._templates.PLAYER(), {
   loc:"lobby",
   regex:/^(me|myself|player)$/,
   examine: "Just a regular guy.",
 })
 
 
-createItem('cloak', WEARABLE(), {
+createItem('cloak', QuestJs._templates.WEARABLE(), {
   examine:'The cloak is black... Very black... So black it seems to absorb light.',
   worn:true,
   loc:'me'
@@ -95,7 +95,7 @@ createRoom("cloakroom", {
 })
 
 
-createItem('hook', SURFACE(), {
+createItem('hook', QuestJs._templates.SURFACE(), {
   regex:/^peg$/,
   hookable:true,
   scenery:true,

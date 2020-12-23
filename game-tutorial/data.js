@@ -1,6 +1,6 @@
 "use strict"
 
-createItem("me", PLAYER(), {
+createItem("me", QuestJs._templates.PLAYER(), {
   loc:"lounge",
   regex:/^(me|myself|player)$/,
   examine: "Just a regular guy.",
@@ -81,7 +81,7 @@ createRoom("kitchen", {
 })
 
 
-createItem("kitchen_door", LOCKED_DOOR([], "lounge", "kitchen"), {
+createItem("kitchen_door", QuestJs._templates.LOCKED_DOOR([], "lounge", "kitchen"), {
   examine:"It is plain, wooden door, painted white.",
 })
 
@@ -106,7 +106,7 @@ createRoom("basement", {
   }
 });
 
-createItem("light_switch", SWITCHABLE(false), {
+createItem("light_switch", QuestJs._templates.SWITCHABLE(false), {
   loc:"basement",
   examine:"A switch, presumably for the light.",
   regex:/light|switch/,
@@ -149,19 +149,19 @@ createItem("cobwebs", {
   scenery:true,
 });
 
-createItem("old_newspaper", TAKEABLE(), READABLE(), {
+createItem("old_newspaper", QuestJs._templates.TAKEABLE(), READABLE(), {
   examine:'A newspaper from the eighties; yellow with age.',
   read:'You spend a few minutes reading about what happens on the day 14th June 1987 (or perhaps the day before). A somewhat mocking article about an archaeologist, Dr Ruudhorn, and Atlantis catches your eye.',
   loc:'basement',
 });
 
-createItem("rope", ROPE(false), {
+createItem("rope", QuestJs._templates.ROPE(false), {
   examine:'About 25 foot long; it looks old, but serviceable.',
   loc:'basement',
   ropeLength:5,
 });
 
-createItem("apple", EDIBLE(), {
+createItem("apple", QuestJs._templates.EDIBLE(), {
   examine:'A rosy red apple.',
   loc:'basement',
 });
@@ -211,7 +211,7 @@ createRoom("garden", {
   },
 })
 
-createItem("hat", WEARABLE(), {
+createItem("hat", QuestJs._templates.WEARABLE(), {
   examine:"It is straw boater, somewhat the worse for wear.",
   loc:"garden",
   onMove:function(toLoc) {
@@ -249,7 +249,7 @@ createItem("grass", {
 
 
 
-createItem("box", READABLE(), CONTAINER(true), LOCKED_WITH([]), {
+createItem("box", READABLE(), QuestJs._templates.CONTAINER(true), QuestJs._templates.LOCKED_WITH([]), {
   examine:function() {
     const tpParams = {char:game.player, container:this}
     tpParams.list = this.listContents(world.LOOK)
@@ -277,7 +277,7 @@ createItem("box", READABLE(), CONTAINER(true), LOCKED_WITH([]), {
 })
 
 
-createItem("crowbar", TAKEABLE(), {
+createItem("crowbar", QuestJs._templates.TAKEABLE(), {
   examine:"A cheap plastic crowbar; it is red, white, blue and yellow.",
   loc:"box",
   onMove:function(toLoc) {
@@ -328,7 +328,7 @@ createRoom("shed", {
 
 
 
-createItem("flashlight", TAKEABLE(), SWITCHABLE(false, 'providing light'), {
+createItem("flashlight", QuestJs._templates.TAKEABLE(), QuestJs._templates.SWITCHABLE(false, 'providing light'), {
   loc:"shed",
   scenery:true,
   examine:"A small red torch.",
@@ -400,7 +400,7 @@ createRoom("laboratory", {
   }}),
 })
 
-createItem("lab_door", OPENABLE(false), {
+createItem("lab_door", QuestJs._templates.OPENABLE(false), {
   examine:"A very solid, steel door.",
   loc:'laboratory',
   open:function(isMultiple, char) {
@@ -433,7 +433,7 @@ createItem("instruments", {
   scenery:true,
 })
 
-createItem("brand_badges", COMPONENT("instruments"), {
+createItem("brand_badges", QuestJs._templates.COMPONENT("instruments"), {
   examine:function() {
     QuestJs._io.msg("The badges on the various instruments are all the same; \"Zeta Industries\". They appear to be hand-drawn.")
     if (!this.flag1) {
@@ -492,7 +492,7 @@ createRoom("reactor_room", {
 
 
 
-createRoom("reactor", CONTAINER(false), {
+createRoom("reactor", QuestJs._templates.CONTAINER(false), {
   examine:function() {
     return "The reactor is composed of a series of rings, hoops and cylinders arranged on a vertical axis. Some are shiny metal, other dull black, but you have no idea of the significant of any of them.{if:reactor_room:reactorRunning: An intense blue light spills out from various points up it length.}"
   },
@@ -517,7 +517,7 @@ createRoom("vomit", {
   scenery:true,
 })
 
-createItem("control_rod", TAKEABLE(), {
+createItem("control_rod", QuestJs._templates.TAKEABLE(), {
   examine:"The control rod is about two foot long, and a dull black colour.",
   take:function(isMultiple, char) {
     const tpParams = {char:char, item:this}
@@ -545,7 +545,7 @@ createItem("control_rod", TAKEABLE(), {
   loc:'control_rod_repository',
 })
 
-createItem("control_rod_repository", SURFACE(), {
+createItem("control_rod_repository", QuestJs._templates.SURFACE(), {
   examine:"The control rod repository is a cross between a shelf and a cradle; it is attached to the wall like a shelf, but shaped like a cradle to hold the control rod.",
   loc:'reactor_room',
 })
@@ -665,7 +665,7 @@ createItem("painting", {
 })
 
 
-createItem("postit_note", TAKEABLE(), READABLE(), {
+createItem("postit_note", QuestJs._templates.TAKEABLE(), READABLE(), {
   alias:'post-it note',
   examine:"The sticky yellow note has something written on it; the number {show:computer:code}.",
   read:"The post-it note just has six digits written on it: {show:computer:code}.",
@@ -675,7 +675,7 @@ createItem("postit_note", TAKEABLE(), READABLE(), {
 
 
 
-createItem("chair", FURNITURE({sit:true, stand:true}), {
+createItem("chair", QuestJs._templates.FURNITURE({sit:true, stand:true}), {
   examine:"This is an elegant, white office chair in good condition.",
   loc:'office',
   scenery:true,
@@ -764,7 +764,7 @@ createItem("computer", {
 
 
 
-createRoom("lift", TRANSIT("east"), {
+createRoom("lift", QuestJs._templates.TRANSIT("east"), {
   regex:/elevator/,
   desc:function() {
     return "The lift is small; according the plaque it is limited to just three people. There are three buttons, labelled one to three. A label above indicates the lift is at \"{transitDest}\"."
@@ -794,7 +794,7 @@ createRoom("lift", TRANSIT("east"), {
   }
 })
 
-createItem("button_3", TRANSIT_BUTTON("lift"), {
+createItem("button_3", QuestJs._templates.TRANSIT_BUTTON("lift"), {
   alias:"Button: 3",
   examine:"A button with the letter 3 on it.",
   transitDest:"office",
@@ -803,7 +803,7 @@ createItem("button_3", TRANSIT_BUTTON("lift"), {
   transitGoToDest:"You press the button; the door closes and the lift ascends.",
 })
 
-createItem("button_2", TRANSIT_BUTTON("lift"), {
+createItem("button_2", QuestJs._templates.TRANSIT_BUTTON("lift"), {
   alias:"Button: 2",
   examine:"A button with the letter 2 on it.",
   title:'Level 2: Lounge',
@@ -812,7 +812,7 @@ createItem("button_2", TRANSIT_BUTTON("lift"), {
   transitGoToDest:"You press the button; the door closes and the lift moves.",
 })
 
-createItem("button_1", TRANSIT_BUTTON("lift"), {
+createItem("button_1", QuestJs._templates.TRANSIT_BUTTON("lift"), {
   alias:"Button: 1",
   examine:"A button with the letter 1 on it.",
   title:'Level 1: Laboratory',

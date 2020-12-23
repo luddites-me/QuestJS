@@ -40,7 +40,7 @@ createRoom("yourchambers", {
 })
 
 
-createItem("player", PLAYER(), {
+createItem("player", QuestJs._templates.PLAYER(), {
   loc:"yourchambers",
 })
 

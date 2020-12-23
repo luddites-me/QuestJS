@@ -39,7 +39,7 @@ createItem("flaming_sword", WEAPON("3d6+2"), {
 });
 
 
-createItem("ice_amulet", WEARABLE(4, ['neck']), {
+createItem("ice_amulet", QuestJs._templates.WEARABLE(4, ['neck']), {
   loc:"me",
   modifyIncomingAttack:function(attack) {
     if (this.worn && attack.element === 'frost') {
@@ -70,7 +70,7 @@ createRoom("great_hall", {
   east:new Exit('practice_room'),
 });
 
-createItem("practice_room_door", LOCKED_DOOR("small_key", "great_hall", "practice_room"), {
+createItem("practice_room_door", QuestJs._templates.LOCKED_DOOR("small_key", "great_hall", "practice_room"), {
   examine:'A very solid, wooden door.',
 });
 
@@ -79,7 +79,7 @@ createRoom("cupboard", {
   north:new Exit('practice_room'),
 });
 
-createItem("small_key", KEY(), {
+createItem("small_key", QuestJs._templates.KEY(), {
   examine:'A small key.',
   loc:"practice_room",
 });
@@ -130,7 +130,7 @@ createItem("rabbit", RPG_NPC(false), {
   },  
 });
 
-createItem("chest", CONTAINER(true), {
+createItem("chest", QuestJs._templates.CONTAINER(true), {
   loc:"practice_room",
 });
 
@@ -138,17 +138,17 @@ createItem("spellbook", SPELLBOOK(["Fireball", "Stoneskin", "Steelskin", "Lightn
   loc:"practice_room",
 });
 
-createItem("helmet", WEARABLE(2, ['head']), {
+createItem("helmet", QuestJs._templates.WEARABLE(2, ['head']), {
   loc:"practice_room",
   armour:10,
 });
 
-createItem("chestplate", WEARABLE(2, ['chest']), {
+createItem("chestplate", QuestJs._templates.WEARABLE(2, ['chest']), {
   loc:"practice_room",
   armour:20,
 });
 
-createItem("boots", WEARABLE(2, ['feet']), {
+createItem("boots", QuestJs._templates.WEARABLE(2, ['feet']), {
   loc:"practice_room",
   pronouns:QuestJs._lang.pronouns.plural,
 });

@@ -449,7 +449,7 @@ createItem("mannequins", {
 })
 
 
-createItem("clock", SURFACE(open), {
+createItem("clock", QuestJs._templates.SURFACE(open), {
   loc:"brass_dining_room",
   scenery:true,
   examine:function() {

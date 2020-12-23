@@ -149,7 +149,7 @@ QuestJs._lang = {
 
 
 
-  // TAKEABLE
+  // QuestJs._templates.TAKEABLE
   take_successful:"{nv:char:take:true} {nm:item:the}.",
   //take_successful_counted:"{nv:char:take:true} {number:count} {nm:item}.",
   //take_successful_counted_plural:"{nv:char:take:true} {number:count} {nm:item}.",
@@ -162,7 +162,7 @@ QuestJs._lang = {
   cannot_take_component:"{pv:char:can't:true} take {ob:item}; {pv:item:'be} part of {nm:whole:the}.",
 
 
-  // EDIBLE
+  // QuestJs._templates.EDIBLE
   eat_successful:"{nv:char:eat:true} {nm:item:the}.",
   drink_successful:"{nv:char:drink:true} {nm:item:the}.",
   cannot_eat:"{nv:item:'be:true} not something you can eat.",
@@ -170,7 +170,7 @@ QuestJs._lang = {
   //cannot_ingest:"{nv:item:'be:true} not something you can ingest.",
 
 
-  // WEARABLE
+  // QuestJs._templates.WEARABLE
   wear_successful:"{nv:char:put:true} on {nm:garment:the}.",
   remove_successful:"{nv:char:take:true} {nm:garment:the} off.",
   cannot_wear:"{nv:char:can't:true} wear {ob:item}.",
@@ -184,7 +184,7 @@ QuestJs._lang = {
   invHoldingPrefix:"holding",
 
 
-  // CONTAINER, etc.
+  // QuestJs._templates.CONTAINER, etc.
   open_successful:"{nv:char:open:true} {nm:container:the}.",
   close_successful:"{nv:char:close:true} {nm:container:the}.",
   lock_successful:"{nv:char:lock:true} {nm:container:the}.",
@@ -217,7 +217,7 @@ QuestJs._lang = {
   cannot_sell_here:"{nv:char:can't:true} sell {nm:item:the} here.",
 
 
-  // FURNITURE
+  // QuestJs._templates.FURNITURE
   sit_on_successful:"{nv:char:sit:true} on {nm:item:the}.",
   stand_on_successful:"{nv:char:stand:true} on {nm:item:the}.",
   recline_on_successful:"{nv:char:lie:true} down on {nm:item:the}.",
@@ -226,14 +226,14 @@ QuestJs._lang = {
   cannot_recline_on:"{nv:item:'be:true} not something you can lie on.",
 
 
-  // SWITCHABLE
+  // QuestJs._templates.SWITCHABLE
   turn_on_successful:"{nv:char:switch:true} {nm:item:the} on.",
   turn_off_successful:"{nv:char:switch:true} {nm:item:the} off.",
   cannot_switch_on:"{nv:char:can't:true} turn {ob:item} on.",
   cannot_switch_off:"{nv:char:can't:true} turn {ob:item} off.",
 
 /*
-  // VESSEL
+  // QuestJs._templates.VESSEL
   fill_successful:"{nv:char:fill:true} {nm:container:the}.",
   empty_successful:"{nv:char:empty:true} {nm:container:the}.",
   cannot_fill:"{nv:container:'be:true} not something you can fill.",
@@ -258,7 +258,7 @@ QuestJs._lang = {
   npc_no_interest_in:"{nv:actor:have:true} no interest in that subject.",
 
 
-  // BUTTON
+  // QuestJs._templates.BUTTON
   push_button_successful:"{nv:char:push:true} {nm:item:the}.",
 
   // SHIFTABLE
@@ -268,7 +268,7 @@ QuestJs._lang = {
   take_not_push:"Just pick the thing up already!",
 
 
-  // ROPE
+  // QuestJs._templates.ROPE
   rope_examine_attached_both_ends:" It is {rope.attachedVerb} to both {nm:obj1:the} and {nm:obj2:the}.",
   rope_examine_attached_one_end:" It is {rope.attachedVerb} to {nm:obj1:the}.",
   rope_attach_verb:'tie',

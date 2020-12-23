@@ -60,7 +60,7 @@ createItem("Buddy", QuestJs._npc.NPC(false), {
 
 
 createItem("knife",
-  TAKEABLE(),
+  QuestJs._templates.TAKEABLE(),
   { loc:"Buddy", sharp:false,
     examine:function(isMultiple) {
       if (this.sharp) {
@@ -115,7 +115,7 @@ createRoom("hole", {
 
 
 
-createItem("book", TAKEABLE(), READABLE(true), { 
+createItem("book", QuestJs._templates.TAKEABLE(), READABLE(true), { 
   loc:"lounge",
   examine:"A leather-bound book.",
   read:function(isMultiple, char) {
@@ -141,21 +141,21 @@ createItem("book", TAKEABLE(), READABLE(true), {
 
 
 
-createItem("book_cover", COMPONENT("book"), { 
+createItem("book_cover", QuestJs._templates.COMPONENT("book"), { 
   examine:"The book cover is very fancy.",
   parsePriority:-20,
 });
 
 
 createItem("boots", 
-  WEARABLE(),
+  QuestJs._templates.WEARABLE(),
   { loc:"lounge", pronouns:QuestJs._lang.pronouns.plural, examine:"Some old boots.", }
 );
 
 
 
 createItem("waterskin",
-  TAKEABLE(),
+  QuestJs._templates.TAKEABLE(),
   { 
     examine:function(isMultiple) { QuestJs._io.msg(prefix(this, isMultiple) + "The waterskin is " + Math.floor(this.full / this.capacity * 100) + "% full."); },
     capacity:10,
@@ -179,7 +179,7 @@ createItem("waterskin",
 
 
 
-createItem("glass_cabinet", CONTAINER(true), LOCKED_WITH(["cabinet_key", "small_key"]), {
+createItem("glass_cabinet", QuestJs._templates.CONTAINER(true), QuestJs._templates.LOCKED_WITH(["cabinet_key", "small_key"]), {
   examine:"A cabinet with a glass front.",
   transparent:true,
   isAtLoc:function(loc) {
@@ -188,7 +188,7 @@ createItem("glass_cabinet", CONTAINER(true), LOCKED_WITH(["cabinet_key", "small_
   }}
 );
 
-createItem("cabinet_key", KEY(), { 
+createItem("cabinet_key", QuestJs._templates.KEY(), { 
   loc:"garage",
   examine: "A small brass key."
 });
@@ -196,17 +196,17 @@ createItem("cabinet_key", KEY(), {
 
 
 createItem("jewellery_box",
-  TAKEABLE(),
-  CONTAINER(true),
+  QuestJs._templates.TAKEABLE(),
+  QuestJs._templates.CONTAINER(true),
   { loc:"glass_cabinet", alias:"jewellery box", examine:"A nice box.", }
 );
 
 createItem("ring",
-  TAKEABLE(),
+  QuestJs._templates.TAKEABLE(),
   { loc:"jewellery_box", examine:"A ring.", }
 );
 
-createItem("cardboard_box", TAKEABLE(), CONTAINER(true), { 
+createItem("cardboard_box", QuestJs._templates.TAKEABLE(), QuestJs._templates.CONTAINER(true), { 
   loc:"lounge",
   alias:"cardboard box",
   regex:/cardboard/,
@@ -214,13 +214,13 @@ createItem("cardboard_box", TAKEABLE(), CONTAINER(true), {
   closed:false,
 });
 
-createItem("sandwich", EDIBLE(false), {
+createItem("sandwich", QuestJs._templates.EDIBLE(false), {
   loc:"lounge",
   onIngesting:function() { QuestJs._io.msg("That was great!"); },
 })
 
 
-createItem("ornate_doll", TAKEABLE(), {
+createItem("ornate_doll", QuestJs._templates.TAKEABLE(), {
   loc:"glass_cabinet", 
   alias:"ornate doll", 
   examine:"A fancy doll, eighteenth century.",
@@ -229,7 +229,7 @@ createItem("ornate_doll", TAKEABLE(), {
 
 
 
-createItem("coin", TAKEABLE(), {
+createItem("coin", QuestJs._templates.TAKEABLE(), {
   loc:"lounge",
   examine: "A gold coin.",
   take:function(isMultiple, participant) {
@@ -239,12 +239,12 @@ createItem("coin", TAKEABLE(), {
 })
 
 
-createItem("small_key", KEY(), { 
+createItem("small_key", QuestJs._templates.KEY(), { 
   loc:"lounge", examine: "A small key.", alias: "small key",
 })
 
 
-createItem("flashlight", TAKEABLE(), SWITCHABLE(false, 'providing light'), {
+createItem("flashlight", QuestJs._templates.TAKEABLE(), QuestJs._templates.SWITCHABLE(false, 'providing light'), {
   loc:"lounge",
   examine:"A small red torch.",
   regex:/^torch$/, 
@@ -298,7 +298,7 @@ createRoom("dining_room", {
 
 
 createItem("chair",
-  FURNITURE({sit:true}),
+  QuestJs._templates.FURNITURE({sit:true}),
   {
     loc:"dining_room", examine:"A wooden chair.",
     onSit:function(char) {
@@ -310,7 +310,7 @@ createItem("chair",
 
 
 createRoom("lift",
-  TRANSIT("east"),
+  QuestJs._templates.TRANSIT("east"),
   {
     desc:'A curious lift.',
     east:new Exit('dining_room'),
@@ -328,7 +328,7 @@ createRoom("lift",
 
 // calling it button_0 make it appear before button_1 in lists
 createItem("button_0",
-  TRANSIT_BUTTON("lift"),
+  QuestJs._templates.TRANSIT_BUTTON("lift"),
   {
     alias:"Button: G",
     examine:"A button with the letter G on it.",
@@ -341,7 +341,7 @@ createItem("button_0",
 );
 
 createItem("button_1",
-  TRANSIT_BUTTON("lift"),
+  QuestJs._templates.TRANSIT_BUTTON("lift"),
   {
     alias:"Button: 1",
     examine:"A button with the letter 1 on it.",
@@ -354,7 +354,7 @@ createItem("button_1",
 );
 
 createItem("button_2",
-  TRANSIT_BUTTON("lift"),
+  QuestJs._templates.TRANSIT_BUTTON("lift"),
   {
     alias:"Button: 2",
     examine:"A button with the letter 2 on it.",
@@ -399,26 +399,26 @@ createRoom("kitchen", {
 });
 
 createItem("clock",
-  TAKEABLE(),
+  QuestJs._templates.TAKEABLE(),
   { loc:"kitchen", scenery:true, examine:"A white clock.", }
 );
 
 createItem("trapdoor",
-  OPENABLE(false),
+  QuestJs._templates.OPENABLE(false),
   { loc:"kitchen", examine:"A small trapdoor in the floor.", }
 );
 
 createItem("camera",
-  TAKEABLE(),
+  QuestJs._templates.TAKEABLE(),
   { loc:"kitchen", examine:"A cheap digital camera.", regex:/^picture box$/ }
 );
 
-createItem("big_kitchen_table", SURFACE(), {
+createItem("big_kitchen_table", QuestJs._templates.SURFACE(), {
   loc:"kitchen",
   examine: "A Formica table.",
 })
 
-createItem("jug", VESSEL(4), TAKEABLE(), {
+createItem("jug", QuestJs._templates.VESSEL(4), QuestJs._templates.TAKEABLE(), {
   loc:"big_kitchen_table",
   examine:"A small jug, stripped blue and white.",
 });
@@ -430,13 +430,13 @@ createItem("kitchen_sink", {
   isSourceOf:function(subst) { return subst === "water" || subst === "lemonade"; }
 });
 
-createItem("water", LIQUID(), {
+createItem("water", QuestJs._templates.LIQUID(), {
 });
 
-createItem("honey", LIQUID(), {
+createItem("honey", QuestJs._templates.LIQUID(), {
 });
 
-createItem("lemonade", LIQUID(), {
+createItem("lemonade", QuestJs._templates.LIQUID(), {
 });
 
 
@@ -456,7 +456,7 @@ createRoom("basement", {
 });
 
 createItem("light_switch",
-  SWITCHABLE(false),
+  QuestJs._templates.SWITCHABLE(false),
   { loc:"basement", examine:"A switch, presumably for the light.", alias:"light switch",
     checkCanSwitchOn:function() {
       if (!w.crates.moved) {
@@ -491,11 +491,11 @@ createRoom("garage", {
   hint:"The garage features a complex mechanism, with two components.",
 });
 
-createItem("garage_door", LOCKED_DOOR("garage_key", "kitchen", "garage"), {
+createItem("garage_door", QuestJs._templates.LOCKED_DOOR("garage_key", "kitchen", "garage"), {
   examine: "The door to the garage.",
 });
 
-createItem("garage_key", KEY(), {
+createItem("garage_key", QuestJs._templates.KEY(), {
   loc:"lounge",
   examine: "A big key.",
 });
@@ -511,7 +511,7 @@ createItem("charger", {
 })
 
 
-createItem("charger_compartment", COMPONENT("charger"), CONTAINER(true), {
+createItem("charger_compartment", QuestJs._templates.COMPONENT("charger"), QuestJs._templates.CONTAINER(true), {
   alias:"compartment",
   examine:"The compartment is just the right size for the torch. It is {if:charger_compartment:closed:closed:open}.",
   testRestrictions:function(item) {
@@ -526,7 +526,7 @@ createItem("charger_compartment", COMPONENT("charger"), CONTAINER(true), {
 
 
 
-createItem("charger_button", COMPONENT("charger"), BUTTON(), {
+createItem("charger_button", QuestJs._templates.COMPONENT("charger"), QuestJs._templates.BUTTON(), {
   examine:"A big red button.",
   alias:"button",
   push:function(isMultiple, char) {
@@ -565,7 +565,7 @@ createItem("wardrobe", QuestJs._defaults.DEFAULT_ROOM, {
   desc:"Oddly empty of fantasy worlds.",
 })
 
-createItem("bed", FURNITURE({sit:true, recline:true}), {
+createItem("bed", QuestJs._templates.FURNITURE({sit:true, recline:true}), {
   loc:"bedroom",
   scenery:true,
   examine:"What would a bedroom be without a bed?",
@@ -573,7 +573,7 @@ createItem("bed", FURNITURE({sit:true, recline:true}), {
 
 
 createItem("underwear", 
-  WEARABLE(1, ["lower"]),
+  QuestJs._templates.WEARABLE(1, ["lower"]),
   { 
     loc:"bedroom",
     pronouns:QuestJs._lang.pronouns.massnoun,
@@ -582,22 +582,22 @@ createItem("underwear",
 );
 
 createItem("jeans", 
-  WEARABLE(2, ["lower"]),
+  QuestJs._templates.WEARABLE(2, ["lower"]),
   { loc:"bedroom", pronouns:QuestJs._lang.pronouns.plural, examine:"Clean!", }
 );
 
 createItem("shirt", 
-  WEARABLE(2, ["upper"]),
+  QuestJs._templates.WEARABLE(2, ["upper"]),
   { loc:"bedroom", examine:"Clean!", }
 );
 
 createItem("coat", 
-  WEARABLE(3, ["upper"]),
+  QuestJs._templates.WEARABLE(3, ["upper"]),
   { loc:"bedroom", examine:"Clean!", }
 );
 
 createItem("jumpsuit", 
-  WEARABLE(2, ["upper", "lower"]),
+  QuestJs._templates.WEARABLE(2, ["upper", "lower"]),
   { loc:"bedroom", examine:"Clean!", }
 );
 
@@ -607,21 +607,21 @@ createItem("jumpsuit",
 
 
 createItem("suit_trousers", 
-  WEARABLE(2, ["lower"]),
+  QuestJs._templates.WEARABLE(2, ["lower"]),
   { loc:"wardrobe", examine:"The trousers.", pronouns:QuestJs._lang.pronouns.plural}
 );
 
 createItem("jacket", 
-  WEARABLE(3, ["upper"]),
+  QuestJs._templates.WEARABLE(3, ["upper"]),
   { loc:"wardrobe", examine:"The jacket", }
 );
 
 createItem("waistcoat", 
-  WEARABLE(2, ["upper"]),
+  QuestJs._templates.WEARABLE(2, ["upper"]),
   { loc:"wardrobe", examine:"The waistcoat", }
 );
 
-createEnsemble("suit", [w.suit_trousers, w.jacket, w.waistcoat],
+QuestJs._templates.createEnsemble("suit", [w.suit_trousers, w.jacket, w.waistcoat],
   { examine:"A complete suit.", regex:/xyz/}
 );
 
@@ -635,7 +635,7 @@ createRoom("conservatory", {
 });
 
 
-createItem("crate", FURNITURE({stand:true}), SHIFTABLE(), {
+createItem("crate", QuestJs._templates.FURNITURE({stand:true}), SHIFTABLE(), {
   loc:"conservatory", 
   examine:"A large wooden crate, probably strong enough to stand on.",
 })
@@ -646,7 +646,7 @@ createItem("broken_chair", {
   attachable:true,
 })
 
-createItem("rope", ROPE(), { 
+createItem("rope", QuestJs._templates.ROPE(), { 
   loc:"conservatory",
   ropeLength:3,
   examine:"The rope is about 40' long.",
@@ -827,7 +827,7 @@ createItem("kyle_question", QuestJs.npc.QUESTION(), {
   
 
 createItem("straw_boater",
-  WEARABLE(false),
+  QuestJs._templates.WEARABLE(false),
   { loc:"Kyle", examine: "A straw boater.", worn:true }
 );
 
@@ -978,7 +978,7 @@ createItem("walls",
 
 
 createItem("brick",
-  COUNTABLE({lounge:7, dining_room:1}),
+  QuestJs._templates.COUNTABLE({lounge:7, dining_room:1}),
     { examine:"A brick is a brick.", regex:/^(\d+ )?bricks?$/}
 );
 
@@ -998,15 +998,15 @@ createRoom("road", {
   north:new Exit("shop"),
 });
 
-createItem("carrot", TAKEABLE(), MERCH(2, ["shop"]), {
+createItem("carrot", QuestJs._templates.TAKEABLE(), QuestJs._templates.MERCH(2, ["shop"]), {
   examine:"It's a carrot!",
 });
 
-createItem("honey_pasta",  TAKEABLE(), MERCH(5, ["shop"]),{
+createItem("honey_pasta",  QuestJs._templates.TAKEABLE(), QuestJs._templates.MERCH(5, ["shop"]),{
   examine:"It's pasta. With honey on it.",
 });
 
-createItem("trophy",  TAKEABLE(), MERCH(15, "shop"),{
+createItem("trophy",  QuestJs._templates.TAKEABLE(), QuestJs._templates.MERCH(15, "shop"),{
   examine:"It is a unique trophy!",
   doNotClone:true,
 });
@@ -1093,7 +1093,7 @@ createRoom("desert", ZONE(), {
 
 
 
-createItem("silver_coin", TAKEABLE(), ZONE_ITEM('desert', 1, 1), {
+createItem("silver_coin", QuestJs._templates.TAKEABLE(), ZONE_ITEM('desert', 1, 1), {
   examine:"A curious silver coin; you do not recognise it. It says it is worth two dollars.",
 })
 

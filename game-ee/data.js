@@ -2,7 +2,7 @@
 
 
 createItem("me",
-  PLAYER(),
+  QuestJs._templates.PLAYER(),
   { loc:"sickbay", regex:/^(me|myself|player)$/, examine: "Just a regular guy.", }
 );
 
@@ -85,14 +85,14 @@ createItem("consult_fastness_council",
 
 
 createRoom("brittany_lift",
-  TRANSIT("north"),
+  QuestJs._templates.TRANSIT("north"),
   {
     desc: "The lift is large and well l;it, with a set of buttons at the back.",
     north:new Exit('flight_deck'),
   }
 );
 createItem("button_1",
-  TRANSIT_BUTTON("brittany_lift"),
+  QuestJs._templates.TRANSIT_BUTTON("brittany_lift"),
   {
     alias:"Button: 1",
     examine:"A button with the number 1 on it.",
@@ -102,7 +102,7 @@ createItem("button_1",
   }
 );
 createItem("button_2",
-  TRANSIT_BUTTON("brittany_lift"),
+  QuestJs._templates.TRANSIT_BUTTON("brittany_lift"),
   {
     alias:"Button: 2",
     examine:"A button with the number 2 on it.",
@@ -112,7 +112,7 @@ createItem("button_2",
   }
 );
 createItem("button_3",
-  TRANSIT_BUTTON("brittany_lift"),
+  QuestJs._templates.TRANSIT_BUTTON("brittany_lift"),
   {
     alias:"Button: 3",
     examine:"A button with the number 3 on it.",

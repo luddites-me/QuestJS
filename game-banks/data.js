@@ -8,7 +8,7 @@ createRoom("nowhere", {
 
   
 createItem("me",
-  PLAYER(),
+  QuestJs._templates.PLAYER(),
   { 
     loc:"stasis_pod_room", 
     regex:/^(me|myself|player)$/, 
@@ -36,7 +36,7 @@ createItem("me",
 
 
 
-createItem("your_jumpsuit", WEARABLE(2, ["body"]), {
+createItem("your_jumpsuit", QuestJs._templates.WEARABLE(2, ["body"]), {
   alias:"jumpsuit",
   loc:"stasis_pod_drawer",
   defArticle:"your",
@@ -50,7 +50,7 @@ createItem("your_jumpsuit", WEARABLE(2, ["body"]), {
   },
 });
 
-createItem("your_underwear", WEARABLE(1, ["body"]), {
+createItem("your_underwear", QuestJs._templates.WEARABLE(1, ["body"]), {
   alias:"underwear",
   loc:"me",
   worn:true,
@@ -102,7 +102,7 @@ createItem("stasis_pod", {
   examine:"Externally, the pods are rather less like coffins, as the sides are thick with the stasis equipment, and flared towards the floor. Each stasis pod is about waist height. {stasis_pod_status}{ifHere:pile_of_vomit: One has a slight splattering of vomit.}",
 });
 
-createItem("stasis_pod_drawer", CONTAINER(false), {
+createItem("stasis_pod_drawer", QuestJs._templates.CONTAINER(false), {
   alias:"drawer",
   scenery:true,
   loc:"stasis_bay",
@@ -110,7 +110,7 @@ createItem("stasis_pod_drawer", CONTAINER(false), {
   examine:"The drawer extends out from the foot of the pod; it is white and quite shallow, and almost the width of the pod.{ifHere:pile_of_vomit: Fortunately, it is well away from the vomit.}",
 });
 
-createItem("stasis_locker", CONTAINER(true), {
+createItem("stasis_locker", QuestJs._templates.CONTAINER(true), {
   alias:"locker",
   scenery:true,
   loc:"stasis_bay",
@@ -125,7 +125,7 @@ createItem("stasis_locker", CONTAINER(true), {
 });
 
 
-createItem("your_spacesuit", WEARABLE(2, ["body"]), {
+createItem("your_spacesuit", QuestJs._templates.WEARABLE(2, ["body"]), {
   alias:"spacesuit",
   loc:"stasis_locker",
   defArticle:"your",
@@ -166,7 +166,7 @@ createRoom("stasis_pod_room", {
 });
 
 createItem("stasis_pod_interior",
-  OPENABLE(true),
+  QuestJs._templates.OPENABLE(true),
   {
     alias:"stasis pod",
     regex:/^(stasis pod|pod|lid)$/,
@@ -473,7 +473,7 @@ createRoom("canteen", {
 });
 
 
-createItem("canteen_table", SURFACE(), {
+createItem("canteen_table", QuestJs._templates.SURFACE(), {
   alias:"table",
   loc:"canteen",
   scenery:true,
@@ -566,7 +566,7 @@ createItem("ship", {
 
 // Probes are cloned from this
 //
-createItem("probe_prototype", COUNTABLE([]), { 
+createItem("probe_prototype", QuestJs._templates.COUNTABLE([]), { 
   alias:"probe",
   regex:/^(\d+ )?(bio-|geo-|bio|geo)?(probe|satellite|satelite)s?$/,
   launch:function(isMultiple, char) {

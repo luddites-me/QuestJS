@@ -3,7 +3,7 @@
 
 
   
-createItem("me", PLAYER(), { 
+createItem("me", QuestJs._templates.PLAYER(), { 
   loc:"bus_seat",
   regex:/^(me|myself|player)$/,
   money:10,
@@ -17,7 +17,7 @@ createItem("me", PLAYER(), {
 
 
 createItem("knife",
-  TAKEABLE(),
+  QuestJs._templates.TAKEABLE(),
   { loc:"me", sharp:false,
     examine:function(isMultiple) {
       if (this.sharp) {
@@ -247,12 +247,12 @@ createRoom("desert", ZONE(), {
 
 
 
-createItem("silver_coin", TAKEABLE(), ZONE_ITEM('desert', -2, 4), {
+createItem("silver_coin", QuestJs._templates.TAKEABLE(), ZONE_ITEM('desert', -2, 4), {
   examine:"A curious silver coin; you do not recognise it. It says it is worth two dollars.",
 });
 
 
-createItem("gas_pump", TAKEABLE(), ZONE_ITEM('desert', 0, -1), {
+createItem("gas_pump", QuestJs._templates.TAKEABLE(), ZONE_ITEM('desert', 0, -1), {
   scenery:true,
   examine:"There are two gas pumps, white and slim. They are labelled \"SkyChief\", by Texaco, and look ancient - so old the displays are rotating drums rather than digital. The price is $1.49; surely gas has not been that cheap since the nineties?",
 });

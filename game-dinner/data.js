@@ -1,6 +1,6 @@
 "use strict"
 
-createItem("me", PLAYER(), {
+createItem("me", QuestJs._templates.PLAYER(), {
   loc:"lounge",
   regex:/^(me|myself|player)$/,
   examine: "Just a regular guy.",
@@ -17,7 +17,7 @@ createItem("Kyle", QuestJs._npc.NPC(), {
   examine: "A slightly larger than normal sized bear in a Flash costume.",
 })
 
-createItem("soup_can", TAKEABLE(), {
+createItem("soup_can", QuestJs._templates.TAKEABLE(), {
   loc:"lounge",
   examine: "A large can of tomato soup.{if:soup_can:opened: It has been opened.}",
   verbFunction:function(l) { if (!this.opened) l.push("Open") },
@@ -28,12 +28,12 @@ createItem("soup_can", TAKEABLE(), {
   },
 })
 
-createItem("beer_can", TAKEABLE(), {
+createItem("beer_can", QuestJs._templates.TAKEABLE(), {
   loc:"lounge",
   examine: "A large can of beer,",
 })
 
-createItem("bowls", TAKEABLE(), {
+createItem("bowls", QuestJs._templates.TAKEABLE(), {
   loc:"lounge",
   state:0,
   examine: "A set of matching bowls.",

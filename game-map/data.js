@@ -1,6 +1,6 @@
 "use strict"
 
-createItem("me", PLAYER(), {
+createItem("me", QuestJs._templates.PLAYER(), {
   loc:"lounge",
   regex:/^(me|myself|player)$/,
   examine: "Just a regular guy.",
@@ -170,7 +170,7 @@ createRoom("forest", {
 
 
 
-createRoom("bus", TRANSIT("south"), {
+createRoom("bus", QuestJs._templates.TRANSIT("south"), {
   desc:"The bus is boring, the author really needs to put stuff in it.",
   south:new Exit('street_north'),
   mapColour:'red',
@@ -185,7 +185,7 @@ createRoom("bus", TRANSIT("south"), {
 
 
 
-createItem("button_street", TRANSIT_BUTTON("bus"), {
+createItem("button_street", QuestJs._templates.TRANSIT_BUTTON("bus"), {
   alias:"Button: Street",
   examine:'A button with the word "High Street" on it.',
   transitDest:"street_north",
@@ -194,7 +194,7 @@ createItem("button_street", TRANSIT_BUTTON("bus"), {
   transitGoToDest:"The drive puts the bus in gear, and sets off.",
 })
 
-createItem("button_glade", TRANSIT_BUTTON("bus"), {
+createItem("button_glade", QuestJs._templates.TRANSIT_BUTTON("bus"), {
   alias:"Button: Glade",
   examine:'A button with the word "Hidden Glade" on it.',
   transitDest:"glade",
