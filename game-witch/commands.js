@@ -7,7 +7,7 @@ comands.unshift(new QuestJs._command.Cmd('wait3', {
   regex:/^^wait$|^z$$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
           if (game.invaded) {
@@ -22,7 +22,7 @@ comands.unshift(new QuestJs._command.Cmd('wait2', {
   regex:/^^wait$|^z$$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
       if (game.invaded) {

@@ -7,7 +7,7 @@ comands.unshift(new QuestJs._command.Cmd('knock_on_door', {
   regex:/^knock$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
           s = "Mandy knocked cautiously on the door,"
@@ -23,7 +23,7 @@ comands.unshift(new QuestJs._command.Cmd('post_letter', {
   regex:/^^(post|push) (letter|envelope)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
           Print ("There was no letter box, so just posting the letter was not an option.")
@@ -33,7 +33,7 @@ comands.unshift(new QuestJs._command.Cmd('climb_telescope', {
   regex:/^climb$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
           do (telescope, "climb")
@@ -43,7 +43,7 @@ comands.unshift(new QuestJs._command.Cmd('climb_out', {
   regex:/^climb$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
           do (exit_up_to_roof, "script")
@@ -53,7 +53,7 @@ comands.unshift(new QuestJs._command.Cmd('fix_wire', {
   regex:/^fix #object#;attach #object#;tie #object#$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
           if (not object = reel) {
@@ -71,7 +71,7 @@ comands.unshift(new QuestJs._command.Cmd('fix_wire_to_spike', {
   regex:/^^(fix|attach|tie) (?<object1>.*) to (?<object2>.*)$$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
           if (not object2 = spike) {
@@ -92,7 +92,7 @@ comands.unshift(new QuestJs._command.Cmd('bootcheat', {
   regex:/^bootcheat$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
       if (EndsWith(game.version, "beta")) {
@@ -108,7 +108,7 @@ comands.unshift(new QuestJs._command.Cmd('bootshrink', {
   regex:/^bootshrink$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:
       if (EndsWith(game.version, "beta")) {

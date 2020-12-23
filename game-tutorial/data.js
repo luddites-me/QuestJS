@@ -102,7 +102,7 @@ createRoom("basement", {
   eventScript:function() {
     if (w.flashlight.switchedon && !this.flag1) hint.now('turnOnLight')
     if (!w.flashlight.switchedon && w.light_switch.switchedon && !this.flag2) hint.now('getAll')
-    if (parser.currentCommand.all && hint.before('moveCrates')) hint.now('moveCrates')
+    if (QuestJs._parser.currentCommand.all && hint.before('moveCrates')) hint.now('moveCrates')
   }
 });
 

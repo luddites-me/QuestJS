@@ -251,7 +251,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('HangUp', {
   regex:/^(hang up|hang) (.+)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
   ],
   script:function(objects) {
     if (!objects[0][0].isAtLoc(game.player)) {
@@ -277,7 +277,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('HangUp', {
   regex:/^(hang up|hang) (.+) on (|the )hook$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
     {ignore:true},
   ],
   script:function(objects) {

@@ -2,18 +2,18 @@
 
 test.tests = function() {
   
-  test.title("parser.scoreObjectMatch");
-  test.assertEqual(70, parser.scoreObjectMatch("me", w.me, ""));
-  test.assertEqual(-1, parser.scoreObjectMatch("me fkh", w.me, ""));
-  test.assertEqual(-1, parser.scoreObjectMatch("xme", w.me, ""));
-  test.assertEqual(70, parser.scoreObjectMatch("flashlight", w.flashlight, ""));
-  test.assertEqual(16, parser.scoreObjectMatch("f", w.flashlight, ""));
-  test.assertEqual(18, parser.scoreObjectMatch("fla", w.flashlight, ""));
-  test.assertEqual(60, parser.scoreObjectMatch("torch", w.flashlight, ""));
-  test.assertEqual(70, parser.scoreObjectMatch("glass cabinet", w.glass_cabinet, ""));
-  test.assertEqual(50, parser.scoreObjectMatch("glass", w.glass_cabinet, ""));
-  test.assertEqual(50, parser.scoreObjectMatch("cabinet", w.glass_cabinet, ""));
-  test.assertEqual(3, parser.scoreObjectMatch("cab", w.glass_cabinet, ""));
+  test.title("QuestJs._parser.scoreObjectMatch");
+  test.assertEqual(70, QuestJs._parser.scoreObjectMatch("me", w.me, ""));
+  test.assertEqual(-1, QuestJs._parser.scoreObjectMatch("me fkh", w.me, ""));
+  test.assertEqual(-1, QuestJs._parser.scoreObjectMatch("xme", w.me, ""));
+  test.assertEqual(70, QuestJs._parser.scoreObjectMatch("flashlight", w.flashlight, ""));
+  test.assertEqual(16, QuestJs._parser.scoreObjectMatch("f", w.flashlight, ""));
+  test.assertEqual(18, QuestJs._parser.scoreObjectMatch("fla", w.flashlight, ""));
+  test.assertEqual(60, QuestJs._parser.scoreObjectMatch("torch", w.flashlight, ""));
+  test.assertEqual(70, QuestJs._parser.scoreObjectMatch("glass cabinet", w.glass_cabinet, ""));
+  test.assertEqual(50, QuestJs._parser.scoreObjectMatch("glass", w.glass_cabinet, ""));
+  test.assertEqual(50, QuestJs._parser.scoreObjectMatch("cabinet", w.glass_cabinet, ""));
+  test.assertEqual(3, QuestJs._parser.scoreObjectMatch("cab", w.glass_cabinet, ""));
   
   
   test.title("sentenceCase");
@@ -218,19 +218,19 @@ test.tests = function() {
   
 
   test.title("Simple object commands (bricks and a box)");
-  test.assertEqual(false, parser.isContained(w.brick));
+  test.assertEqual(false, QuestJs._parser.isContained(w.brick));
   test.assertCmd("drop bricks in box", "Done.");
-  test.assertEqual(true, parser.isContained(w.brick));
+  test.assertEqual(true, QuestJs._parser.isContained(w.brick));
   test.assertCmd("get bricks", "You take seven bricks.");
-  test.assertEqual(false, parser.isContained(w.brick));  
+  test.assertEqual(false, QuestJs._parser.isContained(w.brick));  
   test.assertCmd("drop three bricks in box", "Done.");
-  test.assertEqual(true, parser.isContained(w.brick));
+  test.assertEqual(true, QuestJs._parser.isContained(w.brick));
   test.assertCmd("drop bricks", "You drop four bricks.");
-  test.assertEqual(true, parser.isContained(w.brick));
+  test.assertEqual(true, QuestJs._parser.isContained(w.brick));
   test.assertCmd("get bricks", "You take four bricks.");
-  test.assertEqual(true, parser.isContained(w.brick));
+  test.assertEqual(true, QuestJs._parser.isContained(w.brick));
   test.assertCmd("get bricks", "You take three bricks.");
-  test.assertEqual(false, parser.isContained(w.brick));
+  test.assertEqual(false, QuestJs._parser.isContained(w.brick));
   
   
   test.title("Simple object commands (bricks and a held box)");
@@ -591,21 +591,21 @@ test.tests = function() {
   test.assertEqual("The carrot is $0,02", processText("{nm:item:the:true} is {$:carrot}", {item:'carrot'}))
 
   test.title("shop - buy");
-  test.assertEqual(true, parser.isForSale(w.carrot))
-  test.assertEqual(true, parser.isForSale(w.trophy))
-  test.assertEqual(undefined, parser.isForSale(w.flashlight))
+  test.assertEqual(true, QuestJs._parser.isForSale(w.carrot))
+  test.assertEqual(true, QuestJs._parser.isForSale(w.trophy))
+  test.assertEqual(undefined, QuestJs._parser.isForSale(w.flashlight))
   test.assertCmd("buy carrot", ["You buy the carrot for $0,02."]);
   
-  test.assertEqual(false, parser.isForSale(w.carrot0))
+  test.assertEqual(false, QuestJs._parser.isForSale(w.carrot0))
   test.assertEqual(false, w.carrot0.isForSale(game.player.loc))
   test.assertCmd("buy carrot", ["You buy the carrot for $0,02."]);
   test.assertEqual(16, w.me.money)
   test.assertCmd("buy flashlight", ["You can't buy it."]);
   test.assertCmd("buy trophy", ["You buy the trophy for $0,15."]);
   test.assertEqual(1, w.me.money)
-  test.assertEqual(true, parser.isForSale(w.carrot))
+  test.assertEqual(true, QuestJs._parser.isForSale(w.carrot))
   //console.log("----------------------");
-  test.assertEqual(false, parser.isForSale(w.trophy))
+  test.assertEqual(false, QuestJs._parser.isForSale(w.trophy))
   test.assertCmd("buy trophy", ["You can't buy the trophy here - probably because you are already holding it."]);
   test.assertCmd("buy carrot", ["You can't afford the carrot (need $0,02)."]);
   test.assertEqual(1, w.me.money)

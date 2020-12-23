@@ -9,7 +9,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Kick', {
   regex:/^(kick) (.+)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isPresent}
+    {scope:QuestJs._parser.isPresent}
   ],
   default:function(item, isMultiple, char) {
     QuestJs._io.msg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(char, "kick", true) + " " + item.pronouns.objective + ", but nothing happens.");
@@ -23,7 +23,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Move', {
   regex:/^(move) (.+)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere}
+    {scope:QuestJs._parser.isHere}
   ],
   default:function(item, isMultiple, char) {
     QuestJs._io.msg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
@@ -40,7 +40,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Get in pod1', {
   npcCmd:true,
   attName:"stasis",
   objects:[
-    {scope:parser.isHere, attName:"npc"},
+    {scope:QuestJs._parser.isHere, attName:"npc"},
   ],
   defmsg:"That's not about to get in a stasis!",
 }));
@@ -49,7 +49,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Get in pod2', {
   npcCmd:true,
   attName:"stasis",
   objects:[
-    {scope:parser.isHere, attName:"npc"},
+    {scope:QuestJs._parser.isHere, attName:"npc"},
   ],
   defmsg:"That's not about to get in a stasis!",
 }));
@@ -59,7 +59,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Stop1', {
   npcCmd:true,
   attName:"stopAgenda",
   objects:[
-    {scope:parser.isHere, attName:"npc"},
+    {scope:QuestJs._parser.isHere, attName:"npc"},
   ],
   defmsg:"That's not doing anything!",
 }));
@@ -68,7 +68,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Stop2', {
   npcCmd:true,
   attName:"stopAgenda",
   objects:[
-    {scope:parser.isHere, attName:"npc"},
+    {scope:QuestJs._parser.isHere, attName:"npc"},
   ],
   defmsg:"That's not doing anything",
 }));
@@ -79,7 +79,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Launch', {
   npcCmd:true,
   objects:[
     {ignore:true},
-    {scope:parser.isInWorld},
+    {scope:QuestJs._parser.isInWorld},
   ],
   defmsg:"You can't launch that!",
 }));
@@ -89,7 +89,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Revive', {
   npcCmd:true,
   objects:[
     {ignore:true},
-    {scope:parser.isInWorld},
+    {scope:QuestJs._parser.isInWorld},
   ],
   defmsg:"You can't revive that!",
 }));
@@ -119,7 +119,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Depressurise', {
 /*QuestJs._commands.push(new QuestJs._command.Cmd('NpcPressurise1', {
   regex:/^(.+), ?pressuri[sz]e (.+)$/,
   objects:[
-    {scope:parser.isHere, attName:"npc"},
+    {scope:QuestJs._parser.isHere, attName:"npc"},
     {scope:'isRoom'},
   ],
   script:function(objects) {
@@ -136,7 +136,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Depressurise', {
 QuestJs._commands.push(new QuestJs._command.Cmd('NpcPressurise2', {
   regex:/^tell (.+) to pressuri[sz]e (.+)$/,
   objects:[
-    {scope:parser.isHere, attName:"npc"},
+    {scope:QuestJs._parser.isHere, attName:"npc"},
     {scope:'isRoom'},
   ],
   script:function(objects) {
@@ -153,7 +153,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('NpcPressurise2', {
 QuestJs._commands.push(new QuestJs._command.Cmd('NpcDepressurise1', {
   regex:/^(.+), ?(depressuri[sz]e|evacuate) (.+)$/,
   objects:[
-    {scope:parser.isHere, attName:"npc"},
+    {scope:QuestJs._parser.isHere, attName:"npc"},
     {ignore:true},
     {scope:'isRoom'},
   ],
@@ -171,7 +171,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('NpcDepressurise1', {
 QuestJs._commands.push(new QuestJs._command.Cmd('NpcDepressurise2', {
   regex:/^tell (.+) to (depressuri[sz]e|evacuate) (.+)$/,
   objects:[
-    {scope:parser.isHere, attName:"npc"},
+    {scope:QuestJs._parser.isHere, attName:"npc"},
     {ignore:true},
     {scope:'isRoom'},
   ],

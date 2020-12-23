@@ -219,7 +219,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Crowbar', {
   regex:/^(crowbar|level) (.+)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   default:function(item) {
     QuestJs._io.msg("That's not something you can crowbar open.")
@@ -234,7 +234,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Move', {
   regex:/^(move) (.+)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere}
+    {scope:QuestJs._parser.isHere}
   ],
   default:function(item, isMultiple, char) {
     return QuestJs._io.failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
@@ -279,8 +279,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Wrap1', {
   // wrap fist in newspaper
   regex:/^(?:wrap|cover) (.+) (?:with|in) (.+)$/,
   objects:[
-    {scope:parser.isHeld},
-    {scope:parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
   ],
   script:function(objects) { wrapScript(objects[0][0], objects[1][0]) },
 }));
@@ -289,8 +289,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Wrap2', {
   // wrap newspaper round fist
   regex:/^(?:wrap) (.+) (?:round|around) (.+)$/,
   objects:[
-    {scope:parser.isHeld},
-    {scope:parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
   ],
   script:function(objects) { wrapScript(objects[1][0], objects[0][0]) },
 }));
@@ -299,8 +299,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Unwrap1', {
   // unwrap fist
   regex:/^(?:unwrap|uncover) (.+)$/,
   objects:[
-    {scope:parser.isHeld},
-    {scope:parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
   ],
   script:function(objects) { unwrapScript(objects[0][0], w.old_newspaper) },
 }));
@@ -309,8 +309,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Unwrap2', {
   // take newspaper off fist
   regex:/^(?:take|remove) (.+) (?:off|from) (.+)$/,
   objects:[
-    {scope:parser.isHeld},
-    {scope:parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
   ],
   script:function(objects) { unwrapScript(objects[1][0], objects[0][0]) },
 }));
@@ -321,8 +321,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('ThrowThrough', {
   // throw rope out window
   regex:/^(?:throw|chuck|hurl|toss|pitch|lob|heave) (.+) (?:out of|out|through) (.+)$/,
   objects:[
-    {scope:parser.isHeld},
-    {scope:parser.isHere, attName:'throwThrough'},
+    {scope:QuestJs._parser.isHeld},
+    {scope:QuestJs._parser.isHere, attName:'throwThrough'},
   ],
   script:function(objects) { 
     const item = objects[0][0]
@@ -359,8 +359,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('SmashWith', {
   // throw rope out window
   regex:/^(?:smash|break|destroy) (.+) (?:with|using) (.+)$/,
   objects:[
-    {scope:parser.isHere, attName:'throwThrough'},
-    {scope:parser.isHeld},
+    {scope:QuestJs._parser.isHere, attName:'throwThrough'},
+    {scope:QuestJs._parser.isHeld},
   ],
   script:function(objects) { 
     return smashWithScript(objects[1][0], objects[0][0])
@@ -372,8 +372,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('UseToSmash', {
   // throw rope out window
   regex:/^(?:use|using) (.+?) (?:to |)(?:smash|break|destroy) (.+)$/,
   objects:[
-    {scope:parser.isHeld},
-    {scope:parser.isHere, attName:'throwThrough'},
+    {scope:QuestJs._parser.isHeld},
+    {scope:QuestJs._parser.isHere, attName:'throwThrough'},
   ],
   script:function(objects) { 
     return smashWithScript(objects[0][0], objects[1][0])
@@ -386,7 +386,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Attack', {
   // throw rope out window
   regex:/^(?:attack|kick|punch|hit|strike|kill) (.+?)$/,
   objects:[
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:function(objects) {
     if (objects[0][0].npc) {
@@ -410,7 +410,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('TieUp', {
   // throw rope out window
   regex:/^(?:tie up|tie|bind) (.+?)$/,
   objects:[
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:function(objects) {
     const tpParams = {item:objects[0][0]}
@@ -439,7 +439,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('RudeCommand', {
   // throw rope out window
   regex:/^(?:fuck|facefuck|face-fuck|face fuck|bugger|shag|suck|suck off|assfuck|ass-fuck|ass fuck|rape|ass-rape|ass rape) (.+?)$/,
   objects:[
-    {scope:parser.isHere},
+    {scope:QuestJs._parser.isHere},
   ],
   script:function(objects) {
     QuestJs._io.parsermsg(QuestJs._lang.not_known_msg)
@@ -462,8 +462,8 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('ThrowAt', {
   // throw computer at window
   regex:/^(?:wrap|cover) (.+) (?:with|in) (.+)$/,
   objects:[
-    {scope:parser.isHeld},
-    {scope:parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
+    {scope:QuestJs._parser.isHeld},
   ],
   script:function(objects) { wrapScript(objects[0][0], objects[1][0]) },
 }));

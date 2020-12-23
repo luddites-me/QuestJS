@@ -123,7 +123,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('EgKick', {
   regex:/^(kick) (.+)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isPresent}
+    {scope:QuestJs._parser.isPresent}
   ],
   default:function(item, isMultiple, char) {
     return QuestJs._io.failedmsg(prefix(this, isMultiple) + QuestJs._lang.pronounVerb(char, "kick", true) + " " + this.pronouns.objective + ", but nothing happens.");
@@ -138,7 +138,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('EgCharge', {
   regex:/^(charge) (.+)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHeld}
+    {scope:QuestJs._parser.isHeld}
   ],
   default:function(item, isMultiple, char) {
     return QuestJs._io.failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can charge.");
@@ -152,7 +152,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('EgMove', {
   regex:/^(move) (.+)$/,
   objects:[
     {ignore:true},
-    {scope:parser.isHere}
+    {scope:QuestJs._parser.isHere}
   ],
   default:function(item, isMultiple, char) {
     return QuestJs._io.failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
