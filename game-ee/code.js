@@ -1,6 +1,6 @@
 "use strict";
 
-settings.setup = function() {
+QuestJs._settings.setup = function() {
   QuestJs._io.msg("You open your eyes, and wonder where you are. Some sort of medical facility? You think.");
   QuestJs._io.msg("'Ah, you'reawake.' A woman's voice, off to the side. You look at her.");
   QuestJs._io.msg("'Dr Quechua?' you say. 'What...?' Last time you saw her, Quechua was a medical officer on a the SS Tempest, an Accord frigate.");

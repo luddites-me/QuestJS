@@ -381,7 +381,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('HelpNPCs', {
   script:function() {
     QuestJs._io.metamsg("{b:Interacting with NPCs:}");
     QuestJs._io.metamsg("You can ask an NPC to do something by using the same command you would use to have yourself do something, but prefixed with {color:red:[name],} (note the comma) or {color:red:TELL [name] TO}.");
-    QuestJs._io.metamsg(settings.noTalkTo);
+    QuestJs._io.metamsg(QuestJs._settings.noTalkTo);
     QuestJs._io.metamsg("Use the {color:red:TOPICS} command for some suggested topics. There are rather more for ASK than TELL, as you might expect.");
     return world.SUCCESS_NO_TURNSCRIPTS;
   },

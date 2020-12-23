@@ -132,11 +132,11 @@ test.tests = function() {
   test.assertEqual('one and two', formatList(['one', 'two'], {lastJoiner:'and'}))
   test.assertEqual('one, three, two', formatList(['one', 'two', 'three']))
   test.assertEqual('one, three and two', formatList(['one', 'two', 'three'], {lastJoiner:'and'}))
-  settings.oxfordComma = true
+  QuestJs._settings.oxfordComma = true
   test.assertEqual('one', formatList(['one']))
   test.assertEqual('one and two', formatList(['one', 'two'], {lastJoiner:'and'}))
   test.assertEqual('one, three, and two', formatList(['one', 'two', 'three'], {lastJoiner:'and'}))
-  settings.oxfordComma = false
+  QuestJs._settings.oxfordComma = false
 
 
 
@@ -238,13 +238,13 @@ test.tests = function() {
   test.assertEqual("(012,34)", displayNumber(1234, "(3,2)"));
   test.assertEqual("$1234", displayMoney(1234));
   test.assertEqual("$-1234", displayMoney(-1234));
-  settings.moneyFormat = "!3.2! credits"
+  QuestJs._settings.moneyFormat = "!3.2! credits"
   test.assertEqual("012.34 credits", displayMoney(1234));
   test.assertEqual("-012.34 credits", displayMoney(-1234));
-  settings.moneyFormat = "!+3.2! credits"
+  QuestJs._settings.moneyFormat = "!+3.2! credits"
   test.assertEqual("+012.34 credits", displayMoney(1234));
   test.assertEqual("-012.34 credits", displayMoney(-1234));
-  settings.moneyFormat = game.moneyformat = "!$1,2!($1,2)!"
+  QuestJs._settings.moneyFormat = game.moneyformat = "!$1,2!($1,2)!"
   test.assertEqual("$12,34", displayMoney(1234));
   test.assertEqual("($12,34)", displayMoney(-1234));
   
@@ -692,35 +692,35 @@ test.tests = function() {
   test.title("Save/Load 1");
 
   const sl1 = "Some long string, with ~ all | sorts {} of! = stuff. In it^&*\""
-  test.assertEqual(sl1, saveLoad.decodeString(saveLoad.encodeString(sl1)))
+  test.assertEqual(sl1, QuestJs._saveLoad.decodeString(QuestJs._saveLoad.encodeString(sl1)))
   const sl2 = ["Some long string, ", "with ~ all | sorts {} of! = stuff.", " In it^&*\""]
-  const sl3 = saveLoad.decodeArray(saveLoad.encodeArray(sl2))
+  const sl3 = QuestJs._saveLoad.decodeArray(QuestJs._saveLoad.encodeArray(sl2))
   test.assertEqual(sl2[0], sl3[0])
   test.assertEqual(sl2[1], sl3[1])
   test.assertEqual(sl2[2], sl3[2])
 
-  test.assertEqual("tst:number:14;", saveLoad.encode("tst", 14))
-  test.assertEqual("", saveLoad.encode("tst", false))
-  test.assertEqual("tst:boolean:true;", saveLoad.encode("tst", true))
-  test.assertEqual("tst:string:14;", saveLoad.encode("tst", '14'))
-  test.assertEqual("tst:qobject:book;", saveLoad.encode("tst", w.book))
-  test.assertEqual("tst:array:14~12;", saveLoad.encode("tst", ['14', '12']))
-  test.assertEqual("tst:numberarray:14~12;", saveLoad.encode("tst", [14, 12]))
+  test.assertEqual("tst:number:14;", QuestJs._saveLoad.encode("tst", 14))
+  test.assertEqual("", QuestJs._saveLoad.encode("tst", false))
+  test.assertEqual("tst:boolean:true;", QuestJs._saveLoad.encode("tst", true))
+  test.assertEqual("tst:string:14;", QuestJs._saveLoad.encode("tst", '14'))
+  test.assertEqual("tst:qobject:book;", QuestJs._saveLoad.encode("tst", w.book))
+  test.assertEqual("tst:array:14~12;", QuestJs._saveLoad.encode("tst", ['14', '12']))
+  test.assertEqual("tst:numberarray:14~12;", QuestJs._saveLoad.encode("tst", [14, 12]))
 
-  saveLoad.decode(w.far_away, "one:number:14")
+  QuestJs._saveLoad.decode(w.far_away, "one:number:14")
   test.assertEqual(14, w.far_away.one)
-  saveLoad.decode(w.far_away, "two:string:14")
+  QuestJs._saveLoad.decode(w.far_away, "two:string:14")
   test.assertEqual('14', w.far_away.two)
-  saveLoad.decode(w.far_away, "three:boolean:true")
+  QuestJs._saveLoad.decode(w.far_away, "three:boolean:true")
   test.assertEqual(true, w.far_away.three)
-  saveLoad.decode(w.far_away, "four:qobject:book")
+  QuestJs._saveLoad.decode(w.far_away, "four:qobject:book")
   test.assertEqual(w.book, w.far_away.four)
-  saveLoad.decode(w.far_away, "five:array:14~12")
+  QuestJs._saveLoad.decode(w.far_away, "five:array:14~12")
   test.assertEqual('14', w.far_away.five[0])
   //console.log(w.far_away.north)
-  saveLoad.decode(w.far_away, "north:exit:lounge:l:h")
+  QuestJs._saveLoad.decode(w.far_away, "north:exit:lounge:l:h")
   test.assertEqual(true, w.far_away.north.hidden)
-  saveLoad.decode(w.far_away, "six:numberarray:4~67~9")
+  QuestJs._saveLoad.decode(w.far_away, "six:numberarray:4~67~9")
   test.assertEqual([4, 67, 9], w.far_away.six)
 
   test.title("Save/Load 2");
@@ -735,7 +735,7 @@ test.tests = function() {
   w.far_away.north.locked = false
   const agendaCount = w.Arthur.agenda.length;
   test.assertEqual(0, w.Arthur.followers.length);
-  const s = saveLoad.saveTheWorld("Comment!!!");
+  const s = QuestJs._saveLoad.saveTheWorld("Comment!!!");
   // Now change them again, these changes should get over-written
   w.boots.counter = 42;
   w.boots.unusualString = "Some boring text";
@@ -743,7 +743,7 @@ test.tests = function() {
   w.boots.examine = "This will not remain";
   const clone3 = cloneObject(clone);  // should not be there later
   w.far_away.north.locked = true
-  saveLoad.loadTheWorld(s, 4);
+  QuestJs._saveLoad.loadTheWorld(s, 4);
   test.assertEqual(count + 2, Object.keys(w).length);
   test.assertEqual(17, w.boots.counter);
   test.assertEqual([4, 5, 8], w.boots.sizes);

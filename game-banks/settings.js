@@ -3,51 +3,51 @@
 
 
 
-settings.title = "The Voyages of The Joseph Banks"
-settings.author = "The Pixie"
-settings.version = "0.1"
-settings.thanks = ["Kyle", "Lara"]
-settings.warnings = 'This game does have swearing (including the F-word); it is possible to romance crew mates of either gender, but nothing graphic.'
+QuestJs._settings.title = "The Voyages of The Joseph Banks"
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "0.1"
+QuestJs._settings.thanks = ["Kyle", "Lara"]
+QuestJs._settings.warnings = 'This game does have swearing (including the F-word); it is possible to romance crew mates of either gender, but nothing graphic.'
 
 // UI options
-settings.libraries.push('shipwise')
-settings.files = ["const", "code", "commands", "text", "data", "npcs"]
-settings.styleFile = 'style'
-settings.noTalkTo = "You can talk to an NPC using either {color:red:ASK [name] ABOUT [topic]} or {color:red:TELL [name] ABOUT [topic]}."
-settings.noAskTell = false
-settings.givePlayerAskTellMsg = false
-settings.symbolsForCompass  = true
+QuestJs._settings.libraries.push('shipwise')
+QuestJs._settings.files = ["const", "code", "commands", "text", "data", "npcs"]
+QuestJs._settings.styleFile = 'style'
+QuestJs._settings.noTalkTo = "You can talk to an NPC using either {color:red:ASK [name] ABOUT [topic]} or {color:red:TELL [name] ABOUT [topic]}."
+QuestJs._settings.noAskTell = false
+QuestJs._settings.givePlayerAskTellMsg = false
+QuestJs._settings.symbolsForCompass  = true
 
 
-settings.playMode = 'dev'
-settings.tests = true
+QuestJs._settings.playMode = 'dev'
+QuestJs._settings.tests = true
 
-settings.dateTime.start = new Date('April 14, 2387 09:43:00')
+QuestJs._settings.dateTime.start = new Date('April 14, 2387 09:43:00')
 
-settings.roomTemplate = [
+QuestJs._settings.roomTemplate = [
   "#{cap:{hereName}}",
   "{terse:{hereDesc}}",
   "{objectsHere:You can see {objects} here.}",
 ]
 
-settings.status = [
+QuestJs._settings.status = [
   function() { return '<td width="55px" title="You receive a bonus for collecting good data"><b>Bonus:</b></td><td width="20px"></td><td align="right"><b>$' + game.player.bonus + 'k</b></td>' },
-  function() { return settings.statusReport(game.player) },
-  function() { return settings.statusReport(w.Xsansi) },
-  function() { return settings.statusReport(w.Ha_yoon) },
-  function() { return settings.statusReport(w.Kyle) },
-  function() { return settings.statusReport(w.Ostap) },
-  function() { return settings.statusReport(w.Aada) },
+  function() { return QuestJs._settings.statusReport(game.player) },
+  function() { return QuestJs._settings.statusReport(w.Xsansi) },
+  function() { return QuestJs._settings.statusReport(w.Ha_yoon) },
+  function() { return QuestJs._settings.statusReport(w.Kyle) },
+  function() { return QuestJs._settings.statusReport(w.Ostap) },
+  function() { return QuestJs._settings.statusReport(w.Aada) },
   function() { return '<td colspan="3" style="border:black solid 1px" align="center" title="The current date and time (adjusted for relativistic effects)">' + util.getDateTime() + '</td>' },
-  function() { return settings.oxygenReport() },
+  function() { return QuestJs._settings.oxygenReport() },
 ];
 
 
-settings.colours = ['red', 'yellow', 'blue', 'lime', 'lime', 'grey', 'black']
-settings.colourNotes = ['Red indicates something is seriously wrong; action should be taken to avoid death', 'Yellow indicates cause for concern', 'Blue indicates less than excellent, but probably no cause for concern', 'Green indicates excellent', 'lime', 'Grey indicates the crewman is in stasis', 'Black indicates the crewman is dead']
-settings.intervals = [25,50,25,1, 1000]
-settings.intervalDescs = ['worrying', 'fair', 'good', 'perfect']
-settings.statusReport = function(obj) {
+QuestJs._settings.colours = ['red', 'yellow', 'blue', 'lime', 'lime', 'grey', 'black']
+QuestJs._settings.colourNotes = ['Red indicates something is seriously wrong; action should be taken to avoid death', 'Yellow indicates cause for concern', 'Blue indicates less than excellent, but probably no cause for concern', 'Green indicates excellent', 'lime', 'Grey indicates the crewman is in stasis', 'Black indicates the crewman is dead']
+QuestJs._settings.intervals = [25,50,25,1, 1000]
+QuestJs._settings.intervalDescs = ['worrying', 'fair', 'good', 'perfect']
+QuestJs._settings.statusReport = function(obj) {
   let s, colourCode, tooltip
   tooltip = obj.alias + ' is '
   if (!obj.crewman) tooltip += obj.player ? 'the captain of the ship (i.e., you)' : 'the ship AI'
@@ -58,36 +58,36 @@ settings.statusReport = function(obj) {
   }
   else {
     s = obj.status.toString() + '%'
-    colourCode = util.getByInterval(settings.intervals, obj.status)
+    colourCode = util.getByInterval(QuestJs._settings.intervals, obj.status)
     if (obj.crewman) tooltip += 'in ' + w[obj.loc].alias
   }
-  return '<td title="' + tooltip + '"><i>' + obj.alias + ':</i></td>' + settings.warningLight(colourCode) + '<td align="right">' + s + '</td>'
+  return '<td title="' + tooltip + '"><i>' + obj.alias + ':</i></td>' + QuestJs._settings.warningLight(colourCode) + '<td align="right">' + s + '</td>'
 }
-settings.oxygenReport = function(obj) {
+QuestJs._settings.oxygenReport = function(obj) {
   // 0.84 kg O2  per day
   // https://ntrs.nasa.gov/citations/20040012725
   // so 0.58 g/m
   console.log(w.ship.oxygen)
-  console.log(util.getByInterval(settings.intervals, w.ship.oxygen / 50))
-  const colourCode = util.getByInterval(settings.intervals, w.ship.oxygen / 10)
-  return '<td title="The ship has a limited amount of oxygen; an adult uses about 6 g every minute, but none while in stasis"><b>Oxygen:</b></td>' + settings.warningLight(colourCode) + '<td align="right"><span style="font-size:0.8em">' + (Math.round(w.ship.oxygen) / 1000).toFixed(3) + ' kg</span></td>'
+  console.log(util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 50))
+  const colourCode = util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 10)
+  return '<td title="The ship has a limited amount of oxygen; an adult uses about 6 g every minute, but none while in stasis"><b>Oxygen:</b></td>' + QuestJs._settings.warningLight(colourCode) + '<td align="right"><span style="font-size:0.8em">' + (Math.round(w.ship.oxygen) / 1000).toFixed(3) + ' kg</span></td>'
 }
 
-settings.warningLight = function(colourCode) {
+QuestJs._settings.warningLight = function(colourCode) {
   //return "<td style=\"margin:3px;border:black solid 2px; background:" + colour + "\">&nbsp;</td>"
   
-  let s = '<td title="' + settings.colourNotes[colourCode] + '">'
+  let s = '<td title="' + QuestJs._settings.colourNotes[colourCode] + '">'
   s += '<svg height="12" width="10">'
-  s += '<circle cx="5" cy="5" r="5" stroke="black" stroke-width="1" fill="' + settings.colours[colourCode] + '" />'
+  s += '<circle cx="5" cy="5" r="5" stroke="black" stroke-width="1" fill="' + QuestJs._settings.colours[colourCode] + '" />'
   s += '</svg>'
   s += '</td>'
   return s
 }
 
 
-settings.inventoryPane = false
+QuestJs._settings.inventoryPane = false
 
-settings.setup = function() {
+QuestJs._settings.setup = function() {
   arrival()
   $('#map').appendTo("#panes")
   updateMap()
@@ -95,14 +95,14 @@ settings.setup = function() {
 
 
 
-settings.updateCustomUI = function() {
+QuestJs._settings.updateCustomUI = function() {
   updateMap()
 }
 
 
 
 
-settings.onDarkToggle = function() {
+QuestJs._settings.onDarkToggle = function() {
   updateMap()
 }
 
@@ -148,12 +148,12 @@ for (let back of backgrounds) {
 s += '</select></td></tr></table>'
 
 
-//settings.startingDialogEnabled = true
-settings.startingDialogTitle = "To start with..."
-settings.startingDialogWidth = 555
-settings.startingDialogHeight = 565
-settings.startingDialogHtml = s
-settings.startingDialogOnClick = function() {
+//QuestJs._settings.startingDialogEnabled = true
+QuestJs._settings.startingDialogTitle = "To start with..."
+QuestJs._settings.startingDialogWidth = 555
+QuestJs._settings.startingDialogHeight = 565
+QuestJs._settings.startingDialogHtml = s
+QuestJs._settings.startingDialogOnClick = function() {
   let p = game.player;
   const jobName = $("#job").val();
   const job = professions.find(function(el) { return el.name === jobName; });
@@ -166,10 +166,10 @@ settings.startingDialogOnClick = function() {
   w.me.isFemale = $("#female").is(':checked');
   w.me.alias = $("#namefield").val();
 }
-settings.startingDialogInit = function() {
+QuestJs._settings.startingDialogInit = function() {
   $('#namefield').focus();
 }
-settings.startingDialogAlt = function() {
+QuestJs._settings.startingDialogAlt = function() {
   w.me.job = professions[0].name;
   w.me.jobBonus = professions[0].bonus;
   w.me.isFemale = true;

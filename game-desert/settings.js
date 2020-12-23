@@ -1,28 +1,28 @@
 "use strict";
 
-settings.title = "Desert"
-settings.author = "The Pixie"
-settings.version = "1.0"
-settings.thanks = ["Kyle", "Lara"]
+QuestJs._settings.title = "Desert"
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "1.0"
+QuestJs._settings.thanks = ["Kyle", "Lara"]
 
-settings.noTalkTo = false
-settings.noAskTell = false
+QuestJs._settings.noTalkTo = false
+QuestJs._settings.noAskTell = false
 
-settings.tests = true
+QuestJs._settings.tests = true
 
-settings.textEffectDelay = 100
+QuestJs._settings.textEffectDelay = 100
 
-settings.imagesFolder = 'images/'
-settings.files = ["code", "data", "npcs"]
+QuestJs._settings.imagesFolder = 'images/'
+QuestJs._settings.files = ["code", "data", "npcs"]
 
-settings.panes = 'left'
-settings.statusPane = false
+QuestJs._settings.panes = 'left'
+QuestJs._settings.statusPane = false
 
-settings.roomTemplate = [
+QuestJs._settings.roomTemplate = [
   "{hereDesc}",
   "{objectsHere:You can see {objects} here.}",
 ]
 
-settings.intro = "You wake up, and realise the bus has stopped."
+QuestJs._settings.intro = "You wake up, and realise the bus has stopped."
 
-settings.libraries.push('zone')
+QuestJs._settings.libraries.push('zone')

@@ -1,17 +1,17 @@
 "use strict";
 
 // About your game
-settings.title = "Nation!";
-settings.author = "The Pixie"
-settings.version = "0.1";
-settings.thanks = [];
-settings.files = ["geography", "code", "data", "npcs"]
-settings.libraries.push('board')
-settings.tests = true
+QuestJs._settings.title = "Nation!";
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "0.1";
+QuestJs._settings.thanks = [];
+QuestJs._settings.files = ["geography", "code", "data", "npcs"]
+QuestJs._settings.libraries.push('board')
+QuestJs._settings.tests = true
 
 
 
-settings.setup = function() {
+QuestJs._settings.setup = function() {
   const boardSettings = {
     cellSize:20,
     size:nation.size,

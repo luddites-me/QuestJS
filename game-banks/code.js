@@ -454,14 +454,14 @@ function probeLandsOkay() {
 }
   
   
-settings.deckNames = {layer1:'Deck 2', layer3:'Deck 1', layer4:'Deck 3'}
+QuestJs._settings.deckNames = {layer1:'Deck 2', layer3:'Deck 1', layer4:'Deck 3'}
 
 function updateMap() {
   $('#layer1').hide()
   $('#layer3').hide()
   $('#layer4').hide()
   const currentDeck = w[game.player.loc].deckName
-  $('#map').attr('title', 'The Joseph Banks, ' + settings.deckNames[currentDeck]);
+  $('#map').attr('title', 'The Joseph Banks, ' + QuestJs._settings.deckNames[currentDeck]);
   if (!currentDeck) return QuestJs._io.errormsg("No deckName for " + game.player.loc)
   $('#' + currentDeck).show()
   for (let key in w) {
@@ -480,9 +480,9 @@ function updateMap() {
     if (mySvgId) $('#' + mySvgId).css('fill', 'yellow')
     if (otherSvgId) $('#' + otherSvgId).css('fill', 'blue')
   }
-  $('#rect10').css('fill', settings.darkModeActive ? '#333' : '#bbb')
+  $('#rect10').css('fill', QuestJs._settings.darkModeActive ? '#333' : '#bbb')
   for (let id of [3334, 2800, 2788, 3330]) {
-    $('#text' + id).css('fill', settings.darkModeActive ? 'white' : 'black')
+    $('#text' + id).css('fill', QuestJs._settings.darkModeActive ? 'white' : 'black')
     $('#text' + id).css('font-family', 'Orbitron, sans-serif')
   }
 }

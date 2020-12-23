@@ -1,21 +1,21 @@
 "use strict";
 
-settings.title = "A First RPG...";
-settings.author = "The Pixie"
-settings.version = "1.1";
-settings.thanks = ["Kyle", "Lara"];
+QuestJs._settings.title = "A First RPG...";
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "1.1";
+QuestJs._settings.thanks = ["Kyle", "Lara"];
 
-settings.libraries.push('rpg')
+QuestJs._settings.libraries.push('rpg')
 
-settings.statusPane = false;
-settings.tests = true
-settings.playMode = 'dev'
-settings.attackOutputLevel = 10
-settings.armourScaling = 10
-settings.noTalkTo = false
-settings.output = function(report) {
+QuestJs._settings.statusPane = false;
+QuestJs._settings.tests = true
+QuestJs._settings.playMode = 'dev'
+QuestJs._settings.attackOutputLevel = 10
+QuestJs._settings.armourScaling = 10
+QuestJs._settings.noTalkTo = false
+QuestJs._settings.output = function(report) {
   for (let el of report) {
-    if (el.level <= settings.attackOutputLevel) {
+    if (el.level <= QuestJs._settings.attackOutputLevel) {
       if (el.level === 1) {
         QuestJs._io.msg(el.t)
       }
@@ -29,7 +29,7 @@ settings.output = function(report) {
 
 
 
-settings.dateTime = {
+QuestJs._settings.dateTime = {
   startTime:1000000000,
   data:[
     { name:'second', number:60 },
@@ -59,11 +59,11 @@ settings.dateTime = {
   },
   functions:{
     dayOfWeek:function(dict) { 
-      return settings.dateTime.days[(dict.day + 365 * dict.year) % settings.dateTime.days.length] 
+      return QuestJs._settings.dateTime.days[(dict.day + 365 * dict.year) % QuestJs._settings.dateTime.days.length] 
     },
     dayOfYear:function(dict) {
       let day = dict.day
-      for (let el of settings.dateTime.months) {
+      for (let el of QuestJs._settings.dateTime.months) {
         if (el.n > day) return (day + 1) + ' ' + el.name
         day -= el.n
       }
@@ -84,12 +84,12 @@ settings.dateTime = {
 
 // This function will be called at the start of the game, so can be used
 // to introduce your game.
-settings.setup = function() {
+QuestJs._settings.setup = function() {
   game.player.hitpoints = 20;
   game.player.status = "You are feeling fine";
   game.player.skillsLearnt = ["Double attack", "Fireball"]
 
-  settings.updateCustomUI()
+  QuestJs._settings.updateCustomUI()
   
   console.log(skills.findName("Flaming weapon"))
   console.log(skills.findName("Fireball"))
@@ -103,7 +103,7 @@ settings.setup = function() {
 
 
 
-settings.customUI = function() {
+QuestJs._settings.customUI = function() {
   document.writeln('<div id="rightpanel" class="side-panes side-panes-right">');
   document.writeln('<div id="rightstatus">');
   document.writeln('<table align="center">');
@@ -145,8 +145,8 @@ settings.customUI = function() {
 };  
 
 
-settings.updateCustomUI = function() {
-  $('#weaponImage').attr('src', settings.imagesFolder + 'icon-' + game.player.getEquippedWeapon().image + '.png');
+QuestJs._settings.updateCustomUI = function() {
+  $('#weaponImage').attr('src', QuestJs._settings.imagesFolder + 'icon-' + game.player.getEquippedWeapon().image + '.png');
   $('#weapon-td').prop('title', "Weapon: " + game.player.getEquippedWeapon().alias);
   
   $('#hits-indicator').css('padding-right', 120 * game.player.health / game.player.maxHealth);
@@ -189,8 +189,8 @@ const skillUI = {
     if (!skill.icon) skill.icon = skill.name.toLowerCase()
     const cell = $('#cell' + skillUI.skills.length)
     let s = '<div class="skill-container" title="' + skill.tooltip + '" >'
-    s += '<img class="skill-image" src="' + settings.imagesFolder + 'icon-' + skill.icon + '.png"/>'
-    if (skill.spell) s += '<img class="skill-image" src="' + settings.imagesFolder + 'flag-spell.png"/>'
+    s += '<img class="skill-image" src="' + QuestJs._settings.imagesFolder + 'icon-' + skill.icon + '.png"/>'
+    if (skill.spell) s += '<img class="skill-image" src="' + QuestJs._settings.imagesFolder + 'flag-spell.png"/>'
     s += '</div>'
     cell.html(s)
     cell.click(skillUI.buttonClickHandler)
@@ -278,9 +278,9 @@ const skillUI = {
 
 
 
-settings.startingDialogDisabled = true;
+QuestJs._settings.startingDialogDisabled = true;
 
-settings.professions = [
+QuestJs._settings.professions = [
   {name:"Farm hand", bonus:"strength"},
   {name:"Scribe", bonus:"intelligence"},
   {name:"Exotic dancer", bonus:"agility"},
@@ -288,12 +288,12 @@ settings.professions = [
 ];
 
 $(function() {
-  if (settings.startingDialogDisabled) {
+  if (QuestJs._settings.startingDialogDisabled) {
     const p = w.me;
-    p.job = settings.professions[0];
+    p.job = QuestJs._settings.professions[0];
     p.isFemale = true;
     p.fullname = "Shaala"
-    settings.gui = true
+    QuestJs._settings.gui = true
     return; 
   }
   const diag = $("#dialog");
@@ -303,7 +303,7 @@ $(function() {
   s += '<p>Male: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
   s += 'Female<input type="radio" id="female" name="sex" value="female" checked></p>';
   s += '<p>Job:<select id="job">'
-  for (let profession of settings.professions) {
+  for (let profession of QuestJs._settings.professions) {
     s += '<option value="' + profession.name + '">' + profession.name + '</option>';
   }
   s += '</select></p>'
@@ -324,11 +324,11 @@ $(function() {
           $(this).dialog("close");
           const p = game.player;
           const job = $("#job").val();
-          p.job = settings.professions.find(function(el) { return el.name === job; });
+          p.job = QuestJs._settings.professions.find(function(el) { return el.name === job; });
           p.isFemale = $("#female").is(':checked');
-          settings.gui = $("#gui").is(':checked');
+          QuestJs._settings.gui = $("#gui").is(':checked');
           p.fullname = $("#namefield").val();
-          if (settings.textInput) { $('#textbox').focus(); }
+          if (QuestJs._settings.textInput) { $('#textbox').focus(); }
           console.log(p)
         }
       }
@@ -509,7 +509,7 @@ function showStartDiag() {
         click: function() {
           $(this).dialog("close");
           setValues(this);
-          if (settings.textInput) { $('#textbox').focus(); }
+          if (QuestJs._settings.textInput) { $('#textbox').focus(); }
         }
       }
     ]

@@ -1,33 +1,33 @@
 "use strict"
 
-settings.title = "The City of Halmuth"
-settings.author = "The Pixie"
-settings.version = "0.1"
-settings.thanks = []
-settings.warnings = "No warnings have been set for this game."
-settings.playMode = "dev"
-//settings.reportAllSvg = true
-settings.symbolsForCompass = true
+QuestJs._settings.title = "The City of Halmuth"
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "0.1"
+QuestJs._settings.thanks = []
+QuestJs._settings.warnings = "No warnings have been set for this game."
+QuestJs._settings.playMode = "dev"
+//QuestJs._settings.reportAllSvg = true
+QuestJs._settings.symbolsForCompass = true
 
-settings.libraries.push('image-map')
-settings.libraries.push('quest')
-settings.tests = true
+QuestJs._settings.libraries.push('image-map')
+QuestJs._settings.libraries.push('quest')
+QuestJs._settings.tests = true
 
-settings.status = [
+QuestJs._settings.status = [
   function() { return '<td>Health points:</td><td>' + game.player.hitpoints + '</td>' },
   function() { return '<td colspan="2">' + util.getDateTime() + '</td>' },
 ]
 
-settings.roomTemplate = [
+QuestJs._settings.roomTemplate = [
   "#{cap:{hereName}}",
   "{hereDesc}",
   "{npcStatus}",
   "{objectsHere:You can see {objects} here.}",
 ]
 
-settings.mapAndImageCollapseAt = 1000
+QuestJs._settings.mapAndImageCollapseAt = 1000
 
-settings.mapImages = [
+QuestJs._settings.mapImages = [
   {
     name:'Halmuth',
     file:'game-alt-map/map.png',
@@ -42,22 +42,22 @@ settings.mapImages = [
   },
 ]
 
-settings.mapScrollSpeed = 1
-settings.mapStyle = {
+QuestJs._settings.mapScrollSpeed = 1
+QuestJs._settings.mapStyle = {
   right:'0',
   top:'0',
   width:'400px',
   height:'400px',
   border:'3px black solid',
 }
-settings.mapMarker = function(loc) {
+QuestJs._settings.mapMarker = function(loc) {
   return map.polygon(loc, [
     [0,0], [-5,-25], [-7, -20], [-18, -45], [-20, -40], [-25, -42], [-10, -18], [-15, -20]
   ], 'stroke:none;fill:black;pointer-events:none;opacity:0.5')
 }
 
 
-settings.mapPointsOfInterest = [
+QuestJs._settings.mapPointsOfInterest = [
   {mapX:100, mapY:100, fill:'red', text:'Here is one thing'},
   {mapX:200, mapY:200, fill:'red', text:'Here is another thing'},
   {mapX:300, mapY:300, fill:'blue', text:'Here is something else', isActive:function() {return true }},
@@ -66,7 +66,7 @@ settings.mapPointsOfInterest = [
 
 
 
-settings.dateTime = {
+QuestJs._settings.dateTime = {
   startTime:1000000000,
   secondsPerTurn:60,
   data:[
@@ -94,11 +94,11 @@ settings.dateTime = {
   },
   functions:{
     dayOfWeek:function(dict) { 
-      return settings.dateTime.days[(dict.day + 365 * dict.year) % settings.dateTime.days.length] 
+      return QuestJs._settings.dateTime.days[(dict.day + 365 * dict.year) % QuestJs._settings.dateTime.days.length] 
     },
     dayOfYear:function(dict) {
       let day = dict.day
-      for (let el of settings.dateTime.months) {
+      for (let el of QuestJs._settings.dateTime.months) {
         if (el.n > day) return (day + 1) + ' ' + el.name
         day -= el.n
       }

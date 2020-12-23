@@ -1,34 +1,34 @@
 "use strict"
 
-settings.title = "Quest 6 Map Demo"
-settings.author = "The Pixie"
-settings.version = "0.1"
-settings.thanks = []
-settings.warnings = "No warnings applicable to this game."
-settings.playMode = "dev"
-settings.reportAllSvg = true
+QuestJs._settings.title = "Quest 6 Map Demo"
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "0.1"
+QuestJs._settings.thanks = []
+QuestJs._settings.warnings = "No warnings applicable to this game."
+QuestJs._settings.playMode = "dev"
+QuestJs._settings.reportAllSvg = true
 
-settings.libraries.push('node-map')
-settings.mapAndImageCollapseAt = 1000
-settings.mapShowNotVisited = true
-settings.mapCellSize = 32
-settings.mapScale = 50
-settings.mapDrawLabels = true
-settings.mapLabelStyle = {'font-size':'8pt', 'font-weight':'bold'}
-settings.mapLabelColour = 'blue'
-settings.mapLabelRotate = -20
-settings.mapLabelOffset = -5
-settings.mapStyle = {right:'0', top:'200px', width:'400px', height:'400px', 'background-color':'#ddd', border:'3px black solid', 'background-image':'url(game-map/paper.jpg)' }
-settings.mapClick = function(name) {
+QuestJs._settings.libraries.push('node-map')
+QuestJs._settings.mapAndImageCollapseAt = 1000
+QuestJs._settings.mapShowNotVisited = true
+QuestJs._settings.mapCellSize = 32
+QuestJs._settings.mapScale = 50
+QuestJs._settings.mapDrawLabels = true
+QuestJs._settings.mapLabelStyle = {'font-size':'8pt', 'font-weight':'bold'}
+QuestJs._settings.mapLabelColour = 'blue'
+QuestJs._settings.mapLabelRotate = -20
+QuestJs._settings.mapLabelOffset = -5
+QuestJs._settings.mapStyle = {right:'0', top:'200px', width:'400px', height:'400px', 'background-color':'#ddd', border:'3px black solid', 'background-image':'url(game-map/paper.jpg)' }
+QuestJs._settings.mapClick = function(name) {
   QuestJs._io.metamsg("You clicked on " + w[name].alias)
 }
-settings.mapAutomapFrom = ['street_middle', 'glade']
-settings.mapMarker = function(loc) {
+QuestJs._settings.mapAutomapFrom = ['street_middle', 'glade']
+QuestJs._settings.mapMarker = function(loc) {
   return map.polygon(loc, [
     [0,0], [-5,-25], [-7, -20], [-18, -45], [-20, -40], [-25, -42], [-10, -18], [-15, -20]
   ], 'stroke:none;fill:black;pointer-events:none;opacity:0.3')
 }
-settings.mapExtras = function() {
+QuestJs._settings.mapExtras = function() {
   const result = []
   const room = w[game.player.loc]
   /*for (let o of [w.Robot, w.Lara, w.Kyle]) {

@@ -1,24 +1,24 @@
 "use strict"
 
-settings.title = "The Dinner Party"
-settings.author = "The Pixie"
-settings.version = "0.1"
-settings.thanks = []
-settings.warnings = "This is about eating dinner, so those with food issue might want to be careful, though it does not go into much detail about the food; it is really about the people."
-settings.playMode = "dev"
+QuestJs._settings.title = "The Dinner Party"
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "0.1"
+QuestJs._settings.thanks = []
+QuestJs._settings.warnings = "This is about eating dinner, so those with food issue might want to be careful, though it does not go into much detail about the food; it is really about the people."
+QuestJs._settings.playMode = "dev"
 
-settings.symbolsForCompass = true
+QuestJs._settings.symbolsForCompass = true
 
-settings.setup = function() {
+QuestJs._settings.setup = function() {
   console.log(w.dinner_timetable.steps)
   console.log(w.dinner_timetable.steps.length)
   util.verifyResponses(w.dinner_timetable.steps)
 }
 
-settings.libraries.push('item_links')
+QuestJs._settings.libraries.push('item_links')
 
 
-settings.toolbar = {
+QuestJs._settings.toolbar = {
   content:function() { return `Hitpoints : 100` },
   roomdisplay: true,
   buttons:[

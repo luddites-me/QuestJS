@@ -1,15 +1,15 @@
 "use strict";
 
 // About your game
-settings.title = "Deeper";
-settings.author = "The Pixie"
-settings.version = "3.0";
-settings.thanks = [];
-settings.files = ["geography", "code", "data", "npcs"]
+QuestJs._settings.title = "Deeper";
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "3.0";
+QuestJs._settings.thanks = [];
+QuestJs._settings.files = ["geography", "code", "data", "npcs"]
 
 
 
-settings.roomTemplate = [
+QuestJs._settings.roomTemplate = [
   "{hereDesc}",
   "{objectsHere:You can see {objects} here.}",
 ]

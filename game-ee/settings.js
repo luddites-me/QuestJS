@@ -1,13 +1,13 @@
 "use strict";
 
-settings.title = "Enery Effect";
-settings.author = "The Pixie"
-settings.version = "1.0";
-settings.thanks = [];
+QuestJs._settings.title = "Enery Effect";
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "1.0";
+QuestJs._settings.thanks = [];
 
 // UI options
 
-settings.statusPane = false;  // Set to false to turn off
+QuestJs._settings.statusPane = false;  // Set to false to turn off
 
 
 

@@ -410,7 +410,7 @@ createRoom("brass_dining_room", {
   loc:"zone_victorian",
   scenery:true,
   desc:function() {
-    let s = "This room was dominated by an elegant, dark wood table, well polished, with brass legs shaped like a lion's, and laid out with eight dinner settings. Eight chairs, in matching style, surrounded it.  At the table, "
+    let s = "This room was dominated by an elegant, dark wood table, well polished, with brass legs shaped like a lion's, and laid out with eight dinner QuestJs._settings. Eight chairs, in matching style, surrounded it.  At the table, "
     QuestJs._io.msg (" ")
     if (this.mannequin_count < 9) {
       s += toWords(this.mannequin_count) + " mannequins were sat, dressed up in clothes and wig."

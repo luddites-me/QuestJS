@@ -447,7 +447,7 @@ QuestJs._lang = {
 
 
   helpScript:function() {
-    if (settings.textInput) {
+    if (QuestJs._settings.textInput) {
       QuestJs._io.metamsg("Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.");      
       QuestJs._io.metamsg("{b:Movement:} To move, use the eight compass directions (or just N, NE, etc.). Up/down and in/out may be options too. When \"Num Lock\" is on, you can use the number pad for all eight compass directions, - and + for UP and DOWN, / and * for IN and OUT.");
       QuestJs._io.metamsg("{b:Other commands:} You can also LOOK (or just L or 5 on the number pad), HELP (or ?) or WAIT (or Z or the dot on the number pad). Other commands are generally of the form GET HAT or PUT THE BLUE TEAPOT IN THE ANCIENT CHEST. Experiment and see what you can do!");
@@ -461,10 +461,10 @@ QuestJs._lang = {
       QuestJs._io.metamsg("{b:Shortcuts:}You can often just type the first few characters of an item's name and Quest will guess what you mean.  If fact, if you are in a room with Brian, who is holding a ball, and a box, Quest should be able to work out that B,PUT B IN B mean you want Brian to put the ball in the box.")
       QuestJs._io.metamsg("You can use the up and down arrows to scroll back though your previous typed commands - especially useful if you realise you spelled something wrong. If you do not have arrow keys, use OOPS to retrieve the last typed command so you can edit it. Use AGAIN or just G to repeat the last typed command.")
     }
-    if (settings.panes !== "none") {
+    if (QuestJs._settings.panes !== "none") {
       QuestJs._io.metamsg("{b:User Interface:} To interact with an object, click on its name in the side pane, and a set of possible actions will appear under it. Click on the appropriate action.");
-      if (settings.compassPane) {
-        if (settings.symbolsForCompass) {
+      if (QuestJs._settings.compassPane) {
+        if (QuestJs._settings.symbolsForCompass) {
           QuestJs._io.metamsg("You can also use the compass rose at the top to move around. Click the eye symbol, &#128065;, to look at you current location, the pause symbol, &#9208;, to wait or &#128712; for help.");
         }
         else {
@@ -472,8 +472,8 @@ QuestJs._lang = {
         }
       }
     }
-    if (settings.additionalHelp !== undefined) {
-      for (let s of settings.additionalHelp) QuestJs._io.metamsg(s)
+    if (QuestJs._settings.additionalHelp !== undefined) {
+      for (let s of QuestJs._settings.additionalHelp) QuestJs._io.metamsg(s)
     }
     return world.SUCCESS_NO_TURNSCRIPTS;
   },
@@ -485,21 +485,21 @@ QuestJs._lang = {
 
   aboutScript:function() {
     QuestJs._io.metamsg("{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.", {settings:settings})
-    if (settings.ifdb) QuestJs._io.metamsg("IFDB number: " + settings.ifdb)
-    if (settings.thanks && settings.thanks.length > 0) {
-      QuestJs._io.metamsg("Thanks to " + formatList(settings.thanks, {lastJoiner:QuestJs._lang.list_and}) + ".")
+    if (QuestJs._settings.ifdb) QuestJs._io.metamsg("IFDB number: " + QuestJs._settings.ifdb)
+    if (QuestJs._settings.thanks && QuestJs._settings.thanks.length > 0) {
+      QuestJs._io.metamsg("Thanks to " + formatList(QuestJs._settings.thanks, {lastJoiner:QuestJs._lang.list_and}) + ".")
     }
-    if (settings.additionalAbout !== undefined) {
-      for (let s of settings.additionalAbout) QuestJs._io.metamsg(s)
+    if (QuestJs._settings.additionalAbout !== undefined) {
+      for (let s of QuestJs._settings.additionalAbout) QuestJs._io.metamsg(s)
     }
     return world.SUCCESS_NO_TURNSCRIPTS
   },
 
   warningsScript:function() {
-    switch (typeof settings.warnings) {
+    switch (typeof QuestJs._settings.warnings) {
       case 'undefined' : QuestJs._io.metamsg('No warning have been set for this game.'); break;
-      case 'string' : QuestJs._io.metamsg(settings.warnings); break;
-      default: for (let el of settings.warnings) QuestJs._io.metamsg(el)
+      case 'string' : QuestJs._io.metamsg(QuestJs._settings.warnings); break;
+      default: for (let el of QuestJs._settings.warnings) QuestJs._io.metamsg(el)
     }
     return world.SUCCESS_NO_TURNSCRIPTS;
   },
@@ -528,8 +528,8 @@ QuestJs._lang = {
   },
   
   betaTestIntro:function() {
-    QuestJs._io.metamsg("This version is for beta-testing (" + settings.version + "). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.")
-    if (settings.textInput) QuestJs._io.metamsg("You can add your own comments to the transcript by starting a command with *.")
+    QuestJs._io.metamsg("This version is for beta-testing (" + QuestJs._settings.version + "). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.")
+    if (QuestJs._settings.textInput) QuestJs._io.metamsg("You can add your own comments to the transcript by starting a command with *.")
     QuestJs._IO.scriptStart()
   },
   

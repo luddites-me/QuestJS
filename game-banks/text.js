@@ -9,7 +9,7 @@ tp.addDirective("status", function(arr, params) {
     return params.actor.status === 'stasis' ? 'In stasis' : 'Deceased'
   }
   else {
-    return settings.intervalDescs[util.getByInterval(settings.intervals, params.actor.status)]
+    return QuestJs._settings.intervalDescs[util.getByInterval(QuestJs._settings.intervals, params.actor.status)]
   }
 })
 

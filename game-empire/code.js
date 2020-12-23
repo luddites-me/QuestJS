@@ -35,9 +35,9 @@ for (let i = 0; i < 20; i++) console.log(word.word())
 
 
 
-settings.startingDialogDisabled = true;
+QuestJs._settings.startingDialogDisabled = true;
 
-settings.professions = [
+QuestJs._settings.professions = [
   "Alchemist",
   "Baronet",
   "Farm hand",
@@ -48,7 +48,7 @@ settings.professions = [
 ];
 
 $(function() {
-  if (settings.startingDialogDisabled) {
+  if (QuestJs._settings.startingDialogDisabled) {
     const p = game.player;
     p.job = "Merchant";
     p.isFemale = true;
@@ -62,7 +62,7 @@ $(function() {
   s += '<p>King: <input type="radio" id="male" name="sex" value="male">&nbsp;&nbsp;&nbsp;&nbsp;';
   s += 'Queen<input type="radio" id="female" name="sex" value="female" checked></p>';
   s += '<p>Background:<select id="job">'
-  for (let profession of settings.professions) {
+  for (let profession of QuestJs._settings.professions) {
     s += '<option value="' + profession + '">' + profession + '</option>';
   }
   s += '</select></p>';
@@ -82,7 +82,7 @@ $(function() {
           p.job = $("#job").val();
           p.isFemale = $("#female").is(':checked');
           p.alias = $("#namefield").val();
-          if (settings.textInput) { $('#textbox').focus(); }
+          if (QuestJs._settings.textInput) { $('#textbox').focus(); }
           console.log(p)
         }
       }

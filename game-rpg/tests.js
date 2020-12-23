@@ -38,7 +38,7 @@ test.tests = function() {
   
 
   test.title("Armour")
-  settings.armourScaling = 1
+  QuestJs._settings.armourScaling = 1
   test.assertEqual(0, game.player.getArmour())
   test.assertCmd("get helmet", "You take the helmet.");
   test.assertEqual(0, game.player.getArmour())
@@ -48,7 +48,7 @@ test.tests = function() {
   test.assertEqual(10, game.player.getArmour())
   test.assertCmd("wear chestplate", "You put on the chestplate.");
   test.assertEqual(30, game.player.getArmour())
-  settings.armourScaling = 10
+  QuestJs._settings.armourScaling = 10
 
 
 

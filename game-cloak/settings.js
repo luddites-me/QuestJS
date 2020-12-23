@@ -1,17 +1,17 @@
 
 
 // About your game
-settings.title = "Cloak of Darkness";
-settings.author = "The Pixie"
-settings.version = "0.3";
-settings.thanks = [];
+QuestJs._settings.title = "Cloak of Darkness";
+QuestJs._settings.author = "The Pixie"
+QuestJs._settings.version = "0.3";
+QuestJs._settings.thanks = [];
 
-settings.panes = 'none'
+QuestJs._settings.panes = 'none'
 
-settings.roomTemplate = [
+QuestJs._settings.roomTemplate = [
   "#{cap:{hereName}}",
   "{hereDesc}",
   "{objectsHere:You can see {objects} here.}",
 ]
 
-settings.styleFile = 'style'
+QuestJs._settings.styleFile = 'style'
