@@ -16,20 +16,20 @@ quest.create('A carrot for Buddy', [
 
 function firstTimeTesting() {
   firsttime(232646, function() {
-    QuestJs._io.msg(spaces(5)+ "{font:trade winds:Te first time 10{sup:2} CH{sub:4} Er {smallcaps:This is small caps}.}")
+    QuestJs._io.msg(QuestJs._tools.spaces(5)+ "{font:trade winds:Te first time 10{sup:2} CH{sub:4} Er {smallcaps:This is small caps}.}")
   }, function() {
     QuestJs._io.msg("Every {huge:other} {big:time} betweeb {small:is} {tiny:very small} notmasl.")
   });
   const a = ["one", "two", "three"]
-  console.log(a)
-  array.remove(a, "two")
-  console.log(a)
-  array.remove(a, "three")
-  console.log(a)
-  array.remove(a, "three")
-  console.log(a)
-  array.remove(a, "one")
-  console.log(a)
+  QuestJs._log.info(a)
+  QuestJs._array.remove(a, "two")
+  QuestJs._log.info(a)
+  QuestJs._array.remove(a, "three")
+  QuestJs._log.info(a)
+  QuestJs._array.remove(a, "three")
+  QuestJs._log.info(a)
+  QuestJs._array.remove(a, "one")
+  QuestJs._log.info(a)
 }
 
 
@@ -46,7 +46,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Test input', {
         QuestJs._io.msg("You picked " + result + ".");
       }
       else {
-        QuestJs._io.msg("You picked " + QuestJs._lang.getName(result, {article:DEFINITE}) + ".");
+        QuestJs._io.msg("You picked " + QuestJs._lang.getName(result, {article:QuestJs._consts.DEFINITE}) + ".");
       }
     })
 /*    QuestJs._io.askQuestion("What colour?", function(result) {
@@ -126,7 +126,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('EgKick', {
     {scope:QuestJs._parser.isPresent}
   ],
   default:function(item, isMultiple, char) {
-    return QuestJs._io.failedmsg(prefix(this, isMultiple) + QuestJs._lang.pronounVerb(char, "kick", true) + " " + this.pronouns.objective + ", but nothing happens.");
+    return QuestJs._io.failedmsg(QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.pronounVerb(char, "kick", true) + " " + this.pronouns.objective + ", but nothing happens.");
   },
 }));
 
@@ -141,7 +141,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('EgCharge', {
     {scope:QuestJs._parser.isHeld}
   ],
   default:function(item, isMultiple, char) {
-    return QuestJs._io.failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can charge.");
+    return QuestJs._io.failedmsg(QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can charge.");
   },
 }));
 
@@ -155,7 +155,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('EgMove', {
     {scope:QuestJs._parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    return QuestJs._io.failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
+    return QuestJs._io.failedmsg(QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
   },
 }));
 
@@ -219,5 +219,5 @@ QuestJs._tp.addDirective("charger_state", function(){
   if (contents.length === 0) {
     return "The compartment is empty";
   }
-  return "The compartment contains " + formatList(contents, {article:INDEFINITE});
+  return "The compartment contains " + QuestJs._tools.formatList(contents, {article:QuestJs._consts.INDEFINITE});
 });

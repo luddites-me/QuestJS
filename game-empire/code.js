@@ -21,13 +21,13 @@ const word = {}
 word.start = ['', '', 'b', 'c', 'ch', 'd', 'c', 'ch', 'd', 'f', 'fl', 'fr', 'g', 'l', 'm', 'n', 'p', 'pl', 'pr', 'r', 's', 'sl', 'st', 'sh', 't', 'tr', 'v', 'y']
 word.middle = ['a', 'aa', 'ai', 'e', 'ea', 'ei', 'i', 'ie', 'o', 'oa', 'oe', 'ou', 'oo', 'u', 'ui', 'ue']
 word.end = ['', '', 'b', 'mb', 'ck', 'ch', 'rk', 'd', 'nd', 'rd', 'gg', 'ng', 'gh', 'l', 'll', 'm', 'n', 'pp', 'mp', 'r', 'ss', 'sh', 't', 'rt', 'th']
-word.syllable = function() { return random.fromArray(this.start) + random.fromArray(this.middle) + random.fromArray(this.end) }
+word.syllable = function() { return QuestJs._random.fromArray(this.start) + QuestJs._random.fromArray(this.middle) + QuestJs._random.fromArray(this.end) }
 word.word = function() {
   let s = ''
-  for (let i = random.int(2,4); i > 0; i--) s += this.syllable()
+  for (let i = QuestJs._random.int(2,4); i > 0; i--) s += this.syllable()
   return s
 }
-for (let i = 0; i < 20; i++) console.log(word.word())
+for (let i = 0; i < 20; i++) QuestJs._log.info(word.word())
 */
 
 
@@ -83,7 +83,7 @@ $(function() {
           p.isFemale = $("#female").is(':checked');
           p.alias = $("#namefield").val();
           if (QuestJs._settings.textInput) { $('#textbox').focus(); }
-          console.log(p)
+          QuestJs._log.info(p)
         }
       }
     ]

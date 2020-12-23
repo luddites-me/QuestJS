@@ -19,7 +19,7 @@ class Region {
       const pair = el.split(',')
       const from = parseInt(pair[0])
       const to = parseInt(pair[1])
-      if (from > to) console.log("WARNING: Numbers reversed in region (" + from + " is greater than " + to + ")")
+      if (from > to) QuestJs._log.info("WARNING: Numbers reversed in region (" + from + " is greater than " + to + ")")
       this.froms.push(from)
       this.tos.push(to)
       this.count += to - from + 1
@@ -174,13 +174,13 @@ const setRiver = function(x, y, side, n) {
 const riverRight = function(x, y, count) {
   x--
   for (let j = count; j > 0; j--) {
-    for (let i = 0; i < random.int(4) + 2; i++) {
+    for (let i = 0; i < QuestJs._random.int(4) + 2; i++) {
       y++
       setRiver(x, y, 'right', j)
     }
     y++
     x++
-    for (let i = 0; i < random.int(4) + 1; i++) {
+    for (let i = 0; i < QuestJs._random.int(4) + 1; i++) {
       x--
       setRiver(x, y, 'left', j)
     }
@@ -191,13 +191,13 @@ const riverRight = function(x, y, count) {
 const riverLeft = function(x, y, count) {
   y++
   for (let j = count; j > 0; j--) {
-    for (let i = 0; i < random.int(4) + 2; i++) {
+    for (let i = 0; i < QuestJs._random.int(4) + 2; i++) {
       x--
       setRiver(x, y, 'left', j)
     }
     x--
     y--
-    for (let i = 0; i < random.int(4) + 1; i++) {
+    for (let i = 0; i < QuestJs._random.int(4) + 1; i++) {
       y++
       setRiver(x, y, 'right', j)
     }

@@ -10,7 +10,7 @@ createItem("me", QuestJs._templates.PLAYER(), {
   positionX:-1,
   positionY:-2,
   examine:function(isMultiple) {
-    QuestJs._io.msg(prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
+    QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
   },
 });
 
@@ -21,10 +21,10 @@ createItem("knife",
   { loc:"me", sharp:false,
     examine:function(isMultiple) {
       if (this.sharp) {
-        QuestJs._io.msg(prefix(this, isMultiple) + "A really sharp knife.");
+        QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "A really sharp knife.");
       }
       else {
-        QuestJs._io.msg(prefix(this, isMultiple) + "A blunt knife.");
+        QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "A blunt knife.");
       }
     },
   }

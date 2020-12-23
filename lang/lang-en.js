@@ -341,7 +341,7 @@ QuestJs._lang = {
     let s;
     // You could split up sitting, standing and lying
     if (char.postureFurniture) {
-      s = QuestJs._lang.nounVerb(char, "get", true) + " off " + QuestJs._lang.getName(w[char.postureFurniture], {article:DEFINITE}) + ".";
+      s = QuestJs._lang.nounVerb(char, "get", true) + " off " + QuestJs._lang.getName(w[char.postureFurniture], {article:QuestJs._consts.DEFINITE}) + ".";
     }
     else {
       s = QuestJs._lang.nounVerb(char, "stand", true) + " up.";
@@ -355,26 +355,26 @@ QuestJs._lang = {
 
   // use (or potentially use) different verbs in the responses, so not simple strings
   say_no_one_here:function(char, verb, text) {
-    return QuestJs._lang.nounVerb(char, verb, true) + ", '" + sentenceCase(text) + ",' but no one notices.";
+    return QuestJs._lang.nounVerb(char, verb, true) + ", '" + QuestJs._tools.sentenceCase(text) + ",' but no one notices.";
   },
   say_no_response:function(char, verb, text) {
     return "No one seemed interested in what you say.";
   },
   say_no_response_full:function(char, verb, text) {
-    return QuestJs._lang.nounVerb(char, verb, true) + ", '" + sentenceCase(text) + ",' but no one seemed interested in what you say.";
+    return QuestJs._lang.nounVerb(char, verb, true) + ", '" + QuestJs._tools.sentenceCase(text) + ",' but no one seemed interested in what you say.";
   },
 
   // If the player does SPEAK TO MARY and Mary has some topics, this will be the menu title.
   speak_to_menu_title:function(char) {
-    return "Talk to " + QuestJs._lang.getName(char, {article:DEFINITE}) + " about:";
+    return "Talk to " + QuestJs._lang.getName(char, {article:QuestJs._consts.DEFINITE}) + " about:";
   },
   // If the player does TELL MARY ABOUT HOUSE this will appear before the response.
   tell_about_intro:function(char, text1, text2) {
-    return "You tell " + QuestJs._lang.getName(char, {article:DEFINITE}) + " " + text2 + " " + text1 + ".";
+    return "You tell " + QuestJs._lang.getName(char, {article:QuestJs._consts.DEFINITE}) + " " + text2 + " " + text1 + ".";
   },
   // If the player does ASK MARY ABOUT HOUSE this will appear before the response.
   ask_about_intro:function(char, text1, text2) {
-    return "You ask " + QuestJs._lang.getName(char, {article:DEFINITE}) + " " + text2 + " " + text1 + ".";
+    return "You ask " + QuestJs._lang.getName(char, {article:QuestJs._consts.DEFINITE}) + " " + text2 + " " + text1 + ".";
   },
   
   // Use when the NPC leaves a room; will give a message if the player can observe it
@@ -386,7 +386,7 @@ QuestJs._lang = {
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s += QuestJs._lang.nounVerb(npc, "leave", !flag) + " " + QuestJs._lang.getName(w[npc.loc], {article:DEFINITE});
+      s += QuestJs._lang.nounVerb(npc, "leave", !flag) + " " + QuestJs._lang.getName(w[npc.loc], {article:QuestJs._consts.DEFINITE});
       const exit = w[npc.loc].findExit(dest);
       if (exit) s += ", heading " + exit.dir;
       s += ".";
@@ -404,7 +404,7 @@ QuestJs._lang = {
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s += QuestJs._lang.nounVerb(npc, "enter", !flag) + " " + QuestJs._lang.getName(w[npc.loc], {article:DEFINITE});
+      s += QuestJs._lang.nounVerb(npc, "enter", !flag) + " " + QuestJs._lang.getName(w[npc.loc], {article:QuestJs._consts.DEFINITE});
       const exit = w[npc.loc].findExit(origin);
       if (exit) s += " from " + util.niceDirection(exit.dir);
       s += ".";
@@ -487,7 +487,7 @@ QuestJs._lang = {
     QuestJs._io.metamsg("{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.", {settings:settings})
     if (QuestJs._settings.ifdb) QuestJs._io.metamsg("IFDB number: " + QuestJs._settings.ifdb)
     if (QuestJs._settings.thanks && QuestJs._settings.thanks.length > 0) {
-      QuestJs._io.metamsg("Thanks to " + formatList(QuestJs._settings.thanks, {lastJoiner:QuestJs._lang.list_and}) + ".")
+      QuestJs._io.metamsg("Thanks to " + QuestJs._tools.formatList(QuestJs._settings.thanks, {lastJoiner:QuestJs._lang.list_and}) + ".")
     }
     if (QuestJs._settings.additionalAbout !== undefined) {
       for (let s of QuestJs._settings.additionalAbout) QuestJs._io.metamsg(s)
@@ -765,10 +765,10 @@ QuestJs._lang = {
       if (count && count > 1) {
         s += QuestJs._lang.toWords(count) + ' '
       }
-      else if (options.article === DEFINITE) {
+      else if (options.article === QuestJs._consts.DEFINITE) {
         s += QuestJs._lang.addDefiniteArticle(item)
       }
-      else if (options.article === INDEFINITE) {
+      else if (options.article === QuestJs._consts.INDEFINITE) {
         s += QuestJs._lang.addIndefiniteArticle(item, count)
       }
       if (item.getAdjective) {
@@ -794,7 +794,7 @@ QuestJs._lang = {
     }
     s += util.getNameModifiers(item, options)
 
-    return (options && options.capital ? sentenceCase(s) : s)
+    return (options && options.capital ? QuestJs._tools.sentenceCase(s) : s)
   },
 
 
@@ -930,19 +930,19 @@ QuestJs._lang = {
   pronounVerb:function(item, verb, capitalise) {
     let s = item.pronouns.subjective + " " + QuestJs._lang.conjugate (item, verb);
     s = s.replace(/ +\'/, "'");  // yes this is a hack!
-    return capitalise ? sentenceCase(s) : s;
+    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
   pronounVerbForGroup:function(item, verb, capitalise) {
     let s = item.groupPronouns().subjective + " " + QuestJs._lang.conjugate (item.group(), verb);
     s = s.replace(/ +\'/, "'");  // yes this is a hack!
-    return capitalise ? sentenceCase(s) : s;
+    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
   verbPronoun:function(item, verb, capitalise) {
     let s = QuestJs._lang.conjugate (item, verb) + " " + item.pronouns.subjective;
     s = s.replace(/ +\'/, "'");  // yes this is a hack!
-    return capitalise ? sentenceCase(s) : s;
+    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
   //@DOC
@@ -955,18 +955,18 @@ QuestJs._lang = {
     if (item === game.player && !game.player.useProperName) {
       return QuestJs._lang.pronounVerb(item, verb, capitalise);
     }
-    let s = QuestJs._lang.getName(item, {article:DEFINITE}) + " " + QuestJs._lang.conjugate (item, verb);
+    let s = QuestJs._lang.getName(item, {article:QuestJs._consts.DEFINITE}) + " " + QuestJs._lang.conjugate (item, verb);
     s = s.replace(/ +\'/, "'");  // yes this is a hack!
-    return capitalise ? sentenceCase(s) : s;
+    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
   verbNoun:function(item, verb, capitalise) {
     if (item === game.player) {
       return QuestJs._lang.pronounVerb(item, verb, capitalise);
     }
-    let s = QuestJs._lang.conjugate (item, verb) + " " + QuestJs._lang.getName(item, {article:DEFINITE});
+    let s = QuestJs._lang.conjugate (item, verb) + " " + QuestJs._lang.getName(item, {article:QuestJs._consts.DEFINITE});
     s = s.replace(/ +\'/, "'");  // yes this is a hack!
-    return capitalise ? sentenceCase(s) : s;
+    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
   },
 
 }

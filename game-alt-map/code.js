@@ -36,7 +36,7 @@ QuestJs._tp.addDirective("timeOfDayComment", function(arr, params) {
 QuestJs._tp.addDirective("npcStatus", function(arr, params) {
   const result = []
   for (let el of scopeAllNpcHere()) {
-    console.log(el.name)
+    QuestJs._log.info(el.name)
     if (el.locationStatus) {
       const s = el.locationStatus()
       if (s) result.push(s)

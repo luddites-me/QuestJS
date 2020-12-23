@@ -98,8 +98,8 @@ QuestJs._command.findCmd('MetaHint').script = function() {
     hint.data[game.player.hintCounter].hint()
   }
   else {
-    console.log(hint.data[game.player.hintCounter].name)
-    console.log("hint.data[game.player.hintCounter].hint is a " + (typeof hint.data[game.player.hintCounter].hint))
+    QuestJs._log.info(hint.data[game.player.hintCounter].name)
+    QuestJs._log.info("hint.data[game.player.hintCounter].hint is a " + (typeof hint.data[game.player.hintCounter].hint))
   }
   return world.SUCCESS_NO_TURNSCRIPTS;
 }
@@ -237,7 +237,7 @@ QuestJs._commands.unshift(new QuestJs._command.Cmd('Move', {
     {scope:QuestJs._parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    return QuestJs._io.failedmsg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
+    return QuestJs._io.failedmsg(QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
   },
 }));
 

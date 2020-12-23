@@ -97,28 +97,28 @@ const dungeon = {
 
 //  Master function to generate the whole level.
 dungeon.generateLevel = function(from_room) {
-  console.log('About to generate...')
+  QuestJs._log.info('About to generate...')
   const limit = (dungeon.size - 1) / 2
   const level = from_room.level + 1
   let theme
   if (3 > level) {
     theme = 'e_dungeon'
   }
-  else if (random.chance(50)) {
+  else if (QuestJs._random.chance(50)) {
     theme = from_room.theme
   }
-  else if (random.chance(50)) {
+  else if (QuestJs._random.chance(50)) {
     theme = 'e_dungeon'
   }
   else {
-    theme = random.fromArray(['e_dungeon'])
+    theme = QuestJs._random.fromArray(['e_dungeon'])
   }
   dungeon.generateBasicRooms(level, theme)
-  console.log('Rooms created')
+  QuestJs._log.info('Rooms created')
   dungeon.setUpCentreRoom(level, from_room)
   const levellist = dungeon.checkConnectivity(level)
   const waydown = dungeon.setWayDown(levellist)
-  console.log('About to decorate ' + levellist.length)
+  QuestJs._log.info('About to decorate ' + levellist.length)
   for (let room of levellist) {
     dungeon.decorateRoom(room)
   }
@@ -131,16 +131,16 @@ dungeon.generateLevel = function(from_room) {
 dungeon.decorateRoom = function(room, level, theme) {
   room.theme = theme
   const exits = room.getExits()
-  if ((room.x === 0 && room.y === 0) || (exits.length === 1) || random.chance(25) || room.exit_down) {
-    room.roomType = random.fromArray(dungeon.shapes)
-    room.desc = random.fromArray(room.roomType.descs)
+  if ((room.x === 0 && room.y === 0) || (exits.length === 1) || QuestJs._random.chance(25) || room.exit_down) {
+    room.roomType = QuestJs._random.fromArray(dungeon.shapes)
+    room.desc = QuestJs._random.fromArray(room.roomType.descs)
     
     if (exits.length === 1) {
       room.desc += ' The only exit is ' +  exits.map(el => el.name) + '.'
     }
     else {
       room.desc += ' There are exits '
-      room.desc += formatList(exits.map(el => el.name), {lastJoiner:QuestJs._lang.list_and})
+      room.desc += QuestJs._tools.formatList(exits.map(el => el.name), {lastJoiner:QuestJs._lang.list_and})
       room.desc += '.'
     }
   }
@@ -163,7 +163,7 @@ dungeon.decorateRoom = function(room, level, theme) {
         room.desc = 'You are stood in a tunnel that runs from east to west.'
       }
       else
-        room.desc = 'The tunnel turns a corner here, going ' + formatList(room.getExits().map(el => el.name), {def:"a", joiner:" and"}) + '.'
+        room.desc = 'The tunnel turns a corner here, going ' + QuestJs._tools.formatList(room.getExits().map(el => el.name), {def:"a", joiner:" and"}) + '.'
     }
     
   }
@@ -177,8 +177,8 @@ dungeon.decorateRoom = function(room, level, theme) {
 dungeon.generateBasicRooms = function(level, theme) {
   for (let x = -dungeon.size; x <= dungeon.size; x++) {
     for (let y = -dungeon.size; y <= dungeon.size; y++) {
-      //console.log('x=' + x + ' y=' + y + ' p=' + (100 - dungeon.cellpercentage * dungeon.fromCentre(x, y) / dungeon.size))
-      if (random.chance(100 - dungeon.cellpercentage * dungeon.fromCentre(x, y) / dungeon.size)) {
+      //QuestJs._log.info('x=' + x + ' y=' + y + ' p=' + (100 - dungeon.cellpercentage * dungeon.fromCentre(x, y) / dungeon.size))
+      if (QuestJs._random.chance(100 - dungeon.cellpercentage * dungeon.fromCentre(x, y) / dungeon.size)) {
         dungeon.generateBasicRoom(level, x, y, theme)
       }
     }
@@ -187,30 +187,30 @@ dungeon.generateBasicRooms = function(level, theme) {
 
 
 // Creates a single room with default values.
-// Also creates exits to south and west if there is a room there and at random.
+// Also creates exits to south and west if there is a room there and at QuestJs._random.
 dungeon.generateBasicRoom = function(level, x, y, theme) {
   const name = dungeon.getRoomName(x, y, level)
-  //console.log(name)
+  //QuestJs._log.info(name)
   const name_west = dungeon.getRoomName(x - 1, y, level)
   const name_south = dungeon.getRoomName(x, y - 1, level)
   const room = cloneObject("dungeon_cell_prototype", undefined, name)
-  //console.log(room)
+  //QuestJs._log.info(room)
   room.accessible = false
   room.alias = "Lost in a dungeon"
   room.level = level
   room.x = x
   room.y = y
   const room_west = w[name_west]
-  if (room_west !== undefined && random.chance(dungeon.exitpercentage)) {
+  if (room_west !== undefined && QuestJs._random.chance(dungeon.exitpercentage)) {
     room.exit_west = true
     room_west.exit_east = true
-    room_west.exit_east_type = room.exit_west_type = random.int(dungeon.themescount)
+    room_west.exit_east_type = room.exit_west_type = QuestJs._random.int(dungeon.themescount)
   }
   const room_south = w[name_south]
-  if (room_south !== undefined && random.chance(dungeon.exitpercentage)) {
+  if (room_south !== undefined && QuestJs._random.chance(dungeon.exitpercentage)) {
     room.exit_south = true
     room_south.exit_north = true
-    room_south.exit_north_type = room.exit_south_type = random.int(dungeon.themescount)
+    room_south.exit_north_type = room.exit_south_type = QuestJs._random.int(dungeon.themescount)
   }
   w[name] = room
 }
@@ -224,7 +224,7 @@ dungeon.checkConnectivity = function(level) {
   w[dungeon.getRoomName(0, 0, level)].accessible = true
   let flag = true
   while (flag) {
-    console.log("LOOP")
+    QuestJs._log.info("LOOP")
     flag = false
     for (let x = -dungeon.size; x <= dungeon.size; x++) {
       for (let y = -dungeon.size; y <= dungeon.size; y++) {
@@ -267,7 +267,7 @@ dungeon.setWayDown = function(levellist) {
     dist--
     //QuestJs._io.msg(dist)
   }
-  const waydown = random.fromArray(sublist)
+  const waydown = QuestJs._random.fromArray(sublist)
   waydown.exit_down = true
   return (waydown)
 }
@@ -338,7 +338,7 @@ dungeon.drawMap = function() {
   }
     
   const room = w[game.player.loc]
-  console.log(room)
+  QuestJs._log.info(room)
   if (!room.level) {
     QuestJs._io.metamsg('No map available here.')
     return

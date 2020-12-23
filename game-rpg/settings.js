@@ -91,8 +91,8 @@ QuestJs._settings.setup = function() {
 
   QuestJs._settings.updateCustomUI()
   
-  console.log(skills.findName("Flaming weapon"))
-  console.log(skills.findName("Fireball"))
+  QuestJs._log.info(skills.findName("Flaming weapon"))
+  QuestJs._log.info(skills.findName("Fireball"))
   w.rabbit.setLeader(game.player)
   
 }
@@ -158,13 +158,13 @@ QuestJs._settings.updateCustomUI = function() {
   $('#armour-indicator').css('padding-right', 120 * game.player.armour / game.player.maxArmour);
   $('#armour-td').prop('title', "Armour: " + game.player.armour + "/" + game.player.maxArmour);
 
-  //console.log($('#hits-td').prop('title'));
+  //QuestJs._log.info($('#hits-td').prop('title'));
 
 
-  //console.log(game.player.skillsLearnt)
+  //QuestJs._log.info(game.player.skillsLearnt)
   skillUI.removeAllButtons()
   for (let skill of skills.list) {
-    //console.log(skill.name)
+    //QuestJs._log.info(skill.name)
     if (game.player.skillsLearnt.includes(skill.name)) {
       skillUI.setButton(skill)
     }
@@ -201,7 +201,7 @@ const skillUI = {
   },
 
   resetButtons:function() {
-    //console.log('reset')
+    //QuestJs._log.info('reset')
     for (let i = 0; i < skillUI.skills.length; i++) {
       $('#cell' + i).css("background-color", "black");
     }
@@ -220,11 +220,11 @@ const skillUI = {
   },
 
   buttonClickHandler:function(event) {
-    console.log(event)
+    QuestJs._log.info(event)
     skillUI.resetButtons()
     
     const n = parseInt(event.currentTarget.id.replace('cell', ''))
-    console.log(n)
+    QuestJs._log.info(n)
     skillUI.selected = n
     const cell = $("#cell" + n)
     cell.css("background-color", "yellow")
@@ -237,24 +237,24 @@ const skillUI = {
   },
   
   castButtonClick:function() {
-    console.log("CKLOICK!!!")
-    console.log("CKLOICK!!! " + skillUI.selected)
-    console.log("CKLOICK!!! " + skillUI.skills)
-    console.log("CKLOICK!!! " + skillUI.skills[skillUI.selected].name)
+    QuestJs._log.info("CKLOICK!!!")
+    QuestJs._log.info("CKLOICK!!! " + skillUI.selected)
+    QuestJs._log.info("CKLOICK!!! " + skillUI.skills)
+    QuestJs._log.info("CKLOICK!!! " + skillUI.skills[skillUI.selected].name)
   },
 
 
   chooseWeapon:function() {
-    console.log("in chooseWeapon");
+    QuestJs._log.info("in chooseWeapon");
     const weapons = [];
     for (let o in w) {
       if (w[o].isAtLoc(game.player, world.SCOPING) && w[o].weapon) {
-        console.log(o);
+        QuestJs._log.info(o);
         weapons.push('<option value="'+ o +'">' + w[o].listalias + '</option>');
       }
     }
     const s = weapons.join('');
-    console.log(s);
+    QuestJs._log.info(s);
 
     $('#weapon-select').html(s);  
     
@@ -264,7 +264,7 @@ const skillUI = {
   chosenWeapon:function() {
     $("#choose-weapon-div").dialog("close");
     const selected = $("#weapon-select").val();
-    console.log("in chosenWeapon: " + selected);
+    QuestJs._log.info("in chosenWeapon: " + selected);
     w[selected].equip(false, game.player);
     world.endTurn(world.SUCCESS);
   },
@@ -329,7 +329,7 @@ $(function() {
           QuestJs._settings.gui = $("#gui").is(':checked');
           p.fullname = $("#namefield").val();
           if (QuestJs._settings.textInput) { $('#textbox').focus(); }
-          console.log(p)
+          QuestJs._log.info(p)
         }
       }
     ]
@@ -433,7 +433,7 @@ function scrollPara(element) {
   if (typeof paraPositions[paraNumber] !== 'number') {
     var list = dialogeOptions['para' + paraNumber + 'Opts'];
     paraOpts[paraNumber] = list;
-    paraPositions[paraNumber] = random.int(list.length - 1);
+    paraPositions[paraNumber] = QuestJs._random.int(list.length - 1);
   }
   paraPositions[paraNumber]++;
   if (paraPositions[paraNumber] >= paraOpts[paraNumber].length) {

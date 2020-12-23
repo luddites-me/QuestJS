@@ -2,7 +2,7 @@
 
 
 
-test.tests = function() {
+QuestJs._test.tests = function() {
 
 };
 

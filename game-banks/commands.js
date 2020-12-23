@@ -12,7 +12,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Kick', {
     {scope:QuestJs._parser.isPresent}
   ],
   default:function(item, isMultiple, char) {
-    QuestJs._io.msg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(char, "kick", true) + " " + item.pronouns.objective + ", but nothing happens.");
+    QuestJs._io.msg(QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(char, "kick", true) + " " + item.pronouns.objective + ", but nothing happens.");
     return false;
   },
 }));
@@ -26,7 +26,7 @@ QuestJs._commands.push(new QuestJs._command.Cmd('Move', {
     {scope:QuestJs._parser.isHere}
   ],
   default:function(item, isMultiple, char) {
-    QuestJs._io.msg(prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
+    QuestJs._io.msg(QuestJs._tools.prefix(item, isMultiple) + QuestJs._lang.pronounVerb(item, "'be", true) + " not something you can move.");
     return false;
   },
 }));
@@ -209,7 +209,7 @@ function handlePressurise(char, objects, pressurise) {
   }
   const mainRoom = (typeof baseRoom.vacuum === "string" ? w[baseRoom.vacuum] : baseRoom);
   if (mainRoom.vacuum !== pressurise) {
-    QuestJs._io.msg("'" + sentenceCase(QuestJs._lang.getName(mainRoom, {article:DEFINITE})) + " is already " + (pressurise ? 'pressurised' : 'depressurised') + ".");
+    QuestJs._io.msg("'" + QuestJs._tools.sentenceCase(QuestJs._lang.getName(mainRoom, {article:QuestJs._consts.DEFINITE})) + " is already " + (pressurise ? 'pressurised' : 'depressurised') + ".");
     return world.SUCCESS;
   }
   if (!w.Xsansi.pressureOverride && mainRoom.name !== "airlock" && !pressurise) {
@@ -217,16 +217,16 @@ function handlePressurise(char, objects, pressurise) {
     return world.SUCCESS;
   }
   if (!pressurise) {
-    QuestJs._io.msg("'Evacuating " + QuestJs._lang.getName(mainRoom, {article:DEFINITE}) + "... Room is now under vacuum.'");
+    QuestJs._io.msg("'Evacuating " + QuestJs._lang.getName(mainRoom, {article:QuestJs._consts.DEFINITE}) + "... Room is now under vacuum.'");
     mainRoom.vacuum = true;
     return world.SUCCESS;
   }
   if (mainRoom.leaks) {
-    QuestJs._io.msg("'Pressurising " + QuestJs._lang.getName(mainRoom, {article:DEFINITE}) + "... Pressurisation failed.'");
+    QuestJs._io.msg("'Pressurising " + QuestJs._lang.getName(mainRoom, {article:QuestJs._consts.DEFINITE}) + "... Pressurisation failed.'");
     return world.SUCCESS;
   }
 
-  QuestJs._io.msg("'Pressurising " + QuestJs._lang.getName(mainRoom, {article:DEFINITE}) + "... Room is now pressurised.'");
+  QuestJs._io.msg("'Pressurising " + QuestJs._lang.getName(mainRoom, {article:QuestJs._consts.DEFINITE}) + "... Room is now pressurised.'");
   mainRoom.vacuum = false;
   return world.SUCCESS;
 }

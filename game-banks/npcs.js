@@ -343,8 +343,8 @@ createItem("Xsansi", QuestJs._npc.NPC(true), {
         }
         else {
           QuestJs._io.msg("'Tell me about that meteor shower, Xsansi,' you say.");
-          console.log(w.Xsansi.currentPlanet);
-          console.log(w.Xsansi.name);
+          QuestJs._log.info(w.Xsansi.currentPlanet);
+          QuestJs._log.info(w.Xsansi.name);
           
           if (w.Xsansi.currentPlanet < 3) {
             QuestJs._io.msg("'We passed through the periphery of a class D meteor shower on the approach to " + PLANETS[1].starName + PLANETS[1].planet + ". I was able to modify the course of the ship to avoid the worst of the damage, but was constrained by the amount of fuel needed to complete the mission. The ship experienced damage to the upper forward and port areas.'");
@@ -410,7 +410,7 @@ createItem("Xsansi", QuestJs._npc.NPC(true), {
     
     {
       script:function(p) {
-        console.log(p)
+        QuestJs._log.info(p)
         QuestJs._io.msg("'Tell me about {text},' you say to Xsansi.", p) 
         QuestJs._io.msg("'That is not a area I am knowledgeable in.'") 
       },

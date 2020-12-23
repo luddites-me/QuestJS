@@ -80,7 +80,7 @@ const CREW = function(isFemale) {
     else if (this.posture) {
       s += " {pv:actor:be:true} " + this.posture + ".";
     }
-    QuestJs._io.msg(prefix(this, isMultiple) + this.desc + s, tpParams);
+    QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + this.desc + s, tpParams);
   }
   res.stasis = function() {
     const tpParams = {actor:this}
@@ -305,7 +305,7 @@ function createTopics(npc) {
     regex:/(your |his |her )?(area|special.*|expert.*|job|role)/,
     test:function(p) { return p.text.match(this.regex); }, 
     script:function(response) {
-      QuestJs._io.msg("'What is your area of expertise?' you ask " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
+      QuestJs._io.msg("'What is your area of expertise?' you ask " + QuestJs._lang.getName(response.actor, {article:QuestJs._consts.DEFINITE}) + ".");
       response.actor.areaAskResponse();
     }
   });
@@ -314,7 +314,7 @@ function createTopics(npc) {
     regex:/^((his |her )?(background))|((him|her)self)$/,
     test:function(p) { return p.text.match(this.regex); }, 
     script:function(response) {
-      QuestJs._io.msg("'Tell me about yourself,' you say to " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
+      QuestJs._io.msg("'Tell me about yourself,' you say to " + QuestJs._lang.getName(response.actor, {article:QuestJs._consts.DEFINITE}) + ".");
       response.actor.backgroundAskResponse();
       trackRelationship(response.actor, 1, "background");
     }
@@ -326,7 +326,7 @@ function createTopics(npc) {
 }
  
 function howAreYouFeeling(response) {
-  QuestJs._io.msg("'How are you feeling?' you ask " + QuestJs._lang.getName(response.actor, {article:DEFINITE}) + ".");
+  QuestJs._io.msg("'How are you feeling?' you ask " + QuestJs._lang.getName(response.actor, {article:QuestJs._consts.DEFINITE}) + ".");
   QuestJs._io.msg(PLANETS[w.Xsansi.currentPlanet][response.actor.name + "_how_are_you"]);
 }
 

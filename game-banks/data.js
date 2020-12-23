@@ -20,7 +20,7 @@ createItem("me",
       return this.baseOxygeUse * this.oxygenUseModifier
     },
     examine:function(isMultiple) {
-      QuestJs._io.msg(prefix(this, isMultiple) + "You feel fine...");
+      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "You feel fine...");
     },
     canMove:function(ex) {
       let room1 = w[this.loc];
@@ -28,7 +28,7 @@ createItem("me",
       let room2 = w[ex.name];
       if (typeof room2.vacuum === "string") room2 = w[room2.vacuum];
       if (room1.vacuum === room2.vacuum) return true;
-      QuestJs._io.msg("The door to " + QuestJs._lang.getName(room2, {article:DEFINITE}) + " will not open while it is " + (room1.vacuum ? 'pressurised' : 'depressurised') + " and " + QuestJs._lang.getName(room1, {article:DEFINITE}) + " is not.");
+      QuestJs._io.msg("The door to " + QuestJs._lang.getName(room2, {article:QuestJs._consts.DEFINITE}) + " will not open while it is " + (room1.vacuum ? 'pressurised' : 'depressurised') + " and " + QuestJs._lang.getName(room1, {article:QuestJs._consts.DEFINITE}) + " is not.");
       return false;
     }
   }
@@ -79,7 +79,7 @@ createRoom("stasis_bay", {
       case 0: return "All pods are currently open.";
       case 4: return "Currently only your pod and the spare pod are open.";
       case 1: return QuestJs._lang.getName(arr[0], {possessive:true}) + " stasis pod is closed.";
-      default: return "The stasis pods of " + formatList(arr) + " are closed.";
+      default: return "The stasis pods of " + QuestJs._tools.formatList(arr) + " are closed.";
     }
   },
   vacuum:false,
@@ -116,10 +116,10 @@ createItem("stasis_locker", QuestJs._templates.CONTAINER(true), {
   loc:"stasis_bay",
   examine:function(isMultiple) {
     if (this.closed) {
-      QuestJs._io.msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored{once: (if there is an emergency, you want the spacesuits by the stasis pods)}.");
+      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored{once: (if there is an emergency, you want the spacesuits by the stasis pods)}.");
     }
     else {
-      QuestJs._io.msg(prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored. Inside you can see " + formatList(this.getContents(world.LOOK), {lastJoiner:QuestJs._lang.list_and, article:INDEFINITE}) + ".");
+      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "This metal locker is taller than you, and just as wide; it is where spacesuits are stored. Inside you can see " + QuestJs._tools.formatList(this.getContents(world.LOOK), {lastJoiner:QuestJs._lang.list_and, article:QuestJs._consts.INDEFINITE}) + ".");
     }
   },
 });
@@ -576,10 +576,10 @@ createItem("probe_prototype", QuestJs._templates.COUNTABLE([]), {
     if (!number) number = 1
 
     if (number === 1) {
-      QuestJs._io.msg("'Launch a " + char.probeType + ",' you say to " + QuestJs._lang.getName(char, {article:DEFINITE}) + ".")
+      QuestJs._io.msg("'Launch a " + char.probeType + ",' you say to " + QuestJs._lang.getName(char, {article:QuestJs._consts.DEFINITE}) + ".")
     }
     else {
-      QuestJs._io.msg("'Launch " + number + " " + char.probeType + "s,' you say to " + QuestJs._lang.getName(char, {article:DEFINITE}) + ".")
+      QuestJs._io.msg("'Launch " + number + " " + char.probeType + "s,' you say to " + QuestJs._lang.getName(char, {article:QuestJs._consts.DEFINITE}) + ".")
     }
     if (number > char.probesRemaining) {
       return QuestJs._io.falsemsg("'We only have " + char.probesRemaining + " and we should save some for the other planets on our itinerary.'")
@@ -598,7 +598,7 @@ createItem("probe_prototype", QuestJs._templates.COUNTABLE([]), {
     
     if (char.deployProbeAction === 0 || char.deployProbeAction ===4) {
       QuestJs._io.msg("'Okay captain.'");
-      char.setAgenda(["walkTo:probes_aft:" + QuestJs._lang.getName(char, {article:DEFINITE}) + " goes to the probe deployment console.", "text:deployProbe:" + number])
+      char.setAgenda(["walkTo:probes_aft:" + QuestJs._lang.getName(char, {article:QuestJs._consts.DEFINITE}) + " goes to the probe deployment console.", "text:deployProbe:" + number])
       char.deployProbeAction = 0;
       char.deployProbeCount = 0;
     }
@@ -618,7 +618,7 @@ createItem("probe_prototype", QuestJs._templates.COUNTABLE([]), {
   eventIsActive:function() { return this.clonePrototype },
   cloneMe:function(owner) {
     const probe = cloneObject(this)
-    probe.alias = sentenceCase(owner.probeType) + " " + toRoman(owner.deployProbeOverallTotal)
+    probe.alias = QuestJs._tools.sentenceCase(owner.probeType) + " " + QuestJs._tools.toRoman(owner.deployProbeOverallTotal)
     probe.probeType = owner.probeType
     probe.planetNumber = w.Xsansi.currentPlanet
     probe.probeNumber = owner.deployProbeTotal

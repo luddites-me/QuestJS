@@ -21,9 +21,9 @@ QuestJs._npc_utilities.talkto = function() {
 
 
 function showSidePaneOptions(item, options, fn) {
-  const opts = {article:DEFINITE, capital:true}
+  const opts = {article:QuestJs._consts.DEFINITE, capital:true}
   QuestJs._IO.input('', options, false, fn, function(options) {
-    let s = '<div id="sidepane-menu"><p class="sidepane-menu-title">Talk to ' + QuestJs._lang.getName(item, {article:DEFINITE}) + ':</p>'
+    let s = '<div id="sidepane-menu"><p class="sidepane-menu-title">Talk to ' + QuestJs._lang.getName(item, {article:QuestJs._consts.DEFINITE}) + ':</p>'
     for (let i = 0; i < options.length; i++) {
       s += '<p value="' + i + '" onclick="QuestJs._IO.menuResponse(' + i + ')" class="sidepane-menu-option">';
       s += (typeof options[i] === 'string' ? options[i] : QuestJs._lang.getName(options[i], opts))
@@ -43,7 +43,7 @@ createItem("Buddy", QuestJs._npc.NPC(false), {
   examine:'An orangutan!',
   talkto:function() {
     const res = quest.getState('A carrot for Buddy', this)
-    console.log(res)
+    QuestJs._log.info(res)
     if (!res.status) {
       QuestJs._io.msg("'Hey, Buddy,' you say.")
       QuestJs._io.msg("'Hey yourself! Say, could you get me a carrot?'")
@@ -64,10 +64,10 @@ createItem("knife",
   { loc:"Buddy", sharp:false,
     examine:function(isMultiple) {
       if (this.sharp) {
-        QuestJs._io.msg(prefix(this, isMultiple) + "A really sharp knife.");
+        QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "A really sharp knife.");
       }
       else {
-        QuestJs._io.msg(prefix(this, isMultiple) + "A blunt knife.");
+        QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "A blunt knife.");
       }
     },
     chargeResponse:function(participant) {
@@ -128,7 +128,7 @@ createItem("book", QuestJs._templates.TAKEABLE(), READABLE(true), {
         QuestJs._io.msg ("'It is all about carrots. The basic gist is that all carrots should be given to me.' You are not entirely sure you believe her.")
       }
       else {
-        QuestJs._io.msg (prefix(this, isMultiple) + "It is not in a language " + QuestJs._lang.pronounVerb(char, "understand") + ".");
+        QuestJs._io.msg (QuestJs._tools.prefix(this, isMultiple) + "It is not in a language " + QuestJs._lang.pronounVerb(char, "understand") + ".");
       }
       return true;
     }          
@@ -157,17 +157,17 @@ createItem("boots",
 createItem("waterskin",
   QuestJs._templates.TAKEABLE(),
   { 
-    examine:function(isMultiple) { QuestJs._io.msg(prefix(this, isMultiple) + "The waterskin is " + Math.floor(this.full / this.capacity * 100) + "% full."); },
+    examine:function(isMultiple) { QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "The waterskin is " + Math.floor(this.full / this.capacity * 100) + "% full."); },
     capacity:10,
     full:3,
     loc:"lounge",
     fill:function(isMultiple) {
       if (game.player.loc != "garage") {
-        QuestJs._io.msg(prefix(this, isMultiple) + "There is nothing to charge the torch with here.");
+        QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "There is nothing to charge the torch with here.");
         return false;
       }
       else {
-        QuestJs._io.msg(prefix(this, isMultiple) + "You charge the torch - it should last for hours now.");
+        QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "You charge the torch - it should last for hours now.");
         this.power = 20;;
         return true;
       }
@@ -233,7 +233,7 @@ createItem("coin", QuestJs._templates.TAKEABLE(), {
   loc:"lounge",
   examine: "A gold coin.",
   take:function(isMultiple, participant) {
-    QuestJs._io.msg(prefix(this, isMultiple) + QuestJs._lang.pronounVerb(participant, "try", true) + " to pick up the coin, but it just will not budge.");
+    QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.pronounVerb(participant, "try", true) + " to pick up the coin, but it just will not budge.");
     return false;
   },
 })
@@ -387,7 +387,7 @@ createRoom("kitchen", {
     if (char === game.player) {
       QuestJs._io.msg("You go through the trapdoor, and down the ladder.");
     } else {
-      QuestJs._io.msg("You watch " + QuestJs._lang.getName(char, {article:DEFINITE}) + " disappear through the trapdoor.");
+      QuestJs._io.msg("You watch " + QuestJs._lang.getName(char, {article:QuestJs._consts.DEFINITE}) + " disappear through the trapdoor.");
     }
   }}),
   north:new Exit("garage"),
@@ -680,10 +680,10 @@ createItem("Arthur",
     loc:"garden",
     examine:function(isMultiple) {
       if (this.suspended) {
-        QuestJs._io.msg(prefix(item, isMultiple) + "Arthur is asleep.");
+        QuestJs._io.msg(QuestJs._tools.prefix(item, isMultiple) + "Arthur is asleep.");
       }
       else {
-        QuestJs._io.msg(prefix(item, isMultiple) + "Arthur is awake.");
+        QuestJs._io.msg(QuestJs._tools.prefix(item, isMultiple) + "Arthur is awake.");
       }
     },
     suspended:true,

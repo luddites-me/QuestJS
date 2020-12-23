@@ -129,7 +129,7 @@ createItem("crates", {
     }
   },
   take:function(isMultiple, char) {
-    QuestJs._io.msg(prefix(this, isMultiple) + 'The crates are too heavy to pick... But you might be able to move them.')
+    QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + 'The crates are too heavy to pick... But you might be able to move them.')
     return false
   },    
 })
@@ -143,7 +143,7 @@ createItem("cobwebs", {
     }
   },
   take:function(isMultiple, char) {
-    QuestJs._io.msg(prefix(this, isMultiple) + 'The cobwebs just disintegrate when you try to take them.')
+    QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + 'The cobwebs just disintegrate when you try to take them.')
     return false
   },    
   scenery:true,
@@ -405,7 +405,7 @@ createItem("lab_door", QuestJs._templates.OPENABLE(false), {
   loc:'laboratory',
   open:function(isMultiple, char) {
     if (!this.closed) {
-      QuestJs._io.msg(prefix(this, isMultiple) + QuestJs._lang.already, {item:this})
+      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.already, {item:this})
       return false;
     }
     if (char.strong) {
@@ -415,7 +415,7 @@ createItem("lab_door", QuestJs._templates.OPENABLE(false), {
       return true
     }
     else {
-      QuestJs._io.msg(prefix(this, isMultiple) + 'The door is too heavy to open.')
+      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + 'The door is too heavy to open.')
       return false
     }
   },
@@ -522,7 +522,7 @@ createItem("control_rod", QuestJs._templates.TAKEABLE(), {
   take:function(isMultiple, char) {
     const tpParams = {char:char, item:this}
     if (this.isAtLoc(char.name)) {
-      QuestJs._io.msg(prefix(this, isMultiple) + QuestJs._lang.already_have, tpParams);
+      QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.already_have, tpParams);
       return false;
     }
     if (!char.canManipulate(this, "take")) return false;
@@ -533,7 +533,7 @@ createItem("control_rod", QuestJs._templates.TAKEABLE(), {
       return false 
     }
     let flag = (this.loc === "reactor")
-    QuestJs._io.msg(prefix(this, isMultiple) + QuestJs._lang.take_successful, tpParams)
+    QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + QuestJs._lang.take_successful, tpParams)
     this.moveToFrom(char.name)
     if (flag) {
       QuestJs._io.msg("The blue light in the reactor winks out and the buzz dies.")
@@ -604,7 +604,7 @@ createItem("office_window", {
   outside:[],
   lookout:function() {
     let s = 'Out of the window you can see the street at the front of the house. Your black SUV is parked at the side on the road.'
-    if (this.outside.length > 0) s += ' On the street below the house you can see ' + formatList(this.outside, {article:DEFINITE, lastJoiner:QuestJs._lang.list_and}) + '.'
+    if (this.outside.length > 0) s += ' On the street below the house you can see ' + QuestJs._tools.formatList(this.outside, {article:QuestJs._consts.DEFINITE, lastJoiner:QuestJs._lang.list_and}) + '.'
     QuestJs._io.msg(s)
   },
   smash:function() {
@@ -711,7 +711,7 @@ createItem("computer", {
   examine:"The computer is so old it is beige.",
   loc:'office',
   scenery:true,
-  code:random.int(10000, 999999).toString(),
+  code:QuestJs._random.int(10000, 999999).toString(),
   use:function() {
     if (!w.Professor_Kleinscope.flag) {
       QuestJs._io.msg("You cannot use the computer while Professor Kleinscope is sat there using it himself!")

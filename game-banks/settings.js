@@ -67,8 +67,8 @@ QuestJs._settings.oxygenReport = function(obj) {
   // 0.84 kg O2  per day
   // https://ntrs.nasa.gov/citations/20040012725
   // so 0.58 g/m
-  console.log(w.ship.oxygen)
-  console.log(util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 50))
+  QuestJs._log.info(w.ship.oxygen)
+  QuestJs._log.info(util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 50))
   const colourCode = util.getByInterval(QuestJs._settings.intervals, w.ship.oxygen / 10)
   return '<td title="The ship has a limited amount of oxygen; an adult uses about 6 g every minute, but none while in stasis"><b>Oxygen:</b></td>' + QuestJs._settings.warningLight(colourCode) + '<td align="right"><span style="font-size:0.8em">' + (Math.round(w.ship.oxygen) / 1000).toFixed(3) + ' kg</span></td>'
 }

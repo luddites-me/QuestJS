@@ -15,7 +15,7 @@ createItem("me", RPG_PLAYER(), {
   spellCasting:5,
   offensiveBonus:3,
   examine:function(isMultiple) {
-    QuestJs._io.msg(prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
+    QuestJs._io.msg(QuestJs._tools.prefix(this, isMultiple) + "A " + (this.isFemale ? "chick" : "guy") + " called " + this.alias);
   },
 });
 
@@ -331,7 +331,7 @@ skills.add(new Spell("Commune with animal", {
     if (target.canTalkFlagIsTemporary) {
       target.canTalkFlag = false
       delete target.canTalkFlagIsTemporary
-      return "The {i:Commune with animal} spell on " + QuestJs._lang.getName(target, {article:DEFINITE}) + " expires."
+      return "The {i:Commune with animal} spell on " + QuestJs._lang.getName(target, {article:QuestJs._consts.DEFINITE}) + " expires."
     }
     return ''
   },
