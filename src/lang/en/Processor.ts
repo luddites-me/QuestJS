@@ -1,37 +1,68 @@
-import { Grammar } from './grammar.js';
-
-
+import { ILexicon } from '../ILexicon';
+import { Grammar } from './grammar';
+import { Regex } from './regex';
+import { Responses } from './responses';
+import { Ops } from './ops';
+import { Known, WorldStates } from '../../lib/constants';
+import { getNameModifiers, niceDirection, sentenceCase } from '../../lib/tools';
+import { Settings } from '../../app/settings';
+import { IProcessor } from '../IProcessor';
 
 const {
-  conjugations, list_and, pronouns, numberUnits, ordinalReplacements,
+  conjugations, list_and, pronouns, numberUnits, ordinalReplacements, numberTens,
 } = Grammar;
 
 //----------------------------------------------------------------------------------------------
 // Complex responses (requiring functions)
-export class Language {
+export class Processor implements IProcessor {
+
+  // QuestJs._game
+  game: any;
+  // QuestJs._w
+  worldState: any;
+  // QuestJs._settings
+  settings: Settings;
+
+  constructor(game, worldState, settings: Settings) {
+    this.game = game;
+    this.worldState = worldState;
+    this.settings = settings;
+  }
+
+  get lexicon(): ILexicon {
+    return {
+      ...Grammar,
+      regex: {
+        ...Regex,
+      },
+      ...Responses,
+      ...Ops,
+    };
+  }
+
   // Used deep in the parser, so prefer to use function, rather than string
-  static object_unknown_msg(name) {
-    return `${Language.nounVerb(
-      QuestJs._game.player,
+   object_unknown_msg(name) {
+    return `${this.nounVerb(
+      this.game.player,
       "can't",
       true,
     )} see anything you might call '${name}' here.`;
   }
 
   // For furniture
-  static stop_posture(char) {
+   stop_posture(char) {
     if (!char.posture || char.posture === 'standing') return '';
     let s;
     // You could split up sitting, standing and lying
     if (char.postureFurniture) {
-      s = `${Language.nounVerb(char, 'get', true)} off ${Language.getName(
-        QuestJs._w[char.postureFurniture],
+      s = `${this.nounVerb(char, 'get', true)} off ${this.getName(
+        this.worldState[char.postureFurniture],
         {
-          article: QuestJs._consts.DEFINITE,
+          article: Known.DEFINITE,
         },
       )}.`;
     } else {
-      s = `${Language.nounVerb(char, 'stand', true)} up.`;
+      s = `${this.nounVerb(char, 'stand', true)} up.`;
     }
     char.posture = undefined;
     char.postureFurniture = undefined;
@@ -39,57 +70,57 @@ export class Language {
   }
 
   // use (or potentially use) different verbs in the responses, so not simple strings
-  static say_no_one_here(char, verb, text) {
-    return `${Language.nounVerb(char, verb, true)}, '${QuestJs._tools.sentenceCase(
+   say_no_one_here(char, verb, text) {
+    return `${this.nounVerb(char, verb, true)}, '${sentenceCase(
       text,
     )},' but no one notices.`;
   }
 
-  static say_no_response(char, verb, text) {
+   say_no_response(char, verb, text) {
     return 'No one seemed interested in what you say.';
   }
 
-  static say_no_response_full(char, verb, text) {
-    return `${Language.nounVerb(char, verb, true)}, '${QuestJs._tools.sentenceCase(
+   say_no_response_full(char, verb, text) {
+    return `${this.nounVerb(char, verb, true)}, '${sentenceCase(
       text,
     )},' but no one seemed interested in what you say.`;
   }
 
   // If the player does SPEAK TO MARY and Mary has some topics, this will be the menu title.
-  static speak_to_menu_title(char) {
-    return `Talk to ${Language.getName(char, { article: QuestJs._consts.DEFINITE })} about:`;
+   speak_to_menu_title(char) {
+    return `Talk to ${this.getName(char, { article: Known.DEFINITE })} about:`;
   }
 
   // If the player does TELL MARY ABOUT HOUSE this will appear before the response.
-  static tell_about_intro(char, text1, text2) {
-    return `You tell ${Language.getName(char, {
-      article: QuestJs._consts.DEFINITE,
+   tell_about_intro(char, text1, text2) {
+    return `You tell ${this.getName(char, {
+      article: Known.DEFINITE,
     })} ${text2} ${text1}.`;
   }
 
   // If the player does ASK MARY ABOUT HOUSE this will appear before the response.
-  static ask_about_intro(char, text1, text2) {
-    return `You ask ${Language.getName(char, {
-      article: QuestJs._consts.DEFINITE,
+   ask_about_intro(char, text1, text2) {
+    return `You ask ${this.getName(char, {
+      article: Known.DEFINITE,
     })} ${text2} ${text1}.`;
   }
 
   // Use when the NPC leaves a room; will give a message if the player can observe it
-  static npc_leaving_msg(npc, dest) {
+   npc_leaving_msg(npc, dest) {
     let s = '';
     let flag = false;
     if (
-      QuestJs._w[QuestJs._game.player.loc].canViewLocs
-      && QuestJs._w[QuestJs._game.player.loc].canViewLocs.includes(npc.loc)
+      this.worldState[this.game.player.loc].canViewLocs
+      && this.worldState[this.game.player.loc].canViewLocs.includes(npc.loc)
     ) {
-      s = QuestJs._w[QuestJs._game.player.loc].canViewPrefix;
+      s = this.worldState[this.game.player.loc].canViewPrefix;
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s += `${Language.nounVerb(npc, 'leave', !flag)} ${Language.getName(QuestJs._w[npc.loc], {
-        article: QuestJs._consts.DEFINITE,
+      s += `${this.nounVerb(npc, 'leave', !flag)} ${this.getName(this.worldState[npc.loc], {
+        article: Known.DEFINITE,
       })}`;
-      const exit = QuestJs._w[npc.loc].findExit(dest);
+      const exit = this.worldState[npc.loc].findExit(dest);
       if (exit) s += `, heading ${exit.dir}`;
       s += '.';
       QuestJs._io.msg(s);
@@ -97,23 +128,23 @@ export class Language {
   }
 
   // the NPC has already been moved, so npc.loc is the destination
-  static npc_entering_msg(npc, origin) {
+   npc_entering_msg(npc, origin) {
     let s = '';
     let flag = false;
     if (
-      QuestJs._w[QuestJs._game.player.loc].canViewLocs
-      && QuestJs._w[QuestJs._game.player.loc].canViewLocs.includes(npc.loc)
+      this.worldState[this.game.player.loc].canViewLocs
+      && this.worldState[this.game.player.loc].canViewLocs.includes(npc.loc)
     ) {
       // Can the player see the location the NPC enters, from another location?
-      s = QuestJs._w[QuestJs._game.player.loc].canViewPrefix;
+      s = this.worldState[this.game.player.loc].canViewPrefix;
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s += `${Language.nounVerb(npc, 'enter', !flag)} ${Language.getName(QuestJs._w[npc.loc], {
-        article: QuestJs._consts.DEFINITE,
+      s += `${this.nounVerb(npc, 'enter', !flag)} ${this.getName(this.worldState[npc.loc], {
+        article: Known.DEFINITE,
       })}`;
-      const exit = QuestJs._w[npc.loc].findExit(origin);
-      if (exit) s += ` from ${QuestJs._util.niceDirection(exit.dir)}`;
+      const exit = this.worldState[npc.loc].findExit(origin);
+      if (exit) s += ` from ${niceDirection(exit.dir)}`;
       s += '.';
       QuestJs._io.msg(s);
     }
@@ -121,8 +152,8 @@ export class Language {
 
   //----------------------------------------------------------------------------------------------
   // Meta-command responses
-  static helpScript() {
-    if (QuestJs._settings.textInput) {
+   helpScript() {
+    if (this.settings.textInput) {
       QuestJs._io.metamsg(
         'Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.',
       );
@@ -152,12 +183,12 @@ export class Language {
         'You can use the up and down arrows to scroll back though your previous typed commands - especially useful if you realise you spelled something wrong. If you do not have arrow keys, use OOPS to retrieve the last typed command so you can edit it. Use AGAIN or just G to repeat the last typed command.',
       );
     }
-    if (QuestJs._settings.panes !== 'none') {
+    if (this.settings.panes !== 'none') {
       QuestJs._io.metamsg(
         '{b:User Interface:} To interact with an object, click on its name in the side pane, and a set of possible actions will appear under it. Click on the appropriate action.',
       );
-      if (QuestJs._settings.compassPane) {
-        if (QuestJs._settings.symbolsForCompass) {
+      if (this.settings.compassPane) {
+        if (this.settings.symbolsForCompass) {
           QuestJs._io.metamsg(
             'You can also use the compass rose at the top to move around. Click the eye symbol, &#128065;, to look at you current location, the pause symbol, &#9208;, to wait or &#128712; for help.',
           );
@@ -168,60 +199,60 @@ export class Language {
         }
       }
     }
-    if (QuestJs._settings.additionalHelp !== undefined) {
-      for (const s of QuestJs._settings.additionalHelp) QuestJs._io.metamsg(s);
+    if (this.settings.additionalHelp !== undefined) {
+      for (const s of this.settings.additionalHelp) QuestJs._io.metamsg(s);
     }
-    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
+    return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-  static hintScript() {
+   hintScript() {
     QuestJs._io.metamsg('Sorry, no hints available.');
-    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
+    return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-  static aboutScript() {
+   aboutScript() {
     QuestJs._io.metamsg(
       '{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.',
-      { settings: QuestJs._settings },
+      { settings: this.settings },
     );
-    if (QuestJs._settings.ifdb) QuestJs._io.metamsg(`IFDB number: ${QuestJs._settings.ifdb}`);
-    if (QuestJs._settings.thanks && QuestJs._settings.thanks.length > 0) {
+    if (this.settings.ifdb) QuestJs._io.metamsg(`IFDB number: ${this.settings.ifdb}`);
+    if (this.settings.thanks && this.settings.thanks.length > 0) {
       QuestJs._io.metamsg(
-        `Thanks to ${QuestJs._tools.formatList(QuestJs._settings.thanks, {
+        `Thanks to ${QuestJs._tools.formatList(this.settings.thanks, {
           lastJoiner: list_and,
         })}.`,
       );
     }
-    if (QuestJs._settings.additionalAbout !== undefined) {
-      for (const s of QuestJs._settings.additionalAbout) QuestJs._io.metamsg(s);
+    if (this.settings.additionalAbout !== undefined) {
+      for (const s of this.settings.additionalAbout) QuestJs._io.metamsg(s);
     }
-    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
+    return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-  static warningsScript() {
-    switch (typeof QuestJs._settings.warnings) {
+   warningsScript() {
+    switch (typeof this.settings.warnings) {
     case 'undefined':
       QuestJs._io.metamsg('No warning have been set for this game.');
       break;
     case 'string':
-      QuestJs._io.metamsg(QuestJs._settings.warnings);
+      QuestJs._io.metamsg(this.settings.warnings);
       break;
     default:
-      for (const el of QuestJs._settings.warnings) QuestJs._io.metamsg(el);
+      this.settings.warnings.forEach(el => QuestJs._io.metamsg(el));
     }
-    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
+    return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-  static saveLoadScript() {
+   saveLoadScript() {
     QuestJs._io.metamsg('To save your progress, type SAVE followed by the name to save with.');
     QuestJs._io.metamsg(
       'To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.',
     );
     QuestJs._io.metamsg('To see a list of save games, type DIR.');
-    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
+    return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-  static transcriptScript() {
+   transcriptScript() {
     QuestJs._io.metamsg(
       'The TRANSCRIPT or SCRIPT command can be used to handle saving the input and output. This can be very useful when testing a game, as the author can go back through it and see exactly what happened, and how the player got there.',
     );
@@ -241,21 +272,21 @@ export class Language {
       'Everything gets saved to memory, and will be lost if you go to another web page or close your browser. The transcript is not saved when you save your game (but will not be lost when you load a game). If you complete the game the text input will disappear, however if you have a transcript a link will be available to access it.',
     );
     QuestJs._io.metamsg(`Transcript is currently: ${QuestJs._IO.transcript ? 'on' : 'off'}`);
-    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
+    return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-  static topicsScript() {
+   topicsScript() {
     QuestJs._io.metamsg(
       'Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).',
     );
-    return QuestJs._world.SUCCESS_NO_TURNSCRIPTS;
+    return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-  static betaTestIntro() {
+   betaTestIntro() {
     QuestJs._io.metamsg(
-      `This version is for beta-testing (${QuestJs._settings.version}). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.`,
+      `This version is for beta-testing (${this.settings.version}). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.`,
     );
-    if (QuestJs._settings.textInput) {
+    if (this.settings.textInput) {
       QuestJs._io.metamsg(
         'You can add your own comments to the transcript by starting a command with *.',
       );
@@ -273,7 +304,7 @@ export class Language {
   // @DOC
   // Returns "the " if appropriate for this item.
   // If the item has 'defArticle' it returns that; if it has a proper name, returns an empty string.
-  static addDefiniteArticle(item) {
+   addDefiniteArticle(item) {
     if (item.defArticle) {
       return `${item.defArticle} `;
     }
@@ -284,7 +315,7 @@ export class Language {
   // Returns "a " or "an " if appropriate for this item.
   // If the item has 'indefArticle' it returns that; if it has a proper name, returns an empty string.
   // If it starts with a vowel, it returns "an ", otherwise "a ".
-  static addIndefiniteArticle(item) {
+   addIndefiniteArticle(item) {
     if (item.indefArticle) {
       return `${item.indefArticle} `;
     }
@@ -303,7 +334,7 @@ export class Language {
     return 'a ';
   }
 
-  static getName(item, options = {}) {
+   getName(item, options: any = {}) {
     if (!item.alias) item.alias = item.name;
     let s = '';
     let count = options[`${item.name}_count`] ? options[`${item.name}_count`] : false;
@@ -316,11 +347,11 @@ export class Language {
       s = options.possessive ? item.pronouns.poss_adj : item.pronouns.subjective;
     } else {
       if (count && count > 1) {
-        s += `${Language.toWords(count)} `;
-      } else if (options.article === QuestJs._consts.DEFINITE) {
-        s += Language.addDefiniteArticle(item);
-      } else if (options.article === QuestJs._consts.INDEFINITE) {
-        s += Language.addIndefiniteArticle(item, count);
+        s += `${this.toWords(count)} `;
+      } else if (options.article === Known.DEFINITE) {
+        s += this.addDefiniteArticle(item);
+      } else if (options.article === Known.INDEFINITE) {
+        s += this.addIndefiniteArticle(item);
       }
       if (item.getAdjective) {
         s += item.getAdjective();
@@ -340,16 +371,16 @@ export class Language {
         }
       }
     }
-    s += QuestJs._util.getNameModifiers(item, options);
+    s += getNameModifiers(item, options);
 
-    return options && options.capital ? QuestJs._tools.sentenceCase(s) : s;
+    return options && options.capital ? sentenceCase(s) : s;
   }
 
   // @DOC
   // Returns the given number in words, so 19 would be returned as 'nineteen'.
   // Numbers uner -2000 and over 2000 are returned as a string of digits,
   // so 2001 is returned as '2001'.
-  static toWords(n) {
+   toWords(n) {
     if (typeof n !== 'number') {
       QuestJs._io.errormsg('toWords can only handle numbers');
       return n;
@@ -376,7 +407,7 @@ export class Language {
       } else {
         const units = number % 10;
         const tens = Math.floor(number / 10) % 10;
-        s += Language.numberTens[tens - 2];
+        s += numberTens[tens - 2];
         if (units !== 0) {
           s += numberUnits[units];
         }
@@ -391,13 +422,13 @@ export class Language {
   // Returns the given number in words as the ordinal, so 19 would be returned as 'nineteenth'.
   // Numbers uner -2000 and over 2000 are returned as a string of digits with 'th' appended,
   // so 2001 is returned as '2001th'.
-  static toOrdinal(number) {
+   toOrdinal(number) {
     if (typeof number !== 'number') {
       QuestJs._io.errormsg('toOrdinal can only handle numbers');
       return number;
     }
 
-    const s = Language.toWords(number);
+    const s = this.toWords(number);
     for (const or of ordinalReplacements) {
       if (or.regex.test(s)) {
         return s.replace(or.regex, or.replace);
@@ -406,7 +437,7 @@ export class Language {
     return `${s}th`;
   }
 
-  static convertNumbers(str) {
+   convertNumbers(str) {
     let s = str;
     for (let i = 0; i < numberUnits.length; i += 1) {
       const regex = new RegExp(`\\b${numberUnits[i]}\\b`);
@@ -420,7 +451,7 @@ export class Language {
   // @DOC
   // Returns the verb properly conjugated for the item, so "go" with a ball would return
   // "goes", but "go" with the player (if using second person pronouns).
-  static conjugate(item, verb) {
+   conjugate(item, verb) {
     let gender = item.pronouns.subjective;
     if (gender === 'he' || gender === 'she') {
       gender = 'it';
@@ -441,7 +472,7 @@ export class Language {
       const { name } = conj;
       const { value } = conj;
       if (name.startsWith('@') && verb.endsWith(name.substring(1))) {
-        return Language.conjugate(item, verb.substring(0, verb.length - name.length + 1)) + value;
+        return this.conjugate(item, verb.substring(0, verb.length - name.length + 1)) + value;
       }
       if (name.startsWith('*') && verb.endsWith(name.substring(1))) {
         return item, verb.substring(0, verb.length - name.length + 1) + value;
@@ -455,22 +486,22 @@ export class Language {
   // so "go" with a ball would return "it goes", but "go" with the player (if using second person pronouns)
   // would return "you go".
   // The first letter is capitalised if 'capitalise' is true.
-  static pronounVerb(item, verb, capitalise) {
-    let s = `${item.pronouns.subjective} ${Language.conjugate(item, verb)}`;
+   pronounVerb(item, verb, capitalise) {
+    let s = `${item.pronouns.subjective} ${this.conjugate(item, verb)}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
-    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
+    return capitalise ? sentenceCase(s) : s;
   }
 
-  static pronounVerbForGroup(item, verb, capitalise) {
-    let s = `${item.groupPronouns().subjective} ${Language.conjugate(item.group(), verb)}`;
+   pronounVerbForGroup(item, verb, capitalise) {
+    let s = `${item.groupPronouns().subjective} ${this.conjugate(item.group(), verb)}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
-    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
+    return capitalise ? sentenceCase(s) : s;
   }
 
-  static verbPronoun(item, verb, capitalise) {
-    let s = `${Language.conjugate(item, verb)} ${item.pronouns.subjective}`;
+   verbPronoun(item, verb, capitalise) {
+    let s = `${this.conjugate(item, verb)} ${item.pronouns.subjective}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
-    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
+    return capitalise ? sentenceCase(s) : s;
   }
 
   // @DOC
@@ -479,25 +510,25 @@ export class Language {
   // a some bees would return "the bees go". For the player, (if using second person pronouns)
   // would return the pronoun "you go".
   // The first letter is capitalised if 'capitalise' is true.
-  static nounVerb(item, verb, capitalise) {
-    if (item === QuestJs._game.player && !QuestJs._game.player.useProperName) {
-      return Language.pronounVerb(item, verb, capitalise);
+   nounVerb(item, verb, capitalise) {
+    if (item === this.game.player && !this.game.player.useProperName) {
+      return this.pronounVerb(item, verb, capitalise);
     }
-    let s = `${Language.getName(item, {
-      article: QuestJs._consts.DEFINITE,
-    })} ${Language.conjugate(item, verb)}`;
+    let s = `${this.getName(item, {
+      article: Known.DEFINITE,
+    })} ${this.conjugate(item, verb)}`;
     s = s.replace(/ +'/, "'"); // yes this is a hack!
-    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
+    return capitalise ? sentenceCase(s) : s;
   }
 
-  static verbNoun(item, verb, capitalise) {
-    if (item === QuestJs._game.player) {
-      return Language.pronounVerb(item, verb, capitalise);
+   verbNoun(item, verb, capitalise) {
+    if (item === this.game.player) {
+      return this.pronounVerb(item, verb, capitalise);
     }
-    let s = `${Language.conjugate(item, verb)} ${Language.getName(item, {
-      article: QuestJs._consts.DEFINITE,
+    let s = `${this.conjugate(item, verb)} ${this.getName(item, {
+      article: Known.DEFINITE,
     })}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
-    return capitalise ? QuestJs._tools.sentenceCase(s) : s;
+    return capitalise ? sentenceCase(s) : s;
   }
 }

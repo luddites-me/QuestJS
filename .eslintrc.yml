@@ -72,4 +72,4 @@ env:
   browser: true
   node: true
 globals:
-  QuestJs: writeable
+  $: false

@@ -1,5 +1,5 @@
 // Save/load messages
-export const SaveLoad = {
+export const Ops = {
   sl_dir_headings        : '<tr><th>Filename</th><th>Ver</th><th>Timestamp</th><th>Comment</th></tr>',
   sl_dir_msg             : 'Ver is the version of the game that was being played when saved. Loading a save game from a different version may or may not work. You can delete a file with the DEL command.',
   sl_no_filename         : 'Trying to save with no filename',
