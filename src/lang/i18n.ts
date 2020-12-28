@@ -1,13 +1,15 @@
 import { IProcessor } from "./IProcessor";
 import { Processor } from './en/Processor';
 import { Locale } from "./Locale";
-import { Settings } from "../app/settings";
 import { ILexicon } from "./ILexicon";
+import { Quest } from "../Quest";
 
 export class I18N {
+  private readonly _quest: Quest;
   public readonly locale: Locale;
 
-  constructor(locale: Locale = 'en-US') {
+  constructor(quest: Quest, locale: Locale = 'en-US') {
+    this._quest = quest;
     this.locale = locale;
   }
 
@@ -17,7 +19,7 @@ export class I18N {
     // In the future, we can expand this with additional languages
     switch(this.locale) {
       default:
-        return this._processor = this._processor || new Processor({}, {}, {} as Settings);
+        return this._processor = this._processor || new Processor(this._quest);
     }
   }
 
@@ -26,4 +28,4 @@ export class I18N {
   }
 }
 
-export const languageProcessor = new I18N();
+export const languageProcessor = new I18N(new Quest());

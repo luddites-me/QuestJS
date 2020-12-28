@@ -2,7 +2,10 @@ export const Known = {
   INDEFINITE: 1,
   DEFINITE: 2,
   INFINITY: 9999,
-  NOOP: () => {},
+  NOOP: (...params): any => {},
+  NOOP_FALSE: (...params): boolean => true,
+  NOOP_TRUE: (...params): boolean => true,
+  NOOP_VOID: (...params): void => { return; },
 };
 
 export const WorldStates = {
@@ -32,4 +35,9 @@ export const WorldStates = {
   SUCCESS_NO_TURNSCRIPTS: 2,
   FAILED: -1,
   PARSER_FAILURE: -2,
+
+  BACK_REGEX: /\[.+?\]/,
+
+  // TODO: what is this?
+  Money: Known.NOOP,
 }

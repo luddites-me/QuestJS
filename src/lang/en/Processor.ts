@@ -4,9 +4,9 @@ import { Regex } from './regex';
 import { Responses } from './responses';
 import { Ops } from './ops';
 import { Known, WorldStates } from '../../lib/constants';
-import { getNameModifiers, niceDirection, sentenceCase } from '../../lib/tools';
-import { Settings } from '../../app/settings';
+import { getNameModifiers, niceDirection, sentenceCase } from '../../lib/tools/tools';
 import { IProcessor } from '../IProcessor';
+import { Base } from '../../lib/base';
 
 const {
   conjugations, list_and, pronouns, numberUnits, ordinalReplacements, numberTens,
@@ -14,20 +14,7 @@ const {
 
 //----------------------------------------------------------------------------------------------
 // Complex responses (requiring functions)
-export class Processor implements IProcessor {
-
-  // QuestJs._game
-  game: any;
-  // QuestJs._w
-  worldState: any;
-  // QuestJs._settings
-  settings: Settings;
-
-  constructor(game, worldState, settings: Settings) {
-    this.game = game;
-    this.worldState = worldState;
-    this.settings = settings;
-  }
+export class Processor extends Base implements IProcessor {
 
   get lexicon(): ILexicon {
     return {
@@ -56,7 +43,7 @@ export class Processor implements IProcessor {
     // You could split up sitting, standing and lying
     if (char.postureFurniture) {
       s = `${this.nounVerb(char, 'get', true)} off ${this.getName(
-        this.worldState[char.postureFurniture],
+        this.state.get(char.postureFurniture),
         {
           article: Known.DEFINITE,
         },
@@ -110,20 +97,20 @@ export class Processor implements IProcessor {
     let s = '';
     let flag = false;
     if (
-      this.worldState[this.game.player.loc].canViewLocs
-      && this.worldState[this.game.player.loc].canViewLocs.includes(npc.loc)
+      this.state.get(this.game.player.loc.name).canViewLocs
+      && this.state.get(this.game.player.loc.name).canViewLocs.includes(npc.loc)
     ) {
-      s = this.worldState[this.game.player.loc].canViewPrefix;
+      s = this.state.get(this.game.player.loc.name).canViewPrefix;
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s += `${this.nounVerb(npc, 'leave', !flag)} ${this.getName(this.worldState[npc.loc], {
+      s += `${this.nounVerb(npc, 'leave', !flag)} ${this.getName(this.state.get(npc.loc), {
         article: Known.DEFINITE,
       })}`;
-      const exit = this.worldState[npc.loc].findExit(dest);
+      const exit = this.state.get(npc.loc).findExit(dest);
       if (exit) s += `, heading ${exit.dir}`;
       s += '.';
-      QuestJs._io.msg(s);
+      this.io.msg(s);
     }
   }
 
@@ -132,21 +119,21 @@ export class Processor implements IProcessor {
     let s = '';
     let flag = false;
     if (
-      this.worldState[this.game.player.loc].canViewLocs
-      && this.worldState[this.game.player.loc].canViewLocs.includes(npc.loc)
+      this.state.get(this.game.player.loc.name).canViewLocs
+      && this.state.get(this.game.player.loc.name).canViewLocs.includes(npc.loc)
     ) {
       // Can the player see the location the NPC enters, from another location?
-      s = this.worldState[this.game.player.loc].canViewPrefix;
+      s = this.state.get(this.game.player.loc.name).canViewPrefix;
       flag = true;
     }
     if (flag || npc.inSight()) {
-      s += `${this.nounVerb(npc, 'enter', !flag)} ${this.getName(this.worldState[npc.loc], {
+      s += `${this.nounVerb(npc, 'enter', !flag)} ${this.getName(this.state.get(npc.loc), {
         article: Known.DEFINITE,
       })}`;
-      const exit = this.worldState[npc.loc].findExit(origin);
+      const exit = this.state.get(npc.loc).findExit(origin);
       if (exit) s += ` from ${niceDirection(exit.dir)}`;
       s += '.';
-      QuestJs._io.msg(s);
+      this.io.msg(s);
     }
   }
 
@@ -154,77 +141,77 @@ export class Processor implements IProcessor {
   // Meta-command responses
    helpScript() {
     if (this.settings.textInput) {
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         'Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.',
       );
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         '{b:Movement:} To move, use the eight compass directions (or just N, NE, etc.). Up/down and in/out may be options too. When "Num Lock" is on, you can use the number pad for all eight compass directions, - and + for UP and DOWN, / and * for IN and OUT.',
       );
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         '{b:Other commands:} You can also LOOK (or just L or 5 on the number pad), HELP (or ?) or WAIT (or Z or the dot on the number pad). Other commands are generally of the form GET HAT or PUT THE BLUE TEAPOT IN THE ANCIENT CHEST. Experiment and see what you can do!',
       );
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         "{b:Using items: }You can use ALL and ALL BUT with some commands, for example TAKE ALL, and PUT ALL BUT SWORD IN SACK. You can also use pronouns, so LOOK AT MARY, then TALK TO HER. The pronoun will refer to the last subject in the last successful command, so after PUT HAT AND FUNNY STICK IN THE DRAWER, 'IT' will refer to the funny stick (the hat and the stick are subjects of the sentence, the drawer was the object).",
       );
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         '{b:Characters: }If you come across another character, you can ask him or her to do something. Try things like MARY,PUT THE HAT IN THE BOX, or TELL MARY TO GET ALL BUT THE KNIFE. Depending on the game you may be able to TALK TO a character, to ASK or TELL a character ABOUT a topic, or just SAY something and they will respond..',
       );
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         '{b:Meta-commands:} Type ABOUT to find out about the author, SCRIPT to learn about transcripts or SAVE to learn about saving games. Use WARNINGS to see any applicable sex, violence or trigger warnings.',
       );
       let s = 'You can also use BRIEF/TERSE/VERBOSE to control room descriptions. Type DARK to toggle dark mode or SILENT to toggle sounds and music (if implemented).';
-      if (typeof map !== 'undefined') s += ' Use MAP to toggle/show the map.';
-      if (typeof imagePane !== 'undefined') s += ' Use IMAGES to toggle/show the iage pane.';
-      QuestJs._io.metamsg(s);
-      QuestJs._io.metamsg(
+      if (typeof this.map !== 'undefined') s += ' Use MAP to toggle/show the map.';
+      if (typeof this.imagePane !== 'undefined') s += ' Use IMAGES to toggle/show the iage pane.';
+      this.io.metamsg(s);
+      this.io.metamsg(
         "{b:Shortcuts:}You can often just type the first few characters of an item's name and Quest will guess what you mean.  If fact, if you are in a room with Brian, who is holding a ball, and a box, Quest should be able to work out that B,PUT B IN B mean you want Brian to put the ball in the box.",
       );
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         'You can use the up and down arrows to scroll back though your previous typed commands - especially useful if you realise you spelled something wrong. If you do not have arrow keys, use OOPS to retrieve the last typed command so you can edit it. Use AGAIN or just G to repeat the last typed command.',
       );
     }
     if (this.settings.panes !== 'none') {
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         '{b:User Interface:} To interact with an object, click on its name in the side pane, and a set of possible actions will appear under it. Click on the appropriate action.',
       );
       if (this.settings.compassPane) {
         if (this.settings.symbolsForCompass) {
-          QuestJs._io.metamsg(
+          this.io.metamsg(
             'You can also use the compass rose at the top to move around. Click the eye symbol, &#128065;, to look at you current location, the pause symbol, &#9208;, to wait or &#128712; for help.',
           );
         } else {
-          QuestJs._io.metamsg(
+          this.io.metamsg(
             "You can also use the compass rose at the top to move around. Click 'Lk' to look at you current location, 'Z' to wait or '?' for help.",
           );
         }
       }
     }
     if (this.settings.additionalHelp !== undefined) {
-      for (const s of this.settings.additionalHelp) QuestJs._io.metamsg(s);
+      this.settings.additionalHelp.forEach(s => this.io.metamsg(s));
     }
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
    hintScript() {
-    QuestJs._io.metamsg('Sorry, no hints available.');
+    this.io.metamsg('Sorry, no hints available.');
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
    aboutScript() {
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       '{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.',
       { settings: this.settings },
     );
-    if (this.settings.ifdb) QuestJs._io.metamsg(`IFDB number: ${this.settings.ifdb}`);
+    if (this.settings.ifdb) this.io.metamsg(`IFDB number: ${this.settings.ifdb}`);
     if (this.settings.thanks && this.settings.thanks.length > 0) {
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         `Thanks to ${QuestJs._tools.formatList(this.settings.thanks, {
           lastJoiner: list_and,
         })}.`,
       );
     }
     if (this.settings.additionalAbout !== undefined) {
-      for (const s of this.settings.additionalAbout) QuestJs._io.metamsg(s);
+      for (const s of this.settings.additionalAbout) this.io.metamsg(s);
     }
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
@@ -232,66 +219,66 @@ export class Processor implements IProcessor {
    warningsScript() {
     switch (typeof this.settings.warnings) {
     case 'undefined':
-      QuestJs._io.metamsg('No warning have been set for this game.');
+      this.io.metamsg('No warning have been set for this game.');
       break;
     case 'string':
-      QuestJs._io.metamsg(this.settings.warnings);
+      this.io.metamsg(this.settings.warnings);
       break;
     default:
-      this.settings.warnings.forEach(el => QuestJs._io.metamsg(el));
+      this.settings.warnings.forEach(el => this.io.metamsg(el));
     }
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
    saveLoadScript() {
-    QuestJs._io.metamsg('To save your progress, type SAVE followed by the name to save with.');
-    QuestJs._io.metamsg(
+    this.io.metamsg('To save your progress, type SAVE followed by the name to save with.');
+    this.io.metamsg(
       'To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.',
     );
-    QuestJs._io.metamsg('To see a list of save games, type DIR.');
+    this.io.metamsg('To see a list of save games, type DIR.');
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
    transcriptScript() {
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       'The TRANSCRIPT or SCRIPT command can be used to handle saving the input and output. This can be very useful when testing a game, as the author can go back through it and see exactly what happened, and how the player got there.',
     );
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       'Use SCRIPT ON to turn on recording and SCRIPT OFF to turn it off. Use SCRIPT SHOW to display it (it will appear in a new tab; you will not lose your place inthe game). To empty the file, use SCRIPT CLEAR.',
     );
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       'You can add options to the SCRIPT SHOW to hide various types of text. Use M to hide meta-information (like this), I to hide your input, P to hide parser errors (when the parser says it has no clue what you mean), E to hide programming errors and D to hide debugging messages. These can be combined, so SCRIPT SHOW ED will hide programming errors and debugging messages, and SCRIPT SHOW EDPID will show only the output game text.',
     );
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       'You can add a comment to the transcript by starting your text with an asterisk (*).',
     );
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       'You can do TRANSCRIPT WALKTHROUGH or just SCRIPT W to copy the transcript to the clipboard formatted for a walk-through. You can then paste it straight into the code.',
     );
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       'Everything gets saved to memory, and will be lost if you go to another web page or close your browser. The transcript is not saved when you save your game (but will not be lost when you load a game). If you complete the game the text input will disappear, however if you have a transcript a link will be available to access it.',
     );
-    QuestJs._io.metamsg(`Transcript is currently: ${QuestJs._IO.transcript ? 'on' : 'off'}`);
+    this.io.metamsg(`Transcript is currently: ${this.io.transcript ? 'on' : 'off'}`);
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
    topicsScript() {
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       'Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).',
     );
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
    betaTestIntro() {
-    QuestJs._io.metamsg(
+    this.io.metamsg(
       `This version is for beta-testing (${this.settings.version}). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.`,
     );
     if (this.settings.textInput) {
-      QuestJs._io.metamsg(
+      this.io.metamsg(
         'You can add your own comments to the transcript by starting a command with *.',
       );
     }
-    QuestJs._IO.scriptStart();
+    this.io.scriptStart();
   }
 
   //----------------------------------------------------------------------------------------------
@@ -382,7 +369,7 @@ export class Processor implements IProcessor {
   // so 2001 is returned as '2001'.
    toWords(n) {
     if (typeof n !== 'number') {
-      QuestJs._io.errormsg('toWords can only handle numbers');
+      this.io.errormsg('toWords can only handle numbers');
       return n;
     }
     let number = n;
@@ -424,7 +411,7 @@ export class Processor implements IProcessor {
   // so 2001 is returned as '2001th'.
    toOrdinal(number) {
     if (typeof number !== 'number') {
-      QuestJs._io.errormsg('toOrdinal can only handle numbers');
+      this.io.errormsg('toOrdinal can only handle numbers');
       return number;
     }
 
@@ -459,25 +446,25 @@ export class Processor implements IProcessor {
     const arr = conjugations[gender.toLowerCase()];
 
     if (!arr) {
-      QuestJs._io.errormsg(`No conjugations found: conjugations_${gender.toLowerCase()}`);
+      this.io.errormsg(`No conjugations found: conjugations_${gender.toLowerCase()}`);
       return verb;
     }
-    for (const conj of arr) {
+    arr.forEach(conj => {
       if (conj.name === verb) {
         return conj.value;
       }
-    }
+    });
 
-    for (const conj of arr) {
+    arr.forEach(conj => {
       const { name } = conj;
       const { value } = conj;
       if (name.startsWith('@') && verb.endsWith(name.substring(1))) {
         return this.conjugate(item, verb.substring(0, verb.length - name.length + 1)) + value;
       }
       if (name.startsWith('*') && verb.endsWith(name.substring(1))) {
-        return item, verb.substring(0, verb.length - name.length + 1) + value;
+        return verb.substring(0, verb.length - name.length + 1) + value;
       }
-    }
+    });
     return verb;
   }
 
@@ -530,5 +517,9 @@ export class Processor implements IProcessor {
     })}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? sentenceCase(s) : s;
+  }
+
+  locked_exit(char, exit) {
+    // TODO: implement
   }
 }
