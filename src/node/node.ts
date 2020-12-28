@@ -1,4 +1,4 @@
-import { FnPrmAny } from "../../@types/fn";
+import { FnPrmAny, FnPrmBool } from "../../@types/fn";
 import { Base } from "../lib/base";
 import { Known, WorldStates } from "../lib/constants";
 import { Quest } from "../Quest";
@@ -7,18 +7,18 @@ import { Loc } from "./locations/loc";
 
 export abstract class Node extends Base implements INode {
   alias: string;
-  canReachThrough: (...params) => boolean = () => false;
-  canSeeThrough = () => false;
-  canTalkPlayer = () => false;
+  canReachThrough() { return false; };
+  canSeeThrough() { return false; };
+  canTalkPlayer() { return false; };
   clonePrototype: INode;
-  complexIsAtLoc: (...params) => boolean = Known.NOOP_TRUE;
+  complexIsAtLoc(...params) { return true; };
   componentHolder;
   eventActive = false;
-  eventCondition: FnPrmAny = Known.NOOP_TRUE;
+  eventCondition(...params) { return true; };
   eventCountdown = 0;
   eventPeriod: number;
-  eventScript: FnPrmAny = Known.NOOP_TRUE;
-  getContents;
+  eventScript(...params) { return true; };
+  getContents(...params) { return this.utils.getContents(params); };
   getExits: (...params) => INode[] = (...params) => [];
   getWorn(...params) { }
   hasExit(...params) { return false; };
@@ -27,6 +27,7 @@ export abstract class Node extends Base implements INode {
   itemDropped = Known.NOOP;
   itemTaken = Known.NOOP;
   listAlias: string;
+  listContents(situation, modified?: boolean) { return this.utils.listContents(situation, modified); }
   loc: Loc;
   previousLoc: Loc;
   locked = false;
@@ -40,6 +41,7 @@ export abstract class Node extends Base implements INode {
   scenery;
   scopeStatus;
   scopeStatusForRoom;
+  testForRecursion(char) { return this.utils.testForRecursion(char, this); }
   use: FnPrmAny = Known.NOOP;
   verbFunctions: ((...params) => void)[];
 

@@ -1,7 +1,7 @@
 import { toInt, sentenceCase } from "../..";
 import { Known, WorldStates } from "../../lib";
 import { Quest } from "../../Quest";
-import { Item } from "./item";
+import { allowable, Item } from "./item";
 
 export class Countable extends Item {
   countableLocs: any;
@@ -9,7 +9,7 @@ export class Countable extends Item {
 
   constructor(quest: Quest, name: string, hash: Partial<Countable> = {}) {
     super(quest, name, hash);
-    this.countable = true;
+    this.allowed |= allowable.count;
     this.multiLoc = true;
   }
 

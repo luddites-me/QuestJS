@@ -1,11 +1,11 @@
 import { Quest } from "../../Quest";
-import { Item } from "./item";
+import { allowable, Item } from "./item";
 
 export class Takeable extends Item {
 
   constructor(quest: Quest, name: string, hash: Partial<Takeable> = {}) {
     super(quest, name, hash);
-    this.takeable = true;
+    this.allowed |= allowable.take;
   }
 
   onCreation(o) {

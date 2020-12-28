@@ -1,5 +1,5 @@
 import { Quest } from "../../Quest";
-import { Item } from "./item";
+import { allowable, Item } from "./item";
 import { Takeable } from "./takeable";
 
 export class Wearable extends Takeable {
@@ -14,7 +14,7 @@ export class Wearable extends Takeable {
 
   constructor(quest: Quest, name: string, hash: Partial<Wearable> = {}) {
     super(quest, name, hash);
-    this.wearable = true;
+    this.allowed |= allowable.take | allowable.wear;
     this.armour = 0;
     this.slots = [];
   }

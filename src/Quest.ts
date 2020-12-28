@@ -93,7 +93,9 @@ export class Quest {
   }
 
   walkthroughs: any;
-
+  map: any;
+  imageMap: any;
+  
   constructor() {
     this.created = new Date();
   }

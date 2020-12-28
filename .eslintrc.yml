@@ -4,9 +4,7 @@ extends:
   - plugin:import/typescript
   - plugin:import/warnings
   - plugin:json/recommended
-  - plugin:prettier/recommended
   - plugin:yaml/recommended
-  - prettier
 plugins:
   - import
   - json

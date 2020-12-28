@@ -2,6 +2,14 @@ import { WorldStates } from "../../lib/constants";
 import { Quest } from "../../Quest";
 import { Node } from "../node";
 
+export enum allowable {
+  count = 0,
+  open = 1,
+  shift = 2,
+  take = 3,
+  wear = 4,
+  lock = 5,
+}
 export class Item extends Node {
   verbFunctions;
   hereVerbs;
@@ -13,11 +21,19 @@ export class Item extends Node {
   lightSource() { return WorldStates.LIGHT_NONE; }
   icon() { return ''; }
   testKeys(char, toLock) { return false; }
-  takeable: boolean;
-  shiftable: boolean;
-  countable: boolean;
+  allowed: allowable;
+  get takeable(): boolean { return allowable.take === (this.allowed & allowable.take) } ;
+  get shiftable(): boolean { return allowable.shift === (this.allowed & allowable.shift) } ;
+  get countable(): boolean { return allowable.count === (this.allowed & allowable.count) } ;
+  get wearable(): boolean { return allowable.wear === (this.allowed & allowable.wear) } ;
+  get openable(): boolean { return allowable.open === (this.allowed & allowable.open) } ;
+  get lockable(): boolean { return allowable.lock === (this.allowed & allowable.lock) } ;
+
+  private _closed;
+  get closed(): boolean { return !this.openable || this._closed; }
+  set closed(val: boolean) { if(this.openable) this._closed = val; }
+
   multiLoc: boolean;
-  wearable: boolean;
 
   constructor(quest: Quest, name: string, hash: Partial<Item> = {}) {
     super(quest, name, hash);

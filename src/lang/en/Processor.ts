@@ -28,7 +28,7 @@ export class Processor extends Base implements IProcessor {
   }
 
   // Used deep in the parser, so prefer to use function, rather than string
-   object_unknown_msg(name) {
+  object_unknown_msg(name) {
     return `${this.nounVerb(
       this.game.player,
       "can't",
@@ -37,7 +37,7 @@ export class Processor extends Base implements IProcessor {
   }
 
   // For furniture
-   stop_posture(char) {
+  stop_posture(char) {
     if (!char.posture || char.posture === 'standing') return '';
     let s;
     // You could split up sitting, standing and lying
@@ -57,43 +57,43 @@ export class Processor extends Base implements IProcessor {
   }
 
   // use (or potentially use) different verbs in the responses, so not simple strings
-   say_no_one_here(char, verb, text) {
+  say_no_one_here(char, verb, text) {
     return `${this.nounVerb(char, verb, true)}, '${sentenceCase(
       text,
     )},' but no one notices.`;
   }
 
-   say_no_response(char, verb, text) {
+  say_no_response(char, verb, text) {
     return 'No one seemed interested in what you say.';
   }
 
-   say_no_response_full(char, verb, text) {
+  say_no_response_full(char, verb, text) {
     return `${this.nounVerb(char, verb, true)}, '${sentenceCase(
       text,
     )},' but no one seemed interested in what you say.`;
   }
 
   // If the player does SPEAK TO MARY and Mary has some topics, this will be the menu title.
-   speak_to_menu_title(char) {
+  speak_to_menu_title(char) {
     return `Talk to ${this.getName(char, { article: Known.DEFINITE })} about:`;
   }
 
   // If the player does TELL MARY ABOUT HOUSE this will appear before the response.
-   tell_about_intro(char, text1, text2) {
+  tell_about_intro(char, text1, text2) {
     return `You tell ${this.getName(char, {
       article: Known.DEFINITE,
     })} ${text2} ${text1}.`;
   }
 
   // If the player does ASK MARY ABOUT HOUSE this will appear before the response.
-   ask_about_intro(char, text1, text2) {
+  ask_about_intro(char, text1, text2) {
     return `You ask ${this.getName(char, {
       article: Known.DEFINITE,
     })} ${text2} ${text1}.`;
   }
 
   // Use when the NPC leaves a room; will give a message if the player can observe it
-   npc_leaving_msg(npc, dest) {
+  npc_leaving_msg(npc, dest) {
     let s = '';
     let flag = false;
     if (
@@ -115,7 +115,7 @@ export class Processor extends Base implements IProcessor {
   }
 
   // the NPC has already been moved, so npc.loc is the destination
-   npc_entering_msg(npc, origin) {
+  npc_entering_msg(npc, origin) {
     let s = '';
     let flag = false;
     if (
@@ -139,7 +139,7 @@ export class Processor extends Base implements IProcessor {
 
   //----------------------------------------------------------------------------------------------
   // Meta-command responses
-   helpScript() {
+  helpScript() {
     if (this.settings.textInput) {
       this.io.metamsg(
         'Type commands in the command bar to interact with the world. Using the arrow keys you can scroll up and down though your previous QuestJs._commands.',
@@ -191,12 +191,12 @@ export class Processor extends Base implements IProcessor {
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-   hintScript() {
+  hintScript() {
     this.io.metamsg('Sorry, no hints available.');
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-   aboutScript() {
+  aboutScript() {
     this.io.metamsg(
       '{i:{param:settings:title} version {param:settings:version}} was written by {param:settings:author} using Quest 6 AKA Quest JS version {param:settings:questVersion}.',
       { settings: this.settings },
@@ -215,21 +215,21 @@ export class Processor extends Base implements IProcessor {
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-   warningsScript() {
+  warningsScript() {
     switch (typeof this.settings.warnings) {
-    case 'undefined':
-      this.io.metamsg('No warning have been set for this game.');
-      break;
-    case 'string':
-      this.io.metamsg(this.settings.warnings);
-      break;
-    default:
-      this.settings.warnings.forEach(el => this.io.metamsg(el));
+      case 'undefined':
+        this.io.metamsg('No warning have been set for this game.');
+        break;
+      case 'string':
+        this.io.metamsg(this.settings.warnings);
+        break;
+      default:
+        this.settings.warnings.forEach(el => this.io.metamsg(el));
     }
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-   saveLoadScript() {
+  saveLoadScript() {
     this.io.metamsg('To save your progress, type SAVE followed by the name to save with.');
     this.io.metamsg(
       'To load your game, refresh/reload this page in your browser, then type LOAD followed by the name you saved with.',
@@ -238,7 +238,7 @@ export class Processor extends Base implements IProcessor {
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-   transcriptScript() {
+  transcriptScript() {
     this.io.metamsg(
       'The TRANSCRIPT or SCRIPT command can be used to handle saving the input and output. This can be very useful when testing a game, as the author can go back through it and see exactly what happened, and how the player got there.',
     );
@@ -261,14 +261,14 @@ export class Processor extends Base implements IProcessor {
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-   topicsScript() {
+  topicsScript() {
     this.io.metamsg(
       'Use TOPICS FOR [name] to see a list of topic suggestions to ask a character about (if implemented in this game).',
     );
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 
-   betaTestIntro() {
+  betaTestIntro() {
     this.io.metamsg(
       `This version is for beta-testing (${this.settings.version}). A transcript will be automatically recorded. When you finish, do Ctrl-Enter or type SCRIPT SHOW to open the transcript in a new tab; it can then be copy-and-pasted into an e-mail.`,
     );
@@ -290,7 +290,7 @@ export class Processor extends Base implements IProcessor {
   // @DOC
   // Returns "the " if appropriate for this item.
   // If the item has 'defArticle' it returns that; if it has a proper name, returns an empty string.
-   addDefiniteArticle(item) {
+  addDefiniteArticle(item) {
     if (item.defArticle) {
       return `${item.defArticle} `;
     }
@@ -301,7 +301,7 @@ export class Processor extends Base implements IProcessor {
   // Returns "a " or "an " if appropriate for this item.
   // If the item has 'indefArticle' it returns that; if it has a proper name, returns an empty string.
   // If it starts with a vowel, it returns "an ", otherwise "a ".
-   addIndefiniteArticle(item) {
+  addIndefiniteArticle(item) {
     if (item.indefArticle) {
       return `${item.indefArticle} `;
     }
@@ -320,7 +320,7 @@ export class Processor extends Base implements IProcessor {
     return 'a ';
   }
 
-   getName(item, options: any = {}) {
+  getName(item, options: any = {}) {
     if (!item.alias) item.alias = item.name;
     let s = '';
     let count = options[`${item.name}_count`] ? options[`${item.name}_count`] : false;
@@ -366,7 +366,7 @@ export class Processor extends Base implements IProcessor {
   // Returns the given number in words, so 19 would be returned as 'nineteen'.
   // Numbers uner -2000 and over 2000 are returned as a string of digits,
   // so 2001 is returned as '2001'.
-   toWords(n) {
+  toWords(n) {
     if (typeof n !== 'number') {
       this.io.errormsg('toWords can only handle numbers');
       return n;
@@ -408,7 +408,7 @@ export class Processor extends Base implements IProcessor {
   // Returns the given number in words as the ordinal, so 19 would be returned as 'nineteenth'.
   // Numbers uner -2000 and over 2000 are returned as a string of digits with 'th' appended,
   // so 2001 is returned as '2001th'.
-   toOrdinal(number) {
+  toOrdinal(number) {
     if (typeof number !== 'number') {
       this.io.errormsg('toOrdinal can only handle numbers');
       return number;
@@ -423,7 +423,7 @@ export class Processor extends Base implements IProcessor {
     return `${s}th`;
   }
 
-   convertNumbers(str) {
+  convertNumbers(str) {
     let s = str;
     for (let i = 0; i < numberUnits.length; i += 1) {
       const regex = new RegExp(`\\b${numberUnits[i]}\\b`);
@@ -437,7 +437,7 @@ export class Processor extends Base implements IProcessor {
   // @DOC
   // Returns the verb properly conjugated for the item, so "go" with a ball would return
   // "goes", but "go" with the player (if using second person pronouns).
-   conjugate(item, verb) {
+  conjugate(item, verb) {
     let gender = item.pronouns.subjective;
     if (gender === 'he' || gender === 'she') {
       gender = 'it';
@@ -472,19 +472,19 @@ export class Processor extends Base implements IProcessor {
   // so "go" with a ball would return "it goes", but "go" with the player (if using second person pronouns)
   // would return "you go".
   // The first letter is capitalised if 'capitalise' is true.
-   pronounVerb(item, verb, capitalise) {
+  pronounVerb(item, verb, capitalise) {
     let s = `${item.pronouns.subjective} ${this.conjugate(item, verb)}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? sentenceCase(s) : s;
   }
 
-   pronounVerbForGroup(item, verb, capitalise) {
+  pronounVerbForGroup(item, verb, capitalise) {
     let s = `${item.groupPronouns().subjective} ${this.conjugate(item.group(), verb)}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? sentenceCase(s) : s;
   }
 
-   verbPronoun(item, verb, capitalise) {
+  verbPronoun(item, verb, capitalise) {
     let s = `${this.conjugate(item, verb)} ${item.pronouns.subjective}`;
     s = s.replace(/ +\'/, "'"); // yes this is a hack!
     return capitalise ? sentenceCase(s) : s;
@@ -496,7 +496,7 @@ export class Processor extends Base implements IProcessor {
   // a some bees would return "the bees go". For the player, (if using second person pronouns)
   // would return the pronoun "you go".
   // The first letter is capitalised if 'capitalise' is true.
-   nounVerb(item, verb, capitalise) {
+  nounVerb(item, verb, capitalise) {
     if (item === this.game.player && !this.game.player.useProperName) {
       return this.pronounVerb(item, verb, capitalise);
     }
@@ -507,7 +507,7 @@ export class Processor extends Base implements IProcessor {
     return capitalise ? sentenceCase(s) : s;
   }
 
-   verbNoun(item, verb, capitalise) {
+  verbNoun(item, verb, capitalise) {
     if (item === this.game.player) {
       return this.pronounVerb(item, verb, capitalise);
     }
