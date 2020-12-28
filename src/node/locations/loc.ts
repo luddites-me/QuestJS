@@ -1,4 +1,5 @@
 import { Known, Quest, WorldStates } from "../..";
+import { FnPrmAny } from "../../../@types/fn";
 import { INode } from "../INode";
 import { Node } from "../node";
 
@@ -13,9 +14,9 @@ export class Loc extends Node {
   onExit = Known.NOOP;
   visited = 0;
   desc;
-  preSave: (...params) => any;
+  preSave: FnPrmAny;
   saveExitDests;
-  postLoad: (...params) => any;
+  postLoad: FnPrmAny;
   lightSource() { return WorldStates.LIGHT_FULL; }
 
   constructor(quest: Quest, name: string, hash: Partial<Loc> = {}) {

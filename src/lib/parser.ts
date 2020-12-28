@@ -1,3 +1,4 @@
+import { FnPrmAny } from "../../@types/fn";
 import { INode } from "../node/INode";
 import { Base } from "./base";
 import { Command } from "./command/command";
@@ -444,8 +445,8 @@ export class Parser extends Base {
       res.length > 1
         ? `Cannot decide between: ${res.map((el) => el.name).join(', ')}`
         : res.length === 1
-        ? `..Going with: ${res[0].name}`
-        : 'Found no suitable objects'
+          ? `..Going with: ${res[0].name}`
+          : 'Found no suitable objects'
     );
     return res;
   };
@@ -571,7 +572,7 @@ export class Parser extends Base {
     }
   };
 
-  scope(fn: (...params) => any, options: any = {}) {
+  scope(fn: FnPrmAny, options: any = {}) {
     const list = [];
     this.state.forEach((key, val) => {
       if (fn(val, options)) {

@@ -1,3 +1,5 @@
+import { FnPrmAny } from "../../../@types/fn";
+
 export type Command = {
   all?: boolean;
   cmd?: Command;
@@ -7,14 +9,14 @@ export type Command = {
   error?: string;
   matches?: any[];
   name?: string;
-  noobjecterror?: (...params) => any;
+  noobjecterror?: FnPrmAny;
   nothingForAll?: boolean;
   objects?: any[];
   objectTexts?: any[];
   regex?: RegExp;
   regexes?: RegExp[];
   score?: number;
-  script?: (...params) => any;
+  script?: FnPrmAny;
   string?: string;
 };
 

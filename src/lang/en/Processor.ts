@@ -186,9 +186,8 @@ export class Processor extends Base implements IProcessor {
         }
       }
     }
-    if (this.settings.additionalHelp !== undefined) {
-      this.settings.additionalHelp.forEach(s => this.io.metamsg(s));
-    }
+    this.settings.forEach('additionalHelp', (key, val) => this.io.metamsg(val));
+
     return WorldStates.SUCCESS_NO_TURNSCRIPTS;
   }
 

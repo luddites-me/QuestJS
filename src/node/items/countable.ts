@@ -35,7 +35,7 @@ export class Countable extends Item {
     this.countableLocs = {};
     for (const el of l) {
       const parts = el.split('=');
-      this.countableLocs[parts[0]] = parseInt(parts[1]);
+      this.countableLocs[parts[0]] = toInt(parts[1]);
     }
     delete this.customSaveCountableLocs;
     this.postLoad();

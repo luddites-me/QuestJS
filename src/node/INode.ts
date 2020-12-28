@@ -1,3 +1,4 @@
+import { FnPrmVoid } from "../../@types/fn";
 import { PronounIdentifier } from "../lang";
 import { Loc } from "./locations/loc";
 
@@ -38,7 +39,7 @@ export interface INode {
   locked: boolean;
   moveToFrom(toLoc, fromLoc): void;
   name: string;
-  nameModifierFunctions: ((...params) => void)[];
+  nameModifierFunctions: FnPrmVoid[];
   onCreation(...params): void;
   onMove(...params): any;
   pluralAlias: string;
@@ -52,6 +53,6 @@ export interface INode {
   templatePostLoad(): void;
   templatePreSave(): void;
   use(...params): any;
-  verbFunctions: ((...params) => void)[];
+  verbFunctions: FnPrmVoid[];
   [key: string]: any;
 }

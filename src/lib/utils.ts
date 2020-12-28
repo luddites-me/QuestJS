@@ -98,8 +98,8 @@ export class Utils extends Base {
     if (contents.length > 0 && (!o.closed || o.transparent)) {
       list.push(
         this.lexicon.contentsForData[o.contentsType].prefix +
-          o.listContents(WorldStates.LOOK) +
-          this.lexicon.contentsForData[o.contentsType].suffix,
+        o.listContents(WorldStates.LOOK) +
+        this.lexicon.contentsForData[o.contentsType].suffix,
       );
     }
     // this.log.info(list)
@@ -274,7 +274,7 @@ export class Utils extends Base {
     const list = [];
     const room = this.state.get(char.loc.name);
     this.lexicon.exit_list.forEach(exit => {
-    if (room.hasExit(exit.name)) {
+      if (room.hasExit(exit.name)) {
         list.push(exit.name);
       }
     });
@@ -429,7 +429,7 @@ export class Utils extends Base {
         return this.io.errormsg(
           `Failed to change POV, no object called '${char}'`,
         );
-        character = this.state.get<Character>(char);
+      character = this.state.get<Character>(char);
     } else if (!char)
       this.io.errormsg('Failed to change POV, char not defined.');
 
@@ -542,8 +542,8 @@ export class Utils extends Base {
       return `${n}`;
     }
     const options = regex.exec(control);
-    const places = parseInt(options[4]); // eg 2
-    let padding = parseInt(options[2]); // eg 3
+    const places = toInt(options[4]); // eg 2
+    let padding = toInt(options[2]); // eg 3
     if (places > 0) {
       // We want a decimal point, so the padding, the total length, needs that plus the places
       padding = padding + 1 + places; // eg 6

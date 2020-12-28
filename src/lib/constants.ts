@@ -1,8 +1,20 @@
-export const Known = {
+import { FnPrmAny, FnPrmBool, FnPrmVoid } from "../../@types/fn";
+
+type _known = {
+  INDEFINITE: number,
+  DEFINITE: number,
+  INFINITY: number,
+  NOOP: FnPrmAny,
+  NOOP_FALSE: FnPrmBool,
+  NOOP_TRUE: FnPrmBool,
+  NOOP_VOID: FnPrmVoid,
+}
+
+export const Known: _known = {
   INDEFINITE: 1,
   DEFINITE: 2,
   INFINITY: 9999,
-  NOOP: (...params): any => {},
+  NOOP: (...params) => { return {}; },
   NOOP_FALSE: (...params): boolean => true,
   NOOP_TRUE: (...params): boolean => true,
   NOOP_VOID: (...params): void => { return; },

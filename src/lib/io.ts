@@ -79,7 +79,7 @@ export class IO extends Base {
   dialogShowing = false;
 
   menuStartId: number;
-  menuFn: (...params) => any;
+  menuFn: FnPrmAny;
   menuOptions: MessageOptions[] | string[];
 
   textColour: string;
@@ -102,24 +102,24 @@ export class IO extends Base {
 
   private _msg(s: string, params: any, options: MessageOptions) {
     if (options.tag === undefined)
-        options.tag = 'p';
+      options.tag = 'p';
     if (options.cssClass === undefined)
-        options.cssClass = 'default-' + options.tag.toLowerCase();
+      options.cssClass = 'default-' + options.tag.toLowerCase();
     const processed = params ? this.text.processText(s, params).trim() : s.trim();
     if (processed === "" && !options.printBlank) {
-        return;
+      return;
     }
     // if (test.testing) {
     //     test.testOutput.push(processed);
     //     return;
     const lines = processed.split('|');
     lines.forEach(line => {
-        // can add effects
-        const data = options;
-        data.text = line;
-        if (!data.action)
-            data.action = 'output';
-        this.addToOutputQueue(data);
+      // can add effects
+      const data = options;
+      data.text = line;
+      if (!data.action)
+        data.action = 'output';
+      this.addToOutputQueue(data);
     });
   }
 
@@ -408,7 +408,7 @@ export class IO extends Base {
     }
   }
 
-  askQuestion(title: string, fn: (...params) => any) {
+  askQuestion(title: string, fn: FnPrmAny) {
     this.msg(title);
     this.parser.overrideWith(fn);
   }
@@ -438,9 +438,8 @@ export class IO extends Base {
     this.parser.overrideWith(this.menuResponse);
     this.input(title, options, true, fn, (options) => {
       for (let i = 0; i < options.length; i += 1) {
-        let s = `${
-          i + 1
-        }. <a class="menu-option" onclick="this.menuResponse(${i})">`;
+        let s = `${i + 1
+          }. <a class="menu-option" onclick="this.menuResponse(${i})">`;
         s +=
           typeof options[i] === 'string'
             ? options[i]
@@ -572,11 +571,11 @@ export class IO extends Base {
           if (typeof previous === 'string') {
             const d = {
               cmd: /^ +\"(.+)\"/.exec(previous)[1],
-              menu: [parseInt(el.n, 10)],
+              menu: [toInt(el.n, 10)],
             };
             lines.push(d);
           } else {
-            previous.menu.push(parseInt(el.n));
+            previous.menu.push(toInt(el.n));
             lines.push(previous);
           }
         }
@@ -1007,9 +1006,8 @@ export class IO extends Base {
       this.settings.status.forEach(st => {
         if (typeof st === 'string') {
           if (this.game.player[st] !== undefined) {
-            let s = `<tr><td width="${
-              this.settings.statusWidthLeft
-            }">${sentenceCase(st)}</td>`;
+            let s = `<tr><td width="${this.settings.statusWidthLeft
+              }">${sentenceCase(st)}</td>`;
             s += `<td width="${this.settings.statusWidthRight}">${this.game.player[st]}</td></tr>`;
             $('#status-pane').append(s);
           }
@@ -1026,7 +1024,7 @@ export class IO extends Base {
   };
 
   menuResponse(n) {
-    if (typeof n === 'string' && n.match(/^\d+$/)) n = parseInt(n) - 1;
+    if (typeof n === 'string' && n.match(/^\d+$/)) n = toInt(n) - 1;
     if (typeof n === 'string') {
       const s = n;
       n = this.menuOptions.findIndex((el) => {
@@ -1095,8 +1093,7 @@ export class IO extends Base {
   // The item will be given verbs from its attName attribute
   appendItem(item, htmlDiv, loc, isSubItem = false) {
     $(`#${htmlDiv}`).append(
-      `<div id="${item.name}-item"><p class="item${
-        isSubItem ? ' sub-item' : ''
+      `<div id="${item.name}-item"><p class="item${isSubItem ? ' sub-item' : ''
       }" onclick="this.clickItem('${item.name}')">${this.getIcon(
         item,
       )}${item.getListAlias(loc)}</p></div>`,
@@ -1351,8 +1348,7 @@ export class IO extends Base {
     if (typeof values !== 'number') this.settings.sliders[id].values = values;
     const slider = $(`#${id}`);
     slider.append(
-      `<p id="${id}-text">${name}: ${
-        typeof values === 'number' ? 0 : values[0]
+      `<p id="${id}-text">${name}: ${typeof values === 'number' ? 0 : values[0]
       }</p>`,
     );
     if (func) func(0);
@@ -1366,20 +1362,18 @@ export class IO extends Base {
         const id = event.target.id.replace('-slider', '');
         const { value } = ui;
         $(`#${id}-text`).html(
-          `${this.settings.sliders[id].name}: ${
-            this.settings.sliders[id].values
-              ? this.settings.sliders[id].values[value]
-              : value
+          `${this.settings.sliders[id].name}: ${this.settings.sliders[id].values
+            ? this.settings.sliders[id].values[value]
+            : value
           }`,
         );
         if (this.settings.sliders[id].func) {
           this.settings.sliders[id].func(value);
         } else {
           $(`#${id}-text`).html(
-            `${this.settings.sliders[id].name}: ${
-              this.settings.sliders[id].values
-                ? this.settings.sliders[id].values[value]
-                : value
+            `${this.settings.sliders[id].name}: ${this.settings.sliders[id].values
+              ? this.settings.sliders[id].values[value]
+              : value
             }`,
           );
         }
@@ -1391,9 +1385,8 @@ export class IO extends Base {
     if (!this.settings.iconsFolder) return '';
     if (!item.icon) return '';
     if (item.icon() === '') return '';
-    return `<img src="${this.settings.iconsFolder}${
-      this.settings.darkModeActive ? 'l_' : 'd_'
-    }${item.icon()}.png" />`;
+    return `<img src="${this.settings.iconsFolder}${this.settings.darkModeActive ? 'l_' : 'd_'
+      }${item.icon()}.png" />`;
   };
 
   againOrOops(isAgain) {

@@ -1,3 +1,4 @@
+import { FnPrmAny } from "../../@types/fn";
 import { Base } from "../lib/base";
 import { Known, WorldStates } from "../lib/constants";
 import { Quest } from "../Quest";
@@ -13,13 +14,13 @@ export abstract class Node extends Base implements INode {
   complexIsAtLoc: (...params) => boolean = Known.NOOP_TRUE;
   componentHolder;
   eventActive = false;
-  eventCondition: (...params) => any = Known.NOOP_TRUE;
+  eventCondition: FnPrmAny = Known.NOOP_TRUE;
   eventCountdown = 0;
   eventPeriod: number;
-  eventScript: (...params) => any = Known.NOOP_TRUE;
+  eventScript: FnPrmAny = Known.NOOP_TRUE;
   getContents;
   getExits: (...params) => INode[] = (...params) => [];
-  getWorn(...params) {}
+  getWorn(...params) { }
   hasExit(...params) { return false; };
   hidden = false;
   item: Partial<INode> = {};
@@ -31,7 +32,7 @@ export abstract class Node extends Base implements INode {
   locked = false;
   name: string;
   nameModifierFunctions: ((...params) => void)[];
-  onMove: (...params) => any = Known.NOOP_TRUE;
+  onMove: FnPrmAny = Known.NOOP_TRUE;
   pluralAlias: string;
   postLoad = Known.NOOP;
   preSave = Known.NOOP;
@@ -39,7 +40,7 @@ export abstract class Node extends Base implements INode {
   scenery;
   scopeStatus;
   scopeStatusForRoom;
-  use: (...params) => any = Known.NOOP;
+  use: FnPrmAny = Known.NOOP;
   verbFunctions: ((...params) => void)[];
 
   constructor(quest: Quest, name: string, hash: Partial<INode> = {}) {

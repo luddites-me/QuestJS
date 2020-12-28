@@ -1,3 +1,4 @@
+import { FnPrmAny } from "../../../@types/fn";
 import { Quest } from "../../Quest";
 import { WorldStates } from "../constants";
 import { Cmd } from "./cmd";
@@ -6,7 +7,7 @@ import { Dictionary } from "./command";
 export class NpcExitCmd extends Cmd {
   exitCmd: boolean;
   dir: string;
-  objects: {ignore?: boolean, scope?: (...params) => any, attName?: string}[];
+  objects: { ignore?: boolean, scope?: FnPrmAny, attName?: string }[];
 
   constructor(quest: Quest, name: string, hash: Dictionary, dir: string) {
     super(quest, name, hash);
@@ -23,9 +24,9 @@ export class NpcExitCmd extends Cmd {
     const npc = objects[0][0];
     if (!this.game.room.hasExit(this.dir)) {
       this.io.failedmsg(this.lexicon.not_that_way, {
-      char: npc,
-      dir  : this.dir,
-    });
+        char: npc,
+        dir: this.dir,
+      });
       return WorldStates.FAILED;
     }
     if (!npc.canMove(this.game.room[this.dir], this.dir)) {
@@ -35,10 +36,10 @@ export class NpcExitCmd extends Cmd {
       return WorldStates.FAILED;
     }
     if (
-    !npc.getAgreementGo &&
+      !npc.getAgreementGo &&
       npc.getAgreement &&
       !npc.getAgreement('Go', this.dir)
-  ) {
+    ) {
       return WorldStates.FAILED;
     }
     const ex = this.game.room[this.dir];

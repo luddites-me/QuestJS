@@ -1,8 +1,8 @@
-import { DateTime, ISettings, MapStyle, Sliders, Toolbar } from './ISettings';
+import { DateTime, InventoryPane, ISettings, MapStyle, Sliders, Toolbar } from './ISettings';
 import { WorldStates } from './constants';
-import { World } from '../app/world';
 import { Base } from './base';
 import { Quest } from '../Quest';
+import { FnPrmAny } from '../../@types/fn';
 
 const defaultSettings: Partial<Settings> = {
   // Also title, author, thanks (option; array)
@@ -31,10 +31,10 @@ const defaultSettings: Partial<Settings> = {
   cmdEcho: true,
   textEffectDelay: 25,
   roomTemplate: [
-      "#{cap:{hereName}}",
-      "{terse:{hereDesc}}",
-      "{objectsHere:You can see {objects} here.}",
-      "{exitsHere:You can go {exits}.}",
+    "#{cap:{hereName}}",
+    "{terse:{hereDesc}}",
+    "{objectsHere:You can see {objects} here.}",
+    "{exitsHere:You can go {exits}.}",
   ],
   silent: false,
   walkthroughMenuResponses: [],
@@ -56,14 +56,14 @@ const defaultSettings: Partial<Settings> = {
   saveDisabled: false,
   // Date and time settings
   dateTime: {
-      year: "numeric",
-      month: "short",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      secondsPerTurn: 60,
-      locale: 'en-GB',
-      start: new Date('February 14, 2019 09:43:00'),
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    secondsPerTurn: 60,
+    locale: 'en-GB',
+    start: new Date('February 14, 2019 09:43:00'),
   },
   // Other settings
   // The parser will convert "two" to 2" in player input (can slow down the game)
@@ -85,8 +85,8 @@ const defaultSettings: Partial<Settings> = {
 export class Settings extends Base implements ISettings {
   additionalAbout: string;
   additionalHelp: string;
-  afterLoad:                (...params) => any;
-  afterSave:                (...params) => any;
+  afterLoad: FnPrmAny;
+  afterSave: FnPrmAny;
   author: string;
   clearScreenOnRoomEnter: boolean;
   cmdEcho: boolean;
@@ -96,7 +96,7 @@ export class Settings extends Base implements ISettings {
   cursor: string;
   customExits: boolean;
   customLibraries: any[];
-  customUI:                 () => any;
+  customUI: FnPrmAny;
   darkModeActive: boolean;
   dateTime: DateTime;
   delayStart: boolean;
@@ -112,16 +112,12 @@ export class Settings extends Base implements ISettings {
   ifdb: string;
   imagesFolder: string;
   intro: string | Object;
-  inventoryPane = [
-    { name: 'Items Held', alt: 'itemsHeld', test: this.isHeldNotWorn, getLoc: () => this.game.player.name },
-    { name: 'Items Here', alt: 'itemsHere', test: this.isHere, getLoc: () => this.game.player.loc },
-    { name: 'Items Worn', alt: 'itemsWorn', test: this.isWorn, getLoc: () => this.game.player.name },
-  ];
+  inventoryPane: InventoryPane[];
   lang: string;
   libraries: string[];
   lookCountsAsTurn: boolean;
   mapAndImageCollapseAt: number;
-  mapImageSide;
+  mapImageSide: 'left' | 'right';
   imageWidth: string;
   mapStyle: MapStyle;
   maxUndo: number;
@@ -129,24 +125,24 @@ export class Settings extends Base implements ISettings {
   noAskTell: string;
   noTalkTo: string;
   npcReactionsAlways: boolean;
-  onFinish:                 () => any;
-  onDarkToggle:             () => any;
-  oxfordComma:              boolean;
-  panes:                    'left' | 'right' | 'none';
+  onFinish: FnPrmAny;
+  onDarkToggle: FnPrmAny;
+  oxfordComma: boolean;
+  panes: 'left' | 'right' | 'none';
   panesCollapseAt: number;
-  playMode:                 'dev' | 'meta' | 'play' | 'beta';
+  playMode: 'dev' | 'meta' | 'play' | 'beta';
   questVersion: string;
   reportAllSvg: boolean;
   roomTemplate: string[];
   saveDisabled: boolean;
-  setup:                    (...params) => any;
-  sliders:                  Sliders;
+  setup: FnPrmAny;
+  sliders: Sliders;
   silent: boolean;
   soundsFileExt: string;
   soundsFolder: string;
-  soundsFiles:              string[];
+  soundsFiles: string[];
   startingDialogEnabled: boolean;
-  status = [() => `<td>Health points:</td><td>${this.game.player.hitpoints}</td>`];
+  status: (() => string)[];
   statusPane: string;
   statusWidthLeft: number;
   statusWidthRight: number;
@@ -162,7 +158,7 @@ export class Settings extends Base implements ISettings {
   title: string;
   toolbar: Toolbar;
   turnsQuestionsLast: number;
-  updateCustomUI;
+  updateCustomUI: FnPrmAny;
   version: string;
   videosFolder: string;
   walkthroughMenuResponses: any[];
@@ -172,16 +168,21 @@ export class Settings extends Base implements ISettings {
     super(quest);
     Object.assign(this, config)
     this.dateTime.start = this.dateTime.start || new Date();
+    this.inventoryPane = this.inventoryPane || [
+      { name: 'Items Held', alt: 'itemsHeld', test: this.isHeldNotWorn, getLoc: () => this.game.player.name },
+      { name: 'Items Here', alt: 'itemsHere', test: this.isHere, getLoc: () => this.game.player.loc },
+      { name: 'Items Worn', alt: 'itemsWorn', test: this.isWorn, getLoc: () => this.game.player.name },
+    ];
   }
 
   // Functions for the side panes lists
-  isHeldNotWorn(item: any): any {
+  isHeldNotWorn(item: any): boolean {
     return item.isAtLoc(this.game.player.name, WorldStates.SIDE_PANE) && this.world.ifNotDark(item) && !item.getWorn();
   }
-  isHere(item: any) {
+  isHere(item: any): boolean {
     return item.isAtLoc(this.game.player.loc, WorldStates.SIDE_PANE) && this.world.ifNotDark(item);
   }
-  isWorn(item: any) {
+  isWorn(item: any): boolean {
     return item.isAtLoc(this.game.player.name, WorldStates.SIDE_PANE) && this.world.ifNotDark(item) && item.getWorn();
   }
 
@@ -189,22 +190,28 @@ export class Settings extends Base implements ISettings {
     this.folder = this.folder ? folder + '/' : '';
     document.writeln(`<link rel="shortcut icon" type="image/png" href="${this.iconsFolder}favicon.png"/>`);
     document.writeln(`<link rel="stylesheet" href="${this.cssFolder}default.css"/>`);
-    this.themes?.forEach( file => {
+    this.themes?.forEach(file => {
       document.writeln(`<link rel="stylesheet" href="${this.cssFolder}${file}.css"/>`);
     })
     if (this.styleFile) {
-        document.writeln(`<link rel="stylesheet" href="${this.folder}${this.styleFile}.css"/>`);
+      document.writeln(`<link rel="stylesheet" href="${this.folder}${this.styleFile}.css"/>`);
     }
     if (this.tests) {
-        document.writeln(`<script src="lib/test-lib.js"></script>`);
-        document.writeln(`<script src="${this.folder}tests.js"></script>`);
+      document.writeln(`<script src="lib/test-lib.js"></script>`);
+      document.writeln(`<script src="${this.folder}tests.js"></script>`);
     }
     document.writeln(`<script src="${(this.folder ? 'lang/' : '')}${this.lang}.js"></script>`);
     if (this.customExits) {
-        document.writeln(`<script src="${this.folder}${this.customExits}.js"></script>`);
+      document.writeln(`<script src="${this.folder}${this.customExits}.js"></script>`);
     }
     this.libraries.forEach(file => document.writeln(`<script src="${(this.folder ? 'lib/' : '')}${file}.js"></script>`));
     this.customLibraries.forEach(lib => lib.files.forEach(file => document.writeln(`<script src="${(this.folder ? lib.folder + '/' : '')}${file}.js"></script>`)));
     this.files.forEach(file => document.writeln(`<script src="${this.folder}${file}.js"></script>`));
+  }
+
+  forEach(prop: string, fn: (key: string, val: any) => void) {
+    if (this[prop]) {
+      Object.keys(this[prop]).forEach(key => fn(key, this[prop][key]));
+    }
   }
 }

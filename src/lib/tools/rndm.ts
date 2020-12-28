@@ -1,4 +1,5 @@
 import { Base } from "../base";
+import { toInt } from "./tools";
 
 // ============  Random Utilities  =======================================
 // @DOC
@@ -69,7 +70,7 @@ export class Rndm extends Base {
         negative = -1;
       }
       if (/^\d+$/.test(dice)) {
-        total += parseInt(dice);
+        total += toInt(dice);
       } else {
         if (/^d/.test(dice)) {
           dice = `1${dice}`;
@@ -80,12 +81,12 @@ export class Rndm extends Base {
           /^\d+$/.test(parts[0]) &&
           /^[0-9\:]+$/.test(parts[1])
         ) {
-          const number = parseInt(parts[0]);
+          const number = toInt(parts[0]);
           for (let i = 0; i < number; i += 1) {
             if (/^\d+$/.test(parts[1])) {
-              total += negative * this.int(1, parseInt(parts[1]));
+              total += negative * this.int(1, toInt(parts[1]));
             } else {
-              total += negative * parseInt(this.fromArray(parts[1].split(':')));
+              total += negative * toInt(this.fromArray(parts[1].split(':')));
             }
           }
         } else {

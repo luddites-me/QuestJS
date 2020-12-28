@@ -1,3 +1,5 @@
+import { FnPrmAny } from "../../@types/fn";
+
 export type MessageOptions = {
   action?: string;
   alias?: string;
@@ -6,11 +8,11 @@ export type MessageOptions = {
   cssClass?: string;
   delay?: number;
   destination?: string;
-  effect?: (...params) => any;
+  effect?: FnPrmAny;
   height?: string;
   id?: number;
   name?: string;
-  onclick?: (...params) => any;
+  onclick?: FnPrmAny;
   printBlank?: boolean;
   src?: string;
   tag?: 'p' | 'span' | 'div' | 'h4' | 'ol' | 'ul' | 'table' | 'h1' | 'h2' | 'h3' | 'h5' | 'h6' | 'img' | 'video';

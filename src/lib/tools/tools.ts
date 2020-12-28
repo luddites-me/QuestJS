@@ -4,16 +4,16 @@ import { languageProcessor } from '../../lang/i18n';
 
 export const getNameModifiers = (item: any, options: any): string => {
   if (!options.modified)
-      return '';
+    return '';
   const list: any = [];
   item.nameModifierFunctions?.forEach(f => f(item, list));
   if (item.nameModifierFunction) {
     item.nameModifierFunction(list);
   }
   if (list.length === 0)
-      return '';
+    return '';
   if (options.noBrackets)
-      return ' ' + list.join('; ');
+    return ' ' + list.join('; ');
   return ' (' + list.join('; ') + ')';
 };
 
@@ -46,4 +46,5 @@ export const prefix = (item: { alias: string }, isMultiple = false) => {
   return `${sentenceCase(item.alias)}: `;
 }
 
+// Safely convert to an integer
 export const toInt = (str: string, radix = 10) => parseInt(str, radix);

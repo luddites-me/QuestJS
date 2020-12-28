@@ -1,9 +1,11 @@
-import { Known, WorldStates } from '../lib/constants';
+import { WorldStates } from '../lib/constants';
 import { Node } from '../node';
 import { Quest } from '../Quest';
 import { Player } from '../node/actors/player';
 import { World } from './world';
 import { Character } from '../node/actors/character';
+import { FnPrmAny } from '../../@types/fn';
+import { toInt } from '../lib/tools/tools';
 
 export class Game extends Node {
   dark: boolean;
@@ -21,7 +23,7 @@ export class Game extends Node {
   timeSaveAttribute: string;
   turnCount = 0;
   verbosity = WorldStates.VERBOSE;
-  showMap: Known.NOOP;
+  showMap: FnPrmAny;
   ticker;
 
   private _world;
@@ -166,8 +168,7 @@ export class Game extends Node {
     for (const el of this.timerEvents) {
       if (el.triggerTime) {
         arr.push(
-          `${el.eventName}/${el.triggerTime}/${
-            el.interval ? el.interval : '-'
+          `${el.eventName}/${el.triggerTime}/${el.interval ? el.interval : '-'
           }`,
         );
       }
@@ -180,10 +181,10 @@ export class Game extends Node {
     const arr = this.timeSaveAttribute.split(' ');
     for (const el of arr) {
       const params = el.split('/');
-      const interval = params[2] === '-' ? undefined : parseInt(params[2]);
+      const interval = params[2] === '-' ? undefined : toInt(params[2]);
       this.timerEvents.push({
         eventName: params[0],
-        triggerTime: parseInt(params[1]),
+        triggerTime: toInt(params[1]),
         interval,
       });
     }

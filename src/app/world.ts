@@ -1,5 +1,6 @@
 import { Base } from '../lib/base';
 import { WorldStates } from '../lib/constants';
+import { toInt } from '../lib/tools/tools';
 import { Character } from '../node/actors/character';
 import { Exit } from '../node/exit';
 import { Loc } from '../node/locations/loc';
@@ -22,7 +23,7 @@ export class World extends Base {
     if (!res) {
       return this.findUniqueName(`${s}0`);
     }
-    const n = parseInt(res[0]) + 1;
+    const n = toInt(res[0]) + 1;
     return this.findUniqueName(s.replace(/(\d+)$/, `${n}`));
   }
 
@@ -118,7 +119,7 @@ export class World extends Base {
         .map((el) => el.name);
       // this.log.info(dirs)
       item.forEach(key => {
-       if (dirs.includes(key)) {
+        if (dirs.includes(key)) {
           if (!(item[key] instanceof Exit))
             this.log.info(
               `ERROR: Exit ${key} of ${item.name} is not an Exit instance.`,
@@ -333,7 +334,7 @@ export class World extends Base {
           // yes it is an assignment!
           const arr = md[0].substring(1, md[0].length - 1).split(':');
           this.game.room.desc = this.game.room.desc.replace(md[0], arr[0]);
-          arr.forEach(el=> this.game.room.backgroundNames.push(el));
+          arr.forEach(el => this.game.room.backgroundNames.push(el));
         }
       }
     }
