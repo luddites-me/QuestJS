@@ -13,6 +13,18 @@ import { Test } from './lib/test';
 import { Text } from './lib/text';
 import { Utils } from './lib/utils';
 import { World } from './app/world';
+import { DictionaryAny } from '../@types/dictionary';
+import { ISettings } from './lib/ISettings';
+import { Player } from './node/actors/player';
+
+type QuestOptions = {
+  lexicon: DictionaryAny;
+  textProcessor: DictionaryAny;
+  commands: DictionaryAny;
+  settings: Partial<ISettings>;
+  items: DictionaryAny;
+  player: DictionaryAny;
+};
 
 export class Quest {
   created: Date;
@@ -95,12 +107,29 @@ export class Quest {
   walkthroughs: any;
   map: any;
   imageMap: any;
-  
+
   constructor() {
     this.created = new Date();
   }
 
-  init() {
+  init(options: QuestOptions) {
+    Object.keys(options.lexicon).forEach(key => this.i18n.lexicon[key] = options.lexicon[key] );
+    Object.keys(options.textProcessor).forEach(key => this.text.addDirective(key, options.textProcessor[key]) );
+    Object.keys(options.commands).forEach(key => {
+      const newCmd = options.commands[key];
+      const oldCmd = this.commandFactory.findCmd(key);
+      Object.keys(newCmd).forEach(key => oldCmd[key] = newCmd[key]);
+    });
+    Object.keys(options.player).forEach(key => {
+      const data = options.player[key];
+      const player = new Player(this, key, data);
+      this.game.update(player);
+    });
+    Object.keys(options.items).forEach(key => {
+      const data = options.player[key];
+      const player = new Player(this, key, data);
+      this.game.update(player);
+    });
     this.commandFactory.init();
   }
 }

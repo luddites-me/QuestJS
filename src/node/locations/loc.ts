@@ -87,7 +87,6 @@ export class Loc extends Node {
     if (!this[dir]) {
       return false;
     }
-    const ex = this[dir];
     this[dir].locked = locked;
     return true;
   }
@@ -132,9 +131,9 @@ export class Loc extends Node {
     this.postLoad();
   }
 
-  getReverseExit(dir) {
+  getReverseExit(dir: string) {
     const reverseDir = this.lexicon.exit_list.find((el) => el.name === dir);
     const dest = this[dir];
-    return dest[reverseDir];
+    return dest[reverseDir.name];
   }
 };

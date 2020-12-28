@@ -1,4 +1,3 @@
-import { Base } from "../base";
 import { WorldStates } from "../constants";
 import { Cmd } from "./cmd";
 
@@ -8,7 +7,7 @@ import { Cmd } from "./cmd";
 export class NpcCmd extends Cmd {
   category: string;
   forNpc: boolean;
-  
+
   constructor(quest, name, hash) {
     super(quest, name, hash);
     if (!this.category) this.category = name;
@@ -24,7 +23,6 @@ export class NpcCmd extends Cmd {
       return WorldStates.FAILED;
     }
     let success = false;
-    let handled;
     if (objects.length !== 2) {
       this.io.errormsg(
         `The command ${this.name} is trying to use a facility for NPCs to do it, but there is no object list; this facility is only for commands in the form verb-object.`,

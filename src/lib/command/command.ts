@@ -19,7 +19,3 @@ export type Command = {
   script?: FnPrmAny;
   string?: string;
 };
-
-export type Dictionary = {
-  [key: string]: any;
-}

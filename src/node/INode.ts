@@ -1,6 +1,5 @@
 import { FnPrmVoid } from "../../@types/fn";
 import { PronounIdentifier } from "../lang";
-import { Loc } from "./locations/loc";
 
 export interface INode {
   alias: string;
@@ -34,8 +33,8 @@ export interface INode {
   itemDropped(...params): void;
   itemTaken(...params): void;
   listAlias: string;
-  loc: Loc;
-  previousLoc: Loc;
+  loc: INode;
+  previousLoc: INode;
   locked: boolean;
   moveToFrom(toLoc, fromLoc): void;
   name: string;

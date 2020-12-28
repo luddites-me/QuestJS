@@ -1,5 +1,4 @@
 // Should all be language neutral
-import $ from 'jquery';
 import { Quest } from "..";
 import { Exit } from "../node/exit";
 import { Base } from "./base";

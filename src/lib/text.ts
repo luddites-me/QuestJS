@@ -408,7 +408,7 @@ export class Text extends Base {
       return this.text_processors.handleIfLessMoreThan(arr, params, true, true);
     };
 
-    this.text_processors.handleIf = function (arr, params, reverse) {
+    this.text_processors.handleIf = (arr, params, reverse) => {
       let name = arr.shift();
       let flag;
       const obj = this._findObject(name, params, arr);
@@ -439,7 +439,7 @@ export class Text extends Base {
       return flag ? arr[0] : arr[1] ? arr[1] : '';
     };
 
-    this.text_processors.handleIfHere = function (arr, params, reverse) {
+    this.text_processors.handleIfHere = (arr, params, reverse) => {
       const name = arr.shift();
       const obj = this._findObject(name, params, arr);
       if (!obj) {
@@ -453,12 +453,12 @@ export class Text extends Base {
       return flag ? arr[0] : arr[1] ? arr[1] : '';
     };
 
-    this.text_processors.handleIfLessMoreThan = function (
+    this.text_processors.handleIfLessMoreThan = (
       arr,
       params,
       moreThan,
       orEqual,
-    ) {
+    ) => {
       let name = arr.shift();
       let flag;
       const obj = this._findObject(name, params, arr);

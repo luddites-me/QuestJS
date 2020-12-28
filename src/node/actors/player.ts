@@ -1,5 +1,4 @@
 import { Quest } from "../..";
-import { Money } from "../items/money";
 import { Character } from "./character";
 
 export class Player extends Character {

@@ -1,14 +1,14 @@
+import { DictionaryAny } from "../../../@types/dictionary";
 import { Quest } from "../../Quest";
 import { Base } from "../base";
 import { WorldStates } from "../constants";
-import { Dictionary } from "./command";
 import { prefix } from '../tools/tools';
 
 export class Cmd extends Base {
   attName: string;
   category: string;
   defmsg: string | ((...params) => string);
-  hash: Dictionary;
+  hash: DictionaryAny;
   name: string;
   npcCmd: boolean;
   noTurnscripts: boolean;
@@ -20,7 +20,7 @@ export class Cmd extends Base {
   score: number;
   useThisScriptForNpcs?: boolean;
 
-  constructor(quest: Quest, name: string, hash: Dictionary) {
+  constructor(quest: Quest, name: string, hash: DictionaryAny) {
     super(quest);
     this.name = name;
     this.hash = hash;

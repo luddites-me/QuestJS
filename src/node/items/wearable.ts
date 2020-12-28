@@ -1,5 +1,5 @@
 import { Quest } from "../../Quest";
-import { allowable, Item } from "./item";
+import { allowable } from "./item";
 import { Takeable } from "./takeable";
 
 export class Wearable extends Takeable {

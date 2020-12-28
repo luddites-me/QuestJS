@@ -15,7 +15,7 @@ export type MessageOptions = {
   onclick?: FnPrmAny;
   printBlank?: boolean;
   src?: string;
-  tag?: 'p' | 'span' | 'div' | 'h4' | 'ol' | 'ul' | 'table' | 'h1' | 'h2' | 'h3' | 'h5' | 'h6' | 'img' | 'video';
+  tag?: 'p' | 'span' | 'div' | 'h4' | 'ol' | 'ul' | 'table' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'img' | 'video';
   text?: string;
   volume?: number;
   width?: string;

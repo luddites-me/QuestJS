@@ -2,7 +2,6 @@ import { Base } from "../base";
 import { Cmd } from "./cmd";
 import { NpcCmd } from "./npcCmd";
 import { ExitCmd } from "./exitCmd";
-import { Dictionary } from "./command";
 import { NpcExitCmd } from "./npcExitCmd";
 import { Rules } from "./rules";
 import { loadCommands } from '../../scripts/loadCommands';

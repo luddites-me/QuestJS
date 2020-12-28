@@ -20,6 +20,9 @@ export abstract class Base {
   protected get utils() { return this._quest.utils; }
   protected get world() { return this._quest.world; }
 
+  protected map;
+  protected imagePane;
+
   constructor(quest: Quest) {
     this._quest = quest;
   }

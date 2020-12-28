@@ -1,4 +1,3 @@
-import { Quest } from "../Quest";
 import { ILexicon } from "./ILexicon";
 
 export interface IProcessor {

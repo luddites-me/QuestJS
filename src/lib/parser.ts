@@ -471,7 +471,6 @@ export class Parser extends Base {
         });
       }
     }
-    const itemName = item.alias.toLowerCase();
     let res = -1;
     if (cmdParams.items && cmdParams.items.includes(item.name)) {
       // does this pay any attention to what the player typed????

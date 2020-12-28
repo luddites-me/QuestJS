@@ -2,14 +2,14 @@ import { FnPrmAny } from "../../../@types/fn";
 import { Quest } from "../../Quest";
 import { WorldStates } from "../constants";
 import { Cmd } from "./cmd";
-import { Dictionary } from "./command";
+import { DictionaryAny } from "../../../@types/dictionary";
 
 export class NpcExitCmd extends Cmd {
   exitCmd: boolean;
   dir: string;
   objects: { ignore?: boolean, scope?: FnPrmAny, attName?: string }[];
 
-  constructor(quest: Quest, name: string, hash: Dictionary, dir: string) {
+  constructor(quest: Quest, name: string, hash: DictionaryAny, dir: string) {
     super(quest, name, hash);
     this.exitCmd = true;
     this.dir = dir;

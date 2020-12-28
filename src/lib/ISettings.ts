@@ -1,5 +1,5 @@
+import { DictionaryAny } from "../../@types/dictionary";
 import { FnPrmAny, FnPrmBool, FnPrmString, FnPrmVoid } from "../../@types/fn";
-import { Dictionary } from "./command/command";
 
 export interface ISettings {
   additionalAbout: string;
@@ -99,11 +99,11 @@ export interface Sliders {
 export interface DateTime {
   convertSeconds?: (...params) => number;
   day?: string;
-  data?: Dictionary;
+  data?: DictionaryAny;
   date?: number;
   format?: string;
-  formats?: Dictionary;
-  functions?: Dictionary;
+  formats?: DictionaryAny;
+  functions?: DictionaryAny;
   hour?: string;
   locale?: string;
   minute?: string;

@@ -67,7 +67,7 @@ export class Character extends Node {
     )}`;
   }
 
-  isAtLoc(loc: INode, situation) {
+  isAtLoc(loc: INode, situation?: number) {
     if (situation === WorldStates.LOOK) return false;
     if (situation === WorldStates.SIDE_PANE) return false;
     return this.loc === loc;
@@ -98,7 +98,6 @@ export class Character extends Node {
 
   onCreation = (o: INode) => {
     o.nameModifierFunctions.push((o, l) => {
-      const s = '';
       const state = o.getStatusDesc();
       const held = o.getHolding();
       const worn = o.getWearingVisible();

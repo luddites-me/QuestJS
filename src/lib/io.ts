@@ -1,11 +1,12 @@
 import $ from 'jquery';
 import { WorldStates, Known } from './constants';
 import { languageProcessor } from '../lang/i18n';
-import { sentenceCase } from './tools/tools';
+import { sentenceCase, toInt } from './tools/tools';
 import { Quest } from '../Quest';
 import { Base } from './base';
 import { ExitList } from '../lang';
 import { MessageOptions } from './IOptions';
+import { FnPrmAny } from '../../@types/fn';
 
 // ============  Output  =======================================
 
@@ -198,12 +199,29 @@ export class IO extends Base {
     this._msg(s, params, { cssClass, tag: 'table' });
   }
 
+  getH(level: 1 | 2 | 3 | 4 | 5 | 6): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' {
+    switch(level) {
+      case 1:
+        return 'h1';
+      case 2:
+        return 'h2';
+      case 3:
+        return 'h3';
+      case 4:
+        return 'h4';
+      case 5:
+        return 'h5';
+      case 6:
+        return 'h6';
+    }
+  }
+
   // @DOC
   // As `msg`, but the string is presented as an HTML heading (H1 to H6).
   // The level of the heading is determined by `level`, with 1 being the top, and 6 the bottom.
   // Headings are ignored during unit testing.
-  msgHeading(s, level: 1 | 2 | 3 | 5 | 6, params = {}) {
-    this._msg(s, params, { tag: `h${level}` });
+  msgHeading(s, level: 1 | 2 | 3 | 4 | 5 | 6, params = {}) {
+    this._msg(s, params, { tag: this.getH(level) });
   }
 
   // @DOC
@@ -749,16 +767,17 @@ export class IO extends Base {
     if (data.action === 'sound') {
       this.log.info(`PLAY SOUND ${data.name}`);
       if (!this.settings.silent) {
-        const el = document.getElementById(data.name);
+        const el = document.getElementById(data.name) as HTMLAudioElement;
         el.currentTime = 0;
         el.play();
       }
     }
     if (data.action === 'ambient') {
       this.log.info(`PLAY AMBIENT ${data.name}`);
-      for (const el of document.getElementsByTagName('audio')) el.pause();
+      const els: HTMLAudioElement[] = Array.prototype.slice.call(document.getElementsByTagName('audio'));
+      els.forEach(el => el.pause());
       if (!this.settings.silent && data.name) {
-        const el = document.getElementById(data.name);
+        const el = document.getElementById(data.name) as HTMLAudioElement;
         el.currentTime = 0;
         el.loop = true;
         el.play();
@@ -1023,7 +1042,7 @@ export class IO extends Base {
     }
   };
 
-  menuResponse(n) {
+  menuResponse(n: string | number) {
     if (typeof n === 'string' && n.match(/^\d+$/)) n = toInt(n) - 1;
     if (typeof n === 'string') {
       const s = n;
@@ -1041,14 +1060,14 @@ export class IO extends Base {
     if (n === undefined) {
       this.menuFn();
     } else if (n !== -1) {
-      if (this.transcript)
+      if (this.transcript) {
+        const a = this.menuOptions[n] as any;
         this.scriptAppend({
           cssClass: 'menu',
-          text: this.menuOptions[n].alias
-            ? this.menuOptions[n].alias
-            : this.menuOptions[n],
+          text: a.alias ? a.alias : a,
           n,
         });
+      }
       this.menuFn(this.menuOptions[n]);
     }
     this.endTurnUI(true);
@@ -1058,7 +1077,6 @@ export class IO extends Base {
   clickExit(dir) {
     if (this.disableLevel) return;
 
-    const failed = false;
     this.msgInputText(dir);
     let cmd = this.getCommand(`Go${sentenceCase(dir)}`);
     if (!cmd) cmd = this.getCommand(sentenceCase(dir));

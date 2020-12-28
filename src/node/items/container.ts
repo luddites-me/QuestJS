@@ -1,8 +1,6 @@
-import { FnPrmAny } from "../../../@types/fn";
 import { WorldStates } from "../../lib";
 import { Quest } from "../../Quest";
 import { Openable } from "./openable"
-import { Takeable } from "./takeable";
 
 export class Container extends Openable {
   container = true;
@@ -28,7 +26,7 @@ export class Container extends Openable {
     );
     // this.log.info(o.nameModifierFunctions)
   }
-  
+
   lookinside(isMultiple, char) {
     const tpParams = { char, container: this, list: [] };
     if (this.closed && !this.transparent) {

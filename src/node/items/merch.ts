@@ -1,14 +1,14 @@
 import { WorldStates } from "../../lib";
 import { Quest } from "../../Quest";
-import { Loc } from "../locations/loc";
+import { INode } from "../INode";
 import { Item } from "./item";
 
 export class Merch extends Item {
   price: number;
-  locs: Loc[];
+  locs: INode[];
   doNotClone: boolean;
-  salesLoc: Loc;
-  salesLocs: Loc[];
+  salesLoc: INode;
+  salesLocs: INode[];
 
   constructor(quest: Quest, name: string, hash: Partial<Merch> = {}) {
     super(quest, name, hash);
