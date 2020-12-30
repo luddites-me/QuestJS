@@ -1,4 +1,4 @@
-import { FnPrmAny } from "../../@types/fn";
+import { FnPrmAny } from "../@types/fn";
 import { INode } from "../node/INode";
 import { Base } from "./base";
 import { Command } from "./command/command";
@@ -176,7 +176,7 @@ export class Parser extends Base {
     }
 
     // Get a list of candidate commands that match the regex
-    const candidates = QuestJs._commands.filter((el) => {
+    const candidates = this.commandFactory.filter((el) => {
       if (!Array.isArray(el.regexes)) this.log.info(el); // it will crash in the next line!
       for (const regex of el.regexes) {
         if (regex.test(cmdString)) return true;

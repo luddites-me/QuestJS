@@ -1,11 +1,11 @@
-import { ILexicon } from '../ILexicon';
+import { ILexicon } from '../lexicon';
 import { Grammar } from './grammar';
 import { Regex } from './regex';
 import { Responses } from './responses';
 import { Ops } from './ops';
 import { Known, WorldStates } from '../../lib/constants';
 import { getNameModifiers, niceDirection, sentenceCase } from '../../lib/tools/tools';
-import { IProcessor } from '../IProcessor';
+import { IProcessor } from '../processor';
 import { Base } from '../../lib/base';
 
 const {
@@ -204,7 +204,7 @@ export class Processor extends Base implements IProcessor {
     if (this.settings.ifdb) this.io.metamsg(`IFDB number: ${this.settings.ifdb}`);
     if (this.settings.thanks && this.settings.thanks.length > 0) {
       this.io.metamsg(
-        `Thanks to ${QuestJs._tools.formatList(this.settings.thanks, {
+        `Thanks to ${this.utils.formatList(this.settings.thanks, {
           lastJoiner: list_and,
         })}.`,
       );
@@ -519,6 +519,14 @@ export class Processor extends Base implements IProcessor {
   }
 
   locked_exit(char, exit) {
+    // TODO: implement
+  }
+
+  not_inside(...params) {
+    // TODO: implement
+  }
+
+  not_container(...params) {
     // TODO: implement
   }
 }

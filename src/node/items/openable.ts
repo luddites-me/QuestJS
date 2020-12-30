@@ -1,4 +1,5 @@
-import { FnPrmVoid } from "../../../@types/fn";
+import { prefix } from "../../lib/tools/tools";
+import { FnPrmVoid } from "../../@types/fn";
 import { Quest } from "../../Quest";
 import { allowable, Item } from "./item";
 

@@ -4,6 +4,7 @@ import { Item } from "../node/items/item";
 import { Loc } from "../node/locations/loc";
 import { Clone } from "../node/clone";
 import { Room } from "../node/locations/room";
+import { Quest } from "src/Quest";
 
 interface IStore {
   [key: string]: any;
@@ -12,6 +13,10 @@ interface IStore {
 export class State extends Base {
   store: IStore;
 
+  constructor(quest: Quest, store: IStore = {}) {
+    super(quest);
+    this.store = store;
+  }
   // get(name: string): INode {
   //   return this.store[name];
   // }

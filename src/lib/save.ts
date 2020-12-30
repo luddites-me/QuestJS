@@ -1,5 +1,5 @@
 // Should all be language neutral
-import { Quest } from "..";
+import { Quest } from "../Quest";
 import { Exit } from "../node/exit";
 import { Base } from "./base";
 

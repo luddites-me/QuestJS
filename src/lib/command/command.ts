@@ -1,4 +1,4 @@
-import { FnPrmAny } from "../../../@types/fn";
+import { FnPrmAny } from "../../@types/fn";
 
 export type Command = {
   all?: boolean;
@@ -19,3 +19,5 @@ export type Command = {
   script?: FnPrmAny;
   string?: string;
 };
+
+export class Bar { }

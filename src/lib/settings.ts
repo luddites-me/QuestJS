@@ -2,7 +2,7 @@ import { DateTime, InventoryPane, ISettings, MapStyle, Sliders, Toolbar } from '
 import { WorldStates } from './constants';
 import { Base } from './base';
 import { Quest } from '../Quest';
-import { FnPrmAny } from '../../@types/fn';
+import { FnPrmAny } from '../@types/fn';
 
 const defaultSettings: Partial<Settings> = {
   // Also title, author, thanks (option; array)

@@ -1,4 +1,4 @@
-import { DictionaryAny } from "../../../@types/dictionary";
+import { DictionaryAny } from "../../@types/dictionary";
 import { Quest } from "../../Quest";
 import { Base } from "../base";
 import { WorldStates } from "../constants";

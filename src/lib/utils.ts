@@ -1,10 +1,11 @@
 import { Character } from "../node/actors/character";
 import { INode } from "../node/INode";
 import { Base } from "./base";
-import { WorldStates } from "./constants";
+import { Known, WorldStates } from "./constants";
 import { DateTime } from "./ISettings";
+import { List } from "./tools/array";
 import { Scope } from './tools/scope';
-import { toInt } from "./tools/tools";
+import { prefix, toInt } from "./tools/tools";
 
 export type Options = {
   add?: number;
@@ -245,8 +246,8 @@ export class Utils extends Base {
   };
 
   listContents(situation, modified = true) {
-    return formatList(this.getContents(situation), {
-      article: INDEFINITE,
+    return this.formatList(this.getContents(situation), {
+      article: Known.INDEFINITE,
       lastJoiner: this.lexicon.list_and,
       modified,
       nothing: this.lexicon.list_nothing,
@@ -474,7 +475,7 @@ export class Utils extends Base {
 
     this.io.msg(this.processor.stop_posture(char));
     if (exit.msg) {
-      printOrRun(char, exit, 'this.io.msg');
+      this.printOrRun(char, exit, 'this.io.msg');
     } else {
       this.io.msg(this.lexicon.go_successful, { char, dir });
     }
@@ -634,7 +635,7 @@ export class Utils extends Base {
             toAdd.push(item.ensembleMaster);
         }
       }
-      itemArray = array.subtract(itemArray, toRemove);
+      itemArray = List.subtract(itemArray, toRemove);
       itemArray = itemArray.concat(toAdd);
     }
 
@@ -663,6 +664,19 @@ export class Utils extends Base {
       } else if (l.length > 0) s += `${options.sep} `;
     } while (l.length > 0);
 
+    return s;
+  }
+
+  // @DOC
+  // Converts the string to the standard direction name, so "down", "dn" and "d" will all return "down".
+  // Uses the EXITS array, so language neutral.
+  getDir(s) {
+    for (const exit of this.lexicon.exit_list) {
+      if (exit.type === 'nocmd') continue;
+      if (exit.name === s) return exit.name;
+      if (exit.abbrev.toLowerCase() === s) return exit.name;
+      if (new RegExp(`^(${exit.alt})$`).test(s)) return exit.name;
+    }
     return s;
   }
 }

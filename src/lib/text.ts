@@ -1,9 +1,9 @@
 import $ from 'jquery';
-import { Options } from ".";
 import { Quest } from "../Quest";
 import { Base } from "./base";
 import { Known, WorldStates } from "./constants";
-import { toInt } from "./tools/tools";
+import { sentenceCase, toInt } from "./tools/tools";
+import { Options } from './utils';
 
 type TextProcessor = {
   [key: string]: (...params) => string | boolean;
@@ -193,7 +193,7 @@ export class Text extends Base {
 
   init() {
     this.addDirective('hour', (arr, params) => {
-      const { hour } = QuestJs._util.getDateTimeDict();
+      const { hour } = this.utils.getDateTimeDict();
       if (hour < arr[0]) return '';
       if (hour >= arr[1]) return '';
       return arr[2];
@@ -215,7 +215,7 @@ export class Text extends Base {
       const colours = arr.length === 0 ? this.colours : arr;
       let result = '';
       for (let i = 0; i < s.length; i += 1) {
-        result += `<span style="color:${QuestJs._random.fromArray(
+        result += `<span style="color:${this.random.fromArray(
           colours,
         )}">${s.charAt(i)}</span>`;
       }
@@ -497,7 +497,7 @@ export class Text extends Base {
       const options = Object.assign({ format: arr[0] }, params);
       if (!isNaN(arr[1])) options.is = toInt(arr[1]);
       if (!isNaN(arr[2])) options.add = toInt(arr[2]);
-      return QuestJs._util.getDateTime(options);
+      return this.utils.getDateTime(options);
     };
 
     this.text_processors.transitDest = (arr, params) => {
@@ -552,7 +552,7 @@ export class Text extends Base {
     this.text_processors.popup = (arr, params) => {
       const s1 = arr.shift();
       const s2 = arr.join(':');
-      const id = s1.replace(/[^a-zA-Z_]/, '') + QuestJs._random.int(0, 999999999);
+      const id = s1.replace(/[^a-zA-Z_]/, '') + this.random.int(0, 999999999);
       const html = `<div id="${id}" class="popup" onclick="$('#${id}').toggle();"><p>${s2}</p></div>`;
       $('#main').append(html);
       return `<span class="popup-link" onclick="$('#${id}').toggle()">${s1}</span>`;
@@ -629,7 +629,7 @@ export class Text extends Base {
     };
 
     this.text_processors.exitsHere = (arr, params) => {
-      const list = QuestJs._util.exitList();
+      const list = this.utils.exitList();
       return list.length === 0 ? '' : arr.join(':');
     };
 
@@ -645,7 +645,7 @@ export class Text extends Base {
     };
 
     this.text_processors.exits = (arr, params) => {
-      const list = QuestJs._util.exitList();
+      const list = this.utils.exitList();
       return this.utils.formatList(list, {
         lastJoiner: this.lexicon.list_or,
         nothing: this.lexicon.list_nowhere,

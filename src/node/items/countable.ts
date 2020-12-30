@@ -1,5 +1,5 @@
 import { toInt, sentenceCase } from "../..";
-import { Known, WorldStates } from "../../lib";
+import { Known, prefix, WorldStates } from "../../lib";
 import { Quest } from "../../Quest";
 import { allowable, Item } from "./item";
 
@@ -71,7 +71,7 @@ export class Countable extends Item {
   }
 
   takeFrom(loc, count) {
-    if (this.countableLocs[loc] !== QuestJs._consts.INFINITY)
+    if (this.countableLocs[loc] !== Known.INFINITY)
       this.countableLocs[loc] -= count;
     if (this.countableLocs[loc] <= 0) {
       delete this.countableLocs[loc];
@@ -83,7 +83,7 @@ export class Countable extends Item {
     if (!this.countableLocs[loc]) {
       this.countableLocs[loc] = 0;
     }
-    if (this.countableLocs[loc] !== QuestJs._consts.INFINITY) {
+    if (this.countableLocs[loc] !== Known.INFINITY) {
       this.countableLocs[loc] += count;
     }
     this.state.get(loc.name).itemDropped(this, count);
@@ -96,7 +96,7 @@ export class Countable extends Item {
     }
 
     if (tryContainers) {
-      const containers = QuestJs._scope
+      const containers = this.scope
         .scopeReachable()
         .filter((el) => el.container);
       for (const container of containers) {

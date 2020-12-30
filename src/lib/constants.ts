@@ -1,4 +1,4 @@
-import { FnPrmAny, FnPrmBool, FnPrmVoid } from "../../@types/fn";
+import { FnPrmAny, FnPrmBool, FnPrmVoid } from "../@types/fn";
 
 type _known = {
   INDEFINITE: number,

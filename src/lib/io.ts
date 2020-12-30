@@ -1,12 +1,11 @@
 import $ from 'jquery';
 import { WorldStates, Known } from './constants';
-import { languageProcessor } from '../lang/i18n';
 import { sentenceCase, toInt } from './tools/tools';
 import { Quest } from '../Quest';
 import { Base } from './base';
-import { ExitList } from '../lang';
+import { ExitList } from '../lang/lexicon';
 import { MessageOptions } from './IOptions';
-import { FnPrmAny } from '../../@types/fn';
+import { FnPrmAny } from '../@types/fn';
 
 // ============  Output  =======================================
 
@@ -370,7 +369,7 @@ export class IO extends Base {
       this.print({
         tag: "p",
         cssClass: 'error',
-        text: languageProcessor.lexicon.error,
+        text: this.lexicon.error,
       });
     }
     this.log.error(`ERROR: ${s}`);
@@ -444,7 +443,7 @@ export class IO extends Base {
         s +=
           typeof options[i] === 'string'
             ? options[i]
-            : languageProcessor.processor.getName(options[i], opts);
+            : this.processor.getName(options[i], opts);
         s += '</a>';
         this.msg(s);
       }
@@ -461,7 +460,7 @@ export class IO extends Base {
         s +=
           typeof options[i] === 'string'
             ? options[i]
-            : languageProcessor.processor.getName(options[i], opts);
+            : this.processor.getName(options[i], opts);
         s += '</a>';
         this.msg(s);
       }
@@ -481,7 +480,7 @@ export class IO extends Base {
         s +=
           typeof options[i] === 'string'
             ? options[i]
-            : languageProcessor.processor.getName(options[i], opts);
+            : this.processor.getName(options[i], opts);
         s += '</option>';
       }
       this.msg(`${s}</select>`);
@@ -491,22 +490,22 @@ export class IO extends Base {
   }
 
   showYesNoMenu(title: string, fn) {
-    this.showMenu(title, languageProcessor.lexicon.yesNo, fn);
+    this.showMenu(title, this.lexicon.yesNo, fn);
   }
 
   showYesNoMenuWithNumbers(title: string, fn) {
-    this.showMenuWithNumbers(title, languageProcessor.lexicon.yesNo, fn);
+    this.showMenuWithNumbers(title, this.lexicon.yesNo, fn);
   }
 
   showYesNoDropDown(title: string, fn) {
-    this.showDropDown(title, languageProcessor.lexicon.yesNo, fn);
+    this.showDropDown(title, this.lexicon.yesNo, fn);
   }
 
   // This should be called after each turn to ensure we are at the end of the page and the text box has the focus
   endTurnUI(update) {
     if (this.settings.panes !== 'none' && update) {
       // set the this.lexicon.exit_list
-      languageProcessor.lexicon.exit_list.forEach(exit => {
+      this.lexicon.exit_list.forEach(exit => {
         if (
           this.game.room.hasExit(exit.name, { excludeScenery: true }) ||
           exit.type === 'nocmd'
@@ -1229,7 +1228,7 @@ export class IO extends Base {
 
   // Gets the command with the given name
   getCommand(name) {
-    return QuestJs._commands.find((el) => el.name === name);
+    return this.commandFactory.findCmd(name);
   };
 
   msgInputText(s) {
@@ -1434,6 +1433,9 @@ export class IO extends Base {
 
   init() {
     $(document).ready(() => {
+
+      this.createPanes();
+
       $('#textbox').keydown((event) => {
         const keycode = event.keyCode ? event.keyCode : event.which;
         for (const exit of this.lexicon.exit_list) {
@@ -1543,7 +1545,7 @@ export class IO extends Base {
           );
         }
       }
-      this.game.initialise();
+      this.game.init();
       this.endTurnUI(true);
       this.game.begin();
     });

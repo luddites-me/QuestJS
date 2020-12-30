@@ -1,7 +1,7 @@
-import { IProcessor } from "./IProcessor";
+import { IProcessor } from "./processor";
 import { Processor } from './en/Processor';
-import { Locale } from "./Locale";
-import { ILexicon } from "./ILexicon";
+import { Locale } from "./locale";
+import { ILexicon } from "./lexicon";
 import { Quest } from "../Quest";
 
 export class I18N {
@@ -27,5 +27,3 @@ export class I18N {
     return this.processor.lexicon;
   }
 }
-
-export const languageProcessor = new I18N(new Quest());

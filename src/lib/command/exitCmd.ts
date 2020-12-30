@@ -1,7 +1,7 @@
 import { Quest } from '../../Quest';
 import { WorldStates } from '../constants';
 import { Cmd } from './cmd';
-import { DictionaryAny } from "../../../@types/dictionary";
+import { DictionaryAny } from "../../@types/dictionary";
 
 export class ExitCmd extends Cmd {
   exitCmd: boolean;

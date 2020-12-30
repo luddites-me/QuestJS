@@ -1,6 +1,6 @@
 import { Quest } from "../..";
-import { PronounIdentifier } from "../../lang";
-import { Known, WorldStates } from "../../lib";
+import { PronounIdentifier } from "../../lang/lexicon";
+import { Known, sentenceCase, WorldStates } from "../../lib";
 import { INode } from "../INode";
 import { Money } from "../items/money";
 import { Node } from "../node";
@@ -38,7 +38,7 @@ export class Character extends Node {
   constructor(quest: Quest, name: string, hash: Partial<Character> = {}) {
     super(quest, name, hash);
     this.pronouns = this.lexicon.pronouns.thirdperson;
-    this.money = this.money || new Money(quest, `money-${name}`);
+    this.money = this.money || new Money(quest, `${name}money`);
   }
 
   msg(str: string, ...params) {
@@ -108,7 +108,7 @@ export class Character extends Node {
       }
       if (held.length > 0) {
         list.push(
-          `${this.lexicon.invHoldingPrefix} ${QuestJs._tools.formatList(
+          `${this.lexicon.invHoldingPrefix} ${this.utils.formatList(
             held,
             {
               article: Known.INDEFINITE,
@@ -116,14 +116,14 @@ export class Character extends Node {
               modified: false,
               nothing: this.lexicon.list_nothing,
               loc: o.name,
-              npc: true,
+              //npc: true,
             },
           )}`,
         );
       }
       if (worn.length > 0) {
         list.push(
-          `${this.lexicon.invWearingPrefix} ${QuestJs._tools.formatList(
+          `${this.lexicon.invWearingPrefix} ${this.utils.formatList(
             worn,
             {
               article: Known.INDEFINITE,
@@ -131,7 +131,7 @@ export class Character extends Node {
               modified: false,
               nothing: this.lexicon.list_nothing,
               loc: o.name,
-              npc: true,
+              //npc: true,
             },
           )}`,
         );

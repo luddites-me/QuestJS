@@ -1,6 +1,5 @@
 import { capitalize } from 'lodash';
-import { languageProcessor } from '../../lang/i18n';
-
+import { Grammar } from '../../lang/en/grammar';
 
 export const getNameModifiers = (item: any, options: any): string => {
   if (!options.modified)
@@ -18,7 +17,7 @@ export const getNameModifiers = (item: any, options: any): string => {
 };
 
 export const niceDirection = (dir: string): string => {
-  const dirObj = languageProcessor.lexicon.exit_list.find(el => el.name === dir);
+  const dirObj = Grammar.exit_list.find(el => el.name === dir);
   return dirObj?.niceDir || dirObj?.name;
 };
 

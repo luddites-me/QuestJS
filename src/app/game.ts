@@ -1,13 +1,13 @@
 import { WorldStates } from '../lib/constants';
-import { Node } from '../node';
 import { Quest } from '../Quest';
 import { Player } from '../node/actors/player';
 import { World } from './world';
 import { Character } from '../node/actors/character';
-import { FnPrmAny } from '../../@types/fn';
+import { FnPrmAny } from '../@types/fn';
 import { toInt } from '../lib/tools/tools';
+import { Base } from '../lib';
 
-export class Game extends Node {
+export class Game extends Base {
   dark: boolean;
   get elapsedTime() { return new Date().getTime() - this.startTime.getTime() + this.extraTime; }
   extraTime: number = 0;
@@ -32,9 +32,8 @@ export class Game extends Node {
   }
 
   constructor(quest: Quest, name: string = 'built-in_game_object', hash: Partial<Game> = {}) {
-    super(quest, name, hash);
+    super(quest);
     this.startTime = new Date();
-    this.init()
   }
 
   isAtLoc() {
@@ -42,8 +41,8 @@ export class Game extends Node {
   }
 
   init(): void {
+    this.player = this.player || new Player(this._quest, 'me', { alias: 'built-in_player' });
     this.world.init();
-    this.player = this.player || new Player(this._quest, 'built-in_player');
     this.update(this.player);
     this.saveGameState();
     this.world.setBackground();

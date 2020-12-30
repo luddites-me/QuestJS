@@ -1,5 +1,5 @@
-import { FnPrmVoid } from "../../@types/fn";
-import { PronounIdentifier } from "../lang";
+import { FnPrmVoid } from "../@types/fn";
+import { PronounIdentifier } from "../lang/lexicon";
 
 export interface INode {
   alias: string;

@@ -105,6 +105,7 @@ export interface ILexicon {
   not_npc_for_give:                string;
   not_npc:                         string;
   not_that_way:                    string;
+  not_vessel:                    string;
   not_wearing:                     string;
   nothing_for_sale:                string;
   nothing_inside:                  string;

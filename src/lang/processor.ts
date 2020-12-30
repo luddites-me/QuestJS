@@ -1,4 +1,4 @@
-import { ILexicon } from "./ILexicon";
+import { ILexicon } from "./lexicon";
 
 export interface IProcessor {
   aboutScript(): any;
@@ -13,6 +13,8 @@ export interface IProcessor {
   hintScript(): any;
   lexicon: ILexicon;
   locked_exit(char, exit): any;
+  not_container(...params): any;
+  not_inside(...params): any;
   nounVerb(item, verb, capitalise): any;
   npc_entering_msg(npc, origin): void;
   npc_leaving_msg(npc, dest): void;
@@ -34,3 +36,5 @@ export interface IProcessor {
   verbPronoun(item, verb, capitalise): any;
   warningsScript(): any;
 }
+
+export class Foo {}

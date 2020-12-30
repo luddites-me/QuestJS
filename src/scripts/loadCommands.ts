@@ -1,4 +1,5 @@
-import { CommandFactory } from "../lib";
+import { Helpers } from "../lib/command/helpers";
+import { CommandFactory, sentenceCase } from "../lib";
 import { Cmd } from "../lib/command/cmd";
 import { Known, WorldStates } from "../lib/constants";
 import { Quest } from "../Quest";
@@ -23,6 +24,8 @@ export const loadCommands = (quest: Quest): Cmd[] => {
   }
 
   const cmdFactory = quest.commandFactory;
+
+  const helpers = new Helpers(quest);
 
   const commands = [
     // Single word commands
@@ -283,7 +286,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
           `${quest.i18n.lexicon.inventory_prefix} ${quest.utils.formatList(
             listOfOjects,
             {
-              article: QuestJs._consts.INDEFINITE,
+              article: Known.INDEFINITE,
               lastJoiner: quest.i18n.lexicon.list_and,
               modified: true,
               nothing: quest.i18n.lexicon.list_nothing,
@@ -802,13 +805,13 @@ export const loadCommands = (quest: Quest): Cmd[] => {
 
     cmdFactory.makeCmd('Stand', {
       rules: [cmdFactory.rules.canPosture],
-      script: handleStandUp,
+      script: helpers.handleStandUp,
     }),
     cmdFactory.makeCmd('NpcStand', {
       rules: [cmdFactory.rules.canPosture],
       category: 'Posture',
       objects: [{ scope: quest.parser.isHere, attName: 'npc' }],
-      script: handleStandUp,
+      script: helpers.handleStandUp,
     }),
 
     cmdFactory.makeCmd('FillWith', {
@@ -818,7 +821,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
         { scope: quest.parser.isLiquid },
       ],
       script(objects) {
-        return handleFillWithLiquid(quest.game.player, objects[0][0], objects[1][0]);
+        return helpers.handleFillWithLiquid(quest.game.player, objects[0][0], objects[1][0]);
       },
     }),
     cmdFactory.makeCmd('NpcFillWith', {
@@ -837,7 +840,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             item: npc,
           });
         objects.shift();
-        return handleFillWithLiquid(npc, objects[0][0], objects[1][0]);
+        return helpers.handleFillWithLiquid(npc, objects[0][0], objects[1][0]);
       },
     }),
 
@@ -848,7 +851,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
         { scope: quest.parser.isPresent, attName: 'container' },
       ],
       script(objects) {
-        return handlePutInContainer(quest.game.player, objects);
+        return helpers.handlePutInContainer(quest.game.player, objects);
       },
     }),
 
@@ -868,7 +871,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             item: npc,
           });
         objects.shift();
-        return handlePutInContainer(npc, objects);
+        return helpers.handlePutInContainer(npc, objects);
       },
     }),
 
@@ -879,7 +882,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
         { scope: quest.parser.isPresent, attName: 'container' },
       ],
       script(objects) {
-        return handleTakeFromContainer(quest.game.player, objects);
+        return helpers.handleTakeFromContainer(quest.game.player, objects);
       },
     }),
 
@@ -899,7 +902,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             item: npc,
           });
         objects.shift();
-        return handleTakeFromContainer(npc, objects);
+        return helpers.handleTakeFromContainer(npc, objects);
       },
     }),
 
@@ -910,7 +913,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
         { scope: quest.parser.isPresent, attName: 'npc' },
       ],
       script(objects) {
-        return handleGiveToNpc(quest.game.player, objects);
+        return helpers.handleGiveToNpc(quest.game.player, objects);
       },
     }),
     cmdFactory.makeCmd('NpcGiveTo', {
@@ -929,7 +932,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             item: npc,
           });
         objects.shift();
-        return handleGiveToNpc(npc, objects);
+        return helpers.handleGiveToNpc(npc, objects);
       },
     }),
 
@@ -937,7 +940,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
       rules: [cmdFactory.rules.canManipulate, cmdFactory.rules.isHereNotHeld],
       category: 'Push',
       script(objects) {
-        return handlePushExit(quest.game.player, objects);
+        return helpers.handlePushExit(quest.game.player, objects);
       },
       objects: [
         { text: true },
@@ -956,7 +959,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             item: npc,
           });
         objects.shift();
-        return handlePushExit(npc, objects);
+        return helpers.handlePushExit(npc, objects);
       },
       objects: [
         { scope: quest.parser.isHere, attName: 'npc' },
@@ -974,7 +977,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
         { scope: quest.parser.isHere, attName: 'attachable' },
       ],
       script(objects) {
-        return handleTieTo(quest.game.player, objects[0][0], objects[1][0]);
+        return helpers.handleTieTo(quest.game.player, objects[0][0], objects[1][0]);
       },
     }),
     cmdFactory.makeCmd('NpcTieTo', {
@@ -988,7 +991,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             item: npc,
           });
         objects.shift();
-        return handleTieTo(npc, objects[0][0], objects[1][0]);
+        return helpers.handleTieTo(npc, objects[0][0], objects[1][0]);
       },
       objects: [
         { scope: quest.parser.isHere, attName: 'npc' },
@@ -1003,7 +1006,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
       category: 'Untie',
       objects: [{ scope: quest.parser.isHere, attName: 'rope' }],
       script(objects) {
-        handleUntieFrom(quest.game.player, objects[0][0]);
+        helpers.handleUntieFrom(quest.game.player, objects[0][0]);
         return WorldStates.SUCCESS_NO_TURNSCRIPTS;
       },
     }),
@@ -1018,7 +1021,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             item: npc,
           });
         objects.shift();
-        return handleUntieFrom(npc, objects[0][0], objects[1][0]);
+        return helpers.handleUntieFrom(npc, objects[0][0], objects[1][0]);
       },
       objects: [
         { scope: quest.parser.isHere, attName: 'npc' },
@@ -1036,7 +1039,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
         { scope: quest.parser.isHere, attName: 'attachable' },
       ],
       script(objects) {
-        handleUntieFrom(quest.game.player, objects[0][0], objects[1][0]);
+        helpers.handleUntieFrom(quest.game.player, objects[0][0], objects[1][0]);
         return WorldStates.SUCCESS_NO_TURNSCRIPTS;
       },
     }),
@@ -1051,7 +1054,7 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             item: npc,
           });
         objects.shift();
-        return handleUntieFrom(npc, objects[0][0], objects[1][0]);
+        return helpers.handleUntieFrom(npc, objects[0][0], objects[1][0]);
       },
       objects: [
         { scope: quest.parser.isHere, attName: 'npc' },
@@ -1236,11 +1239,11 @@ export const loadCommands = (quest: Quest): Cmd[] => {
             );
             return WorldStates.SUCCESS_NO_TURNSCRIPTS;
           }
-          if (typeof QuestJs._test.runTests !== 'function') {
+          if (typeof quest.test.runTests !== 'function') {
             quest.logger.info(test);
             return WorldStates.FAILED;
           }
-          QuestJs._test.runTests();
+          quest.test.runTests();
           return WorldStates.SUCCESS_NO_TURNSCRIPTS;
         },
       }),
@@ -1394,7 +1397,7 @@ const initNpcCommands = (quest: Quest, cmdFactory: CommandFactory, commands: Cmd
       }
       regex += ')$';
       commands.push(
-        cmdFactory.makeExitCmd(`Go${QuestJs._tools.sentenceCase(el.name)}`, {
+        cmdFactory.makeExitCmd(`Go${sentenceCase(el.name)}`, {
           regexes: [new RegExp(`^${regex}`)],
         }, el.name),
       );
@@ -1407,7 +1410,7 @@ const initNpcCommands = (quest: Quest, cmdFactory: CommandFactory, commands: Cmd
       })
       commands.push(
         cmdFactory.makeNpcExitCmd(
-          `NpcGo${QuestJs._tools.sentenceCase(el.name)}2`,
+          `NpcGo${sentenceCase(el.name)}2`,
           {
             regexes,
           },

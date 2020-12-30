@@ -1,4 +1,4 @@
-import { WorldStates } from "../../lib";
+import { prefix, WorldStates } from "../../lib";
 import { Quest } from "../../Quest";
 import { Openable } from "./openable"
 
@@ -22,13 +22,13 @@ export class Container extends Openable {
     });
     // this.log.info(o.verbFunctions.length)
     o.nameModifierFunctions.push(
-      QuestJs._util.nameModifierFunctionForContainer,
+      this.utils.nameModifierFunctionForContainer,
     );
     // this.log.info(o.nameModifierFunctions)
   }
 
   lookinside(isMultiple, char) {
-    const tpParams = { char, container: this, list: [] };
+    const tpParams = { char, container: this, list: '' };
     if (this.closed && !this.transparent) {
       this.io.msg(
         prefix(this, isMultiple) +

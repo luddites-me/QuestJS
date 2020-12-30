@@ -1,5 +1,5 @@
 import { Known, Quest, WorldStates } from "../..";
-import { FnPrmAny } from "../../../@types/fn";
+import { FnPrmAny } from "../../@types/fn";
 import { INode } from "../INode";
 import { Node } from "../node";
 

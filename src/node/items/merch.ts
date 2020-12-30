@@ -1,4 +1,4 @@
-import { WorldStates } from "../../lib";
+import { prefix, WorldStates } from "../../lib";
 import { Quest } from "../../Quest";
 import { INode } from "../INode";
 import { Item } from "./item";

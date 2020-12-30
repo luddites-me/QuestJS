@@ -146,7 +146,7 @@ export class World extends Base {
       this.io.debugmsg(
         "That command returned 'false', rather than the proper result code.",
       );
-    QuestJs._util.handleChangeListeners();
+    this.utils.handleChangeListeners();
     if (
       result === WorldStates.SUCCESS ||
       (this.settings.failCountsAsTurn && result === WorldStates.FAILED)
@@ -154,7 +154,7 @@ export class World extends Base {
       this.game.turnCount += 1;
       //this.game.elapsedTime += this.settings.dateTime.secondsPerTurn;
       this.state.forEach((key, val) => val.doEvent(key));
-      QuestJs._util.handleChangeListeners();
+      this.utils.handleChangeListeners();
       this.resetPauses();
       this.game.update();
       this.game.saveGameState();

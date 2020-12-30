@@ -1,5 +1,5 @@
-import { DictionaryAny } from "../../@types/dictionary";
-import { FnPrmAny, FnPrmBool, FnPrmString, FnPrmVoid } from "../../@types/fn";
+import { DictionaryAny } from "../@types/dictionary";
+import { FnPrmAny, FnPrmBool, FnPrmString, FnPrmVoid } from "../@types/fn";
 
 export interface ISettings {
   additionalAbout: string;

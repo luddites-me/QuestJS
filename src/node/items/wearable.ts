@@ -1,3 +1,4 @@
+import { prefix } from "../../lib/tools/tools";
 import { Quest } from "../../Quest";
 import { allowable } from "./item";
 import { Takeable } from "./takeable";

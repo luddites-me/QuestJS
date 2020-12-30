@@ -1,4 +1,4 @@
-import { FnPrmAny } from "../../@types/fn";
+import { FnPrmAny } from "../@types/fn";
 
 export type MessageOptions = {
   action?: string;

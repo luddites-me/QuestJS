@@ -27,6 +27,7 @@ type AllCommands = {
   npcCmds: NpcCommandDictionary;
   exitCmds: ExitCommandDictionary;
   npcExitCmds: NpcExitCommandDictionary;
+  all: Array<Cmd | NpcCmd | ExitCmd | NpcExitCmd>;
 }
 
 export class CommandFactory extends Base {
@@ -36,11 +37,13 @@ export class CommandFactory extends Base {
     npcCmds: {},
     exitCmds: {},
     npcExitCmds: {},
+    all: [],
   }
 
   makeCmd(name: string, hash: Partial<Cmd>): Cmd {
     if(!this._commands.cmds[name]) {
       this._commands.cmds[name] = new Cmd(this._quest, name, hash);
+      this._commands.all.push(this._commands.cmds[name]);
     }
     return this._commands.cmds[name];
   }
@@ -48,6 +51,7 @@ export class CommandFactory extends Base {
   makeNpcCmd(name: string, hash: Partial<NpcCmd>): NpcCmd {
     if(!this._commands.npcCmds[name]) {
       this._commands.npcCmds[name] = new NpcCmd(this._quest, name, hash);
+      this._commands.all.push(this._commands.npcCmds[name]);
     }
     return this._commands.npcCmds[name];
   }
@@ -55,6 +59,7 @@ export class CommandFactory extends Base {
   makeExitCmd(name: string, hash: Partial<ExitCmd>, dir: string): ExitCmd {
     if(!this._commands.exitCmds[name]) {
       this._commands.exitCmds[name] = new ExitCmd(this._quest, name, hash, dir);
+      this._commands.all.push(this._commands.exitCmds[name]);
     }
     return this._commands.exitCmds[name];
   }
@@ -62,6 +67,7 @@ export class CommandFactory extends Base {
   makeNpcExitCmd(name: string, hash: Partial<NpcExitCmd>, dir: string): NpcExitCmd {
     if(!this._commands.npcExitCmds[name]) {
       this._commands.npcExitCmds[name] = new NpcExitCmd(this._quest, name, hash, dir);
+      this._commands.all.push(this._commands.npcExitCmds[name]);
     }
     return this._commands.npcExitCmds[name];
   }
@@ -74,6 +80,10 @@ export class CommandFactory extends Base {
       this._commands.npcExitCmds[name]
     );
 
+  }
+
+  filter(fn) {
+    return this._commands.all.filter(fn);
   }
 
   private _rules;

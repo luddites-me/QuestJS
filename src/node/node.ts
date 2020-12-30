@@ -1,4 +1,5 @@
-import { FnPrmAny } from "../../@types/fn";
+import { sentenceCase } from "../lib/tools";
+import { FnPrmAny } from "../@types/fn";
 import { Base } from "../lib/base";
 import { Known, WorldStates } from "../lib/constants";
 import { Quest } from "../Quest";
@@ -264,7 +265,7 @@ export abstract class Node extends Base implements INode {
     if (!this.pluralAlias) this.pluralAlias = `${this.alias}s`;
     if (this.pluralAlias === '*') this.pluralAlias = this.alias;
 
-    this.verbFunctions.push(
+    this.verbFunctions?.push(
       (o: INode, verbList: string[]) => {
         verbList.push(this.lexicon.verbs.examine);
         if (o.use !== undefined) verbList.push(this.lexicon.verbs.use);

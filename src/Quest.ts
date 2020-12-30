@@ -13,17 +13,17 @@ import { Test } from './lib/test';
 import { Text } from './lib/text';
 import { Utils } from './lib/utils';
 import { World } from './app/world';
-import { DictionaryAny } from '../@types/dictionary';
+import { DictionaryAny } from './@types/dictionary';
 import { ISettings } from './lib/ISettings';
 import { Player } from './node/actors/player';
 
 type QuestOptions = {
-  lexicon: DictionaryAny;
-  textProcessor: DictionaryAny;
-  commands: DictionaryAny;
-  settings: Partial<ISettings>;
-  items: DictionaryAny;
-  player: DictionaryAny;
+  lexicon?: DictionaryAny;
+  textProcessor?: DictionaryAny;
+  commands?: DictionaryAny;
+  settings?: Partial<ISettings>;
+  items?: DictionaryAny;
+  player?: DictionaryAny;
 };
 
 export class Quest {
@@ -112,24 +112,41 @@ export class Quest {
     this.created = new Date();
   }
 
-  init(options: QuestOptions) {
-    Object.keys(options.lexicon).forEach(key => this.i18n.lexicon[key] = options.lexicon[key] );
-    Object.keys(options.textProcessor).forEach(key => this.text.addDirective(key, options.textProcessor[key]) );
-    Object.keys(options.commands).forEach(key => {
-      const newCmd = options.commands[key];
-      const oldCmd = this.commandFactory.findCmd(key);
-      Object.keys(newCmd).forEach(key => oldCmd[key] = newCmd[key]);
-    });
-    Object.keys(options.player).forEach(key => {
-      const data = options.player[key];
-      const player = new Player(this, key, data);
-      this.game.update(player);
-    });
-    Object.keys(options.items).forEach(key => {
-      const data = options.player[key];
-      const player = new Player(this, key, data);
-      this.game.update(player);
-    });
+  init(options?: QuestOptions) {
     this.commandFactory.init();
+
+    if(options?.lexicon) {
+      Object.keys(options.lexicon).forEach(key => this.i18n.lexicon[key] = options.lexicon[key] );
+    }
+    if(options?.textProcessor) {
+      Object.keys(options.textProcessor).forEach(key => this.text.addDirective(key, options.textProcessor[key]) );
+    }
+    if(options?.commands) {
+      Object.keys(options.commands).forEach(key => {
+        const newCmd = options.commands[key];
+        const oldCmd = this.commandFactory.findCmd(key);
+        if(oldCmd) {
+          Object.keys(newCmd).forEach(key => oldCmd[key] = newCmd[key]);
+        } else {
+          this.commandFactory.makeCmd(key, newCmd);
+        }
+      });
+    }
+    if(options?.player) {
+      Object.keys(options.player).forEach(key => {
+        const data = options.player[key];
+        const player = new Player(this, key, data);
+        this.game.update(player);
+      });
+    }
+    if(options?.items) {
+      Object.keys(options.items).forEach(key => {
+        const data = options.player[key];
+        const player = new Player(this, key, data);
+        this.game.update(player);
+      });
+    }
+    this.game.init();
+    this.io.init();
   }
 }
