@@ -1,6 +1,0 @@
-{
-  "imports": {
-    "jquery": "./jquery.js",
-    "lodash": "./lodash.js"
-  }
-}
