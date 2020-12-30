@@ -1,6 +1,6 @@
 import { Quest } from "../..";
 import { PronounIdentifier } from "../../lang/lexicon";
-import { Known, sentenceCase, WorldStates } from "../../lib";
+import { Known, WorldStates } from "../../lib";
 import { INode } from "../INode";
 import { Money } from "../items/money";
 import { Node } from "../node";

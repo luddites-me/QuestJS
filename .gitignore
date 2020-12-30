@@ -1,14 +1,5 @@
-tmp.*
-*.zip
-game-x*/
-game-banks-demo/
-page-*-demo.html
-libx/
-page-x*.html
-images/Joseph Banks.svg
-misc/
-sounds/
-images/medieval_houses_isometric_map_elements_by_darthasparagus_d6hhk05-fullview.png
+build/
+dist/
 *.zip
 node_modules/
 
