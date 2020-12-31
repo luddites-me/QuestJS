@@ -231,7 +231,7 @@ export abstract class Node extends Base implements INode {
         `Attempting to use the disallowed name \`${this.name}\`; a name can only include letters and digits - no spaces or accented characters. Use the 'alias' attribute to give an item a name with other characters.`,
       );
     }
-    if (this.state.exists(this.name)) {
+    if (false && this.state.exists(this.name)) {
       this.log.info(
         `Attempting to use the name \`${this.name}\` when there is already an item with that name in the world.`,
       );
@@ -265,14 +265,15 @@ export abstract class Node extends Base implements INode {
     if (!this.pluralAlias) this.pluralAlias = `${this.alias}s`;
     if (this.pluralAlias === '*') this.pluralAlias = this.alias;
 
-    this.verbFunctions?.push(
+    this.verbFunctions = this.verbFunctions || [];
+    this.verbFunctions.push(
       (o: INode, verbList: string[]) => {
         verbList.push(this.lexicon.verbs.examine);
-        if (o.use !== undefined) verbList.push(this.lexicon.verbs.use);
+        if (o.use) verbList.push(this.lexicon.verbs.use);
       },
     );
 
-    this.onCreation();
+    this.onCreation(this);
     this.state.set(this.name, this);
   }
 }

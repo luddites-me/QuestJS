@@ -16,6 +16,7 @@ import { World } from './app/world';
 import { DictionaryAny } from './@types/dictionary';
 import { ISettings } from './lib/ISettings';
 import { Player } from './node/actors/player';
+import { Item } from './node/items/item';
 
 type QuestOptions = {
   lexicon?: DictionaryAny;
@@ -141,12 +142,9 @@ export class Quest {
     }
     if(options?.items) {
       Object.keys(options.items).forEach(key => {
-        const data = options.player[key];
-        const player = new Player(this, key, data);
-        this.game.update(player);
+        const data = options.items[key];
+        new Item(this, key, data);
       });
     }
-    this.game.init();
-    this.io.init();
   }
 }

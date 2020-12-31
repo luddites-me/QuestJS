@@ -307,3 +307,6 @@ new Item(quest, 'doors', {
     return loc.room && situation === WorldStates.PARSER;
   },
 });
+
+quest.game.init();
+quest.io.init();

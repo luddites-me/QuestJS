@@ -36,9 +36,9 @@ export class Wearable extends Takeable {
     return this.armour;
   };
 
-  onCreation(o) {
-    // QuestJs._log.info('wearable: ' + o.name)
-    o.verbFunctions.push((o, verbList) => {
+  onCreation() {
+    // this.log.info('wearable: ' + o.name)
+    this.verbFunctions.push((o: INode, verbList: any[]) => {
       if (!o.isAtLoc(this.game.player.name)) {
         verbList.push(this.lexicon.verbs.take);
       } else if (o.getWorn()) {
@@ -50,7 +50,7 @@ export class Wearable extends Takeable {
           verbList.push(this.lexicon.verbs.wear);
       }
     });
-    // QuestJs._log.info(o.verbFunctions.length)
+    // this.log.info(o.verbFunctions.length)
 
     o.nameModifierFunctions.push((o, list) => {
       if (o.worn && o.isAtLoc(this.game.player.name))

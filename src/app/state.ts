@@ -135,7 +135,7 @@ export class State extends Base {
       );
       return null;
     }
-    if (this.store.exists(name)) {
+    if (false && this.store.exists(name)) {
       this.log.info(
         `Attempting to use the name \`${name}\` when there is already an item with that name in the world.`,
       );
