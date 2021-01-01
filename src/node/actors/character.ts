@@ -10,7 +10,7 @@ export class Character extends Node {
   canReachThrough = Known.NOOP_TRUE;
   canSeeThrough = Known.NOOP_TRUE;
   getAgreement = Known.NOOP_TRUE;
-  getContents = (situation) => this.utils.getContents(situation);
+  getContents = (situation) => this.utils.getContents(this.loc, situation);
   pause = Known.NOOP_VOID;
   canManipulate = Known.NOOP_TRUE;
   canMove = Known.NOOP_TRUE;
@@ -96,8 +96,8 @@ export class Character extends Node {
     return outer;
   }
 
-  onCreation = (o: INode) => {
-    o.nameModifierFunctions.push((o, l) => {
+  onCreation(o: INode) {
+    this.nameModifierFunctions.push((o, l) => {
       const state = o.getStatusDesc();
       const held = o.getHolding();
       const worn = o.getWearingVisible();
@@ -138,7 +138,7 @@ export class Character extends Node {
       }
       if (list.length > 0) l.push(list.join('; '));
     });
-    o.verbFunctions.push((o, verbList) => {
+    this.verbFunctions.push((o, verbList) => {
       verbList.shift();
       verbList.push(this.lexicon.verbs.lookat);
       if (!this.settings.noTalkTo)

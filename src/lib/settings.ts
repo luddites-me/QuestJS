@@ -19,7 +19,7 @@ const defaultSettings: Partial<Settings> = {
   cssFolder: 'assets/css/',
   soundsFileExt: '.mp3',
   // The side panes
-  panes: 'left',
+  panes: 'none',
   panesCollapseAt: 700,
   compassPane: true,
   statusPane: "Status",

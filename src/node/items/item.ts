@@ -18,7 +18,7 @@ export class Item extends Node {
   verbFunction(...params) { return {}; }
   getWorn(...params): any { return {}; }
   isAtLoc(...params) { return false; }
-  lightSource() { return WorldStates.LIGHT_NONE; }
+  _lightSource =WorldStates.LIGHT_NONE;
   icon() { return ''; }
   testKeys(char, toLock) { return false; }
   allowed: allowable;

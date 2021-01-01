@@ -17,10 +17,11 @@ export class Loc extends Node {
   preSave: FnPrmAny;
   saveExitDests;
   postLoad: FnPrmAny;
-  lightSource() { return WorldStates.LIGHT_FULL; }
+  _lightSource = WorldStates.LIGHT_FULL;
 
   constructor(quest: Quest, name: string, hash: Partial<Loc> = {}) {
     super(quest, name, hash);
+    this.loc = this;
   }
 
   description() {

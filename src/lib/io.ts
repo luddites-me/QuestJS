@@ -37,7 +37,7 @@ export class IO extends Base {
 
   // The output system is quite complicated...
   // https://github.com/ThePix/QuestJS/wiki/The-Output-Queue
-  outputQueue: MessageOptions[];
+  outputQueue: MessageOptions[] = [];
   outputSuspended = false;
 
   // A list of names for items currently world. in the inventory panes
@@ -556,7 +556,7 @@ export class IO extends Base {
 
     html += '<div class="links">';
     for (const link of this.settings.toolbar.buttons) {
-      const js = link.cmd ? `QuestJs._tools.runCmd('${link.cmd}')` : link.onclick;
+      const js = link.cmd ? `this.runCmd('${link.cmd}')` : link.onclick;
       html += ` <a class="link" onclick="${js}"><i class="fas ${link.icon}" title="${link.title}"></i></a>`;
     }
     html += '</div>';
@@ -1021,7 +1021,7 @@ export class IO extends Base {
   updateStatus() {
     if (this.settings.statusPane) {
       $('#status-pane').empty();
-      this.settings.status.forEach(st => {
+      this.settings.forEach('status', (key, st) => {
         if (typeof st === 'string') {
           if (this.game.player[st] !== undefined) {
             let s = `<tr><td width="${this.settings.statusWidthLeft
@@ -1159,71 +1159,71 @@ export class IO extends Base {
     if (this.settings.panes === 'none') {
       return;
     }
-    document.writeln(
-      `<div id="panes" class="side-panes side-panes${this.settings.panes} panes-narrow">`,
-    );
+
+    const panes = $('#panes');
+    panes.addClass(`side-panes side-panes${this.settings.panes} panes-narrow`);
 
     if (this.settings.compassPane) {
-      document.writeln('<div class="pane-div">');
-      document.writeln('<table id="compass-table">');
+      panes.append('<div class="pane-div">');
+      panes.append('<table id="compass-table">');
       for (let i = 0; i < 3; i += 1) {
-        document.writeln('<tr>');
-        this.writeExit(0 + 5 * i);
-        this.writeExit(1 + 5 * i);
-        this.writeExit(2 + 5 * i);
-        document.writeln('<td></td>');
-        this.writeExit(3 + 5 * i);
-        this.writeExit(4 + 5 * i);
-        document.writeln('</tr>');
+        panes.append('<tr>');
+        this.writeExit(panes, 0 + 5 * i);
+        this.writeExit(panes, 1 + 5 * i);
+        this.writeExit(panes, 2 + 5 * i);
+        panes.append('<td></td>');
+        this.writeExit(panes, 3 + 5 * i);
+        this.writeExit(panes, 4 + 5 * i);
+        panes.append('</tr>');
       }
-      document.writeln('</table>');
-      document.writeln('</div>');
+      panes.append('</table>');
+      panes.append('</div>');
     }
 
     if (this.settings.statusPane) {
-      document.writeln('<div class="pane-div">');
-      document.writeln(
+      panes.append('<div class="pane-div">');
+      panes.append(
         `<h4 class="side-pane-heading">${this.settings.statusPane}</h4>`,
       );
-      document.writeln('<table id="status-pane">');
-      document.writeln('</table>');
-      document.writeln('</div>');
+      panes.append('<table id="status-pane">');
+      panes.append('</table>');
+      panes.append('</div>');
     }
 
     if (this.settings.inventoryPane) {
       for (const inv of this.settings.inventoryPane) {
-        document.writeln('<div class="pane-div">');
-        document.writeln(`<h4 class="side-pane-heading">${inv.name}</h4>`);
-        document.writeln(`<div id="${inv.alt}">`);
-        document.writeln('</div>');
-        document.writeln('</div>');
+        panes.append('<div class="pane-div">');
+        panes.append(`<h4 class="side-pane-heading">${inv.name}</h4>`);
+        panes.append(`<div id="${inv.alt}">`);
+        panes.append('</div>');
+        panes.append('</div>');
       }
     }
 
-    document.writeln('<div class="pane-div-finished">');
-    document.writeln(this.lexicon.game_over_html);
-    document.writeln('</div>');
-    document.writeln('</div>');
+    panes.append('<div class="pane-div-finished">');
+    panes.append(this.lexicon.game_over_html);
+    panes.append('</div>');
+    panes.append('</div>');
 
     if (this.settings.customUI) this.settings.customUI();
   };
 
-  writeExit(n) {
-    document.write(
+  writeExit(panes, n) {
+    panes.append(
       `<td class="compass-button" title="${this.lexicon.exit_list[n].name}">`,
     );
-    document.write(
+    panes.append(
       `<span class="compass-button" id="exit-${this.lexicon.exit_list[n].name}`,
     );
-    document.write(
+    panes.append(
       `" onclick="this.clickExit('${this.lexicon.exit_list[n].name}')">`,
     );
-    document.write(
+    panes.append(
       this.settings.symbolsForCompass
         ? this.displayIconsCompass(this.lexicon.exit_list[n])
         : this.lexicon.exit_list[n].abbrev,
     );
-    document.write('</span></td>');
+    panes.append('</span></td>');
   }
 
   // Gets the command with the given name

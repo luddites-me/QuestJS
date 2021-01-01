@@ -8,4 +8,8 @@ export class Player extends Character {
     this.pronouns = this.lexicon.pronouns.secondperson;
     this.player = true;
   }
+
+  init() {
+    this.game.update(this);
+  }
 }

@@ -66,13 +66,15 @@ export class Utils extends Base {
     throw new Error(s);
   }
 
-  getContents(situation) {
+  getContents(loc: INode, situation: number) {
     const list = [];
-    this.state.forEach((key, val) => {
-      if (val.isAtLoc(this.name, situation)) {
-        list.push(val);
-      }
-    });
+    if(loc?.name) {
+      this.state.forEach((key, val) => {
+        if (val.isAtLoc(loc.name, situation)) {
+          list.push(val);
+        }
+      });
+    }
     return list;
   };
 
@@ -246,7 +248,7 @@ export class Utils extends Base {
   };
 
   listContents(situation, modified = true) {
-    return this.formatList(this.getContents(situation), {
+    return this.formatList(this.getContents(null, situation), {
       article: Known.INDEFINITE,
       lastJoiner: this.lexicon.list_and,
       modified,

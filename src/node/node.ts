@@ -18,7 +18,7 @@ export abstract class Node extends Base implements INode {
   eventCountdown = 0;
   eventPeriod: number;
   eventScript(...params) { return true; };
-  getContents(...params) { return this.utils.getContents(params); };
+  getContents(situation) { return this.utils.getContents(this.loc, situation); };
   getExits: (...params) => INode[] = (...params) => [];
   getWorn(...params) { }
   hasExit(...params) { return false; };
@@ -26,6 +26,12 @@ export abstract class Node extends Base implements INode {
   item: Partial<INode> = {};
   itemDropped = Known.NOOP;
   itemTaken = Known.NOOP;
+  get key(): string {
+    return `${this.type}_${this.name}`.trim().toLowerCase().split(' ').join('');
+  }
+  _lightSource = WorldStates.LIGHT_FULL;
+  get lightSource() { return this._lightSource; }
+  set lightSource(val: number) { this._lightSource = val; }
   listAlias: string;
   listContents(situation, modified?: boolean) { return this.utils.listContents(situation, modified); }
   loc: INode;
@@ -42,6 +48,9 @@ export abstract class Node extends Base implements INode {
   scopeStatus;
   scopeStatusForRoom;
   testForRecursion(char) { return this.utils.testForRecursion(char, this); }
+  get type(): string {
+    return this.constructor.name;
+  }
   use: FnPrmAny = Known.NOOP;
   verbFunctions: ((...params) => void)[];
   [key: string]: any;
@@ -100,7 +109,6 @@ export abstract class Node extends Base implements INode {
   onCreation(...params) {
 
   }
-
 
   scopeSnapshot(visible) {
     if (this.scopeStatus) return; // already done this one
@@ -265,6 +273,7 @@ export abstract class Node extends Base implements INode {
     if (!this.pluralAlias) this.pluralAlias = `${this.alias}s`;
     if (this.pluralAlias === '*') this.pluralAlias = this.alias;
 
+    this.nameModifierFunctions = this.nameModifierFunctions || [];
     this.verbFunctions = this.verbFunctions || [];
     this.verbFunctions.push(
       (o: INode, verbList: string[]) => {

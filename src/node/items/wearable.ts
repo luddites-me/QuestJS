@@ -1,5 +1,6 @@
 import { prefix } from "../../lib/tools/tools";
 import { Quest } from "../../Quest";
+import { INode } from "../INode";
 import { allowable } from "./item";
 import { Takeable } from "./takeable";
 
@@ -52,7 +53,7 @@ export class Wearable extends Takeable {
     });
     // this.log.info(o.verbFunctions.length)
 
-    o.nameModifierFunctions.push((o, list) => {
+    this.nameModifierFunctions.push((o, list) => {
       if (o.worn && o.isAtLoc(this.game.player.name))
         list.push(this.lexicon.invModifiers.worn);
     });

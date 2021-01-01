@@ -10,12 +10,10 @@ import { Quest } from '../../src/Quest';
 const quest = new Quest();
 
 const cloakHere = () => {
-  const cloak = quest.state.get('cloak');
-  if (cloak.isAtLoc('me')) return true;
+  if (cloak.isAtLoc(player)) return true;
   if (cloak.isHere()) return true;
 
-  const cloakRoom = quest.state.get('cloakroom');
-  if (cloak.isAtLoc('hook') && quest.game.player.isAtLoc(cloakRoom))
+  if (cloak.isAtLoc(hook) && quest.game.player.isAtLoc(cloakRoom))
     return true;
   return false;
 };
@@ -169,7 +167,7 @@ const cloakRoom = new Room(quest, 'cloakroom', {
   east: new Exit(quest, 'lobby'),
 });
 
-new Surface(quest, 'hook', {
+const hook = new Surface(quest, 'hook', {
   regex: /^peg$/,
   hookable: true,
   scenery: true,
@@ -308,5 +306,6 @@ new Item(quest, 'doors', {
   },
 });
 
+player.init();
 quest.game.init();
 quest.io.init();

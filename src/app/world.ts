@@ -1,3 +1,4 @@
+import { Background } from '../node/background';
 import { Base } from '../lib/base';
 import { WorldStates } from '../lib/constants';
 import { toInt } from '../lib/tools/tools';
@@ -12,7 +13,7 @@ export class World extends Base {
 
   // Returns true if bad lighting is not obscuring the item
   ifNotDark(item) {
-    return !this.game.dark || item.lightSource() > WorldStates.LIGHT_NONE;
+    return !this.game.dark || item.lightSource > WorldStates.LIGHT_NONE;
   }
 
   findUniqueName(s) {
@@ -29,40 +30,29 @@ export class World extends Base {
 
   init() {
     // Sort out the player
-    let player;
-    this.state.forEach((key, val) => {
-      if (val.player) {
-        player = val;
+    let player = this.game.player;
+    if(!player) {
+      this.state.forEach((key, val) => {
+        if (val.player) {
+          player = val as Character;
+        }
+      })
+      if (!player) {
+        this.io.errormsg(
+          'No player object found. This is probably due to an error in data.js. Do [Ctrl][Shft]-I to open the developer tools, and go to the console tab, and look at the first error in the list (if it mentions jQuery, skip it and look at the second one). It should tell you exactly which line in which file. But also check one object is actually flagged as the player.'
+        );
+        return;
       }
-    })
-    if (!player) {
-      this.io.errormsg(
-        'No player object found. This is probably due to an error in data.js. Do [Ctrl][Shft]-I to open the developer tools, and go to the console tab, and look at the first error in the list (if it mentions jQuery, skip it and look at the second one). It should tell you exactly which line in which file. But also check one object is actually flagged as the player.'
-      );
-      return;
+      this.game.update(player);
     }
-    this.game.update(player);
-
     // Create a background item if it does not exist
     // This handles the player wanting to interact with things in room descriptions
     // that are not implemented by changing its regex when a room is entered.
-    if (this.state.get('background') === undefined) {
-      this.state.set('background', this.state.createItem('background', {
-        scenery: true,
-        examine: this.lexicon.default_description,
-        background: true,
-        name: 'default_background_object',
-        lightSource: () => {
-          return WorldStates.LIGHT_NONE;
-        },
-        isAtLoc: (loc, situation) => {
-          if (typeof loc !== 'string') loc = loc.name;
-          if (!this.state.exists(loc)) this.io.errormsg(`Unknown location: ${loc}`);
-          return this.state.get(loc)?.room && situation === WorldStates.PARSER;
-        },
-      }));
+    let background = this.state.get('background-default_background_object');
+    if (!background) {
+      background = new Background(this._quest, 'default_background_object');
     }
-    if (!this.state.get('background')?.background) {
+    if (!background.background) {
       this.io.errormsg(
         "It looks like an item has been named 'background`, but is not set as the background item. If you intended to do this, ensure the background property is set to true.",
       );
@@ -83,7 +73,7 @@ export class World extends Base {
       this.io.msgHeading(this.settings.subtitle, 3);
     this.io.setTitleAndInit(this.settings.title);
 
-    this.game.ticker = setInterval(this.game.gameTimer, 1000);
+    this.game.ticker = setInterval(() => { this.game.gameTimer() }, 1000);
     this.state.get(this.game.player.loc.name).visited += 1;
   }
 
@@ -182,7 +172,7 @@ export class World extends Base {
     })
 
     // start from the current room
-    let room = this.state.get(this.game.player.loc.name);
+    let room = this.game.player.loc;
     if (room === undefined) {
       this.io.errormsg(
         'Error in scopeSnapshot; the location assigned to the player does not exist.'
@@ -197,19 +187,19 @@ export class World extends Base {
     }
     room.scopeStatusForRoom = WorldStates.REACHABLE;
     // crawl up the room hierarchy to the topmost visible
-    while (room.loc && room.canReachThrough()) {
-      room = this.state.get(room.loc.name);
-      room.scopeStatusForRoom = WorldStates.REACHABLE;
-    }
+    // while (room.loc && room.canReachThrough()) {
+    //   room = this.state.get(room.loc.name);
+    //   room.scopeStatusForRoom = WorldStates.REACHABLE;
+    // }
     // room is now the top level applicable, so now work downwards from here (recursively)
 
     room.scopeSnapshot(false);
 
     // Also want to go further upwards if room is transparent
-    while (room.loc && room.canSeeThrough()) {
-      room = this.state.get(room.loc.name);
-      room.scopeStatusForRoom = WorldStates.VISIBLE;
-    }
+    // while (room.loc && room.canSeeThrough()) {
+    //   room = this.state.get(room.loc.name);
+    //   room.scopeStatusForRoom = WorldStates.VISIBLE;
+    // }
     // room is now the top level applicable
 
     room.scopeSnapshot(true);

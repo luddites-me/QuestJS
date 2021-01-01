@@ -32,6 +32,7 @@ export interface INode {
   isLocked(): boolean;
   itemDropped(...params): void;
   itemTaken(...params): void;
+  key: string;
   listAlias: string;
   loc: INode;
   previousLoc: INode;

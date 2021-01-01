@@ -34,6 +34,7 @@ export class Game extends Base {
   constructor(quest: Quest, name: string = 'built-in_game_object', hash: Partial<Game> = {}) {
     super(quest);
     this.startTime = new Date();
+    //this.state.set('game', this);
   }
 
   isAtLoc() {
@@ -67,8 +68,8 @@ export class Game extends Base {
   update(player: Player = this.player) {
     // this.io.debugmsg("update");
     if (player !== undefined) {
-      this.state.set(this.player.name, player)
       this.player = player;
+      this.state.set(this.player.name, player)
     }
 
     if (!this.player) {
@@ -77,7 +78,7 @@ export class Game extends Base {
       );
       return;
     }
-    if (!this.player.loc || !this.state.get(this.player.loc.name)) {
+    if (!this.player.loc || !this.state.exists(this.player.loc.key)) {
       this.io.errormsg(
         this.player.loc === undefined
           ? 'No player location set.'
@@ -90,14 +91,14 @@ export class Game extends Base {
         'If this is when player moves: This is likely to be because of an error in the exit being used.'
       );
     }
-    this.room = this.state.get(this.player.loc.name);
+    this.room = this.player.loc;
     this.world.scopeSnapshot();
 
     let light = WorldStates.LIGHT_NONE;
     this.state.forEach((key, val) => {
       if (val.scopeStatus) {
-        if (light < val.lightSource()) {
-          light = val.lightSource();
+        if (light < val.lightSource) {
+          light = val.lightSource;
         }
       }
     })

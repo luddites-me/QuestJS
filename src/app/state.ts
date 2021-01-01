@@ -4,7 +4,7 @@ import { Item } from "../node/items/item";
 import { Loc } from "../node/locations/loc";
 import { Clone } from "../node/clone";
 import { Room } from "../node/locations/room";
-import { Quest } from "src/Quest";
+import { Quest } from "../Quest";
 
 interface IStore {
   [key: string]: any;
@@ -21,12 +21,12 @@ export class State extends Base {
   //   return this.store[name];
   // }
 
-  get<T extends INode>(name: string): T {
-    return this.store[name] as T;
+  get<T extends INode>(key: string): T {
+    return this.store[key] as T;
   }
 
   set(name: string, value: INode): void {
-    this.store[name] = value;
+    this.store[value.key] = value;
   }
 
   forEach(callback: (key: string, value: INode, ...params) => any, ...params): void {
@@ -109,7 +109,7 @@ export class State extends Base {
     //   }
     //   return s;
     // };
-    this.store.set(clone.name, clone);
+    this.store.set(clone.key, clone);
     return clone;
   }
 
@@ -144,7 +144,7 @@ export class State extends Base {
       );
       return null;
     }
-    if (typeof node.unshift !== 'function') {
+    if (false && typeof node.unshift !== 'function') {
       this.log.info(
         `The list of hashes for \`${name}\` is not what I was expecting. Found:`,
       );
